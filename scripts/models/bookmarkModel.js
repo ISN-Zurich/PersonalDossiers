@@ -58,7 +58,7 @@ BookmarkModel.prototype.addItem=function(id){
     var self=this;
     var dossierID = self.dossierId || self.controller.getActiveDossier();
     console.log("dossierID in addItem is "+dossierID);
-    var url='http://yellowjacket.ethz.ch/tools/service/service2.php/'+ dossierID;
+    var url='http://yellowjacket.ethz.ch/tools/service/dossier.php/'+ dossierID;
     var method="PUT";
     var pdata= JSON.stringify({'id': id });
     
@@ -101,7 +101,7 @@ BookmarkModel.prototype.removeItem=function(id){
     var self=this;
     //send delete request via ajax
     var dossierID = self.dossierId;
-    var url='http://yellowjacket.ethz.ch/tools/service/service2.php/' + dossierID + '/' + id;
+    var url='http://yellowjacket.ethz.ch/tools/service/dossier.php/' + dossierID + '/' + id;
     var method="DELETE";
     
     
@@ -139,7 +139,7 @@ BookmarkModel.prototype.loadDossierList=function(){
     
     //var dossierID = this.dossierId;
     var dossierID= self.dossierId;
-    var url='http://yellowjacket.ethz.ch/tools/service/service2.php/' + dossierID;
+    var url='http://yellowjacket.ethz.ch/tools/service/dossier.php/' + dossierID;
     var method="GET";
     if ( dossierID ) {
 	console.log("before executing the ajax request for " + dossierID);
@@ -215,7 +215,7 @@ BookmarkModel.prototype.sendDataToServer=function(){
     console.log("enter send data to server");
     var self=this;
     var dossierID = self.dossierId;
-    var url="http://yellowjacket.ethz.ch/tools/service/service2.php/"+dossierID;
+    var url="http://yellowjacket.ethz.ch/tools/service/dossier.php/"+dossierID;
     var method="POST";
     
     if ( dossierID &&

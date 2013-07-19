@@ -118,7 +118,7 @@ DossierListModel.prototype.getDefaultDossierId = function() {
 DossierListModel.prototype.getUserDossiers=function(){
 	var self = this;
 
-    var url='http://yellowjacket.ethz.ch/tools/service/service2.php';
+    var url='http://yellowjacket.ethz.ch/tools/service/dossier.php';
     var method = 'GET';
     console.log( 'request to load dossier list');
     
