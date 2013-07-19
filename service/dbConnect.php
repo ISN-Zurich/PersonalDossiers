@@ -5,8 +5,8 @@ require_once 'MDB2.php';
 //NEW Database connection by using MDB2
 $dsn = array(
 		'phptype'  => 'mysql',
-		'username' => 'LITSA',
-		'password' => 'LITSAKI83',
+		'username' => '',
+		'password' => '',
 		'hostspec' => 'localhost',
 		'database' => 'dossier',
 );
