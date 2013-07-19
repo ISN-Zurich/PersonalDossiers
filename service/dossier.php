@@ -55,7 +55,7 @@ include 'session.php';
  *
  */
 class DossierService extends OAUTHRESTService {
-       protected $uri = "/tools/service/service2.php";
+       protected $uri = "/tools/service/dossier.php";
        
        protected $dbh;
        protected $dossier_id;
