@@ -130,7 +130,6 @@ UserModel.prototype.checkActiveUser = function(){
         // send the user to the login page
         window.location.href = 'user.html';
 	//console.log("get request token in checkactiveUser");
-	
     }
 };
 

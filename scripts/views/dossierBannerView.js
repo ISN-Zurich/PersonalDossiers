@@ -47,6 +47,7 @@ function DossierBannerView(myController){
     }
 
     $(document).bind('dataSuccessfullySent', function() {
+        self.waitForUpload--;
         self.transitionToGallery();
     });
 } //end of constructor
@@ -82,24 +83,16 @@ DossierBannerView.prototype.deactivateBannerEditMode = function() {
 
 DossierBannerView.prototype.changeImage= function(){
     if (this.editMode) {
-	// window.location.assign("gallery.html")
-	// wrong solution below
-        if ( this.waitForUpload === 0) {
-            console.log( "really do the transition");
-	    window.location.href = "gallery.html";
-        }
-        else {
-            console.log('wait for Transition');
-            this.goToGallery = true;
-        }
+        console.log('wait for Transition');
+        this.goToGallery = true;
+        this.transitionToGallery();
     }
 };
 
 DossierBannerView.prototype.transitionToGallery = function() {
-    this.waitForUpload--;
     if ( this.waitForUpload === 0 && this.goToGallery === true ) {
         console.log('upload done');
-	window.location.href = "gallery.html";
+	window.location.href = "gallery.php";
     }
 }
 

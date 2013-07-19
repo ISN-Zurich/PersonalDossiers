@@ -16,15 +16,15 @@ function ImageHandler(controller){
 	var targetE = e.target;
 	var targetID = targetE.id;
 	console.log("targetID is "+targetID);
-	if($(targetE).hasClass("pictureSelect") ){
-	    var myID=targetID.substring(4);
-	    var imgString= $("#img"+myID).attr("src");
-	    console.log("string of image is "+imgString);
-	    //update the model with the new image, in order it to be sent in the next step to the server
-	    self.controller.models['bookmark'].setDossierImageURL(imgString);
-	    //send to the server the new image url and update the database
-	    self.controller.models['bookmark'].sendDataToServer();
-	}
+
+	var myID=targetID.substring(4);
+	var imgString= $("#imgx"+myID).attr("src");
+	console.log("string of image is "+imgString);
+	//update the model with the new image, in order it to be sent in the next step to the server
+	self.controller.models['bookmark'].setDossierImageURL(imgString);
+	//send to the server the new image url and update the database
+	self.controller.models['bookmark'].sendDataToServer();
+
         console.log("clicked on image");
     }
     console.log("image handler ready");
