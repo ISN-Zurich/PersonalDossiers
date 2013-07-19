@@ -537,7 +537,7 @@ class DossierService extends OAUTHRESTService {
 		     $description = "No Description";
 	      }
 	      if (empty($image)) {
-		     $image = "sample_index_files/default3.jpg";
+		     $image = "gallery/default3.jpg";
 	      }
 	      
 	      $sth = $mdb2->prepare("insert into dossiers (title, description, image) Values (?,?,?)");
