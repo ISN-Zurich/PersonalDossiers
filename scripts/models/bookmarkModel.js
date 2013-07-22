@@ -79,6 +79,7 @@ BookmarkModel.prototype.addItem=function(id){
     function success(){
 	// great! well done!
 	console.log("great the insertion of the bookmark was succesfull");
+        $(document).trigger('BOOKMARKSTORED')
     }
     
     function error(request) {
@@ -277,6 +278,19 @@ BookmarkModel.prototype.nextItem = function() {
     this.index++;
     console.log("this.index in nextItem is "+this.index);
     return this.index < this.dossierList.length;
+};
+
+BookmarkModel.prototype.hasItem = function(id) {
+    var retval = false, i = 0;
+    if (this.dossierList && this.dossierList.length && id) {
+        for (i; i < this.dossierList.length; i++) {
+            if ( this.dossierList[i]['digital_library_id'] === id ) {
+                retval = true;
+                break;
+            }
+        }
+    }
+    return retval;
 };
 
 

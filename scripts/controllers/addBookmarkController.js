@@ -6,10 +6,25 @@ function addBookmarkController() {
 
     console.log("do not initialize");
     window.addEventListener('message', authorizationListener, false);
+    var search = window.location.search;
+
+    var params = search.split("&");
+    var i;
+    for ( i = 0; i < params.length; i++) {
+        var tmp = params[i].split('=');
+        if ( tmp[0] === "id" || tmp[0] === "?id" ) {
+            this.itemId = tmp[1];
+        }
+    }
     // create a hidden window
     $('<iframe/>', {'class': 'none', 
                     'id': 'isn_pd_authorize', 
-                    'src': 'http://yellowjacket.ethz.ch/tools/authorize.html' }).appendTo('#isn_pd_widget');
+                    'src': 'http://yellowjacket.ethz.ch/tools/authorize.html' }).appendTo('#isn_pd_widget').bind('load', function(){
+                        if ( self.itemId ) {
+                            self.checkItem();
+                        }
+                    });
+
 
     function authorizationListener(m) {
         if (m.origin == "http://yellowjacket.ethz.ch") {
@@ -23,9 +38,15 @@ function addBookmarkController() {
 	        
 	        console.log("add bookmark controller is initialized");
             }
+            if ( data.bookmarkok ) {
+                console.log('item is already bookmarked' ); 
+                self.views.addBookmark.feedback('OK');
+            }
         }
     }
 };
+
+
 
 addBookmarkController.prototype.getActiveDossier = function() {
     var self=this;
@@ -48,10 +69,20 @@ addBookmarkController.prototype.initOAuth = function() {
     }
 };
 
-addBookmarkController.prototype.addItem = function(itemId, dossierId) {
-    var data = {'dossierID': dossierId, 'itemID': itemId};
-    $('#isn_pd_authorize')[0].contentWindow.postMessage(JSON.stringify(data), 'http://yellowjacket.ethz.ch');
+addBookmarkController.prototype.addItem = function() {
+    var data = {'operation': 'store', 'itemID': this.itemId};
+    $('#isn_pd_authorize')[0].contentWindow.postMessage(JSON.stringify(data), 
+                                                        'http://yellowjacket.ethz.ch');
 };
+
+addBookmarkController.prototype.checkItem = function() {
+    var data = {'operation': 'check', 'itemID': this.itemId};
+    var msg = JSON.stringify(data);
+    console.log( 'post message ' + msg);
+    $('#isn_pd_authorize')[0].contentWindow.postMessage(msg, 
+                                                        'http://yellowjacket.ethz.ch');
+};
+
 
 addBookmarkController.prototype.isLoggedin = function() {
     return this.login;

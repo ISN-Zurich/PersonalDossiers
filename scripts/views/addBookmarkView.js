@@ -6,25 +6,20 @@
  * 
  */
 function DesignBookmarkView(dcontroller) {
-	console.log("enter design bookmark view");
-	var self = this;
+    console.log("enter design bookmark view");
+    var self = this;
+    
+    self.controller=dcontroller;
 
-	self.controller=dcontroller;
-
-	$('#isn_pd_widget').bind("click", function(e) { //add id dynamically
-		if ( e.target.id === "addbmbutton" ) {
-                    self.addItemToDossier();
-                }
-//		console.log("clicked on the submit button");
-//		var dossierItemId= $('input#inputValue').val();
-//		console.log("got the input value and it is "+dossierItemId);
-//		var bookmarkModel=controller.models["bookmark"];
-//		bookmarkModel.addItem(dossierItemId);
-	});	
-
-        if ( this.controller.isLoggedin() ) {
-	    this.open();
+    $('#isn_pd_widget').bind("click", function(e) { //add id dynamically
+	if ( e.target.id === "addbmbutton" ) {
+            self.addItemToDossier();
         }
+    });	
+
+    if ( this.controller.isLoggedin() ) {
+	this.open();
+    }
 }
 
 
@@ -56,22 +51,15 @@ DesignBookmarkView.prototype.update = function(){
     }	
 };
 
-DesignBookmarkView.prototype.addItemToDossier = function() {
-    console.log('click on add bookmark');
-
-    var search = window.location.search;
-
-    var params = search.split("&");
-    var i;
-    for ( i = 0; i < params.length; i++) {
-        var tmp = params[i].split('=');
-        if ( tmp[0] === "id" || tmp[0] === "?id" ) {
-            this.itemId = tmp[1];
-        }
+DesignBookmarkView.prototype.feedback = function(type) {
+    if ( type === 'OK' ) {
+        // change from add bookmark to bookmarked
+        $('#addbmbutton').text('bookmarked');
     }
+};
 
-    console.log( 'add id ' + this.itemId);
-    this.controller.addItem(this.itemId);
+DesignBookmarkView.prototype.addItemToDossier = function() {
+    this.controller.addItem();
 };
 
 

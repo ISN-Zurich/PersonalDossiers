@@ -25,19 +25,25 @@ function AuthorizationController() {
         return did;
     };
 
+    $(document).bind('BOOKMARKSTORED', function() {
+        window.parent.postMessage(JSON.stringify({'bookmarkok': 1}), 
+                                  'http://www.isn.ethz.ch');
+    });
+
     if (self.oauth) {
         // indeed we want to verify the tokens first
         var data = JSON.stringify({'userok': 1});
         window.parent.postMessage(data, 'http://www.isn.ethz.ch');
         // now load the bookmark model 
+        $(document).bind('BookmarkModelLoaded', checkBookmark);
+
         mUser = new UserModel(self);
         mDossiers = new DossierListModel(self);
         bookmarks = new BookmarkModel(self);
 
         window.addEventListener('message', addDossierItem, false);
-    }
 
-    
+    }    
 
     function addDossierItem(m) {
         console.log( 'received a message from ' + m.origin);
@@ -48,13 +54,30 @@ function AuthorizationController() {
             // use only for our digital library
             console.log( 'item id? ' + data.itemID);
             if ( data.itemID ) {
-                console.log('dID:  ' + data.dossierID);
-                if ( data.dossierID ) {
-                    bookmarks.dossierId = data.dossierID;
+                console.log('operation is ' + data.operation)
+                switch (data.operation) {
+                case 'store':
+                    console.log('add the bookmark');
+                    bookmarks.addItem(data.itemID);                
+                    break;
+                case 'check':
+                    console.log( 'check bookmark');
+                    self.activeItemID = data.itemID;
+                    checkBookmark();
+                    break;
+                default: 
+                    break;
                 }
-                console.log('iID:  '+ data.itemID);
-                bookmarks.addItem(data.itemID);                
             }
+        }
+    }
+
+    function checkBookmark() {
+        console.log('check bookmark! ' + self.activeItemID);
+        if ( self.activeItemID && bookmarks.hasItem(self.activeItemID) ){
+            console.log('bookmark found!');
+            window.parent.postMessage(JSON.stringify({'bookmarkok': 1}), 
+                                      'http://www.isn.ethz.ch');
         }
     }
 }
