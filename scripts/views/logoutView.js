@@ -26,7 +26,7 @@ LogoutView.prototype.update = function(){
     $('#delete').empty();
     console.log("design dynamically logout button");
     var p = $("<p/>", {
-	"class": "bold active",
+	"class": "bold active clickable",
 	"text": "Logout"
     }).appendTo("#delete");
     

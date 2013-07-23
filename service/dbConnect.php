@@ -23,6 +23,7 @@ if (PEAR::isError($mdb2)) {
 	die($mdb2->getMessage());
 } else {
 	//echo 'Connected Successufly';
+	$mdb2->setCharset('utf8');
 }
 
 ?>
