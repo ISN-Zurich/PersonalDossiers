@@ -3,6 +3,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" type="text/css" href="style/gallery.css" />
+    <link type="text/css" href="style/personaldossier.css" rel="stylesheet">
 
     <script type="text/javascript" src="libs/jquery.js"></script>
     <script type="text/javascript" src="libs/sha1.js"></script>

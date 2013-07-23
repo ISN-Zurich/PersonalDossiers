@@ -54,7 +54,7 @@ DossiersButtonView.prototype.update = function(){
 		do {
 			var dossierId=self.controller.models['dossierList'].getDossierId();
 		var p1=$("<p/>",{
-			"class": "bold",
+			"class": "bold clickable",
 			"id":"dossierBtn"+dossierId,
 			"text": self.controller.models['dossierList'].getDossierTitle()
 		}).appendTo("#findinformation");
@@ -62,7 +62,7 @@ DossiersButtonView.prototype.update = function(){
 	}
 	
 	var p2=$("<p/>",{
-		"class": (self.controller.oauth) ? "bold": "bold hidden",
+		"class": (self.controller.oauth ? "bold": "bold hidden") + " clickable",
 		"id":"userprofile",
 		"text": "User Profile"
 	}).appendTo("#findinformation");	
