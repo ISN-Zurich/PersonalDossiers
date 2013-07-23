@@ -58,6 +58,7 @@ DossierContentView.prototype.openDiv = openView;
 
 DossierContentView.prototype.open = function() {
 	$("#contentArea").empty();
+    //TODO: only if we are loggedIn to display the logout button
 	$("#delete").removeClass("hidden");
 	console.log("open dossier list view");
 	this.renderList();

@@ -12,7 +12,7 @@ function DossierListModel(controller){
 	//load the "userProfile" object from Local storage
 	//self.loadData();
     
-        self.getUserDossiers();
+    self.getUserDossiers();
 
 	console.log("initialized dossier list model");
 }

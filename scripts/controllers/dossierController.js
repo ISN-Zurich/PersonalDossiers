@@ -11,7 +11,13 @@ function dossierController() {
 
     self.initOAuth();
 
-    if (self.oauth) {
+  // if we are logged in or if there is a hash on the url then show & open the authorized views
+  // if there is a hash on the url don't show the logout button
+
+  // x= self.hashedUrl();
+
+
+   if (self.oauth) {
 
 	//initialization of models 
 	self.models = {};
@@ -30,14 +36,14 @@ function dossierController() {
 
 	//initialization of views 
         self.views.dossierBanner = new DossierBannerView(self);
-	self.views.dossierContent= new DossierContentView(self);
+	    self.views.dossierContent= new DossierContentView(self);
         self.views.dossierList = new DossiersButtonView(self);
         self.views.logout      = new LogoutView(self);
 
 	$(document).bind("BookmarkModelLoaded", function() {
 	    console.log("initialize views in controller");
 	    self.views.dossierBanner.open();
-            self.views.dossierContent.open();
+        self.views.dossierContent.open();
 	});
 	
 	
@@ -49,63 +55,82 @@ function dossierController() {
     }
 }
 
-dossierController.prototype.initOAuth = function() {
-    try {
-        this.oauth = new OAuthHelper('http://yellowjacket.ethz.ch/tools/');
+    dossierController.prototype.hashedUrl = function() {
+                   url_path= window.location.pathname;
+                    if (url_path.indexOf('#') != -1) {
+                        return true;
+                    }else{
+                        return false;
+                    }
+    };
+
+    dossierController.prototype.getHashedURLId = function(){
+
+
+
+    };
+
+    dossierController.prototype.initOAuth = function() {
+        try {
+            this.oauth = new OAuthHelper('http://yellowjacket.ethz.ch/tools/');
+        }
+        catch (e) {
+            this.oauth = null;
+        }
+    };
+
+    dossierController.prototype.updateUserData = function() {
+        if ( this.oauth ) {
+            this.models.dossierList.getUserDossiers();
+        }
+    };
+
+
+    dossierController.prototype.initImageHandler=function(){
+        var self=this;
+        console.log("runs in controller image handler");
+        self.imageHandler= new ImageHandler(this);
+
+    };
+
+    dossierController.prototype.test = function(){
+        console.log("after initializing image gallery");
+    };
+
+    // ************************* Old function ********************
+    //dossierController.prototype.getActiveDossier = function() {
+    //	//return 1;
+    //	return this.models.dossierList.getActiveDossier();
+    //};
+
+
+    dossierController.prototype.getActiveDossier = function(){
+
+
+
+        // if there a hash
+        var activedossierId =  this.models.user.getActiveDossier();
+        if (activedossierId){
+        return activedossierId;
+        }else{
+        var dossierId = this.models.dossierList.getDefaultDossierId();
+        return dossierId;
+        }
+        return undefined;
+    };
+
+
+    dossierController.prototype.transition = function(){
+
     }
-    catch (e) {
-        this.oauth = null;
+
+    dossierController.prototype.logout = function() {
+        this.models.user.logout();
     }
-};
 
-dossierController.prototype.updateUserData = function() {
-    if ( this.oauth ) {
-        this.models.dossierList.getUserDossiers();
-    } 
-};
-
-
-dossierController.prototype.initImageHandler=function(){
-	var self=this;
-	console.log("runs in controller image handler");
-	self.imageHandler= new ImageHandler(this);
-	
-};
-
-dossierController.prototype.test = function(){
-	console.log("after initializing image gallery");
-};
-
-// ************************* Old function ********************
-//dossierController.prototype.getActiveDossier = function() {
-//	//return 1;
-//	return this.models.dossierList.getActiveDossier();
-//};
-
-
-dossierController.prototype.getActiveDossier = function(){
-    var activedossierId =  this.models.user.getActiveDossier();
-    if (activedossierId){
-	return activedossierId;
-    }else{
-	var dossierId = this.models.dossierList.getDefaultDossierId();
-	return dossierId;
-    }
-    return undefined;
-};
-
-
-dossierController.prototype.transition = function(){
-		
-}
-
-dossierController.prototype.logout = function() {
-    this.models.user.logout();
-}
-
-var controller;
-console.log("enter main js");
-$(document).ready(function(){
-	console.log("document ready");
-	controller = new dossierController();
-});
+    var controller;
+    console.log("enter main js");
+    $(document).ready(function(){
+        console.log("document ready");
+        controller = new dossierController();
+    });
