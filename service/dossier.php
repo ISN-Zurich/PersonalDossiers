@@ -299,7 +299,7 @@ class DossierService extends OAUTHRESTService {
 	      
 	      // verify that the object is not already added
 	      $sth = $mdb2->prepare('SELECT id FROM dossier_items WHERE dossier_id=? AND digital_library_id =?');
-	      $res = $sth->execute(array($this->dossier_id, $itemid))->numRows();
+          $res = $sth->execute(array($this->dossier_id, $itemid))->numRows();
 	      $sth->free();
 	      if ( $res <> 0) {
 		     $this->log("Item already exists in this dossier, silently send OK");
@@ -346,7 +346,7 @@ class DossierService extends OAUTHRESTService {
 		     }
 	      }
 	      catch (HttpException $e) {
-		     $this->log("HTTP error while fetching the item: ". $e->getMessasge());
+		     $this->log("HTTP error while fetching the item: ". $e->getMessage());
 		    
 		     $this->logtest(empty($tmp),"invalid JSON returned");
 	      
@@ -369,14 +369,24 @@ class DossierService extends OAUTHRESTService {
 	      
 	      // we no longer use the user id for the dossier items
 	      $this->log('metadata for id: ' . $itemid . " is " . $itemmeta);
-	      $sth = $mdb2->prepare("insert into dossier_items (digital_library_id, dossier_id, metadata) values (?, ?, ?)");
-	      $res = $sth->execute(array($itemid, $this->dossier_id, $itemmeta));
-	      if (PEAR::isError($res)) {
-		     $this->log("pear error " . $res->getMessage());
+	      $sth = $mdb2->prepare("insert into dossier_items (digital_library_id, dossier_id) values (?, ?)");
+	      $res1 = $sth->execute(array($itemid, $this->dossier_id));
+	      if (PEAR::isError($res1)) {
+		     $this->log("pear error " . $res1->getMessage());
 		     $this->bad_request();
 		     return;
 	      }
-	      
+
+           //insert library id and metadata for it into a separate table
+	       $sth = $mdb2->prepare("insert into library_metadata (digital_library_id, metadata) values ( ?, ?)");
+          	      $res2 = $sth->execute(array($itemid, $itemmeta));
+            if (PEAR::isError($res2)) {
+             $this->log("pear error " . $res2->getMessage());
+             $this->bad_request();
+             return;
+            }
+
+
 	      $this->item_id = $mdb2->lastInsertID("dossiers", "id");
 	      array_push($this->data, array("dossier_id"=> $this->dossier_id, "item_id" => $this->item_id));
 	      $this->respond_json_data();
@@ -675,7 +685,7 @@ class DossierService extends OAUTHRESTService {
 		     $sth->free();
 		     
 		     // load the dossier item list
-		     $sth = $mdb2->prepare('SELECT * FROM dossier_items WHERE dossier_id=?');
+		     $sth = $mdb2->prepare('SELECT lm.metadata, di.dossier_id FROM dossier_items di,library_metadata lm  WHERE di.dossier_id=? AND di.digital_library_id = lm.digital_library_id  ');
 		     $res = $sth->execute($this->dossier_id);
 		     $idata= array();
 		     while ($row=$res->fetchRow()) {
