@@ -98,7 +98,7 @@ DossierListModel.prototype.getDefaultDossierId = function() {
 		for ( i = 0;  i < self.dossierList.length; i++) {
 			console.log("enter for " + i);
 			if (!minId || self.dossierList[i].dossier_id < minId) {
-				console.log("befor set to smaller minId");
+				console.log("before set to smaller minId");
 				minId = self.dossierList[i].dossier_id;
 			}
 		}
