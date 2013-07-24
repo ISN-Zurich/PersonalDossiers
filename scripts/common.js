@@ -4,6 +4,10 @@
  * @function openView 
  * */ 
 
+if ( !window.console ) {
+    window.console = {'log': function(m){}};
+} 
+
 function openView() {
 	console.log("first console log message");
 	$("#" + this.tagID).show();
