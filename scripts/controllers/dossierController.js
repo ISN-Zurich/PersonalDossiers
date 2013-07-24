@@ -8,7 +8,9 @@ function dossierController() {
     var self=this;
     
     document.domain = 'ethz.ch';
+    self.hashed=false;
 
+    self.hashedUrl();
     self.initOAuth();
 
   // if we are logged in or if there is a hash on the url then show & open the authorized views
@@ -17,13 +19,17 @@ function dossierController() {
   // x= self.hashedUrl();
 
 
-   if (self.oauth) {
+   if (self.oauth || self.hashed){
 
 	//initialization of models 
 	self.models = {};
 	
 	//self.models.authentication = new AuthenticationModel(this);
-	self.models.user = new UserModel(self);
+
+    //user model is run only when we are authenticated
+   if (self.oauth){
+       self.models.user = new UserModel(self);
+   }
 	
 	self.models.dossierList = new DossierListModel(self);
 	self.models.bookmark = new BookmarkModel(self);
@@ -31,14 +37,17 @@ function dossierController() {
 	
 	console.log("model is initialized");
 	
-	console.log("loaded from model is "+self.models.bookmark.loaded);
 	self.views = {};
 
 	//initialization of views 
         self.views.dossierBanner = new DossierBannerView(self);
 	    self.views.dossierContent= new DossierContentView(self);
-        self.views.dossierList = new DossiersButtonView(self);
-        self.views.logout      = new LogoutView(self);
+
+       //the following views run only when we are authenticated
+       if (self.oauth){
+       self.views.dossierList = new DossiersButtonView(self);
+       self.views.logout      = new LogoutView(self);
+       }
 
 	$(document).bind("BookmarkModelLoaded", function() {
 	    console.log("initialize views in controller");
@@ -49,25 +58,35 @@ function dossierController() {
 	
 	//console.log("dossiersController is initialized"+this.models.bookmark.loaded);
     }
-    else {
+    else if (!self.oauth && !self.hashed) {
+       console.log("the user is not loggedIn and there is no hash on the url");
         // user is not logged in go to user.html
-        window.location.href = 'user.html';
+       // window.location.href = 'user.html';
     }
 }
 
     dossierController.prototype.hashedUrl = function() {
-                   url_path= window.location.pathname;
-                    if (url_path.indexOf('#') != -1) {
-                        return true;
-                    }else{
-                        return false;
+               //var  url_path= window.location.pathname;
+              // if (url_path.indexOf('#') != -1) {
+
+                console.log(" enter hashedUrl");
+                if (window.location.hash){
+                    console.log("url has a hash");
+                        this.hashed=true;
+                      //  return true;
+                 }
+                 else{
+                    console.log("url has not a hash");
+                    this.hashed=false;
+                     //   return false;
                     }
     };
 
     dossierController.prototype.getHashedURLId = function(){
-
-
-
+                  var hashed_url= window.location.hash;
+                  var dossierId= hashed_url.substring(1);
+                  console.log("dossier id after hash is "+dossierId);
+                  return dossierId;
     };
 
     dossierController.prototype.initOAuth = function() {
@@ -106,17 +125,18 @@ function dossierController() {
 
     dossierController.prototype.getActiveDossier = function(){
 
-
-
-        // if there a hash
+        if (this.hashed){
+        var activedosId = this.getHashedURLId();
+            return activedosId;
+        } else {   //if there is no hash at the url
         var activedossierId =  this.models.user.getActiveDossier();
         if (activedossierId){
         return activedossierId;
         }else{
         var dossierId = this.models.dossierList.getDefaultDossierId();
         return dossierId;
-        }
-        return undefined;
+        }}
+        return undefined;    //if something goes wrong for any reason
     };
 
 

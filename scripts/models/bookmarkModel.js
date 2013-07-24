@@ -8,6 +8,8 @@
  ****/
 
 function BookmarkModel(dController){
+
+    console.log("enter BookmarkModel");
     var self=this;
     self.controller=dController;
     this.loaded=false;
@@ -31,7 +33,10 @@ function BookmarkModel(dController){
     //load the list of dossier items for the active dossier
     // this.loadDossierList();
     //this.initValues();
-
+    if (self.controller.hashed) {
+        self.dossierId = self.controller.getActiveDossier();
+        self.loadDossierList();
+    }
     $(document).bind("ActiveDossierReady", loadActiveDossier);
     
     function loadActiveDossier() {
@@ -133,13 +138,18 @@ BookmarkModel.prototype.removeItem=function(id){
 
 BookmarkModel.prototype.arrangeItem=function(){};
 
-
+/*
+ * Load the list of dossier items for the active dossier
+ *
+ */
 BookmarkModel.prototype.loadDossierList=function(){
+    console.log("enter loadDossier list");
     var self=this;
     var data = {};
     
     //var dossierID = this.dossierId;
     var dossierID= self.dossierId;
+    console.log("dossier ID in loadDossierList is "+dossierID);
     var url='http://yellowjacket.ethz.ch/tools/service/dossier.php/' + dossierID;
     var method="GET";
     if ( dossierID ) {
@@ -206,8 +216,10 @@ BookmarkModel.prototype.loadDossierList=function(){
     }
     
     function setHeader(xhr) {
-	var header_request=self.controller.oauth.oauthHeader(method, url, data);
-	xhr.setRequestHeader('Authorization', header_request);
+        if (self.controller.oauth)   {
+	    var header_request=self.controller.oauth.oauthHeader(method, url, data);
+	    xhr.setRequestHeader('Authorization', header_request);
+        }
     }
     
 };

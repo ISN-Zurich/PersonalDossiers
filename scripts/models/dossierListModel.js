@@ -116,6 +116,8 @@ DossierListModel.prototype.getDefaultDossierId = function() {
 };
 
 DossierListModel.prototype.getUserDossiers=function(){
+
+    console.log("enter getUserDossiers");
 	var self = this;
 
     var url='http://yellowjacket.ethz.ch/tools/service/dossier.php';
@@ -123,7 +125,7 @@ DossierListModel.prototype.getUserDossiers=function(){
     console.log( 'request to load dossier list');
     
     if (self.controller.oauth) {
-        console.log( 'load dossier list');
+        console.log( 'load dossier list because there is oauth');
 	$.ajax({
 	    url:  url,
 	    type : method,
@@ -138,7 +140,10 @@ DossierListModel.prototype.getUserDossiers=function(){
 	});
     }
     else {
-        console.log('the controller lacks the oauth helper!');
+        //Trigger the activeDossierReady, it will be bound in the bookmark model which in turn
+        //will ask the activeDossier in the controller
+        $(document).trigger("ActiveDossierReady"); //  for the models  (bookmarkModel)
+        console.log('the controller lacks the oauth helper! but has a hash key');
     }
     
     function success(data){
@@ -148,8 +153,8 @@ DossierListModel.prototype.getUserDossiers=function(){
 	console.log("dossier_id is "+JSON.stringify(self.dossierList[0]['dossier_id']));
 	
         // inform all dossier views that they need to update
-        $(document).trigger('DossierListUpdate'); // for the views
-        $(document).trigger("ActiveDossierReady"); //  for the models
+      $(document).trigger('DossierListUpdate'); // for the views   (dossierListButtons)
+      $(document).trigger("ActiveDossierReady"); //  for the models  (bookmarkModel)
     }
     
     
