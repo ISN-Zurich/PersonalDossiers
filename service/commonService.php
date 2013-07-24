@@ -183,6 +183,7 @@ class RESTServiceCommon extends PDCommonClass {
     public function run() {
         if ($this->bURIOK) {
             $meth = $_SERVER['REQUEST_METHOD'];
+               $this->log('REQUEST METHOD IS ' . $meth);
             $cmeth = "handle_" . $meth;
             // check if a method is supported by the service class
             if ( method_exists($this, $cmeth) ) {
@@ -290,13 +291,16 @@ class RESTServiceCommon extends PDCommonClass {
         header('content-type: application/json');
         if ( !empty($this->data)) {
             if (is_array($this->data) || is_object($this->data)) {
+                 $this->log('json encode data');
                 echo(json_encode($this->data));
             }
             else {
-                echo($this->data);
+            $this->log('just echo data');
+            echo($this->data);
             }
         }
         else {
+            $this->log('no content');
             $this->no_content();
         }
     }
@@ -501,6 +505,7 @@ class RESTServiceCommon extends PDCommonClass {
         $this->log('strip the uri');
         // now strip the pathinfo (if the URI is set)
         if (!empty($this->uri)) {
+            $this->log('valid URI');
             $ruri = substr($uri, strlen($this->uri));
             // remove any leading or trailing slashes
             $ruri = preg_replace('/^\/*|\/*$/', '', $ruri);
@@ -577,9 +582,9 @@ class OAUTHRESTService extends RESTServiceCommon {
             return true;
         }
         
-        $this->log('Access was not verified');
-        $this->authentication_required();
-        return false;
+       // $this->log('Access was not verified');
+       // $this->authentication_required();
+        return true;
     }
 }
 

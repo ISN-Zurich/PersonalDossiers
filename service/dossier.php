@@ -105,13 +105,17 @@ class DossierService extends OAUTHRESTService {
         */
        protected function handle_GET() {
 	      $this->mark();
+	      $this->log('enter handle_GET');
 	      if ($this->item_id > 0 ) {
+	      $this->log('item id >0 in handle_GET');
 		     $this->read_item();
 	      }
 	      else if ( $this->dossier_id > 0 ) {
+	       $this->log('dossier id >0 in handle_GET');
 		     $this->read_dossier();
 	      }
 	      else {
+	       $this->log('read_user dossiers in handle_GET');
 		     $this->read_user_dossiers();
 	      }
        }
