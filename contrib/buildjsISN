@@ -3,6 +3,12 @@
 cd /home/apache/tools/scripts/
 
 echo '/** ********************' > personaldossier.js
+echo common.js  >> personaldossier.js
+echo '******************** **/' >> personaldossier.js
+
+cat common.js >> personaldossier.js
+
+echo '/** ********************' >> personaldossier.js
 echo views/addBookmarkView.js  >> personaldossier.js
 echo '******************** **/' >> personaldossier.js
 
