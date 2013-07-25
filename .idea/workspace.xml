@@ -2,14 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aec4976c-8c72-4221-b8b3-d723ce8cfe58" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/models/authentication.js" afterPath="$PROJECT_DIR$/scripts/models/authentication.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/service/dossier.php" afterPath="$PROJECT_DIR$/service/dossier.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/models/dossierListModel.js" afterPath="$PROJECT_DIR$/scripts/models/dossierListModel.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/service/commonService.php" afterPath="$PROJECT_DIR$/service/commonService.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/views/dossierBannerView.js" afterPath="$PROJECT_DIR$/scripts/views/dossierBannerView.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/controllers/dossierController.js" afterPath="$PROJECT_DIR$/scripts/controllers/dossierController.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/service/session.php" afterPath="$PROJECT_DIR$/service/session.php" />
     </list>
     <ignored path="PersonalDossiersISN.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="aec4976c-8c72-4221-b8b3-d723ce8cfe58" time="1374568842022" ignored="false" />
+    <file path="/Dummy.txt" changelist="aec4976c-8c72-4221-b8b3-d723ce8cfe58" time="1374739551479" ignored="false" />
     <file path="/dossier.php" changelist="aec4976c-8c72-4221-b8b3-d723ce8cfe58" time="1374572027125" ignored="false" />
+    <file path="/session.php" changelist="aec4976c-8c72-4221-b8b3-d723ce8cfe58" time="1374742904360" ignored="false" />
+    <file path="/commonService.php" changelist="aec4976c-8c72-4221-b8b3-d723ce8cfe58" time="1374745905222" ignored="false" />
+    <file path="/dossierBannerView.js" changelist="aec4976c-8c72-4221-b8b3-d723ce8cfe58" time="1374751262209" ignored="false" />
+    <file path="/dossierController.js" changelist="aec4976c-8c72-4221-b8b3-d723ce8cfe58" time="1374752348828" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,19 +34,82 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="authentication.php" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/service/authentication.php">
+      <file leaf-file-name="addBookmarkView.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/views/addBookmarkView.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="29" selection-start="91" selection-end="91" vertical-scroll-proportion="0.07692308">
+            <state line="56" column="25" selection-start="1323" selection-end="1341" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="addBookmarkView.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/views/addBookmarkView.js">
+      <file leaf-file-name="commonService.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/service/commonService.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="20" selection-start="274" selection-end="436" vertical-scroll-proportion="0.0">
+            <state line="552" column="40" selection-start="17890" selection-end="17890" vertical-scroll-proportion="-9.230769">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dossierBannerView.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/views/dossierBannerView.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="167" column="70" selection-start="4872" selection-end="4872" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="83" column="52" selection-start="4845" selection-end="4860" vertical-scroll-proportion="-6.06">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dossierController.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/scripts/controllers/dossierController.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="52" column="30" selection-start="1342" selection-end="1342" vertical-scroll-proportion="0.70987654">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dossiersListButton.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts/views/dossiersListButton.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="session.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/service/session.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="234" column="39" selection-start="7940" selection-end="7959" vertical-scroll-proportion="-3.8846154">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="authentication.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/service/authentication.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="317" column="38" selection-start="10698" selection-end="10721" vertical-scroll-proportion="-27.153847">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dossier.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/service/dossier.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="702" column="37" selection-start="23259" selection-end="23276" vertical-scroll-proportion="-25.384615">
               <folding />
             </state>
           </provider>
@@ -68,13 +136,18 @@
         <option value="$PROJECT_DIR$/scripts/models/dossierListModel.js" />
         <option value="$PROJECT_DIR$/service/dossier.php" />
         <option value="$PROJECT_DIR$/scripts/models/authentication.js" />
+        <option value="$PROJECT_DIR$/service/session.php" />
+        <option value="$PROJECT_DIR$/service/commonService.php" />
+        <option value="$PROJECT_DIR$/scripts/views/dossierBannerView.js" />
+        <option value="$PROJECT_DIR$/scripts/controllers/dossierController.js" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="22" />
-    <option name="width" value="1900" />
-    <option name="height" value="1123" />
+    <option name="x" value="18" />
+    <option name="y" value="42" />
+    <option name="width" value="1898" />
+    <option name="height" value="1120" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -102,6 +175,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -184,9 +258,26 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PersonalDossiersISN" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PersonalDossiersISN" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controllers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -230,25 +321,25 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="22" width="1900" height="1123" extended-state="0" />
+    <frame x="18" y="42" width="1898" height="1120" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24986681" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2496" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -314,9 +405,7 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/scripts/models/oauthhelper.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/models/userModel.js">
@@ -342,18 +431,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/service/dossier.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="680" column="53" selection-start="22417" selection-end="22456" vertical-scroll-proportion="-16.192308">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/models/dossierModel.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="109" selection-start="41" selection-end="41" vertical-scroll-proportion="0.06153846">
-          <folding />
-        </state>
+        <state line="4" column="109" selection-start="41" selection-end="41" vertical-scroll-proportion="0.06153846" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/models/authentication.js">
@@ -365,21 +445,68 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/models/addBookmark.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="25" selection-start="178" selection-end="190" vertical-scroll-proportion="0.10769231">
+        <state line="7" column="25" selection-start="178" selection-end="190" vertical-scroll-proportion="0.10769231" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/authentication.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="317" column="38" selection-start="10698" selection-end="10721" vertical-scroll-proportion="-27.153847">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/session.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="234" column="39" selection-start="7940" selection-end="7959" vertical-scroll-proportion="-3.8846154">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service/commonService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="552" column="40" selection-start="17890" selection-end="17890" vertical-scroll-proportion="-9.230769">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/views/dossierBannerView.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="167" column="70" selection-start="4872" selection-end="4872" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="83" column="52" selection-start="4845" selection-end="4860" vertical-scroll-proportion="-6.06">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/views/dossiersListButton.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/views/addBookmarkView.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="20" selection-start="274" selection-end="436" vertical-scroll-proportion="0.0">
+        <state line="56" column="25" selection-start="1323" selection-end="1341" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/service/authentication.php">
+    <entry file="file://$PROJECT_DIR$/service/dossier.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="29" selection-start="91" selection-end="91" vertical-scroll-proportion="0.07692308">
+        <state line="702" column="37" selection-start="23259" selection-end="23276" vertical-scroll-proportion="-25.384615">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/controllers/dossierController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="52" column="30" selection-start="1342" selection-end="1342" vertical-scroll-proportion="0.70987654">
           <folding />
         </state>
       </provider>
