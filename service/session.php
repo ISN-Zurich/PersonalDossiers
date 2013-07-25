@@ -246,6 +246,7 @@ class SessionManagement extends PDCommonClass {
             $oauth->checkOAuthRequest();
         }
         catch(OAuthException $E) {
+            $this->log('cannot run the token validation without a request token');
             $this->log(OAuthProvider::reportProblem($E));
             $this->oauthState = OAUTH_INVALID_SIGNATURE;
         }
