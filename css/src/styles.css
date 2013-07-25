@@ -287,6 +287,14 @@ FIND INFORMATION
     cursor:pointer;
 }
 
+#shareButton{
+    width: 22.7em;
+    height: 3.5em;
+    margin-bottom: 2em;
+    background: #ebedee;
+    border: .1em solid #C9CACF;
+    cursor:pointer;
+}
  
 .sideButton2 {
 	padding-top:1em;

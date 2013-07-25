@@ -59,7 +59,16 @@ DossierContentView.prototype.openDiv = openView;
 DossierContentView.prototype.open = function() {
 	$("#contentArea").empty();
     //TODO: only if we are loggedIn to display the logout button
-	$("#delete").removeClass("hidden");
+    if (self.controller.oauth){
+        $("#delete").removeClass("hidden");
+        $('#findinformation').removeClass("hidden");
+        $('#shareButton').removeClass("hidden");
+    }
+
+    if (self.controller.hashed){
+         $('#loginButtonLink').removeClass("hidden");
+    }
+
 	console.log("open dossier list view");
 	this.renderList();
 	this.openDiv();
@@ -162,7 +171,8 @@ DossierContentView.prototype.renderItem = function() {
 	var divp2=$("<p/>", {
 		text:bookmarkModel.getDescription()
 	}).appendTo(divFloatText);
-	
+
+    if (self.controller.oauth){
 	var div3 = $("<div/>", {
 		class:"deletecontainer"
 	}).appendTo(divFloatText);
@@ -178,7 +188,7 @@ DossierContentView.prototype.renderItem = function() {
 		text: "Really delete?",
 		"class": "deleteConfirmButton"
 	}).appendTo(div3);
-	
+    }
 	var lastbr1=$("<br/>", {
 		
 	}).appendTo(divFloatText);

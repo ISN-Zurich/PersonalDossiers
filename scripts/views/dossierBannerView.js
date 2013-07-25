@@ -182,7 +182,7 @@ DossierBannerView.prototype.renderBanner= function(){
 	text:bookmarkModel.getDossierDescription()
     }).appendTo(p2);
     
-    
+    if (self.controller.oauth){
     var divEdit=$("<span/>", {
 	"id":"editDossier",//we need to provide the dossierId dynamically
 	"class":"titleEdit",
@@ -194,4 +194,5 @@ DossierBannerView.prototype.renderBanner= function(){
 	"class":"hidden",
 	text:"lock edit"
     }).appendTo(div1);
+    }
 };
