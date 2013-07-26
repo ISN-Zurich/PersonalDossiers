@@ -758,6 +758,66 @@ class DossierService extends OAUTHRESTService {
 	      $this->log("Dossier List is: " . json_encode($this->data));
 	      $this->respond_json_data();
        }
+       
+       protected function prepareOperation($meth) {
+	      $retval = parent::prepareOperation($meth);
+	      
+	      if ( !$retval && $meth == 'GET' && $this->dossier_id) {
+		     $retval = true;
+	      }
+	      
+	      // now check if the user is allowed to perform the requested method
+	      if ( $this->session && $this->session->getUserID() && $this->dossier_id ) {
+		     // authenticated user
+		     // check if the user is allowed to perform the requested operation
+		     switch($meth) {
+		     case 'GET':
+			    // only access if the dossier is public or if the user is a member
+			    // if (!$this->userHasAccessToDossier( 'member')) {
+			    //   $retval = false;
+			    // }
+			    // else if (!$this->dossierIsPublic()) {
+			    //     $retval = false;	   
+			    // }
+			    break;
+		     case 'PUT':
+			    // only access if the user is a contributor
+			    // if (!$this->userHasAccessToDossier('author')) {
+			    //   $retval = false;
+			    // }
+			    break;
+		     case 'POST':
+			    if ( $this->item_id) {
+				   // only access if the user is a contributor
+			    }
+			    else {
+				   // only access if the user is an editor
+			    }
+			    break;
+		     case 'DELETE':
+			    if ( $this->item_id) {
+				   // only access if the user is a contributor
+			    }
+			    else {
+				   // only access if the user is an editor
+			    }
+			    break;
+		     default:
+			    //ignore and accept the parent's prepareOperation
+			    break;
+		     }
+	      }
+	      else if ( $this->dossier_id ) {
+		     // anonymous user (not logged in)
+		     // check if the requested dossier is public
+	      }
+	      
+	      if (!$retval) {
+		     $this->authentication_required();
+	      }
+	      
+	      return $retval;
+       }
 }
 
 

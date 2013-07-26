@@ -51,17 +51,22 @@ class AuthenticationService extends OAUTHRESTService {
      */
     protected function prepareOperation($meth) {
         if ($meth !== 'DELETE' && !empty($this->mode)) {
-            // if the OAuth functions before the actual user authorization perform their specific
+            // the OAuth steps before the actual user authorization perform their specific
             // token validation. Therefore, the default access-token validation must be omitted.
             
             $this->log('what is the mode? ' . $this->mode);
-            $this->OAuthOmitCheck = true;
+            // $this->OAuthOmitCheck = true;
+            return true;
         }
 
         $this->logtest(  $meth === 'DELETE',                                        'user wants to DELETE');
         $this->logtest(( $meth === 'DELETE' ) && ( $this->mode === 'access_token'), 'user wants to log out');
         
-        return parent::prepareOperation($meth);
+        $retval = parent::prepareOperation($meth);
+        if (!$retval) {
+            $this->authentication_required();
+        }
+        return $retval;
     }
     
     protected function handle_GET() {
