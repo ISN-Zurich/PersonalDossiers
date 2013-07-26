@@ -561,36 +561,32 @@ class OAUTHRESTService extends RESTServiceCommon {
      * If the OAuthOmitCheck is TRUE, then NO check is performed and the service proceeds with
      * calling the method handler.
      *
-     * If the OAuth Token cannot get verified the service will not call the method handler, but
-     * respond with a 401 Unauthorized error. 
+     * If the OAuth Token cannot get verified the service should not call the method handler.
+     * In this case this function returns FALSE, which means that the user is not authenticated.
      */
     protected function prepareOperation($meth) {
         $this->mark();        
-
+    
+        // this is needed for CORS Requests.
         if ($meth === 'OPTIONS') {
             return true;
         }
 
+        // OAuthOmitCheck should be always false.
         if ($this->OAuthOmitCheck) {
             $this->log("omit built in oauth check");
             return true;
         }
-          $myheaders=getallheaders();
-          $this->log('my headers are '.json_encode($myheaders));
-          $authorization = $myheaders['Authorization'];
-
-            $this->log('authorization part on the header is  '.json_encode($authorization));
-        if  (isset($authorization)){
-
+        
         $this->session->validateAccessToken();
         if ( $this->session->accessVerified() ){
             $this->log('Access Token Verified');
             return true;
         }
-        }
-       // $this->log('Access was not verified');
-       // $this->authentication_required();
-        return true;
+       
+        // $this->log('Access was not verified');
+        // $this->authentication_required();
+        return false;
     }
 }
 
