@@ -35,7 +35,44 @@ ShareButtonView.prototype.open = function(){
 };
 
 ShareButtonView.prototype.update = function(){
-    var self=this;
+
+   /* var self=this;
+    $('#shareButton').empty();
+    console.log("design dynamically share button");
+
+    var p = $("<p/>", {
+        "id":"shareBtn",
+        "class": "bold active clickable",
+        "text": "Share"
+    }).appendTo("#shareButton");
+
+    var divContainer =  $("<div/>", {
+        "id":"divContainer",
+        "class":"hidden"
+    }).appendTo("#shareButton");
+
+    var input = $("<input/>", {
+        "id":"shareArea",
+        "name":"shareArea",
+        "width":"150px",
+        "value": self.getPublicLink()
+    }).appendTo("#divContainer");
+    var emptyP = $("<div/>", {
+        "class":"divWidth"
+
+    }).appendTo("#divContainer");
+
+    var div1= $("<button/>", {
+        "id":"d_clip_button",
+        "data-clipboard-target":"shareArea",
+        "data-clipboard-text":self.getPublicLink(),
+        "title": "Copy" ,
+        "text": "copy"
+    }).appendTo("#divContainer");
+
+    console.log("designed share view");*/
+
+     var self=this;
     $('#shareButton').empty();
     console.log("design dynamically share button");
     var p = $("<p/>", {
@@ -44,19 +81,24 @@ ShareButtonView.prototype.update = function(){
         "text": "Share"
     }).appendTo("#shareButton");
 
+    var divContainer =  $("<div/>", {
+         "id":"divContainer",
+        "class":"hidden"
+    }).appendTo("#shareButton");
+
     var input = $("<input/>", {
         "id":"shareArea",
         "name":"shareArea",
-        "class":"hidden",
-        "width":"210px",
+        "width":"150px",
         "value": self.getPublicLink()
-    }).appendTo("#shareButton");
+    }).appendTo("#divContainer");
 
-      var div=  $("<div/>", {
-          "id": "copylink",
-          "class": "hidden",
-          "text": "Copy Link"
-      }).appendTo("#shareButton");
+
+
+   var div=  $("<span/>", {
+        "id": "copyLink",
+        "text": "Copy Link"
+    }).appendTo("#divContainer");
 
 };
 
@@ -67,15 +109,16 @@ ShareButtonView.prototype.close = function(){
 };
 
 ShareButtonView.prototype.createShareLink = function() {
-    $("#shareArea").removeClass("hidden");
-    $("#copyLink").show();
+    var self=this;
+    console.log("enter createShareLink");
+    $("#divContainer").removeClass("hidden");
+
 
     $(document).bind("click", function(e) { //add id dynamically
-        console.log("click copy link");
         console.log("target id is "+ e.target.id);
         if ( e.target.id === "copyLink" ) {
             console.log("clicked copy link button");
-          //  self.copyLink();
+          self.copyLink();
         }
     });
  };
@@ -94,4 +137,10 @@ ShareButtonView.prototype.getPublicLink=function(){
     }
   return hashedUrl;
 
+};
+
+
+ShareButtonView.prototype.copyLink= function(){
+    var copyEvent = new ClipboardEvent('copy', { bubbles: true, cancelable: true, dataType: 'text/plain', data: self.getPublicLink() } );
+    document.dispatchEvent(copyEvent);
 };
