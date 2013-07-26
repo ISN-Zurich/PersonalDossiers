@@ -289,11 +289,21 @@ FIND INFORMATION
 
 #shareButton{
     width: 22.7em;
-    height: 3.5em;
+    height: auto;
     margin-bottom: 2em;
     background: #ebedee;
     border: .1em solid #C9CACF;
     cursor:pointer;
+}
+
+.divWidth{
+    width:8px;
+}
+
+.copyButton{
+    color:blue;
+    margin-left:5px;
+    border:1px solid red;
 }
  
 .sideButton2 {
