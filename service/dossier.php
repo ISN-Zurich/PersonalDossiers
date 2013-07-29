@@ -8,7 +8,8 @@ include_once 'commonService.php';
 include 'session.php';
 
 /**
- * DossierService Interface Class
+ * @class DossierService
+ * @extends OAUTHRESTService
  *
  * This class handles the dossier management.
  * The related service is not expected to be directly used by customers without an
@@ -772,8 +773,8 @@ class DossierService extends OAUTHRESTService {
 		     // check if the user is allowed to perform the requested operation
 		     switch($meth) {
 		     case 'GET':
-			    // only access if the dossier is public or if the user is a member
-			    // if (!$this->userHasAccessToDossier( 'member')) {
+			    // only access if the dossier is public or if the user is a "user" (or editor or owner)
+			    // if (!$this->userHasAccessToDossier('user')) {
 			    //   $retval = false;
 			    // }
 			    // else if (!$this->dossierIsPublic()) {
@@ -781,25 +782,25 @@ class DossierService extends OAUTHRESTService {
 			    // }
 			    break;
 		     case 'PUT':
-			    // only access if the user is a contributor
-			    // if (!$this->userHasAccessToDossier('author')) {
+			    // only access if the user is a editor (or owner)
+			    // if (!$this->userHasAccessToDossier('editor')) {
 			    //   $retval = false;
 			    // }
 			    break;
 		     case 'POST':
 			    if ( $this->item_id) {
-				   // only access if the user is a contributor
+				   // only access if the user is a editor
 			    }
 			    else {
-				   // only access if the user is an editor
+				   // only access if the user is an owner
 			    }
 			    break;
 		     case 'DELETE':
 			    if ( $this->item_id) {
-				   // only access if the user is a contributor
+				   // only access if the user is a editor
 			    }
 			    else {
-				   // only access if the user is an editor
+				   // only access if the user is an owner
 			    }
 			    break;
 		     default:

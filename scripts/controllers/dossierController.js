@@ -33,7 +33,7 @@ function dossierController() {
 	
 	self.models.dossierList = new DossierListModel(self);
 	self.models.bookmark = new BookmarkModel(self);
-	
+
 	
 	console.log("model is initialized");
 	
