@@ -90,15 +90,23 @@ ShareButtonView.prototype.update = function(){
         "id":"shareArea",
         "name":"shareArea",
         "width":"150px",
+        "checked":"checked",
         "value": self.getPublicLink()
     }).appendTo("#divContainer");
 
 
 
-   var div=  $("<span/>", {
-        "id": "copyLink",
-        "text": "Copy Link"
-    }).appendTo("#divContainer");
+
+    /* var div=  $("<span/>", {
+          "id": "copyLink",
+          "text": "Copy Link"
+      }).appendTo("#divContainer");
+      */
+
+      var div=  $("<span/>", {
+     "id": "closeUrl",
+     "text": "remove"
+     }).appendTo("#divContainer");
 
 };
 
@@ -112,6 +120,7 @@ ShareButtonView.prototype.createShareLink = function() {
     var self=this;
     console.log("enter createShareLink");
     $("#divContainer").removeClass("hidden");
+    $('#shareArea').select();
 
 
     $(document).bind("click", function(e) { //add id dynamically
@@ -119,6 +128,14 @@ ShareButtonView.prototype.createShareLink = function() {
         if ( e.target.id === "copyLink" ) {
             console.log("clicked copy link button");
           self.copyLink();
+        }
+    });
+
+    $(document).bind("click", function(e) { //add id dynamically
+        console.log("target id is "+ e.target.id);
+        if ( e.target.id === "closeUrl" ) {
+            console.log("clicked close url");
+             $("#divContainer").addClass("hidden");
         }
     });
  };
@@ -141,6 +158,14 @@ ShareButtonView.prototype.getPublicLink=function(){
 
 
 ShareButtonView.prototype.copyLink= function(){
-    var copyEvent = new ClipboardEvent('copy', { bubbles: true, cancelable: true, dataType: 'text/plain', data: self.getPublicLink() } );
-    document.dispatchEvent(copyEvent);
+    if( window.clipboardData && clipboardData.setData ) {
+        console.log(" has window clipboard data ");
+    }
+    if( document.clipboardData && document.clipboardData.setData ) {
+        console.log(" has document clipboard data ");
+    }
+    if ( window.ClipboardEvent) {
+        var copyEvent = new ClipboardEvent('copy', { bubbles: true, cancelable: true, dataType: 'text/plain', data: self.getPublicLink() } );
+        document.dispatchEvent(copyEvent);
+    }
 };
