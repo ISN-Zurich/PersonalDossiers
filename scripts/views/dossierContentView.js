@@ -1,8 +1,10 @@
 /***
  * Design the overview page of the dossier.
+
  * This contains the list of the items of the dossier (publication, audio, video, articles)
  * */
 
+/*jslint vars: true, sloppy: true */
 function DossierContentView(dController){
 	var self=this;
 	self.controller=dController;
@@ -20,7 +22,7 @@ function DossierContentView(dController){
 	});
 	
 	$(window).bind('keydown', function(e){
-		if (e.keyCode == 27 && self.deleteMode > 0) {
+		if (e.keyCode === 27 && self.deleteMode > 0) {
 			$('#delete-confirm-'+self.deleteMode).hide();
 			$('#delete-'+self.deleteMode).show();
 			self.deleteMode = 0;
@@ -40,12 +42,12 @@ function DossierContentView(dController){
 		}
 		else if ($(targetE).hasClass("deleteConfirmButton")) {
 			// get rid off the element 
-			var myID = targetID.substring(15);
-			self.removeItem(myID);
+			var myIDf = targetID.substring(15);
+			self.removeItem(myIDf);
 			self.deleteMode = 0;
 			e.stopPropagation();
 		}
-	};
+	}
 }
 
 
@@ -100,13 +102,9 @@ DossierContentView.prototype.close = function() {
 //rename to renderItemList
 DossierContentView.prototype.renderList = function() {
 	
-	var bookmarkModel = self.controller.models['bookmark'];
+	var bookmarkModel = self.controller.models.bookmark;
 	console.log("dossier list length in dossier content view "+bookmarkModel.dossierList.length);
-	
-	// we need to get the dossier list for the active dossier
-	// bookmark.getDossierList();
-		
-	//Design Content Area
+
 	if (bookmarkModel.dossierList && bookmarkModel.dossierList.length > 0) {
 		//console.log("dossier list is "+JSON.stringify(bookmarkModel.dossierList));
 		console.log("dossier list index is "+bookmarkModel.index);
@@ -126,10 +124,10 @@ DossierContentView.prototype.renderList = function() {
 DossierContentView.prototype.renderItem = function() {
 	//var self=this;
 
-	var bookmarkModel = self.controller.models['bookmark'];
+	var bookmarkModel = self.controller.models.bookmark;
 	
 	console.log("enter render Item");
-	var	dossierID = self.controller.models['bookmark'].getItemId();
+	var	dossierID = self.controller.models.bookmark.getItemId();
 	console.log("dossier item id is"+dossierID);
 	var div1=$("<div/>", {
 		"id": "item"+dossierID, //to get the itemID dynamically from the model
@@ -144,7 +142,7 @@ DossierContentView.prototype.renderItem = function() {
 		"href":bookmarkModel.getISNURL()
 	}).appendTo(divFloat);
 	
-	var img=$("<img/>", {
+	img=$("<img/>", {
 		"class" : "floatleft",
 		"src": bookmarkModel.getThumbnail(),
 		"width":"80",
@@ -157,46 +155,46 @@ DossierContentView.prototype.renderItem = function() {
 	
 	var divh1=$("<h1/>", {	}).appendTo(divFloatText);
 	
-	var divAText=$("<a/>", {
+	divAText=$("<a/>", {
 		"class": "header1",
 		"href":bookmarkModel.getISNURL(), 
 		text:bookmarkModel.getTitle()
 	}).appendTo(divh1);
 	
-	var divp1=$("<p/>", {
+	 divp1=$("<p/>", {
 		"class":"small",
 		text:bookmarkModel.getDate()+"/"+bookmarkModel.getType() 
 	}).appendTo(divFloatText);
 	
-	var divp2=$("<p/>", {
+	divp2=$("<p/>", {
 		text:bookmarkModel.getDescription()
 	}).appendTo(divFloatText);
 
     if (self.controller.oauth){
-	var div3 = $("<div/>", {
-		class:"deletecontainer"
+	div3 = $("<div/>", {
+		"class":"deletecontainer"
 	}).appendTo(divFloatText);
 	
-	var delButton = $("<div/>", {
-		id: "delete-"+ dossierID,
-		text: "Delete",
+	delButton = $("<div/>", {
+		"id": "delete-"+ dossierID,
+		"text": "Delete",
 		"class": "deleteButton"
 	}).appendTo(div3);
 	
-	var delConfirmButton = $("<div/>", {
+	delConfirmButton = $("<div/>", {
 		id: "delete-confirm-" + dossierID,
 		text: "Really delete?",
 		"class": "deleteConfirmButton"
 	}).appendTo(div3);
     }
-	var lastbr1=$("<br/>", {
+	lastbr1=$("<br/>", {
 		
 	}).appendTo(divFloatText);
-	var lastbr2=$("<br/>", {
+	lastbr2=$("<br/>", {
 		
 	}).appendTo(divFloatText);
 	
-}
+};
 /**
  *	In this function we delete a dossier item by performing two tasks
  *	1. Remove its visual representation
@@ -204,11 +202,11 @@ DossierContentView.prototype.renderItem = function() {
  */
 
 DossierContentView.prototype.removeItem=function(id){
-	var bookmarkModel = self.controller.models['bookmark'];
+	var bookmarkModel = self.controller.models.bookmark;
 	//call the model removeBookmark()
 	bookmarkModel.removeItem(id);	
 	// remove the visuals
-	$("#item"+ id).remove();
+	$("#item"+id).remove();
 };
 
 

@@ -1,11 +1,13 @@
 
+/*jslint vars: true, sloppy: true */
+
 function userController() {
 	var self=this;
     
     document.domain = 'ethz.ch';
 	
-	self.activeView;
-        self.initOAuth();
+	self.activeView=false;
+    self.initOAuth();
       
 	//initialization of models 
 	self.models = {};
@@ -78,7 +80,7 @@ userController.prototype.getActiveDossier = function() {
 
 userController.prototype.logout = function() {
     this.models.authentication.logout();
-}
+};
 
 
 var controller;

@@ -1,3 +1,5 @@
+/*jslint vars: true, sloppy: true */
+
 function addBookmarkController() {
     var self=this;
 
@@ -27,7 +29,7 @@ function addBookmarkController() {
 
 
     function authorizationListener(m) {
-        if (m.origin == "http://yellowjacket.ethz.ch") {
+        if (m.origin === "http://yellowjacket.ethz.ch") {
             var data = JSON.parse(m.data);
             console.log('received a message: ' + m.data);
             // store the data into the local storage. 
@@ -44,7 +46,7 @@ function addBookmarkController() {
             }
         }
     }
-};
+}
 
 
 

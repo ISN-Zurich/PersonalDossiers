@@ -46,30 +46,16 @@ DossierListModel.prototype.getDossierList=function(){
 
 DossierListModel.prototype.getDossierId = function(){
 	if( this.dossierList && this.dossierList.length > 0) {
-		return this.dossierList[this.index]['dossier_id'];
+		return this.dossierList[this.index].dossier_id;
 	}
 };
 
 DossierListModel.prototype.getDossierTitle = function(){
 	if( this.dossierList && this.dossierList.length > 0) {
-		return this.dossierList[this.index]['title'];
+		return this.dossierList[this.index].title;
 	}
 };
 	
-//DossierListModel.prototype.setActiveDossier = function(dossierId){
-//    if( this.dossierList && this.dossierList.length > 0) {
-//	this.activeDossier=dossierId;
-//	//store in the local storage
-//        if (!this.profileData) {
-//            this.profileData = {};
-//        }
-//	this.profileData.activeDossierId=dossierId;
-//	var profileString = JSON.stringify(this.profileData);
-//	localStorage.setItem("userProfile", profileString);
-//	$(document).trigger("ActiveDossierChanged");
-//	console.log("local storage after store of active dossier id "+ localStorage.getItem("userProfile"));
-//    }
-//};
 
 DossierListModel.prototype.getActiveDossier = function(){
     console.log("get active dossier in dossier list model");
@@ -91,7 +77,7 @@ DossierListModel.prototype.getActiveDossier = function(){
 
 DossierListModel.prototype.getDefaultDossierId = function() {
 	var self=this;
-	var minId;
+	var minId=null;
 	var i;
 	if (self.dossierList && self.dossierList.length >0){
 		console.log("enter if, list exists");
@@ -103,8 +89,7 @@ DossierListModel.prototype.getDefaultDossierId = function() {
 			}
 		}
 	}
-	console.log("default id is "+ minId);
-	activeDossierId = minId;
+	console.log("default id is "+minId);
 	// now store the active dossier id to the profile
 	var defaultDossierId = minId;
 	
@@ -150,7 +135,7 @@ DossierListModel.prototype.getUserDossiers=function(){
 	self.dossierList=data;
 		
 	console.log("dossier list is "+JSON.stringify(self.dossierList));
-	console.log("dossier_id is "+JSON.stringify(self.dossierList[0]['dossier_id']));
+	console.log("dossier_id is "+JSON.stringify(self.dossierList[0].dossier_id));
 	
         // inform all dossier views that they need to update
       $(document).trigger('DossierListUpdate'); // for the views   (dossierListButtons)

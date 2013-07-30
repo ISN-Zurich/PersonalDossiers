@@ -1,9 +1,13 @@
 /**
  * This controller is responsible for the indx.html
+
  * (dossier banner view and dossier content view)
  * 
  * @returns
  */
+
+/*jslint vars: true, sloppy: true */
+
 function dossierController() {
     var self=this;
     
@@ -124,37 +128,35 @@ function dossierController() {
         console.log("after initializing image gallery");
     };
 
-    // ************************* Old function ********************
-    //dossierController.prototype.getActiveDossier = function() {
-    //	//return 1;
-    //	return this.models.dossierList.getActiveDossier();
-    //};
-
+  
 
     dossierController.prototype.getActiveDossier = function(){
 
         if (this.hashed){
         var activedosId = this.getHashedURLId();
             return activedosId;
-        } else {   //if there is no hash at the url
+        }
+        if (!this.hashed){   //if there is no hash at the url
         var activedossierId =  this.models.user.getActiveDossier();
         if (activedossierId){
         return activedossierId;
-        }else{
+        }
+        if(!this.activedossierId){
         var dossierId = this.models.dossierList.getDefaultDossierId();
         return dossierId;
-        }}
+        } 
+        }//is not hashed
         return undefined;    //if something goes wrong for any reason
     };
 
 
     dossierController.prototype.transition = function(){
 
-    }
+    };
 
     dossierController.prototype.logout = function() {
         this.models.user.logout();
-    }
+    };
 
     var controller;
     console.log("enter main js");

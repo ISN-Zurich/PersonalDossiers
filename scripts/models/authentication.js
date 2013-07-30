@@ -1,3 +1,4 @@
+/*jslint vars: true, sloppy: true */
 
 function AuthenticationModel(controller){
     console.log("enter authentication model");
@@ -7,17 +8,17 @@ function AuthenticationModel(controller){
     //store the consumer key, secret and the access token and secret
     this.authentication={};
 
-    this.consumerSecret;
-    this.consumerKey;
+    this.consumerSecret=null;
+    this.consumerKey=null;
     this.loadData();
 
-    this.requestToken_header;
-    this.obtain_authorize_header;
-    this.request_token;
-    this.token_secret;
-    this.oauth_callback;
-    this.verificationCode;
-    this.userProfile;
+    this.requestToken_header=null;
+    this.obtain_authorize_header=null;
+    this.request_token=null;
+    this.token_secret=null;
+    this.oauth_callback=null;
+    this.verificationCode=null;
+    this.userProfile=null;
     this.dossierList =[];
 
     // create an eventlistener for the case when the user profile changes.
@@ -39,11 +40,11 @@ AuthenticationModel.prototype.storeData = function(){
 
 
 AuthenticationModel.prototype.loadData=function(){
-    var authObject;
+    var authObject=null;
     //if there is an item in the local storage with the name "authentication"
     //then get it by parsing the string and convert it into a json object
     try {
-        authObject = JSON.parse(localStorage.getItem("authentication"));
+       authObject = JSON.parse(localStorage.getItem("authentication"));
     }
     catch (err) {
         console.log("error! while loading");
@@ -305,14 +306,12 @@ AuthenticationModel.prototype.requestAccessToken = function() {
     function success(data){
         //get back from request the access_token and access_secret
         console.log("success in granting access token");
-//		self.accesstoken=data.oauth_token;
-//		self.accesstoken_secret=data.oauth_token_secret;
         console.log("access_token is "+self.accesstoken);
         self.authentication.accessToken=data.oauth_token;
         self.authentication.accessSecret=data.oauth_token_secret;
         self.storeData();
         self.controller.initOAuth();
-        self.controller.models['user'].getUserProfile();
+        self.controller.models.user.getUserProfile();
         self.controller.updateUserData();
     }
 
@@ -325,7 +324,7 @@ AuthenticationModel.prototype.checkActiveUser = function(){
     console.log("access token in checkActiveUser is  "+this.authentication.accessToken);
     if(this.authentication.accessToken && this.authentication.accessToken.length>0){
         console.log("get user profile");
-        this.controller.models['user'].getUserProfile();
+        this.controller.models.user.getUserProfile();
     }
     else{
         console.log("get request token in checkactiveUser");
@@ -355,14 +354,14 @@ AuthenticationModel.prototype.logout =function(){
 
             showErrorResponses(request);
             //display a message to the user that the logout was not successful
-            if (request.status == 401){
+            if (request.status === 401){
                 console.log("success in logging out from the server");
                 self.authentication={
                     consumerSecret:"6a33d1d90067c005de32f5f6aafe082ae8375a6f",
                     consumerKey :"ch.isn.personal-dossier",
                     "accessToken":"",
                     "access_secret":""
-                }
+                };
                 self.storeData();
                 self.controller.initOAuth();
                 self.checkActiveUser();

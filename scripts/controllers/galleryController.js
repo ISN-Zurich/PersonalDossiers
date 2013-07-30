@@ -1,9 +1,13 @@
 /**
  * This controller is responsible for the indx.html
+
  * (dossier banner view and dossier content view)
  * 
  * @returns
  */
+
+/*jslint vars: true, sloppy: true */
+
 function GalleryController() {
     var self=this;
 
@@ -60,18 +64,12 @@ GalleryController.prototype.initImageHandler=function(){
 };
 
 
-// ************************* Old function ********************
-//GalleryController.prototype.getActiveDossier = function() {
-//	//return 1;
-//	return this.models.dossierList.getActiveDossier();
-//};
-
-
 GalleryController.prototype.getActiveDossier = function(){
     var activedossierId =  this.models.user.getActiveDossier();
     if (activedossierId){
 	return activedossierId;
-    }else{
+    }
+    if(!activedossierId){
 	var dossierId = this.models.dossierList.getDefaultDossierId();
 	return dossierId;
     }
@@ -81,11 +79,11 @@ GalleryController.prototype.getActiveDossier = function(){
 
 GalleryController.prototype.transition = function(){
 		
-}
+};
 
 GalleryController.prototype.logout = function() {
     this.models.user.logout();
-}
+};
 
 var controller;
 console.log("enter main js");

@@ -1,8 +1,10 @@
+/*jslint vars: true, sloppy: true */
+
 function UserModel(userController){
     console.log("runs user model");
     var self=this;
     self.controller=userController;	
-    self.userProfile;
+    self.userProfile=null;
     // self.checkActiveUser();
     self.loadData();
     $(document).bind("ActiveDossierChanged", function() {
@@ -23,7 +25,7 @@ UserModel.prototype.loadData = function() {
 
 UserModel.prototype.getActiveDossier = function(){
     console.log("enter getActiveDossierFromUserProfile");
-    var activeDossierId = undefined;
+    var activeDossierId= null;//not necessary to initialize to undefined
     if ( this.activeDossierId ) {
         return this.activeDossierId;
     }
@@ -188,14 +190,14 @@ UserModel.prototype.logout =function(){
 	    
 	    showErrorResponses(request); 
 	    //display a message to the user that the logout was not successful
-	    if (request.status == 401){
+	    if (request.status === 401){
 		console.log("success in logging out from the server");
 		var authentication={
 		    consumerSecret:"6a33d1d90067c005de32f5f6aafe082ae8375a6f",
 		    consumerKey :"ch.isn.personal-dossier",
 		    "accessToken":"",
 		    "access_secret":""
-		}
+		};
 
 		localStorage.setItem('authentication', JSON.stringify(authentication));
                 self.controller.initOAuth();

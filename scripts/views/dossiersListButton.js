@@ -1,3 +1,5 @@
+/*jslint vars: true, sloppy: true */
+
 function DossiersButtonView(controller){
 	var self=this;
 	self.controller = controller;
@@ -21,7 +23,7 @@ function DossiersButtonView(controller){
 		console.log("targetID is "+targetE.id);
 		var dosID = targetID.substring(10);
 		console.log("dosID is "+dosID);
-		var userModel = self.controller.models['user'];
+		var userModel = self.controller.models.user;
 		userModel.setActiveDossier(dosID);
 		window.location.href="index.html";
 		//window.href="index.html";
@@ -47,21 +49,21 @@ DossiersButtonView.prototype.update = function(){
 	if (self.controller.oauth){
 		
 	//if the user has created some dossiers
-	if (self.controller.models['dossierList'].listIsPresent()) { 
+	if (self.controller.models.dossierList.listIsPresent()) { 
 		console.log("there is dossier list in update of dossiers button");
-		self.controller.models['dossierList'].reset();
+		self.controller.models.dossierList.reset();
 		
 		do {
-			var dossierId=self.controller.models['dossierList'].getDossierId();
-		var p1=$("<p/>",{
+			var dossierId=self.controller.models.dossierList.getDossierId();
+		p1=$("<p/>",{
 			"class": "bold clickable",
 			"id":"dossierBtn"+dossierId,
-			"text": self.controller.models['dossierList'].getDossierTitle()
+			"text": self.controller.models.dossierList.getDossierTitle()
 		}).appendTo("#findinformation");
-		} while (self.controller.models['dossierList'].nextDossier());	
+		} while (self.controller.models.dossierList.nextDossier());	
 	}
 	
-	var p2=$("<p/>",{
+	p2=$("<p/>",{
 		"class": (self.controller.oauth ? "bold": "bold hidden") + " clickable",
 		"id":"userprofile",
 		"text": "User Profile"
