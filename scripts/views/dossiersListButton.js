@@ -41,37 +41,34 @@ DossiersButtonView.prototype.open = function(){
 };
 
 DossiersButtonView.prototype.update = function(){
-	
+
 	var self=this;
 	console.log("enter update dossiers button list");
 	$("#findinformation").empty();
 	//if we are logged in
 	if (self.controller.oauth){
-		
-	//if the user has created some dossiers
-	if (self.controller.models.dossierList.listIsPresent()) { 
-		console.log("there is dossier list in update of dossiers button");
-		self.controller.models.dossierList.reset();
-		
-		do {
-			var dossierId=self.controller.models.dossierList.getDossierId();
-		p1=$("<p/>",{
-			"class": "bold clickable",
-			"id":"dossierBtn"+dossierId,
-			"text": self.controller.models.dossierList.getDossierTitle()
-		}).appendTo("#findinformation");
-		} while (self.controller.models.dossierList.nextDossier());	
+
+		//if the user has created some dossiers
+		if (self.controller.models.dossierList.listIsPresent()) { 
+			console.log("there is dossier list in update of dossiers button");
+			self.controller.models.dossierList.reset();
+
+			do {
+				var dossierId=self.controller.models.dossierList.getDossierId();
+				p1=$("<p/>",{
+					"class": "bold clickable",
+					"id":"dossierBtn"+dossierId,
+					"text": self.controller.models.dossierList.getDossierTitle()
+				}).appendTo("#findinformation");
+			} while (self.controller.models.dossierList.nextDossier());	
+		}
+
+		p2=$("<p/>",{
+			"class": (self.controller.oauth ? "bold": "bold hidden") + " clickable",
+			"id":"userprofile",
+			"text": "User Profile"
+		}).appendTo("#findinformation");	
 	}
-	
-	p2=$("<p/>",{
-		"class": (self.controller.oauth ? "bold": "bold hidden") + " clickable",
-		"id":"userprofile",
-		"text": "User Profile"
-	}).appendTo("#findinformation");	
-	}
-	
-	
-	
 };
 
 DossiersButtonView.prototype.closeDiv= closeView;

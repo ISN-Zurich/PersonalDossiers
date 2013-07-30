@@ -5,11 +5,15 @@ function UserModel(userController){
     var self=this;
     self.controller=userController;	
     self.userProfile=null;
+    self.userlist=null;
+    self.index=0;
     // self.checkActiveUser();
     self.loadData();
     $(document).bind("ActiveDossierChanged", function() {
         self.sendUserProfileToServer();
     });  
+    
+    self.getDossierUsers();
 }
 
 UserModel.prototype.loadData = function() {
@@ -44,9 +48,6 @@ UserModel.prototype.getActiveDossier = function(){
 };
 
 
-UserModel.prototype.getUserId = function(){
-    return this.userProfile.user_id;
-};
 
 
 UserModel.prototype.getUserProfile=function(){
@@ -224,3 +225,64 @@ UserModel.prototype.logout =function(){
     
 };
 
+
+UserModel.prototype.getDossierUsers = function(){
+		var self=this;
+		var dossierId= self.dossierId;
+	    var url= "http://yellowjacket.ethz.ch/tools/service/authentication.php/user.php/"+dossierId;
+	    var method = "GET";
+	    var data={};
+	    
+	    $.ajax({
+	    	url:  url,
+	    	type : method,
+	      	dataType : 'json',
+	    	success : success,
+	    	error : function(request) {
+	    	    console.log("Error while loading the list of users for a specific dossier");
+	    	    showErrorResponses(request); 
+	    	},
+	    	beforeSend : setHeader
+	        });
+	
+	    
+	    function success(data){
+	    	console.log("success in getting the user list for a specific dossier");
+	    	var userlistObject;
+	    	try{
+	    		userlistObject=data;
+	    	}catch(err) {
+	    		userlistObject={};
+	    	    console.log("couldnt load user list for a specific dossier from the database");
+	    	}
+	    	
+	    	self.userlist=userlistObject;
+	    }
+	    
+	    function setHeader(xhr){    
+	    	if (self.controller.oauth) {
+	    		var header_request=self.controller.oauth.oauthHeader(method, url, data);
+	    		xhr.setRequestHeader('Authorization', header_request);
+	    	}
+	    }
+};
+
+
+//GETTERS
+
+/**
+ * Get the id of the authenticated user
+ */
+UserModel.prototype.getUserId = function(){
+    return this.userProfile.user_id;
+};
+
+
+UserModel.prototype.getUsername = function(){
+	return this.userlist[this.index].username;
+};
+
+
+UserModel.prototype.getUserrole = function(){
+	return this.userlist[this.index].user_type;
+};

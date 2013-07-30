@@ -479,7 +479,7 @@ class DossierService extends OAUTHRESTService {
 							       MDB2_AUTOQUERY_DELETE,
 							       'id = ?');
 	      if (PEAR::isError($affectedRows)) {
-	           $this->log("error " . $affectedRows->getMessage());
+	           $this->log("error " .$affectedRows->getMessage());
 	           $this->bad_request();
 	      }
 	      else {

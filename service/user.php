@@ -5,8 +5,6 @@ require_once 'HTTP/Request.php';
 include 'dbConnect.php';
 include_once 'commonService.php';
 
-include 'session.php';
-
 /**
 * UserService Interface Class
 *
@@ -14,19 +12,19 @@ include 'session.php';
 *
 * The service expects calls of the following style:
 * BASE_URI [+ "/" + Dossier_ID]
-*
-*
-*
+* 
+* It is not a service, its a data management class similar with Session Management.
 *
 */
 
-class User extends PDCommonClass {
+class UserManagement extends PDCommonClass {
    protected $uri = "/tools/service/user.php";
 
    protected $dbh;
    protected $user_role;
    protected $dossier_type;
-   protected $dossier;
+   protected $dossierId;
+   protected $item_id;
 
    public function __construct($dbh) {
    parent::__construct($dbh);
@@ -51,23 +49,47 @@ class User extends PDCommonClass {
    	      // init the database connection
    	      $this->dbh = $dbh;
    	      $this->data = array();
-}
+	}//end of constructor
 
+/**
+  * getDossierUsers()
+  * 
+  * gets the list of users of a specific dossier
+  * 
+ */
 
+	public function getDossierUsers() {
 
-// DEFINE  FUNCTIONS
+		$this->mark();
+		$dbh = $this->dbh;
+		$dbh->setFetchMode(MDB2_FETCHMODE_ASSOC);
+		$dossierId = $this->dossier_id;
 
-public function getDossierUsers() {
+		$sth = $dbh->prepare("SELECT u.name, du.user_type, du.user_id FROM users u, dossier_users du WHERE u.user_id = du.user_id AND du.dossier_id = ?");
+		$res = $sth->execute($dossierId);
+		if ($res->numRows() === 0) {
+			if (PEAR::isError($res)) {
+				$this->log("pear error " . $res->getMessage());
+				$this->bad_request();
+				$sth->free();
+				return;
+			}
+		} else { //if the query retrieves back results
 
-   $this->mark();
-   $dbh = $this->dbh;
-   $dbh->setFetchMode(MDB2_FETCHMODE_ASSOC);
-   $dossierId = $this->session->getUserID();
+			while ($row = $res->fetchRow() ){
+				$this->log('row: ' . json_encode($row));
+				array_push($retval,array(
+				'user_id'=> $row['user_id'],
+				'username'=> $row['name'],
+				'user_type'=> $row['user_type']));
+			}
 
-   $sth = $dbh->prepare("SELECT u.name, du.user_type FROM users u, dossier_users du WHERE u.user_id = du.user_id AND du.dossier_id = ?");
-   $res = $sth->execute($dossierId);
+			$this->data = $retval;
+			$this->log("User List of the ".$dossierId." dossier is " .json_encode($this->data));
+			$this->respond_json_data();
 
-}
+		} //end of else
+	}
 
 
 public function getUserRole() {
@@ -77,7 +99,7 @@ public function getUserRole() {
 }
 
 
-public function getDossierType(userId) {
+public function getDossierType($userId) {
 // a dossier can be private or public
 
 }
@@ -100,7 +122,7 @@ public function dossierIsPublic(){
 
 }
 
-public function isUser(userId){
+public function isUser($userId){
 
 // getUserRole
 // if  user_type =="user", return true otherwise false
@@ -108,25 +130,20 @@ public function isUser(userId){
 }
 
 
-public function isEditor(userId){
+public function isEditor($userId){
 
 //  getUserRole
 //  if user_type == "editor" return true, otherwise false
 
 }
 
-public function isOwner(userId){
+public function isOwner($userId){
 
 //  getUserRole
 //  if user_type == "owner" return true, otherwise false
 
 }
 
-$service = new UserService($mdb2);
-// check if the active user is allowed to run the service with the given parameter
 
-// if everything is OK run the actual service
-$service->run();
-$mdb2->disconnect();
-
+}//end of class
 ?>

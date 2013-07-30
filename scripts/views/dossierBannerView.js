@@ -1,5 +1,6 @@
 /**
  * This views refers to the banner  
+
  * 
  * 
  * 
