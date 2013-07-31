@@ -51,7 +51,18 @@ class UserManagement extends PDCommonClass {
    	      $this->data = array();
 	}//end of constructor
 
+
+	protected function handle_GET() {
+		$this->mark();
+		$this->log('enter handle_GET');
+		if ( $this->dossier_id > 0 ) {
+			$this->log('dossier id >0 in handle_GET');
+			$this->getDossierUsers();
+		}
+	}
+
 /**
+ * 
   * getDossierUsers()
   * 
   * gets the list of users of a specific dossier
@@ -146,4 +157,12 @@ public function isOwner($userId){
 
 
 }//end of class
+
+
+$service = new UserManagement($mdb2);
+// check if the active user is allowed to run the service with the given parameter
+
+// if everything is OK run the actual service
+$service->run();
+$mdb2->disconnect();
 ?>

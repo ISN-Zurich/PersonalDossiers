@@ -701,6 +701,11 @@ class DossierService extends OAUTHRESTService {
 		     
 		     $this->data["dossier_items"]=$idata;
 		     
+		     
+		     
+		     // load the users for the specific dossier
+		     
+		     
 		     $this->respond_json_data();
 	      }
 	      else {

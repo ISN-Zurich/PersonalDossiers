@@ -112,11 +112,10 @@ DossierContentView.prototype.renderList = function() {
 			this.renderItem();
 			bookmarkModel.setIndex(bookmarkModel.index++);
 		}
-//		do{
-//			this.renderItem();
-//			
-//		}while (bookmarkModel.nextItem());
-	//	}while (bookmarkModel.index<bookmarkModel.dossierList.length);
+		//	do{
+		//	this.renderItem();	
+		//	}while (bookmarkModel.nextItem());
+		//	}while (bookmarkModel.index<bookmarkModel.dossierList.length);
 	}
 };
 

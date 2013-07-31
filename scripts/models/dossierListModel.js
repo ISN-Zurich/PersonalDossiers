@@ -152,6 +152,4 @@ DossierListModel.prototype.getUserDossiers=function(){
     }
 };
 
-
-
 // console.log("DLM: parse end!");

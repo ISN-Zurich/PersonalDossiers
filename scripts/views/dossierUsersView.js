@@ -1,5 +1,5 @@
 /*jslint vars: true, sloppy: true */
-function DossierUsersView(Controller){
+function DossierUsersView(controller){
 	var self=this;
 	self.controller=controller;
 	self.tagID="dossierUsers";
@@ -11,6 +11,7 @@ DossierUsersView.prototype.openDiv=openView;
 
 DossierUsersView.prototype.open = function(){
 	console.log("open dossierUsersView");
+	
 	this.update();
 };
 
@@ -23,15 +24,13 @@ DossierUsersView.prototype.update = function(){
 			dossierId=self.controller.getActiveDossier();
 			p1=$("<p/>",{
 				"class": "bold clickable",
-				"id":"user", //might need user id or dossier id
+				"id":"user"+self.controller.models.user.getUserMemberId(), //might need user id 
 				"text": self.controller.models.user.getUsername()
 			}).appendTo("#dossierUsers");
 		} while (self.controller.models.user.nextUser());	
 	}
 };
 	
-
-
 DossierUsersView.prototype.closeDiv= closeView;
 
 DossiersButtonView.prototype.close = function(){

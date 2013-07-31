@@ -16,18 +16,18 @@ function DossiersButtonView(controller){
             window.location.href="user.html";
         }
         else {
-		console.log("clicked the dossier cat on the left");
-		var targetE = e.target;
-		console.log("targetE is "+targetE);
-		var targetID = targetE.id;
-		console.log("targetID is "+targetE.id);
-		var dosID = targetID.substring(10);
-		console.log("dosID is "+dosID);
-		var userModel = self.controller.models.user;
-		userModel.setActiveDossier(dosID);
-		window.location.href="index.html";
-		//window.href="index.html";
-		e.stopPropagation();
+        	console.log("clicked the dossier cat on the left");
+        	var targetE = e.target;
+        	console.log("targetE is "+targetE);
+        	var targetID = targetE.id;
+        	console.log("targetID is "+targetE.id);
+        	var dosID = targetID.substring(10);
+        	console.log("dosID is "+dosID);
+        	var userModel = self.controller.models.user;
+        	userModel.setActiveDossier(dosID);
+        	window.location.href="index.html";
+        	//window.href="index.html";
+        	e.stopPropagation();
         }
     });
 	
