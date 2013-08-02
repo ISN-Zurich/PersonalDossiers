@@ -30,6 +30,8 @@ function BookmarkModel(dController){
     this.dossierList=[];
     this.dossiers=[];
     this.index=0;
+    this.userlist=[];
+    this.user_index=0;
     
     this.editMode=false;
     //load the list of dossier items for the active dossier
@@ -213,6 +215,9 @@ BookmarkModel.prototype.loadDossierList=function(){
 	// console.log("metadata is "+stringifiedMetadata);
 	
 	//self.loaded=true;
+	
+	self.userlist=self.dossierData.user_list;
+	console.log("user list is "+JSON.stringify(self.userlist));
 	$(document).trigger("BookmarkModelLoaded");
 	
     }
@@ -295,6 +300,13 @@ BookmarkModel.prototype.nextItem = function() {
     return this.index < this.dossierList.length;
 };
 
+
+BookmarkModel.prototype.nextUser = function() {
+    this.user_index++;
+    console.log("user_index in nextUseris "+this.user_index);
+    return  this.user_index <=this.userlist.length;
+};
+
 BookmarkModel.prototype.hasItem = function(id) {
     var retval = false, i = 0;
     if (this.dossierList && this.dossierList.length && id) {
@@ -363,6 +375,17 @@ BookmarkModel.prototype.getISNURL = function() {
     return (this.index < this.dossierList.length) ? this.dossierList[this.index].metadata.isn_detail_url: false;	
 };
 
+BookmarkModel.prototype.getUsername = function() {
+	  return (this.user_index < this.userlist.length) ? this.userlist[this.user_index].username: false;	
+};
+
+BookmarkModel.prototype.getUsertype = function() {
+	  return (this.user_index < this.userlist.length) ? this.userlist[this.user_index].user_type: false;	
+};
+
+BookmarkModel.prototype.getUserid = function() {
+	  return (this.user_index < this.userlist.length) ? this.userlist[this.user_index].user_id: false;	
+};
 
 //Dossier functions
 

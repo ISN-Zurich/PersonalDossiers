@@ -60,12 +60,12 @@ function dossierController() {
            self.views.loginButton = new LoginButtonView(self);
         }
 
-	$(document).bind("BookmarkModelLoaded", function() {
-	    console.log("initialize views in controller");
-	    self.views.dossierBanner.open();
-        self.views.dossierContent.open();
-
-	});
+       $(document).bind("BookmarkModelLoaded", function() {
+    	   console.log("initialize views in controller");
+    	   self.views.dossierBanner.open();
+    	   self.views.dossierContent.open();
+    	   self.views.userlist.open();
+       });
 	
 	
 	//console.log("dossiersController is initialized"+this.models.bookmark.loaded);

@@ -682,6 +682,8 @@ class DossierService extends OAUTHRESTService {
 	      
 	      $sth = $mdb2->prepare('SELECT * FROM dossiers WHERE id=?');
 	      $res = $sth->execute($this->dossier_id);
+	      
+	      
 	      if ($res->numRows() == 1) {
 		     // load the dossier meta data
 		     // there should be only one dossier with that id
@@ -700,13 +702,34 @@ class DossierService extends OAUTHRESTService {
 		     }
 		     
 		     $this->data["dossier_items"]=$idata;
-		     
-		     
-		     
+		 
 		     // load the users for the specific dossier
 		     
-		     
-		     $this->respond_json_data();
+	    $sth = $mdb2->prepare("SELECT u.name, du.user_type, du.user_id FROM users u, dossier_users du WHERE u.id = du.user_id AND du.dossier_id = ?");
+		$res = $sth->execute($this->dossier_id);
+		if (PEAR::isError($res)) {
+			$this->log('cannot execute the query for the users');
+			$this->log('DB Error: ' . $res->getMessage());
+			$this->bad_request();
+			return;
+		}
+		//$udata= array();
+		$retval = array();
+		if ($res->numRows() > 0) {
+		while ($row = $res->fetchRow() ){
+				$this->log('row: ' . json_encode($row));
+				array_push($retval,array(
+				'user_id'=> $row['user_id'],
+				'username'=> $row['name'],
+				'user_type'=> $row['user_type']));
+				//array_push($udata,$row);
+			}
+
+			//$this->data["user_list"] = $udata;
+			$this->data["user_list"] = $retval;
+			$this->log("User List of the ".$dossierId." dossier is " .json_encode($this->data["user_list"]));
+		}   
+	        $this->respond_json_data();
 	      }
 	      else {
 		     $this->not_found();

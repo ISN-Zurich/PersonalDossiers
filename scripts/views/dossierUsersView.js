@@ -3,7 +3,6 @@ function DossierUsersView(controller){
 	var self=this;
 	self.controller=controller;
 	self.tagID="dossierUsers";
-	this.open();
 }
 
 
@@ -18,16 +17,17 @@ DossierUsersView.prototype.open = function(){
 DossierUsersView.prototype.update = function(){
 	var self=this;
 	console.log("enter update users list for a dossier");
-	$("#dossierUsers").empty();
-	if (self.controller.models.userlist && self.controller.models.userlist.length >0) {
+	$("#dossierUsers").removeClass("hidden");
+	console.log("userlist is "+self.controller.models.bookmark.userlist);
+	if (self.controller.models.bookmark.userlist && self.controller.models.bookmark.userlist.length >0) {
+		console.log("dossierUsersView: userlist exists ");
 		do {
-			dossierId=self.controller.getActiveDossier();
-			p1=$("<p/>",{
+				p1=$("<p/>",{
 				"class": "bold clickable",
-				"id":"user"+self.controller.models.user.getUserMemberId(), //might need user id 
-				"text": self.controller.models.user.getUsername()
+				"id":"user"+self.controller.models.bookmark.getUserid(), //might need user id 
+				"text": self.controller.models.bookmark.getUsername()
 			}).appendTo("#dossierUsers");
-		} while (self.controller.models.user.nextUser());	
+		} while (self.controller.models.bookmark.nextUser());	
 	}
 };
 	
