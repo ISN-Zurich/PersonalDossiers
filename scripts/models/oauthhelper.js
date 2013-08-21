@@ -6,7 +6,7 @@ function OAuthHelper(realm) {
 
     if ( !data ) {
         console.log( 'no data cannot be loaded' );
-	throw new Error('No OAuth Data Stored');
+    throw new Error('No OAuth Data Stored');
         return;
     }
 
@@ -40,11 +40,11 @@ function OAuthHelper(realm) {
         };
         console.log("method: "+method+" url "+url);
         if (data){
-        	console.log("data found");
-        	for ( var key in data ) {
-        		console.log("key: "+key);
-        		message.parameters.push([key, data[key]]);
-        	}
+            console.log("data found");
+            for ( var key in data ) {
+                console.log("key: "+key);
+                message.parameters.push([key, data[key]]);
+            }
         }
         
         OAuth.completeRequest(message, this.accessor);

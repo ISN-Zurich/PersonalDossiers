@@ -4,6 +4,9 @@
  * 
  * @returns
  */
+
+/*jslint vars: true, sloppy: true */
+
 function AuthorizationController() {
     var bookmarks, dossierId, self=this;
     var mUser, mDossiers;
@@ -85,6 +88,6 @@ function AuthorizationController() {
 var controller;
 console.log("enter main js");
 $(document).ready(function(){
-	console.log("document ready");
-	controller = new AuthorizationController();
+    console.log("document ready");
+    controller = new AuthorizationController();
 });

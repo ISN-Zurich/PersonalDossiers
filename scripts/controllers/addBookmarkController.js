@@ -1,3 +1,5 @@
+/*jslint vars: true, sloppy: true */
+
 function addBookmarkController() {
     var self=this;
 
@@ -33,10 +35,10 @@ function addBookmarkController() {
             // store the data into the local storage. 
             if ( data.userok ) {
                 self.login = true;
-	        self.views ={};
-	        self.views.addBookmark = new DesignBookmarkView(self);
-	        
-	        console.log("add bookmark controller is initialized");
+            self.views ={};
+            self.views.addBookmark = new DesignBookmarkView(self);
+            
+            console.log("add bookmark controller is initialized");
             }
             if ( data.bookmarkok ) {
                 console.log('item is already bookmarked' ); 
@@ -91,7 +93,7 @@ addBookmarkController.prototype.isLoggedin = function() {
 var controller;
 console.log("enter addBookmark main js");
 $(document).ready(function(){
-	console.log("document ready");
-	controller = new addBookmarkController();
+    console.log("document ready");
+    controller = new addBookmarkController();
 });
 
