@@ -7,8 +7,6 @@
  * 
  ****/
 
-/*jslint vars: true, sloppy: true */
-
 function BookmarkModel(dController){
 
     console.log("enter BookmarkModel");
@@ -20,9 +18,9 @@ function BookmarkModel(dController){
     
     // console.log("default dossier is "+this.dossierId);
     
-    this.dossierTitle= null;
-    this.dossierDescription = null;
-    this.dossierImageURL=null;
+    this.dossierTitle;
+    this.dossierDescription;
+    this.dossierImageURL;
     
     //dossier items' attributes
     this.dossierData=[];
@@ -30,8 +28,6 @@ function BookmarkModel(dController){
     this.dossierList=[];
     this.dossiers=[];
     this.index=0;
-    this.userlist=[];
-    this.user_index=0;
     
     this.editMode=false;
     //load the list of dossier items for the active dossier
@@ -48,18 +44,18 @@ function BookmarkModel(dController){
 	self.dossierId=self.controller.getActiveDossier();
 	self.loadDossierList();
     }
-}
+};
 
 
 BookmarkModel.prototype.initValues=function(){
     this.dossierTitle= this.getDossierTitle();
     this.dossierDescription=this.getDossierDescription();
-    this.dossierImageURL= this.getDossierImageURL();
-};
+    this.dossierImageURL= this.getDossierImageURL()
+}
 
 BookmarkModel.prototype.setEditModeOn=function(){
     this.editMode=true;
-};
+}
 
 
 BookmarkModel.prototype.addItem=function(id){
@@ -88,7 +84,7 @@ BookmarkModel.prototype.addItem=function(id){
     function success(){
 	// great! well done!
 	console.log("great the insertion of the bookmark was succesfull");
-        $(document).trigger('BOOKMARKSTORED');
+        $(document).trigger('BOOKMARKSTORED')
     }
     
     function error(request) {
@@ -181,43 +177,40 @@ BookmarkModel.prototype.loadDossierList=function(){
 
     function createDossierList(data){
 	console.log("success in getting the dossier list");
-	var dossierObject=null;
+	var dossierObject;
 	try{
 	    dossierObject=data;
 	}catch(err) {
-	    dossierObject={};
+	    var dossierObject={};
 	    console.log("couldnt load dossier items from the database");
 	}
 	
-	dossierItemMetadata={};
+	var dossierItemMetadata={};
 	self.dossierData=dossierObject || {};
 	console.log("dossierData are "+JSON.stringify(self.dossierData));
 	//self.dossierList=JSON.stringify(self.dossierData['dossier_items']);
 	
-	self.dossierMetadata=self.dossierData.dossier_metadata;
+	self.dossierMetadata=self.dossierData['dossier_metadata'];
 	console.log("dossier metadata is "+JSON.stringify(self.dossierMetadata));
 	
-	self.dossierList=self.dossierData.dossier_items;
-	//console.log("dossierList is "+JSON.stringify(self.dossierList));
+	self.dossierList=self.dossierData['dossier_items'];
+	//console.log("dossierList issssss "+JSON.stringify(self.dossierList));
 	if (self.dossierList && self.dossierList.length>0){
-	    var itemId= self.dossierList[0].metadata.id;	
+	    var itemId= self.dossierList[0]['metadata']['id'];	
 	    console.log("dossier item id in success is "+itemId);
 	}
 	//init values
 	
-	self.dossierTitle= self.dossierMetadata.title;
+	self.dossierTitle= self.dossierMetadata['title'];
 	console.log("dossier title is "+self.dossierTitle);
-	self.dossierDescription=self.dossierMetadata.description;
-	self.dossierImageURL=self.dossierMetadata.image;
-	self.dossierId=self.dossierMetadata.id;
+	self.dossierDescription=self.dossierMetadata['description'];
+	self.dossierImageURL=self.dossierMetadata['image'];
+	self.dossierId=self.dossierMetadata['id'];
 	
 	// var stringifiedMetadata = JSON.stringify(dossierMetadata);
 	// console.log("metadata is "+stringifiedMetadata);
 	
 	//self.loaded=true;
-	
-	self.userlist=self.dossierData.user_list;
-	console.log("user list is "+JSON.stringify(self.userlist));
 	$(document).trigger("BookmarkModelLoaded");
 	
     }
@@ -237,22 +230,21 @@ BookmarkModel.prototype.sendDataToServer=function(){
     var dossierID = self.dossierId;
     var url="http://yellowjacket.ethz.ch/tools/service/dossier.php/"+dossierID;
     var method="POST";
-    var myData = {};
     
     if ( dossierID &&
 	 ((self.dossierTitle && self.dossierTitle.length ) ||
 	  (self.dossierDescription && self.dossierDescription.length) ||
 	  (self.dossierImageURL && self.dossierImageURL.length))) {
-	
+	var myData = {};
 	if (self.dossierTitle && self.dossierTitle.length) {
-	    myData.title = self.dossierTitle;
+	    myData['title'] = self.dossierTitle;
 	}
 	if (self.dossierDescription && self.dossierDescription.length) {
             console.log('send description to server ' + self.dossierDescription );
-	    myData.description = self.dossierDescription;
+	    myData['description'] = self.dossierDescription;
 	}
 	if (self.dossierImageURL && self.dossierImageURL.length) {
-	    myData.image = self.dossierImageURL;
+	    myData['image'] = self.dossierImageURL;
 	}
 	// var data=myData;
 	
@@ -281,8 +273,8 @@ BookmarkModel.prototype.sendDataToServer=function(){
     }
     
     function setHeader(xhr){
-    var header_request=self.controller.oauth.oauthHeader(method, url, myData);
-    xhr.setRequestHeader('Authorization', header_request);
+	var header_request=self.controller.oauth.oauthHeader(method, url, myData);
+	xhr.setRequestHeader('Authorization', header_request);
     }
 };
 
@@ -300,20 +292,11 @@ BookmarkModel.prototype.nextItem = function() {
     return this.index < this.dossierList.length;
 };
 
-
-BookmarkModel.prototype.nextUser = function() {
-	console.log("user_index before increase is "+this.user_index);
-    this.user_index++;
-    console.log("user_index in nextUseris "+this.user_index);
-    console.log("userlist length is "+this.userlist.length);
-    return  this.user_index <= this.userlist.length;
-};
-
 BookmarkModel.prototype.hasItem = function(id) {
     var retval = false, i = 0;
     if (this.dossierList && this.dossierList.length && id) {
         for (i; i < this.dossierList.length; i++) {
-            if ( this.dossierList[i].digital_library_id === id ) {
+            if ( this.dossierList[i]['digital_library_id'] === id ) {
                 retval = true;
                 break;
             }
@@ -335,10 +318,10 @@ BookmarkModel.prototype.firstItem = function() {
 
 
 BookmarkModel.prototype.getItemId = function() {
-    self=this;
+    var self=this;
     console.log("this.index in getID is "+this.index);
     console.log("dossier list length in id is "+this.dossierList.length);
-    return (this.index < this.dossierList.length ) ? this.dossierList[this.index].metadata.id : false;	
+    return (this.index < this.dossierList.length ) ? this.dossierList[this.index]['metadata']['id'] : false;	
     //return self.dossierList[this.index]['metadata']['id'];	
 };
 
@@ -348,67 +331,56 @@ BookmarkModel.prototype.getItemId = function() {
  * @return {string}, the title of the dossier item
  */
 BookmarkModel.prototype.getTitle = function() {
-    return (this.index < this.dossierList.length ) ? this.dossierList[this.index].metadata.title : false;	
+    return (this.index < this.dossierList.length ) ? this.dossierList[this.index]['metadata']['title'] : false;	
     //return this.dossierList[this.index]['metadata']['title'];	
 };
 
 
 BookmarkModel.prototype.getDate = function() {
-    return (this.index < this.dossierList.length) ? this.dossierList[this.index].metadata.date : false;	
+    return (this.index < this.dossierList.length) ? this.dossierList[this.index]['metadata']['date'] : false;	
 };
 
 BookmarkModel.prototype.getAuthorList = function() {
-    return (this.index < this.dossierList.length) ? this.dossierList[this.index].metadata.author : false;	
+    return (this.index < this.dossierList.length) ? this.dossierList[this.index]['metadata']['author'] : false;	
 };
 
 BookmarkModel.prototype.getDescription = function() {
-    return (this.index < this.dossierList.length) ? this.dossierList[this.index].metadata.description : false;	
+    return (this.index < this.dossierList.length) ? this.dossierList[this.index]['metadata']['description'] : false;	
 };
 
 BookmarkModel.prototype.getThumbnail = function() {
-    return (this.index < this.dossierList.length) ? this.dossierList[this.index].metadata.image : false;	
+    return (this.index < this.dossierList.length) ? this.dossierList[this.index]['metadata']['image'] : false;	
 };
 
 BookmarkModel.prototype.getType = function() {
-    return (this.index < this.dossierList.length) ? this.dossierList[this.index].metadata.type : false;	
+    return (this.index < this.dossierList.length) ? this.dossierList[this.index]['metadata']['type'] : false;	
 };
 
 BookmarkModel.prototype.getISNURL = function() {
-    return (this.index < this.dossierList.length) ? this.dossierList[this.index].metadata.isn_detail_url: false;	
+    return (this.index < this.dossierList.length) ? this.dossierList[this.index]['metadata']['isn_detail_url'] : false;	
 };
 
-BookmarkModel.prototype.getUsername = function() {
-	  return (this.user_index < this.userlist.length) ? this.userlist[this.user_index].username: false;	
-};
-
-BookmarkModel.prototype.getUsertype = function() {
-	  return (this.user_index < this.userlist.length) ? this.userlist[this.user_index].user_type: false;	
-};
-
-BookmarkModel.prototype.getUserid = function() {
-	  return (this.user_index < this.userlist.length) ? this.userlist[this.user_index].user_id: false;	
-};
 
 //Dossier functions
 
 BookmarkModel.prototype.getDossierID=function(){
-    return this.dossierMetadata.id;	
+    return this.dossierMetadata['id'];	
 };
 
 BookmarkModel.prototype.getDossierTitle=function(){
     //return (this.index > this.dossierMetadata.length - 1) ? false :
-    return	 this.dossierMetadata.title;	
+    return	 this.dossierMetadata['title'];	
     
 };
 
 BookmarkModel.prototype.getDossierDescription=function(){
     console.log("this.index in get description is "+this.index);
     //return (this.index > this.dossierMetadata.length - 1) ? false :
-    return this.dossierMetadata.description;	
+    return this.dossierMetadata['description'];	
 };
 
 BookmarkModel.prototype.getDossierImageURL=function(){
-    return this.dossierMetadata.image;	
+    return this.dossierMetadata['image'];	
 };
 
 BookmarkModel.prototype.setDossierTitle=function(title){
@@ -430,9 +402,6 @@ BookmarkModel.prototype.reset=function(){
     this.index=0;
 };
 
-BookmarkModel.prototype.resetUserIndex=function(){
-    this.user_index=0;
-};
 
 BookmarkModel.prototype.setIndex=function(index){
     this.index=index;

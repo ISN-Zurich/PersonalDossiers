@@ -1,0 +1,79 @@
+/* -------------------------------------------------------------- 
+   Urs Zihlmann, 22. November
+-------------------------------------------------------------- */
+
+* {
+	margin: 0;
+	padding: 0;
+	font-size: 1em; /* don't edit */
+	color: #333;
+}
+html {
+	font-size: 62.5%; /* don't edit */
+}
+html, body {
+	height: 100%;
+	min-height: 100%;
+	margin: 0;
+	/* + scrollbar styles */
+}
+body {
+	font-size: 1em; /* edit here global size for em ? 1em = 10px */
+	line-height: 1em;
+}
+p {
+	font-size: 1.2em;
+	line-height: 1.5em;
+	padding: .25em 0 .25em 0;
+}
+ul {
+	font-size: 1.2em;
+	line-height: 1.5em;
+	margin: 0;
+	padding: 0;
+	list-style-image: none;
+	list-style-position: outside;
+	list-style-type: none;
+}
+ol {
+	font-size: 1.2em;
+	line-height: 1.5em;
+	margin: 0;
+	padding: 0;
+}
+
+/* ******************************************************************************
+Bedienhilfe via Tab
+=> http://www.wien.gv.at/
+ Skiplinks ein-/ausblenden
+******************************************************************************* */
+
+#skip0 a, #skip1 a, #skip2 a { 
+	font-size: 1.2em;
+	background-color: #fff;
+	position: absolute;
+	z-index: 2;
+	width: 11em;
+	overflow: hidden;
+	top: 10em;
+	left: -100em;
+}
+#skip0 a:focus, #skip1 a:focus, #skip2 a:focus { 
+	top: 0;
+	left: 0;
+}  
+p#skipcont a { 
+	position: relative;
+	z-index: 2;
+	width: 11em;
+	overflow: hidden;
+	top: -10em;
+	left: -100em;
+} 
+p#skipcont a:focus {
+      top: 0;
+      left: 0;
+}
+.none {
+	display: none;
+}

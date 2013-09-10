@@ -1,0 +1,223 @@
+/*  ----------------Formulare---------------------- */ 
+
+
+#content label {
+	float: left;
+}
+#content input,
+.uploadfile {
+	padding: .1em 0;
+	border: 1px solid #999;
+}
+#content input.checkbox {
+	border: none;
+}
+#search input {
+	float: left;
+}
+#content textarea {
+	margin: 0 0 .7em;
+	padding: 0;
+	height: 8em;
+	width: 467px;
+	background-color: #fff;
+	border: 1px solid #999;
+}
+
+/* OVERRIDE:
+Success, error & notice boxes for messages and errors. */
+.error,
+.notice,
+.warning,
+.success    			{ padding: 0 .3em .6em 1em; margin: 1em 0; border: .2em solid #ddd; }
+.error      			{ background: #FBE3E4; color: #D12F19; border-color: #FBC2C4; }
+.notice, .warning   	{ background: #FFF6BF; color: #817134; border-color: #FFD324; }
+.success    			{ background: #E6EFC2; color: #529214; border-color: #C6D880; }
+.error a    			{ color: #D12F19; }
+.notice a, .warning a   { color: #817134; }
+.success a  			{ color: #529214; }
+
+
+
+/*
+good Form
+*/
+
+form {
+	text-align: left;
+}
+fieldset {
+	margin: 0;
+	border: 0;
+	padding: 0;
+}
+legend {
+	display: none;
+}
+form h2.bg_grey {
+	font-size: 1.2em;
+	font-weight: bold;
+	font-family: Arial, Times, sans-serif;
+	color: #FFF;
+	background-color: #4B515F;
+	margin: .5em 0 .8em 0;
+	padding: 0.1em .5em .2em .5em;
+}
+form h3 {
+	clear: both;
+	padding: 0 0 .5em 0;
+}
+form label {
+	font-weight: bold;
+	display: block;
+	width: 400px;
+	font-size: 1.2em;
+	line-height: 1.4em;
+	padding: .4em 0;
+}
+/*
+#content form input {
+	display: block;
+	margin-top: 3px;
+}
+*/
+form select {
+	float: left;
+	display: block;
+}
+form label.field-first,
+form label.field-address,
+form label.field-city,
+form label.field-email {
+	clear: left;
+}
+form label.field-first,
+form label.field-last,
+form label.field-city,
+form label.field-email,
+form label.field-phone {
+	float: left;
+	margin: 0;
+	width: 467px;
+}
+form label.field-first input,
+form label.field-last input,
+form label.field-email input,
+form label.field-city input,
+form label.field-phone input {
+	float: left;
+	width: 467px;
+	padding: 0px;
+}
+
+form label.half,
+form label.half input {
+	width: 230px;
+}
+
+form label.half input[type=file] {
+  margin:4px 0;
+}
+
+form label.field-state {
+	float: left;
+	width: 5em;
+}
+form label.field-state select {
+	width: 60px;
+	float: left;
+	margin-top: 3px;
+}
+form label.field-zip {
+	float: left;
+	width: 80px;
+}
+form label.field-zip input {
+	float: left;
+	width: 80px;
+}
+form label.field-address {
+	float: left;
+	width: 310px;
+	margin: 0px 0px 0px 0px;
+}
+form label.field-address input {
+	float: left;
+	width: 310px;
+	padding: 0px;
+}
+form input.radiobutton {
+	clear: left;
+	float: left;
+	padding: 0;
+	margin: 0;
+}
+form label.radioitem {
+	clear: none;
+	margin: 0 0 0 1.5em;
+	padding: 0 0 .3em 0;
+}
+form label.radioitem2 {
+	clear: none;
+	margin: 0;
+	padding: 0 0 .3em 0;
+}
+textarea {
+	display: block;
+	font-family: Arial, Times, sans-serif;
+}
+form input.checkbox {
+	clear: both;
+	float: left;
+	padding: 0;
+	margin: 0;
+	border: none;
+}
+form label.field-checkbox {
+	font-weight: normal;
+	clear: none;
+	margin: 0 0 0 1.5em;
+	padding: 0 0 .3em 0;
+}
+form textarea {
+	margin-top: 3px;
+}
+form label.validation-error {
+	color: #aa0000;
+}
+
+#content input.new_comment {
+	margin: .5em 0 0 0;
+}
+
+/* PAGING */
+#paging input.paging {
+	/* cursor: hand; */
+	cursor: pointer;
+	font-size: 1em;
+	font-weight: bold;
+	color: #000;
+	border: none;
+	margin: 0;
+	padding: 0;
+}
+#paging input.Off {
+	cursor: default;
+	color: #999;
+}
+form span.field-first {
+	float: left;
+	width: 250px;
+	display:block;
+	font-size:1.2em;
+	font-weight:bold;
+	line-height:1.4em;
+	padding:0.4em 0;
+}
+form span.section {
+	width:400px;
+	margin-top:8px;
+}
+form fieldset h2 {
+	margin-bottom:0.5em;
+}
