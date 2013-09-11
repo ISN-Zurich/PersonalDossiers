@@ -42,12 +42,13 @@ function BookmarkModel(dController){
         self.loadDossierList();
     }
     $(document).bind("ActiveDossierReady", loadActiveDossier);
-    
-   
+       
     function loadActiveDossier() {
+    	if (!self.controller.hashed){
     	console.log("load Active Dossier");
     	self.dossierId=self.controller.getActiveDossier();
     	self.loadDossierList();
+    	}
     }
  }
 

@@ -128,9 +128,7 @@ function dossierController() {
         console.log("after initializing image gallery");
     };
 
-  
-
-    dossierController.prototype.getActiveDossier = function(){
+      dossierController.prototype.getActiveDossier = function(){
 
         if (this.hashed){
         var activedosId = this.getHashedURLId();
