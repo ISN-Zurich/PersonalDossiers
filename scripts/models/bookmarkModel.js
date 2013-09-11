@@ -43,12 +43,13 @@ function BookmarkModel(dController){
     }
     $(document).bind("ActiveDossierReady", loadActiveDossier);
     
+   
     function loadActiveDossier() {
-	console.log("load Active Dossier");
-	self.dossierId=self.controller.getActiveDossier();
-	self.loadDossierList();
+    	console.log("load Active Dossier");
+    	self.dossierId=self.controller.getActiveDossier();
+    	self.loadDossierList();
     }
-}
+ }
 
 
 BookmarkModel.prototype.initValues=function(){
@@ -58,6 +59,7 @@ BookmarkModel.prototype.initValues=function(){
 };
 
 BookmarkModel.prototype.setEditModeOn=function(){
+	console.log();
     this.editMode=true;
 };
 
@@ -180,7 +182,7 @@ BookmarkModel.prototype.loadDossierList=function(){
     }
 
     function createDossierList(data){
-	console.log("success in getting the dossier list");
+	console.log("success in getting the dossier list in the model");
 	var dossierObject=null;
 	try{
 	    dossierObject=data;
@@ -306,7 +308,7 @@ BookmarkModel.prototype.nextUser = function() {
     this.user_index++;
     console.log("user_index in nextUseris "+this.user_index);
     console.log("userlist length is "+this.userlist.length);
-    return  this.user_index <= this.userlist.length;
+    return  this.user_index < this.userlist.length;
 };
 
 BookmarkModel.prototype.hasItem = function(id) {

@@ -7,6 +7,7 @@ function UserModel(userController){
     self.userProfile=null;
     self.userlist=null;
     self.index=0;
+    self.activeDossierId;
     // self.checkActiveUser();
     self.loadData();
     $(document).bind("ActiveDossierChanged", function() {
@@ -38,13 +39,14 @@ UserModel.prototype.getActiveDossier = function(){
 	activeDossierId = profObj.activeDossierId;
 	if (activeDossierId) {
             this.activeDossierId = activeDossierId;
-            $(document).trigger("ActiveDossierReady");
+         //   $(document).trigger("ActiveDossierReady");
 	}
 	console.log("active dossier Id from the storage is "+activeDossierId);
 	
-    } //end of if profObj	
-    return activeDossierId;
+    } //end of if profObj
+     return activeDossierId;
 };
+
 
 
 UserModel.prototype.getUserProfile=function(){

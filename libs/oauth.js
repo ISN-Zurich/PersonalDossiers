@@ -357,7 +357,7 @@ OAuth.declareClass = function declareClass(parent, name, newConstructor) {
         }
     }
     return newConstructor;
-}
+};
 
 /** An abstract algorithm for signing messages. */
 OAuth.declareClass(OAuth, "SignatureMethod", function OAuthSignatureMethod(){});

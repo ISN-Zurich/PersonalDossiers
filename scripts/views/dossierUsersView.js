@@ -22,31 +22,14 @@ DossierUsersView.prototype.update = function(){
 	console.log("userlist is in View is "+JSON.stringify(self.controller.models.bookmark.userlist));
 	if (bookmarkModel.userlist && bookmarkModel.userlist.length >0) {
 		console.log("dossierUsersView: userlist exists ");
-//		do {
-//				p1=$("<p/>",{
-//				"class": "bold clickable",
-//				"id":"user"+self.controller.models.bookmark.getUserid(), //might need user id 
-//				"text": self.controller.models.bookmark.getUsername()
-//			}).appendTo("#dossierUsers");
-//		} while (self.controller.models.bookmark.nextUser());	
-//		
-		while (bookmarkModel.nextUser()){
-			p1=$("<p/>",{
+		do {
+				p1=$("<p/>",{
 				"class": "bold clickable",
 				"id":"user"+self.controller.models.bookmark.getUserid(), //might need user id 
 				"text": self.controller.models.bookmark.getUsername()
 			}).appendTo("#dossierUsers");
-		} //end of while
-		
-//		for (i=0; i< bookmarkModel.userlist.length;i++){
-//			p1=$("<p/>",{
-//				"class": "bold clickable",
-//				"id":"user"+self.controller.models.bookmark.getUserid(), //might need user id 
-//				"text": self.controller.models.bookmark.getUsername()
-//			}).appendTo("#dossierUsers");
-//			
-//		}
-//		
+		} while (self.controller.models.bookmark.nextUser());	
+
 	} //end of external if
 };
 	
