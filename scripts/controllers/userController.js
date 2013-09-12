@@ -3,8 +3,7 @@
 
 function userController() {
 	var self=this;
-    
-    document.domain = 'ethz.ch';
+	document.domain = 'ethz.ch';
 	
 	self.activeView=false;
     self.initOAuth();
