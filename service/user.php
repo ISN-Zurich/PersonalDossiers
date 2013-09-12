@@ -103,11 +103,7 @@ class UserManagement extends PDCommonClass {
 	}
 
 
-public function getUserRole() {
 
-// owner, editor, user
-
-}
 
 
 public function getDossierType($userId) {
@@ -124,20 +120,54 @@ public function getUsername(){
 }
 
 
-public function dossierIsPublic(){
+public function dossierIsPublic($dossierId){
+	$this->mark();
+	// select private_flag from dossiers table
+	$this->dbh->setFetchMode(MDB2_FETCHMODE_ASSOC);
+	$mdb2 = $this->dbh;
+	$sth = $mdb2->prepare('SELECT private_flag FROM dossiers WHERE id=?');
+	$res = $sth->execute($this->dossier_id);
 
-// getDossierType;
-// if dossierType == public
-//return true
-//otherwise return false
+	if ($res->numRows() == 1) {
+		//there should be only one dossier with that id
+		$row=$res->fetchRow();
+		$private_flag = $row;
+		$sth->free();
+	}
+
+if ($private_flag == true){
+		return true;
+	}else {
+		return false;
+	}
+}
+
+public function getUserRole() {
+
+	// owner, editor, user
 
 }
 
-public function isUser($userId){
+public function hasUserPriviledges($userId, $dossierId){
 
-// getUserRole
-// if  user_type =="user", return true otherwise false
-
+	$this->mark();
+	// select private_flag from dossiers table
+	$this->dbh->setFetchMode(MDB2_FETCHMODE_ASSOC);
+	$mdb2 = $this->dbh;
+	$sth = $mdb2->prepare('SELECT user_type FROM dossiers_users  WHERE user_id=? AND dossier_id=?');
+	$res = $sth->execute($this->user_id,$this->dossier_id);
+	
+	if ($res->numRows() == 1) {
+			$row=$res->fetchRow();
+		$user_role = $row;
+		$sth->free();
+	}	
+	
+	if ($user_role == "owner" || $user_role == "author" || $user_role == "user"){
+		return true;
+	}else {
+		return false;
+	}
 }
 
 
@@ -150,6 +180,7 @@ public function isEditor($userId){
 
 public function isOwner($userId){
 
+	
 //  getUserRole
 //  if user_type == "owner" return true, otherwise false
 
@@ -158,6 +189,11 @@ public function isOwner($userId){
 
 }//end of class
 
+/**
+ * NOTE: i dont need to run the code below, 
+ * we just need the functions of this class to reuse them in the prepareOperation
+ * of the dossier service. 
+ **/
 
 $service = new UserManagement($mdb2);
 // check if the active user is allowed to run the service with the given parameter

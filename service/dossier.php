@@ -802,20 +802,24 @@ class DossierService extends OAUTHRESTService {
 		     switch($meth) {
 		     case 'GET':
 			    // only access if the dossier is public or if the user is a "user" (or editor or owner)
-			    // if (!$this->userHasAccessToDossier('user')) {
-			    //   $retval = false;
+			    
+		     	//if ( $this->user->dossierIsPublic($this->dossier_id) && $this->user->hasUserPriviledges(userId, $this->dossier_id)){
+		     	//   $retval = false;
 			    // }
-			    // else if (!$this->dossierIsPublic()) {
+			    // else if (!$this->user->dossierIsPublic($this->dossier_id)) {
 			    //     $retval = false;	   
 			    // }
 			    break;
 		     case 'PUT':
+		     	//add new item
 			    // only access if the user is a editor (or owner)
 			    // if (!$this->userHasAccessToDossier('editor')) {
 			    //   $retval = false;
 			    // }
 			    break;
 		     case 'POST':
+		     	//update a dossier (title, description, image) 
+		     	//or update a dossier item (its metadata like title, description, author, etc.)
 			    if ( $this->item_id) {
 				   // only access if the user is a editor
 			    }
@@ -833,6 +837,7 @@ class DossierService extends OAUTHRESTService {
 			    break;
 		     default:
 			    //ignore and accept the parent's prepareOperation
+			    // parent::prepareOperation($meth);
 			    break;
 		     }
 	      }
