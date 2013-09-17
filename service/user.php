@@ -120,27 +120,7 @@ public function getUsername(){
 }
 
 
-public function dossierIsPublic($dossierId){
-	$this->mark();
-	// select private_flag from dossiers table
-	$this->dbh->setFetchMode(MDB2_FETCHMODE_ASSOC);
-	$mdb2 = $this->dbh;
-	$sth = $mdb2->prepare('SELECT private_flag FROM dossiers WHERE id=?');
-	$res = $sth->execute($this->dossier_id);
 
-	if ($res->numRows() == 1) {
-		//there should be only one dossier with that id
-		$row=$res->fetchRow();
-		$private_flag = $row;
-		$sth->free();
-	}
-
-if ($private_flag == true){
-		return true;
-	}else {
-		return false;
-	}
-}
 
 public function getUserRole() {
 
@@ -148,21 +128,21 @@ public function getUserRole() {
 
 }
 
-public function hasUserPriviledges($userId, $dossierId){
+protected function hasViewingPriviledges($userId, $dossierId){
 
 	$this->mark();
 	// select private_flag from dossiers table
 	$this->dbh->setFetchMode(MDB2_FETCHMODE_ASSOC);
 	$mdb2 = $this->dbh;
 	$sth = $mdb2->prepare('SELECT user_type FROM dossiers_users  WHERE user_id=? AND dossier_id=?');
-	$res = $sth->execute($this->user_id,$this->dossier_id);
-	
+	$res = $sth->execute(array($this->user_id,$this->dossier_id));
+
 	if ($res->numRows() == 1) {
-			$row=$res->fetchRow();
+		$row=$res->fetchRow();
 		$user_role = $row;
 		$sth->free();
-	}	
-	
+	}
+
 	if ($user_role == "owner" || $user_role == "author" || $user_role == "user"){
 		return true;
 	}else {

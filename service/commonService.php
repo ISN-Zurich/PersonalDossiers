@@ -552,6 +552,8 @@ class OAUTHRESTService extends RESTServiceCommon {
         $this->dbh = $dbh;
         // instantiate the session manamgenet
         $this->session = new SessionManagement($dbh);
+        //instantiate the user management
+       // $this->user = new UserManagement($dbh);
     }
     
     /**

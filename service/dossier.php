@@ -788,9 +788,47 @@ class DossierService extends OAUTHRESTService {
 	      $this->respond_json_data();
        }
        
+       
+
+       /**
+        * dossierIsPublic()
+        *
+        * This function is useful in order to restrict the access and management
+        * of a dossier to users that do not have the permission on it.
+        * 
+        * If a dossier is public, everyone (every type of authenticated and non-authenticated users)
+        * can see it.
+        * 
+        * Returns true if the dossier type is public and false if it is private
+        * 
+        */
+       
+       protected function dossierIsPublic($dossierId){
+       	$this->mark();
+       	// select private_flag from dossiers table
+       	$this->dbh->setFetchMode(MDB2_FETCHMODE_ASSOC);
+       	$mdb2 = $this->dbh;
+       	$sth = $mdb2->prepare('SELECT * FROM dossiers WHERE id=? AND private_flag=?');
+       	$res = $sth->execute(array($this->dossier_id, true));
+       	if ($res->numRows() == 1) {
+       		//there should be only one dossier with that id
+       		$row=$res->fetchRow();
+       		$private_flag = $row;
+       		$sth->free();
+       		return true;
+       	} else {
+       		return false;
+       	}  	 
+
+       }
+       
+       
+       
        protected function prepareOperation($meth) {
 	      $retval = parent::prepareOperation($meth);
 	      
+			//if any external guest user access a dossier via a shared link
+			//he should be able to 
 	      if ( !$retval && $meth == 'GET' && $this->dossier_id) {
 		     $retval = true;
 	      }
@@ -801,16 +839,18 @@ class DossierService extends OAUTHRESTService {
 		     // check if the user is allowed to perform the requested operation
 		     switch($meth) {
 		     case 'GET':
+		     	$this->log("enter GET in prepare statement in dossier.php");
 			    // only access if the dossier is public or if the user is a "user" (or editor or owner)
-			    
-		     	//if ( $this->user->dossierIsPublic($this->dossier_id) && $this->user->hasUserPriviledges(userId, $this->dossier_id)){
-		     	//   $retval = false;
-			    // }
-			    // else if (!$this->user->dossierIsPublic($this->dossier_id)) {
-			    //     $retval = false;	   
-			    // }
+			   // $userId=$this->session->getUserID();
+// 		     	if ( $this->dossierIsPublic($this->dossier_id) && $this->user->hasViewingPriviledges($this->session->getUserID(),$this->dossier_id)){
+// 		     	  $retval = true;
+// 			    }
+// 			    else if (!$this->dossierIsPublic($this->dossier_id)) {
+// 			        $retval = false;	   
+// 			    }
 			    break;
 		     case 'PUT':
+		     	$this->log("enter PUT in prepare statement in dossier.php");
 		     	//add new item
 			    // only access if the user is a editor (or owner)
 			    // if (!$this->userHasAccessToDossier('editor')) {
@@ -818,6 +858,7 @@ class DossierService extends OAUTHRESTService {
 			    // }
 			    break;
 		     case 'POST':
+		     	$this->log("enter POST in prepare statement in dossier.php");
 		     	//update a dossier (title, description, image) 
 		     	//or update a dossier item (its metadata like title, description, author, etc.)
 			    if ( $this->item_id) {
@@ -828,6 +869,7 @@ class DossierService extends OAUTHRESTService {
 			    }
 			    break;
 		     case 'DELETE':
+		     	$this->log("enter DELETE in prepare statement in dossier.php");
 			    if ( $this->item_id) {
 				   // only access if the user is a editor
 			    }
