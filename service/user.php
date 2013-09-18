@@ -27,32 +27,15 @@ class UserManagement extends PDCommonClass {
    protected $item_id;
 
    public function __construct($dbh) {
-   parent::__construct($dbh);
-
+  // parent::__construct($dbh);
+   $this->setDebugMode(true);
    $this->mark();
-
-   // The following code is used in the constructor of authentication service
-   //$this->mode = $this->path_info;
-   //$this->log("mode: " . $this->mode);
-
-    if ( !empty($this->path_info) ) {
-   		     $parts = explode('/', $this->path_info);
-   	      } else {
-   		     $parts = array();
-   	      }
-   	      if ( count($parts)>1) {
-   		     $this->item_id = $parts[1];
-   	      }
-   	      if ( count($parts) > 0) {
-   		     $this->dossier_id = $parts[0];
-   	      }
-   	      // init the database connection
-   	      $this->dbh = $dbh;
-   	      $this->data = array();
+   $this->dbh = $dbh;
+   $this->log(" dbh in user constructor is ".$dbh);
 	}//end of constructor
 
 
-	protected function handle_GET() {
+	public function handle_GET() {
 		$this->mark();
 		$this->log('enter handle_GET');
 		if ( $this->dossier_id > 0 ) {
@@ -122,63 +105,78 @@ public function getUsername(){
 
 
 
-public function getUserRole() {
-
-	// owner, editor, user
-
-}
-
-protected function hasViewingPriviledges($userId, $dossierId){
-
+public function getUserRole($userId, $dossierId) {
+	
+	$this->log("enter hasViewing Priviledges");
 	$this->mark();
+	if (!isset($this->dbh)){
+		$this->log("dbh has not been set");
+	}
 	// select private_flag from dossiers table
 	$this->dbh->setFetchMode(MDB2_FETCHMODE_ASSOC);
 	$mdb2 = $this->dbh;
-	$sth = $mdb2->prepare('SELECT user_type FROM dossiers_users  WHERE user_id=? AND dossier_id=?');
-	$res = $sth->execute(array($this->user_id,$this->dossier_id));
-
+	$sth = $mdb2->prepare('SELECT user_type FROM dossier_users WHERE user_id=? AND dossier_id=?');
+	$res = $sth->execute(array($userId,$dossierId));
+	
+	if (PEAR::isError($res)) {
+		$this->log("pear error " . $res->getMessage());
+		$this->bad_request();
+		$sth->free();
+		return;
+	}
+	
 	if ($res->numRows() == 1) {
 		$row=$res->fetchRow();
-		$user_role = $row;
+		$user_role = $row['user_type'];
+		$this->log("user role is ".$user_role);
 		$sth->free();
 	}
 
-	if ($user_role == "owner" || $user_role == "author" || $user_role == "user"){
+	return $user_role;
+}
+
+public function hasUserPriviledges($userId, $dossierId){
+	$user_role=$this->getUserRole($userId, $dossierId);
+
+	if ($user_role == "owner" || $user_role == "editor" || $user_role == "user"){
+		$this->log("the user has user priviledges");
 		return true;
 	}else {
+		$this->log("the user has not user priviledges");
 		return false;
 	}
 }
 
 
-public function isEditor($userId){
+public function hasEditorPriviledges($userId, $dossierId){
+	$user_role=$this->getUserRole($userId, $dossierId);
 
-//  getUserRole
-//  if user_type == "editor" return true, otherwise false
-
+	if ($user_role == "owner" || $user_role == "editor"){
+		$this->log("the user has editor priviledges");
+		return true;
+	}else {
+		$this->log("the user has not editor priviledges");
+		return false;
+	}
 }
 
-public function isOwner($userId){
 
-	
-//  getUserRole
-//  if user_type == "owner" return true, otherwise false
 
+public function isOwner($userId, $dossierId){
+
+	$user_role=$this->getUserRole($userId, $dossierId);
+
+	if ($user_role == "owner"){
+		$this->log("the user has owner priviledges");
+		return true;
+	}else {
+		$this->log("the user has not owner priviledges");
+		return false;
+	}
 }
 
 
 }//end of class
 
-/**
- * NOTE: i dont need to run the code below, 
- * we just need the functions of this class to reuse them in the prepareOperation
- * of the dossier service. 
- **/
 
-$service = new UserManagement($mdb2);
-// check if the active user is allowed to run the service with the given parameter
-
-// if everything is OK run the actual service
-$service->run();
-$mdb2->disconnect();
 ?>

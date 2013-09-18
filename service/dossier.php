@@ -6,6 +6,7 @@ include 'dbConnect.php';
 include_once 'commonService.php';
 
 include 'session.php';
+include 'user.php';
 
 /**
  * @class DossierService
@@ -88,6 +89,7 @@ class DossierService extends OAUTHRESTService {
 	      }
 	      // init the database connection
 	      $this->dbh = $dbh;
+	      $this->log(" dbh in dossier constructor is ".$dbh);
 	      $this->data = array();
        }
        
@@ -809,14 +811,16 @@ class DossierService extends OAUTHRESTService {
        	$this->dbh->setFetchMode(MDB2_FETCHMODE_ASSOC);
        	$mdb2 = $this->dbh;
        	$sth = $mdb2->prepare('SELECT * FROM dossiers WHERE id=? AND private_flag=?');
-       	$res = $sth->execute(array($this->dossier_id, true));
+       	$res = $sth->execute(array($this->dossier_id, false));
        	if ($res->numRows() == 1) {
        		//there should be only one dossier with that id
        		$row=$res->fetchRow();
        		$private_flag = $row;
        		$sth->free();
+       		$this->log("dossier is public");
        		return true;
        	} else {
+       		$this->log("dossier is private");
        		return false;
        	}  	 
 
@@ -841,40 +845,56 @@ class DossierService extends OAUTHRESTService {
 		     case 'GET':
 		     	$this->log("enter GET in prepare statement in dossier.php");
 			    // only access if the dossier is public or if the user is a "user" (or editor or owner)
-			   // $userId=$this->session->getUserID();
-// 		     	if ( $this->dossierIsPublic($this->dossier_id) && $this->user->hasViewingPriviledges($this->session->getUserID(),$this->dossier_id)){
-// 		     	  $retval = true;
-// 			    }
-// 			    else if (!$this->dossierIsPublic($this->dossier_id)) {
-// 			        $retval = false;	   
-// 			    }
+			   	$this->user = new UserManagement($this->dbh);
+		     	if ( $this->dossierIsPublic($this->dossier_id) || $this->user->hasUserPriviledges($this->session->getUserID(),$this->dossier_id)){
+		     	  $retval = true;
+			    }
+			    else if (!$this->dossierIsPublic($this->dossier_id)) {
+			        $retval = false;	   
+			    }
 			    break;
 		     case 'PUT':
 		     	$this->log("enter PUT in prepare statement in dossier.php");
 		     	//add new item
 			    // only access if the user is a editor (or owner)
-			    // if (!$this->userHasAccessToDossier('editor')) {
-			    //   $retval = false;
-			    // }
+			   	$this->user = new UserManagement($this->dbh);
+		     	if (!$this->user->hasEditorPriviledges($this->session->getUserID(),$this->dossier_id)){
+		     		$this->log("the user cannot add item");
+		     		$retval = false;
+		     	}
 			    break;
 		     case 'POST':
 		     	$this->log("enter POST in prepare statement in dossier.php");
-		     	//update a dossier (title, description, image) 
+		     	
 		     	//or update a dossier item (its metadata like title, description, author, etc.)
-			    if ( $this->item_id) {
-				   // only access if the user is a editor
-			    }
+		     	if ( $this->item_id) {
+		     		// only access if the user is an editor
+			    	if (!$this->user->hasEditorPriviledges($this->session->getUserID(),$this->dossier_id)){
+			    		$retval = false;
+			    	}
+		     	}
 			    else {
-				   // only access if the user is an owner
+			    	$this->user = new UserManagement($this->dbh);
+				// only access if the user is an owner: dossierId > 0 or any other case
+			    // update a dossier (title, description, image), 
+			    	if (!$this->user->isOwner($this->session->getUserID(),$this->dossier_id)){
+			    		$retval = false;
+			    	}
 			    }
 			    break;
 		     case 'DELETE':
 		     	$this->log("enter DELETE in prepare statement in dossier.php");
 			    if ( $this->item_id) {
 				   // only access if the user is a editor
+			    	if (!$this->user->hasEditorPriviledges($this->session->getUserID(),$this->dossier_id)){
+			    		$retval = false;
+			    	}
 			    }
 			    else {
 				   // only access if the user is an owner
+			    	if (!$this->user->isOwner($this->session->getUserID(),$this->dossier_id)){
+			    		$retval = false;
+			    	}
 			    }
 			    break;
 		     default:

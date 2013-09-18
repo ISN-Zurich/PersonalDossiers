@@ -72,7 +72,12 @@ DossierContentView.prototype.open = function() {
     }
 
 	console.log("open dossier list view");
-	this.renderList();
+	var bookmarkModel = self.controller.models.bookmark;
+	if (bookmarkModel.dossierList && bookmarkModel.dossierList.length > 0){ 
+	this.renderList();}
+	else{
+	this.loadErrorMessage();
+	}
 	this.openDiv();
 };
 
@@ -116,7 +121,8 @@ DossierContentView.prototype.renderList = function() {
 		//	this.renderItem();	
 		//	}while (bookmarkModel.nextItem());
 		//	}while (bookmarkModel.index<bookmarkModel.dossierList.length);
-	}
+	} 
+	
 };
 
 
@@ -214,3 +220,19 @@ DossierContentView.prototype.arrangeItem=function(id){
 		// remove the visuals
 	$("#item"+ id).remove();
 };
+
+
+//the following function is used to display an error message
+//when the contents of a dossier cannot be displayed because it is private
+
+DossierContentView.prototype.loadErrorMessage = function(){
+	var divError=$("<div/>", {
+		"id": "dossiersError",
+		"class":"errorDossiers",
+		text: "Sorry you don't have permission to access the contents of this Dossier because it is private"
+	}).appendTo("#contentArea");
+	
+	
+};
+	
+	

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CoreService
  *
@@ -553,7 +554,7 @@ class OAUTHRESTService extends RESTServiceCommon {
         // instantiate the session manamgenet
         $this->session = new SessionManagement($dbh);
         //instantiate the user management
-       // $this->user = new UserManagement($dbh);
+        //$this->user = new UserManagement($dbh);
     }
     
     /**

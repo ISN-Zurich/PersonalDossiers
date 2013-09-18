@@ -66,6 +66,10 @@ function dossierController() {
     	   self.views.dossierContent.open();
     	   self.views.userlist.open();
        });
+       
+       $(document).bind("BookmarkModelNotLoaded", function() {
+    	   self.views.dossierContent.open(); 
+       });
 	
 	
 	//console.log("dossiersController is initialized"+this.models.bookmark.loaded);

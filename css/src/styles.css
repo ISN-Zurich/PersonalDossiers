@@ -1716,6 +1716,13 @@ padding-left:3px;
 	vertical-align:middle;
 }
 
+.errorDossiers{
+	font-size:20px;
+	line-height:70px;
+	height:70px;
+	
+}
+
 /* READY LOGIN FORM  */
 
 #subscribe, 
@@ -1905,3 +1912,6 @@ p.change_link{
 	cursor:pointer;
 	color:blue;
 }
+
+
+

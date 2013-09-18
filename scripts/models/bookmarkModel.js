@@ -176,6 +176,7 @@ BookmarkModel.prototype.loadDossierList=function(){
 		if (request.status === 401){
 		    //	window.location.href ="user.html";
 		    console.log("received 401, we should load the login page");
+			$(document).trigger("BookmarkModelNotLoaded");
 		}
 	    },
 	    beforeSend : setHeader
