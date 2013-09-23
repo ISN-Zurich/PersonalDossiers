@@ -20,6 +20,7 @@ WelcomeView.prototype.openDiv=openView;
 WelcomeView.prototype.open = function(){
 	$('#delete').show();
 	$('#findinformation').show();
+	$('#addDossier').show();
 	$('#socials').show();
 	console.log("called open of the WelcomeView");
 	this.update();

@@ -22,6 +22,7 @@ function userController() {
 	self.views.login= new LoginView(self);
 	self.views.welcome= new WelcomeView(self);
 	self.views.dossierButton= new DossiersButtonView(self);
+	self.views.dossier= new AddDossierView(self);
 	self.views.logout= new LogoutView(self);
 	
 	

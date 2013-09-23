@@ -292,6 +292,10 @@ BookmarkModel.prototype.sendDataToServer=function(){
 
 
 
+
+
+
+
 /**
  * Increases the index in the dossiers-item list, which means we move to the next dossier item
  * @prototype

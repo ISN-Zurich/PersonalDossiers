@@ -152,4 +152,44 @@ DossierListModel.prototype.getUserDossiers=function(){
     }
 };
 
+
+DossierListModel.prototype.addDossier=function(){
+    console.log("enter addDossier in Bookmark Model");
+    var self=this;
+  
+    var url='http://yellowjacket.ethz.ch/tools/service/dossier.php/' ;
+    var method="PUT";
+        
+      
+	console.log("before AJAX");
+	$.ajax({
+	    url :url,
+	    type : method,
+	    dataType : 'json',
+	    success: success,
+	    error:error,
+	    beforeSend:setHeader
+	});
+ 
+	function success(){
+	// great! well done!
+	console.log("great the insertion of the dossier was succesfull");
+    }
+    
+    function error(request) {
+	// the server rejected the request!
+	console.log("the server rejected the creation of a new dossier");
+	console.log("ERROR status text: "+ request.statusText); 
+	console.log("ERROR status code: "+ request.statusCode()); 
+	console.log("ERROR status code is : " + request.status);
+	console.log("ERROR responsetext: "+ request.responseText); 
+    }
+    
+    function setHeader(xhr){
+	var header_request=self.controller.oauth.oauthHeader(method, url);
+	xhr.setRequestHeader('Authorization', header_request);
+    }
+};
+
+
 // console.log("DLM: parse end!");
