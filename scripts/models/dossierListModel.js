@@ -46,30 +46,16 @@ DossierListModel.prototype.getDossierList=function(){
 
 DossierListModel.prototype.getDossierId = function(){
 	if( this.dossierList && this.dossierList.length > 0) {
-		return this.dossierList[this.index]['dossier_id'];
+		return this.dossierList[this.index].dossier_id;
 	}
 };
 
 DossierListModel.prototype.getDossierTitle = function(){
 	if( this.dossierList && this.dossierList.length > 0) {
-		return this.dossierList[this.index]['title'];
+		return this.dossierList[this.index].title;
 	}
 };
 	
-//DossierListModel.prototype.setActiveDossier = function(dossierId){
-//    if( this.dossierList && this.dossierList.length > 0) {
-//	this.activeDossier=dossierId;
-//	//store in the local storage
-//        if (!this.profileData) {
-//            this.profileData = {};
-//        }
-//	this.profileData.activeDossierId=dossierId;
-//	var profileString = JSON.stringify(this.profileData);
-//	localStorage.setItem("userProfile", profileString);
-//	$(document).trigger("ActiveDossierChanged");
-//	console.log("local storage after store of active dossier id "+ localStorage.getItem("userProfile"));
-//    }
-//};
 
 DossierListModel.prototype.getActiveDossier = function(){
     console.log("get active dossier in dossier list model");
@@ -91,7 +77,7 @@ DossierListModel.prototype.getActiveDossier = function(){
 
 DossierListModel.prototype.getDefaultDossierId = function() {
 	var self=this;
-	var minId;
+	var minId=null;
 	var i;
 	if (self.dossierList && self.dossierList.length >0){
 		console.log("enter if, list exists");
@@ -103,8 +89,7 @@ DossierListModel.prototype.getDefaultDossierId = function() {
 			}
 		}
 	}
-	console.log("default id is "+ minId);
-	activeDossierId = minId;
+	console.log("default id is "+minId);
 	// now store the active dossier id to the profile
 	var defaultDossierId = minId;
 	
@@ -150,7 +135,7 @@ DossierListModel.prototype.getUserDossiers=function(){
 	self.dossierList=data;
 		
 	console.log("dossier list is "+JSON.stringify(self.dossierList));
-	console.log("dossier_id is "+JSON.stringify(self.dossierList[0]['dossier_id']));
+	console.log("dossier_id is "+JSON.stringify(self.dossierList[0].dossier_id));
 	
         // inform all dossier views that they need to update
       $(document).trigger('DossierListUpdate'); // for the views   (dossierListButtons)
@@ -167,6 +152,44 @@ DossierListModel.prototype.getUserDossiers=function(){
     }
 };
 
+
+DossierListModel.prototype.addDossier=function(){
+    console.log("enter addDossier in Bookmark Model");
+    var self=this;
+  
+    var url='http://yellowjacket.ethz.ch/tools/service/dossier.php/' ;
+    var method="PUT";
+        
+      
+	console.log("before AJAX");
+	$.ajax({
+	    url :url,
+	    type : method,
+	    dataType : 'json',
+	    success: success,
+	    error:error,
+	    beforeSend:setHeader
+	});
+ 
+	function success(){
+	// great! well done!
+	console.log("great the insertion of the dossier was succesfull");
+    }
+    
+    function error(request) {
+	// the server rejected the request!
+	console.log("the server rejected the creation of a new dossier");
+	console.log("ERROR status text: "+ request.statusText); 
+	console.log("ERROR status code: "+ request.statusCode()); 
+	console.log("ERROR status code is : " + request.status);
+	console.log("ERROR responsetext: "+ request.responseText); 
+    }
+    
+    function setHeader(xhr){
+	var header_request=self.controller.oauth.oauthHeader(method, url);
+	xhr.setRequestHeader('Authorization', header_request);
+    }
+};
 
 
 // console.log("DLM: parse end!");

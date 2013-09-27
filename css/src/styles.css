@@ -278,6 +278,16 @@ FIND INFORMATION
     padding-bottom: 1em;
 } 
  
+#dossierUsers{
+	width: 22.7em;
+   /* height: 6em;*/
+   	height:auto;
+    margin-bottom: 2em;
+    background: #ebedee;
+    border: .1em solid #C9CACF;
+    padding-bottom: 1em;
+}
+
 #delete{
 	width: 22.7em;
     height: 3.5em;
@@ -1706,6 +1716,13 @@ padding-left:3px;
 	vertical-align:middle;
 }
 
+.errorDossiers{
+	font-size:20px;
+	line-height:70px;
+	height:70px;
+	
+}
+
 /* READY LOGIN FORM  */
 
 #subscribe, 
@@ -1895,3 +1912,6 @@ p.change_link{
 	cursor:pointer;
 	color:blue;
 }
+
+
+

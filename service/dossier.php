@@ -6,6 +6,7 @@ include 'dbConnect.php';
 include_once 'commonService.php';
 
 include 'session.php';
+include 'user.php';
 
 /**
  * @class DossierService
@@ -88,6 +89,7 @@ class DossierService extends OAUTHRESTService {
 	      }
 	      // init the database connection
 	      $this->dbh = $dbh;
+	      $this->log(" dbh in dossier constructor is ".$dbh);
 	      $this->data = array();
        }
        
@@ -108,7 +110,7 @@ class DossierService extends OAUTHRESTService {
 	      $this->mark();
 	      $this->log('enter handle_GET');
 	      if ($this->item_id > 0 ) {
-	      $this->log('item id >0 in handle_GET');
+	      $this->log('item id >0 in handle_GcET');
 		     $this->read_item();
 	      }
 	      else if ( $this->dossier_id > 0 ) {
@@ -165,6 +167,8 @@ class DossierService extends OAUTHRESTService {
 	      // make sure that the post parameters are read
 	      $content = file_get_contents("php://input");
 	      $this->log($content);
+	      //json_decode: transforms json into a php arrray if second argument is set to true 
+	      //otherwise (if set to false) it returns an object
 	      $data = json_decode($content, true);
 	      if (!data) {
 		     parse_str($content, $_POST);
@@ -479,7 +483,7 @@ class DossierService extends OAUTHRESTService {
 							       MDB2_AUTOQUERY_DELETE,
 							       'id = ?');
 	      if (PEAR::isError($affectedRows)) {
-	           $this->log("error " . $affectedRows->getMessage());
+	           $this->log("error " .$affectedRows->getMessage());
 	           $this->bad_request();
 	      }
 	      else {
@@ -682,6 +686,8 @@ class DossierService extends OAUTHRESTService {
 	      
 	      $sth = $mdb2->prepare('SELECT * FROM dossiers WHERE id=?');
 	      $res = $sth->execute($this->dossier_id);
+	      
+	      
 	      if ($res->numRows() == 1) {
 		     // load the dossier meta data
 		     // there should be only one dossier with that id
@@ -700,8 +706,34 @@ class DossierService extends OAUTHRESTService {
 		     }
 		     
 		     $this->data["dossier_items"]=$idata;
+		 
+		     // load the users for the specific dossier
 		     
-		     $this->respond_json_data();
+	    $sth = $mdb2->prepare("SELECT u.name, du.user_type, du.user_id FROM users u, dossier_users du WHERE u.id = du.user_id AND du.dossier_id = ?");
+		$res = $sth->execute($this->dossier_id);
+		if (PEAR::isError($res)) {
+			$this->log('cannot execute the query for the users');
+			$this->log('DB Error: ' . $res->getMessage());
+			$this->bad_request();
+			return;
+		}
+		//$udata= array();
+		$retval = array();
+		if ($res->numRows() > 0) {
+		while ($row = $res->fetchRow() ){
+				$this->log('row: ' . json_encode($row));
+				array_push($retval,array(
+				'user_id'=> $row['user_id'],
+				'username'=> $row['name'],
+				'user_type'=> $row['user_type']));
+				//array_push($udata,$row);
+			}
+
+			//$this->data["user_list"] = $udata;
+			$this->data["user_list"] = $retval;
+			$this->log("User List of the ".$dossierId." dossier is " .json_encode($this->data["user_list"]));
+		}   
+	        $this->respond_json_data();
 	      }
 	      else {
 		     $this->not_found();
@@ -760,9 +792,49 @@ class DossierService extends OAUTHRESTService {
 	      $this->respond_json_data();
        }
        
+       
+
+       /**
+        * dossierIsPublic()
+        *
+        * This function is useful in order to restrict the access and management
+        * of a dossier to users that do not have the permission on it.
+        * 
+        * If a dossier is public, everyone (every type of authenticated and non-authenticated users)
+        * can see it.
+        * 
+        * Returns true if the dossier type is public and false if it is private
+        * 
+        */
+       
+       protected function dossierIsPublic($dossierId){
+       	$this->mark();
+       	// select private_flag from dossiers table
+       	$this->dbh->setFetchMode(MDB2_FETCHMODE_ASSOC);
+       	$mdb2 = $this->dbh;
+       	$sth = $mdb2->prepare('SELECT * FROM dossiers WHERE id=? AND private_flag=?');
+       	$res = $sth->execute(array($this->dossier_id, false));
+       	if ($res->numRows() == 1) {
+       		//there should be only one dossier with that id
+       		$row=$res->fetchRow();
+       		$private_flag = $row;
+       		$sth->free();
+       		$this->log("dossier is public");
+       		return true;
+       	} else {
+       		$this->log("dossier is private");
+       		return false;
+       	}  	 
+
+       }
+       
+       
+       
        protected function prepareOperation($meth) {
 	      $retval = parent::prepareOperation($meth);
 	      
+			//if any external guest user access a dossier via a shared link
+			//he should be able to 
 	      if ( !$retval && $meth == 'GET' && $this->dossier_id) {
 		     $retval = true;
 	      }
@@ -773,38 +845,63 @@ class DossierService extends OAUTHRESTService {
 		     // check if the user is allowed to perform the requested operation
 		     switch($meth) {
 		     case 'GET':
+		     	$this->log("enter GET in prepare statement in dossier.php");
 			    // only access if the dossier is public or if the user is a "user" (or editor or owner)
-			    // if (!$this->userHasAccessToDossier('user')) {
-			    //   $retval = false;
-			    // }
-			    // else if (!$this->dossierIsPublic()) {
-			    //     $retval = false;	   
-			    // }
+			   	$this->user = new UserManagement($this->dbh);
+		     	if ( $this->dossierIsPublic($this->dossier_id) || $this->user->hasUserPriviledges($this->session->getUserID(),$this->dossier_id)){
+		     	  $retval = true;
+			    }
+			    else if (!$this->dossierIsPublic($this->dossier_id)) {
+			        $retval = false;	   
+			    }
 			    break;
 		     case 'PUT':
+		     	$this->log("enter PUT in prepare statement in dossier.php");
+		     	//add new item
 			    // only access if the user is a editor (or owner)
-			    // if (!$this->userHasAccessToDossier('editor')) {
-			    //   $retval = false;
-			    // }
+			   	$this->user = new UserManagement($this->dbh);
+		     	if (!$this->user->hasEditorPriviledges($this->session->getUserID(),$this->dossier_id)){
+		     		$this->log("the user cannot add item");
+		     		$retval = false;
+		     	}
 			    break;
 		     case 'POST':
-			    if ( $this->item_id) {
-				   // only access if the user is a editor
-			    }
+		     	$this->log("enter POST in prepare statement in dossier.php");
+		     	
+		     	//or update a dossier item (its metadata like title, description, author, etc.)
+		     	if ( $this->item_id) {
+		     		// only access if the user is an editor
+			    	if (!$this->user->hasEditorPriviledges($this->session->getUserID(),$this->dossier_id)){
+			    		$retval = false;
+			    	}
+		     	}
 			    else {
-				   // only access if the user is an owner
+			    	$this->user = new UserManagement($this->dbh);
+				// only access if the user is an owner: dossierId > 0 or any other case
+			    // update a dossier (title, description, image), 
+			    	if (!$this->user->isOwner($this->session->getUserID(),$this->dossier_id)){
+			    		$retval = false;
+			    	}
 			    }
 			    break;
 		     case 'DELETE':
+		     	$this->log("enter DELETE in prepare statement in dossier.php");
 			    if ( $this->item_id) {
 				   // only access if the user is a editor
+			    	if (!$this->user->hasEditorPriviledges($this->session->getUserID(),$this->dossier_id)){
+			    		$retval = false;
+			    	}
 			    }
 			    else {
 				   // only access if the user is an owner
+			    	if (!$this->user->isOwner($this->session->getUserID(),$this->dossier_id)){
+			    		$retval = false;
+			    	}
 			    }
 			    break;
 		     default:
 			    //ignore and accept the parent's prepareOperation
+			    // parent::prepareOperation($meth);
 			    break;
 		     }
 	      }

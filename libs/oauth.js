@@ -71,16 +71,18 @@
    Another option is to call OAuth.correctTimestamp with a Unix timestamp.
  */
 
-var OAuth; if (OAuth == null) OAuth = {};
+var OAuth; if (OAuth === null) {
+	OAuth = {};
+	}
 
 OAuth.setProperties = function setProperties(into, from) {
-    if (into != null && from != null) {
+	if (into !== null && from !== null) {
         for (var key in from) {
             into[key] = from[key];
         }
     }
     return into;
-}
+};
 
 OAuth.setProperties(OAuth, // utility functions
 {
@@ -355,7 +357,7 @@ OAuth.declareClass = function declareClass(parent, name, newConstructor) {
         }
     }
     return newConstructor;
-}
+};
 
 /** An abstract algorithm for signing messages. */
 OAuth.declareClass(OAuth, "SignatureMethod", function OAuthSignatureMethod(){});

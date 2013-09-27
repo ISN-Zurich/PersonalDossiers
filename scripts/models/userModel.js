@@ -1,19 +1,35 @@
 /*jslint vars: true, sloppy: true */
 
+<<<<<<< HEAD
 function UserModel(userController) {
     console.log("runs user model");
     var self = this;
     self.controller = userController;
     self.userProfile = {};
+=======
+function UserModel(userController){
+    console.log("runs user model");
+    var self=this;
+    self.controller=userController;	
+    self.userProfile=null;
+    self.userlist=null;
+    self.index=0;
+    self.activeDossierId;
+>>>>>>> cc9a3a3a130e209fdb368d9c7f0e30b6ee8c9bed
     // self.checkActiveUser();
     self.loadData();
     $(document).bind("ActiveDossierChanged", function () {
         self.sendUserProfileToServer();
+<<<<<<< HEAD
     });
     
     // we can proceed now, but lets check if the user is really logged in
     // and forward the user to the login page if not
     self.getUserProfile();
+=======
+    });  
+      
+>>>>>>> cc9a3a3a130e209fdb368d9c7f0e30b6ee8c9bed
 }
 
 UserModel.prototype.loadData = function () {
@@ -33,8 +49,13 @@ UserModel.prototype.redirectToLogin = function() {
 
 UserModel.prototype.getActiveDossier = function () {
     console.log("enter getActiveDossierFromUserProfile");
+<<<<<<< HEAD
     var activeDossierId = undefined;
     if (this.activeDossierId) {
+=======
+    var activeDossierId= null;//not necessary to initialize to undefined
+    if ( this.activeDossierId ) {
+>>>>>>> cc9a3a3a130e209fdb368d9c7f0e30b6ee8c9bed
         return this.activeDossierId;
     }
     var profObj = localStorage.getItem("userProfile");
@@ -43,6 +64,7 @@ UserModel.prototype.getActiveDossier = function () {
         activeDossierId = profObj.activeDossierId;
         if (activeDossierId) {
             this.activeDossierId = activeDossierId;
+<<<<<<< HEAD
             $(document).trigger("ActiveDossierReady");
         }
         console.log("active dossier Id from the storage is " + activeDossierId);
@@ -56,6 +78,17 @@ UserModel.prototype.getUserId = function () {
     return this.userProfile.user_id;
 };
 
+=======
+         //   $(document).trigger("ActiveDossierReady");
+	}
+	console.log("active dossier Id from the storage is "+activeDossierId);
+	
+    } //end of if profObj
+     return activeDossierId;
+};
+
+
+>>>>>>> cc9a3a3a130e209fdb368d9c7f0e30b6ee8c9bed
 
 UserModel.prototype.getUserProfile = function () {
     var self = this;
@@ -190,6 +223,7 @@ UserModel.prototype.logout = function () {
     var self = this;
     var url = "http://yellowjacket.ethz.ch/tools/service/authentication.php/access_token";
     $.ajax({
+<<<<<<< HEAD
         url: url,
         type: 'DELETE',
         dataType: 'json',
@@ -208,6 +242,26 @@ UserModel.prototype.logout = function () {
                 }
 
                 localStorage.setItem('authentication', JSON.stringify(authentication));
+=======
+	url: url,
+	type : 'DELETE',
+	dataType : 'json',
+	success : success,
+	error : function(request) {
+	    
+	    showErrorResponses(request); 
+	    //display a message to the user that the logout was not successful
+	    if (request.status === 401){
+		console.log("success in logging out from the server");
+		var authentication={
+		    consumerSecret:"6a33d1d90067c005de32f5f6aafe082ae8375a6f",
+		    consumerKey :"ch.isn.personal-dossier",
+		    "accessToken":"",
+		    "access_secret":""
+		};
+
+		localStorage.setItem('authentication', JSON.stringify(authentication));
+>>>>>>> cc9a3a3a130e209fdb368d9c7f0e30b6ee8c9bed
                 self.controller.initOAuth();
                 self.checkActiveUser();
                 //self.setInitParameters();
@@ -229,5 +283,79 @@ UserModel.prototype.logout = function () {
         var header_request = self.controller.oauth.oauthHeader(url, "DELETE");
         xhr.setRequestHeader('Authorization', header_request);
     }
+<<<<<<< HEAD
 
+=======
+};
+
+
+//UserModel.prototype.getDossierUsers = function(){
+//		var self=this;
+//		var dossierId= self.controller.getActiveDossier();
+//	    var url= "http://yellowjacket.ethz.ch/tools/service/authentication.php/user.php/"+dossierId;
+//	    var method = "GET";
+//	    var data={};
+//	    
+//	    $.ajax({
+//	    	url:  url,
+//	    	type : method,
+//	      	dataType : 'json',
+//	    	success : success,
+//	    	error : function(request) {
+//	    	    console.log("Error while loading the list of users for a specific dossier");
+//	    	    showErrorResponses(request); 
+//	    	},
+//	    	beforeSend : setHeader
+//	        });
+//	
+//	    
+//	    function success(data){
+//	    	console.log("success in getting the user list for a specific dossier");
+//	    	var userlistObject;
+//	    	try{
+//	    		userlistObject=data;
+//	    	}catch(err) {
+//	    		userlistObject={};
+//	    	    console.log("couldnt load user list for a specific dossier from the database");
+//	    	}
+//	    	self.userlist=userlistObject;
+//	    	$(document).trigger("UserListReady");
+//	    }
+//	    
+//	    function setHeader(xhr){    
+//	    	if (self.controller.oauth) {
+//	    		var header_request=self.controller.oauth.oauthHeader(method, url, data);
+//	    		xhr.setRequestHeader('Authorization', header_request);
+//	    	}
+//	    }
+//};
+
+
+//GETTERS
+
+/**
+ * Get the id of the authenticated user
+ */
+UserModel.prototype.getUserId = function(){
+    return this.userProfile.user_id;
+};
+
+
+//UserModel.prototype.getUsername = function(){
+//	return this.userlist[this.index].username;
+//};
+//
+//UserModel.prototype.getUserrole = function(){
+//	return this.userlist[this.index].user_type;
+//};
+//
+//UserModel.prototype.getUserMemberId = function(){
+//    return this.userlist[this.index].user_id;
+//};
+
+
+UserModel.prototype.nextUser = function(){
+	this.index++;
+	return this.index < this.userlist.length;
+>>>>>>> cc9a3a3a130e209fdb368d9c7f0e30b6ee8c9bed
 };

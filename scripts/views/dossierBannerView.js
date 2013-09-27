@@ -1,9 +1,13 @@
 /**
  * This views refers to the banner  
+
  * 
  * 
  * 
  **/
+
+/*jslint vars: true, sloppy: true */
+
 function DossierBannerView(myController){
     var self = this;
     
@@ -94,32 +98,32 @@ DossierBannerView.prototype.transitionToGallery = function() {
         console.log('upload done');
 	window.location.href = "gallery.php";
     }
-}
+};
 
 DossierBannerView.prototype.checkTitleEdit = function() {
     var value = $("#headerTitle").text();
-    var oldVal= self.controller.models['bookmark'].getDossierTitle();
+    var oldVal= self.controller.models.bookmark.getDossierTitle();
     
     if ( value !== oldVal) {
 	console.log('Change the title content! and make it: '+value);
-	this.controller.models['bookmark'].setDossierTitle(value);
+	this.controller.models.bookmark.setDossierTitle(value);
 
 	this.waitForUpload++;
-	this.controller.models['bookmark'].sendDataToServer();
+	this.controller.models.bookmark.sendDataToServer();
     }
 }; 
 
 DossierBannerView.prototype.checkDescriptionEdit = function() {
     var value = $("#headerDescription").text();
-    var oldVal= self.controller.models['bookmark'].getDossierDescription();
+    var oldVal= self.controller.models.bookmark.getDossierDescription();
     
     if ( value !== oldVal) {
 	console.log('Change the description content! ' + value);
-	this.controller.models['bookmark'].setDossierDescription(value);
+	this.controller.models.bookmark.setDossierDescription(value);
 	// safe the edit in the backend
 
-        this.waitForUpload++;
-	this.controller.models['bookmark'].sendDataToServer();
+    this.waitForUpload++;
+	this.controller.models.bookmark.sendDataToServer();
     }
 }; 
 
@@ -131,10 +135,10 @@ DossierBannerView.prototype.open=function(){
 };
 
 DossierBannerView.prototype.renderBanner= function(){
-    var self=this
+    var self=this;
     //Design the Banner area 
     $("#header_image").empty();
-    var bookmarkModel = self.controller.models['bookmark'];
+    var bookmarkModel = self.controller.models.bookmark;
     //var dossierId= bookmarkModel.getDossierID();
     var dossierId=bookmarkModel.dossierId;
     
@@ -144,7 +148,7 @@ DossierBannerView.prototype.renderBanner= function(){
     //	var div=$("<div/>", {
     //	}).appendTo("#header_image");
     
-    var img=$("<img/>", {
+    img=$("<img/>", {
 	"id":"bannerImage",//we need to provide the dossierId dynamically
 	"class" : "big_img",
 	//"src": "sample_index_files/default3.jpg"//to get it dynamically
@@ -159,10 +163,10 @@ DossierBannerView.prototype.renderBanner= function(){
     
     
     var p1=$("<p/>", {
-	"id":"titleContainer",
+	"id":"titleContainer"
     }).appendTo(div1);
     
-    var span=$("<span/>", {
+    span=$("<span/>", {
 	"id":"headerTitle",//we need to provide the dossierId dynamically
 	"class":"headerTitle", 
 	//text:"My personal dossier" //to get it dynamically
@@ -175,7 +179,7 @@ DossierBannerView.prototype.renderBanner= function(){
 	"class": "margingForEdit"
     }).appendTo(div1);
     
-    var span2=$("<span/>", {
+    span2=$("<span/>", {
 	"id":"headerDescription", //we need to provide the dossierId dynamically
 	"class":"subject",
 	//text:"Short description about what pseronal dossiers are dossiers are Short description about what personal dossiers are"//to get it dynamically
@@ -183,13 +187,13 @@ DossierBannerView.prototype.renderBanner= function(){
     }).appendTo(p2);
     
     if (self.controller.oauth){
-    var divEdit=$("<span/>", {
+    divEdit=$("<span/>", {
 	"id":"editDossier",//we need to provide the dossierId dynamically
 	"class":"titleEdit",
 	text:"edit"
     }).appendTo(div1);
     
-    var divLockEdit=$("<span/>", {
+    divLockEdit=$("<span/>", {
 	"id":"lock-editDossier", //we need to provide the dossierId dynamically
 	"class":"hidden",
 	text:"lock edit"

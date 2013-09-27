@@ -1,5 +1,6 @@
 /**
  * This controller is responsible for the indx.html
+
  * (dossier banner view and dossier content view)
  * 
  * @returns
@@ -11,8 +12,12 @@ function dossierController() {
     var self = this;
 
     document.domain = 'ethz.ch';
+<<<<<<< HEAD
     self.hashed = false;
 
+=======
+    self.hashed=false;
+>>>>>>> cc9a3a3a130e209fdb368d9c7f0e30b6ee8c9bed
     self.hashedUrl();
     self.initOAuth();
 
@@ -42,6 +47,7 @@ function dossierController() {
 
         //initialization of views 
         self.views.dossierBanner = new DossierBannerView(self);
+<<<<<<< HEAD
         self.views.dossierContent = new DossierContentView(self);
 
         //the following views run only when we are authenticated
@@ -68,6 +74,40 @@ function dossierController() {
         //console.log("dossiersController is initialized"+this.models.bookmark.loaded);
     } else {
         console.log("the user is not loggedIn and there is no hash on the url");
+=======
+	    self.views.dossierContent= new DossierContentView(self);
+	    self.views.userlist = new DossierUsersView(self);
+
+       //the following views run only when we are authenticated
+       if (self.oauth){
+       self.views.dossierList = new DossiersButtonView(self);
+       self.views.logout      = new LogoutView(self);
+       self.views.share      = new ShareButtonView(self);
+       }
+
+       if (self.hashed){
+           console.log("design hash-specific views");
+           $('#loginButton').removeClass("hidden");
+           self.views.loginButton = new LoginButtonView(self);
+        }
+
+       $(document).bind("BookmarkModelLoaded", function() {
+    	   console.log("initialize views in controller");
+    	   self.views.dossierBanner.open();
+    	   self.views.dossierContent.open();
+    	   self.views.userlist.open();
+       });
+       
+       $(document).bind("BookmarkModelNotLoaded", function() {
+    	   self.views.dossierContent.open(); 
+       });
+	
+	
+	//console.log("dossiersController is initialized"+this.models.bookmark.loaded);
+    }
+    else if (!self.oauth && !self.hashed) {
+       console.log("the user is not loggedIn and there is no hash on the url");
+>>>>>>> cc9a3a3a130e209fdb368d9c7f0e30b6ee8c9bed
         // user is not logged in go to user.html
         self.redirectToLogin();
     }
@@ -126,6 +166,7 @@ dossierController.prototype.test = function () {
     console.log("after initializing image gallery");
 };
 
+<<<<<<< HEAD
 // ************************* Old function ********************
 //dossierController.prototype.getActiveDossier = function() {
 //	//return 1;
@@ -134,9 +175,13 @@ dossierController.prototype.test = function () {
 
 
 dossierController.prototype.getActiveDossier = function () {
+=======
+      dossierController.prototype.getActiveDossier = function(){
+>>>>>>> cc9a3a3a130e209fdb368d9c7f0e30b6ee8c9bed
 
     if (this.hashed) {
         var activedosId = this.getHashedURLId();
+<<<<<<< HEAD
         return activedosId;
     } else { //if there is no hash at the url
         var activedossierId = this.models.user.getActiveDossier();
@@ -149,15 +194,39 @@ dossierController.prototype.getActiveDossier = function () {
     }
     return undefined; //if something goes wrong for any reason
 };
+=======
+            return activedosId;
+        }
+        if (!this.hashed){   //if there is no hash at the url
+        var activedossierId =  this.models.user.getActiveDossier();
+        if (activedossierId){
+        return activedossierId;
+        }
+        if(!this.activedossierId){
+        var dossierId = this.models.dossierList.getDefaultDossierId();
+        return dossierId;
+        } 
+        }//is not hashed
+        return undefined;    //if something goes wrong for any reason
+    };
+>>>>>>> cc9a3a3a130e209fdb368d9c7f0e30b6ee8c9bed
 
 
 dossierController.prototype.transition = function () {
 
+<<<<<<< HEAD
 }
 
 dossierController.prototype.logout = function () {
     this.models.user.logout();
 }
+=======
+    };
+
+    dossierController.prototype.logout = function() {
+        this.models.user.logout();
+    };
+>>>>>>> cc9a3a3a130e209fdb368d9c7f0e30b6ee8c9bed
 
 var controller;
 console.log("enter main js");

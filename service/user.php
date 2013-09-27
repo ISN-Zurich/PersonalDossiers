@@ -5,8 +5,6 @@ require_once 'HTTP/Request.php';
 include 'dbConnect.php';
 include_once 'commonService.php';
 
-include 'session.php';
-
 /**
 * UserService Interface Class
 *
@@ -14,70 +12,84 @@ include 'session.php';
 *
 * The service expects calls of the following style:
 * BASE_URI [+ "/" + Dossier_ID]
-*
-*
-*
+* 
+* It is not a service, its a data management class similar with Session Management.
 *
 */
 
-class User extends PDCommonClass {
+class UserManagement extends PDCommonClass {
    protected $uri = "/tools/service/user.php";
 
    protected $dbh;
    protected $user_role;
    protected $dossier_type;
-   protected $dossier;
+   protected $dossierId;
+   protected $item_id;
 
    public function __construct($dbh) {
-   parent::__construct($dbh);
-
+  // parent::__construct($dbh);
+   $this->setDebugMode(true);
    $this->mark();
-
-   // The following code is used in the constructor of authentication service
-   //$this->mode = $this->path_info;
-   //$this->log("mode: " . $this->mode);
-
-    if ( !empty($this->path_info) ) {
-   		     $parts = explode('/', $this->path_info);
-   	      } else {
-   		     $parts = array();
-   	      }
-   	      if ( count($parts)>1) {
-   		     $this->item_id = $parts[1];
-   	      }
-   	      if ( count($parts) > 0) {
-   		     $this->dossier_id = $parts[0];
-   	      }
-   	      // init the database connection
-   	      $this->dbh = $dbh;
-   	      $this->data = array();
-}
+   $this->dbh = $dbh;
+   $this->log(" dbh in user constructor is ".$dbh);
+	}//end of constructor
 
 
+	public function handle_GET() {
+		$this->mark();
+		$this->log('enter handle_GET');
+		if ( $this->dossier_id > 0 ) {
+			$this->log('dossier id >0 in handle_GET');
+			$this->getDossierUsers();
+		}
+	}
 
-// DEFINE  FUNCTIONS
+/**
+ * 
+  * getDossierUsers()
+  * 
+  * gets the list of users of a specific dossier
+  * 
+ */
 
-public function getDossierUsers() {
+	public function getDossierUsers() {
 
-   $this->mark();
-   $dbh = $this->dbh;
-   $dbh->setFetchMode(MDB2_FETCHMODE_ASSOC);
-   $dossierId = $this->session->getUserID();
+		$this->mark();
+		$dbh = $this->dbh;
+		$dbh->setFetchMode(MDB2_FETCHMODE_ASSOC);
+		$dossierId = $this->dossier_id;
 
-   $sth = $dbh->prepare("SELECT u.name, du.user_type FROM users u, dossier_users du WHERE u.user_id = du.user_id AND du.dossier_id = ?");
-   $res = $sth->execute($dossierId);
+		$sth = $dbh->prepare("SELECT u.name, du.user_type, du.user_id FROM users u, dossier_users du WHERE u.user_id = du.user_id AND du.dossier_id = ?");
+		$res = $sth->execute($dossierId);
+		if ($res->numRows() === 0) {
+			if (PEAR::isError($res)) {
+				$this->log("pear error " . $res->getMessage());
+				$this->bad_request();
+				$sth->free();
+				return;
+			}
+		} else { //if the query retrieves back results
 
-}
+			while ($row = $res->fetchRow() ){
+				$this->log('row: ' . json_encode($row));
+				array_push($retval,array(
+				'user_id'=> $row['user_id'],
+				'username'=> $row['name'],
+				'user_type'=> $row['user_type']));
+			}
+
+			$this->data = $retval;
+			$this->log("User List of the ".$dossierId." dossier is " .json_encode($this->data));
+			$this->respond_json_data();
+
+		} //end of else
+	}
 
 
-public function getUserRole() {
-
-// owner, editor, user
-
-}
 
 
-public function getDossierType(userId) {
+
+public function getDossierType($userId) {
 // a dossier can be private or public
 
 }
@@ -91,42 +103,80 @@ public function getUsername(){
 }
 
 
-public function dossierIsPublic(){
 
-// getDossierType;
-// if dossierType == public
-//return true
-//otherwise return false
 
+public function getUserRole($userId, $dossierId) {
+	
+	$this->log("enter hasViewing Priviledges");
+	$this->mark();
+	if (!isset($this->dbh)){
+		$this->log("dbh has not been set");
+	}
+	// select private_flag from dossiers table
+	$this->dbh->setFetchMode(MDB2_FETCHMODE_ASSOC);
+	$mdb2 = $this->dbh;
+	$sth = $mdb2->prepare('SELECT user_type FROM dossier_users WHERE user_id=? AND dossier_id=?');
+	$res = $sth->execute(array($userId,$dossierId));
+	
+	if (PEAR::isError($res)) {
+		$this->log("pear error " . $res->getMessage());
+		$this->bad_request();
+		$sth->free();
+		return;
+	}
+	
+	if ($res->numRows() == 1) {
+		$row=$res->fetchRow();
+		$user_role = $row['user_type'];
+		$this->log("user role is ".$user_role);
+		$sth->free();
+	}
+
+	return $user_role;
 }
 
-public function isUser(userId){
+public function hasUserPriviledges($userId, $dossierId){
+	$user_role=$this->getUserRole($userId, $dossierId);
 
-// getUserRole
-// if  user_type =="user", return true otherwise false
-
+	if ($user_role == "owner" || $user_role == "editor" || $user_role == "user"){
+		$this->log("the user has user priviledges");
+		return true;
+	}else {
+		$this->log("the user has not user priviledges");
+		return false;
+	}
 }
 
 
-public function isEditor(userId){
+public function hasEditorPriviledges($userId, $dossierId){
+	$user_role=$this->getUserRole($userId, $dossierId);
 
-//  getUserRole
-//  if user_type == "editor" return true, otherwise false
-
+	if ($user_role == "owner" || $user_role == "editor"){
+		$this->log("the user has editor priviledges");
+		return true;
+	}else {
+		$this->log("the user has not editor priviledges");
+		return false;
+	}
 }
 
-public function isOwner(userId){
 
-//  getUserRole
-//  if user_type == "owner" return true, otherwise false
 
+public function isOwner($userId, $dossierId){
+
+	$user_role=$this->getUserRole($userId, $dossierId);
+
+	if ($user_role == "owner"){
+		$this->log("the user has owner priviledges");
+		return true;
+	}else {
+		$this->log("the user has not owner priviledges");
+		return false;
+	}
 }
 
-$service = new UserService($mdb2);
-// check if the active user is allowed to run the service with the given parameter
 
-// if everything is OK run the actual service
-$service->run();
-$mdb2->disconnect();
+}//end of class
+
 
 ?>

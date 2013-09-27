@@ -1,5 +1,6 @@
 /**
  * This controller is responsible for the indx.html
+
  * (dossier banner view and dossier content view)
  * 
  * @returns
@@ -8,8 +9,10 @@
 /*jslint vars: true, sloppy: true */
 
 function AuthorizationController() {
-    var bookmarks, dossierId, self=this;
-    var mUser, mDossiers;
+   
+    var self=this;
+    var bookmarks=null;
+    var  mUser=null, mDossiers=0;
     document.domain = 'ethz.ch';
 
     try {
@@ -57,7 +60,7 @@ function AuthorizationController() {
             // use only for our digital library
             console.log( 'item id? ' + data.itemID);
             if ( data.itemID ) {
-                console.log('operation is ' + data.operation)
+                console.log('operation is ' + data.operation);
                 switch (data.operation) {
                 case 'store':
                     console.log('add the bookmark');

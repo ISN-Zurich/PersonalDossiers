@@ -1,5 +1,6 @@
 
 //it is like a model for the selection of images
+/*jslint vars: true, sloppy: true */
 function ImageHandler(controller){
 
     console.log("runs in image handler constructor");
@@ -21,9 +22,9 @@ function ImageHandler(controller){
 	var imgString= $("#imgx"+myID).attr("src");
 	console.log("string of image is "+imgString);
 	//update the model with the new image, in order it to be sent in the next step to the server
-	self.controller.models['bookmark'].setDossierImageURL(imgString);
+	self.controller.models.bookmark.setDossierImageURL(imgString);
 	//send to the server the new image url and update the database
-	self.controller.models['bookmark'].sendDataToServer();
+	self.controller.models.bookmark.sendDataToServer();
 
         console.log("clicked on image");
     }
