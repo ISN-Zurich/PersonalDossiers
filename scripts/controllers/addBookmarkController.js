@@ -1,7 +1,7 @@
 /*jslint vars: true, sloppy: true */
 
 function addBookmarkController() {
-    var self=this;
+    var self = this;
 
     document.domain = 'ethz.ch';
     self.login = false;
@@ -12,7 +12,7 @@ function addBookmarkController() {
 
     var params = search.split("&");
     var i;
-    for ( i = 0; i < params.length; i++) {
+    for (i = 0; i < params.length; i++) {
         var tmp = params[i].split('=');
         if ( tmp[0] === "id" || tmp[0] === "?id" ) {
             this.itemId = tmp[1];
