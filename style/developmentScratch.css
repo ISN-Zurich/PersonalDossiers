@@ -1,0 +1,45 @@
+.grey_bar {
+
+display: inline-block;
+width: 212px;
+height: 28px;
+padding: 0px 0px 0px 18px;
+margin: 0;
+margin-bottom: 1px;
+vertical-align: middle;
+line-height: 28px;
+background: #ebedee !important;
+color: #4C5160 !important;
+}
+
+.grey_bar.st a, .grey_bar.in a, .grey_bar.st b, .grey_bar.in b {
+float: right;
+}
+
+.grey_bar_btn.bi img, .grey_bar_btn.as img, .sb_icon, #sidebar_right>ul>li>a.rss>img.grey_bar_btn_rss_image {
+display: inline-block !important;
+width: 28px;
+height: 28px;
+background-color: #4C5160 !important;
+background-position: -1px -1px;
+background-repeat: no-repeat;
+background-attachment: scroll;
+border-left: solid 1px white;
+}
+
+
+#st_googleplus {
+background-image: url(../images/icons/search_banner/googleplus.png);
+}
+
+#st_reddit {
+background-image: url(../images/icons/search_banner/reddit.png);
+}
+
+#st_twitter {
+background-image: url(../images/icons/search_banner/twitter.png);
+}
+
+#st_facebook {
+background-image: url(../images/icons/search_banner/facebook.png);
+}
