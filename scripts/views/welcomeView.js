@@ -20,8 +20,8 @@ WelcomeView.prototype.openDiv=openView;
 WelcomeView.prototype.open = function(){
 	$('#delete').show();
 	$('#findinformation').show();
-	$('#addDossier').show();
 	$('#socials').show();
+	$('#addDossier').show();
 	console.log("called open of the WelcomeView");
 	this.update();
 	$('#'+this.tagID).removeClass("hidden");
@@ -53,6 +53,13 @@ WelcomeView.prototype.update = function(){
 		} while (self.controller.models.dossierList.nextDossier());
 	}
 	
+	
+	p1=$("<p/>",{
+		"class": "deleteButton",
+		"id":"addDossierBtn",
+		"text": "add a new Dossier"
+	}).appendTo("#dossiersUl");
+	
 	$("#dossiersUl").bind("click", function(e){
 		console.log("clicked the dossier category");
 		var targetE = e.target;
@@ -66,6 +73,10 @@ WelcomeView.prototype.update = function(){
 		e.stopPropagation();
 	});
 	
+	$("#addDossierBtn").bind("click", function(e){
+		console.log("clicked the add Dossier button");
+		self.controller.models.dossierList.addDossier();
+	});
 };
 
 WelcomeView.prototype.close=function(){

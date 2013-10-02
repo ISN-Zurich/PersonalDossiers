@@ -6,6 +6,7 @@
     <meta http-equiv="cache-control" content="no-cache"/>
     <link type="text/css" href="css/screen.css" rel="stylesheet">
     <link type="text/css" href="style/personaldossier.css" rel="stylesheet">
+	<link type="text/css" href="style/developmentScratch.css" rel="stylesheet">
 
     <!-- Inclusion of dossiers-project javascript files -->
     <script type="text/javascript" src="libs/jquery.js"></script>
@@ -21,7 +22,6 @@
 
     <script type="text/javascript" src="scripts/views/loginView.js"></script>
     <script type="text/javascript" src="scripts/views/dossiersListButton.js"></script>
-     <script type="text/javascript" src="scripts/views/addDossierView.js"></script>
     <script type="text/javascript" src="scripts/views/logoutView.js"></script>
     <script type="text/javascript" src="scripts/views/welcomeView.js"></script>
 
@@ -113,18 +113,26 @@
 
 <div class="column span-6 last" id="sidebar_right">
     
+<div class="grey_bar st">Interact 
+<a href="#comments" class="sb_icon disabled" id="in_comment" title="Comments [disabled]"><span class=""></span>L</a>
+<a href="/layout/set/print/content/view/full/2" class="sb_icon" id="in_print" title="Print"><span class="">D</span></a>
+<a href="http://pdfcreate.ethz.ch" class="sb_icon" id="in_pdf" title="PDF"><span class="">P</span></a>
+<a href="/content/tipafriend/2" class="sb_icon" id="in_mail" title="Mail"><span class="">N</span></a></div>
+    </div>
+
+
 <div class="column span-6 last hidden" id="findinformation">
     <!-- <p class=" bold"><a href="index.html" class="active"> My personal dossier</a></p>-->
     <!-- TO DESIGN IT DYNAMICALLY IN THE DOSSIER LIST VIEW -->
    <!-- <p class="bold "><a href="user.html">User profile</a></p> --> 
 </div>
 
+
 <div class="column span-6 last hidden" id="delete">
       <!--<p class="bold active"> Logout</p> -->
 </div> 
 
-<div class="column span-6 last hidden" id="addDossier">
-</div>   
+
        
 <div id="socials" style="text-align:left;border-top:solid 1px #ccc;padding-top:1em;" class="hidden"><a class="social " title="Facebook" href="http://www.facebook.com/pages/International-Relations-and-Security-Network-ISN/141505796320">
 <img border="0"  src="images/facebook.png" alt="ISN on Facebook"></a>

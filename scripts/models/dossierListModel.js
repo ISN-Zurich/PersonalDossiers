@@ -13,6 +13,12 @@ function DossierListModel(controller){
 	//self.loadData();
     
     self.getUserDossiers();
+    
+   //when we add a new dossier, to update the list of dossiers 
+    $(document).bind('DossierAdded', function(){
+    	console.log("binded dossierAdded");
+    	self.getUserDossiers();
+    });
 
 	console.log("initialized dossier list model");
 }
@@ -174,6 +180,7 @@ DossierListModel.prototype.addDossier=function(){
 	function success(){
 	// great! well done!
 	console.log("great the insertion of the dossier was succesfull");
+	$(document).trigger('DossierAdded'); 
     }
     
     function error(request) {

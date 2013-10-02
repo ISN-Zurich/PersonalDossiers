@@ -32,6 +32,7 @@ AddDossierView.prototype.update= function(){
 		"id":"addDossierBtn",
 		"text": "add a new Dossier"
 	}).appendTo("#addDossier");
+	console.log("designed the add dossier button");
 };
 
 AddDossierView.prototype.closeDiv=closeView;

@@ -50,6 +50,8 @@ function BookmarkModel(dController){
     	self.loadDossierList();
     	}
     }
+    
+  
  }
 
 
