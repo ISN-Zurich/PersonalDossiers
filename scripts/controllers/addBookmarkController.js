@@ -1,7 +1,7 @@
 /*jslint vars: true, sloppy: true */
 
 function addBookmarkController() {
-    var self=this;
+    var self = this;
 
     document.domain = 'ethz.ch';
     self.login = false;
@@ -12,7 +12,7 @@ function addBookmarkController() {
 
     var params = search.split("&");
     var i;
-    for ( i = 0; i < params.length; i++) {
+    for (i = 0; i < params.length; i++) {
         var tmp = params[i].split('=');
         if ( tmp[0] === "id" || tmp[0] === "?id" ) {
             this.itemId = tmp[1];
@@ -35,10 +35,10 @@ function addBookmarkController() {
             // store the data into the local storage. 
             if ( data.userok ) {
                 self.login = true;
-	        self.views ={};
-	        self.views.addBookmark = new DesignBookmarkView(self);
-	        
-	        console.log("add bookmark controller is initialized");
+            self.views ={};
+            self.views.addBookmark = new DesignBookmarkView(self);
+            
+            console.log("add bookmark controller is initialized");
             }
             if ( data.bookmarkok ) {
                 console.log('item is already bookmarked' ); 
@@ -93,7 +93,7 @@ addBookmarkController.prototype.isLoggedin = function() {
 var controller;
 console.log("enter addBookmark main js");
 $(document).ready(function(){
-	console.log("document ready");
-	controller = new addBookmarkController();
+    console.log("document ready");
+    controller = new addBookmarkController();
 });
 

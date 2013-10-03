@@ -3,3 +3,16 @@
 *~
 *#*
 gallery/*
+.project
+
+.settings/.jsdtscope
+
+.idea/workspace.xml
+
+*.prefs
+
+*.container
+
+.settings/org.eclipse.wst.jsdt.ui.superType.name
+
+scripts/.DS_Store

@@ -9,7 +9,7 @@
 /*jslint vars: true, sloppy: true */
 
 function GalleryController() {
-    var self=this;
+    var self = this;
 
     console.log('Gallery Controller starts');
     document.domain = 'ethz.ch';
@@ -17,19 +17,19 @@ function GalleryController() {
     self.initOAuth();
 
     if (self.oauth) {
-	//initialization of models 
-	self.models = {};
-	
-	//self.models.authentication = new AuthenticationModel(this);
-	self.models.user = new UserModel(self);
-	
-	self.models.dossierList = new DossierListModel(self);
-	self.models.bookmark = new BookmarkModel(self);
+    //initialization of models 
+    self.models = {};
+    
+    //self.models.authentication = new AuthenticationModel(this);
+    self.models.user = new UserModel(self);
+    
+    self.models.dossierList = new DossierListModel(self);
+    self.models.bookmark = new BookmarkModel(self);
 
-	console.log("model is initialized");
-	
-	console.log("loaded from model is "+self.models.bookmark.loaded);
-	self.views = {};
+    console.log("model is initialized");
+    
+    console.log("loaded from model is "+self.models.bookmark.loaded);
+    self.views = {};
 
         self.initImageHandler();
     }
@@ -57,29 +57,30 @@ GalleryController.prototype.updateUserData = function() {
 
 
 GalleryController.prototype.initImageHandler=function(){
-	var self=this;
-	console.log("runs in controller image handler");
-	self.imageHandler= new ImageHandler(this);
-	
+    var self=this;
+    console.log("runs in controller image handler");
+    self.imageHandler= new ImageHandler(this);
+    
 };
 
 
 GalleryController.prototype.getActiveDossier = function(){
     var activedossierId =  this.models.user.getActiveDossier();
     if (activedossierId){
-	return activedossierId;
-    }
-    if(!activedossierId){
-	var dossierId = this.models.dossierList.getDefaultDossierId();
-	return dossierId;
+    return activedossierId;
+    }else{
+    var dossierId = this.models.dossierList.getDefaultDossierId();
+    return dossierId;
     }
     return undefined;
 };
 
 
 GalleryController.prototype.transition = function(){
+
 		
 };
+
 
 GalleryController.prototype.logout = function() {
     this.models.user.logout();
@@ -88,6 +89,6 @@ GalleryController.prototype.logout = function() {
 var controller;
 console.log("enter main js");
 $(document).ready(function(){
-	console.log("document ready");
-	controller = new GalleryController();
+    console.log("document ready");
+    controller = new GalleryController();
 });
