@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="jasmine.css">
+    <script src="../cornp.js" type="text/javascript"></script>
+
+    <script src="jasmine-full.js" type="text/javascript"></script>
+    <script src="cornp-spec.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        
+        document.addEventListener('DOMContentLoaded', function() {
+          var el = document.getElementById('responder');
+
+           el.addEventListener('load', function() {
+              initTests();
+        //var jasmineEnv = jasmine.getEnv();
+        //jasmineEnv.updateInterval = 1000;
+        
+        //var htmlReporter = new jasmine.HtmlReporter();
+        
+        //jasmineEnv.addReporter(htmlReporter);
+
+        //jasmineEnv.specFilter = function(spec) {
+        //   return htmlReporter.specFilter(spec);
+        //};
+        
+        //      jasmineEnv.execute();
+           }, false); 
+        });
+    </script>
+  </head>
+  <body>
+    <iframe id="responder" src="responder.html"></iframe>
+  </body>
+</html>

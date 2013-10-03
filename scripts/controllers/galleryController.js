@@ -1,6 +1,5 @@
 /**
  * This controller is responsible for the indx.html
-
  * (dossier banner view and dossier content view)
  * 
  * @returns
@@ -64,6 +63,13 @@ GalleryController.prototype.initImageHandler=function(){
 };
 
 
+// ************************* Old function ********************
+//GalleryController.prototype.getActiveDossier = function() {
+//	//return 1;
+//	return this.models.dossierList.getActiveDossier();
+//};
+
+
 GalleryController.prototype.getActiveDossier = function(){
     var activedossierId =  this.models.user.getActiveDossier();
     if (activedossierId){
@@ -77,14 +83,12 @@ GalleryController.prototype.getActiveDossier = function(){
 
 
 GalleryController.prototype.transition = function(){
-
-		
-};
-
+        
+}
 
 GalleryController.prototype.logout = function() {
     this.models.user.logout();
-};
+}
 
 var controller;
 console.log("enter main js");

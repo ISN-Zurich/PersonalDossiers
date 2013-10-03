@@ -1,5 +1,3 @@
-/*jslint vars: true, sloppy: true */
-
 function OAuthHelper(realm) {
     var data;
     var tmp = localStorage.getItem("authentication");    

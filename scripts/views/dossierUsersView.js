@@ -29,7 +29,24 @@ DossierUsersView.prototype.update = function(){
 				"text": self.controller.models.bookmark.getUsername()
 			}).appendTo("#dossierUsers");
 		} while (self.controller.models.bookmark.nextUser());	
-
+//		
+//		while (bookmarkModel.nextUser()){
+//			p1=$("<p/>",{
+//				"class": "bold clickable",
+//				"id":"user"+self.controller.models.bookmark.getUserid(), //might need user id 
+//				"text": self.controller.models.bookmark.getUsername()
+//			}).appendTo("#dossierUsers");
+//		} //end of while
+//		
+//		for (i=0; i< bookmarkModel.userlist.length;i++){
+//			p1=$("<p/>",{
+//				"class": "bold clickable",
+//				"id":"user"+self.controller.models.bookmark.getUserid(), //might need user id 
+//				"text": self.controller.models.bookmark.getUsername()
+//			}).appendTo("#dossierUsers");
+//			
+//		}
+//		
 	} //end of external if
 };
 	

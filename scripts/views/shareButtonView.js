@@ -1,4 +1,4 @@
-/*jslint vars: true, sloppy: true */
+
 
 
 function ShareButtonView(controller){
@@ -7,8 +7,15 @@ function ShareButtonView(controller){
     self.controller=controller;
     self.tagID="#shareButton";
     this.open();
-  
-   $(document).bind("click", function(e) { //add id dynamically
+    //$("#shareButton").bind("click", function(){
+    //console.log("clicked the share button");
+    //create the public link and display it
+    //self.createShareLink();
+  //  });
+
+
+
+    $(document).bind("click", function(e) { //add id dynamically
         console.log("click share button before the if");
         console.log("target id is "+ e.target.id);
         if ( e.target.id === "shareBtn" ) {
@@ -29,21 +36,57 @@ ShareButtonView.prototype.open = function(){
 
 ShareButtonView.prototype.update = function(){
 
-     var self=this;
+   /* var self=this;
     $('#shareButton').empty();
     console.log("design dynamically share button");
-    p = $("<p/>", {
+
+    var p = $("<p/>", {
         "id":"shareBtn",
         "class": "bold active clickable",
         "text": "Share"
     }).appendTo("#shareButton");
 
-    divContainer =  $("<div/>", {
+    var divContainer =  $("<div/>", {
+        "id":"divContainer",
+        "class":"hidden"
+    }).appendTo("#shareButton");
+
+    var input = $("<input/>", {
+        "id":"shareArea",
+        "name":"shareArea",
+        "width":"150px",
+        "value": self.getPublicLink()
+    }).appendTo("#divContainer");
+    var emptyP = $("<div/>", {
+        "class":"divWidth"
+
+    }).appendTo("#divContainer");
+
+    var div1= $("<button/>", {
+        "id":"d_clip_button",
+        "data-clipboard-target":"shareArea",
+        "data-clipboard-text":self.getPublicLink(),
+        "title": "Copy" ,
+        "text": "copy"
+    }).appendTo("#divContainer");
+
+    console.log("designed share view");*/
+
+     var self=this;
+    $('#shareButton').empty();
+    console.log("design dynamically share button");
+    var p = $("<p/>", {
+        "id":"shareBtn",
+        "class": "bold active clickable",
+        "text": "Share"
+    }).appendTo("#shareButton");
+
+    var divContainer =  $("<div/>", {
          "id":"divContainer",
         "class":"hidden"
     }).appendTo("#shareButton");
 
-    input = $("<input/>", {
+    var input = $("<input/>", {
         "id":"shareArea",
         "name":"shareArea",
         "width":"150px",
@@ -51,7 +94,16 @@ ShareButtonView.prototype.update = function(){
         "value": self.getPublicLink()
     }).appendTo("#divContainer");
 
-   div=  $("<span/>", {
+
+
+
+    /* var div=  $("<span/>", {
+          "id": "copyLink",
+          "text": "Copy Link"
+      }).appendTo("#divContainer");
+      */
+
+      var div=  $("<span/>", {
      "id": "closeUrl",
      "text": "remove"
      }).appendTo("#divContainer");
@@ -94,10 +146,10 @@ ShareButtonView.prototype.getPublicLink=function(){
     var self=this;
     var url= window.location.href;
     if (self.controller.hashed){
-        hashedUrl= url;
+        var hashedUrl= url;
     }
     else{
-        hashedUrl= url + "#" + this.controller.getActiveDossier();
+        var hashedUrl= url + "#" + this.controller.getActiveDossier();
         console.log("hashedUrl so far is "+hashedUrl);
     }
   return hashedUrl;

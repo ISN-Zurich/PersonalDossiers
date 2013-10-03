@@ -110,7 +110,7 @@ class DossierService extends OAUTHRESTService {
 	      $this->mark();
 	      $this->log('enter handle_GET');
 	      if ($this->item_id > 0 ) {
-	      $this->log('item id >0 in handle_GcET');
+	      $this->log('item id >0 in handle_GET');
 		     $this->read_item();
 	      }
 	      else if ( $this->dossier_id > 0 ) {
@@ -167,8 +167,6 @@ class DossierService extends OAUTHRESTService {
 	      // make sure that the post parameters are read
 	      $content = file_get_contents("php://input");
 	      $this->log($content);
-	      //json_decode: transforms json into a php arrray if second argument is set to true 
-	      //otherwise (if set to false) it returns an object
 	      $data = json_decode($content, true);
 	      if (!data) {
 		     parse_str($content, $_POST);
@@ -888,15 +886,9 @@ class DossierService extends OAUTHRESTService {
 		     	$this->log("enter DELETE in prepare statement in dossier.php");
 			    if ( $this->item_id) {
 				   // only access if the user is a editor
-			    	if (!$this->user->hasEditorPriviledges($this->session->getUserID(),$this->dossier_id)){
-			    		$retval = false;
-			    	}
 			    }
 			    else {
 				   // only access if the user is an owner
-			    	if (!$this->user->isOwner($this->session->getUserID(),$this->dossier_id)){
-			    		$retval = false;
-			    	}
 			    }
 			    break;
 		     default:

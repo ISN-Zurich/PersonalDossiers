@@ -11,7 +11,7 @@ function AuthorizationController() {
     var self = this;
     var bookmarks = null;
     var  mUser = null, mDossiers = 0;
-    document.domain = 'ethz.ch';
+    // document.domain = 'ethz.ch';
     
     var targetHost = 'http://www.isn.ethz.ch';
     var allowedHosts = ['http://www.isn.ethz.ch', 'http://isn.ethz.ch', 'http://www.isn.ch', 'http://isn.ch'];

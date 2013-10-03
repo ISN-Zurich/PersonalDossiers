@@ -1,6 +1,4 @@
 
-/*jslint vars: true, sloppy: true */
-
 function LoginButtonView(controller){
     console.log("enter login button view");
     var self=this;
@@ -25,7 +23,7 @@ LoginButtonView.prototype.open = function(){
 LoginButtonView.prototype.update = function(){
     $('#loginButtonLink').empty();
     console.log("design dynamically the login button on the list");
-    p = $("<p/>", {
+    var p = $("<p/>", {
         "class": "bold active clickable",
         "text": "Login"
     }).appendTo("#loginButtonLink");

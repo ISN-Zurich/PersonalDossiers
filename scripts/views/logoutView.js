@@ -1,5 +1,5 @@
 
-/*jslint vars: true, sloppy: true */
+
 
 function LogoutView(controller){
 	var self=this;
@@ -25,7 +25,7 @@ LogoutView.prototype.open = function(){
 LogoutView.prototype.update = function(){
     $('#delete').empty();
     console.log("design dynamically logout button");
-    p = $("<p/>", {
+    var p = $("<p/>", {
 	"class": "bold active clickable",
 	"text": "Logout"
     }).appendTo("#delete");

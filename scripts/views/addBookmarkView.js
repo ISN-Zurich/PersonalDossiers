@@ -5,9 +5,6 @@
  *  
  * 
  */
-
-/*jslint vars: true, sloppy: true */
-
 function DesignBookmarkView(dcontroller) {
     console.log("enter design bookmark view");
     var self = this;
@@ -36,11 +33,11 @@ DesignBookmarkView.prototype.update = function(){
     console.log('update bookmark button');
 	//design the bookmark button dynamically in the appropriate div
 	
-	bookMarkbuttonContainer = $("<div/>", {
+	var bookMarkbuttonContainer = $("<div/>", {
 		"id":"bookmark" //add id dynamically
 	}).appendTo("#isn_pd_widget");
 	
-	bookmarkButton = $("<p/>", {
+	var bookmarkButton = $("<p/>", {
             "id": "addbmbutton",
 		"class":"bold active",
 		text:"add Bookmark"

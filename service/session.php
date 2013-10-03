@@ -47,7 +47,7 @@ class SessionManagement extends PDCommonClass {
         $this->dbh = $dbh;
         
         $this->oauth = new OAuthProvider();
-	    $this->oauth->setParam('_', NULL);
+	$this->oauth->setParam('_', NULL);
         $this->oauthState = OAUTH_OK;
     }
     

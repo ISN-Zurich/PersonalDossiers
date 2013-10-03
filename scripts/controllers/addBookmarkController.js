@@ -1,7 +1,7 @@
 /*jslint vars: true, sloppy: true */
 
 function addBookmarkController() {
-    var self = this;
+    var self=this;
 
     document.domain = 'ethz.ch';
     self.login = false;
@@ -12,7 +12,7 @@ function addBookmarkController() {
 
     var params = search.split("&");
     var i;
-    for (i = 0; i < params.length; i++) {
+    for ( i = 0; i < params.length; i++) {
         var tmp = params[i].split('=');
         if ( tmp[0] === "id" || tmp[0] === "?id" ) {
             this.itemId = tmp[1];
@@ -29,7 +29,7 @@ function addBookmarkController() {
 
 
     function authorizationListener(m) {
-        if (m.origin === "http://yellowjacket.ethz.ch") {
+        if (m.origin == "http://yellowjacket.ethz.ch") {
             var data = JSON.parse(m.data);
             console.log('received a message: ' + m.data);
             // store the data into the local storage. 
@@ -46,7 +46,7 @@ function addBookmarkController() {
             }
         }
     }
-}
+};
 
 
 

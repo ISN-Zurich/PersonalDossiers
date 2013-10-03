@@ -1,5 +1,3 @@
-/*jslint vars: true, sloppy: true */
-
 function OAuthPageHelper(controller) {
     this.controller = controller;
 
@@ -22,7 +20,7 @@ OAuthPageHelper.prototype.getRequestToken = function() {
 
 OAuthPageHelper.prototype.obtainAuthorization = function() {
     // forwards the user to the authorization URL
-   auIL = $('<iframe>', {
+    var auIL = $('<iframe>', {
         'id': 'isn_pd_authorize',
         'class': 'hidden',
         'src': this.authrizationurl + '#' + this.requesttoken 
