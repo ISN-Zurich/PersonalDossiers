@@ -71,7 +71,6 @@ DossierContentView.prototype.open = function() {
          $('#loginButtonLink').removeClass("hidden");
     }
     console.log("open dossier list view");
-    var bookmarkModel = self.controller.models.bookmark;
     //if (bookmarkModel.dossierList && bookmarkModel.dossierList.length > 0){ 
     this.renderList();
 //}
