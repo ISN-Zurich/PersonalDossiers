@@ -21,9 +21,9 @@
     <script type="text/javascript" src="scripts/models/userModel.js"></script>
 
     <script type="text/javascript" src="scripts/views/loginView.js"></script>
-    <script type="text/javascript" src="scripts/views/dossiersListButton.js"></script>
     <script type="text/javascript" src="scripts/views/logoutView.js"></script>
     <script type="text/javascript" src="scripts/views/welcomeView.js"></script>
+     <script type="text/javascript" src="scripts/views/logView.js"></script>
 
     <script type="text/javascript" src="scripts/controllers/userController.js"></script>
 		<title>ISN</title>
@@ -113,33 +113,21 @@
 
 <div class="column span-6 last" id="sidebar_right">
     
-<div class="grey_bar st">Interact 
-<a href="#comments" class="sb_icon disabled" id="in_comment" title="Comments [disabled]"><span class=""></span>L</a>
-<a href="/layout/set/print/content/view/full/2" class="sb_icon" id="in_print" title="Print"><span class="">D</span></a>
-<a href="http://pdfcreate.ethz.ch" class="sb_icon" id="in_pdf" title="PDF"><span class="">P</span></a>
-<a href="/content/tipafriend/2" class="sb_icon" id="in_mail" title="Mail"><span class="">N</span></a></div>
-    </div>
+<div  class="grey_bar st" id="InteractionBar" >Personal Dossiers 
+<a href="https://plus.google.com/share?url=http://www.isn.ethz.ch" class="sb_icon" id="st_googleplus" title="Share on Google Plus" target="_blank"><span class="tabs_margin">N</span></a>
+<a href="http://reddit.com/submit?url=http://www.isn.ethz.ch" class="sb_icon" id="st_reddit" title="Submit to Reddit" target="_blank"><span class="tabs_margin">P</span></a>
+<a href="http://twitter.com/home/?status=http://www.isn.ethz.ch" class="sb_icon" id="st_twitter" title="Tweet about this" target="_blank"><span class="tabs_margin">D</span></a>
 
-
-<div class="column span-6 last hidden" id="findinformation">
-    <!-- <p class=" bold"><a href="index.html" class="active"> My personal dossier</a></p>-->
-    <!-- TO DESIGN IT DYNAMICALLY IN THE DOSSIER LIST VIEW -->
-   <!-- <p class="bold "><a href="user.html">User profile</a></p> --> 
+<!-- Design the login logout dynamically based on if we are logged in or not 
+<a href="https://www.facebook.com/sharer.php?u=http://www.isn.ethz.ch" class="sb_icon" id="st_facebook" title="Share on Facebook" target="_blank"><span class="tabs_margin">L</span></a>-->
 </div>
 
 
 <div class="column span-6 last hidden" id="delete">
-      <!--<p class="bold active"> Logout</p> -->
+      
 </div> 
 
-
-       
-<div id="socials" style="text-align:left;border-top:solid 1px #ccc;padding-top:1em;" class="hidden"><a class="social " title="Facebook" href="http://www.facebook.com/pages/International-Relations-and-Security-Network-ISN/141505796320">
-<img border="0"  src="images/facebook.png" alt="ISN on Facebook"></a>
-<a class="social " title="Twitter" href="http://www.twitter.com/ISN_Zurich"><img border="0" src="images/twitter.png" alt="ISN on Twitter"></a></div>
-
-
-
+     
 </div><!-- id="sidebar_right" -->
 	<!-- google_ad_section_end -->
 	<hr class="hidden">

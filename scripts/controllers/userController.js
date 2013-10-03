@@ -21,11 +21,18 @@ function userController() {
 	//initialization of views 
 	self.views.login= new LoginView(self);
 	self.views.welcome= new WelcomeView(self);
-	self.views.dossierButton= new DossiersButtonView(self);
+	self.views.log= new LogView(self);
 	self.views.logout= new LogoutView(self);
 	
 	
 	self.models.user.checkActiveUser();
+
+	//we want to update the Log View once we have logged out
+	//in order to display the Li in the interaction box
+	 $(document).bind("LogoutSent", function(){
+		 console.log("logout sent is binded");
+		 self.views.log.open();		 
+	 });
 }
 
 userController.prototype.initOAuth = function() {

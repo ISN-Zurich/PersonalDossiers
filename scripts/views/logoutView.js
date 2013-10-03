@@ -16,7 +16,7 @@ function LogoutView(controller){
 LogoutView.prototype.openDiv=openView;
 
 LogoutView.prototype.open = function(){
-	//das logut button hier dynamisch generieren, wenn es keine logut button auf der Seite gibt.
+	//das logout button hier dynamisch generieren, wenn es keine logut button auf der Seite gibt.
 	//1. zeigt den Logout Button
 	this.update();
 	

@@ -368,6 +368,7 @@ AuthenticationModel.prototype.logout =function(){
                 self.checkActiveUser();
                 //self.setInitParameters();
                 //self.controller.transition("login");
+                $(document).trigger("LogoutSent");
             }else{
                 console.log("Error while invalidating access token");
             }
