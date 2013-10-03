@@ -20,7 +20,7 @@ float: right;
 display: inline-block !important;
 width: 28px;
 height: 28px;
-background-color: #4C5160 !important;
+/*background-color: #4C5160 !important;*/
 background-position: -1px -1px;
 background-repeat: no-repeat;
 background-attachment: scroll;
@@ -32,6 +32,8 @@ border-left: solid 1px white;
 background-image: url(../images/icons/search_banner/googleplus.png);
 }
 
+
+
 #st_reddit {
 background-image: url(../images/icons/search_banner/reddit.png);
 }
@@ -42,4 +44,8 @@ background-image: url(../images/icons/search_banner/twitter.png);
 
 #st_facebook {
 background-image: url(../images/icons/search_banner/facebook.png);
+}
+
+.tabs_margin {
+	padding-left:10px;
 }
