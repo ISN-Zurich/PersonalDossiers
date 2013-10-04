@@ -20,6 +20,7 @@ userProfileView.prototype.update= function(){
 	$("#welcome").hide();
 
 	$("#userProfile").empty();
+	$("#notifications").empty();
 	if ( self.controller.models.user.userProfile ) {
 		$("#userProfile").html("<p>Welcome to user profile view</p>");
 	}

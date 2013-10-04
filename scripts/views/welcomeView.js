@@ -31,6 +31,7 @@ WelcomeView.prototype.update = function(){
 	var self=this;
 	console.log("update the welcome view");
 	$("#userProfile").empty();
+	$("#notifications").empty();
 	$("#welcome").show();
 	$("#welcome").empty();
     if ( self.controller.models.user.userProfile ) {

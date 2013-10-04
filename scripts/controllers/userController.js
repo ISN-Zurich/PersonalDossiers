@@ -25,6 +25,7 @@ function userController() {
 	console.log("log view is initialized");
 	self.views.user= new userProfileView(self);
 	self.views.interaction = new interactionBox(self);
+	self.views.notifications = new notificationView(self);
 		
 	self.models.user.checkActiveUser();
 

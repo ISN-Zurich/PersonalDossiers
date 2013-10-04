@@ -22,4 +22,8 @@ function interactionBox(controller){
 	});
 	
 	
+	$("#st_notifications").bind("click", function(){
+		console.log("clicked  notification icon");
+		self.controller.views.notifications.open();
+	});
 }
