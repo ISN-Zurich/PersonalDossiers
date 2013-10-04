@@ -21,7 +21,5 @@ function interactionBox(controller){
 		self.controller.views.user.open();
 	});
 	
-	 $("#interaction_box").bind('click', function(){
-
-	 });
+	
 }
