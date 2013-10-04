@@ -10,7 +10,7 @@ function LogView(controller){
 	console.log("enter logView constructor");
 	var self=this;
 	self.controller=controller;
-	this.tagID='st_log';
+	this.tagID='logView';
 	this.logView = null;
 	this.open();
 	
@@ -22,9 +22,7 @@ function LogView(controller){
 		  console.log("caught dossier list update in log view");
 	        self.update();
 	    });
-	 $(document).bind('LogoutSent', function(){
-		   self.update();
-	 });
+	
 }
 
 LogView.prototype.open = function(){
@@ -45,53 +43,73 @@ LogView.prototype.update = function(){
 };
 
 LogView.prototype.showLogout = function(){
-	$("#st_log_in").remove();
-	$("#st_log_out").remove();
+	$("#st_log_in").empty();
 	$("#st_log_in").hide();
+	$("#st_log_out").remove();
+	
 	
 	var self=this;
 	console.log("enter show logout");
-	 div = $("<div/>", {
-		"id":"st_log_out",
-		"class": "sb_icon"		
-	}).appendTo("#InteractionBar");
 
-	 span = $("<p/>", {
+	 span = $("<span/>", {
+		"id": "st_log_out",
 		"class":"tabs_margin",
 		"text": "Lo"
-	}).appendTo("#st_log_out");
+	}).appendTo("#logView");
 	 
-	 $("#st_log_out").bind("click", function(){
-		 console.log("clicked the logout button");
-		 self.controller.logout();			
+	 divConfirm = $("<div/>", {
+			"id": "st_log_out_confirm",
+			"class":"red hidden",
+			"text": "are you sure you want to log out?"
+	}).appendTo("#InteractionBar");
+	 
+
+	 
+	 $("#st_log_out_confirm").bind("click", function(){
+		 self.controller.logout();
+	 });
+	 
+	 $(document).bind("click", function(e){
+		 console.log("clicked 1");
+		 var targetE= e.target;
+		 var targetId= targetE.id;
+		 //if the logout confirmation is visible
+		 if (!$("#st_log_out_confirm").hasClass("hidden") && targetId!== "st_log_out"){
+			 console.log("clicekd 2");
+			 if (targetId !== 'st_log_out_confirm'){
+				 $("#st_log_out_confirm").addClass("hidden"); 
+			 }
+		 }
+		 
+		 if ($("#st_log_out_confirm").hasClass("hidden") && targetId== "st_log_out"){
+			 console.log("clicked 3");
+			 $("#st_log_out_confirm").removeClass("hidden"); 
+			 console.log("removedClass from 3");
+			}
 	 });
 };
 
 
 LogView.prototype.showLogin = function(){
 	$("#st_log_in").remove();
-	$("#st_log_out").remove();
 	$("#st_log_out").hide();
+	$("#st_log_out_confirm").addClass("hidden");
+	
 	var self=this;
 	console.log("enter show login");
-	 div = $("<div/>", {
-		"id":"st_log_in",
-		"class": "sb_icon"		
-	}).appendTo("#InteractionBar");
 
-	 span = $("<p/>", {
+	 span = $("<span/>", {
+		 "id":"st_log_in",
 		"class":"tabs_margin",
 		"text": "Li"
-	}).appendTo("#st_log_in");
+	}).appendTo("#logView");
 	 
 	  
 	 $("#st_log_in").bind("click", function(){
 		 console.log("clicked the login button");
 		 self.controller.models.authentication.loadData();
-		 self.controller.models.user.checkActiveUser();
-		 self.controller.views.login.open();	
-		
-		 		
+		 self.controller.models.user.checkActiveUser()
+		 self.controller.views.login.open();			
 	 });
 	
 };
