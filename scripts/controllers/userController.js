@@ -22,17 +22,21 @@ function userController() {
 	self.views.login= new LoginView(self);
 	self.views.welcome= new WelcomeView(self);
 	self.views.log= new LogView(self);
-	self.views.logout= new LogoutView(self);
-	
-	
+	console.log("log view is initialized");
+	self.views.user= new userProfileView(self);
+	self.views.interaction = new interactionBox(self);
+		
 	self.models.user.checkActiveUser();
 
 	//we want to update the Log View once we have logged out
 	//in order to display the Li in the interaction box
 	 $(document).bind("LogoutSent", function(){
 		 console.log("logout sent is binded");
-		 self.views.log.open();		 
+		 self.views.log.open();	
+		 $("#welcome").hide();
 	 });
+	 
+	
 }
 
 userController.prototype.initOAuth = function() {

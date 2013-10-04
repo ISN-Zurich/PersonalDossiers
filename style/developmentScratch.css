@@ -49,3 +49,11 @@ background-image: url(../images/icons/search_banner/facebook.png);
 .tabs_margin {
 	padding-left:10px;
 }
+
+.red {
+	color:red;
+}
+
+.hidden{
+	display:none;
+}

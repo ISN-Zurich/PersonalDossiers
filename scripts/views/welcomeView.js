@@ -30,8 +30,11 @@ WelcomeView.prototype.open = function(){
 WelcomeView.prototype.update = function(){
 	var self=this;
 	console.log("update the welcome view");
+	$("#userProfile").empty();
+	$("#welcome").show();
 	$("#welcome").empty();
     if ( self.controller.models.user.userProfile ) {
+    	console.log("user profile existis, design welcome view");
 	$("#welcome").html("<p>Welcome "+self.controller.models.user.userProfile.name+"</p><p>Here is your personal dossier area</p>");
 }
 	

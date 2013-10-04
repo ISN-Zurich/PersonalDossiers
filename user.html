@@ -21,9 +21,10 @@
     <script type="text/javascript" src="scripts/models/userModel.js"></script>
 
     <script type="text/javascript" src="scripts/views/loginView.js"></script>
-    <script type="text/javascript" src="scripts/views/logoutView.js"></script>
     <script type="text/javascript" src="scripts/views/welcomeView.js"></script>
-     <script type="text/javascript" src="scripts/views/logView.js"></script>
+    <script type="text/javascript" src="scripts/views/logView.js"></script>
+    <script type="text/javascript" src="scripts/views/userProfileView.js"></script>
+    <script type="text/javascript" src="scripts/views/interactionBox.js"></script>
 
     <script type="text/javascript" src="scripts/controllers/userController.js"></script>
 		<title>ISN</title>
@@ -103,6 +104,11 @@
    
    </div>
  
+ <div id="userProfile" class="">
+  
+   
+   
+   </div>
   
   </div>
   
@@ -114,18 +120,14 @@
 <div class="column span-6 last" id="sidebar_right">
     
 <div  class="grey_bar st" id="InteractionBar" >Personal Dossiers 
-<a href="https://plus.google.com/share?url=http://www.isn.ethz.ch" class="sb_icon" id="st_googleplus" title="Share on Google Plus" target="_blank"><span class="tabs_margin">N</span></a>
-<a href="http://reddit.com/submit?url=http://www.isn.ethz.ch" class="sb_icon" id="st_reddit" title="Submit to Reddit" target="_blank"><span class="tabs_margin">P</span></a>
-<a href="http://twitter.com/home/?status=http://www.isn.ethz.ch" class="sb_icon" id="st_twitter" title="Tweet about this" target="_blank"><span class="tabs_margin">D</span></a>
-
+<span  class="sb_icon" id="st_notifications" title="Share on Google Plus" ><span class="tabs_margin">N</span></span>
+<span class="sb_icon" id="st_user" title="User Profile" ><span class="tabs_margin">P</span></span>
+<span  class="sb_icon" id="st_dossiers" title="Personal Dossier List" ><span class="tabs_margin">D</span></span>
+<span id="logView" class="sb_icon" title="Personal Dossier List"></span>
 <!-- Design the login logout dynamically based on if we are logged in or not 
 <a href="https://www.facebook.com/sharer.php?u=http://www.isn.ethz.ch" class="sb_icon" id="st_facebook" title="Share on Facebook" target="_blank"><span class="tabs_margin">L</span></a>-->
 </div>
 
-
-<div class="column span-6 last hidden" id="delete">
-      
-</div> 
 
      
 </div><!-- id="sidebar_right" -->
