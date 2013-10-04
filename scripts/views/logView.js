@@ -15,8 +15,13 @@ function LogView(controller){
 	this.open();
 	
 	 $(document).bind('UserProfileUpdate', function(){
+		 console.log("caught user profile update in log view");
 	   self.update();
 	  });
+	  $(document).bind('DossierListUpdate', function(){
+		  console.log("caught dossier list update in log view");
+	        self.update();
+	    });
 	 $(document).bind('LogoutSent', function(){
 		   self.update();
 	 });
@@ -40,7 +45,9 @@ LogView.prototype.update = function(){
 };
 
 LogView.prototype.showLogout = function(){
+	$("#st_log_in").remove();
 	$("#st_log_out").remove();
+	$("#st_log_in").hide();
 	
 	var self=this;
 	console.log("enter show logout");
@@ -63,6 +70,8 @@ LogView.prototype.showLogout = function(){
 
 LogView.prototype.showLogin = function(){
 	$("#st_log_in").remove();
+	$("#st_log_out").remove();
+	$("#st_log_out").hide();
 	var self=this;
 	console.log("enter show login");
 	 div = $("<div/>", {
