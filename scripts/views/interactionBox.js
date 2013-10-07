@@ -11,19 +11,19 @@ function interactionBox(controller){
 	var self=this;
 	self.controller=controller;
 	
-	$("#st_dossiers").bind("click", function(){
-		console.log("clicked  dossiers icon");
-		self.controller.views.welcome.open();
-	});
-	
-	$("#st_user").bind("click", function(){
-		console.log("clicked  user profile icon");
-		self.controller.views.user.open();
-	});
-	
-	
-	$("#st_notifications").bind("click", function(){
-		console.log("clicked  notification icon");
-		self.controller.views.notifications.open();
-	});
+//	$("#st_dossiers").bind("click", function(){
+//		console.log("clicked  dossiers icon");
+//		self.controller.views.welcome.open();
+//	});
+//	
+//	$("#st_user").bind("click", function(){
+//		console.log("clicked  user profile icon");
+//		self.controller.views.user.open();
+//	});
+//	
+//	
+//	$("#st_notifications").bind("click", function(){
+//		console.log("clicked  notification icon");
+//		self.controller.views.notifications.open();
+//	});
 }

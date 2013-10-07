@@ -21,6 +21,7 @@
     <script type="text/javascript" src="scripts/models/userModel.js"></script>
 
     <script type="text/javascript" src="scripts/views/loginView.js"></script>
+    <script type="text/javascript" src="scripts/views/landingView.js"></script>
     <script type="text/javascript" src="scripts/views/welcomeView.js"></script>
     <script type="text/javascript" src="scripts/views/logView.js"></script>
     <script type="text/javascript" src="scripts/views/userProfileView.js"></script>
@@ -72,68 +73,71 @@
 
        
 </div><!-- id="sidebar_left" -->
-                                                                                                                                                                                                                                                                  
-  <div class="column span-12" id="dossierTitle">
-  
 
-<div id="wrapper">
-        <div id="login" class="animate form hidden" >
-            <form  action="#" autocomplete="off"> 
-                <h1>Log in</h1> 
-                <p> 
-                    <label for="username" class="uname" data-icon="" > Username </label>
-                    <input id="username" name="username" required="required" type="text" placeholder="myusername or mymail@mail.com">
-                </p>
-                <p> 
-                    <label for="password" class="youpasswd" data-icon=""> Password </label>
-                    <input id="password" name="password" required="required" type="password" placeholder="eg. X8df!90EO"> 
-                </p>
-                
-                <p id="loginButton" class="login button clickable"> 
-                    Login 
-                </p>
-                <!-- <p class="change_link">
+		<div class="column span-12" id="dossierTitle">
+
+
+			<div id="wrapper">
+				<div id="login" class="animate form hidden">
+					<form action="#" autocomplete="off">
+						<h1>Log in</h1>
+						<p>
+							<label for="username" class="uname" data-icon="">
+								Username </label> <input id="username" name="username"
+								required="required" type="text"
+								placeholder="myusername or mymail@mail.com">
+						</p>
+						<p>
+							<label for="password" class="youpasswd" data-icon="">
+								Password </label> <input id="password" name="password"
+								required="required" type="password" placeholder="eg. X8df!90EO">
+						</p>
+
+						<p id="loginButton" class="login button clickable">Login</p>
+						<!-- <p class="change_link">
                     Not a member yet ?
                     <a href="#toregister" class="to_register">Join us</a>
                 </p> -->
-            </form>
-        
-</div>
-  <div id="welcome" class="welcomeText hidden">
-  
-   <ul id="dossiersUl"></ul>
-   
-   </div>
- 
- <div id="userProfile" class="">
-  
-   
-   
-   </div>
-   
-   <div id="notifications" class="">
-  
-   
-   
-   </div>
-  
-  </div>
-  
-  </div>
-  
+					</form>
+
+				</div>
+				<div id="landingView">
+					<div id="welcome" class="welcomeText hidden">
+						<ul id="dossiersUl"></ul>
+					</div>
+
+					<div id="userProfile" class=""></div>
+
+				<div id="notifications" class=""></div>
+				</div>
+
+			</div>
+
+		</div>
 
 
 
-<div class="column span-6 last" id="sidebar_right">
+
+		<div class="column span-6 last" id="sidebar_right">
     
-<div  class="grey_bar st" id="InteractionBar" >Personal Dossiers 
+<!-- <div  class="grey_bar st" id="InteractionBar" >Personal Dossiers 
 <span  class="sb_icon" id="st_notifications" title="Share on Google Plus" ><span class="tabs_margin">N</span></span>
 <span class="sb_icon" id="st_user" title="User Profile" ><span class="tabs_margin">P</span></span>
 <span  class="sb_icon" id="st_dossiers" title="Personal Dossier List" ><span class="tabs_margin">D</span></span>
 <span id="logView" class="sb_icon" title="Personal Dossier List"></span>
+Design the login logout dynamically based on if we are logged in or not 
+<a href="https://www.facebook.com/sharer.php?u=http://www.isn.ethz.ch" class="sb_icon" id="st_facebook" title="Share on Facebook" target="_blank"><span class="tabs_margin">L</span></a>
+</div> -->
+
+<div  class="grey_bar st" id="InteractionBar" >Personal Dossiers 
+<a href ="http://yellowjacket.ethz.ch/tools/user.html#notifications" class="sb_icon" id="st_notifications" title="Share on Google Plus" ><span class="tabs_margin">N</span></a>
+<a href ="http://yellowjacket.ethz.ch/tools/user.html#userProfile" class="sb_icon" id="st_user" title="User Profile" ><span class="tabs_margin">P</span></a>
+<a href ="http://yellowjacket.ethz.ch/tools/user.html#personalDossiers"   class="sb_icon" id="st_dossiers" title="Personal Dossier List" ><span class="tabs_margin">D</span></a>
+<span id="logView" class="sb_icon" title="Personal Dossier List"></span>
 <!-- Design the login logout dynamically based on if we are logged in or not 
 <a href="https://www.facebook.com/sharer.php?u=http://www.isn.ethz.ch" class="sb_icon" id="st_facebook" title="Share on Facebook" target="_blank"><span class="tabs_margin">L</span></a>-->
 </div>
+
 
 
      

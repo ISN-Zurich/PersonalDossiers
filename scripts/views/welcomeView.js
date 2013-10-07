@@ -5,13 +5,16 @@ function WelcomeView(controller){
 	self.controller=controller;
 	self.tagID="welcome";
 
-    $(document).bind('DossierListUpdate', function(){
-        self.update();
-    });
+//    $(document).bind('DossierListUpdate', function(){
+//        self.update();
+//    });
+//    
     
-    $(document).bind('UserProfileUpdate', function(){
-        self.update();
-    });
+    //TO MOVE THE BELOW BINDING TO LANDING VIEW
+    
+//    $(document).bind('UserProfileUpdate', function(){
+//        self.update();
+//    });
     
 }
 
@@ -30,17 +33,19 @@ WelcomeView.prototype.open = function(){
 WelcomeView.prototype.update = function(){
 	var self=this;
 	console.log("update the welcome view");
+	
+	//empty the sub views
 	$("#userProfile").empty();
 	$("#notifications").empty();
 	$("#welcome").show();
 	$("#welcome").empty();
-    if ( self.controller.models.user.userProfile ) {
+	
+	if ( self.controller.models.user.userProfile ) {
     	console.log("user profile existis, design welcome view");
 	$("#welcome").html("<p>Welcome "+self.controller.models.user.userProfile.name+"</p><p>Here is your personal dossier area</p>");
 }
 	
-	
-	
+		
 	if (self.controller.models.dossierList.listIsPresent()) { 
 		self.controller.models.dossierList.reset();
 		
@@ -81,6 +86,9 @@ WelcomeView.prototype.update = function(){
 		console.log("clicked the add Dossier button");
 		self.controller.models.dossierList.addDossier();
 	});
+	
+	
+	
 };
 
 WelcomeView.prototype.close=function(){

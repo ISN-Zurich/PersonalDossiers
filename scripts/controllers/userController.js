@@ -20,6 +20,7 @@ function userController() {
 
 	//initialization of views 
 	self.views.login= new LoginView(self);
+	self.views.landing= new landingView(self);
 	self.views.welcome= new WelcomeView(self);
 	self.views.log= new LogView(self);
 	console.log("log view is initialized");
@@ -33,12 +34,40 @@ function userController() {
 	//in order to display the Li in the interaction box
 	 $(document).bind("LogoutSent", function(){
 		 console.log("logout sent is binded");
-		 self.views.log.open();	
-		 $("#welcome").hide();
+		 self.views.log.open();
+		 $("#landingView").hide();
+		 //$("#welcome").hide();
 	 });
 	 
-	
-}
+	 
+	 $(window).bind( "hashchange",function(){
+		 console.log("hash change event binded");
+		 var hashTag = self.getHash();
+		 self.chooseView(hashTag);
+	 });
+} //end of constructor
+
+
+userController.prototype.getHash = function(){
+	var hash= window.location.hash;
+	var hashTag = hash.substring(1);
+	return hashTag;	
+};
+
+userController.prototype.chooseView = function(viewHashString){
+	switch (viewHashString){
+	case 'personalDossiers':
+	case '':
+		this.views.welcome.open();
+		break;
+	case 'userProfile':
+		this.views.user.open();
+		break;
+	case 'notifications':
+		this.views.notifications.open();
+		break;
+	}	
+};
 
 userController.prototype.initOAuth = function() {
     console.log('initialize the oauth helper class');
