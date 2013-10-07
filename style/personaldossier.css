@@ -133,6 +133,15 @@ padding-left:3px;
 }
 
 
+.red {
+	color:red;
+}
+
+.hidden{
+	display:none;
+}
+
+
 *********************************************** READY LOGIN FORM ******************************
 
 #subscribe, 
