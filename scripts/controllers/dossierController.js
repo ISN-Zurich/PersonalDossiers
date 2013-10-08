@@ -156,7 +156,9 @@ function dossierController() {
     };
 
     dossierController.prototype.logout = function() {
-        this.models.user.logout();
+      	console.log("enter logout in dossier controller");
+    	authentication = new AuthenticationModel(this);
+    	authentication.logout();
     };
 
     var controller;
