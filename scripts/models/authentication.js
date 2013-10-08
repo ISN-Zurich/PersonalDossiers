@@ -362,7 +362,7 @@ AuthenticationModel.prototype.logout =function(){
                     consumerKey :"ch.isn.personal-dossier",
                     "accessToken":"",
                     "access_secret":""
-                }
+                };
                 self.storeData();
                 self.controller.initOAuth();
                 self.checkActiveUser();
