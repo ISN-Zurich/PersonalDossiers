@@ -49,6 +49,8 @@ WelcomeView.prototype.update = function(){
 	if (self.controller.models.dossierList.listIsPresent()) { 
 		self.controller.models.dossierList.reset();
 		
+		console.log("dossier list is present design dossier list - welcome view");
+		
 		dossierId=self.controller.models.dossierList.getDossierId();
 		ul=$("<ul/>", {
 			"id":"dossiersUl"
