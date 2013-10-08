@@ -100,7 +100,7 @@ LogView.prototype.showLogin = function(){
 
 	 span = $("<span/>", {
 		 "id":"st_log_in",
-		"class":"tabs_margin",
+		"class":"tabs_margin blue",
 		"text": "Li"
 	}).appendTo("#logView");
 	 
@@ -108,7 +108,7 @@ LogView.prototype.showLogin = function(){
 	 $("#st_log_in").bind("click", function(){
 		 console.log("clicked the login button");
 		 self.controller.models.authentication.loadData();
-		 self.controller.models.user.checkActiveUser()
+		 self.controller.models.user.checkActiveUser();
 		 self.controller.views.login.open();			
 	 });
 	

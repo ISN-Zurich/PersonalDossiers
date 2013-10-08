@@ -50,3 +50,21 @@ background-image: url(../images/icons/search_banner/facebook.png);
 	padding-left:10px;
 }
 
+.blue {
+	color:blue;
+}
+
+.grey {
+	color:#696969;
+}
+
+.lightgrey {
+	color: #bebebe;
+}
+
+/*make unclickable some items of the interaction box*/
+
+a.disable {
+   pointer-events: none;
+   cursor: default;
+}
