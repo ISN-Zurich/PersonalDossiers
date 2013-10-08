@@ -89,7 +89,6 @@ UserModel.prototype.getUserProfile=function(){
 	localStorage.setItem("userProfile",stringProfile);
 	console.log("user profile item from local storage is "+localStorage.getItem("userProfile"));
 	$(document).trigger('UserProfileUpdate'); 
-	//self.controller.transition("welcome");
 	self.controller.transition("landing");
 	
 	//self.getUserDossiers();
