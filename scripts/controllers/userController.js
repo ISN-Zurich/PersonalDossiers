@@ -29,6 +29,11 @@ function userController() {
 	self.views.notifications = new notificationView(self);
 		
 	self.models.user.checkActiveUser();
+	
+	if (this.oauth){
+		$("#st_user").removeClass("disable");
+		$("#st_dossiers").removeClass("disable");
+	}
 
 	//we want to update the Log View once we have logged out
 	//in order to display the Li in the interaction box

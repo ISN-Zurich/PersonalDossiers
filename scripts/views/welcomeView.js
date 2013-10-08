@@ -71,6 +71,7 @@ WelcomeView.prototype.update = function(){
 		"text": "add a new Dossier"
 	}).appendTo("#dossiersUl");
 	
+	
 	$("#dossiersUl").bind("click", function(e){
 		console.log("clicked the dossier category");
 		var targetE = e.target;
