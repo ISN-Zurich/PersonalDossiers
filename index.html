@@ -22,10 +22,10 @@
 	<script type="text/javascript" src="scripts/models/bookmarkModel.js"></script>
 	<script type="text/javascript" src="scripts/models/userModel.js"></script>
 	
-	<script type="text/javascript" src="scripts/views/logoutView.js"></script>
-    <script type="text/javascript" src="scripts/views/loginButtonView.js"></script>
+	
+    <script type="text/javascript" src="scripts/views/logView.js"></script>
     <script type="text/javascript" src="scripts/views/shareButtonView.js"></script>
-	<script type="text/javascript" src="scripts/views/dossiersListButton.js"></script>
+
 	
 	<script type="text/javascript" src="scripts/views/dossierUsersView.js"></script>
 	<script type="text/javascript" src="scripts/views/dossierBannerView.js"></script>
@@ -83,28 +83,27 @@
 
 <div class="column span-6 last" id="sidebar_right">
         
- <div class="column span-6 last hidden" id="findinformation">
-  
-</div>
-<div class="column span-6 last hidden" id="shareButton">    </div>
+<!-- <div class="column span-6 last hidden" id="findinformation"></div>
+<div class="column span-6 last  hidden" id="delete"></div>
+ -->
 
-<div class="column span-6 last  hidden" id="delete">
-  
-</div>
-
-
-<div class="column span-6 last  hidden" id="dossierUsers">
-  
-</div>
-
-<div class="column span-6 last sideButtonLink hidden" id="loginButtonLink">
+<div  class="grey_bar st" id="InteractionBar" >Personal Dossiers 
+<a href ="http://yellowjacket.ethz.ch/tools/user.html#notifications" class="sb_icon" id="st_notifications" title="Share on Google Plus" ><span class="tabs_margin">N</span></a>
+<a href ="http://yellowjacket.ethz.ch/tools/user.html#userProfile" class="sb_icon" id="st_user" title="User Profile" ><span class="tabs_margin">P</span></a>
+<a href ="http://yellowjacket.ethz.ch/tools/user.html#personalDossiers"   class="sb_icon" id="st_dossiers" title="Personal Dossier List" ><span class="tabs_margin">D</span></a>
+<span id="logView" class="sb_icon" title="Personal Dossier List"></span>
+<!-- Design the login logout dynamically based on if we are logged in or not 
+<a href="https://www.facebook.com/sharer.php?u=http://www.isn.ethz.ch" class="sb_icon" id="st_facebook" title="Share on Facebook" target="_blank"><span class="tabs_margin">L</span></a>-->
 </div>
 
+<br/>
+<br/>
+<br/>
 
+<div class="column span-6 last  hidden" id="dossierUsers"></div>
 
-   <!--
-    <div style="text-align:left;border-top:solid 1px #ccc;padding-top:1em;"><a class="social" title="Facebook" href="http://www.facebook.com/pages/International-Relations-and-Security-Network-ISN/141505796320"><img border="0" src="images/facebook.png" alt="ISN on Facebook"></a><a class="social" title="Twitter" href="http://www.twitter.com/ISN_Zurich"><img border="0" src="images/twitter.png" alt="ISN on Twitter"></a></div>
--->
+<div class="column span-6 last hidden" id="shareButton"> </div>
+
 </div><!-- id="sidebar_right" -->
 
 	<hr class="hidden">

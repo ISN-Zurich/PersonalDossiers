@@ -48,11 +48,10 @@ function dossierController() {
 	    self.views.userlist = new DossierUsersView(self);
 
        //the following views run only when we are authenticated
-       if (self.oauth){
-       self.views.dossierList = new DossiersButtonView(self);
-       self.views.logout      = new LogoutView(self);
-       self.views.share      = new ShareButtonView(self);
-       }
+	    if (self.oauth){
+	    	self.views.log = new LogView(self);
+	    	self.views.share = new ShareButtonView(self);
+	    }
 
        if (self.hashed){
            console.log("design hash-specific views");
