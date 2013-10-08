@@ -35,8 +35,19 @@ function userController() {
 	 $(document).bind("LogoutSent", function(){
 		 console.log("logout sent is binded");
 		 self.views.log.open();
+		 //1. hide the landing view
 		 $("#landingView").hide();
-		 //$("#welcome").hide();
+		 
+		 //2. show the login view
+		 self.chooseView();
+		 
+		 //3. clear the url from hash
+		 var loc = window.location.href;
+		 index= loc.indexOf('#');
+		 
+		 if (index >0){
+			 window.location = loc.substring(0,index);
+		 }
 	 });
 	 
 	 
@@ -45,6 +56,9 @@ function userController() {
 		 var hashTag = self.getHash();
 		 self.chooseView(hashTag);
 	 });
+	 
+	
+	 
 } //end of constructor
 
 
@@ -57,7 +71,6 @@ userController.prototype.getHash = function(){
 userController.prototype.chooseView = function(viewHashString){
 	switch (viewHashString){
 	case 'personalDossiers':
-	case '':
 		this.views.welcome.open();
 		break;
 	case 'userProfile':
@@ -66,7 +79,16 @@ userController.prototype.chooseView = function(viewHashString){
 	case 'notifications':
 		this.views.notifications.open();
 		break;
-	}	
+	case '':
+		if (!this.oauth){
+			console.log("will show login");
+			this.views.login.open();
+		}else { 
+			console.log("will show welcome");
+			this.views.welcome.open();	
+		}
+		break;
+	}
 };
 
 userController.prototype.initOAuth = function() {
