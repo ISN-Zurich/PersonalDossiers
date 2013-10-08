@@ -78,6 +78,11 @@ function dossierController() {
         // user is not logged in go to user.html
         window.location.href = 'user.html';
     }
+   
+   $(document).bind("LogoutSent", function(){
+	   console.log("binded logout sent in constructor");
+	   window.location.href = 'user.html';
+   });
 }
 
     dossierController.prototype.hashedUrl = function() {
