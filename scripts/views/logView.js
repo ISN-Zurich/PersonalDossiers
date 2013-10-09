@@ -100,7 +100,7 @@ LogView.prototype.showLogin = function(){
 
 	 span = $("<span/>", {
 		 "id":"st_log_in",
-		"class":"tabs_margin blue",
+		"class":"tabs_margin selected",
 		"text": "Li"
 	}).appendTo("#logView");
 	 
