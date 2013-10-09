@@ -30,6 +30,14 @@ function showErrorResponses(request){
 	console.log("ERROR responsetext: "+ request.responseText);
 }
 
+
+function activateDossierItem() {
+	$("#st_dossiers").removeClass("disable");
+	$("#span_user").removeClass("selected");
+	$("#span_dossiers").addClass("selected");
+};
+
+
 function base64_encode (data) {
 	console.log("enter base 64 encode");
 	  // http://kevin.vanzonneveld.net

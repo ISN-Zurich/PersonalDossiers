@@ -113,9 +113,7 @@ userController.prototype.colorizeInteractiveBox = function(hash){
 		
 	switch (hash){
 	case 'personalDossiers':
-		$("#st_dossiers").removeClass("disable");
-		$("#span_user").removeClass("selected");
-		$("#span_dossiers").addClass("selected");
+		activateDossierItem();
 		break;
 	case 'userProfile':
 		$("#st_user").removeClass("disable");
@@ -124,14 +122,15 @@ userController.prototype.colorizeInteractiveBox = function(hash){
 		break;
 	case '':
 		if (this.oauth){
-			console.log("colorization when logged in");
-			$("#st_dossiers").removeClass("disable");
-			$("#span_user").removeClass("selected");
-			$("#span_dossiers").addClass("selected");
+			activateDossierItem();
 		}else {
 			console.log("colorization when logged out");
 			$("#span_dossiers").removeClass("selected");
+			$("#span_dossiers").addClass("lightgrey");
 			$("#span_user").removeClass("selected");
+			$("#span_user").addClass("lightgrey");
+			$("#st_dossiers").addClass("disable");
+			$("#st_user").addClass("disable");
 		}
 		break;
 	}
