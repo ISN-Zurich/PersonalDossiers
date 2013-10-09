@@ -66,14 +66,14 @@ function userController() {
 		 self.colorizeInteractiveBox(hashTag);
 	 });
 	 
-	 
-	 //interaction box colorization and de(in)-activeness
-//	 
-//	 if (self.oauth){
-//		 console.log("before enter colorization");
-//		 var hashTag = self.getHash();
-//		 this.colorizeInteractiveBox(hashTag);
-//	 };
+ // when we are coming from the index.html
+ // the page during its loading should colorize the interaction box based on the hashed url
+	 $(window).load(function(){
+		 console.log("enter on window load");
+		 var hash= window.location.hash;
+		 var hashTag = hash.substring(1);
+		 self.colorizeInteractiveBox(hashTag);
+	 });
 	
 	 
 } //end of constructor
@@ -98,10 +98,8 @@ userController.prototype.chooseView = function(viewHashString){
 		break;
 	case '':
 		if (!this.oauth){
-			console.log("will show login");
 			this.views.login.open();
 		}else { 
-			console.log("will show welcome");
 			this.views.welcome.open();	
 		}
 		break;
@@ -110,27 +108,20 @@ userController.prototype.chooseView = function(viewHashString){
 
 userController.prototype.colorizeInteractiveBox = function(hash){
 	console.log("enter colorize interactive box");
-		
+
 	switch (hash){
 	case 'personalDossiers':
-		activateDossierItem();
+		setDossiersColorization();
 		break;
 	case 'userProfile':
-		$("#st_user").removeClass("disable");
-		$("#span_dossiers").removeClass("selected");
-		$("#span_user").addClass("selected");
+		console.log("user profile colorization");
+		setUserProfileColorization();
 		break;
 	case '':
 		if (this.oauth){
-			activateDossierItem();
+			setDossiersColorization();
 		}else {
-			console.log("colorization when logged out");
-			$("#span_dossiers").removeClass("selected");
-			$("#span_dossiers").addClass("lightgrey");
-			$("#span_user").removeClass("selected");
-			$("#span_user").addClass("lightgrey");
-			$("#st_dossiers").addClass("disable");
-			$("#st_user").addClass("disable");
+			setLoggedOutColorization();
 		}
 		break;
 	}
@@ -195,4 +186,6 @@ var controller;
 $(document).ready(function(){
 	console.log("document ready");
 	controller = new userController();
+	var hashTag = this.getHash();
+	this.colorizeInteractiveBox(hashTag);
 });

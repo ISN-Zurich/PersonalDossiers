@@ -31,10 +31,33 @@ function showErrorResponses(request){
 }
 
 
-function activateDossierItem() {
+function setDossiersColorization() {
 	$("#st_dossiers").removeClass("disable");
 	$("#span_user").removeClass("selected");
+	$("#span_dossiers").removeClass("grey");
 	$("#span_dossiers").addClass("selected");
+};
+
+
+/**
+ * Colorization of the interaction box when we are logged out
+ * */
+
+function setLoggedOutColorization(){
+	$("#span_dossiers").removeClass("selected");
+	$("#span_dossiers").addClass("lightgrey");
+	$("#span_user").removeClass("selected");
+	$("#span_user").addClass("lightgrey");
+	$("#st_dossiers").addClass("disable");
+	$("#st_user").addClass("disable");
+};
+
+
+function setUserProfileColorization(){
+	$("#span_dossiers").removeClass("selected");
+	$("#span_dossiers").addClass("grey");
+	$("#st_user").removeClass("disable");
+	$("#span_user").addClass("selected");
 };
 
 
