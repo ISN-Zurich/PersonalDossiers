@@ -78,12 +78,14 @@ LogView.prototype.showLogout = function(){
 			 console.log("clicekd 2");
 			 if (targetId !== 'st_log_out_confirm'){
 				 $("#st_log_out_confirm").addClass("hidden"); 
+				 $("#st_log_out").removeClass("selected"); 
 			 }
 		 }
 		 
 		 if ($("#st_log_out_confirm").hasClass("hidden") && targetId== "st_log_out"){
 			 console.log("clicked 3");
 			 $("#st_log_out_confirm").removeClass("hidden"); 
+			 $("#st_log_out").addClass("selected"); 
 			 console.log("removedClass from 3");
 			}
 	 });

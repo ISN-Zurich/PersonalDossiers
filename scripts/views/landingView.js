@@ -14,11 +14,19 @@ function landingView(controller){
 }
 
 landingView.prototype.open = function(){
+	
+			
 	this.update();
 };
 
 landingView.prototype.update = function(){
 	 var self= this;
+	 
+	 //prepare colorization of interaction box for the authenticated area
+	 $("#span_dossiers").removeClass("lightgrey");
+	 $("#span_dossiers").addClass("selected");
+	 $("#span_user").removeClass("lightgrey");
+	 
 	 var hashTag = self.controller.getHash();
 	 self.controller.chooseView(hashTag);
 };

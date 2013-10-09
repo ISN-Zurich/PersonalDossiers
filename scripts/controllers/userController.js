@@ -43,16 +43,19 @@ function userController() {
 		 //1. hide the landing view
 		 $("#landingView").hide();
 		 
-		 //2. show the login view
-		 self.chooseView();
-		 
-		 //3. clear the url from hash
+		//3. clear the url from hash
 		 var loc = window.location.href;
 		 index= loc.indexOf('#');
 		 
 		 if (index >0){
 			 window.location = loc.substring(0,index);
 		 }
+		 
+		 //2. show the login view
+		 var hashTag = self.getHash();
+		 self.chooseView(hashTag);
+		 self.colorizeInteractiveBox(hashTag);
+		 
 	 });
 	 
 	 
@@ -60,8 +63,17 @@ function userController() {
 		 console.log("hash change event binded");
 		 var hashTag = self.getHash();
 		 self.chooseView(hashTag);
+		 self.colorizeInteractiveBox(hashTag);
 	 });
 	 
+	 
+	 //interaction box colorization and de(in)-activeness
+//	 
+//	 if (self.oauth){
+//		 console.log("before enter colorization");
+//		 var hashTag = self.getHash();
+//		 this.colorizeInteractiveBox(hashTag);
+//	 };
 	
 	 
 } //end of constructor
@@ -96,10 +108,40 @@ userController.prototype.chooseView = function(viewHashString){
 	}
 };
 
+userController.prototype.colorizeInteractiveBox = function(hash){
+	console.log("enter colorize interactive box");
+		
+	switch (hash){
+	case 'personalDossiers':
+		$("#st_dossiers").removeClass("disable");
+		$("#span_user").removeClass("selected");
+		$("#span_dossiers").addClass("selected");
+		break;
+	case 'userProfile':
+		$("#st_user").removeClass("disable");
+		$("#span_dossiers").removeClass("selected");
+		$("#span_user").addClass("selected");
+		break;
+	case '':
+		if (this.oauth){
+			console.log("colorization when logged in");
+			$("#st_dossiers").removeClass("disable");
+			$("#span_user").removeClass("selected");
+			$("#span_dossiers").addClass("selected");
+		}else {
+			console.log("colorization when logged out");
+			$("#span_dossiers").removeClass("selected");
+			$("#span_user").removeClass("selected");
+		}
+		break;
+	}
+};
+
 userController.prototype.initOAuth = function() {
     console.log('initialize the oauth helper class');
     try {
 	this.oauth = new OAuthHelper("http://yellowjacket.ethz.ch/tools/");
+	 $(document).trigger('oauthSet');
     }
     catch (e) {
         this.oauth = undefined;

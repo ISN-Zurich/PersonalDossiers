@@ -3,19 +3,7 @@
 function WelcomeView(controller){
 	var self=this;
 	self.controller=controller;
-	self.tagID="welcome";
-
-//    $(document).bind('DossierListUpdate', function(){
-//        self.update();
-//    });
-//    
-    
-    //TO MOVE THE BELOW BINDING TO LANDING VIEW
-    
-//    $(document).bind('UserProfileUpdate', function(){
-//        self.update();
-//    });
-    
+	self.tagID="welcome"; 
 }
 
 WelcomeView.prototype.openDiv=openView;
@@ -39,6 +27,9 @@ WelcomeView.prototype.update = function(){
 	$("#notifications").empty();
 	$("#welcome").show();
 	$("#welcome").empty();
+	
+	
+	
 	
 	if ( self.controller.models.user.userProfile ) {
     	console.log("user profile existis, design welcome view");
@@ -97,3 +88,5 @@ WelcomeView.prototype.update = function(){
 WelcomeView.prototype.close=function(){
 	$('#'+this.tagID).addClass("hidden");
 };
+
+
