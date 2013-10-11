@@ -55,11 +55,34 @@ height:34px;
 
 
 
+/******LOGIN FORM******************/
 
+
+
+#loginButton {
+	
+	color: white;
+	background: #696969;
+	text-align: center;
+	cursor: pointer;  
+}
+
+
+
+#loginUl{
+	border: 0px solid red;
+}
+.pd_loginContainer{
+	
+	border: 0px solid green;
+}
+
+
+
+/*****end of login form***********/
 
 
 /**will REMOVE the below part*/
-
 #addbmbutton, .clickable {
     cursor: pointer;
 }
@@ -207,6 +230,7 @@ padding-left:3px;
 *********************************************** READY LOGIN FORM ******************************
 
 #subscribe, 
+
 #login{
    
     width: 60%; 
@@ -222,6 +246,7 @@ padding-left:3px;
         0px 0px 8px 5px rgba(208, 223, 226, 0.4) inset;
     border-radius: 5px;
 }
+
 #login{
     z-index: 22;
 }

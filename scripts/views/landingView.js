@@ -5,12 +5,20 @@ function landingView(controller){
 	
 	$(document).bind('UserProfileUpdate', function(){
 		console.log("user profile update binded in landing view");
-      self.update();
-  });
-	   $(document).bind('DossierListUpdate', function(){
-	        self.update();
-	    });
+		self.update();
+	});
+	
+	$(document).bind('DossierListUpdate', function(){
+		self.update();
+	});
 	    
+	   $("#st_log_in").bind("click", function(){
+			 console.log("clicked the login button");
+			 self.controller.models.authentication.loadData();
+			 self.controller.models.user.checkActiveUser();
+			 self.controller.views.login.open();			
+		 });   
+	   
 }
 
 landingView.prototype.open = function(){
@@ -26,6 +34,10 @@ landingView.prototype.update = function(){
 	 $("#span_dossiers").removeClass("pd_disable");
 	 $("#span_dossiers").addClass("pd_selected");
 	 $("#span_user").removeClass("pd_disable");
+	 $("#videoView").addClass("hide");
+	 $("#landingView").removeClass("hide");
+	 $("#loginFormContainer").addClass("hide");
+	 $("#IntroductionPD").addClass("hide");
 	 
 	 var hashTag = self.controller.getHash();
 	 self.controller.chooseView(hashTag);

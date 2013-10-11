@@ -31,8 +31,8 @@ function userController() {
 	self.models.user.checkActiveUser();
 	
 	if (this.oauth){
-		$("#st_user").removeClass("disable");
-		$("#st_dossiers").removeClass("disable");
+		$("#st_user").removeClass("pd_disable");
+		$("#st_dossiers").removeClass("pd_disable");
 	}
 
 	//we want to update the Log View once we have logged out
@@ -73,6 +73,7 @@ function userController() {
 		 var hash= window.location.hash;
 		 var hashTag = hash.substring(1);
 		 self.colorizeInteractiveBox(hashTag);
+		 self.chooseView(hashTag);
 	 });
 	
 	 

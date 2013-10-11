@@ -33,7 +33,7 @@ WelcomeView.prototype.update = function(){
 	
 	if ( self.controller.models.user.userProfile ) {
     	console.log("user profile existis, design welcome view");
-	$("#welcome").html("<p>Welcome "+self.controller.models.user.userProfile.name+"</p><p>Here is your personal dossier area</p>");
+	$("#welcome").html("<h3>Welcome "+self.controller.models.user.userProfile.name+"</h3>");
 }
 	
 		

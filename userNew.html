@@ -218,7 +218,7 @@
 
                                                                                                                                                                                                                                                                                                                         
         
-                        <div class="box snippetlist">
+                        <div class="box snippetlist hide">
 
 	
 	
@@ -303,11 +303,19 @@
         <div class="grey_bar in">Interact <a href="#comments" class="sb_icon disabled" id="in_comment" title="Comments [disabled]"><span class="hide">Comment</span></a><a href="/layout/set/print/content/view/full/24140" class="sb_icon" id="in_print" title="Print"><span class="hide">Print</span></a><a href="http://pdfcreate.ethz.ch" class="sb_icon" id="in_pdf" title="PDF"><span class="hide">PDF</span></a><a href="/content/tipafriend/24140" class="sb_icon" id="in_mail" title="Mail"><span class="hide">Mail</span></a></div>
     </div>
 <div class="column span-12" id="content">
-                                                                                                                                                                                                                                                                                                                        
-    
-        
 
-    <div class="video_container">
+				<div id="landingView" class="hide">
+					<div id="welcome" class="welcomeText hidden">
+						<ul id="dossiersUl"></ul>
+					</div>
+
+					<div id="userProfile" class=""></div>
+
+					<div id="notifications" class=""></div>
+				</div>
+
+
+	<div id="videoView" class="video_container">
     <h2 class="titlebar marginbottom1"><div class="show_info"></div>Featured Video</h2>
     <div class="video_overlay">
       <div class="video_overlay_img_detail">
@@ -444,7 +452,7 @@
 </div>
 	</div>
 <hr class="overview hide" />
-	<div class="entry">
+	<div id="IntroductionPD"class="entry">
 	<p> This is an introductory text about personal dossier management area. Personal Dossiers gives the flexibility to the users to create their own dossiers that will contain the dossier itmes of their choice. Based on their interest and their learning needs they can regulate their learning resources.</p>
 	
 	</div>
@@ -488,7 +496,7 @@
                                                                                                                                                                                                                                                                                                                     
         
                         
-<div class="box snippetlist hide">
+<div class="box snippetlist hide ">
 	<div class="sidebar-header darkblue">Welcome to the ISN’s Dossiers Page!</div>
 	<div class="snippetlist-content first alt-lightblue">
 		<div class="about_section_desc">
@@ -497,17 +505,44 @@
 	</div></div>            
 
 <div id="InteractionBox" class="grey_bar st"> <span class="pd_boxTitle">My Dossiers</span> 
-<a href="http://yellowjacket.ethz.ch/tools/user.html#notifications" class="sb_icon pd_interactionItem disable" id="st_notifications" title="Share on Google Plus" target=" "><span id= "span_notifications "  class="tabs_margin disable">N</span></a>
-<a href="http://yellowjacket.ethz.ch/tools/user.html#userProfile" class="sb_icon pd_interactionItem disable" id="st_user" title="Submit to Reddit" target=""><span class="tabs_margin">P</span></a>
-<a href="http://yellowjacket.ethz.ch/tools/user.html#personalDossiers" class="sb_icon pd_interactionItem disable" id="st_dossiers" title="Tweet about this" target=""><span class="tabs_margin">D</span></a>
- <a id="logView" class="sb_icon pd_interactionItem" title="Personal Dossier List"></a> 
+<a href="http://yellowjacket.ethz.ch/tools/userNew.html#notifications" class="sb_icon pd_interactionItem disable" id="st_notifications" title="Share on Google Plus" target=" "><span id= "span_notifications "  class="pd_tabs_margin pd_disable">N</span></a>
+<a href="http://yellowjacket.ethz.ch/tools/userNew.html#userProfile" class="sb_icon pd_interactionItem disable" id="st_user" title="Submit to Reddit" target=""><span class="pd_tabs_margin pd_disable">P</span></a>
+<a href="http://yellowjacket.ethz.ch/tools/userNew.html#personalDossiers" class="sb_icon pd_interactionItem disable" id="st_dossiers" title="Tweet about this" target=""><span class="pd_tabs_margin pd_disable">D</span></a>
+<a id="logView" class="sb_icon pd_interactionItem" title="Personal Dossier List"></a> 
 <!-- Design the login logout dynamically based on if we are logged in or not 
 <a href="https://www.facebook.com/sharer.php?u=http://www.isn.ethz.ch" class="sb_icon" id="st_facebook" title="Share on Facebook" target="_blank"><span class="tabs_margin">L</span></a>-->
 
-
-
 </div><!-- id="sidebar_right" -->
-	<!-- google_ad_section_end -->
+<br/>
+<br/>
+				<div id="loginFormContainer" class="box snippetlist ">
+					<div class="sidebar-header darkblue">Log into Your Personal
+						Area</div>
+					<div class="snippetlist-content first alt-lightblue">
+						<div class="about_section_desc">
+							<form id="loginForm">
+								<ul id="loginUl">
+									<li id="pd_uContainer" class="pd_loginContainer">
+										Username <span><input type="text" id="username" placeholder="username"></input>
+										</span>
+									</li>
+									<li id="pd_pContainer" class="pd_loginContainer">
+										Password <input type="text" id="password" placeholder="password"></input>
+									</li>
+ 									<li>  
+        							<p id="loginButton" value="Login" class=" pd_loginContainer clickable"> Login</p>
+        							</li>  
+								</ul>
+							</form>
+
+						</div>
+					</div>
+				</div>
+
+
+
+
+				<!-- google_ad_section_end -->
 	<hr class="hidden" />
     <div class="clearboth"></div>
     </div><!-- id="container" -->
