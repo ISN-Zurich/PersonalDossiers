@@ -34,6 +34,8 @@ landingView.prototype.update = function(){
 	 $("#span_dossiers").removeClass("pd_disable");
 	 $("#span_dossiers").addClass("pd_selected");
 	 $("#span_user").removeClass("pd_disable");
+	 $("#st_dossiers").removeClass("disable");
+	 $("#st_user").removeClass("disable");
 	 $("#videoView").addClass("hide");
 	 $("#landingView").removeClass("hide");
 	 $("#loginFormContainer").addClass("hide");
