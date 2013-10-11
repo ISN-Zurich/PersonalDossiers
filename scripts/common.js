@@ -34,6 +34,7 @@ function showErrorResponses(request){
 function setDossiersColorization() {
 	$("#st_dossiers").removeClass("disable");
 	$("#span_user").removeClass("selected");
+	$("#span_user").addClass("grey");
 	$("#span_dossiers").removeClass("grey");
 	$("#span_dossiers").addClass("selected");
 };
@@ -45,9 +46,9 @@ function setDossiersColorization() {
 
 function setLoggedOutColorization(){
 	$("#span_dossiers").removeClass("selected");
-	$("#span_dossiers").addClass("lightgrey");
+	$("#span_dossiers").addClass("disable");
 	$("#span_user").removeClass("selected");
-	$("#span_user").addClass("lightgrey");
+	$("#span_user").addClass("disable");
 	$("#st_dossiers").addClass("disable");
 	$("#st_user").addClass("disable");
 };

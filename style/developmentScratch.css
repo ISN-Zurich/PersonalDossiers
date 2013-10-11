@@ -1,21 +1,11 @@
 
-.tabs_margin {
-	padding-left:10px;
-}
+/**a should have a different font color if not clicked
 
-.selected {
-	color:blue;
-}
 
-.grey {
-	color:#696969;
-}
-
-.lightgrey {
-	color: #bebebe;
-}
-
-a.disable {
+/*add an extra formatting to disabled links. the pointer is not hand.*/
+a.disable  {
    pointer-events: none;
    cursor: default;
+  
 }
+

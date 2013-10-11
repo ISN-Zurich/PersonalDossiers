@@ -16,6 +16,30 @@ height:34px;
 	background-image:url(../images/interactionItem.png);
 }
 
+
+.tabs_margin {
+	padding-left:10px;
+}
+
+.selected {
+	color:blue;
+}
+
+.grey {
+	color:#696969;
+}
+
+
+/*
+.lightgrey {
+	color: #bebebe;
+}*/
+
+.disable {
+	color: #bebebe;
+}
+
+
 #st_notifications{
 	/*background-image:url(../images/notifications.png);*/
 }
@@ -29,6 +53,7 @@ height:34px;
 }
 
 
+/***********************End of Interaction Box*********************/
 
 
 
