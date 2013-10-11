@@ -43,6 +43,7 @@ LogView.prototype.update = function(){
 };
 
 LogView.prototype.showLogout = function(){
+	var self=this;
 	$("#st_log_in").empty();
 	$("#st_log_in").hide();
 	$("#st_log_out").remove();
@@ -69,26 +70,35 @@ LogView.prototype.showLogout = function(){
 		 self.controller.logout();
 	 });
 	 
-	 $(document).bind("click", function(e){
-		 console.log("clicked 1");
-		 var targetE= e.target;
-		 var targetId= targetE.id;
-		 //if the logout confirmation is visible
-		 if (!$("#st_log_out_confirm").hasClass("hidden") && targetId!== "st_log_out"){
-			 console.log("clicekd 2");
-			 if (targetId !== 'st_log_out_confirm'){
-				 $("#st_log_out_confirm").addClass("hidden"); 
-				 $("#st_log_out").removeClass("selected"); 
-			 }
-		 }
-		 
-		 if ($("#st_log_out_confirm").hasClass("hidden") && targetId== "st_log_out"){
-			 console.log("clicked 3");
-			 $("#st_log_out_confirm").removeClass("hidden"); 
-			 $("#st_log_out").addClass("selected"); 
-			 console.log("removedClass from 3");
-			}
+	 $("#logView").bind("click", function(){
+		 $("#st_log_out").addClass("selected"); 
+		 $("#st_log_out_confirm").removeClass("hidden"); 
+		 self.controller.loggoutClicked=true;
 	 });
+	 
+	 
+//	 $(document).bind("click", function(e){
+//		 console.log("clicked 1");
+//		 var targetE= e.target;
+//		 var targetId= targetE.id;
+//		 //if the logout confirmation is visible
+//		 if (!$("#st_log_out_confirm").hasClass("hidden") && targetId!== "st_log_out"){
+//			 console.log("clicekd 2");
+//			 if (targetId !== 'st_log_out_confirm'){
+//				 $("#st_log_out_confirm").addClass("hidden"); 
+//				 $("#st_log_out").removeClass("selected"); 
+//			 }
+//		 }
+//		
+//			 
+//		 
+//		 if ($("#st_log_out_confirm").hasClass("hidden") && targetId== "st_log_out"){
+//			 console.log("clicked 3");
+//			 $("#st_log_out_confirm").removeClass("hidden"); 
+//			 $("#st_log_out").addClass("selected"); 
+//			 console.log("removedClass from 3");
+//			}
+//	 });
 };
 
 
@@ -114,4 +124,14 @@ LogView.prototype.showLogin = function(){
 		 self.controller.views.login.open();			
 	 });
 	
+};
+
+
+LogView.prototype.showLogoutConfirm = function(){
+	 $("#st_log_out").addClass("selected"); 
+	 $("#st_log_out_confirm").removeClass("hidden"); 
+	 
+	 $("#st_log_out_confirm").bind("click", function(){
+		 self.controller.logout();
+	 });
 };

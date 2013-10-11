@@ -6,6 +6,7 @@ function userController() {
 	document.domain = 'ethz.ch';
 	
 	self.activeView=false;
+	self.loggoutClicked=false;
     self.initOAuth();
       
 	//initialization of models 
@@ -69,11 +70,15 @@ function userController() {
  // when we are coming from the index.html
  // the page during its loading should colorize the interaction box based on the hashed url
 	 $(window).load(function(){
+		 //we use the loggoutClicked flag to prevent the automatic loading of the page
+		 //when click on the <a> logView.
+		 if (!self.loggoutClicked){
 		 console.log("enter on window load");
 		 var hash= window.location.hash;
 		 var hashTag = hash.substring(1);
 		 self.colorizeInteractiveBox(hashTag);
 		 self.chooseView(hashTag);
+		 }
 	 });
 	
 	 
@@ -96,6 +101,9 @@ userController.prototype.chooseView = function(viewHashString){
 		break;
 	case 'notifications':
 		this.views.notifications.open();
+		break;
+	case 'logoutView':	
+		this.views.log.showLogoutConfirm();
 		break;
 	case '':
 		if (!this.oauth){
