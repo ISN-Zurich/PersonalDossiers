@@ -17,25 +17,23 @@ height:34px;
 }
 
 
-.tabs_margin {
+.pd_tabs_margin {
 	padding-left:10px;
 }
 
-.selected {
+.pd_selected {
 	color:blue;
 }
 
-.grey {
+/*.grey {
+	color:#696969;
+}*/
+
+.pd_active{
 	color:#696969;
 }
 
-
-/*
-.lightgrey {
-	color: #bebebe;
-}*/
-
-.disable {
+.pd_disable {
 	color: #bebebe;
 }
 
@@ -54,6 +52,9 @@ height:34px;
 
 
 /***********************End of Interaction Box*********************/
+
+
+
 
 
 

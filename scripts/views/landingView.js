@@ -23,9 +23,9 @@ landingView.prototype.update = function(){
 	 var self= this;
 	 
 	 //prepare colorization of interaction box for the authenticated area
-	 $("#span_dossiers").removeClass("disable");
-	 $("#span_dossiers").addClass("selected");
-	 $("#span_user").removeClass("disable");
+	 $("#span_dossiers").removeClass("pd_disable");
+	 $("#span_dossiers").addClass("pd_selected");
+	 $("#span_user").removeClass("pd_disable");
 	 
 	 var hashTag = self.controller.getHash();
 	 self.controller.chooseView(hashTag);

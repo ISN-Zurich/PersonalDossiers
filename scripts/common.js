@@ -32,11 +32,11 @@ function showErrorResponses(request){
 
 
 function setDossiersColorization() {
-	$("#st_dossiers").removeClass("disable");
-	$("#span_user").removeClass("selected");
-	$("#span_user").addClass("grey");
-	$("#span_dossiers").removeClass("grey");
-	$("#span_dossiers").addClass("selected");
+	$("#st_dossiers").removeClass("pd_disable");
+	$("#span_user").removeClass("pd_selected");
+	$("#span_user").addClass("pd_active");
+	$("#span_dossiers").removeClass("pd_active");
+	$("#span_dossiers").addClass("pd_selected");
 };
 
 
@@ -45,20 +45,20 @@ function setDossiersColorization() {
  * */
 
 function setLoggedOutColorization(){
-	$("#span_dossiers").removeClass("selected");
-	$("#span_dossiers").addClass("disable");
+	$("#span_dossiers").removeClass("pd_selected");
+	$("#span_dossiers").addClass("pd_disable");
 	$("#span_user").removeClass("selected");
-	$("#span_user").addClass("disable");
-	$("#st_dossiers").addClass("disable");
-	$("#st_user").addClass("disable");
+	$("#span_user").addClass("pd_disable");
+	$("#st_dossiers").addClass("pd_disable");
+	$("#st_user").addClass("pd_disable");
 };
 
 
 function setUserProfileColorization(){
-	$("#span_dossiers").removeClass("selected");
-	$("#span_dossiers").addClass("grey");
-	$("#st_user").removeClass("disable");
-	$("#span_user").addClass("selected");
+	$("#span_dossiers").removeClass("pd_selected");
+	$("#span_dossiers").addClass("pd_active");
+	$("#st_user").removeClass("pd_disable");
+	$("#span_user").addClass("pd_selected");
 };
 
 

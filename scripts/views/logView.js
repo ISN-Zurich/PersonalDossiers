@@ -53,7 +53,7 @@ LogView.prototype.showLogout = function(){
 
 	 span = $("<span/>", {
 		"id": "st_log_out",
-		"class":"tabs_margin",
+		"class":"pd_tabs_margin",
 		"text": "Lo"
 	}).appendTo("#logView");
 	 
@@ -102,7 +102,7 @@ LogView.prototype.showLogin = function(){
 
 	 span = $("<span/>", {
 		 "id":"st_log_in",
-		"class":"tabs_margin selected",
+		"class":"pd_tabs_margin pd_selected",
 		"text": "Li"
 	}).appendTo("#logView");
 	 
