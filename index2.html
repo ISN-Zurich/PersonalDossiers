@@ -59,7 +59,29 @@
 
 
 
+<!-- Inclusion of dossiers-project javascript files -->
+    <script type="text/javascript" src="libs/jquery.js"></script>
+    <script type="text/javascript" src="libs/sha1.js"></script>
+    <script type="text/javascript" src="libs/oauth.js"></script>
 
+    <script type="text/javascript" src="scripts/common.js"></script>
+
+    <script type="text/javascript" src="scripts/models/oauthhelper.js"></script>
+    <script type="text/javascript" src="scripts/models/authentication.js"></script>
+    <script type="text/javascript" src="scripts/models/dossierListModel.js"></script>
+    <script type="text/javascript" src="scripts/models/userModel.js"></script>
+
+    <script type="text/javascript" src="scripts/views/loginView.js"></script>
+    <script type="text/javascript" src="scripts/views/landingView.js"></script>
+    <script type="text/javascript" src="scripts/views/welcomeView.js"></script>
+    <script type="text/javascript" src="scripts/views/logView.js"></script>
+    <script type="text/javascript" src="scripts/views/userProfileView.js"></script>
+    <script type="text/javascript" src="scripts/views/interactionBox.js"></script>
+     <script type="text/javascript" src="scripts/views/notification.js"></script>
+
+    <script type="text/javascript" src="scripts/controllers/userController.js"></script>
+
+	
         						    						    						    						    						    						    						    						    						    						    						    						    						    						    						    						    						    						    	
 
     		  		      		  		  		      				        
@@ -194,8 +216,7 @@
 
 
 
-
-											<li><img class="big_img" src="http://mercury.ethz.ch:80/serviceengine/Files/ISN/720x270/170570/iresourcemultiple_files/799f7c60-6926-4cd0-9e48-49f77c3621e8/en/IISS.jpg" />
+<li><img class="big_img" src="http://mercury.ethz.ch:80/serviceengine/Files/ISN/720x270/170570/iresourcemultiple_files/799f7c60-6926-4cd0-9e48-49f77c3621e8/en/IISS.jpg" />
 <div class="drm">
               <a href="http://creativecommons.org/licenses/by/2.0/deed.en" target="_blank"><img src="http://mercury.ethz.ch:80/serviceengine/Files/ISN/15x9/92679/ilicense_icons/61eaf7ad-68ad-46a8-85e2-7c0be08e7409/en/cc.gif" alt="Creative Commons - Attribution 2.0 Generic" /></a>
                   <a href="http://www.flickr.com/photos/68842444@N03/8907370689/in/photolist-ez7AYH-ez7BJZ-f1BPFC-dNUdjx-dP4M8M-dP85uN-dP2t3e-dP4Mb4-dFF1Nb-fHt3sf-gi49J8-fQGnhc-dewjEU-eB5iPa" target="_blank"><img src="http://mercury.ethz.ch:80/serviceengine/Files/ISN/15x9/92679/ilicense_icons/153980b0-c06c-4f2b-9cea-5fd657881196/en/by.gif" alt="Creative Commons - Attribution 2.0 Generic" /></a>
@@ -610,7 +631,7 @@
         
                         <div class="box snippetlist">
 
-	<div class="snippetlist-header darkgray hide ">
+	<div class="snippetlist-header darkgray hide">
 		<div class="snippetlist-title darkgray">ISN Announcements</div>
 	</div>
 
@@ -656,18 +677,16 @@
 				&nbsp;<a class="endlink" href="/Digital-Library/Audio/Detail/?ots591=40db1b50-7439-887d-706e-8ec00590bdb9&amp;lng=en&amp;id=156062">More</a>
 			</div>
 		</div>
-		
-		<div id="InteractionBar" class="grey_bar st"> <span class="pd_boxTitle">My Account</span> 
+			</div>            
+
+
+<div id="InteractionBar" class="grey_bar st"> <span class="pd_boxTitle">My Account</span> 
 <a href="http://yellowjacket.ethz.ch/tools/userNew.html#notifications" class="sb_icon pd_interactionItem disable" id="st_notifications" title="Share on Google Plus" target=" "><span id= "span_notifications "  class="pd_tabs_margin pd_disable">N</span></a>
 <a href="http://yellowjacket.ethz.ch/tools/userNew.html#userProfile" class="sb_icon pd_interactionItem disable" id="st_user" title="Submit to Reddit" target=""><span id= "span_user" class="pd_tabs_margin pd_disable">P</span></a>
 <a href="http://yellowjacket.ethz.ch/tools/userNew.html#personalDossiers" class="sb_icon pd_interactionItem disable" id="st_dossiers" title="Tweet about this" target=""><span id= "span_dossiers" class="pd_tabs_margin pd_disable">D</span></a>
 <a href="http://yellowjacket.ethz.ch/tools/userNew.html#logoutView" class="sb_icon pd_a_selected" id="logView" title="Personal Dossier List"></a> 
 <!-- Design the login logout dynamically based on if we are logged in or not 
 <a href="https://www.facebook.com/sharer.php?u=http://www.isn.ethz.ch" class="sb_icon" id="st_facebook" title="Share on Facebook" target="_blank"><span class="tabs_margin">L</span></a>-->
-
-</div>
-			</div>            
-
 
 
 

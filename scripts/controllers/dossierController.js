@@ -83,7 +83,16 @@ function dossierController() {
 	   console.log("binded logout sent in constructor");
 	   window.location.href = 'user.html';
    });
-}
+   
+   
+   $(window).load(function(){
+	   console.log("enter on window load");
+	   var hash= window.location.hash;
+	   var hashTag = hash.substring(1);
+	   self.colorizeInteractiveBox(hashTag);
+	   self.chooseView(hashTag);
+   });
+} //end of constructor
 
     dossierController.prototype.hashedUrl = function() {
                //var  url_path= window.location.pathname;
@@ -165,6 +174,52 @@ function dossierController() {
     	authentication = new AuthenticationModel(this);
     	authentication.logout();
     };
+
+    dossierController.prototype.chooseView = function(viewHashString){
+	switch (viewHashString){
+	case 'personalDossiers':
+		this.views.welcome.open();
+		break;
+	case 'userProfile':
+		this.views.user.open();
+		break;
+	case 'notifications':
+		this.views.notifications.open();
+		break;
+	case 'logoutView':	
+		this.views.log.showLogoutConfirm();
+		break;
+	case '':
+		if (!this.oauth){
+			this.views.login.open();
+		}else { 
+			this.views.welcome.open();	
+		}
+		break;
+	}
+};
+
+dossierController.prototype.colorizeInteractiveBox = function(hash){
+	console.log("enter colorize interactive box");
+
+	switch (hash){
+	case 'personalDossiers':
+		setDossiersColorization();
+		break;
+	case 'userProfile':
+		console.log("user profile colorization");
+		setUserProfileColorization();
+		break;
+	case '':
+		if (this.oauth){
+			setDossiersColorization();
+		}else {
+			setLoggedOutColorization();
+		}
+		break;
+	}
+};
+
 
     var controller;
     console.log("enter main js");

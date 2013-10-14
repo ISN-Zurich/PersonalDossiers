@@ -13,3 +13,7 @@ a.disable  {
 	border: 0px solid green;
 	padding:0px;	
 }
+
+a:link{
+	text-decoration:none;
+}
