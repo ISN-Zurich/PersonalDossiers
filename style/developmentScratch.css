@@ -8,3 +8,8 @@ a.disable  {
    cursor: default;
 }
 
+/* this overrides the original class, by changing its paddings*/
+.snippetlist-content.first {
+	border: 0px solid green;
+	padding:0px;	
+}

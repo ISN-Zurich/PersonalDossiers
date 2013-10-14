@@ -57,14 +57,31 @@ height:34px;
 
 /******LOGIN FORM******************/
 
+#loginForm{
+	
+	border:0px solid black;
+	padding-bottom:0px;
+	
+}
 
+input#username, input#password {
+    background-color:transparent;
+    border: none;
+    border-bottom:1px dotted grey;
+    margin-left:10px;
+    margin:7px 0px 10px 10px;
+}
 
-#loginButton {
+p#loginButton {
 	
 	color: white;
 	background: #696969;
 	text-align: center;
-	cursor: pointer;  
+	cursor: pointer; 
+	border:0px solid red;
+	width:auto;
+	margin-bottom:0px;
+	margin-top:10px;
 }
 
 
@@ -75,8 +92,11 @@ height:34px;
 .pd_loginContainer{
 	
 	border: 0px solid green;
+	width:200px;
+	padding-left:-10px;
+	right:20px;
+	clear:both;
 }
-
 
 
 /*****end of login form***********/
