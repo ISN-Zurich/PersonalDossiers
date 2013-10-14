@@ -16,13 +16,18 @@ height:34px;
 	background-image:url(../images/interactionItem.png);
 }
 
+.pd_a_selected{
+background-image:url(../images/selected.png);
+color:white;
+}
 
 .pd_tabs_margin {
 	padding-left:10px;
 }
 
+
 .pd_selected {
-	color:blue;
+	color:white;
 }
 
 /*.grey {

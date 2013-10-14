@@ -32,20 +32,18 @@ landingView.prototype.update = function(){
 	 
 	 //prepare colorization of interaction box for the authenticated area
 	 
-
+//	 $("#st_dossiers").removeClass("disable");
 //	 $("#st_dossiers").addClass("pd_a_selected");
 //	 
-//	 
+//	 $("#span_dossiers").removeClass("pd_disable");
 //	 $("#span_dossiers").addClass("pd_selected");
 //	 
 //	 	 
-	 $("#logView").removeClass("pd_a_selected");
-	 $("#logView").addClass("pd_interactionItem");
-	 
-	 $("#st_dossiers").removeClass("disable");
-	 $("#span_dossiers").removeClass("pd_disable");
-	 $("#st_user").removeClass("disable");
-	 $("#span_user").removeClass("pd_disable");
+//	 $("#logView").removeClass("pd_a_selected");
+//	 $("#logView").addClass("pd_interactionItem");
+//	
+//	 $("#st_user").removeClass("disable");
+//	 $("#span_user").removeClass("pd_disable");
 	
 	 var hash= window.location.hash;
 	 var hashTag = hash.substring(1);
