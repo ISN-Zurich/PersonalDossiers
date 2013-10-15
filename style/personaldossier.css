@@ -72,30 +72,62 @@ color:white;
 input#username, input#password {
     background-color:transparent;
     border: none;
-    border-bottom:1px dotted grey;
-    margin-left:10px;
+    /*border-bottom:1px dotted grey;
     margin:7px 0px 10px 10px;
+    */
+    margin-left:18px;
+    margin-right:18px;
     color:grey;
+   
 }
 
+input#username{
+	 border-bottom:1px solid #c9cacf;
+	 padding-bottom:5px;
+	/* border:1px solid blue;*/
+}
 input#password{
 	 -webkit-text-security: disc;
+	 border:0px solid blue;
 }
 
 
-p#loginButton {
-	
-	color: white;
-	background: #696969;
+#loginButton {
+	color:#4c5160;
 	text-align: center;
 	cursor: pointer; 
 	border:0px solid red;
-	width:auto;
+	border-right:1px solid white;
+	width:115px;
 	margin-bottom:0px;
-	margin-top:10px;
+	padding-left:40px;
+	padding-right:40px;
+	text-aling:center;
 }
 
+#registerButton{
+	color:#4c5160;
+	text-align: center;
+	cursor: pointer; 
+	border:0px solid red;
+	width:114px;
+	margin-bottom:0px;
+	padding-left:30px;
+	padding-right:30px;
+}
+#buttonBorder{
+	width:4px;
+	height:28px;
+	background-color:white;
+	border-right:1px solid white;
+}
 
+.buttonContainer{
+	border-top:1px solid white;
+	height:23px;
+	padding-top:5px;
+	
+}
 
 #loginUl{
 	border: 0px solid red;

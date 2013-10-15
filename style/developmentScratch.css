@@ -11,7 +11,7 @@ a.disable  {
 /* this overrides the original class, by changing its paddings*/
 .snippetlist-content.first {
 	border: 0px solid green;
-	padding:0px;	
+	padding:0px 0px 0px 0px;
 }
 
 a:link{
