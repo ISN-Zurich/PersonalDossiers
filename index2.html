@@ -59,28 +59,32 @@
 
 
 
-<!-- Inclusion of dossiers-project javascript files -->
-    <script type="text/javascript" src="libs/jquery.js"></script>
-    <script type="text/javascript" src="libs/sha1.js"></script>
-    <script type="text/javascript" src="libs/oauth.js"></script>
 
-    <script type="text/javascript" src="scripts/common.js"></script>
+ <!-- Inclusion of dossiers-project javascript files -->
 
-    <script type="text/javascript" src="scripts/models/oauthhelper.js"></script>
-    <script type="text/javascript" src="scripts/models/authentication.js"></script>
-    <script type="text/javascript" src="scripts/models/dossierListModel.js"></script>
-    <script type="text/javascript" src="scripts/models/userModel.js"></script>
+	<script type="text/javascript" src="libs/jquery.js"></script>
+	<script type="text/javascript" src="libs/sha1.js"></script>
+	<script type="text/javascript" src="libs/oauth.js"></script>
 
-    <script type="text/javascript" src="scripts/views/loginView.js"></script>
-    <script type="text/javascript" src="scripts/views/landingView.js"></script>
-    <script type="text/javascript" src="scripts/views/welcomeView.js"></script>
+	<script type="text/javascript" src="scripts/common.js"></script>
+
+	<script type="text/javascript" src="scripts/models/oauthhelper.js"></script>
+	<script type="text/javascript" src="scripts/models/authentication.js"></script>
+	<script type="text/javascript" src="scripts/models/dossierListModel.js"></script>
+	<script type="text/javascript" src="scripts/models/bookmarkModel.js"></script>
+	<script type="text/javascript" src="scripts/models/userModel.js"></script>
+	
+	
     <script type="text/javascript" src="scripts/views/logView.js"></script>
-    <script type="text/javascript" src="scripts/views/userProfileView.js"></script>
-    <script type="text/javascript" src="scripts/views/interactionBox.js"></script>
-     <script type="text/javascript" src="scripts/views/notification.js"></script>
+    <script type="text/javascript" src="scripts/views/shareButtonView.js"></script>
 
-    <script type="text/javascript" src="scripts/controllers/userController.js"></script>
-
+	
+	<script type="text/javascript" src="scripts/views/dossierUsersView.js"></script>
+	<script type="text/javascript" src="scripts/views/dossierBannerView.js"></script>
+ 	<script type="text/javascript" src="scripts/views/dossierContentView.js"></script>
+ 	
+	<script type="text/javascript" src="scripts/controllers/dossierController.js"></script>
+	
 	
         						    						    						    						    						    						    						    						    						    						    						    						    						    						    						    						    						    						    	
 
@@ -446,7 +450,7 @@
 
 <!-- 69:25m -->
 
-  <div class="video_container">
+  <div class="video_container hide">
     <h2 class="titlebar marginbottom1"><div class="show_info"></div>Featured Video</h2>
     <div class="video_overlay">
       <div class="video_overlay_img_detail">
@@ -523,7 +527,7 @@
 
 	</div>
 			<hr class="overview hide" />
-		<div class="column featured2">
+		<div class="column featured2 hide">
 
 
 
@@ -589,7 +593,7 @@
 	<a href="/Digital-Library/Publications/Detail/?lng=en&amp;id=170138" class="more">More<span class="hide"> on &laquo;New Markets and Partners for Saudi Oil Exports&raquo;</span></a></p>
 </div>
 	</div>
-			<hr class="overview" />
+			<hr class="overview hide" />
 		<div class="column featured2 hide">
 
 
@@ -681,10 +685,10 @@
 
 
 <div id="InteractionBar" class="grey_bar st"> <span class="pd_boxTitle">My Account</span> 
-<a href="http://yellowjacket.ethz.ch/tools/userNew.html#notifications" class="sb_icon pd_interactionItem disable" id="st_notifications" title="Share on Google Plus" target=" "><span id= "span_notifications "  class="pd_tabs_margin pd_disable">N</span></a>
-<a href="http://yellowjacket.ethz.ch/tools/userNew.html#userProfile" class="sb_icon pd_interactionItem disable" id="st_user" title="Submit to Reddit" target=""><span id= "span_user" class="pd_tabs_margin pd_disable">P</span></a>
-<a href="http://yellowjacket.ethz.ch/tools/userNew.html#personalDossiers" class="sb_icon pd_interactionItem disable" id="st_dossiers" title="Tweet about this" target=""><span id= "span_dossiers" class="pd_tabs_margin pd_disable">D</span></a>
-<a href="http://yellowjacket.ethz.ch/tools/userNew.html#logoutView" class="sb_icon pd_a_selected" id="logView" title="Personal Dossier List"></a> 
+<a href="http://yellowjacket.ethz.ch/tools/userNew.html#notifications" class="sb_icon pd_interactionItem disable" id="st_notifications" title="Share on Google Plus" target=" "><span id= "span_notifications "  class="pd_tabs_margin">N</span></a>
+<a href="http://yellowjacket.ethz.ch/tools/userNew.html#userProfile" class="sb_icon pd_interactionItem" id="st_user" title="Submit to Reddit" target=""><span id= "span_user" class="pd_tabs_margin">P</span></a>
+<a href="http://yellowjacket.ethz.ch/tools/userNew.html#personalDossiers" class="sb_icon pd_interactionItem" id="st_dossiers" title="Tweet about this" target=""><span id= "span_dossiers" class="pd_tabs_margin">D</span></a>
+<a href="http://yellowjacket.ethz.ch/tools/userNew.html#logoutView" class="sb_icon pd_interactionItem" id="logView" title="Personal Dossier List"></a> 
 <!-- Design the login logout dynamically based on if we are logged in or not 
 <a href="https://www.facebook.com/sharer.php?u=http://www.isn.ethz.ch" class="sb_icon" id="st_facebook" title="Share on Facebook" target="_blank"><span class="tabs_margin">L</span></a>-->
 
