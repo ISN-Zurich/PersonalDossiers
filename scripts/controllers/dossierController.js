@@ -76,14 +76,12 @@ function dossierController() {
     else if (!self.oauth && !self.hashed) {
        console.log("the user is not loggedIn and there is no hash on the url");
         // user is not logged in go to user.html
-        //window.location.href = 'user.html';
-       window.location.href = 'userNew.html';
+        window.location.href = 'user.html';
     }
    
    $(document).bind("LogoutSent", function(){
 	   console.log("binded logout sent in constructor");
-	  //window.location.href = 'user.html';
-	   window.location.href = 'userNew.html';
+	  window.location.href = 'user.html';
    });
    
    

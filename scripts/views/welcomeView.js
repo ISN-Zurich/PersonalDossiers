@@ -71,8 +71,7 @@ WelcomeView.prototype.update = function(){
 		console.log("dosID is "+dosID);
 		var userModel = self.controller.models.user;
 		userModel.setActiveDossier(dosID);
-		//window.location.href="index.html";
-		window.location.href="index2.html";
+		window.location.href="index.html";
 		//window.href="index.html";
 		e.stopPropagation();
 	});
