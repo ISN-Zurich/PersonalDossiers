@@ -9,10 +9,17 @@ height:34px;
 
 .pd_boxTitle{
 	font-size:12px;
-	color:#4e5362;
+	color:#fff;
+	
 }
-
+#InteractionBar{
+	background-image:url(../images/bluegreybg.png);
+}
 .pd_interactionItem{
+	background-image:url(../images/bluegreybg.png);
+	
+}
+.greyBg{
 	background-image:url(../images/interactionItem.png);
 }
 
@@ -35,7 +42,7 @@ color:white;
 }*/
 
 .pd_active{
-	color:#696969;
+	color:#fff;
 }
 
 .pd_disable {

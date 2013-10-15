@@ -17,3 +17,17 @@ a.disable  {
 a:link{
 	text-decoration:none;
 }
+
+.grey_bar{
+display: inline-block;
+width: 212px;
+height: 28px;
+padding: 0px 0px 0px 18px;
+margin: 0;
+margin-bottom: 1px;
+vertical-align: middle;
+line-height: 28px;
+background: #4c5160 !important;
+color: #fff !important;
+/*background:url(../images/bluegreybg.png);*/
+}
