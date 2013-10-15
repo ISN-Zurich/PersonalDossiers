@@ -76,19 +76,31 @@ function dossierController() {
     else if (!self.oauth && !self.hashed) {
        console.log("the user is not loggedIn and there is no hash on the url");
         // user is not logged in go to user.html
-        window.location.href = 'user.html';
+        //window.location.href = 'user.html';
+       window.location.href = 'userNew.html';
     }
    
    $(document).bind("LogoutSent", function(){
 	   console.log("binded logout sent in constructor");
-	   window.location.href = 'user.html';
+	  //window.location.href = 'user.html';
+	   window.location.href = 'userNew.html';
    });
    
    
    $(window).load(function(){
 	   console.log("enter on window load");
+	   var hash= window.location.hash;
+		 var hashTag = hash.substring(1);
+		 self.chooseView(hashTag);
 
    });
+   
+   $(window).bind( "hashchange",function(){
+		 console.log("hash change event binded");
+		 var hashTag = self.getHash();
+		 self.chooseView(hashTag);
+		 self.colorizeInteractiveBox(hashTag);
+	 });
 } //end of constructor
 
     dossierController.prototype.hashedUrl = function() {
@@ -172,29 +184,29 @@ function dossierController() {
     	authentication.logout();
     };
 
-//    dossierController.prototype.chooseView = function(viewHashString){
-//	switch (viewHashString){
-//	case 'personalDossiers':
-//		this.views.welcome.open();
-//		break;
-//	case 'userProfile':
-//		this.views.user.open();
-//		break;
-//	case 'notifications':
-//		this.views.notifications.open();
-//		break;
-//	case 'logoutView':	
-//		this.views.log.showLogoutConfirm();
-//		break;
-//	case '':
-//		if (!this.oauth){
-//			this.views.login.open();
-//		}else { 
-//			this.views.welcome.open();	
-//		}
-//		break;
-//	}
-//};
+  dossierController.prototype.chooseView = function(viewHashString){
+	switch (viewHashString){
+	case 'personalDossiers':
+		this.views.welcome.open();
+		break;
+	case 'userProfile':
+		this.views.user.open();
+		break;
+	case 'notifications':
+		this.views.notifications.open();
+		break;
+	case 'logoutView':	
+		this.views.log.showLogoutConfirm();
+		break;
+	case '':
+		if (!this.oauth){
+			this.views.login.open();
+		}else { 
+			this.views.welcome.open();	
+		}
+		break;
+	}
+};
 //
 //dossierController.prototype.colorizeInteractiveBox = function(hash){
 //	console.log("enter colorize interactive box");

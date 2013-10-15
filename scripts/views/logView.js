@@ -71,6 +71,7 @@ LogView.prototype.showLogout = function(){
 	 });
 	 
 	 $("#logView").bind("click", function(){
+		 console.log("clicked log view, the loggout button");
 		 $("#st_log_out").addClass("selected"); 
 		 $("#st_log_out_confirm").removeClass("hidden"); 
 		 self.controller.loggoutClicked=true;
