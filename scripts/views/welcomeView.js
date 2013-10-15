@@ -4,6 +4,11 @@ function WelcomeView(controller){
 	var self=this;
 	self.controller=controller;
 	self.tagID="welcome"; 
+	$("#addDossierBtn").bind("click", function(e){
+		console.log("clicked the add Dossier button");
+		self.controller.models.dossierList.addDossier();
+	});
+	
 }
 
 WelcomeView.prototype.openDiv=openView;
@@ -28,12 +33,12 @@ WelcomeView.prototype.update = function(){
 	$("#welcome").show();
 	$("#welcome").empty();
 	
-	
+	$("#dossiersUl").empty();
 	
 	
 	if ( self.controller.models.user.userProfile ) {
     	console.log("user profile existis, design welcome view");
-	$("#welcome").html("<h3>Welcome "+self.controller.models.user.userProfile.name+"</h3>");
+	
 }
 	
 		
@@ -55,12 +60,12 @@ WelcomeView.prototype.update = function(){
 		} while (self.controller.models.dossierList.nextDossier());
 	}
 	
-	
-	p1=$("<p/>",{
-		"class": "deleteButton",
-		"id":"addDossierBtn",
-		"text": "add a new Dossier"
-	}).appendTo("#dossiersUl");
+//	
+//	p1=$("<p/>",{
+//		"class": "deleteButton",
+//		"id":"addDossierBtn",
+//		"text": "add a new Dossier"
+//	}).appendTo("#dossiersUl");
 	
 	
 	$("#dossiersUl").bind("click", function(e){
@@ -76,10 +81,6 @@ WelcomeView.prototype.update = function(){
 		e.stopPropagation();
 	});
 	
-	$("#addDossierBtn").bind("click", function(e){
-		console.log("clicked the add Dossier button");
-		self.controller.models.dossierList.addDossier();
-	});
 	
 	
 	

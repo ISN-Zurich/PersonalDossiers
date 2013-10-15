@@ -84,7 +84,7 @@ input#username, input#password {
     */
     margin-left:18px;
     margin-right:18px;
-    color:grey;
+    color:#a1aab1;
    
 }
 
@@ -149,8 +149,14 @@ input#password{
 }
 
 
+#pd_uContainer1 input:hover{
+      font-color:blue;  
+}
 
-
+#pd_uContainer2 input:hover{
+    background: rgb(74, 179, 198);
+    color:#4c5160;
+}
 
 /*****end of login form***********/
 
