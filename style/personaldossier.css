@@ -37,9 +37,6 @@ color:white;
 	color:white;
 }
 
-/*.grey {
-	color:#696969;
-}*/
 
 .pd_active{
 	color:#fff;
@@ -79,12 +76,9 @@ color:white;
 input#username, input#password {
     background-color:transparent;
     border: none;
-    /*border-bottom:1px dotted grey;
-    margin:7px 0px 10px 10px;
-    */
     margin-left:18px;
     margin-right:18px;
-    color:#a1aab1;
+   /*color:#a1aab1;*/
    
 }
 
@@ -148,15 +142,32 @@ input#password{
 	clear:both;
 }
 
-
-#pd_uContainer1 input:hover{
-      font-color:blue;  
+form.placeholder{
+	color:red;
 }
 
-#pd_uContainer2 input:hover{
-    background: rgb(74, 179, 198);
-    color:#4c5160;
+
+input::-webkit-input-placeholder{
+	color:#a1aab1;
 }
+
+input:hover::-webkit-input-placeholder{
+	color:#4c5160;
+}
+
+input:focus::-webkit-input-placeholder{
+	color:#4c5160;
+}
+input:-moz-placeholder, textarea:-moz-placeholder { 
+    color:red;
+}
+input::-moz-placeholder, textarea::-moz-placeholder { 
+   color:red;
+}
+input:-ms-input-placeholder, textarea:-ms-input-placeholder { 
+  color:red;
+}
+
 
 /*****end of login form***********/
 
