@@ -89,16 +89,15 @@ function dossierController() {
 //	   console.log("enter on window load");
 //	   var hash= window.location.hash;
 //		 var hashTag = hash.substring(1);
-//		 self.chooseView(hashTag);
 //
 //   });
    
-   $(window).bind( "hashchange",function(){
-		 console.log("hash change event binded");
-		 var hashTag = self.getHash();
-		 self.chooseView(hashTag);
-		 self.colorizeInteractiveBox(hashTag);
-	 });
+//   $(window).bind( "hashchange",function(){
+//		 console.log("hash change event binded");
+//		 var hashTag = self.getHash();
+//		 self.chooseView(hashTag);
+//		 //self.colorizeInteractiveBox(hashTag);
+//	 });
 } //end of constructor
 
     dossierController.prototype.hashedUrl = function() {
@@ -206,27 +205,27 @@ function dossierController() {
 	}
 };
 //
-//dossierController.prototype.colorizeInteractiveBox = function(hash){
-//	console.log("enter colorize interactive box");
-//
-//	switch (hash){
-//	case 'personalDossiers':
-//		setDossiersColorization();
-//		break;
-//	case 'userProfile':
-//		console.log("user profile colorization");
-//		setUserProfileColorization();
-//		break;
-//	case '':
-//		if (this.oauth){
-//			setDossiersColorization();
-//		}else {
-//			setLoggedOutColorization();
-//		}
-//		break;
-//	}
-//};
-//
+dossierController.prototype.colorizeInteractiveBox = function(hash){
+	console.log("enter colorize interactive box");
+
+	switch (hash){
+	case 'personalDossiers':
+		setDossiersColorization();
+		break;
+	case 'userProfile':
+		console.log("user profile colorization");
+		setUserProfileColorization();
+		break;
+	case '':
+		if (this.oauth){
+			setDossiersColorization();
+		}else {
+			setLoggedOutColorization();
+		}
+		break;
+	}
+};
+
 
     var controller;
     console.log("enter main js");
