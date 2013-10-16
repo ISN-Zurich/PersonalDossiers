@@ -85,10 +85,11 @@ input#username, input#password {
 
 input#username{
 	 border-bottom:1px solid #c9cacf;
-	 padding-bottom:5px;
+	 padding-bottom:3px;
 	/* border:1px solid blue;*/
 }
 input#password{
+	margin-top:-3px;
 	 -webkit-text-security: disc;
 	 border:0px solid blue;
 }
