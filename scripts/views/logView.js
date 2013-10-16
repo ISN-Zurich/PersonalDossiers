@@ -23,6 +23,28 @@ function LogView(controller){
 	        self.update();
 	    });
 	
+	  $(document).bind("click", function(e){
+	  console.log("clicked 1");
+	  var targetE= e.target;
+	  var targetId= targetE.id;
+	  if($("#st_log_out") && $("#st_log_out_confirm")){
+	  //if the logout confirmation is visible
+	  if (!$("#st_log_out_confirm").hasClass("hidden") && targetId!== "st_log_out"){
+	  console.log("clicekd 2");
+	  if (targetId !== 'st_log_out_confirm'){
+	  $("#st_log_out_confirm").addClass("hidden"); 
+	  $("#st_log_out").removeClass("selected"); 
+	  }
+	  }
+
+	  if ($("#st_log_out_confirm").hasClass("hidden") && targetId== "st_log_out"){
+	  console.log("clicked 3");
+	  $("#st_log_out_confirm").removeClass("hidden"); 
+	  $("#st_log_out").addClass("selected"); 
+	  console.log("removedClass from 3");
+	  }
+	  }
+	  });
 }
 
 LogView.prototype.open = function(){
@@ -78,28 +100,7 @@ LogView.prototype.showLogout = function(){
 	 });
 	 
 	 
-//	 $(document).bind("click", function(e){
-//		 console.log("clicked 1");
-//		 var targetE= e.target;
-//		 var targetId= targetE.id;
-//		 //if the logout confirmation is visible
-//		 if (!$("#st_log_out_confirm").hasClass("hidden") && targetId!== "st_log_out"){
-//			 console.log("clicekd 2");
-//			 if (targetId !== 'st_log_out_confirm'){
-//				 $("#st_log_out_confirm").addClass("hidden"); 
-//				 $("#st_log_out").removeClass("selected"); 
-//			 }
-//		 }
-//		
-//			 
-//		 
-//		 if ($("#st_log_out_confirm").hasClass("hidden") && targetId== "st_log_out"){
-//			 console.log("clicked 3");
-//			 $("#st_log_out_confirm").removeClass("hidden"); 
-//			 $("#st_log_out").addClass("selected"); 
-//			 console.log("removedClass from 3");
-//			}
-//	 });
+
 };
 
 
@@ -130,6 +131,10 @@ LogView.prototype.showLogin = function(){
 
 LogView.prototype.showLogoutConfirm = function(){
 	 $("#st_log_out").addClass("selected"); 
+	 $("#logView").addClass("pd_a_selected");
+	 $("#st_dossiers").removeClass("pd_a_selected");
+	 $("#st_user").removeClass("pd_a_selected");
+	 
 	 $("#st_log_out_confirm").removeClass("hidden"); 
 	 
 	 $("#st_log_out_confirm").bind("click", function(){

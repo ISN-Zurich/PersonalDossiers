@@ -38,6 +38,7 @@ function setDossiersColorization() {
 	$("#st_dossiers").addClass("pd_a_selected");
 	
 	$("#st_user").removeClass("disable");
+	$("#logView").removeClass("pd_a_selected");
 	$("#st_user").removeClass("pd_a_selected");
 	$("#span_user").addClass("pd_active");
 	
@@ -63,6 +64,7 @@ function setLoggedOutColorization(){
 function setUserProfileColorization(){
 	$("#st_dossiers").removeClass("disable");
 	$("#st_dossiers").removeClass("pd_a_selected");
+	$("#logView").removeClass("pd_a_selected");
 	$("#span_dossiers").addClass("pd_active");
 	
 	$("#st_user").removeClass("disable");
