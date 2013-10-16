@@ -57,8 +57,15 @@ display:inline-block !important;
 	height:28px;
 	/*background-color:#4C5160 !important;*/
 	background-color:transparent;
-	background-position:-1px -1px;
+	background-position:0px 0px;
 	background-repeat:no-repeat;
 	background-attachment:scroll;
 	border-left:solid 1px white;
+}
+.pd_add_dossier{
+	display:inline;
+	width:28px;
+	height:28px;
+	border-left:solid 1px white;
+	float:right;
 }
