@@ -85,13 +85,13 @@ function dossierController() {
    });
    
    
-   $(window).load(function(){
-	   console.log("enter on window load");
-	   var hash= window.location.hash;
-		 var hashTag = hash.substring(1);
-		 self.chooseView(hashTag);
-
-   });
+//   $(window).load(function(){
+//	   console.log("enter on window load");
+//	   var hash= window.location.hash;
+//		 var hashTag = hash.substring(1);
+//		 self.chooseView(hashTag);
+//
+//   });
    
    $(window).bind( "hashchange",function(){
 		 console.log("hash change event binded");

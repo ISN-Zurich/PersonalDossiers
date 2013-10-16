@@ -54,7 +54,7 @@ LogView.prototype.showLogout = function(){
 
 	 span = $("<span/>", {
 		"id": "st_log_out",
-		"class":"pd_tabs_margin",
+		"class":"pd_tabs_margin pd_active",
 		"text": "Lo"
 	}).appendTo("#logView");
 	 
