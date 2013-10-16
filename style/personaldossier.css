@@ -188,11 +188,31 @@ input:focus::-ms-input-placeholder, textarea:-ms-input-placeholder {
 
 
 
+
+/*****ADD DOSSIER BUTTON**********/
+
+.pd_generalButton{
+display: inline-block;
+width: 212px;
+height: 28px;
+padding: 0px 0px 0px 18px;
+margin: 0;
+margin-bottom: 1px;
+vertical-align: middle;
+line-height: 28px;
+background: #ebedee !important;
+color: #fff !important;	}
+
+.pd_img{
+	float:left;
+}
 /**index.html css*/
 #addbmbutton, .clickable {
     cursor: pointer;
 }
-
+#st_addDossier{
+	background-image:url(../images/add.png);
+}
 
 
 
@@ -243,7 +263,7 @@ input:focus::-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 
 #addDossierBtn{
-	font-size:14px;
+	font-size:11px;
 	margin-right:10px;
 }
 .headerTitleContainer{
