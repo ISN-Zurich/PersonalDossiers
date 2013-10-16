@@ -78,6 +78,7 @@ input#username, input#password {
     border: none;
     margin-left:18px;
     margin-right:18px;
+    height:22px;
    /*color:#a1aab1;*/
    
 }
@@ -94,52 +95,50 @@ input#password{
 
 
 #loginButton {
+	display:inline;
+	width:45px;
 	color:#4c5160;
 	text-align: center;
 	cursor: pointer; 
-	border:0px solid red;
 	border-right:1px solid white;
-	width:115px;
-	margin-bottom:0px;
+	/*border:1px solid green;*/
 	padding-left:40px;
 	padding-right:40px;
 	text-aling:center;
+	padding-top:6px;
+	padding-bottom:10px;
 }
 
 #registerButton{
+	display:inline;
 	color:#4c5160;
 	text-align: center;
 	cursor: pointer; 
 	border:0px solid red;
-	width:114px;
+	width:50px;
 	margin-bottom:0px;
 	padding-left:30px;
 	padding-right:30px;
 }
-#buttonBorder{
-	width:4px;
-	height:28px;
-	background-color:white;
-	border-right:1px solid white;
-}
 
 .buttonContainer{
+	width:229px;
 	border-top:1px solid white;
-	height:23px;
-	padding-top:5px;
-	
+	height:22px;
+	padding-top:5px;	
 }
 
 #loginUl{
-	border: 0px solid red;
+	border: 0px solid blue;
 }
 .pd_loginContainer{
-	
+	height:28px:
 	border: 0px solid green;
 	width:200px;
 	padding-left:-10px;
 	right:20px;
 	clear:both;
+	
 }
 
 form.placeholder{
