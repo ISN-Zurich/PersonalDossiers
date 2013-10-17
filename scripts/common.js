@@ -43,6 +43,9 @@ function setDossiersColorization() {
 	$("#span_user").addClass("pd_active");
 	
 	//$("#span_dossiers").addClass("pd_selected");
+	
+	$("#modifiedListHeader").removeClass("hide");
+	 $("#followingListHeader").removeClass("hide");
 };
 
 
@@ -62,6 +65,10 @@ function setLoggedOutColorization(){
 
 
 function setUserProfileColorization(){
+	$("#modifiedListHeader").addClass("hide");
+	$("#followingListHeader").addClass("hide");
+	$("#dossierListHeader").addClass("hide");
+		
 	$("#st_dossiers").removeClass("disable");
 	$("#st_dossiers").removeClass("pd_a_selected");
 	$("#logView").removeClass("pd_a_selected");
@@ -72,7 +79,7 @@ function setUserProfileColorization(){
 	$("#span_user").removeClass("pd_active");
 	$("#span_user").addClass("pd_selected");
 	
-		
+	
 };
 
 

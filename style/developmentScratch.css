@@ -3,20 +3,24 @@
 
 
 /*add an extra formatting to disabled links. the pointer is not hand.*/
+
 a.disable  {
    pointer-events: none;
    cursor: default;
 }
 
 /* this overrides the original class, by changing its paddings*/
+
 .snippetlist-content.first {
 	border: 0px solid green;
 	padding:0px 0px 0px 0px;
 }
 
+
 a:link{
 	text-decoration:none;
 }
+
 
 .pd_grey_bar{
 display: inline-block;
@@ -29,20 +33,6 @@ vertical-align: middle;
 line-height: 28px;
 background: #4c5160 !important;
 color: #fff !important;
-/*background:url(../images/bluegreybg.png);*/
-}
-
-.grey_bar_btn{
-display: inline-block;
-width: 212px;
-height: 28px;
-padding: 0px 0px 0px 18px;
-margin: 0;
-margin-bottom: 1px;
-vertical-align: middle;
-line-height: 28px;
-background: #ebedee !important;
-color: #4C5160 !important;
 }
 
 
@@ -51,17 +41,19 @@ color: #4C5160 !important;
 	
 }
 
+
 .pd_sb_icon{
 display:inline-block !important;
 	width:28px;
 	height:28px;
-	/*background-color:#4C5160 !important;*/
 	background-color:transparent;
 	background-position:0px 0px;
 	background-repeat:no-repeat;
 	background-attachment:scroll;
 	border-left:solid 1px white;
 }
+
+
 .pd_add_dossier{
 	display:inline;
 	width:28px;
@@ -69,3 +61,20 @@ display:inline-block !important;
 	border-left:solid 1px white;
 	float:right;
 }
+
+
+
+.pd_grey_head{
+/*display: inline-block;*/
+width: 452px;
+height: 28px;
+padding: 0px 0px 0px 18px;
+margin-left: 0px;
+margin-bottom: 1px;
+vertical-align: middle;
+line-height: 28px;
+background: #ebedee !important;
+color: grey !important;
+font-size:12px;
+}
+

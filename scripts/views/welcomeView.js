@@ -18,6 +18,7 @@ WelcomeView.prototype.open = function(){
 	$('#findinformation').show();
 	$('#socials').show();
 	$('#addDossier').show();
+	$('#dossierListHeader').show();
 	console.log("called open of the WelcomeView");
 	this.update();
 	$('#'+this.tagID).removeClass("hidden");
