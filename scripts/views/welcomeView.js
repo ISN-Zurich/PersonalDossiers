@@ -70,7 +70,7 @@ WelcomeView.prototype.update = function(){
 			
 			img=$("<img/>", {
 				"class": "floatleft",
-				"src":"http://mercury.ethz.ch:80/serviceengine/Files/ISN/160x120/166389/iresourcemultiple_files/a01bc06e-3a33-4f5f-9290-5662c2349516/en/HassanWirajuda160x120.jpg",
+				"src":self.controller.models.dossierList.getDossierImage(),
 				"width":"80px",
 				"height":"60px"
 			}).appendTo(div2);
@@ -86,12 +86,13 @@ WelcomeView.prototype.update = function(){
 			
 			pS =$("<p/>", {
 				"class":"small",
-			    "text": "2013-07-08"
+			   // "text": "2013-07-08"
 			}).appendTo(div3);
 			
 			p =$("<p/>", {
 				"class":"small",
-			    "text": "In this podcast, the former Foreign Minister of Indonesia, Hassan Wirajuda, outlines the thinking behind Jakarta&amp;rsquo;s current &amp;lsquo;free and active&amp;rsquo; foreign policy (bebas aktif); how the policy is shaping its relationships with the US, China and other ASEAN states; and how it might impact Indonesia&amp;rsquo;s 2014 presidential election."
+				// "text": "In this podcast, the former Foreign Minister of Indonesia, Hassan Wirajuda, outlines the thinking behind Jakarta&amp;rsquo;s current &amp;lsquo;free and active&amp;rsquo; foreign policy (bebas aktif); how the policy is shaping its relationships with the US, China and other ASEAN states; and how it might impact Indonesia&amp;rsquo;s 2014 presidential election."
+				"text":self.controller.models.dossierList.getDossierDescription()
 			}).appendTo(div3);
 			if (self.controller.oauth){
 			divDelContainer =$("<div/>", {
@@ -115,6 +116,9 @@ WelcomeView.prototype.update = function(){
 			lastbr2=$("<br/>", {
 
 			}).appendTo(div1);
+			hr=$("<hr/>", {
+				"class":"overview"
+			}).appendTo("#welcome");
 			
 		} while (self.controller.models.dossierList.nextDossier());
 	}

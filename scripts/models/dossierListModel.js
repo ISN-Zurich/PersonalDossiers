@@ -62,6 +62,23 @@ DossierListModel.prototype.getDossierTitle = function(){
 	}
 };
 	
+DossierListModel.prototype.getDossierDescription = function(){
+	if( this.dossierList && this.dossierList.length > 0) {
+		return this.dossierList[this.index].description;
+	}
+};
+
+DossierListModel.prototype.getDossierImage = function(){
+	if( this.dossierList && this.dossierList.length > 0) {
+		return this.dossierList[this.index].image;
+	}
+};
+
+DossierListModel.prototype.getUserType=function(){
+	if( this.dossierList && this.dossierList.length > 0) {
+	return this.dossierList[index].user_type;
+	}
+};
 
 DossierListModel.prototype.getActiveDossier = function(){
     console.log("get active dossier in dossier list model");
@@ -158,9 +175,7 @@ DossierListModel.prototype.getUserDossiers=function(){
     }
 };
 
-DossierListModel.prototype.getUserType=function(index){
-	return this.dossierList[index].dossier_id;
-};
+
 
 DossierListModel.prototype.addDossier=function(){
     console.log("enter addDossier in Bookmark Model");
