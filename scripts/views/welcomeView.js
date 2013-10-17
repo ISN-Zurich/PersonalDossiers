@@ -47,6 +47,18 @@ WelcomeView.prototype.update = function(){
 		console.log("dossier list is present design dossier list - welcome view");
 
 		dossierId=dossierListModel.getDossierId();
+		
+		headerBlue =$("<div/>", {
+			"id": "dossierListHeader",
+			"class": "sidebar-header darkblue",
+			"text":"Personal Dossiers"
+		}).appendTo("#welcome");
+		
+		header1 =$("<div/>", {
+			"id": "modifiedListHeader",
+			"class": "pd_grey_head",
+			"text":"Created / modified"
+		}).appendTo("#welcome");
 
 		do {
 			div1 =$("<div/>", {
@@ -107,18 +119,29 @@ WelcomeView.prototype.update = function(){
 			lastbr2=$("<br/>", {
 
 			}).appendTo(div1);
+			
+		if (dossierListModel.index < dossierListModel.dossierList.length-1){
 			hr=$("<hr/>", {
 				"class":"overview"
 			}).appendTo("#welcome");
+		}else{
+			hr=$("<hr/>", {
+				"class":"overview white"
+			}).appendTo("#welcome");
+		}	
 		} while (dossierListModel.nextDossier());
 	}
 
-//	followingHeader =$("<div/>", {
-//		"id":"modifiedListHeader",
-//		"class": "pd_grey_head",
-//		"text":"Created / modified"
-//	}).appendTo(div1);
-//	
+
+	
+	
+followingHeader =$("<div/>", {
+	"id": "followinhListHeader",
+	"class": "pd_grey_head",
+	"text":"Followed"
+}).appendTo("#welcome");
+
+
 	
 	$("#welcome").bind("click", function(e){
 		console.log("clicked the dossier category");
