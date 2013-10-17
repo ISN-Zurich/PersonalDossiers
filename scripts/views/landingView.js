@@ -4,20 +4,21 @@ function landingView(controller){
 	self.tagID = 'landingView';
 	
 	$(document).bind('UserProfileUpdate', function(){
-		console.log("user profile update binded in landing view");
+		console.log("user profile update bound in landing view");
 		self.update();
 	});
-	
+
 	$(document).bind('DossierListUpdate', function(){
+		console.log("dossier list update bound in landing view");
 		self.update();
 	});
 	    
-	   $("#st_log_in").bind("click", function(){
-			 console.log("clicked the login button");
-			 self.controller.models.authentication.loadData();
-			 self.controller.models.user.checkActiveUser();
-			 self.controller.views.login.open();			
-		 });   
+	$("#st_log_in").bind("click", function(){
+		console.log("clicked the login button");
+		self.controller.models.authentication.loadData();
+		self.controller.models.user.checkActiveUser();
+		self.controller.views.login.open();			
+	});   
 	   
 }
 
@@ -44,19 +45,15 @@ landingView.prototype.update = function(){
 	 
 	 $("#addDossierBtn").removeClass("hide");
 	
-	 var hash= window.location.hash;
-	 var hashTag = hash.substring(1);
-	 self.controller.colorizeInteractiveBox(hashTag);
-	 self.controller.chooseView(hashTag);
+	
 	 
 	 $("#videoView").addClass("hide");
 	 $("#landingView").removeClass("hide");
-//	 $("#modifiedListHeader").removeClass("hide");
-//	 $("#followingListHeader").removeClass("hide");
 	 $("#loginFormContainer").addClass("hide");
 	 $("#IntroductionPD").addClass("hide");
-	 
-	 var hashTag = self.controller.getHash();
+	 var hash= window.location.hash;
+	 var hashTag = hash.substring(1);
+	 self.controller.colorizeInteractiveBox(hashTag);
 	 self.controller.chooseView(hashTag);
 };
 

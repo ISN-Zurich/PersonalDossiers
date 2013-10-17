@@ -81,7 +81,8 @@ function userController() {
 		 }
 	 });
 	
-	 
+	
+	
 } //end of constructor
 
 
@@ -92,26 +93,24 @@ userController.prototype.getHash = function(){
 };
 
 userController.prototype.chooseView = function(viewHashString){
-	switch (viewHashString){
-	case 'personalDossiers':
-		this.views.welcome.open();
-		break;
-	case 'userProfile':
-		this.views.user.open();
-		break;
-	case 'notifications':
-		this.views.notifications.open();
-		break;
-	case 'logoutView':	
-		this.views.log.showLogoutConfirm();
-		break;
-	case '':
-		if (!this.oauth){
-			this.views.login.open();
-		}else { 
+	if (!this.oauth){
+		this.views.login.open();
+	}else { 
+		switch (viewHashString){
+		case 'userProfile':
+			this.views.user.open();
+			break;
+		case 'notifications':
+			this.views.notifications.open();
+			break;
+		case 'logoutView':	
+			this.views.log.showLogoutConfirm();
+			break;
+		case 'personalDossiers':
+		default:
 			this.views.welcome.open();	
+			break;
 		}
-		break;
 	}
 };
 

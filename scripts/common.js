@@ -65,10 +65,8 @@ function setLoggedOutColorization(){
 
 
 function setUserProfileColorization(){
-	$("#modifiedListHeader").addClass("hide");
-//	$("#followingListHeader").addClass("hide");
-//	$("#dossierListHeader").addClass("hide");
-		
+	
+	
 	$("#st_dossiers").removeClass("disable");
 	$("#st_dossiers").removeClass("pd_a_selected");
 	$("#logView").removeClass("pd_a_selected");

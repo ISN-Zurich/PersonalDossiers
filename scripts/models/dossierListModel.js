@@ -23,15 +23,6 @@ function DossierListModel(controller){
 	console.log("initialized dossier list model");
 }
 
-//DossierListModel.prototype.loadData = function() {
-//	var profileObj=localStorage.getItem("userProfile");
-//	
-//	if (profileObj){
-//		profileObj= JSON.parse(profileObj);
-//	}
-//	this.profileData=profileObj;
-//};
-
 DossierListModel.prototype.reset=function(){
 	this.index = 0;
 };
