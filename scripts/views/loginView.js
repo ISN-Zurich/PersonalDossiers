@@ -4,11 +4,6 @@ function LoginView(controller){
 	self.tagID="login";
 		
 	$("#loginButton").bind("click", function(){
-		// fixes #21
-//		$("#IntroductionPD").addClass("hide");
-//		$("#videoView").addClass("hide");
-//		$("#landingView").removeClass("hide");
-//		$("#loginFormContainer").addClass("hide");
 		var authenticationModel = self.controller.models['authentication'];
 		var email=$("#username").val();
 		var password=$("#password").val();
