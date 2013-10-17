@@ -32,7 +32,7 @@ WelcomeView.prototype.update = function(){
 	$("#userProfile").empty();
 	$("#notifications").empty();
 	$("#welcome").show();
-	$("#welcome").empty();
+	//$("#welcome").empty();
 	
 	$("#dossiersUl").empty();
 	
@@ -58,17 +58,17 @@ WelcomeView.prototype.update = function(){
 				"id" : "dossier" + self.controller.models.dossierList.getDossierId(),
 				"text":self.controller.models.dossierList.getDossierTitle()
 			}).appendTo("#dossiersUl");
+			 
+//			div =$("<li/>", {
+//				"class": "dossierCat",
+//				"id" : "dossier" + self.controller.models.dossierList.getDossierId(),
+//				"text":self.controller.models.dossierList.getDossierTitle()
+//			}).appendTo("#welcome");
+			
 		} while (self.controller.models.dossierList.nextDossier());
 	}
 	
-//	
-//	p1=$("<p/>",{
-//		"class": "deleteButton",
-//		"id":"addDossierBtn",
-//		"text": "add a new Dossier"
-//	}).appendTo("#dossiersUl");
-	
-	
+
 	$("#dossiersUl").bind("click", function(e){
 		console.log("clicked the dossier category");
 		var targetE = e.target;

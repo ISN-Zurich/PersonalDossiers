@@ -51,8 +51,8 @@ landingView.prototype.update = function(){
 	 
 	 $("#videoView").addClass("hide");
 	 $("#landingView").removeClass("hide");
-	 $("#modifiedListHeader").removeClass("hide");
-	 $("#followingListHeader").removeClass("hide");
+//	 $("#modifiedListHeader").removeClass("hide");
+//	 $("#followingListHeader").removeClass("hide");
 	 $("#loginFormContainer").addClass("hide");
 	 $("#IntroductionPD").addClass("hide");
 	 

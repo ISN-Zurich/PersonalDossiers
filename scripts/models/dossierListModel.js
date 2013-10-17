@@ -158,6 +158,9 @@ DossierListModel.prototype.getUserDossiers=function(){
     }
 };
 
+DossierListModel.prototype.getUserType=function(index){
+	return this.dossierList[index].dossier_id;
+};
 
 DossierListModel.prototype.addDossier=function(){
     console.log("enter addDossier in Bookmark Model");
