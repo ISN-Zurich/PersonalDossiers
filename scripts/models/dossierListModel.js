@@ -65,9 +65,21 @@ DossierListModel.prototype.getDossierImage = function(){
 	}
 };
 
-DossierListModel.prototype.getUserType=function(){
+DossierListModel.prototype.getUserType=function(index){
 	if( this.dossierList && this.dossierList.length > 0) {
 	return this.dossierList[index].user_type;
+	}
+};
+
+DossierListModel.prototype.isFollowedDossier = function(index){
+	console.log("enter isFollowedDossier");
+	userType=this.getUserType(index);
+	if (userType == "user"){
+		console.log("userType is user");
+		return true;
+	}else{
+		console.log("userType is other");
+		return false;
 	}
 };
 
