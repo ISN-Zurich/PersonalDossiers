@@ -112,7 +112,7 @@ WelcomeView.prototype.close=function(){
 };
 
 
-WelcomeView.prototype.renderMyOwnItem=function(){
+WelcomeView.prototype.renderMyOwnItem=function(div1){
 	console.log("enter redering my item");
 
 	var dossierListModel=self.controller.models.dossierList;
@@ -126,7 +126,7 @@ WelcomeView.prototype.renderMyOwnItem=function(){
 //	}
 
 
-	if (!dossierListModel.isFollowedDossier(dossierListModel.index)){
+	if (!dossierListModel.isFollowedDossier()){
 
 console.log("enter if in condition");
 		div1 =$("<div/>", {
