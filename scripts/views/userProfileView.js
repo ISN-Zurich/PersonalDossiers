@@ -6,6 +6,15 @@ function userProfileView(controller){
 	var self=this;
 	self.controller=controller;
 	self.tagID="userProfile";
+	
+	$("#pd_uContainer3").bind("click", function(e){
+		console.log("clicked the edit user profile button");
+		 $("#titleInput").attr('contenteditable', 'true');
+		 $("#nameInput").attr('contenteditable', 'true');
+		 $("#emailInput").attr('contenteditable', 'true');
+		  
+		//self.controller.models.dossierList.addDossier();
+	});
 }
 
 userProfileView.prototype.open = function(){
@@ -45,7 +54,8 @@ userProfileView.prototype.update= function(){
 		console.log("designed the title label ");
 		
 		titleinput =$("<div/>", {
-			"class": "adv_search_input_container",
+			"id":"titleInput",
+			"class": " adv_search_label adv_search_input_container",
 			//"text":"Mr." //to be designed dynamically	
 		    "text": userModel.getTitle()
 		}).appendTo(titleContainer);
@@ -61,7 +71,8 @@ userProfileView.prototype.update= function(){
 		}).appendTo(nameContainer);
 		
 		nameinput =$("<div/>", {
-			"class": "adv_search_input_container",
+			"id":"nameInput",
+			"class": "adv_search_label adv_search_input_container",
 			//"text":"Tim" //to be designed dynamically
 			"text":userModel.getName()			
 		}).appendTo(nameContainer);
@@ -77,7 +88,8 @@ userProfileView.prototype.update= function(){
 		}).appendTo(emailContainer);
 
 		emailnameinput =$("<div/>", {
-			"class": "adv_search_input_container",
+			"id":"emailInput",
+			"class": " adv_search_label adv_search_input_container",
 			text:userModel.getEmail()	
 		}).appendTo(emailContainer);
 				

@@ -73,7 +73,7 @@ color:white;
 	
 }
 
-input#username, input#password {
+input#username, input#password, input#edit_password,  input#edit_profile  {
     background-color:transparent;
     border: none;
     margin-left:18px;
@@ -83,7 +83,7 @@ input#username, input#password {
    
 }
 
-input#username{
+input#username, input#edit_profile{
 	 border-bottom:1px solid #c9cacf;
 	 padding-bottom:3px;
 	/* border:1px solid blue;*/
