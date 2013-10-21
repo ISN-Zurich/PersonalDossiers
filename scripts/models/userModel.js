@@ -1,19 +1,13 @@
-/*jslint vars: true, sloppy: true */
-
 function UserModel(userController){
     console.log("runs user model");
     var self=this;
     self.controller=userController;	
-    self.userProfile=null;
-    self.userlist=null;
-    self.index=0;
-    self.activeDossierId;
+    self.userProfile;
     // self.checkActiveUser();
     self.loadData();
     $(document).bind("ActiveDossierChanged", function() {
         self.sendUserProfileToServer();
     });  
-      
 }
 
 UserModel.prototype.loadData = function() {
@@ -29,7 +23,7 @@ UserModel.prototype.loadData = function() {
 
 UserModel.prototype.getActiveDossier = function(){
     console.log("enter getActiveDossierFromUserProfile");
-    var activeDossierId= null;//not necessary to initialize to undefined
+    var activeDossierId = undefined;
     if ( this.activeDossierId ) {
         return this.activeDossierId;
     }
@@ -39,14 +33,32 @@ UserModel.prototype.getActiveDossier = function(){
 	activeDossierId = profObj.activeDossierId;
 	if (activeDossierId) {
             this.activeDossierId = activeDossierId;
-         //   $(document).trigger("ActiveDossierReady");
+            $(document).trigger("ActiveDossierReady");
 	}
 	console.log("active dossier Id from the storage is "+activeDossierId);
 	
-    } //end of if profObj
-     return activeDossierId;
+    } //end of if profObj	
+    return activeDossierId;
 };
 
+
+UserModel.prototype.getUserId = function(){
+    return this.userProfile.user_id;
+};
+
+
+UserModel.prototype.getName = function(){
+    return this.userProfile.name;
+};
+
+UserModel.prototype.getEmail = function(){
+    return this.userProfile.email;
+};
+
+
+UserModel.prototype.getTitle = function(){
+    return this.userProfile.title;
+};
 
 
 UserModel.prototype.getUserProfile=function(){
@@ -73,7 +85,8 @@ UserModel.prototype.getUserProfile=function(){
             else {
                 // forward to a page that has the authentication 
                 console.log('userModel: forward to user.html');
-                window.location.href = 'user.html';
+                
+                window.location.href = '/tools/user.html';
             }
 	},
 	beforeSend : setHeader
@@ -89,7 +102,7 @@ UserModel.prototype.getUserProfile=function(){
 	localStorage.setItem("userProfile",stringProfile);
 	console.log("user profile item from local storage is "+localStorage.getItem("userProfile"));
 	$(document).trigger('UserProfileUpdate'); 
-	self.controller.transition("landing");
+	self.controller.transition("welcome");
 	
 	//self.getUserDossiers();
 	//self.controller.models['dossierList'].getUserDossiers();
@@ -130,8 +143,9 @@ UserModel.prototype.checkActiveUser = function(){
     }
     else {
         // send the user to the login page
-        window.location.href = 'user.html';
+        window.location.href = '/tools/user.html';
 	//console.log("get request token in checkactiveUser");
+	
     }
 };
 
@@ -190,14 +204,14 @@ UserModel.prototype.logout =function(){
 	    
 	    showErrorResponses(request); 
 	    //display a message to the user that the logout was not successful
-	    if (request.status === 401){
+	    if (request.status == 401){
 		console.log("success in logging out from the server");
 		var authentication={
 		    consumerSecret:"6a33d1d90067c005de32f5f6aafe082ae8375a6f",
 		    consumerKey :"ch.isn.personal-dossier",
 		    "accessToken":"",
 		    "access_secret":""
-		};
+		}
 
 		localStorage.setItem('authentication', JSON.stringify(authentication));
                 self.controller.initOAuth();
@@ -221,75 +235,6 @@ UserModel.prototype.logout =function(){
 	var header_request= self.controller.oauth.oauthHeader(url, "DELETE");
 	xhr.setRequestHeader('Authorization', header_request);	
     }
+    
 };
 
-
-//UserModel.prototype.getDossierUsers = function(){
-//		var self=this;
-//		var dossierId= self.controller.getActiveDossier();
-//	    var url= "http://yellowjacket.ethz.ch/tools/service/authentication.php/user.php/"+dossierId;
-//	    var method = "GET";
-//	    var data={};
-//	    
-//	    $.ajax({
-//	    	url:  url,
-//	    	type : method,
-//	      	dataType : 'json',
-//	    	success : success,
-//	    	error : function(request) {
-//	    	    console.log("Error while loading the list of users for a specific dossier");
-//	    	    showErrorResponses(request); 
-//	    	},
-//	    	beforeSend : setHeader
-//	        });
-//	
-//	    
-//	    function success(data){
-//	    	console.log("success in getting the user list for a specific dossier");
-//	    	var userlistObject;
-//	    	try{
-//	    		userlistObject=data;
-//	    	}catch(err) {
-//	    		userlistObject={};
-//	    	    console.log("couldnt load user list for a specific dossier from the database");
-//	    	}
-//	    	self.userlist=userlistObject;
-//	    	$(document).trigger("UserListReady");
-//	    }
-//	    
-//	    function setHeader(xhr){    
-//	    	if (self.controller.oauth) {
-//	    		var header_request=self.controller.oauth.oauthHeader(method, url, data);
-//	    		xhr.setRequestHeader('Authorization', header_request);
-//	    	}
-//	    }
-//};
-
-
-//GETTERS
-
-/**
- * Get the id of the authenticated user
- */
-UserModel.prototype.getUserId = function(){
-    return this.userProfile.user_id;
-};
-
-
-//UserModel.prototype.getUsername = function(){
-//	return this.userlist[this.index].username;
-//};
-//
-//UserModel.prototype.getUserrole = function(){
-//	return this.userlist[this.index].user_type;
-//};
-//
-//UserModel.prototype.getUserMemberId = function(){
-//    return this.userlist[this.index].user_id;
-//};
-
-
-UserModel.prototype.nextUser = function(){
-	this.index++;
-	return this.index < this.userlist.length;
-};

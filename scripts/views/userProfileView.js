@@ -15,13 +15,17 @@ userProfileView.prototype.open = function(){
 
 userProfileView.prototype.update= function(){
 	var self=this;
-
+	
+	console.log("enter update user profile view");
+	
 	$("#welcome").empty();
 	$("#welcome").hide();
 
 	$("#userProfile").empty();
 	$("#notifications").empty();
-	if ( self.controller.models.user.userProfile ) {		
+	var userModel=self.controller.models.user;
+	if (userModel.userProfile) {		
+		
 	//$("#userProfile").html("<p>Welcome to user profile view</p>");
 		headerBlue =$("<div/>", {
 			"id": "dossierListHeader",
@@ -38,10 +42,15 @@ userProfileView.prototype.update= function(){
 			"text":"Title"			
 		}).appendTo(titleContainer);
 		
+		console.log("designed the title label ");
+		
 		titleinput =$("<div/>", {
 			"class": "adv_search_input_container",
-			"text":"Mr." //to be designed dynamically			
+			//"text":"Mr." //to be designed dynamically	
+		    "text": userModel.getTitle()
 		}).appendTo(titleContainer);
+		
+		console.log("designed the title value ");
 		nameContainer =$("<div/>", {
 			
 		}).appendTo("#userProfile");
@@ -53,35 +62,23 @@ userProfileView.prototype.update= function(){
 		
 		nameinput =$("<div/>", {
 			"class": "adv_search_input_container",
-			"text":"Tim" //to be designed dynamically			
+			//"text":"Tim" //to be designed dynamically
+			"text":userModel.getName()			
 		}).appendTo(nameContainer);
 		
-		lastnameContainer =$("<div/>", {
-
-		}).appendTo("#userProfile");
-
-		lastnameLabel =$("<div/>", {
-			"class": "adv_search_label",
-			"text":"Surname"			
-		}).appendTo(lastnameContainer);
-
-		lastnameinput =$("<div/>", {
-			"class": "adv_search_input_container",
-			"text":"Wender" //to be designed dynamically			
-		}).appendTo(lastnameContainer);
-		
+				
 		emailContainer =$("<div/>", {
 
 		}).appendTo("#userProfile");
 
 		emailnameLabel =$("<div/>", {
 			"class": "adv_search_label",
-			"text":"Email"			
+			"text":"Email"
 		}).appendTo(emailContainer);
 
 		emailnameinput =$("<div/>", {
 			"class": "adv_search_input_container",
-			"text":"wendel.sipo.gess.ethz.ch" //to be designed dynamically			
+			text:userModel.getEmail()	
 		}).appendTo(emailContainer);
 				
 	}

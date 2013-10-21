@@ -221,7 +221,7 @@ class AuthenticationService extends OAUTHRESTService {
                 $this->data = array('user_id'=> $this->session->getUserID());
             }
             
-            $sth = $this->dbh->prepare("SELECT name, email FROM users WHERE id = ?");
+            $sth = $this->dbh->prepare("SELECT title, name, email FROM users WHERE id = ?");
             $res = $sth->execute($this->data['user_id']);
             if (PEAR::isError($res)) {
                 $this->log('DB Error: '.$res->getMessage());
@@ -232,8 +232,9 @@ class AuthenticationService extends OAUTHRESTService {
             
             if ($res->numRows() > 0) {
                 $row = $res->fetchRow();
-                $this->data['name']  = $row[0];
-                $this->data['email'] = $row[1];
+                $this->data['title']  = $row[0];
+                $this->data['name']  = $row[1];
+                $this->data['email'] = $row[2];
             }
             else {
                 $this->log("lost the user's account information");
