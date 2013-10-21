@@ -186,7 +186,11 @@ input:focus::-ms-input-placeholder, textarea:-ms-input-placeholder {
 
 
 
-
+.profile{
+	color:#4c5160;
+	padding-left:18px;
+	height:28px;
+}
 
 
 /*****ADD DOSSIER BUTTON**********/
