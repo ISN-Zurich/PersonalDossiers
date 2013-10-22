@@ -729,7 +729,7 @@ class DossierService extends OAUTHRESTService {
 
 			//$this->data["user_list"] = $udata;
 			$this->data["user_list"] = $retval;
-			$this->log("User List of the ".$dossierId." dossier is " .json_encode($this->data["user_list"]));
+			$this->log("User List of the ".$this->dossier_id." dossier is " .json_encode($this->data["user_list"]));
 		}   
 	        $this->respond_json_data();
 	      }

@@ -196,52 +196,53 @@ class AuthenticationService extends OAUTHRESTService {
         $this->log('load profile for '. $this->session->getUserID());
         $res = $sth->execute($this->session->getUserID());
         if (PEAR::isError($res)) {
-            
-            $this->log('DB Error: ' . $res->getMessage());
-            $this->bad_request();
-            return;
+
+        	$this->log('DB Error: ' . $res->getMessage());
+        	$this->bad_request();
+        	return;
         }
-        
-            if ($res->numRows() > 0) {
-                $row = $res->fetchRow();
-                $sth->free();
-                
-                try {
-                    $this->data = json_decode($row[0], true);
-                }
-                catch(Exception $e) {
-                    $this->bad_request();
-                    return;
-                }
-                
-                $this->data['user_id'] = $this->session->getUserID();
-            }
-            else {
-                $this->log('init the user profile');
-                $this->data = array('user_id'=> $this->session->getUserID());
-            }
-            
-            $sth = $this->dbh->prepare("SELECT title, name, email FROM users WHERE id = ?");
-            $res = $sth->execute($this->data['user_id']);
-            if (PEAR::isError($res)) {
-                $this->log('DB Error: '.$res->getMessage());
-                $sth->free();
-                $this->bad_request();
-                return;
-            }
-            
-            if ($res->numRows() > 0) {
-                $row = $res->fetchRow();
-                $this->data['title']  = $row[0];
-                $this->data['name']  = $row[1];
-                $this->data['email'] = $row[2];
-            }
-            else {
-                $this->log("lost the user's account information");
-                // gone is probably the best thing to report
-                // maybe 404 not found, but this feels inappropriate on this URL.
-                $this->gone();
-                return;
+
+        if ($res->numRows() > 0) {
+        	$row = $res->fetchRow();
+        	$sth->free();
+
+        	try {
+        		$this->data = json_decode($row[0], true); //true means the returned object will be converted into an associative array
+        		
+        	}
+        	catch(Exception $e) {
+        		$this->bad_request();
+        		return;
+        	}
+        	$this->log('data so far in user profile'.json_encode($this->data));
+        	$this->data['user_id'] = $this->session->getUserID();
+        }
+        else {
+        	$this->log('init the user profile');
+        	$this->data = array('user_id'=> $this->session->getUserID());
+        }
+
+        $sth = $this->dbh->prepare("SELECT title, name, email FROM users WHERE id = ?");
+        $res = $sth->execute($this->data['user_id']);
+        if (PEAR::isError($res)) {
+        	$this->log('DB Error: '.$res->getMessage());
+        	$sth->free();
+        	$this->bad_request();
+        	return;
+        }
+
+        if ($res->numRows() > 0) {
+        	$row = $res->fetchRow();
+        	$this->data['title']  = $row[0];
+        	$this->data['name']  = $row[1];
+        	$this->data['email'] = $row[2];
+        }
+        else {
+        	$this->log("lost the user's account information");
+        	// gone is probably the best thing to report
+        	// maybe 404 not found, but this feels inappropriate on this URL.
+        	$this->gone();
+        	return;
             }
             
             $sth->free();
@@ -252,6 +253,10 @@ class AuthenticationService extends OAUTHRESTService {
     }
     
     protected function update_userprofile() {
+    	$this->mark();
+    	$this->dbh->setFetchMode(MDB2_FETCHMODE_ASSOC);
+    	$mdb2 = $this->dbh;
+    	
         // POST BASE_URI
     	$this->log('update user profile');
     	
@@ -276,31 +281,62 @@ class AuthenticationService extends OAUTHRESTService {
         $uid = $this->session->getUserID();
         
         // strip the user id, email and username from the profile
-        unset($tmp['user_id']);
-        unset($tmp['title']);
-        unset($tmp['name']);
-        unset($tmp['email']);
+//         unset($tmp['user_id']);
+//         unset($tmp['title']);
+//         unset($tmp['name']);
+//         unset($tmp['email']);
     
         $data = json_encode($tmp);
-    
+        
+        $types = array();
+        array_push($types, "text");
+        
         // update or insert?
         $sth = $this->dbh->prepare("SELECT user_id FROM userprofile WHERE USER_ID = ?");
         $res = $sth->execute($uid);
+        
         if (!PEAR::isError($res)) {
+        	//$mdb2->loadModule('Extended');
             if ($res->numRows() > 0) {
-                // update
-                $sqlstring = "UPDATE  userprofile SET profile_data = ? WHERE user_id = ?";
-                
+            	$this->log(' before the update user profile query');
+            	$this->log(' data to be inserted are '.$data);
+                // update the user profile table
+                $sqlstring1 = "UPDATE  userprofile SET profile_data = ? WHERE user_id = ?";
+                $sth->free();
+                $sth = $this->dbh->prepare($sqlstring1);
+                $sth->execute(array($data, $uid));
+                $sth->free();
+            	
             }
             else {
                 // insert
                 $sqlstring = "INSERT INTO userprofile (profile_data, user_id) VALUES (?,?)";
+                
+                
             }
+            
+           //Update the user table
+            
+            $sth2 = $this->dbh->prepare("SELECT id FROM users WHERE id = ?");
+            $res2 = $sth2->execute($uid);
+            if (!PEAR::isError($res2)) {
+            	$this->log(' before the update of users table');
+            	$this->log(' data to be inserted are '.$tmp['title']);
+            	$sqlstring2 = "UPDATE users SET title = ?, name = ?, email = ?  WHERE id = ?";
+            	$sth2->free();
+            	$sth2 = $this->dbh->prepare($sqlstring2);
+            	$sth2->execute(array($tmp['title'],$tmp['name'],$tmp['email'], $uid));
+            	$sth2->free();
+            }
+            else {
+            	//inser user data : This part of the user registration
+            	
+            	     	
+            	
+            }
+            
              
-            $sth->free();
-            $sth = $this->dbh->prepare($sqlstring);
-            $sth->execute(array($data, $uid));
-            $sth->free();
+           
             $this->no_content();
         }
     }

@@ -98,7 +98,6 @@ WelcomeView.prototype.update = function(){
 		var userModel = self.controller.models.user;
 		userModel.setActiveDossier(dosID);
 		window.location.href="index.html";
-		//window.href="index.html";
 		e.stopPropagation();
 	});
 

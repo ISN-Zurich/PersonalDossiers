@@ -146,6 +146,8 @@ UserModel.prototype.setActiveDossier = function(dossierId){
     }
 };
 
+
+
 UserModel.prototype.checkActiveUser = function(){
     if(this.controller.oauth) {
 	console.log("get user profile");
@@ -172,19 +174,23 @@ UserModel.prototype.checkActiveUser = function(){
  * */
 
 UserModel.prototype.sendUserProfileToServer = function(){
+	console.log("enter send user profile to server");
     var self=this;
     var url='http://yellowjacket.ethz.ch/tools/service/authentication.php';
     var method = 'POST';
-    var data = {
-    		"user_id":self.userProfile.user_id,
-    		"title":self.userProfile.title,
-    		"name": self.userProfile.name,
-    		"email": self.userProfile.email,
-    		"activedDossier":self.userProfile.activeDossierId
-    };
-    var data=JSON.stringify(self.userProfile);
+//    var dataObject = {
+//    		"user_id":self.userProfile.user_id,
+//    		"title":self.userProfile.title,
+//    		"name": self.userProfile.name,
+//    		"email": self.userProfile.email,
+//    		"activedDossier": this.userProfile.activeDossierId
+//    };
+   
+ //  var data=JSON.stringify(dataObject);
+  
+ var data=JSON.stringify(self.userProfile);
     
-    $.ajax({
+ $.ajax({
 	url:  url,
 	type : method,
 	data: data,
