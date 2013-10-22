@@ -88,12 +88,15 @@ input#username, input#edit_profile{
 	 padding-bottom:3px;
 	/* border:1px solid blue;*/
 }
-input#password{
+input#password { 
 	margin-top:-3px;
-	 -webkit-text-security: disc;
 	 border:0px solid blue;
 }
 
+input#password, #pd_currentPassword, #pd_newPassword, #pd_confirm_newPassword{
+	 -webkit-text-security: disc;
+	 -moz-text-security:disc;
+}
 
 #loginButton {
 	display:inline;
@@ -153,6 +156,9 @@ input::-webkit-input-placeholder{
 }
 
 input#edit_profile::-webkit-input-placeholder{
+	color:#4c5160;
+}
+input#edit_password::-webkit-input-placeholder{
 	color:#4c5160;
 }
 input:hover::-webkit-input-placeholder{

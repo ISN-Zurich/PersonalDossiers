@@ -13,7 +13,7 @@ function userProfileView(controller){
 		 $("#titleInput").attr('contenteditable', 'true');
 		 $("#nameInput").attr('contenteditable', 'true');
 		 $("#emailInput").attr('contenteditable', 'true');
-		 
+		 $("#saveChanges_container").removeClass('hide');
 		 self.editMode = true;	
 	});
 	
@@ -26,10 +26,21 @@ function userProfileView(controller){
 		 $("#titleInput").attr('contenteditable', 'false');
 		 $("#nameInput").attr('contenteditable', 'false');
 		 $("#emailInput").attr('contenteditable', 'false');
-		self.editMode=false;
+		 $("#saveChanges_container").addClass('hide');
+		 self.editMode=false;
 		}
 	});
-}
+	
+	$("#pd_pContainer4").bind("click", function(e){
+		console.log("clicked the edit password button");
+		 $("#pd_newPassword").attr('contenteditable', 'true');
+		 $("#pd_confirm_newPassword").attr('contenteditable', 'true');
+		self.showPasswordForm();
+		  $("#saveChangesPswd_container").removeClass('hide');
+		 self.editMode = true;	
+	});
+	
+} //end of constructor
 
 userProfileView.prototype.open = function(){
 	console.log("enter open in user profile view");
@@ -61,14 +72,20 @@ userProfileView.prototype.update= function(){
 
 
 userProfileView.prototype.saveChanges= function(){
-	
-	 var value_title = $("#titleInput").text();
+	var value_title = $("#titleInput").text();
 	 this.controller.models.user.setUserTitle(value_title);
 	 var value_name = $("#nameInput").text();
 	 this.controller.models.user.setUserName(value_name);
 	 var value_email = $("#emailInput").text();
 	 this.controller.models.user.setUserEmail(value_email);
-	 
-	
-	
 };
+
+
+userProfileView.prototype.showPasswordForm= function(){
+	var self=this;
+	userModel= self.controller.models.user;
+	$("#userProfileContainer").addClass("hide");
+	$("#changePasswordContainer").removeClass("hide");
+	$("#pd_currentPassword").text(userModel.getName());
+};
+

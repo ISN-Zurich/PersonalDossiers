@@ -61,12 +61,18 @@ UserModel.prototype.setUserEmail = function(email){
 	this.userProfile.email=email;
 };
 
+
+
 UserModel.prototype.getTitle = function(){
     return this.userProfile.title;
 };
 
 UserModel.prototype.setUserTitle = function(title){
 	this.userProfile.title=title;
+};
+
+UserModel.prototype.validatePasswordConfirmation=function(){
+	
 };
 
 UserModel.prototype.getUserProfile=function(){
