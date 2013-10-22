@@ -36,8 +36,21 @@ function userProfileView(controller){
 		 $("#pd_newPassword").attr('contenteditable', 'true');
 		 $("#pd_confirm_newPassword").attr('contenteditable', 'true');
 		self.showPasswordForm();
-		  $("#saveChangesPswd_container").removeClass('hide');
+		 $("#saveChangesPswd_container").removeClass('hide');
 		 self.editMode = true;	
+	});
+	
+	$("#save_password_submit").bind("click", function(e){
+		console.log("click save changes before if");
+		if (self.editMode){
+		console.log("clicked the save changes  button");
+		self.savePasswordChanges();
+		self.controller.models.user.sendUserPasswordToServer();
+		 $("#pd_newPassword").attr('contenteditable', 'false');
+		 $("#pd_confirm_newPassword").attr('contenteditable', 'false');
+		 $("#saveChangesPswd_container").addClass('hide');
+		 self.editMode=false;
+		}
 	});
 	
 } //end of constructor
@@ -86,6 +99,16 @@ userProfileView.prototype.showPasswordForm= function(){
 	userModel= self.controller.models.user;
 	$("#userProfileContainer").addClass("hide");
 	$("#changePasswordContainer").removeClass("hide");
-	$("#pd_currentPassword").text(userModel.getName());
+	$("#pd_currentPassword").text(userModel.getPassword());
+};
+
+userProfileView.prototype.savePasswordChanges= function(){
+	console.log("enter save password changes");
+	var new_password = $("#pd_newPassword").text();
+//	 this.controller.models.user.setUserTitle(value_title);
+//	 var value_name = $("#nameInput").text();
+//	 this.controller.models.user.setUserName(value_name);
+//	 var value_email = $("#emailInput").text();
+	 this.controller.models.user.sendUserPasswordToServer(new_password);
 };
 

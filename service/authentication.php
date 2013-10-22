@@ -91,6 +91,8 @@ class AuthenticationService extends OAUTHRESTService {
             case 'authorize':
                 $this->authenticate_user();
                 break;
+            case 'password':
+            	$this->update_password();
             default:
                 $this->update_userprofile();
                 break;
@@ -222,7 +224,7 @@ class AuthenticationService extends OAUTHRESTService {
         	$this->data = array('user_id'=> $this->session->getUserID());
         }
 
-        $sth = $this->dbh->prepare("SELECT title, name, email FROM users WHERE id = ?");
+        $sth = $this->dbh->prepare("SELECT title, name, password, email FROM users WHERE id = ?");
         $res = $sth->execute($this->data['user_id']);
         if (PEAR::isError($res)) {
         	$this->log('DB Error: '.$res->getMessage());
@@ -235,7 +237,8 @@ class AuthenticationService extends OAUTHRESTService {
         	$row = $res->fetchRow();
         	$this->data['title']  = $row[0];
         	$this->data['name']  = $row[1];
-        	$this->data['email'] = $row[2];
+        	$this->data['password']  = $row[2];
+        	$this->data['email'] = $row[3];
         }
         else {
         	$this->log("lost the user's account information");
@@ -339,6 +342,67 @@ class AuthenticationService extends OAUTHRESTService {
            
             $this->no_content();
         }
+    }
+    
+    
+    /**
+     * TODO: to write comments
+     * 
+     * 
+     */
+    protected function update_password() {
+    	$this->mark();
+    	$this->dbh->setFetchMode(MDB2_FETCHMODE_ASSOC);
+    	$mdb2 = $this->dbh;
+    	 
+    	// POST BASE_URI
+    	$this->log('update password');
+    	
+    	$data = file_get_contents("php://input");
+    	$this->log('data found in update password: '. $data);
+    	try {
+    		$tmp = json_decode($data, true);
+    		$this->log('encoded password data succesfully');
+    	}
+    	catch (Exception $e) {
+    		$this->log(' did NOT encod password data');
+    		$this->bad_request();
+    		return;
+    	}
+    	 
+//     	if (!isset($tmp)) {
+//     		$this->log(' did not get any password data');
+//     		$this->bad_request();
+//     		return;
+//     	}
+    	 
+    	$uid = $this->session->getUserID();
+    	$this->log(' user id is'.$uid);
+    	
+    	$sth = $this->dbh->prepare("SELECT id FROM users WHERE id = ?");
+    	$res = $sth->execute($uid);
+    	
+    	if (!PEAR::isError($res)) {
+    		$this->log('there are no errors');
+    		if ($res->numRows() > 0) {
+    			$this->log(' before the update password query');
+    			$this->log(' data to be inserted are '.$data);
+    			// update the user profile table
+    			$sqlstring1 = "UPDATE  users SET password = ? WHERE id = ?";
+    			$sth->free();
+    			$sth = $this->dbh->prepare($sqlstring1);
+    			$sth->execute(array($data, $uid));
+    			$sth->free();
+    			 
+    		}
+    		else {
+    			// insert
+    			$sqlstring = "INSERT INTO userprofile (profile_data, user_id) VALUES (?,?)";
+    	
+    	
+    		}
+    	
+    }
     }
     
     /**

@@ -54,6 +54,11 @@ UserModel.prototype.setUserName = function(name){
 	this.userProfile.name=name;
 };
 
+
+UserModel.prototype.getPassword = function(){
+    return this.userProfile.password;
+};
+
 UserModel.prototype.getEmail = function(){
     return this.userProfile.email;
 };
@@ -259,4 +264,41 @@ UserModel.prototype.logout =function(){
     
 };
 
+UserModel.prototype.sendUserPasswordToServer = function(password){
+	var self=this;
+	self.email = self.getEmail();
+	var hash1= hex_sha1(self.email+password);
+	console.log(" hash1 in send password to server "+hash1);
 
+
+	var string=self.controller.models.authentication.token_secret +self.controller.models.authentication.consumerSecret + hash1;
+	var hash_pswd=hex_sha1(string);
+	console.log("encrypted password is: " + hash_pswd);
+	
+	 var url='http://yellowjacket.ethz.ch/tools/service/authentication.php/password';
+	 var method = 'POST';
+	 
+	 var data=hash_pswd;
+	    
+	 $.ajax({
+		url:  url,
+		type : method,
+		data: data,
+		dataType : 'json',
+		success : success,
+		error : function(request) {
+		    console.log("Error while sending the password to the server");
+		    showErrorResponses(request); 
+		},
+		beforeSend : setHeader
+	    });
+	    
+	    function success(data){
+		console.log("success in sending the password to the server");
+	    }
+	    
+	    function setHeader(xhr){
+		var header_request=self.controller.oauth.oauthHeader(method,url);
+		xhr.setRequestHeader('Authorization', header_request);
+	    }
+};
