@@ -78,3 +78,16 @@ color: grey !important;
 font-size:12px;
 }
 
+#save_changes_submit{
+	
+border: solid 1px white;
+-webkit-appearance: none;
+-moz-appearance: none;
+background-color: #4C5160;
+background-color: #ebedee;
+color: #4C5160;
+cursor: pointer;
+}
+	
+	
+}

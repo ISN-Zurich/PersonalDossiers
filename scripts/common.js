@@ -48,6 +48,7 @@ function setDossiersColorization() {
 	 $("#followingListHeader").removeClass("hide");
 	 $("#addDossierBtn").removeClass("hide");
 	 $("#profileViewContainer").addClass("hide");
+	 $("#userProfile").addClass("hide");
 };
 
 
@@ -81,8 +82,12 @@ function setUserProfileColorization(){
 	$("#span_user").removeClass("pd_active");
 	$("#span_user").addClass("pd_selected");
 	
-	$("#profileViewContainer").removeClass("hide");
 	$("#addDossierBtn").addClass("hide");
+	$("#profileViewContainer").removeClass("hide");
+	$("#userProfile").removeClass("hide")
+	controller.views.user.open();
+	("#welcome").addClass("hidden");
+
 	
 	
 	

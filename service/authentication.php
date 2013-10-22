@@ -277,6 +277,7 @@ class AuthenticationService extends OAUTHRESTService {
         
         // strip the user id, email and username from the profile
         unset($tmp['user_id']);
+        unset($tmp['title']);
         unset($tmp['name']);
         unset($tmp['email']);
     

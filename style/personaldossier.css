@@ -152,6 +152,9 @@ input::-webkit-input-placeholder{
 	color:#a1aab1;
 }
 
+input#edit_profile::-webkit-input-placeholder{
+	color:#4c5160;
+}
 input:hover::-webkit-input-placeholder{
 	color:#4c5160;
 }

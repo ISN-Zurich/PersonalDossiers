@@ -50,16 +50,24 @@ UserModel.prototype.getUserId = function(){
 UserModel.prototype.getName = function(){
     return this.userProfile.name;
 };
+UserModel.prototype.setUserName = function(name){
+	this.userProfile.name=name;
+};
 
 UserModel.prototype.getEmail = function(){
     return this.userProfile.email;
 };
-
+UserModel.prototype.setUserEmail = function(email){
+	this.userProfile.email=email;
+};
 
 UserModel.prototype.getTitle = function(){
     return this.userProfile.title;
 };
 
+UserModel.prototype.setUserTitle = function(title){
+	this.userProfile.title=title;
+};
 
 UserModel.prototype.getUserProfile=function(){
     var self = this;
@@ -161,12 +169,13 @@ UserModel.prototype.sendUserProfileToServer = function(){
     var self=this;
     var url='http://yellowjacket.ethz.ch/tools/service/authentication.php';
     var method = 'POST';
-    //	var data = {
-    //			"user_id":self.userProfile.user_id,
-    //			"name": self.userProfile.name,
-    //			"email": self.userProfile.email,
-    //			"activedDossier":self.userProfile.activeDossierId
-    //	};
+    var data = {
+    		"user_id":self.userProfile.user_id,
+    		"title":self.userProfile.title,
+    		"name": self.userProfile.name,
+    		"email": self.userProfile.email,
+    		"activedDossier":self.userProfile.activeDossierId
+    };
     var data=JSON.stringify(self.userProfile);
     
     $.ajax({
@@ -237,4 +246,5 @@ UserModel.prototype.logout =function(){
     }
     
 };
+
 

@@ -30,7 +30,7 @@ WelcomeView.prototype.update = function(){
 	console.log("update the welcome view");
 
 	//empty the sub views
-	$("#userProfile").empty();
+	//$("#userProfile").empty();
 	$("#notifications").empty();
 	$("#welcome").empty();
 

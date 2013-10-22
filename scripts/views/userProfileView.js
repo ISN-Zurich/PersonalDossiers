@@ -6,14 +6,28 @@ function userProfileView(controller){
 	var self=this;
 	self.controller=controller;
 	self.tagID="userProfile";
+	self.editMode=false;
 	
 	$("#pd_uContainer3").bind("click", function(e){
 		console.log("clicked the edit user profile button");
 		 $("#titleInput").attr('contenteditable', 'true');
 		 $("#nameInput").attr('contenteditable', 'true');
 		 $("#emailInput").attr('contenteditable', 'true');
-		  
-		//self.controller.models.dossierList.addDossier();
+		 
+		 self.editMode = true;	
+	});
+	
+	$("#save_changes_submit").bind("click", function(e){
+		console.log("click save changes before if");
+		if (self.editMode){
+		console.log("clicked the save changes  button");
+		self.saveChanges();
+		self.controller.models.user.sendUserProfileToServer();
+		 $("#titleInput").attr('contenteditable', 'false');
+		 $("#nameInput").attr('contenteditable', 'false');
+		 $("#emailInput").attr('contenteditable', 'false');
+		self.editMode=false;
+		}
 	});
 }
 
@@ -30,69 +44,31 @@ userProfileView.prototype.update= function(){
 	$("#welcome").empty();
 	$("#welcome").hide();
 
-	$("#userProfile").empty();
 	$("#notifications").empty();
+	$("#userProfile").removeClass("hide");
+	
 	var userModel=self.controller.models.user;
 	if (userModel.userProfile) {		
+					
+		$("#titleInput").text(userModel.getTitle());
 		
-	//$("#userProfile").html("<p>Welcome to user profile view</p>");
-		headerBlue =$("<div/>", {
-			"id": "dossierListHeader",
-			"class": "sidebar-header darkblue",
-			"text":"Edit your profile"
-		}).appendTo("#userProfile");
-		
-		titleContainer =$("<div/>", {
-			
-		}).appendTo("#userProfile");
-		
-		titleLabel =$("<div/>", {
-			"class": "adv_search_label",
-			"text":"Title"			
-		}).appendTo(titleContainer);
-		
-		console.log("designed the title label ");
-		
-		titleinput =$("<div/>", {
-			"id":"titleInput",
-			"class": " adv_search_label adv_search_input_container",
-			//"text":"Mr." //to be designed dynamically	
-		    "text": userModel.getTitle()
-		}).appendTo(titleContainer);
-		
-		console.log("designed the title value ");
-		nameContainer =$("<div/>", {
-			
-		}).appendTo("#userProfile");
-		
-		nameLabel =$("<div/>", {
-			"class": "adv_search_label",
-			"text":"Name"			
-		}).appendTo(nameContainer);
-		
-		nameinput =$("<div/>", {
-			"id":"nameInput",
-			"class": "adv_search_label adv_search_input_container",
-			//"text":"Tim" //to be designed dynamically
-			"text":userModel.getName()			
-		}).appendTo(nameContainer);
-		
-				
-		emailContainer =$("<div/>", {
+		$("#nameInput").text(userModel.getName());
 
-		}).appendTo("#userProfile");
-
-		emailnameLabel =$("<div/>", {
-			"class": "adv_search_label",
-			"text":"Email"
-		}).appendTo(emailContainer);
-
-		emailnameinput =$("<div/>", {
-			"id":"emailInput",
-			"class": " adv_search_label adv_search_input_container",
-			text:userModel.getEmail()	
-		}).appendTo(emailContainer);
-				
+		$("#emailInput").text(userModel.getEmail());
 	}
+	
+};
+
+
+userProfileView.prototype.saveChanges= function(){
+	
+	 var value_title = $("#titleInput").text();
+	 this.controller.models.user.setUserTitle(value_title);
+	 var value_name = $("#nameInput").text();
+	 this.controller.models.user.setUserName(value_name);
+	 var value_email = $("#emailInput").text();
+	 this.controller.models.user.setUserEmail(value_email);
+	 
+	
 	
 };
