@@ -232,7 +232,27 @@ color: #fff !important;	}
 	font-size:20px:
 }
 
+
+.pd_profile_selected{
+background-color:#D2D2D2;
+color:white;
+}
 /*************************end of change password***************/
+
+/***LOGOUT CONFIRMATION BUTTON**/
+
+
+.pd_logout_confirm{
+	height:80px;
+}
+
+
+#st_log_out_confirm{
+	border:0px solid green;
+}
+
+/**END OF LOGOUT CONFIRMATION BUTTON*/
+
 
 
 .pd_img{

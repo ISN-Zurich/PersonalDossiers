@@ -82,11 +82,34 @@ LogView.prototype.showLogout = function(){
 	 
 	 divConfirm = $("<div/>", {
 			"id": "st_log_out_confirm",
-			"class":"red hidden",
-			"text": "are you sure you want to log out?"
-	}).appendTo("#InteractionBar");
+			"class":"box snippetlist hidden"
+	}).insertBefore("#loginFormContainer");
 	 
-
+//	 divHeader = $("<div/>", {
+//			"class":"sidebar-header darkblue",
+//			"text": "Logout Confirmation"
+//	}).appendTo(divConfirm);
+	 
+	 div2 = $("<div/>", {
+			"class":"snippetlist-content greyBg"
+	}).appendTo(divConfirm);
+	 
+	 div3 = $("<div/>", {
+			"class":"about_section_desc"
+	}).appendTo(div2);
+	 
+	 ul = $("<ul/>", {
+		
+	}).appendTo(div3);
+	 
+	liContainer = $("<li/>", {
+			"class":"pd_loginContainer"
+		}).appendTo(ul);
+	divFinal= $("<div/>", {
+		"id": "confirmationMsg",
+		"class":"pd_loginContainer red clickable",
+		"text":"are you sure you want to log out?"
+	}).appendTo(liContainer);
 	 
 	 $("#st_log_out_confirm").bind("click", function(){
 		 self.controller.logout();
