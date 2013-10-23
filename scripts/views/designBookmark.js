@@ -13,8 +13,8 @@ function DesignBookmarkView(dcontroller) {
 
 	$('#isn_pd_widget').bind("click", function(e) { //add id dynamically
 		if ( e.target.id === "addbmbutton" ) {
-                    self.addItemToDossier();
-                }
+			self.addItemToDossier();
+		}
 //		console.log("clicked on the submit button");
 //		var dossierItemId= $('input#inputValue').val();
 //		console.log("got the input value and it is "+dossierItemId);

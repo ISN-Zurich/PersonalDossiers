@@ -271,14 +271,19 @@ UserModel.prototype.sendUserPasswordToServer = function(password){
 	console.log(" hash1 in send password to server "+hash1);
 
 
-	var string=self.controller.models.authentication.token_secret +self.controller.models.authentication.consumerSecret + hash1;
-	var hash_pswd=hex_sha1(string);
-	console.log("encrypted password is: " + hash_pswd);
+//	var string=self.controller.models.authentication.token_secret +self.controller.models.authentication.consumerSecret + hash1;
+//	var hash_pswd=hex_sha1(string);
+//	console.log("encrypted password is: " + hash_pswd);
 	
 	 var url='http://yellowjacket.ethz.ch/tools/service/authentication.php/password';
 	 var method = 'POST';
 	 
-	 var data=hash_pswd;
+	 var dataObject= { 
+			 "user_id":self.userProfile.user_id,
+			 "password":hash1
+		};
+	 
+	 var data=JSON.stringify(dataObject);
 	    
 	 $.ajax({
 		url:  url,

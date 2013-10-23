@@ -216,6 +216,25 @@ line-height: 28px;
 background: #ebedee !important;
 color: #fff !important;	}
 
+
+/************** CHANGE PASSWORD FORM       *****************/
+
+.pd_warning{
+	color:red;
+	maring-top:15px;
+	padding-left:25px;
+	font-size:20px:
+}
+
+
+.pd_success{
+	color:blue;
+	font-size:20px:
+}
+
+/*************************end of change password***************/
+
+
 .pd_img{
 	float:left;
 }

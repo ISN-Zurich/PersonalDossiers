@@ -8,6 +8,32 @@ function userProfileView(controller){
 	self.tagID="userProfile";
 	self.editMode=false;
 	
+	
+//remove the warning messages when start typing again
+	
+	$("#pd_newPassword").bind("click", function(e){
+		console.log("click change password container");
+		if (!$("#warning_empty").hasClass("hide")){
+			$("#warning_empty").addClass("hide")
+		}
+		
+		if (!$("#warning_confirm").hasClass("hide")){
+			$("#warning_confirm").addClass("hide")
+		}
+	});
+	
+	
+	$("#pd_confirm_newPassword").bind("click", function(e){
+		console.log("click change password container");
+		if (!$("#warning_empty").hasClass("hide")){
+			$("#warning_empty").addClass("hide")
+		}
+		
+		if (!$("#warning_confirm").hasClass("hide")){
+			$("#warning_confirm").addClass("hide")
+		}
+	});
+	
 	$("#pd_uContainer3").bind("click", function(e){
 		console.log("clicked the edit user profile button");
 		 $("#titleInput").attr('contenteditable', 'true');
@@ -45,11 +71,6 @@ function userProfileView(controller){
 		if (self.editMode){
 		console.log("clicked the save changes  button");
 		self.savePasswordChanges();
-		self.controller.models.user.sendUserPasswordToServer();
-		 $("#pd_newPassword").attr('contenteditable', 'false');
-		 $("#pd_confirm_newPassword").attr('contenteditable', 'false');
-		 $("#saveChangesPswd_container").addClass('hide');
-		 self.editMode=false;
 		}
 	});
 	
@@ -57,6 +78,8 @@ function userProfileView(controller){
 
 userProfileView.prototype.open = function(){
 	console.log("enter open in user profile view");
+//	$("#warning_empty").addClass("hide");
+//	$("#warning_confirm").addClass("hide");
 	this.update(); 
 };
 
@@ -98,6 +121,8 @@ userProfileView.prototype.showPasswordForm= function(){
 	var self=this;
 	userModel= self.controller.models.user;
 	$("#userProfileContainer").addClass("hide");
+	$("#warning_empty").addClass("hide");
+	$("#warning_confirm").addClass("hide");
 	$("#changePasswordContainer").removeClass("hide");
 	$("#pd_currentPassword").text(userModel.getPassword());
 };
@@ -105,10 +130,34 @@ userProfileView.prototype.showPasswordForm= function(){
 userProfileView.prototype.savePasswordChanges= function(){
 	console.log("enter save password changes");
 	var new_password = $("#pd_newPassword").text();
-//	 this.controller.models.user.setUserTitle(value_title);
-//	 var value_name = $("#nameInput").text();
-//	 this.controller.models.user.setUserName(value_name);
-//	 var value_email = $("#emailInput").text();
+	var form_validation=true;;
+	var confirm_password = $("#pd_confirm_newPassword").text();
+ if (new_password.length == 0 || confirm_password.length ==0) {
+	 // one or both of the input password fields are empty
+	 //$("#warning_empty").removeClass("hide");
+	 $("#warning_empty").fadeIn();
+	 $("#warning_empty").fadeOut(5000);
+	 form_validation=false;
+ }
+ 
+ if (new_password !== confirm_password){
+	 //$("#warning_confirm").removeClass("hide");
+	 $("#warning_confirm").fadeIn();
+	 $("#warning_confirm").fadeOut(5000);
+	 form_validation=false;
+ }
+	
+ if (form_validation){
+	 console.log("passed the form validation");
 	 this.controller.models.user.sendUserPasswordToServer(new_password);
+	 $("#pd_newPassword").attr('contenteditable', 'false');
+	 $("#pd_confirm_newPassword").attr('contenteditable', 'false');
+	 $("#saveChangesPswd_container").addClass('hide');
+//	 $("#warning_empty").addClass("hide");
+//	 $("#warning_confirm").addClass("hide");
+	 $("#successful_message").fadeIn();
+	 $("#successful_message").fadeOut(5000);
+	 self.editMode=false;
+ }
 };
 

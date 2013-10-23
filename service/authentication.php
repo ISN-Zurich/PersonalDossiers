@@ -282,6 +282,7 @@ class AuthenticationService extends OAUTHRESTService {
         }
          
         $uid = $this->session->getUserID();
+        $this->log('user id in update profile is'.$uid);
         
         // strip the user id, email and username from the profile
 //         unset($tmp['user_id']);
@@ -370,14 +371,21 @@ class AuthenticationService extends OAUTHRESTService {
     		return;
     	}
     	 
-//     	if (!isset($tmp)) {
-//     		$this->log(' did not get any password data');
-//     		$this->bad_request();
-//     		return;
-//     	}
+    	if (!isset($tmp)) {
+    		$this->log(' did not get any password data');
+    		$this->bad_request();
+    		return;
+    	}
     	 
-    	$uid = $this->session->getUserID();
-    	$this->log(' user id is'.$uid);
+    	
+    	
+    	//$uid = $this->session->getUserID();
+    	
+    	$uid=$tmp['user_id'];
+    	$this->log(' user id in update password is'.$uid);
+    	$data = json_encode($tmp);
+    	$uid2=$data['user_id'];
+    	$this->log(' user id 2 in update password is'.$uid);
     	
     	$sth = $this->dbh->prepare("SELECT id FROM users WHERE id = ?");
     	$res = $sth->execute($uid);
@@ -386,14 +394,13 @@ class AuthenticationService extends OAUTHRESTService {
     		$this->log('there are no errors');
     		if ($res->numRows() > 0) {
     			$this->log(' before the update password query');
-    			$this->log(' data to be inserted are '.$data);
+    			$this->log(' data to be inserted are '.$tmp['password']);
     			// update the user profile table
     			$sqlstring1 = "UPDATE  users SET password = ? WHERE id = ?";
     			$sth->free();
     			$sth = $this->dbh->prepare($sqlstring1);
-    			$sth->execute(array($data, $uid));
-    			$sth->free();
-    			 
+    			$sth->execute(array($tmp['password'], $uid));
+    			$sth->free(); 
     		}
     		else {
     			// insert
