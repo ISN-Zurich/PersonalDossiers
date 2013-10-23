@@ -105,11 +105,30 @@ LogView.prototype.showLogout = function(){
 	liContainer = $("<li/>", {
 			"class":"pd_loginContainer"
 		}).appendTo(ul);
+	
 	divFinal= $("<div/>", {
 		"id": "confirmationMsg",
 		"class":"pd_loginContainer red clickable",
 		"text":"are you sure you want to log out?"
 	}).appendTo(liContainer);
+	 
+	
+	 
+//	 buttonContainer = $("<div/>", {
+//		 	"id": "logoutBtn_container",
+//			"class":"adv_search_buttons right"
+//	}).insertAfter("#st_log_out_confirm");
+//	 
+//	 button = $("<div/>", {
+//		 	"id": "pd_logoutBtn",
+//			"class":"search_bar_button right",
+//			"value": "Logout",
+//			"name": "Logout",
+//			"text": "Logout"
+//	}).appendTo(buttonContainer);
+//	 
+	 
+	 
 	 
 	 $("#st_log_out_confirm").bind("click", function(){
 		 self.controller.logout();
