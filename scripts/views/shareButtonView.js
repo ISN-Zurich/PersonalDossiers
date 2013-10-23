@@ -24,6 +24,16 @@ function ShareButtonView(controller){
         }
     });
 
+    
+
+	$("#pd_st_facebook").bind("click", function(e){
+		console.log("click facebook button in ");
+//		window.open(
+//			      'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href), 
+//			      'facebook-share-dialog', 
+//			      'width=626,height=436'); 
+	});
+    
 }
 
 ShareButtonView.prototype.openDiv=openView;
@@ -94,10 +104,7 @@ ShareButtonView.prototype.update = function(){
         "value": self.getPublicLink()
     }).appendTo("#divContainer");
 
-
-
-
-    /* var div=  $("<span/>", {
+  /* var div=  $("<span/>", {
           "id": "copyLink",
           "text": "Copy Link"
       }).appendTo("#divContainer");
@@ -107,6 +114,9 @@ ShareButtonView.prototype.update = function(){
      "id": "closeUrl",
      "text": "remove"
      }).appendTo("#divContainer");
+      
+     var fb_a= $("#pd_st_facebook");
+     fb_a.href=this.getPublicLink();
 
 };
 

@@ -46,6 +46,7 @@ function dossierController() {
         self.views.dossierBanner = new DossierBannerView(self);
 	    self.views.dossierContent= new DossierContentView(self);
 	    self.views.userlist = new DossierUsersView(self);
+	    self.views.share = new ShareButtonView(self);
 
        //the following views run only when we are authenticated
 	    if (self.oauth){
