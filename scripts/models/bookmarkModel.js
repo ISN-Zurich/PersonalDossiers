@@ -38,12 +38,14 @@ function BookmarkModel(dController){
     // this.loadDossierList();
     //this.initValues();
     if (self.controller.hashed) {
+    	console.log("in bookmark model constructor, to get the active dossier id");
         self.dossierId = self.controller.getActiveDossier();
         self.loadDossierList();
     }
     $(document).bind("ActiveDossierReady", loadActiveDossier);
        
     function loadActiveDossier() {
+    	console.log("enter event handler in bookmark model to load activeDossier");
     	if (!self.controller.hashed){
     	console.log("load Active Dossier");
     	self.dossierId=self.controller.getActiveDossier();

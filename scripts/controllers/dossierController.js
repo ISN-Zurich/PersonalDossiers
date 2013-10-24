@@ -97,16 +97,17 @@ function dossierController() {
     		console.log("there is id in the new url and it is "+d_id);
     		this.pubid=d_id;
     		this.hashed=true;
-    	}}
+    	}} else{
     	
-    	return this.hashed=false;
+    	 this.hashed=false;
+    	}
                
     };
 
     dossierController.prototype.getHashedURLId = function(){
                  // var hashed_url= window.location.hash;
-                  var dossierId= hashed_url.substring(1);
-                  var dossierId=this.pubid;
+                  //var dossierId= hashed_url.substring(1);
+                     var dossierId=this.pubid;
                   console.log("dossier id after hash is "+dossierId);
                   return dossierId;
     };
@@ -139,7 +140,7 @@ function dossierController() {
     };
 
       dossierController.prototype.getActiveDossier = function(){
-
+    	  console.log("in user controller to get active dossier");
         if (this.hashed){
         var activedosId = this.getHashedURLId();
             return activedosId;
