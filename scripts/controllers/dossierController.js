@@ -19,9 +19,6 @@ function dossierController() {
   // if we are logged in or if there is a hash on the url then show & open the authorized views
   // if there is a hash on the url don't show the logout button
 
-  // x= self.hashedUrl();
-
-
    if (self.oauth || self.hashed){
 
 	//initialization of models 
@@ -54,12 +51,7 @@ function dossierController() {
 	    	self.views.share = new ShareButtonView(self);
 	    }
 
-       if (self.hashed){
-           console.log("design hash-specific views");
-//           $('#loginButton').removeClass("hidden");
-//           self.views.loginButton = new LoginButtonView(self);
-        }
-
+     
        $(document).bind("BookmarkModelLoaded", function() {
     	   console.log("initialize views in controller");
     	   self.views.dossierBanner.open();
@@ -90,25 +82,31 @@ function dossierController() {
 } //end of constructor
 
     dossierController.prototype.hashedUrl = function() {
-               //var  url_path= window.location.pathname;
-              // if (url_path.indexOf('#') != -1) {
+    	
+    	console.log("enter hasehd url"); 
 
-                console.log(" enter hashedUrl");
-                if (window.location.hash){
-                    console.log("url has a hash");
-                        this.hashed=true;
-                      //  return true;
-                 }
-                 else{
-                    console.log("url has not a hash");
-                    this.hashed=false;
-                     //   return false;
-                    }
+    	url_ref=window.location.href;
+    	var splited=url_ref.split("?");
+    	console.log("show splitted url array is "+splited);
+    	var split1=splited[1];
+    	if (split1 && split1.length>0){
+    	console.log("tools is "+split1);
+    	var split2=split1.split("=");
+    	var d_id=split2[1];
+    	if (d_id && d_id.length>0){
+    		console.log("there is id in the new url and it is "+d_id);
+    		this.pubid=d_id;
+    		this.hashed=true;
+    	}}
+    	
+    	return this.hashed=false;
+               
     };
 
     dossierController.prototype.getHashedURLId = function(){
-                  var hashed_url= window.location.hash;
+                 // var hashed_url= window.location.hash;
                   var dossierId= hashed_url.substring(1);
+                  var dossierId=this.pubid;
                   console.log("dossier id after hash is "+dossierId);
                   return dossierId;
     };
