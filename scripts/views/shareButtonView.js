@@ -33,7 +33,14 @@ function ShareButtonView(controller){
 		);
 		
 	});
-    
+	
+	$("#st_twitter").bind("click", function(e){
+		console.log("clicked the twitter icon");
+		var url1='http://twitter.com/home?status=';
+		console.log("final twitter url is "+url1+self.getPublicLink());
+		$("#st_twitter").attr("href",url1+self.getPublicLink());
+	}
+);    
 }
 
 
@@ -46,7 +53,7 @@ ShareButtonView.prototype.getPublicLink=function(){
         var hashedUrl= url;
     }
     else{
-        var hashedUrl= url + "#" + this.controller.getActiveDossier();
+        var hashedUrl= url + "?id=" + this.controller.getActiveDossier();
         console.log("hashedUrl so far is "+hashedUrl);
     }
   return hashedUrl;
