@@ -56,8 +56,8 @@ function dossierController() {
 
        if (self.hashed){
            console.log("design hash-specific views");
-           $('#loginButton').removeClass("hidden");
-           self.views.loginButton = new LoginButtonView(self);
+//           $('#loginButton').removeClass("hidden");
+//           self.views.loginButton = new LoginButtonView(self);
         }
 
        $(document).bind("BookmarkModelLoaded", function() {
