@@ -7,16 +7,32 @@ function ShareButtonView(controller){
     self.controller=controller;
     self.tagID="#shareButton";
     this.open();
-    
-	$("#pd_st_facebook").bind("click", function(e){
+    $("#st_facebook").attr("href", "http://www.google.com/");
+    	
+	$("#st_facebook").bind("click", function(e){
 		console.log("click facebook button in ");
-		window.open(
-			      'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(self.getPublicLink()+"&t="+self.controller.models['bookmark'].getDossierTitle()), 
-			      'facebook-share-dialog', 
-			      'width=626,height=436'); 
+		var bookmarkModel=self.controller.models['bookmark'];
+		var shared_title=encodeURIComponent(bookmarkModel.getDossierTitle());
+		var shared_url=encodeURIComponent(self.getPublicLink());
+		var shared_description=encodeURIComponent(bookmarkModel.getDossierDescription());
+		
+		var whole_image_string=window.location.href;
+		var trim_url=whole_image_string.substring(0, whole_image_string.indexOf('index.html'));
+		console.log("trimed url is "+trim_url);
+		
+		var shared_image= encodeURIComponent(trim_url+'/'+bookmarkModel.getDossierImageURL());
+		console.log("sharedimage is "+shared_image);
+
+		window.open('http://www.facebook.com/sharer.php?s=100&p[title]='+ shared_title + '&p[summary]=' + shared_description + '&p[url]=' + shared_url + '&p[images][0]='+shared_image, 
+				 'facebook-share-dialog', 
+				 'width=626,height=436'		
+		);
+		
 	});
     
 }
+
+
 
 ShareButtonView.prototype.openDiv=openView;
 
@@ -61,10 +77,7 @@ ShareButtonView.prototype.update = function(){
      "id": "closeUrl",
      "text": "remove"
      }).appendTo("#divContainer");
-      
-//     var fb_a= $("#pd_st_facebook");
-//     fb_a.href="https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(this.getPublicLink()+"&t="+self.controller.models['bookmark'].getDossierTitle());
-
+   
 };
 
 
