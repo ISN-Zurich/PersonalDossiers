@@ -683,6 +683,7 @@ class DossierService extends OAUTHRESTService {
 	      $mdb2 = $this->dbh;
 	      
 	      $sth = $mdb2->prepare('SELECT * FROM dossiers WHERE id=?');
+	      $this->log('dossierId in read dossier is '.$this->dossier_id);
 	      $res = $sth->execute($this->dossier_id);
 	      
 	      
@@ -895,13 +896,15 @@ class DossierService extends OAUTHRESTService {
 			    break;
 		     default:
 			    //ignore and accept the parent's prepareOperation
-			    // parent::prepareOperation($meth);
+			    parent::prepareOperation($meth);
 			    break;
 		     }
 	      }
 	      else if ( $this->dossier_id ) {
 		     // anonymous user (not logged in)
 		     // check if the requested dossier is public
+	      	$this->log("anonymous user tries to see dossier");
+	      	$retval = true;
 	      }
 	      
 	      if (!$retval) {

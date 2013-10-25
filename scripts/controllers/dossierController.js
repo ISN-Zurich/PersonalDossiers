@@ -101,13 +101,12 @@ function dossierController() {
     	
     	 this.hashed=false;
     	}
-               
+    	
+    	              
     };
 
     dossierController.prototype.getHashedURLId = function(){
-                 // var hashed_url= window.location.hash;
-                  //var dossierId= hashed_url.substring(1);
-                     var dossierId=this.pubid;
+                 var dossierId=this.pubid;
                   console.log("dossier id after hash is "+dossierId);
                   return dossierId;
     };

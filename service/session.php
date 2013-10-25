@@ -46,9 +46,20 @@ class SessionManagement extends PDCommonClass {
         $this->mark();
         $this->dbh = $dbh;
         
-        $this->oauth = new OAuthProvider();
-	$this->oauth->setParam('_', NULL);
-        $this->oauthState = OAUTH_OK;
+        // check if we receive a header request from a non authenticated user
+        $myheaders = getallheaders();
+        $nonOauth = $myheaders["NonOauth"];
+        
+        //proceed as normal, if we are authenticated
+        if (!isset($nonOauth)){
+        	$this->log("we are authenticated ");
+        	$this->oauth = new OAuthProvider();
+        	$this->oauth->setParam('_', NULL);
+        	$this->oauthState = OAUTH_OK;
+        }else{
+        	$this->oauth=null;
+        	$this->log("we are not authenticated ");
+        }
     }
     
     /**

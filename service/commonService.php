@@ -230,7 +230,7 @@ class RESTServiceCommon extends PDCommonClass {
      * for injecting user authorization code.
      */
     protected function prepareOperation($meth) {
-        return true; // by default we always allow the service handlers to be run.
+        return false; // by default we always allow the service handlers to be run.
     }
     
     /**
@@ -288,7 +288,7 @@ class RESTServiceCommon extends PDCommonClass {
      * returns the service internal data stash in JSON format. This method sets the Content-type header to "application/json".
      */
     protected function respond_json_data() {
-        $this->log('respond JSON data');
+        //$this->log('respond JSON data');
         header('content-type: application/json');
         if ( !empty($this->data)) {
             if (is_array($this->data) || is_object($this->data)) {
@@ -296,7 +296,7 @@ class RESTServiceCommon extends PDCommonClass {
                 echo(json_encode($this->data));
             }
             else {
-            $this->log('just echo data');
+            //$this->log('just echo data');
             echo($this->data);
             }
         }
@@ -553,8 +553,6 @@ class OAUTHRESTService extends RESTServiceCommon {
         $this->dbh = $dbh;
         // instantiate the session manamgenet
         $this->session = new SessionManagement($dbh);
-        //instantiate the user management
-        //$this->user = new UserManagement($dbh);
     }
     
     /**
@@ -581,7 +579,10 @@ class OAUTHRESTService extends RESTServiceCommon {
             return true;
         }
         
+        //if we are authenticated
+        if (isset($this->oauth)) {
         $this->session->validateAccessToken();
+        }
         if ( $this->session->accessVerified() ){
             $this->log('Access Token Verified');
             return true;
