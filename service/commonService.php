@@ -580,8 +580,11 @@ class OAUTHRESTService extends RESTServiceCommon {
             $this->log("omit built in oauth check");
             return true;
         }
-        
-        $this->session->validateAccessToken();
+        $myheaders = getallheaders();
+    	if (!array_key_exists("NonAuth",$myheaders)){ 
+       	$this->session->validateAccessToken();
+          }
+     
         if ( $this->session->accessVerified() ){
             $this->log('Access Token Verified');
             return true;

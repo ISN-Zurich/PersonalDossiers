@@ -234,6 +234,9 @@ BookmarkModel.prototype.loadDossierList=function(){
         if (self.controller.oauth)   {
 	    var header_request=self.controller.oauth.oauthHeader(method, url, data);
 	    xhr.setRequestHeader('Authorization', header_request);
+        }else{
+        	var non_authenticationFlag=true;
+        	 xhr.setRequestHeader('NonAuth', non_authenticationFlag);	
         }
     }
     

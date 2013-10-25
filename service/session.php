@@ -42,13 +42,19 @@ class SessionManagement extends PDCommonClass {
     protected $oauthState;
     
     public function __construct($dbh) {
-        $this->setDebugMode(true);
-        $this->mark();
-        $this->dbh = $dbh;
-        
-        $this->oauth = new OAuthProvider();
-	$this->oauth->setParam('_', NULL);
-        $this->oauthState = OAUTH_OK;
+    	$this->setDebugMode(true);
+    	$this->mark();
+    	$this->dbh = $dbh;
+    	$myheaders = getallheaders();
+    	if (array_key_exists("NonAuth",$myheaders)){
+    		$this->log("we send NonAuth in header");
+    		$this->oauth=null;
+    	}else{
+    		$this->log("we will init oauth provider");
+    		$this->oauth = new OAuthProvider();
+    		$this->oauth->setParam('_', NULL);
+    		$this->oauthState = OAUTH_OK;
+    	}
     }
     
     /**
