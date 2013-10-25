@@ -148,51 +148,53 @@ DossierBannerView.prototype.renderBanner= function(){
 	"id":"bannerImage",//we need to provide the dossierId dynamically
 	"class" : "big_img",
 	//"src": "sample_index_files/default3.jpg"//to get it dynamically
+	"width":"470px",
+	"height":"313px",
 	"src": bookmarkModel.getDossierImageURL()
     }).appendTo("#header_image");
     
     
-    var div1=$("<div/>", {
-	"id": "headerText",
-	"class":"column span-6 last"
-    }).appendTo('#header_image');
+//    var div1=$("<div/>", {
+//	"id": "headerText",
+//	"class":"column span-6 last"
+//    }).appendTo('#header_image');
+//    
     
-    
-    var p1=$("<p/>", {
-	"id":"titleContainer",
-    }).appendTo(div1);
-    
-    var span=$("<span/>", {
-	"id":"headerTitle",//we need to provide the dossierId dynamically
-	"class":"headerTitle", 
-	//text:"My personal dossier" //to get it dynamically
-	text:bookmarkModel.getDossierTitle()
-    }).appendTo(p1);
-    
-    
-    var p2=$("<p/>", {
-	"id":"descriptionContainer",
-	"class": "margingForEdit"
-    }).appendTo(div1);
-    
-    var span2=$("<span/>", {
-	"id":"headerDescription", //we need to provide the dossierId dynamically
-	"class":"subject",
-	//text:"Short description about what pseronal dossiers are dossiers are Short description about what personal dossiers are"//to get it dynamically
-	text:bookmarkModel.getDossierDescription()
-    }).appendTo(p2);
-    
-    if (self.controller.oauth){
-    var divEdit=$("<span/>", {
-	"id":"editDossier",//we need to provide the dossierId dynamically
-	"class":"titleEdit",
-	text:"edit"
-    }).appendTo(div1);
-    
-    var divLockEdit=$("<span/>", {
-	"id":"lock-editDossier", //we need to provide the dossierId dynamically
-	"class":"hidden",
-	text:"lock edit"
-    }).appendTo(div1);
-    }
+//    var p1=$("<p/>", {
+//	"id":"titleContainer",
+//    }).appendTo(div1);
+//    
+//    var span=$("<span/>", {
+//	"id":"headerTitle",//we need to provide the dossierId dynamically
+//	"class":"headerTitle", 
+//	//text:"My personal dossier" //to get it dynamically
+//	text:bookmarkModel.getDossierTitle()
+//    }).appendTo(p1);
+//    
+//    
+//    var p2=$("<p/>", {
+//	"id":"descriptionContainer",
+//	"class": "margingForEdit"
+//    }).appendTo(div1);
+//    
+//    var span2=$("<span/>", {
+//	"id":"headerDescription", //we need to provide the dossierId dynamically
+//	"class":"subject",
+//	//text:"Short description about what pseronal dossiers are dossiers are Short description about what personal dossiers are"//to get it dynamically
+//	text:bookmarkModel.getDossierDescription()
+//    }).appendTo(p2);
+//    
+//    if (self.controller.oauth){
+//    var divEdit=$("<span/>", {
+//	"id":"editDossier",//we need to provide the dossierId dynamically
+//	"class":"titleEdit",
+//	text:"edit"
+//    }).appendTo(div1);
+//    
+//    var divLockEdit=$("<span/>", {
+//	"id":"lock-editDossier", //we need to provide the dossierId dynamically
+//	"class":"hidden",
+//	text:"lock edit"
+//    }).appendTo(div1);
+//    }
 };
