@@ -42,6 +42,7 @@ class SessionManagement extends PDCommonClass {
     protected $oauthState;
     
     public function __construct($dbh) {
+
     	$this->setDebugMode(true);
     	$this->mark();
     	$this->dbh = $dbh;
@@ -55,6 +56,7 @@ class SessionManagement extends PDCommonClass {
     		$this->oauth->setParam('_', NULL);
     		$this->oauthState = OAUTH_OK;
     	}
+
     }
     
     /**

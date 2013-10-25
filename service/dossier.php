@@ -683,6 +683,7 @@ class DossierService extends OAUTHRESTService {
 	      $mdb2 = $this->dbh;
 	      
 	      $sth = $mdb2->prepare('SELECT * FROM dossiers WHERE id=?');
+	      $this->log('dossierId in read dossier is '.$this->dossier_id);
 	      $res = $sth->execute($this->dossier_id);
 	      
 	      
@@ -895,7 +896,7 @@ class DossierService extends OAUTHRESTService {
 			    break;
 		     default:
 			    //ignore and accept the parent's prepareOperation
-			    // parent::prepareOperation($meth);
+			    parent::prepareOperation($meth);
 			    break;
 		     }
 	      }
@@ -906,6 +907,7 @@ class DossierService extends OAUTHRESTService {
 	      	if ( $this->dossierIsPublic){
 	      		$retval = true;
 	      	}
+
 	      }
 	      
 	      if (!$retval) {
