@@ -40,8 +40,17 @@ function ShareButtonView(controller){
 		console.log("final twitter url is "+url1+self.getPublicLink());
 		$("#st_twitter").attr("href",url1+self.getPublicLink());
 	}
-);    
-}
+	);  
+	
+	
+	$("#st_googleplus").bind("click", function(e){
+		console.log("clicked the twitter icon");
+		var url='https://plus.google.com/share?url=';
+		console.log("final twitter url is "+url+self.getPublicLink());
+		$("#st_googleplus").attr("href",url+self.getPublicLink());
+	}
+	);   
+}//end of constructor
 
 
 
