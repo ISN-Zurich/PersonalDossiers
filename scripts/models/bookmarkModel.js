@@ -239,11 +239,7 @@ BookmarkModel.prototype.loadDossierList=function(){
         	var non_authenticationFlag=true;
         	 xhr.setRequestHeader('NonAuth', non_authenticationFlag);	
         }
-        else{
-        	//var header_request=self.controller.oauth.oauthHeader(method, url);
-        	var non_authenticated_flag=true;
-    	    xhr.setRequestHeader('NonOauth', non_authenticated_flag);
-        }
+        
     }
     
 };

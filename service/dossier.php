@@ -904,9 +904,9 @@ class DossierService extends OAUTHRESTService {
 		     // anonymous user (not logged in)
 	      	$this->log("anonymous user tries to login");
 		     // check if the requested dossier is public
-	      	if ( $this->dossierIsPublic){
+	      //	if ( $this->dossierIsPublic($this->dossier_id)){
 	      		$retval = true;
-	      	}
+	      //	}
 
 	      }
 	      
