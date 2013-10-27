@@ -551,7 +551,7 @@ class DossierService extends OAUTHRESTService {
 		     $title = "My Personal Dossier";
 	      }
 	      if (empty($description)) {
-		     $description = "No Description";
+		     $description = "This is your new Dossier. You can change the title and description of the dossier  by clicking on the edit dossier button. You can also change the default image by clicking on it, after having previously clicked the edit button.";
 	      }
 	      if (empty($image)) {
 		     $image = "gallery/default3.jpg";
