@@ -33,7 +33,7 @@ UserModel.prototype.getActiveDossier = function(){
 	activeDossierId = profObj.activeDossierId;
 	if (activeDossierId) {
             this.activeDossierId = activeDossierId;
-            $(document).trigger("ActiveDossierReady");
+       //     $(document).trigger("ActiveDossierReady");
 	}
 	console.log("active dossier Id from the storage is "+activeDossierId);
 	

@@ -206,20 +206,12 @@ DossierBannerView.prototype.renderBanner= function(){
     	"id":"headerDescription",
     	"text": bookmarkModel.getDossierDescription()
         }).appendTo(descriptionContainer);
+    
+    hr=$("<hr/>", {
+		"class":"overview white"
+	}).appendTo("#header_image");
       
     if (self.controller.oauth){
-//    var divEdit=$("<span/>", {
-//	"id":"editDossier",//we need to provide the dossierId dynamically
-//	"class":"titleEdit",
-//	text:"edit"
-//    }).appendTo("#sidebar_right");
-//   
-//    var divLockEdit=$("<span/>", {
-//	"id":"lock-editDossier", //we need to provide the dossierId dynamically
-//	"class":"hidden",
-//	text:"lock edit"
-//    }).appendTo("#sidebar_right");
-    	
     	$("#editDossier").removeClass("hide");
     	
     }
