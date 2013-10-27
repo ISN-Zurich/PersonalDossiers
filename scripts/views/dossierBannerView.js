@@ -15,7 +15,40 @@ function DossierBannerView(myController){
     self.controller= myController;
     self.tagID='header_image';	
     
-    $('#header_image').bind('click', _clickHandler);
+//    $('#header_image').bind('click', _clickHandler);
+//    $('#header_image').bind('click', _clickHandler);
+    $('#header_image').bind('click', function(e){
+	if ( self.editMode ) {
+	    // always check for edits
+		self.checkDescriptionEdit();
+	    self.checkTitleEdit();	;		
+	}
+	var targetID = e.target.id;
+	if (targetID == "bannerImage"){
+    self.changeImage();
+    e.stopPropagation();}}
+    );
+    
+    $('#editDossier').bind('click', function(){
+    	if ( self.editMode ) {
+    	    // always check for edits
+    	    self.checkDescriptionEdit();
+    	    self.checkTitleEdit();			
+    	}
+    	self.activateBannerEditMode();
+	    e.stopPropagation();
+    });
+    
+    $('#lock-editDossier').bind('click', function(){
+    	if ( self.editMode ) {
+    	    // always check for edits
+    	    self.checkDescriptionEdit();
+    	    self.checkTitleEdit();			
+    	}
+    	
+    	self.deactivateBannerEditMode();
+	    e.stopPropagation();
+    });
     
     // click handler
     function _clickHandler(e) {
@@ -50,6 +83,7 @@ function DossierBannerView(myController){
         self.waitForUpload--;
         self.transitionToGallery();
     });
+    
 } //end of constructor
 
 DossierBannerView.prototype.activateBannerEditMode = function() {
@@ -62,8 +96,10 @@ DossierBannerView.prototype.activateBannerEditMode = function() {
     $("#descriptionContainer").attr('contenteditable', 'true');
     $('#bannerImage').attr('title', 'Click to Edit');
     
-    $("#editDossier").removeClass('titleEdit').addClass('hidden');
-    $("#lock-editDossier").removeClass('hidden').addClass('titleEdit');
+//    $("#editDossier").removeClass('titleEdit').addClass('hidden');
+//    $("#lock-editDossier").removeClass('hidden').addClass('titleEdit');
+    $("#editDossier").addClass('hide');
+    $("#lock-editDossier").removeClass('hide').addClass('titleEdit');
 };
 
 DossierBannerView.prototype.deactivateBannerEditMode = function() {
@@ -75,8 +111,10 @@ DossierBannerView.prototype.deactivateBannerEditMode = function() {
     $("#descriptionContainer").removeAttr('contenteditable');
     $('#bannerImage').removeAttr('title');
     
-    $("#lock-editDossier").removeClass('titleEdit').addClass('hidden');
-    $("#editDossier").removeClass('hidden').addClass('titleEdit');
+//    $("#lock-editDossier").removeClass('titleEdit').addClass('hidden');
+//    $("#editDossier").removeClass('hidden').addClass('titleEdit');
+    $("#lock-editDossier").addClass('hide');
+    $("#editDossier").removeClass('hide').addClass('titleEdit');
     
     this.editMode = false;
 };
@@ -139,62 +177,50 @@ DossierBannerView.prototype.renderBanner= function(){
     var dossierId=bookmarkModel.dossierId;
     
     console.log("dossier id in banner view is "+dossierId);
-    // 1. If there is no dossier selected, set the default banner settings	(title, bg img, description) for the default dossier id
-    // - design dynamically the existing html-code of the index.html
-    //	var div=$("<div/>", {
-    //	}).appendTo("#header_image");
     
     var img=$("<img/>", {
 	"id":"bannerImage",//we need to provide the dossierId dynamically
 	"class" : "big_img",
-	//"src": "sample_index_files/default3.jpg"//to get it dynamically
 	"width":"470px",
 	"height":"313px",
 	"src": bookmarkModel.getDossierImageURL()
     }).appendTo("#header_image");
     
+  var titleContainer=$("<p/>", {
+	"id":"titleContainer",
+    }).appendTo("#header_image");
     
-//    var div1=$("<div/>", {
-//	"id": "headerText",
-//	"class":"column span-6 last"
-//    }).appendTo('#header_image');
-//    
     
-//    var p1=$("<p/>", {
-//	"id":"titleContainer",
-//    }).appendTo(div1);
-//    
-//    var span=$("<span/>", {
-//	"id":"headerTitle",//we need to provide the dossierId dynamically
-//	"class":"headerTitle", 
-//	//text:"My personal dossier" //to get it dynamically
-//	text:bookmarkModel.getDossierTitle()
-//    }).appendTo(p1);
-//    
-//    
-//    var p2=$("<p/>", {
-//	"id":"descriptionContainer",
-//	"class": "margingForEdit"
-//    }).appendTo(div1);
-//    
-//    var span2=$("<span/>", {
-//	"id":"headerDescription", //we need to provide the dossierId dynamically
-//	"class":"subject",
-//	//text:"Short description about what pseronal dossiers are dossiers are Short description about what personal dossiers are"//to get it dynamically
-//	text:bookmarkModel.getDossierDescription()
-//    }).appendTo(p2);
-//    
-//    if (self.controller.oauth){
+    var span=$("<span/>", {
+    	"id":"headerTitle",//we need to provide the dossierId dynamically
+    	"class":"headerTitle", 
+    	text:bookmarkModel.getDossierTitle()
+        }).appendTo(titleContainer);
+        
+  var descriptionContainer=$("<p/>", {
+	"id":"descriptionContainer",
+	"class": "margingForEdit"
+  }).appendTo("#header_image");
+    
+    var p=$("<p/>", {
+    	"id":"headerDescription",
+    	"text": bookmarkModel.getDossierDescription()
+        }).appendTo(descriptionContainer);
+      
+    if (self.controller.oauth){
 //    var divEdit=$("<span/>", {
 //	"id":"editDossier",//we need to provide the dossierId dynamically
 //	"class":"titleEdit",
 //	text:"edit"
-//    }).appendTo(div1);
-//    
+//    }).appendTo("#sidebar_right");
+//   
 //    var divLockEdit=$("<span/>", {
 //	"id":"lock-editDossier", //we need to provide the dossierId dynamically
 //	"class":"hidden",
 //	text:"lock edit"
-//    }).appendTo(div1);
-//    }
+//    }).appendTo("#sidebar_right");
+    	
+    	$("#editDossier").removeClass("hide");
+    	
+    }
 };
