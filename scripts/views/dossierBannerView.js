@@ -96,10 +96,8 @@ DossierBannerView.prototype.activateBannerEditMode = function() {
     $("#descriptionContainer").attr('contenteditable', 'true');
     $('#bannerImage').attr('title', 'Click to Edit');
     
-//    $("#editDossier").removeClass('titleEdit').addClass('hidden');
-//    $("#lock-editDossier").removeClass('hidden').addClass('titleEdit');
     $("#editDossier").addClass('hide');
-    $("#lock-editDossier").removeClass('hide').addClass('titleEdit');
+    $("#lock-editDossier").removeClass('hide');
 };
 
 DossierBannerView.prototype.deactivateBannerEditMode = function() {
@@ -111,10 +109,8 @@ DossierBannerView.prototype.deactivateBannerEditMode = function() {
     $("#descriptionContainer").removeAttr('contenteditable');
     $('#bannerImage').removeAttr('title');
     
-//    $("#lock-editDossier").removeClass('titleEdit').addClass('hidden');
-//    $("#editDossier").removeClass('hidden').addClass('titleEdit');
     $("#lock-editDossier").addClass('hide');
-    $("#editDossier").removeClass('hide').addClass('titleEdit');
+    $("#editDossier").removeClass('hide');
     
     this.editMode = false;
 };
@@ -132,7 +128,7 @@ DossierBannerView.prototype.transitionToGallery = function() {
         console.log('upload done');
 	window.location.href = "gallery.php";
     }
-}
+};
 
 DossierBannerView.prototype.checkTitleEdit = function() {
     var value = $("#headerTitle").text();

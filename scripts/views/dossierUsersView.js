@@ -29,19 +29,22 @@ DossierUsersView.prototype.update = function(){
 				"class": "bold clickable",
 				"id":"user"+self.controller.models.bookmark.getUserid(), //might need user id 
 				"text": self.controller.models.bookmark.getUsername()
-			}).appendTo("#dossierUsers");
+				}).appendTo("#dossierUsers")
+		
+//			ownerContainer=$("<li/>",{
+//				"id":"ownerContainer"
+//			}).appendTo("#ownersUI");
+//			
+//			inputOwner=$("<input/>",{
+//				"type":"text",
+//				"id":"owner"+self.controller.models.bookmark.getUserid(),
+//				"class":"pd_loginContainer clickable",
+//				"placeholder":self.controller.models.bookmark.getUsername(),
+//				"disabled":"disabled"
+//			}).appendTo(ownerContainer);
+		
 		} while (self.controller.models.bookmark.nextUser());	
-//		
-//		while (bookmarkModel.nextUser()){
-//			p1=$("<p/>",{
-//				"class": "bold clickable",
-//				"id":"user"+self.controller.models.bookmark.getUserid(), //might need user id 
-//				"text": self.controller.models.bookmark.getUsername()
-//			}).appendTo("#dossierUsers");
-//		} //end of while
-//		
-
-//		
+	
 	} //end of external if
 };
 	

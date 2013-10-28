@@ -246,6 +246,9 @@ color:white;
 	height:80px;
 }
 
+.logoutText{
+	color:white;
+}
 
 #st_log_out_confirm{
 	border:0px solid green;
@@ -253,6 +256,13 @@ color:white;
 
 /**END OF LOGOUT CONFIRMATION BUTTON*/
 
+
+/******************  EDIT DOSSIER BUTTON     ********************/
+
+
+.pd_editDossier{
+	font-size:12px;
+}
 
 
 .pd_img{
