@@ -108,7 +108,7 @@ LogView.prototype.showLogout = function(){
 	
 	divFinal= $("<div/>", {
 		"id": "confirmationMsg",
-		"class":"pd_loginContainer red clickable",
+		"class":"pd_loginContainer clickable",
 		"text":"are you sure you want to log out?"
 	}).appendTo(liContainer);
 	 
