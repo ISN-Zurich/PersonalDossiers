@@ -83,7 +83,19 @@ input#username, input#password, input#edit_password,  input#edit_profile  {
    
 }
 
-input#username, input#edit_profile{
+#edit_password, #edit_profile  {
+    background-color:transparent;
+    border: none;
+    margin-left:18px;
+    margin-right:18px;
+    height:16px;
+	font-size:12px;
+	padding-top:12px;
+	color:#4c5160;
+   
+}
+
+input#username, #edit_profile{
 	 border-bottom:1px solid #c9cacf;
 	 padding-bottom:3px;
 	/* border:1px solid blue;*/
