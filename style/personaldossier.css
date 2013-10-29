@@ -276,7 +276,6 @@ color:white;
 
 /******************  EDIT DOSSIER BUTTON     ********************/
 
-
 .pd_editDossier{
 	font-size:12px;
 }
@@ -293,6 +292,11 @@ color:white;
 	background-image:url(../images/add.png);
 }
 
+
+/***** Dossier List Styles *****/
+#L1, #L2, #followingListHeader {
+	clear: both;
+}
 
 
 #headerText{
