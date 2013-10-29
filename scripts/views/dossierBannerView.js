@@ -178,7 +178,7 @@ DossierBannerView.prototype.renderBanner= function(){
 	"id":"bannerImage",//we need to provide the dossierId dynamically
 	"class" : "big_img",
 	"width":"470px",
-	"height":"313px",
+	//"height":"264px", 
 	"src": bookmarkModel.getDossierImageURL()
     }).appendTo("#header_image");
     
