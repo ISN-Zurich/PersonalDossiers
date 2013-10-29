@@ -12,7 +12,11 @@ DossierUsersView.prototype.open = function(){
 	
 	this.update();
 	
+	$("#dossierOwners").show();
+	$("#dossierEditors").show();
 	$("#dossierUsers").show();
+	
+	
 };
 
 DossierUsersView.prototype.update = function(){
@@ -25,24 +29,29 @@ DossierUsersView.prototype.update = function(){
 	if (bookmarkModel.userlist && bookmarkModel.userlist.length >0) {
 		console.log("dossierUsersView: userlist exists ");
 		do {
-				p1=$("<p/>",{
-				"class": "bold clickable",
-				"id":"user"+self.controller.models.bookmark.getUserid(), //might need user id 
+
+		if (self.controller.models.bookmark.getUsertype() == "owner"){
+			ownerContainer=$("<div/>",{
+				"id":"owner"+self.controller.models.bookmark.getUserid(),
+				"class":"pd_loginContainer clickable pd_listItem",
 				"text": self.controller.models.bookmark.getUsername()
-				}).appendTo("#dossierUsers")
+			}).appendTo("#pd_udossierOwners");
+		}
 		
-//			ownerContainer=$("<li/>",{
-//				"id":"ownerContainer"
-//			}).appendTo("#ownersUI");
-//			
-//			inputOwner=$("<input/>",{
-//				"type":"text",
-//				"id":"owner"+self.controller.models.bookmark.getUserid(),
-//				"class":"pd_loginContainer clickable",
-//				"placeholder":self.controller.models.bookmark.getUsername(),
-//				"disabled":"disabled"
-//			}).appendTo(ownerContainer);
+		if (self.controller.models.bookmark.getUsertype() == "editor"){
+			editorContainer=$("<div/>",{
+				"id":"editor"+self.controller.models.bookmark.getUserid(),
+				"class":"pd_loginContainer clickable pd_listItem",
+				"text": self.controller.models.bookmark.getUsername()
+			}).appendTo("#pd_udossierEditors");}
 		
+		if (self.controller.models.bookmark.getUsertype() == "user"){
+			editorContainer=$("<div/>",{
+				"id":"user"+self.controller.models.bookmark.getUserid(),
+				"class":"pd_loginContainer clickable pd_listItem",
+				"text": self.controller.models.bookmark.getUsername()
+			}).appendTo("#pd_udossierUsers");}
+					
 		} while (self.controller.models.bookmark.nextUser());	
 	
 	} //end of external if

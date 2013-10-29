@@ -83,7 +83,7 @@ input#username, input#password, input#edit_password,  input#edit_profile  {
    
 }
 
-#edit_password, #edit_profile  {
+#edit_password, #edit_profile, .pd_listItem  {
     background-color:transparent;
     border: none;
     margin-left:18px;
@@ -95,7 +95,7 @@ input#username, input#password, input#edit_password,  input#edit_profile  {
    
 }
 
-input#username, #edit_profile{
+input#username, #edit_profile,.pd_listItem  {
 	 border-bottom:1px solid #c9cacf;
 	 padding-bottom:3px;
 	/* border:1px solid blue;*/
