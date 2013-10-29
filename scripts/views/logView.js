@@ -83,15 +83,11 @@ LogView.prototype.showLogout = function(){
 	 divConfirm = $("<div/>", {
 			"id": "st_log_out_confirm",
 			"class":"box snippetlist hidden"
-	}).insertBefore("#loginFormContainer");
+	}).insertAfter("#InteractionBar");
 	 
-//	 divHeader = $("<div/>", {
-//			"class":"sidebar-header darkblue",
-//			"text": "Logout Confirmation"
-//	}).appendTo(divConfirm);
-	 
+
 	 div2 = $("<div/>", {
-			"class":"snippetlist-content greyBg"
+			"class":"snippetlist-content sidebar-header darkblue"
 	}).appendTo(divConfirm);
 	 
 	 div3 = $("<div/>", {

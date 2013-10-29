@@ -266,6 +266,11 @@ color:white;
 	border:0px solid green;
 }
 
+#confirmationMsg{
+	color:white;
+	size:12px;
+}
+
 /**END OF LOGOUT CONFIRMATION BUTTON*/
 
 

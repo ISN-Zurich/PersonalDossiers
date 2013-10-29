@@ -77,6 +77,12 @@ function dossierController() {
 	  window.location.href = 'user.html';
    });
    
+   $(window).bind( "hashchange",function(){
+//		 console.log("hash change event binded");
+//		 var hashTag = self.getHash();
+//		 self.chooseView(hashTag);
+//		 self.colorizeInteractiveBox(hashTag);
+	 });
    
 
 } //end of constructor
