@@ -47,9 +47,10 @@ function userController() {
 	//in order to display the Li in the interaction box
 	 $(document).bind("LogoutSent", function(){
 		 console.log("logout sent is binded");
-		 self.views.log.open();
+		// self.views.log.open();
 		 //1. hide the landing view
 		 $("#landingView").hide();
+		 $("#st_logout_confirm").hide();
 		 
 		//3. clear the url from hash
 		 var loc = window.location.href;
@@ -109,9 +110,6 @@ userController.prototype.chooseView = function(viewHashString){
 			break;
 		case 'notifications':
 			this.views.notifications.open();
-			break;
-		case 'logoutView':	
-			this.views.log.showLogoutConfirm();
 			break;
 		case 'personalDossiers':
 		default:
