@@ -10,6 +10,9 @@
 
 function dossierController() {
     var self=this;
+    this.debugMode = debugMode;
+    this.baseURL = baseURL;
+    this.hostURL = hostURL;
     
     document.domain = 'ethz.ch';
     self.hashed=false;
@@ -119,7 +122,7 @@ function dossierController() {
 
     dossierController.prototype.initOAuth = function() {
         try {
-            this.oauth = new OAuthHelper('http://yellowjacket.ethz.ch/tools/');
+            this.oauth = new OAuthHelper(this.baseURL());
         }
         catch (e) {
             this.oauth = null;

@@ -1,3 +1,5 @@
+/*jslint vars: true, sloppy: true */
+
 function OAuthPageHelper(controller) {
     this.controller = controller;
 
@@ -7,8 +9,8 @@ function OAuthPageHelper(controller) {
         tokenSecret: ""
     };
 
-    this.serviceurl = 'http://yellowjacket.ethz.ch/tools/service/authentication.php';
-    this.authorizationurl = 'http://yellowjacket.ethz.ch/tools/authorize.html';
+    this.serviceurl = this.controller.baseURL() +'service/authentication.php';
+    this.authorizationurl = this.controller.baseURL() +'authorize.html';
 
     
 }

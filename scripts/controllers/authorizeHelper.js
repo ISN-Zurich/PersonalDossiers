@@ -9,6 +9,11 @@
 function AuthorizationController() {
    
     var self = this;
+    
+    this.debugMode = debugMode;
+    this.hostURL = hostURL;
+    this.baseURL = baseURL;
+
     var bookmarks = null;
     var  mUser = null, mDossiers = 0;
     // document.domain = 'ethz.ch';
@@ -17,7 +22,7 @@ function AuthorizationController() {
     var allowedHosts = ['http://www.isn.ethz.ch', 'http://isn.ethz.ch', 'http://www.isn.ch', 'http://isn.ch'];
 
     try {
-        self.oauth = new OAuthHelper('http://yellowjacket.ethz.ch/tools/');
+        self.oauth = new OAuthHelper(this.baseURL());
     }
     catch (e) {
         self.oauth = null;

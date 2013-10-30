@@ -9,7 +9,10 @@
 
 function GalleryController() {
     var self = this;
-
+    this.debugMode = debugMode;
+    this.baseURL = baseURL;
+    this.hostURL = hostURL;
+    
     console.log('Gallery Controller starts');
     document.domain = 'ethz.ch';
 
@@ -40,7 +43,7 @@ function GalleryController() {
 
 GalleryController.prototype.initOAuth = function() {
     try {
-        this.oauth = new OAuthHelper('http://yellowjacket.ethz.ch/tools/');
+        this.oauth = new OAuthHelper(this.baseURL());
     }
     catch (e) {
         console.log( 'oauth error! ' + e.message);

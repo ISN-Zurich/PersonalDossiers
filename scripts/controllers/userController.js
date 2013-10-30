@@ -3,6 +3,10 @@
 
 function userController() {
 	var self=this;
+    this.debugMode = debugMode;
+    this.baseURL = baseURL;
+    this.hostURL = hostURL;
+    
 	document.domain = 'ethz.ch';
 	
 	self.activeView=false;
@@ -138,7 +142,7 @@ userController.prototype.colorizeInteractiveBox = function(hash){
 userController.prototype.initOAuth = function() {
     console.log('initialize the oauth helper class');
     try {
-	this.oauth = new OAuthHelper("http://yellowjacket.ethz.ch/tools/");
+	this.oauth = new OAuthHelper(this.basePath());
 	 $(document).trigger('oauthSet');
     }
     catch (e) {
