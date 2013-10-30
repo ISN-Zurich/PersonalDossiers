@@ -24,7 +24,7 @@ function baseURL() {
     var debugPath = "/tools/";
     var livePath = "/";
     
-    return this.baseURL() + (this.debugMode() ? debugPath : livePath); 
+    return this.hostURL() + (this.debugMode() ? debugPath : livePath); 
 }
 
 
