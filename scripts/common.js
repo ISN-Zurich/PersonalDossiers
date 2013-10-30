@@ -8,11 +8,31 @@ if ( !window.console ) {
     window.console = {'log': function(m){}};
 } 
 
+function debugMode() {
+    var debugMode = false;
+    return debugMode;
+}
+
+function hostURL() {
+    var debugURL = "http://yellowjacket.ethz.ch";
+    var liveURL = "http://lab.isn.ethz.ch";
+    
+    return this.debugMode() ? debugURL : liveURL; 
+}
+
+function baseURL() {
+    var debugPath = "/tools/";
+    var livePath = "/";
+    
+    //return this.hostURL() + (this.debugMode() ? debugPath : livePath); 
+    return this.hostURL() + debugPath; 
+}
+
+
 function openView() {
 	console.log("first console log message");
 	$("#" + this.tagID).show();
 }
-
  
 
 /**closes  a view
@@ -29,7 +49,6 @@ function showErrorResponses(request){
 	console.log("ERROR status code is : " + request.status);
 	console.log("ERROR responsetext: "+ request.responseText);
 }
-
 
 function setDossiersColorization() {
 	//$("#span_dossiers").removeClass("pd_active");

@@ -3,6 +3,10 @@
 
 function userController() {
 	var self=this;
+    this.debugMode = debugMode;
+    this.baseURL = baseURL;
+    this.hostURL = hostURL;
+    
 	document.domain = 'ethz.ch';
 	
 	self.activeView=false;
@@ -36,6 +40,9 @@ function userController() {
 		$("#st_dossiers").removeClass("pd_disable");
 	}
 
+    var hashTag = this.getHash();
+	this.colorizeInteractiveBox(hashTag);
+    
 	//we want to update the Log View once we have logged out
 	//in order to display the Li in the interaction box
 	 $(document).bind("LogoutSent", function(){
@@ -138,7 +145,7 @@ userController.prototype.colorizeInteractiveBox = function(hash){
 userController.prototype.initOAuth = function() {
     console.log('initialize the oauth helper class');
     try {
-	this.oauth = new OAuthHelper("http://yellowjacket.ethz.ch/tools/");
+	this.oauth = new OAuthHelper(this.baseURL());
 	 $(document).trigger('oauthSet');
     }
     catch (e) {
@@ -194,6 +201,5 @@ var controller;
 $(document).ready(function(){
 	console.log("document ready");
 	controller = new userController();
-	var hashTag = this.getHash();
-	this.colorizeInteractiveBox(hashTag);
+	
 });

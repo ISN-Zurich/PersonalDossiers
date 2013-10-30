@@ -1,3 +1,5 @@
+/*jslint vars: true, sloppy: true */
+
 function UserModel(userController){
     console.log("runs user model");
     var self=this;
@@ -82,7 +84,7 @@ UserModel.prototype.validatePasswordConfirmation=function(){
 
 UserModel.prototype.getUserProfile=function(){
     var self = this;
-    var url= 'http://yellowjacket.ethz.ch/tools/service/authentication.php';
+    var url= this.controller.baseURL() +'service/authentication.php';
     var method = 'GET';
     
     $.ajax({
@@ -181,7 +183,7 @@ UserModel.prototype.checkActiveUser = function(){
 UserModel.prototype.sendUserProfileToServer = function(){
 	console.log("enter send user profile to server");
     var self=this;
-    var url='http://yellowjacket.ethz.ch/tools/service/authentication.php';
+    var url=this.controller.baseURL() +'service/authentication.php';
     var method = 'POST';
 //    var dataObject = {
 //    		"user_id":self.userProfile.user_id,
@@ -220,7 +222,7 @@ UserModel.prototype.sendUserProfileToServer = function(){
 
 UserModel.prototype.logout =function(){
     var self=this;
-    var url= "http://yellowjacket.ethz.ch/tools/service/authentication.php/access_token";
+    var url= this.controller.baseURL() +"service/authentication.php/access_token";
     $.ajax({
 	url: url,
 	type : 'DELETE',
@@ -275,7 +277,7 @@ UserModel.prototype.sendUserPasswordToServer = function(password){
 //	var hash_pswd=hex_sha1(string);
 //	console.log("encrypted password is: " + hash_pswd);
 	
-	 var url='http://yellowjacket.ethz.ch/tools/service/authentication.php/password';
+	 var url= self.controller.baseURL() +'service/authentication.php/password';
 	 var method = 'POST';
 	 
 	 var dataObject= { 

@@ -133,7 +133,7 @@ DossierListModel.prototype.getUserDossiers=function(){
 	console.log("enter getUserDossiers");
 	var self = this;
 
-	var url='http://yellowjacket.ethz.ch/tools/service/dossier.php';
+	var url=self.controller.baseURL() +'service/dossier.php';
 	var method = 'GET';
 	console.log( 'request to load dossier list');
 
@@ -186,7 +186,7 @@ DossierListModel.prototype.addDossier=function(){
 	console.log("enter addDossier in Bookmark Model");
 	var self=this;
 
-	var url='http://yellowjacket.ethz.ch/tools/service/dossier.php/' ;
+	var url= self.controller.baseURL() +'service/dossier.php/' ;
 	var method="PUT";
 
 
