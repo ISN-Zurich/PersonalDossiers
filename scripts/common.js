@@ -9,7 +9,7 @@ if ( !window.console ) {
 } 
 
 function debugMode() {
-    var debugMode = false;
+    var debugMode = true;
     return debugMode;
 }
 
@@ -58,6 +58,7 @@ function setDossiersColorization() {
 	
 	$("#st_user").removeClass("disable");
 	$("#logView").removeClass("pd_a_selected");
+	$("#logView").removeClass("disable");
 	$("#st_user").removeClass("pd_a_selected");
 	$("#span_user").addClass("pd_active");
 	
