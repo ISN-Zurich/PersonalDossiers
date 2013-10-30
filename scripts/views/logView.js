@@ -76,8 +76,8 @@ LogView.prototype.showLogout = function(){
 
 	 span = $("<span/>", {
 		"id": "st_log_out",
-		"class":"pd_tabs_margin pd_active",
-		"text": "Lo"
+		"class":"pd_tabs_margin pd_active iconMoon",
+		"text": "L"
 	}).appendTo("#logView");
 	 
 	 divConfirm = $("<div/>", {
@@ -109,22 +109,7 @@ LogView.prototype.showLogout = function(){
 	}).appendTo(liContainer);
 	 
 	
-	 
-//	 buttonContainer = $("<div/>", {
-//		 	"id": "logoutBtn_container",
-//			"class":"adv_search_buttons right"
-//	}).insertAfter("#st_log_out_confirm");
-//	 
-//	 button = $("<div/>", {
-//		 	"id": "pd_logoutBtn",
-//			"class":"search_bar_button right",
-//			"value": "Logout",
-//			"name": "Logout",
-//			"text": "Logout"
-//	}).appendTo(buttonContainer);
-//	 
-	 
-	 
+ 
 	 
 	 $("#st_log_out_confirm").bind("click", function(){
 		 self.controller.logout();
@@ -152,8 +137,8 @@ LogView.prototype.showLogin = function(){
 
 	 span = $("<span/>", {
 		 "id":"st_log_in",
-		"class":"pd_tabs_margin pd_selected",
-		"text": "Li"
+		"class":"pd_tabs_margin pd_selected iconMoon",
+		"text": "L"
 	}).appendTo("#logView");
 	 
 	  
