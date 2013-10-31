@@ -25,7 +25,6 @@ function userController() {
 
 	//initialization of views 
 	self.views.login= new LoginView(self);
-	self.views.landing= new landingView(self);
 	self.views.welcome= new WelcomeView(self);
 	self.views.log= new LogView(self);
 	console.log("log view is initialized");
@@ -43,6 +42,17 @@ function userController() {
 
     var hashTag = this.getHash();
 	this.colorizeInteractiveBox(hashTag);
+	
+	
+	$(document).bind('UserProfileUpdate', function(){
+		console.log("user profile update in user controller");
+		self.views.welcome.open();
+	});
+
+	$(document).bind('DossierListUpdate', function(){
+		console.log("dossier list update in user controller");
+		self.views.welcome.open();
+	});
     
 	//we want to update the Log View once we have logged out
 	//in order to display the Li in the interaction box

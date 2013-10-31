@@ -29,15 +29,9 @@ function WelcomeView(controller){
 WelcomeView.prototype.openDiv=openView;
 
 WelcomeView.prototype.open = function(){
-	$('#delete').show();
-	$('#findinformation').show();
-	$('#socials').show();
-	$('#addDossier').show();
-	$('#dossierListHeader').show();
-	console.log("called open of the WelcomeView");
 	this.update();
 	$("#" + this.tagID).show();
-	$('#'+this.tagID).removeClass("hidden");
+	//$('#'+this.tagID).removeClass("hide");
 };
 
 WelcomeView.prototype.update = function(){
@@ -46,10 +40,34 @@ WelcomeView.prototype.update = function(){
 
 	//empty the sub views
 	//$("#userProfile").empty();
+	
+
+	 $("#logView").removeClass("pd_a_selected");
+	 $("#logView").addClass("pd_interactionItem");
+	 $("#logView").addClass("pd_active");
+	 
+	 $("#st_dossiers").removeClass("disable");
+	 $("#span_dossiers").removeClass("pd_disable");
+	 $("#st_user").removeClass("disable");
+	 $("#span_user").removeClass("pd_disable");
+	 
+	 $("#addDossierBtn").removeClass("hide");
+	$('#delete').show();
+	$('#findinformation').show();
+	$('#socials').show();
+	$('#addDossier').show();
+	$('#dossierListHeader').show();
+	$("#videoView").addClass("hide");
+	$("#landingView").removeClass("hide");
+	$("#loginFormContainer").addClass("hide");
+	$("#IntroductionPD").addClass("hide");
 	$("#notifications").empty();
 	$("#welcome").empty();
 
-
+	 
+	 var hash= window.location.hash;
+	 var hashTag = hash.substring(1);
+	 self.controller.colorizeInteractiveBox(hashTag);
 	if ( self.controller.models.user.userProfile ) {
 		console.log("user profile existis, design welcome view");
 	}

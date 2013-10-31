@@ -65,7 +65,6 @@ function setDossiersColorization() {
 		
 	$("#modifiedListHeader").removeClass("hide");
 	 $("#followingListHeader").removeClass("hide");
-//	 $("#addDossierBtn").removeClass("hide"); it will open in the controller
 	 $("#profileViewContainer").addClass("hide");
 	 $("#userProfile").addClass("hide");
 };

@@ -31,7 +31,6 @@ DossierListModel.prototype.nextDossier = function(){
 	this.index++;
 	return this.index < this.dossierList.length;
 };
-
 DossierListModel.prototype.listIsPresent=function(){
 	return this.dossierList && this.dossierList.length ? true : false;
 };
