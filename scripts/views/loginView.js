@@ -24,11 +24,11 @@ LoginView.prototype.open = function(){
 	this.update();
 	$('#'+this.tagID).removeClass("hidden");
 	//load data when we open the login view from the interaction box and not when we first launch the service
-	self.controller.models.authentication.loadData();
+	//self.controller.models.authentication.loadData();
 };
 
 LoginView.prototype.update = function(){
-	
+
 };
 
 LoginView.prototype.close=function(){

@@ -38,6 +38,7 @@ function userController() {
 	if (this.oauth){
 		$("#st_user").removeClass("pd_disable");
 		$("#st_dossiers").removeClass("pd_disable");
+		self.views.addDossier = new AddDossierView(self);
 	}
 
     var hashTag = this.getHash();
@@ -60,8 +61,7 @@ function userController() {
 			 window.location = loc.substring(0,index);
 		 }
 		 
-		 //2. show the login view
-		 var hashTag = self.getHash();
+		 //2. show the login view 
 		 self.chooseView(hashTag);
 		 self.colorizeInteractiveBox(hashTag);
 		 
@@ -114,6 +114,7 @@ userController.prototype.chooseView = function(viewHashString){
 		case 'personalDossiers':
 		default:
 			this.views.welcome.open();	
+			this.views.addDossier.open();
 			break;
 		}
 	}
@@ -132,8 +133,10 @@ userController.prototype.colorizeInteractiveBox = function(hash){
 		break;
 	case '':
 		if (this.oauth){
+			console.log("we are authenticated in colorize interactive box");
 			setDossiersColorization();
 		}else {
+			console.log("we are NOT authenticated in colorize interactive box");
 			setLoggedOutColorization();
 		}
 		break;
