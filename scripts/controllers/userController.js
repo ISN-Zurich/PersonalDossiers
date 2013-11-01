@@ -26,18 +26,22 @@ function userController() {
 	//initialization of views 
 	self.views.login= new LoginView(self);
 	self.views.welcome= new WelcomeView(self);
+	self.views.addDossier = new addDossierView(self);
 	self.views.log= new LogView(self);
 	console.log("log view is initialized");
 	self.views.user= new userProfileView(self);
+	
 	self.views.interaction = new interactionBox(self);
 	self.views.notifications = new notificationView(self);
+	
+	
 		
 	self.models.user.checkActiveUser();
 	
 	if (this.oauth){
 		$("#st_user").removeClass("pd_disable");
 		$("#st_dossiers").removeClass("pd_disable");
-		self.views.addDossier = new AddDossierView(self);
+		
 	}
 
     var hashTag = this.getHash();
@@ -47,12 +51,15 @@ function userController() {
 	$(document).bind('UserProfileUpdate', function(){
 		console.log("user profile update in user controller");
 		self.views.welcome.open();
+		self.views.addDossier.open();
 	});
 
 	$(document).bind('DossierListUpdate', function(){
 		console.log("dossier list update in user controller");
 		self.views.welcome.open();
-	});
+		console.log("opened welcome view ");
+		self.views.addDossier.open();
+		});
     
 	//we want to update the Log View once we have logged out
 	//in order to display the Li in the interaction box

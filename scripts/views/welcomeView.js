@@ -4,10 +4,6 @@ function WelcomeView(controller){
 	var self=this;
 	self.controller=controller;
 	self.tagID="welcomeBox"; 
-	$("#addDossierBtn").bind("click", function(e){
-		console.log("clicked the add Dossier button");
-		self.controller.models.dossierList.addDossier();
-	});
 
 	$("#welcomeBox").bind("click", function(e){
 		// ensure that clicks on the headers are ignored
@@ -30,8 +26,7 @@ WelcomeView.prototype.openDiv=openView;
 
 WelcomeView.prototype.open = function(){
 	this.update();
-	$("#" + this.tagID).show();
-	//$('#'+this.tagID).removeClass("hide");
+	this.openDiv();
 };
 
 WelcomeView.prototype.update = function(){
@@ -41,7 +36,6 @@ WelcomeView.prototype.update = function(){
 	//empty the sub views
 	//$("#userProfile").empty();
 	
-
 	 $("#logView").removeClass("pd_a_selected");
 	 $("#logView").addClass("pd_interactionItem");
 	 $("#logView").addClass("pd_active");
@@ -51,18 +45,18 @@ WelcomeView.prototype.update = function(){
 	 $("#st_user").removeClass("disable");
 	 $("#span_user").removeClass("pd_disable");
 	 
-	 $("#addDossierBtn").removeClass("hide");
-	$('#delete').show();
-	$('#findinformation').show();
-	$('#socials').show();
-	$('#addDossier').show();
-	$('#dossierListHeader').show();
-	$("#videoView").addClass("hide");
-	$("#landingView").removeClass("hide");
-	$("#loginFormContainer").addClass("hide");
-	$("#IntroductionPD").addClass("hide");
-	$("#notifications").empty();
-	$("#welcome").empty();
+	// $("#addDossierBtn").removeClass("hide");
+	 $('#delete').show();
+	 $('#findinformation').show();
+	 $('#socials').show();
+	 $('#addDossier').show();
+	 $('#dossierListHeader').show();
+	 $("#videoView").addClass("hide");
+	 $("#landingView").removeClass("hide");
+	 $("#loginFormContainer").addClass("hide");
+	 $("#IntroductionPD").addClass("hide");
+	 $("#notifications").empty();
+	 $("#welcome").empty();
 
 	 
 	 var hash= window.location.hash;
@@ -112,17 +106,17 @@ WelcomeView.prototype.update = function(){
 
 
 		// Design of the Dossier list that contain the Dossiers the user follows
-		dossierListModel.reset();
-		
-		followingHeader =$("<div/>", {
-			"id": "followinhListHeader",
-			"class": "pd_grey_head",
-			"text":"Followed"
-		}).appendTo("#welcome");
-
-		do {
-			this.renderFollowingItem();
-		} while (dossierListModel.nextDossier());
+//		dossierListModel.reset();
+//		
+//		followingHeader =$("<div/>", {
+//			"id": "followinhListHeader",
+//			"class": "pd_grey_head",
+//			"text":"Followed"
+//		}).appendTo("#welcome");
+//
+//		do {
+//			this.renderFollowingItem();
+//		} while (dossierListModel.nextDossier());
 	}
 
 };
@@ -203,3 +197,10 @@ WelcomeView.prototype.renderDossierItem = function(parentE) {
 
 }; 
 
+WelcomeView.prototype.closeDiv=closeView;
+
+WelcomeView.prototype.close = function(){
+	console.log("close welcome view");
+	this.closeDiv();
+	
+};

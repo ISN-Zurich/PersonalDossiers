@@ -1,37 +1,36 @@
 /*jslint vars: true, sloppy: true */
 
-
-function AddDossierView(controller){
+function addDossierView(controller){
 	console.log("enter AddDossierView");
 	var self=this;
 	self.controller=controller;
-	self.tagID="addDossier";
+	self.tagID="addDossierBtn";
 		
-	$("#addDossier").bind("click", function(e){
+	$("#addDossierBtn").bind("click", function(e){
 		console.log("clicked the add Dossier button");
 		self.controller.models.dossierList.addDossier();
 	});
+
 		
-} //end of constructor
+}//end of constructor
 
 
 
-AddDossierView.prototype.openDiv=openView;
+addDossierView.prototype.openDiv=openView;
 
-AddDossierView.prototype.open= function(){
+addDossierView.prototype.open= function(){
 	console.log("open add Dossier View");
 	this.update();
-	$('#'+this.tagID).show();
+	this.openDiv();
 };
 
-AddDossierView.prototype.update= function(){
-	
-	
+addDossierView.prototype.update= function(){
+		
 };
 
-AddDossierView.prototype.closeDiv=closeView;
+addDossierView.prototype.closeDiv=closeView;
 
-AddDossierView.prototype.close= function(){
+addDossierView.prototype.close= function(){
 	console.log("close add dossier view");
 	this.closeDiv();
 };
