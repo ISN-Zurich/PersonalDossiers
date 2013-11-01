@@ -29,7 +29,6 @@ function userController() {
 	self.views.introduction = new IntroductionView(self);
 	self.views.addDossier = new addDossierView(self);
 	self.views.log= new LogView(self);
-	console.log("log view is initialized");
 	self.views.user= new userProfileView(self);
 	
 	self.views.interaction = new interactionBox(self);
@@ -45,10 +44,7 @@ function userController() {
 		
 	}
 
-    var hashTag = this.getHash();
-	this.colorizeInteractiveBox(hashTag);
-	
-	
+
 	$(document).bind('UserProfileUpdate', function(){
 		console.log("user profile update in user controller");
 		self.views.welcome.open();
@@ -136,7 +132,8 @@ userController.prototype.chooseView = function(viewHashString){
 			break;
 		case 'personalDossiers':
 		default:
-			this.views.introduction.close();	
+			this.views.introduction.close();
+			this.views.user.close();
 			this.views.welcome.open();	
 			this.views.addDossier.open();
 			break;
