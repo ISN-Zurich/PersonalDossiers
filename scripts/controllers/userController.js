@@ -127,6 +127,7 @@ userController.prototype.chooseView = function(viewHashString){
 	}else { 
 		switch (viewHashString){
 		case 'userProfile':
+			this.views.welcome.close();
 			this.views.addDossier.close();
 			this.views.user.open();
 			break;
