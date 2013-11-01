@@ -26,6 +26,7 @@ function userController() {
 	//initialization of views 
 	self.views.login= new LoginView(self);
 	self.views.welcome= new WelcomeView(self);
+	self.views.introduction = new IntroductionView(self);
 	self.views.addDossier = new addDossierView(self);
 	self.views.log= new LogView(self);
 	console.log("log view is initialized");
@@ -52,13 +53,16 @@ function userController() {
 		console.log("user profile update in user controller");
 		self.views.welcome.open();
 		self.views.addDossier.open();
+		self.views.login.close();
+		self.views.introduction.close();
 	});
 
 	$(document).bind('DossierListUpdate', function(){
 		console.log("dossier list update in user controller");
 		self.views.welcome.open();
-		console.log("opened welcome view ");
 		self.views.addDossier.open();
+		self.views.login.close();
+		self.views.introduction.close();
 		});
     
 	//we want to update the Log View once we have logged out

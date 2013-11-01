@@ -60,6 +60,7 @@ function setDossiersColorization() {
 	$("#logView").removeClass("pd_a_selected");
 	$("#logView").removeClass("disable");
 	$("#st_user").removeClass("pd_a_selected");
+	$("#logView").addClass("pd_interactionItem");
 	$("#span_user").addClass("pd_active");
 	
 		

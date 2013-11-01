@@ -65,11 +65,14 @@ function LogView(controller){
 	 
 }
 
-//LogView.prototype.open = function(){
-//	this.update();
-//};
-//
-//
+LogView.prototype.openDiv=openView;
+
+LogView.prototype.open = function(){
+	this.update();
+	this.openDiv();
+};
+
+
 //LogView.prototype.update = function(){
 //	var self=this;
 //	console.log("enter open logView");
@@ -82,103 +85,9 @@ function LogView(controller){
 //	}
 //};
 //
-//LogView.prototype.showLogout = function(){
-//	var self=this;
-//	$("#st_log_in").empty();
-//	$("#st_log_in").hide();
-//	$("#st_log_out").remove();
-//	
-//	
-//	var self=this;
-//	console.log("enter show logout");
-//
-//	 span = $("<span/>", {
-//		"id": "st_log_out",
-//		"class":"pd_tabs_margin pd_active iconMoon",
-//		"text": "L"
-//	}).appendTo("#logView");
-//	 
-//	 divConfirm = $("<div/>", {
-//			"id": "st_log_out_confirm",
-//			"class":"box snippetlist hidden"
-//	}).insertAfter("#InteractionBar");
-//	 
-//
-//	 div2 = $("<div/>", {
-//			"class":"snippetlist-content sidebar-header darkblue"
-//	}).appendTo(divConfirm);
-//	 
-//	 div3 = $("<div/>", {
-//			"class":"about_section_desc"
-//	}).appendTo(div2);
-//	 
-//	 ul = $("<ul/>", {
-//		
-//	}).appendTo(div3);
-//	 
-//	liContainer = $("<li/>", {
-//			"class":"pd_loginContainer"
-//		}).appendTo(ul);
-//	
-//	divFinal= $("<div/>", {
-//		"id": "confirmationMsg",
-//		"class":"pd_loginContainer clickable",
-//		"text":"are you sure you want to log out?"
-//	}).appendTo(liContainer);
-//	 
-//	
-// 
-//	 
-//	 $("#st_log_out_confirm").bind("click", function(){
-//		 self.controller.logout();
-//	 });
-//	 
-//	 $("#logView").bind("click", function(){
-//		 console.log("clicked log view, the loggout button");
-//		 $("#st_log_out").addClass("selected"); 
-//		 $("#st_log_out_confirm").removeClass("hidden"); 
-//		 self.controller.loggoutClicked=true;
-//	 });
-//	 
-//	 
-//
-//};
-//
-//
-//LogView.prototype.showLogin = function(){
-//	$("#st_log_in").remove();
-//	$("#st_log_out").hide();
-//	$("#st_log_out_confirm").addClass("hidden");
-//	
-//	var self=this;
-//	console.log("enter show login");
-//
-//	 span = $("<span/>", {
-//		 "id":"st_log_in",
-//		"class":"pd_tabs_margin pd_selected iconMoon",
-//		"text": "L"
-//	}).appendTo("#logView");
-//	 
-//	  
-//	 $("#st_log_in").bind("click", function(){
-//		 console.log("clicked the login button");
-//		 self.controller.models.authentication.loadData();
-//		 self.controller.models.user.checkActiveUser();
-//		 self.controller.views.login.open();			
-//	 });
-//	
-//};
 
+LogView.prototype.closeDiv=closeView;
 
-//LogView.prototype.showLogoutConfirm = function(){
-//	 $("#st_log_out").addClass("selected"); 
-//	 $("#logView").addClass("pd_a_selected");
-//	 $("#st_dossiers").removeClass("pd_a_selected");
-//	 $("#st_user").removeClass("pd_a_selected");
-//	 
-//	 $("#st_log_out_confirm").removeClass("hidden"); 
-//	 
-//	 $("#st_log_out_confirm").bind("click", function(){
-//		 self.controller.logout();
-//	 });
-//};
+LogView.prototype.close=function(){
+	this.closeDiv();
+};

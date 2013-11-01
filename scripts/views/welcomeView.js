@@ -32,36 +32,13 @@ WelcomeView.prototype.open = function(){
 WelcomeView.prototype.update = function(){
 	var self=this;
 	console.log("update the welcome view");
+	var hash= window.location.hash;
+	var hashTag = hash.substring(1);
+	self.controller.colorizeInteractiveBox(hashTag);
 
-	//empty the sub views
-	//$("#userProfile").empty();
-	
-	 $("#logView").removeClass("pd_a_selected");
-	 $("#logView").addClass("pd_interactionItem");
-	 $("#logView").addClass("pd_active");
-	 
-	 $("#st_dossiers").removeClass("disable");
-	 $("#span_dossiers").removeClass("pd_disable");
-	 $("#st_user").removeClass("disable");
-	 $("#span_user").removeClass("pd_disable");
-	 
-	// $("#addDossierBtn").removeClass("hide");
-	 $('#delete').show();
-	 $('#findinformation').show();
-	 $('#socials').show();
-	 $('#addDossier').show();
-	 $('#dossierListHeader').show();
-	 $("#videoView").addClass("hide");
-	 $("#landingView").removeClass("hide");
-	 $("#loginFormContainer").addClass("hide");
-	 $("#IntroductionPD").addClass("hide");
-	 $("#notifications").empty();
 	 $("#welcome").empty();
 
-	 
-	 var hash= window.location.hash;
-	 var hashTag = hash.substring(1);
-	 self.controller.colorizeInteractiveBox(hashTag);
+		 
 	if ( self.controller.models.user.userProfile ) {
 		console.log("user profile existis, design welcome view");
 	}
@@ -103,20 +80,6 @@ WelcomeView.prototype.update = function(){
 		
 		// END OF DESIGN OF FIRST LIST OF DOSSIERS
 
-
-
-		// Design of the Dossier list that contain the Dossiers the user follows
-//		dossierListModel.reset();
-//		
-//		followingHeader =$("<div/>", {
-//			"id": "followinhListHeader",
-//			"class": "pd_grey_head",
-//			"text":"Followed"
-//		}).appendTo("#welcome");
-//
-//		do {
-//			this.renderFollowingItem();
-//		} while (dossierListModel.nextDossier());
 	}
 
 };

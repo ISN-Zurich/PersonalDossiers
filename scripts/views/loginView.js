@@ -1,7 +1,7 @@
 function LoginView(controller){
 	var self=this;
 	self.controller=controller;
-	self.tagID="login";
+	self.tagID="loginFormContainer";
 		
 	$("#loginButton").bind("click", function(){
 		var authenticationModel = self.controller.models['authentication'];
@@ -16,21 +16,17 @@ function LoginView(controller){
 LoginView.prototype.openDiv=openView;
 
 LoginView.prototype.open = function(){
-	$('#delete').hide();
-	$("#findinformation").hide();
-	$("#socials").hide();
-	$("#landingView").removeClass("hide");
-	console.log("open in LoginView");
 	this.update();
-	$('#'+this.tagID).removeClass("hidden");
+	this.openDiv();
 };
 
 LoginView.prototype.update = function(){
 
 };
+LoginView.prototype.closeDiv=closeView;
 
 LoginView.prototype.close=function(){
-	$('#'+this.tagID).addClass("hidden");
 	$('#username').val("");
 	$('#password').val("");
+	this.closeDiv();
 };
