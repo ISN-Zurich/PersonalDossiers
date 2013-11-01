@@ -25,20 +25,20 @@ function LogView(controller){
 //	        //self.update();
 //	        $("#logView").removeClass("disable"); 
 //	    });
-//	
-	  $(document).bind("click", function(e){
-	  console.log("clicked 1");
-	  var targetE= e.target;
-	  var targetId= targetE.id;
-	 
-	  //if the logout confirmation is visible
-	  if ($("#st_log_out_confirm").is(":visible") && targetId!== "#logView"){
-	  console.log("clicekd 2");
-	  if (targetId !== 'st_log_out_confirm'){
-	  $("#st_log_out_confirm").addClass("hide"); 
-	  
-	  
-	  }
+////	
+//	  $(document).bind("click", function(e){
+//	  console.log("clicked 1");
+//	  var targetE= e.target;
+//	  var targetId= targetE.id;
+//	 
+//	  //if the logout confirmation is visible
+//	  if ($("#st_log_out_confirm").is(":visible") && targetId!== "#logView"){
+//	  console.log("clicekd 2");
+//	  if (targetId !== 'st_log_out_confirm'){
+//	  $("#st_log_out_confirm").addClass("hide"); 
+//	  
+//	  
+//	  }
 //
 //	  if ($("#st_log_out_confirm").hasClass("hidden") && targetId== "st_log_out"){
 //	  console.log("clicked 3");
@@ -46,8 +46,9 @@ function LogView(controller){
 //	  $("#st_log_out").addClass("selected"); 
 //	  console.log("removedClass from 3");
 //	  }
+////	  }
 //	  }
-	  }});
+//});
 	 
 	 $("#logView").bind('click', function(){
 		 console.log("click loggout button");

@@ -13,11 +13,16 @@ function interactionBox(controller){
 	
 //	$("#st_dossiers").bind("click", function(){
 //		console.log("clicked  dossiers icon");
+//		setDossiersColorization();
 //		self.controller.views.welcome.open();
+//		self.views.addDossier.open();
 //	});
 //	
 //	$("#st_user").bind("click", function(){
 //		console.log("clicked  user profile icon");
+//		setUserProfileColorization();
+//		self.controller.views.welcome.close();
+//		self.controller.views.addDossier.close();
 //		self.controller.views.user.open();
 //	});
 //	

@@ -47,6 +47,7 @@ function userController() {
 
 	$(document).bind('UserProfileUpdate', function(){
 		console.log("user profile update in user controller");
+		
 		self.views.welcome.open();
 		self.views.addDossier.open();
 		self.views.login.close();
@@ -65,11 +66,7 @@ function userController() {
 	//in order to display the Li in the interaction box
 	 $(document).bind("LogoutSent", function(){
 		 console.log("logout sent is binded");
-		// self.views.log.open();
-		 //1. hide the landing view
-		 $("#landingView").hide();
-		 $("#st_logout_confirm").hide();
-		 
+					 
 		//3. clear the url from hash
 		 var loc = window.location.href;
 		 index= loc.indexOf('#');
@@ -77,13 +74,22 @@ function userController() {
 		 if (index >0){
 			 window.location = loc.substring(0,index);
 		 }
-		 
+
 		 //2. show the login view 
+		 var hashTag = self.getHash();
 		 self.chooseView(hashTag);
 		 self.colorizeInteractiveBox(hashTag);
 		 
+//		 $("#st_logout_confirm").hide();
+//		 self.views.welcome.close();
+//		 self.views.addDossier.close();
+//		 self.views.user.close();
+//		 self.views.login.open();
+//		 self.views.introduction.open();
+		 
+		 
 	 });
-	 
+	
 	 
 	 $(window).bind( "hashchange",function(){
 		 console.log("hash change event binded");
@@ -95,6 +101,7 @@ function userController() {
  // when we are coming from the index.html
  // the page during its loading should colorize the interaction box based on the hashed url
 	 $(window).load(function(){
+		 console.log("window load event binded");
 		 //we use the loggoutClicked flag to prevent the automatic loading of the page
 		 //when click on the <a> logView.
 		 if (!self.loggoutClicked){
@@ -120,6 +127,7 @@ userController.prototype.getHash = function(){
 userController.prototype.chooseView = function(viewHashString){
 	if (!this.oauth){
 		this.views.login.open();
+		
 	}else { 
 		switch (viewHashString){
 		case 'userProfile':
