@@ -1,5 +1,6 @@
+/*jslint vars: true, sloppy: true */
 /**
- * User Profile View
+* User Profile View
  */
 function userProfileView(controller){
 	console.log("enter user profile view");
@@ -87,23 +88,20 @@ function userProfileView(controller){
 	
 } //end of constructor
 
+userProfileView.prototype.openDiv=openView;
+
 userProfileView.prototype.open = function(){
 	console.log("enter open in user profile view");
 
 	this.update(); 
+	this.openDiv();
 };
 
 userProfileView.prototype.update= function(){
 	var self=this;
-	
 	console.log("enter update user profile view");
-	
-	$("#welcome").empty();
-	$("#welcome").hide();
-
-	$("#notifications").empty();
-	$("#userProfile").removeClass("hide");
-	
+	$("#profileViewContainer").removeClass("hide");
+		
 	var userModel=self.controller.models.user;
 	if (userModel.userProfile) {		
 					
@@ -169,3 +167,13 @@ userProfileView.prototype.savePasswordChanges= function(){
  }
 };
 
+
+userProfileView.prototype.closeDiv=closeView;
+
+userProfileView.prototype.close=function(){
+	//close the button on the right side
+	$("#profileViewContainer").addClass("hide");
+
+	//close the content area that contains the user data
+	this.closeDiv();
+};
