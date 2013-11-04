@@ -100,6 +100,8 @@ userProfileView.prototype.open = function(){
 userProfileView.prototype.update= function(){
 	var self=this;
 	console.log("enter update user profile view");
+	
+	self.controller.activeView=self.controller.views.user; 
 	$("#profileViewContainer").removeClass("hide");
 		
 	var userModel=self.controller.models.user;

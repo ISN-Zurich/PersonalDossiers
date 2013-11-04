@@ -123,10 +123,9 @@ UserModel.prototype.getUserProfile=function(){
 	localStorage.setItem("userProfile",stringProfile);
 	console.log("user profile item from local storage is "+localStorage.getItem("userProfile"));
 	$(document).trigger('UserProfileUpdate'); 
-	self.controller.transition("welcome");
+	//self.controller.transition("welcome"); the opening of the view will be bound in controler, when dossier list will be updated
+										// the dossier list  model will be loaded when the user profile update will be bound in dossier list model
 	
-	//self.getUserDossiers();
-	//self.controller.models['dossierList'].getUserDossiers();
     }
     
     function setHeader(xhr){

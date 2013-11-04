@@ -9,14 +9,17 @@ function DossierListModel(controller){
 	self.dossierList=[];
 	self.activeDossier = -1;
 	self.index=0;
-	//load the "userProfile" object from Local storage
-	//self.loadData();
-
-	self.getUserDossiers();
+	
+	//self.getUserDossiers();
 
 	//when we add a new dossier, to update the list of dossiers 
 	$(document).bind('DossierAdded', function(){
 		console.log("binded dossierAdded");
+		self.getUserDossiers();
+	});
+	
+	$(document).bind('UserProfileUpdate', function(){
+		console.log("binded User profile update in dossier list model");
 		self.getUserDossiers();
 	});
 

@@ -305,15 +305,13 @@ AuthenticationModel.prototype.requestAccessToken = function() {
     function success(data){
         //get back from request the access_token and access_secret
         console.log("success in granting access token");
-//		self.accesstoken=data.oauth_token;
-//		self.accesstoken_secret=data.oauth_token_secret;
         console.log("access_token is "+self.accesstoken);
         self.authentication.accessToken=data.oauth_token;
         self.authentication.accessSecret=data.oauth_token_secret;
         self.storeData();
         self.controller.initOAuth();
         self.controller.models['user'].getUserProfile();
-        self.controller.updateUserData();
+       // self.controller.updateUserData(); we will load id after the user profile will be bound in dossier list model
     }
 
     function setHeader(xhr){

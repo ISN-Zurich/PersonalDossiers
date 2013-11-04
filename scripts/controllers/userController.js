@@ -2,10 +2,12 @@
 /*jslint vars: true, sloppy: true */
 
 function userController() {
+	
 	var self=this;
     this.debugMode = debugMode;
     this.baseURL = baseURL;
     this.hostURL = hostURL;
+    this.appLoaded=false;
     
 	document.domain = 'ethz.ch';
 	
@@ -44,18 +46,21 @@ function userController() {
 		
 	}
 
-
-	$(document).bind('UserProfileUpdate', function(){
-		console.log("user profile update in user controller");
-		
-		self.views.welcome.open();
-		self.views.addDossier.open();
-		self.views.login.close();
-		self.views.introduction.close();
-	});
+// this will be bound in dossier list model, which will load the getUser dossier which in turn will
+// trigger the dossier list update	
+	
+//	$(document).bind('UserProfileUpdate', function(){
+//		console.log("user profile update in user controller");
+//		
+//		self.views.welcome.open();
+//		self.views.addDossier.open();
+//		self.views.login.close();
+//		self.views.introduction.close();
+//	});
 
 	$(document).bind('DossierListUpdate', function(){
 		console.log("dossier list update in user controller");
+		self.activeView=self.views.welcome; 
 		self.views.welcome.open();
 		self.views.addDossier.open();
 		self.views.login.close();
@@ -79,14 +84,7 @@ function userController() {
 		 var hashTag = self.getHash();
 		 self.chooseView(hashTag);
 		 self.colorizeInteractiveBox(hashTag);
-		 
-//		 $("#st_logout_confirm").hide();
-//		 self.views.welcome.close();
-//		 self.views.addDossier.close();
-//		 self.views.user.close();
-//		 self.views.login.open();
-//		 self.views.introduction.open();
-		 
+
 		 
 	 });
 	
