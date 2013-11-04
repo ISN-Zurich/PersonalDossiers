@@ -46,26 +46,11 @@ function userController() {
 		
 	}
 
-// this will be bound in dossier list model, which will load the getUser dossier which in turn will
-// trigger the dossier list update	
-	
-//	$(document).bind('UserProfileUpdate', function(){
-//		console.log("user profile update in user controller");
-//		
-//		self.views.welcome.open();
-//		self.views.addDossier.open();
-//		self.views.login.close();
-//		self.views.introduction.close();
-//	});
-
 	$(document).bind('DossierListUpdate', function(){
 		console.log("dossier list update in user controller");
-		self.activeView=self.views.welcome; 
-		self.views.welcome.open();
-		self.views.addDossier.open();
-		self.views.login.close();
-		self.views.introduction.close();
-		});
+		self.chooseView();
+		self.colorizeInteractiveBox();
+	});
     
 	//we want to update the Log View once we have logged out
 	//in order to display the Li in the interaction box
@@ -80,10 +65,9 @@ function userController() {
 			 window.location = loc.substring(0,index);
 		 }
 
-		 //2. show the login view 
-		 var hashTag = self.getHash();
-		 self.chooseView(hashTag);
-		 self.colorizeInteractiveBox(hashTag);
+				 
+		 self.chooseView();
+		 self.colorizeInteractiveBox();
 
 		 
 	 });
@@ -91,9 +75,8 @@ function userController() {
 	 
 	 $(window).bind( "hashchange",function(){
 		 console.log("hash change event binded");
-		 var hashTag = self.getHash();
-		 self.chooseView(hashTag);
-		 self.colorizeInteractiveBox(hashTag);
+		 self.chooseView();
+		 self.colorizeInteractiveBox();
 	 });
 	 
  // when we are coming from the index.html
@@ -104,10 +87,8 @@ function userController() {
 		 //when click on the <a> logView.
 		 if (!self.loggoutClicked){
 		 console.log("enter on window load");
-		 var hash= window.location.hash;
-		 var hashTag = hash.substring(1);
-		 self.colorizeInteractiveBox(hashTag);
-		 self.chooseView(hashTag);
+		 self.colorizeInteractiveBox();
+		 self.chooseView();
 		 }
 	 });
 	
@@ -122,32 +103,40 @@ userController.prototype.getHash = function(){
 	return hashTag;	
 };
 
-userController.prototype.chooseView = function(viewHashString){
-	if (!this.oauth){
+userController.prototype.chooseView = function(){
+	 var hashTag = this.getHash();
+	 if (!this.oauth){
 		this.views.login.open();
 		
 	}else { 
-		switch (viewHashString){
+		switch (hashTag){
 		case 'userProfile':
 			this.views.welcome.close();
+			this.views.introduction.close();
+			this.views.login.close();
 			this.views.addDossier.close();
 			this.views.user.open();
+			this.activeView=this.views.user;
 			break;
 		case 'notifications':
 			this.views.notifications.open();
+			this.activeView=this.views.notifications;
 			break;
 		case 'personalDossiers':
 		default:
 			this.views.introduction.close();
+			this.views.login.close();
 			this.views.user.close();
 			this.views.welcome.open();	
 			this.views.addDossier.open();
+			this.activeView=this.views.welcome;
 			break;
 		}
 	}
 };
 
-userController.prototype.colorizeInteractiveBox = function(hash){
+userController.prototype.colorizeInteractiveBox = function(){
+	 var hash = this.getHash();
 	console.log("enter colorize interactive box");
 
 	switch (hash){
