@@ -16,3 +16,4 @@ gallery/*
 .settings/org.eclipse.wst.jsdt.ui.superType.name
 
 scripts/.DS_Store
+scripts/userController.js

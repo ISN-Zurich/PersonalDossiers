@@ -90,5 +90,6 @@ LogView.prototype.open = function(){
 LogView.prototype.closeDiv=closeView;
 
 LogView.prototype.close=function(){
+	$("#st_logout_confirm").addClass("hide");
 	this.closeDiv();
 };

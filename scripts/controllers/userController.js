@@ -107,6 +107,9 @@ userController.prototype.chooseView = function(){
 	 var hashTag = this.getHash();
 	 if (!this.oauth){
 		this.views.login.open();
+		this.views.introduction.open();
+		this.views.addDossier.close();
+		this.views.log.close();
 		
 	}else { 
 		switch (hashTag){
