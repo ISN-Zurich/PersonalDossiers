@@ -305,7 +305,8 @@ color:white;
 
 .dossier_item{
 	border:1px solid red;
-	padding:10px;
+	float: left;
+	margin-right: 10px;	
 }
 #headerText{
 	width: 22.72em;

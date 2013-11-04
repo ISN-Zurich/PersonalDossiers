@@ -10,7 +10,7 @@ function DossierListModel(controller){
 	self.activeDossier = -1;
 	self.index=0;
 	
-	//self.getUserDossiers();
+	self.getUserDossiers();
 
 	//when we add a new dossier, to update the list of dossiers 
 	$(document).bind('DossierAdded', function(){
