@@ -271,11 +271,6 @@ UserModel.prototype.sendUserPasswordToServer = function(password){
 	var hash1= hex_sha1(self.email+password);
 	console.log(" hash1 in send password to server "+hash1);
 
-
-//	var string=self.controller.models.authentication.token_secret +self.controller.models.authentication.consumerSecret + hash1;
-//	var hash_pswd=hex_sha1(string);
-//	console.log("encrypted password is: " + hash_pswd);
-	
 	 var url= self.controller.baseURL() +'service/authentication.php/password';
 	 var method = 'POST';
 	 

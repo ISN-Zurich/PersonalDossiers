@@ -68,6 +68,13 @@ function userProfileView(controller){
 	});
 	
 	$("#edit_password").bind("click", function(e){
+		
+		//make uneditable the user profile fields 
+		 $("#titleInput").attr('contenteditable', 'false');
+		 $("#nameInput").attr('contenteditable', 'false');
+		 $("#emailInput").attr('contenteditable', 'false');
+		
+		
 		 $("#edit_profile").css('color', '#4c5160');
 		console.log("clicked the edit password button");
 		 $("#pd_newPassword").attr('contenteditable', 'true');
@@ -86,6 +93,43 @@ function userProfileView(controller){
 		self.savePasswordChanges();
 		}
 	});
+	
+	
+	$("#titleInput").focusout(function(){
+		console.log("focused out title input");
+		if (self.editMode){
+		var value_title = $("#titleInput").text();
+		self.controller.models.user.setUserTitle(value_title);
+
+		self.controller.models.user.sendUserProfileToServer();
+		$("#pd_title_label").css('background-color', '#0089CF');
+		$("#pd_title_label").css('color', '#fff');
+		}
+	});
+	
+	$("#nameInput").focusout(function(){
+		console.log("focused out name input");
+		if (self.editMode){
+		var value_name = $("#nameInput").text();
+		self.controller.models.user.setUserName(value_name);
+		self.controller.models.user.sendUserProfileToServer();
+		$("#pd_name_label").css('background-color', '#0089CF');
+		$("#pd_name_label").css('color', '#fff');
+		}
+	});
+	
+	$("#emailInput").focusout(function(){
+		console.log("focused out email input");
+		if (self.editMode){
+		var value_email = $("#emailInput").text();
+		self.controller.models.user.setUserEmail(value_email);
+		self.controller.models.user.sendUserProfileToServer();
+		//we need to send and store in the database the new password based on the new email
+		$("#pd_email_label").css('background-color', '#0089CF');
+		$("#pd_email_label").css('color', '#fff');
+		}
+	});
+	
 	
 } //end of constructor
 
