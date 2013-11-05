@@ -35,20 +35,21 @@ function userProfileView(controller){
 		}
 	});
 	
-	$("#pd_uContainer3").bind("click", function(e){
+	$("#edit_profile").bind("click", function(e){
 		console.log("clicked the edit user profile button");
 		
 		//close the edit password sub view
 		$("#changePasswordContainer").addClass('hide');
 		$("#userProfileContainer").removeClass('hide');
 		
-		$("#pd_pContainer4").removeClass('pd_profile_selected');
+		 $("#edit_password").css('color', '#4c5160');
 		 $("#titleInput").attr('contenteditable', 'true');
 		 $("#nameInput").attr('contenteditable', 'true');
 		 $("#emailInput").attr('contenteditable', 'true');
 		 $("#saveChanges_container").removeClass('hide');
 		 
-		 $(this).addClass('pd_profile_selected');
+		 //$(this).addClass('pd_profile_selected');
+		 $(this).css('color', '#0089CF');
 		 self.editMode = true;	
 	});
 	
@@ -66,15 +67,15 @@ function userProfileView(controller){
 		}
 	});
 	
-	$("#pd_pContainer4").bind("click", function(e){
-		 $("#pd_uContainer3").removeClass('pd_profile_selected');
+	$("#edit_password").bind("click", function(e){
+		 $("#edit_profile").css('color', '#4c5160');
 		console.log("clicked the edit password button");
 		 $("#pd_newPassword").attr('contenteditable', 'true');
 		 $("#pd_confirm_newPassword").attr('contenteditable', 'true');
 		self.showPasswordForm();
 		$("#userProfileContainer").addClass('hide');
 		 $("#saveChangesPswd_container").removeClass('hide');
-		 $(this).addClass('pd_profile_selected');
+		 $(this).css('color', '#0089CF');
 		 self.editMode = true;	
 	});
 	

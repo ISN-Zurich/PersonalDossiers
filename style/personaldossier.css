@@ -250,8 +250,8 @@ color: #fff !important;	}
 
 
 .pd_profile_selected{
-background-color:#D2D2D2;
-color:white;
+/*background-color:#D2D2D2;*/
+font-color:blue;
 }
 /*************************end of change password***************/
 
