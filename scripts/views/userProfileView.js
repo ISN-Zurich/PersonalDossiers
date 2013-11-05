@@ -122,7 +122,9 @@ function userProfileView(controller){
 		console.log("focused out email input");
 		if (self.editMode){
 		var value_email = $("#emailInput").text();
-		self.controller.models.user.setUserEmail(value_email);
+		var currentPassword= self.controller.models.user.getPassword();
+		console.log("currentpassword is "+currentPassword);
+		self.controller.models.user.setUserEmail(value_email, currentPassword);
 		self.controller.models.user.sendUserProfileToServer();
 		//we need to send and store in the database the new password based on the new email
 		$("#pd_email_label").css('background-color', '#0089CF');
@@ -187,7 +189,8 @@ userProfileView.prototype.showPasswordForm= function(){
 userProfileView.prototype.savePasswordChanges= function(){
 	console.log("enter save password changes");
 	var new_password = $("#pd_newPassword").text();
-	var form_validation=true;;
+	var current_mail = this.controller.models.user.getEmail();
+	var form_validation=true;
 	var confirm_password = $("#pd_confirm_newPassword").text();
  if (new_password.length == 0 || confirm_password.length ==0) {
 	 // one or both of the input password fields are empty
@@ -204,7 +207,7 @@ userProfileView.prototype.savePasswordChanges= function(){
 	
  if (form_validation){
 	 console.log("passed the form validation");
-	 this.controller.models.user.sendUserPasswordToServer(new_password);
+	 this.controller.models.user.sendUserPasswordToServer(new_password,current_mail);
 	 $("#pd_newPassword").attr('contenteditable', 'false');
 	 $("#pd_confirm_newPassword").attr('contenteditable', 'false');
 	 $("#saveChangesPswd_container").addClass('hide');
