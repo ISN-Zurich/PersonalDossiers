@@ -74,8 +74,10 @@ WelcomeView.prototype.update = function(){
 				welcomeElement.append(l2);
 			}
 			this.renderDossierItem(isFollowedDossier ? l2 : l1);
+		
 		} while (dossierListModel.nextDossier());
-
+		$(l1+":last-child").removeClass("dossier_item_border");
+		$(l2+":last-child").removeClass("dossier_item_border");
 		return; // stop here
 		
 		// END OF DESIGN OF FIRST LIST OF DOSSIERS
@@ -100,7 +102,7 @@ WelcomeView.prototype.renderDossierItem = function(parentE) {
 	
 	// This item should have a border by the CSS styles unless it is the last element in the parent container
 	div1 =$("<div/>", {
-		"class": "column featured2  dossier_item"
+		"class": "column featured2  dossier_item dossier_item_border"
 	}).appendTo(parentE);
 
 
@@ -157,7 +159,6 @@ WelcomeView.prototype.renderDossierItem = function(parentE) {
 	lastbr2=$("<br/>", {
 
 	}).appendTo(div1);
-	
 	
 
 }; 

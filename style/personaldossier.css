@@ -305,12 +305,15 @@ font-color:blue;
 
 .dossier_item{
 	border:0px solid red;
-	border-bottom:1px solid #C9CACF;
 	float: left;
 	margin-right: 10px;	
 	padding-top:10px;
 	padding-bottom:10px;
 	width:470px;
+}
+
+.dossier_item_border{
+	border-bottom:1px solid #C9CACF;
 }
 #headerText{
 	width: 22.72em;
