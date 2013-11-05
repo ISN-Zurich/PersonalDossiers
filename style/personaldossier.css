@@ -304,9 +304,13 @@ font-color:blue;
 
 
 .dossier_item{
-	border:1px solid red;
+	border:0px solid red;
+	border-bottom:1px solid #C9CACF;
 	float: left;
 	margin-right: 10px;	
+	padding-top:10px;
+	padding-bottom:10px;
+	width:452px;
 }
 #headerText{
 	width: 22.72em;
