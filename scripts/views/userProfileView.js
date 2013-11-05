@@ -38,6 +38,11 @@ function userProfileView(controller){
 	$("#edit_profile").bind("click", function(e){
 		console.log("clicked the edit user profile button");
 		
+		
+		//clear the background for the confirmated password
+		$("#pd_confirm_password_label").css('background-color', '#ebedee');
+		$("#pd_confirm_password_label").css('color', '#4C5160');
+		
 		//close the edit password sub view
 		$("#changePasswordContainer").addClass('hide');
 		$("#userProfileContainer").removeClass('hide');
