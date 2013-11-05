@@ -24,16 +24,16 @@ function userProfileView(controller){
 	});
 	
 	
-	$("#pd_confirm_newPassword").bind("click", function(e){
-		console.log("click change password container");
-		if (!$("#warning_empty").hasClass("hide")){
-			$("#warning_empty").addClass("hide")
-		}
-		
-		if (!$("#warning_confirm").hasClass("hide")){
-			$("#warning_confirm").addClass("hide")
-		}
-	});
+//	$("#pd_confirm_newPassword").bind("click", function(e){
+//		console.log("click change password container");
+//		if (!$("#warning_empty").hasClass("hide")){
+//			$("#warning_empty").addClass("hide")
+//		}
+//		
+//		if (!$("#warning_confirm").hasClass("hide")){
+//			$("#warning_confirm").addClass("hide")
+//		}
+//	});
 	
 	$("#edit_profile").bind("click", function(e){
 		console.log("clicked the edit user profile button");
@@ -133,6 +133,34 @@ function userProfileView(controller){
 	});
 	
 	
+	$("#pd_confirm_newPassword").keyup(function(e){
+		console.log("enter focus in confirm password field");
+		if (self.editMode){
+		var new_password = $("#pd_newPassword").text();
+		
+			
+		var confirm_password = $(this).text();
+		
+		if (confirm_password.length == 0){
+			console.log("confirm password is empty");
+			$("#pd_confirm_password_label").css('background-color', '#ebedee');
+			$("#pd_confirm_password_label").css('color', '#4C5160');
+		}
+				
+		if (new_password !== confirm_password){
+			$("#pd_confirm_password_label").css('background-color', 'red');
+			$("#pd_confirm_password_label").css('color', '#fff');
+		}
+		
+		if (new_password == confirm_password){
+			$("#pd_confirm_password_label").css('background-color', '#0089CF');
+			$("#pd_confirm_password_label").css('color', '#fff');
+		}
+		
+		}
+	});
+	
+	
 } //end of constructor
 
 userProfileView.prototype.openDiv=openView;
@@ -200,11 +228,20 @@ userProfileView.prototype.savePasswordChanges= function(){
  }
  
  if (new_password !== confirm_password){
+	$("#pd_confirm_password_label").css('background-color', 'red');
+	$("#pd_email_label").css('color', '#fff');
 	 $("#warning_confirm").fadeIn();
 	 $("#warning_confirm").fadeOut(5000);
 	 form_validation=false;
  }
-	
+ 
+ 
+ if (new_password == confirm_password){
+		$("#pd_confirm_password_label").css('background-color', '#0089CF');
+		$("#pd_email_label").css('color', '#fff');
+ }
+ 
+ 
  if (form_validation){
 	 console.log("passed the form validation");
 	 this.controller.models.user.sendUserPasswordToServer(new_password,current_mail);
