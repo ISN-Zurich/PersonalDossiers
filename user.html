@@ -71,6 +71,7 @@
    	 <script type="text/javascript" src="scripts/views/addDossierView.js"></script>
     <script type="text/javascript" src="scripts/views/logView.js"></script>
    
+    <script type="text/javascript" src="scripts/views/registrationView.js"></script>
     <script type="text/javascript" src="scripts/views/userProfileView.js"></script>
     <script type="text/javascript" src="scripts/views/interactionBox.js"></script>
      <script type="text/javascript" src="scripts/views/notification.js"></script>
@@ -372,6 +373,40 @@
 					
 					</div> <!-- end of user profile -->
 
+					<div id="registrationView" class="hide">
+					
+					<div id="registrationContainer">
+					
+					<div id="registrationHeader" class="sidebar-header darkblue"> Registration </div>
+					<div>
+					 <div id="pd_registration_title_label" class="adv_search_label"> Title</div>
+					<div id="titleRegistrationInput" class="adv_search_label adv_search_input_container"></div>
+					</div>
+					<div>
+					 <div id="pd_registration_name_label" class="adv_search_label"> Name</div>
+					<div id="nameRegistrationInput" class="adv_search_label adv_search_input_container"></div>
+					</div>
+					<div>
+					 <div id="pd_registration_email_label" class="adv_search_label"> Email</div>
+					<div id="emailRegistrationInput" class="adv_search_label adv_search_input_container"></div>
+					</div>
+					<div>
+					 <div id="pd_registration_password_label" class="adv_search_label"> Password</div>
+					<div id="passwordRegistrationInput" class="adv_search_label adv_search_input_container"></div>
+					</div>
+					<div>
+					 <div id="pd_reg_password_confirm_label" class="adv_search_label"> Confirm Password</div>
+					<div id="passwordRegConfirmInput" class="adv_search_label adv_search_input_container"></div>
+					</div>
+					
+					<div id="successful_message1" class=" pd_success hide">Your profile has been succesfully updated</div>
+					<div id="saveChanges_container" class="adv_search_buttons right hide" >
+        		<!-- <div id="save_changes_submit" class="search_bar_button right" value="Save" name="save">Save </div> -->
+        		 </div>
+        		</div>
+					
+					</div>
+					
 					<div id="notifications" class="hide"></div>
 				
  
@@ -542,25 +577,7 @@
 					</div>
 				</div>
 				
-				<!-- <div id="profileViewContainer" class="box snippetlist hide ">
-					<div class="sidebar-header darkblue">Profile</div>
-					<div class="snippetlist-content first greyBg">
-						<div class="about_section_desc">
-							<form id="userProfileContainer">
-								<ul id="profileUI">
-									<li id="pd_uContainer3" >
-									 <div id="edit_profile" class="pd_loginContainer clickable">Edit your user profile</div></li>
-									<li id="pd_pContainer4">
-									<div id="edit_password" class="pd_loginContainer clickable" disabled="disabled">Edit your password</div>
-									</li>
- 									 
-								</ul>
-							</form>
-
-						</div>
-					</div>
-				</div>-->
-				
+								
 				
 				<div id="profileViewContainer" class="box snippetlist hide ">
 					<div class="sidebar-header darkblue">Profile</div>

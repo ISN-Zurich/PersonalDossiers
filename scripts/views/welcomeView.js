@@ -86,9 +86,6 @@ WelcomeView.prototype.update = function(){
 
 };
 
-WelcomeView.prototype.close=function(){
-	$('#'+this.tagID).addClass("hidden");
-};
 
 WelcomeView.prototype.createListBlock = function(listId){
 	return $("<div/>", {

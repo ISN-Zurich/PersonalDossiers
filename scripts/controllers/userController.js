@@ -32,6 +32,7 @@ function userController() {
 	self.views.addDossier = new addDossierView(self);
 	self.views.log= new LogView(self);
 	self.views.user= new userProfileView(self);
+	self.views.registration= new RegistrationView(self);
 	
 	self.views.interaction = new interactionBox(self);
 	self.views.notifications = new notificationView(self);
@@ -81,16 +82,16 @@ function userController() {
 	 
  // when we are coming from the index.html
  // the page during its loading should colorize the interaction box based on the hashed url
-	 $(window).load(function(){
-		 console.log("window load event binded");
-		 //we use the loggoutClicked flag to prevent the automatic loading of the page
-		 //when click on the <a> logView.
-		 if (!self.loggoutClicked){
-		 console.log("enter on window load");
-		 self.colorizeInteractiveBox();
-		 self.chooseView();
-		 }
-	 });
+//	 $(window).load(function(){
+//		 console.log("window load event binded");
+//		 //we use the loggoutClicked flag to prevent the automatic loading of the page
+//		 //when click on the <a> logView.
+//		 if (!self.loggoutClicked){
+//		 console.log("enter on window load");
+//		 self.colorizeInteractiveBox();
+//		 self.chooseView();
+//		 }
+//	 });
 	
 	
 	
@@ -130,6 +131,7 @@ userController.prototype.chooseView = function(){
 		case 'personalDossiers':
 		default:
 			this.views.introduction.close();
+			this.views.registration.close();
 			this.views.login.close();
 			this.views.user.close();
 			this.views.welcome.open();	
@@ -218,6 +220,11 @@ userController.prototype.logout = function() {
     this.models.authentication.logout();
 };
 
+userController.prototype.transitionToRegistration = function(){
+	console.log("enter transition to registation");
+	this.views.introduction.close();
+	this.views.registration.open();	
+};
 
 var controller;
 $(document).ready(function(){
