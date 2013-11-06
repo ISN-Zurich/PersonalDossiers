@@ -32,17 +32,34 @@ function RegistrationView(controller){
 	$("#emailRegistrationInput").focusout(function(e){
 		console.log("focused out email in registration");
 		var value_email = $("#emailRegistrationInput").text();
+		
 		self.controller.models.user.setUserEmail(value_email);
+		
 	});
-		
-	
-		
 	
 	$("#submit_confirmation").bind("click", function(e){
-		//check if password is set self.checkPassword();
+		console.log("clicked submit confirmation");
+		form_validation=true;
+		//check if password is set 
 		var value_password = $("#passwordRegistrationInput").text();
-		self.controller.models.user.register(value_password);
-		
+		var value_password_confirm = $("#passwordRegConfirmInput").text();
+		if (value_password.length ==0) {
+		console.log("password is empty");
+		$("#pd_registration_password_label").css('background-color', 'red');
+		$("#pd_registration_password_label").css('color', '#fff'); 
+		form_validation=false;
+		}
+		if (value_password_confirm.length == 0) {
+		$("#pd_reg_password_confirm_label").css('background-color', 'red');
+		$("#pd_reg_password_confirm_label").css('color', '#fff'); 
+				// $("#warning_empty").fadeIn();
+				// $("#warning_empty").fadeOut(5000);
+			 form_validation=false;
+		}
+		 if (form_validation){
+			 console.log("the password is filled in so validation done");
+			 self.controller.models.user.register(value_password);
+		 }	
 	});
 	
 }
@@ -57,6 +74,7 @@ RegistrationView.prototype.open = function(){
 RegistrationView.prototype.update = function(){
 	
 };
+
 
 RegistrationView.prototype.closeDiv=closeView;
 
