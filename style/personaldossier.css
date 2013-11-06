@@ -109,9 +109,9 @@ input#password {
 	 border:0px solid blue;
 }
 
-input#password, #pd_currentPassword, #pd_newPassword, #pd_confirm_newPassword{
+input#password, #pd_currentPassword, #pd_newPassword, #pd_confirm_newPassword, #passwordRegistrationInput,#passwordRegConfirmInput {
 	 -webkit-text-security: disc;
-	 -moz-text-security:disc;
+	 text-security:disc;
 }
 
 #loginButton {

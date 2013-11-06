@@ -91,6 +91,9 @@ class AuthenticationService extends OAUTHRESTService {
             case 'authorize':
                 $this->authenticate_user();
                 break;
+            case 'register':
+            	$this->register_user();
+            	break;
             case 'password':
             	$this->update_password();
             default:
@@ -345,6 +348,48 @@ class AuthenticationService extends OAUTHRESTService {
         }
     }
     
+    
+    protected function register_user(){
+    	$this->mark();
+    	$this->dbh->setFetchMode(MDB2_FETCHMODE_ASSOC);
+    	$mdb2 = $this->dbh;
+    	
+    	$this->log('register user');
+    	$data = file_get_contents("php://input");
+    	$this->log('data found are: '. $data);
+    	try {
+    		$tmp = json_decode($data, true);
+    		$this->log('encoded user data succesfully');
+    	}
+    	catch (Exception $e) {
+    		$this->log(' did NOT encod user data');
+    		$this->bad_request();
+    		return;
+    	}
+    	 
+    	if (!isset($tmp)) {
+    		$this->log(' did not get any user data');
+    		$this->bad_request();
+    		return;
+    	}
+    	
+    	$ttl = $tmp['title'];
+    	$name =$tmp['name'];
+    	$email = $tmp['email'];
+    	$pswd = $tmp['password'];
+    	
+    	//TODO: to check if the email already exists in the database
+    	
+    	
+    	$sth = $mdb2->prepare("insert into users (title,name, email,password) values (?, ?, ?, ?)");
+    	$res1 = $sth->execute(array($ttl,$name,$email,$pswd));
+    	if (PEAR::isError($res1)) {
+    		$this->log("pear error " . $res1->getMessage());
+    		$this->bad_request();
+    		return;
+    	}
+    	
+    }
     
     /**
      * TODO: to write comments

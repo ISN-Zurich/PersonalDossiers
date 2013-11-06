@@ -62,6 +62,7 @@ UserModel.prototype.getPassword = function(){
 };
 
 UserModel.prototype.getEmail = function(){
+	console.log("enter get email");
     return this.userProfile.email;
 };
 UserModel.prototype.setUserEmail = function(email){
@@ -271,7 +272,7 @@ UserModel.prototype.sendUserPasswordToServer = function(password,mail){
 	var hash1= hex_sha1(mail+password);
 	console.log(" hash1 in send password to server "+hash1);
 
-	 var url= self.controller.baseURL() +'service/authentication.php/password';
+	 var url= this.controller.baseURL() +'service/authentication.php/password';
 	 var method = 'POST';
 	 
 	 var dataObject= { 
@@ -299,7 +300,69 @@ UserModel.prototype.sendUserPasswordToServer = function(password,mail){
 	    }
 	    
 	    function setHeader(xhr){
+	    	if (self.controller.oauth)   {
 		var header_request=self.controller.oauth.oauthHeader(method,url);
 		xhr.setRequestHeader('Authorization', header_request);
+	    }else{
+        	var non_authenticationFlag=true;
+       	 xhr.setRequestHeader('NonAuth', non_authenticationFlag);	
+       }}
+};
+
+/**
+ * 
+ * we pass as an argument the password becasuse for security reasons
+ * we don't want to store it in the model, like we did with the rest 
+ * user profile information i.e. name, title, mail.
+ *  * 
+ * */
+
+UserModel.prototype.register = function(password){
+	console.log("enter register in user model");
+	var self=this;
+	var mail=self.getEmail();
+	console.log("mail is "+mail);
+	console.log("password is "+password);
+	var hash1= hex_sha1(mail+password); 
+	console.log("hash1 is "+hash1);
+	
+	var url= self.controller.baseURL() +'service/authentication.php/register';
+	var method = 'POST';
+	console.log("url is "+url);
+	
+	 var dataObject= { 
+			  "title": self.getTitle(),
+			  "name": self.getName(),
+			  "email": mail,
+			  "password":hash1
+		};
+	 
+	 var data=JSON.stringify(dataObject);
+	 
+	 console.log("before ajax request");
+	 $.ajax({
+		url:  url,
+		type : method,
+		data: data,
+		dataType : 'json',
+		success : success,
+		error : function(request) {
+		    console.log("Error while registering the user to the server");
+		    showErrorResponses(request); 
+		},
+		beforeSend : setHeader
+	    });
+	 
+	    console.log("after ajax request");
+	    function success(data){
+		console.log("success in registering the user to the server");
 	    }
+	    function setHeader(xhr){
+	    	if (self.controller.oauth)   {
+		var header_request=self.controller.oauth.oauthHeader(method,url);
+		xhr.setRequestHeader('Authorization', header_request);
+	    }else{
+        	var non_authenticationFlag=true;
+       	 xhr.setRequestHeader('NonAuth', non_authenticationFlag);	
+       }}
 };

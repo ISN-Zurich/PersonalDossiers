@@ -17,6 +17,34 @@ function RegistrationView(controller){
 			
 	});
 	
+	$("#titleRegistrationInput").focusout(function(e){
+		console.log("focused out title in registration");
+		var value_title = $("#titleRegistrationInput").text();
+		self.controller.models.user.setUserTitle(value_title);
+	});
+	
+	$("#nameRegistrationInput").focusout(function(e){
+		console.log("focused out name in registration");
+		var value_name = $("#nameRegistrationInput").text();
+		self.controller.models.user.setUserName(value_name);
+	});
+	
+	$("#emailRegistrationInput").focusout(function(e){
+		console.log("focused out email in registration");
+		var value_email = $("#emailRegistrationInput").text();
+		self.controller.models.user.setUserEmail(value_email);
+	});
+		
+	
+		
+	
+	$("#submit_confirmation").bind("click", function(e){
+		//check if password is set self.checkPassword();
+		var value_password = $("#passwordRegistrationInput").text();
+		self.controller.models.user.register(value_password);
+		
+	});
+	
 }
 
 RegistrationView.prototype.openDiv= openView;
