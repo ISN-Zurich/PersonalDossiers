@@ -56,10 +56,53 @@ function RegistrationView(controller){
 				// $("#warning_empty").fadeOut(5000);
 			 form_validation=false;
 		}
+		
+		if (value_password_confirm.length != 0 && value_password.length !=0){
+			if (value_password != value_password_confirm){
+				$("#pd_registration_password_label").css('background-color', '#0089CF');
+				$("#pd_registration_password_label").css('color', '#fff'); 
+				$("#pd_reg_password_confirm_label").css('background-color', 'red');
+				$("#pd_reg_password_confirm_label").css('color', '#fff'); 
+			}
+		}
+		
 		 if (form_validation){
 			 console.log("the password is filled in so validation done");
 			 self.controller.models.user.register(value_password);
+			 
+			 $("#pd_registration_password_label").css('background-color', '#ebedee');
+			 $("#pd_registration_password_label").css('color', '#4C5160');
+			 $("#pd_reg_password_confirm_label").css('background-color', '#ebedee');
+			 $("#pd_reg_password_confirm_label").css('color', '#4C5160');
 		 }	
+	});
+	
+	
+	$("#passwordRegConfirmInput").keyup(function(e){
+		console.log("enter focus in confirm password field");
+		
+		var new_password = $("#passwordRegistrationInput").text();
+		
+			
+		var confirm_password = $(this).text();
+		
+		if (confirm_password.length == 0){
+			console.log("confirm password is empty");
+			$("#pd_reg_password_confirm_label").css('background-color', '#ebedee');
+			$("#pd_reg_password_confirm_label").css('color', '#4C5160');
+		}
+				
+		if (new_password !== confirm_password){
+			$("#pd_reg_password_confirm_label").css('background-color', 'red');
+			$("#pd_reg_password_confirm_label").css('color', '#fff');
+		}
+		
+		if (new_password == confirm_password){
+			$("#pd_reg_password_confirm_label").css('background-color', '#0089CF');
+			$("#pd_reg_password_confirm_label").css('color', '#fff');
+		}
+		
+		
 	});
 	
 }
