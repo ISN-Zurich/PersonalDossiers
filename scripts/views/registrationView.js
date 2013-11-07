@@ -27,6 +27,7 @@ function RegistrationView(controller){
 		console.log("focused out name in registration");
 		var value_name = $("#nameRegistrationInput").text();
 		self.controller.models.user.setUserName(value_name);
+		
 	});
 	
 	$("#emailRegistrationInput").focusout(function(e){
@@ -35,6 +36,12 @@ function RegistrationView(controller){
 		
 		self.controller.models.user.setUserEmail(value_email);
 		
+	});
+	
+	$("#registrationContainer").bind("click", function(e){
+		$("#pd_registration_email_label").css('background-color', '#ebedee');
+		$("#pd_registration_email_label").css('color', '#4C5160'); 
+		$("#registration_mail").hide();
 	});
 	
 	$("#submit_confirmation").bind("click", function(e){

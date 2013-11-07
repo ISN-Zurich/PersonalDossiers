@@ -348,6 +348,17 @@ UserModel.prototype.register = function(password){
 		success : success,
 		error : function(request) {
 		    console.log("Error while registering the user to the server");
+		    $("#pd_registration_email_label").css('background-color', 'red');
+			$("#pd_registration_email_label").css('color', '#fff'); 
+			
+			  var span=$("<span/>", {
+			    	"id":"registration_mail",
+			    	"class":"pd_warning", 
+			    	text:"email already taken"
+			        }).appendTo("#emailRegistrationInput");
+			  
+//			$("#registration_mail").fadeIn();
+//			$("#registration_mail").fadeOut(5000);
 		    showErrorResponses(request); 
 		},
 		beforeSend : setHeader

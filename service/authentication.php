@@ -378,15 +378,32 @@ class AuthenticationService extends OAUTHRESTService {
     	$email = $tmp['email'];
     	$pswd = $tmp['password'];
     	
-    	//TODO: to check if the email already exists in the database
+    	//to check if the email already exists in the database
+    	$sthCheck = $this->dbh->prepare("SELECT id FROM users WHERE email = ?");
+    	$resCheck = $sthCheck->execute($email);
     	
-    	
-    	$sth = $mdb2->prepare("insert into users (title,name, email,password) values (?, ?, ?, ?)");
-    	$res1 = $sth->execute(array($ttl,$name,$email,$pswd));
-    	if (PEAR::isError($res1)) {
-    		$this->log("pear error " . $res1->getMessage());
+    	//check if there is any error in the query
+    	if (PEAR::isError($resCheck)) {
+    		$this->log("pear error " . $resCheck->getMessage());
     		$this->bad_request();
     		return;
+    	}
+    	
+    	//if the email existis already in the database
+    	if ($resCheck->numRows() == 1) {
+    		$this->log("the email exists already in the database");
+    		$this->bad_request();
+    		return;
+    	}
+    	else { 
+    		 
+    		$sth = $mdb2->prepare("insert into users (title,name, email,password) values (?, ?, ?, ?)");
+    		$res1 = $sth->execute(array($ttl,$name,$email,$pswd));
+    		if (PEAR::isError($res1)) {
+    			$this->log("pear error " . $res1->getMessage());
+    			$this->bad_request();
+    			return;
+    		}
     	}
     	
     }
