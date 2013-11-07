@@ -85,7 +85,7 @@ UserModel.prototype.validatePasswordConfirmation=function(){
 
 UserModel.prototype.getUserProfile=function(){
     var self = this;
-    var url= this.controller.baseURL() +'service/authentication.php';
+    var url= this.controller.baseURL +'service/authentication.php';
     var method = 'GET';
     
     $.ajax({
@@ -183,7 +183,7 @@ UserModel.prototype.checkActiveUser = function(){
 UserModel.prototype.sendUserProfileToServer = function(){
 	console.log("enter send user profile to server");
     var self=this;
-    var url=this.controller.baseURL() +'service/authentication.php';
+    var url=this.controller.baseURL +'service/authentication.php';
     var method = 'POST';
 //    var dataObject = {
 //    		"user_id":self.userProfile.user_id,
@@ -222,7 +222,7 @@ UserModel.prototype.sendUserProfileToServer = function(){
 
 UserModel.prototype.logout =function(){
     var self=this;
-    var url= this.controller.baseURL() +"service/authentication.php/access_token";
+    var url= this.controller.baseURL +"service/authentication.php/access_token";
     $.ajax({
 	url: url,
 	type : 'DELETE',
@@ -272,7 +272,7 @@ UserModel.prototype.sendUserPasswordToServer = function(password,mail){
 	var hash1= hex_sha1(mail+password);
 	console.log(" hash1 in send password to server "+hash1);
 
-	 var url= this.controller.baseURL() +'service/authentication.php/password';
+	 var url= this.controller.baseURL +'service/authentication.php/password';
 	 var method = 'POST';
 	 
 	 var dataObject= { 
@@ -326,7 +326,7 @@ UserModel.prototype.register = function(password){
 	var hash1= hex_sha1(mail+password); 
 	console.log("hash1 is "+hash1);
 	
-	var url= self.controller.baseURL() +'service/authentication.php/register';
+	var url= self.controller.baseURL +'service/authentication.php/register';
 	var method = 'POST';
 	console.log("url is "+url);
 	

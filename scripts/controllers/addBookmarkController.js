@@ -6,6 +6,9 @@ function addBookmarkController() {
     this.debugMode = debugMode;
     this.hostURL = hostURL;
     this.baseURL = baseURL;
+    console.log("debugMode is"+this.debugMode);
+    console.log("hostURL is"+this.hostURL);
+    console.log("baseURL is"+this.baseURL);
     
     document.domain = 'ethz.ch';
     self.login = false;
@@ -25,7 +28,7 @@ function addBookmarkController() {
     // create a hidden window
     $('<iframe/>', {'class': 'none', 
                     'id': 'isn_pd_authorize', 
-                    'src': this.baseURL() + 'authorize.html' }).appendTo('#isn_pd_widget').bind('load', function(){
+                    'src': this.baseURL + 'authorize.html' }).appendTo('#isn_pd_widget').bind('load', function(){
                         if ( self.itemId ) {
                             self.checkItem();
                         }
@@ -33,7 +36,10 @@ function addBookmarkController() {
 
 
     function authorizationListener(m) {
-        if (m.origin == self.hostURL()) {
+    	console.log("enter authorization listener");
+    	console.log("self.hostURL is "+self.hostURL);
+    	console.log("this.hostURL is "+this.hostURL);
+        if (m.origin == this.hostURL) {
             var data = JSON.parse(m.data);
             console.log('received a message: ' + m.data);
             // store the data into the local storage. 
@@ -67,7 +73,7 @@ addBookmarkController.prototype.getActiveDossier = function() {
 
 addBookmarkController.prototype.initOAuth = function() {
     try {
-        this.oauth = new OAuthHelper(this.baseURL());
+        this.oauth = new OAuthHelper(this.baseURL);
     }
     catch (e) {
         this.oauth = undefined;
@@ -78,15 +84,16 @@ addBookmarkController.prototype.initOAuth = function() {
 addBookmarkController.prototype.addItem = function() {
     var data = {'operation': 'store', 'itemID': this.itemId};
     $('#isn_pd_authorize')[0].contentWindow.postMessage(JSON.stringify(data), 
-                                                        this.baseURL());
+                                                        this.hostURL);
 };
 
 addBookmarkController.prototype.checkItem = function() {
     var data = {'operation': 'check', 'itemID': this.itemId};
     var msg = JSON.stringify(data);
     console.log( 'post message ' + msg);
+    console.log("hostURL is"+this.hostURL);
     $('#isn_pd_authorize')[0].contentWindow.postMessage(msg, 
-                                                        this.baseURL());
+                                                        this.hostURL);
 };
 
 

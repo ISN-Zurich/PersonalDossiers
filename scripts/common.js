@@ -4,6 +4,10 @@
  * @function openView 
  * */ 
 
+var debugMode = debugMode();
+var hostURL = hostURL();
+var baseURL = baseURL();
+
 if ( !window.console ) {
     window.console = {'log': function(m){}};
 } 
@@ -17,7 +21,7 @@ function hostURL() {
     var debugURL = "http://yellowjacket.ethz.ch";
     var liveURL = "http://lab.isn.ethz.ch";
     
-    return this.debugMode() ? debugURL : liveURL; 
+    return this.debugMode ? debugURL : liveURL; 
 }
 
 function baseURL() {
@@ -25,7 +29,7 @@ function baseURL() {
     var livePath = "/";
     
     //return this.hostURL() + (this.debugMode() ? debugPath : livePath); 
-    return this.hostURL() + debugPath; 
+    return this.hostURL + debugPath; 
 }
 
 

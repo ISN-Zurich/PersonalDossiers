@@ -169,7 +169,7 @@ userController.prototype.colorizeInteractiveBox = function(){
 userController.prototype.initOAuth = function() {
     console.log('initialize the oauth helper class');
     try {
-	this.oauth = new OAuthHelper(this.baseURL());
+	this.oauth = new OAuthHelper(this.baseURL);
 	 $(document).trigger('oauthSet');
     }
     catch (e) {

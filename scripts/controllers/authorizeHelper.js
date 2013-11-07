@@ -7,12 +7,18 @@
 /*jslint vars: true, sloppy: true */
 
 function AuthorizationController() {
+	
+	console.log("enter authorize controller");
    
     var self = this;
     
-    this.debugMode = debugMode;
-    this.hostURL = hostURL;
-    this.baseURL = baseURL;
+//    this.debugMode = debugMode;
+//    this.hostURL = hostURL;
+//    this.baseURL = baseURL;
+    this.debugMode = true;
+    this.hostURL = "http://yellowjacket.ethz.ch";
+    this.baseURL = "http://yellowjacket.ethz.ch/tools/";
+   
 
     var bookmarks = null;
     var  mUser = null, mDossiers = 0;
@@ -22,7 +28,7 @@ function AuthorizationController() {
     var allowedHosts = ['http://www.isn.ethz.ch', 'http://isn.ethz.ch', 'http://www.isn.ch', 'http://isn.ch'];
 
     try {
-        self.oauth = new OAuthHelper(this.baseURL());
+        self.oauth = new OAuthHelper(this.baseURL);
     }
     catch (e) {
         self.oauth = null;
@@ -43,6 +49,7 @@ function AuthorizationController() {
     });
 
     if (self.oauth) {
+    	console.log("we send the message event in authorize helper");
         // indeed we want to verify the tokens first
         window.addEventListener('message', handshake, false);    
         
