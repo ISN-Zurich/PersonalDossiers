@@ -155,10 +155,10 @@ class AuthenticationService extends OAUTHRESTService {
         // POST BASE_URI/authorize
         $this->mark();
         
-        $this->session->validateRequestToken(array('email'=>$_POST['email'], 'credentials'=> $_POST['credentials']));
+        $this->session->validateRequestToken(array('username'=>$_POST['username'], 'credentials'=> $_POST['credentials']));
         
         if ($this->session->getOAuthState() === OAUTH_OK) {
-            $this->session->verifyUser($_POST['email'], $_POST['credentials']);
+            $this->session->verifyUser($_POST['username'], $_POST['credentials']);
             if ( $this->session->requestVerified()) {
                 // if the user credentials were ok we can send the verification code to the frontend
                 // it should then proceed and get the access token
@@ -227,7 +227,7 @@ class AuthenticationService extends OAUTHRESTService {
         	$this->data = array('user_id'=> $this->session->getUserID());
         }
 
-        $sth = $this->dbh->prepare("SELECT title, name, password, email FROM users WHERE id = ?");
+        $sth = $this->dbh->prepare("SELECT title, name, username, password, email FROM users WHERE id = ?");
         $res = $sth->execute($this->data['user_id']);
         if (PEAR::isError($res)) {
         	$this->log('DB Error: '.$res->getMessage());
@@ -240,8 +240,9 @@ class AuthenticationService extends OAUTHRESTService {
         	$row = $res->fetchRow();
         	$this->data['title']  = $row[0];
         	$this->data['name']  = $row[1];
-        	$this->data['password']  = $row[2];
-        	$this->data['email'] = $row[3];
+        	$this->data['username']  = $row[2];
+        	$this->data['password']  = $row[3];
+        	$this->data['email'] = $row[4];
         }
         else {
         	$this->log("lost the user's account information");
@@ -375,6 +376,7 @@ class AuthenticationService extends OAUTHRESTService {
     	
     	$ttl = $tmp['title'];
     	$name =$tmp['name'];
+    	$username =$tmp['username'];
     	$email = $tmp['email'];
     	$pswd = $tmp['password'];
     	
@@ -397,8 +399,8 @@ class AuthenticationService extends OAUTHRESTService {
     	}
     	else { 
     		 
-    		$sth = $mdb2->prepare("insert into users (title,name, email,password) values (?, ?, ?, ?)");
-    		$res1 = $sth->execute(array($ttl,$name,$email,$pswd));
+    		$sth = $mdb2->prepare("insert into users (title,name,username,email,password) values (?, ?, ?, ?, ?)");
+    		$res1 = $sth->execute(array($ttl,$name,$username,$email,$pswd));
     		if (PEAR::isError($res1)) {
     			$this->log("pear error " . $res1->getMessage());
     			$this->bad_request();

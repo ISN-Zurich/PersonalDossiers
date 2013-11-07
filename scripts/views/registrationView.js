@@ -11,6 +11,7 @@ function RegistrationView(controller){
 		
 		$("#titleRegistrationInput").attr('contenteditable', 'true');
 		$("#nameRegistrationInput").attr('contenteditable', 'true');
+		$("#usernameRegistrationInput").attr('contenteditable', 'true');
 		$("#emailRegistrationInput").attr('contenteditable', 'true');
 		$("#passwordRegistrationInput").attr('contenteditable', 'true');
 		$("#passwordRegConfirmInput").attr('contenteditable', 'true');
@@ -26,14 +27,20 @@ function RegistrationView(controller){
 	$("#nameRegistrationInput").focusout(function(e){
 		console.log("focused out name in registration");
 		var value_name = $("#nameRegistrationInput").text();
-		self.controller.models.user.setUserName(value_name);
+		self.controller.models.user.setName(value_name);
+		
+	});
+	
+	$("#usernameRegistrationInput").focusout(function(e){
+		console.log("focused out username in registration");
+		var value_username = $("#usernameRegistrationInput").text();
+		self.controller.models.user.setUsername(value_username);
 		
 	});
 	
 	$("#emailRegistrationInput").focusout(function(e){
 		console.log("focused out email in registration");
 		var value_email = $("#emailRegistrationInput").text();
-		
 		self.controller.models.user.setUserEmail(value_email);
 		
 	});

@@ -5,9 +5,9 @@ function LoginView(controller){
 		
 	$("#loginButton").bind("click", function(){
 		var authenticationModel = self.controller.models['authentication'];
-		var email=$("#username").val();
+		var username=$("#username").val();
 		var password=$("#password").val();
-		authenticationModel.authenticateUser(email, password);			
+		authenticationModel.authenticateUser(username, password);			
 	});
 	
 };

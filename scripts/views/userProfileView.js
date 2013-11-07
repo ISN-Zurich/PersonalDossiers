@@ -50,6 +50,7 @@ function userProfileView(controller){
 		 $("#edit_password").css('color', '#4c5160');
 		 $("#titleInput").attr('contenteditable', 'true');
 		 $("#nameInput").attr('contenteditable', 'true');
+		 $("#usernameInput").attr('contenteditable', 'true');
 		 $("#emailInput").attr('contenteditable', 'true');
 		 $("#saveChanges_container").removeClass('hide');
 		 
@@ -77,6 +78,7 @@ function userProfileView(controller){
 		//make uneditable the user profile fields 
 		 $("#titleInput").attr('contenteditable', 'false');
 		 $("#nameInput").attr('contenteditable', 'false');
+		 $("#usernameInput").attr('contenteditable', 'false');
 		 $("#emailInput").attr('contenteditable', 'false');
 		
 		
@@ -105,8 +107,8 @@ function userProfileView(controller){
 		if (self.editMode){
 		var value_title = $("#titleInput").text();
 		self.controller.models.user.setUserTitle(value_title);
-
 		self.controller.models.user.sendUserProfileToServer();
+		//add a bluesih background to the edit fields
 		$("#pd_title_label").css('background-color', '#0089CF');
 		$("#pd_title_label").css('color', '#fff');
 		}
@@ -116,12 +118,26 @@ function userProfileView(controller){
 		console.log("focused out name input");
 		if (self.editMode){
 		var value_name = $("#nameInput").text();
-		self.controller.models.user.setUserName(value_name);
+		self.controller.models.user.setName(value_name);
 		self.controller.models.user.sendUserProfileToServer();
+		//add a bluesih background to the edit fields
 		$("#pd_name_label").css('background-color', '#0089CF');
 		$("#pd_name_label").css('color', '#fff');
 		}
 	});
+	
+	$("#usernameInput").focusout(function(){
+		console.log("focused out username input");
+		if (self.editMode){
+		var value_name = $("#usernameInput").text();
+		self.controller.models.user.setUsername(value_name);
+		self.controller.models.user.sendUserProfileToServer();
+		//add a bluesih background to the edit fields
+		$("#usernameInput").css('background-color', '#0089CF');
+		$("#usernameInput").css('color', '#fff');
+		}
+	});
+	
 	
 	$("#emailInput").focusout(function(){
 		console.log("focused out email input");
@@ -190,6 +206,8 @@ userProfileView.prototype.update= function(){
 		$("#titleInput").text(userModel.getTitle());
 		
 		$("#nameInput").text(userModel.getName());
+		
+		$("#usernameInput").text(userModel.getUsername());
 
 		$("#emailInput").text(userModel.getEmail());
 	}

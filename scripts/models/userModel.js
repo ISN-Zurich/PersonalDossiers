@@ -52,10 +52,17 @@ UserModel.prototype.getUserId = function(){
 UserModel.prototype.getName = function(){
     return this.userProfile.name;
 };
-UserModel.prototype.setUserName = function(name){
+UserModel.prototype.setName = function(name){
 	this.userProfile.name=name;
 };
 
+UserModel.prototype.setUsername = function(username){
+	this.userProfile.username=username;
+};
+
+UserModel.prototype.getUsername = function(){
+    return this.userProfile.username;
+};
 
 UserModel.prototype.getPassword = function(){
     return this.userProfile.password;
@@ -333,9 +340,12 @@ UserModel.prototype.register = function(password){
 	 var dataObject= { 
 			  "title": self.getTitle(),
 			  "name": self.getName(),
+			  "username": self.getUsername(),
 			  "email": mail,
 			  "password":hash1
 		};
+	 
+	 console.log("username is "+self.getUsername());
 	 
 	 var data=JSON.stringify(dataObject);
 	 
