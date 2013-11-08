@@ -284,6 +284,7 @@ font-color:blue;
 
 .pd_editDossier{
 	font-size:12px;
+	margin-bottom:10px;
 }
 
 
@@ -297,7 +298,7 @@ font-color:blue;
 #st_addDossier{
 	background-image:url(../images/add.png);
 }
-#st_editDosser{
+#st_editDosser, #embedDossier{
 	border-left:1px solid white;
 	float:right;
 	padding-left:5px;
@@ -325,7 +326,6 @@ font-color:blue;
 .dossier_item_border{
 	border-bottom:1px solid #C9CACF;
 }
-
 
 
 

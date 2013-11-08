@@ -47,6 +47,7 @@ function dossierController() {
         self.views.dossierBanner = new DossierBannerView(self);
 	    self.views.dossierContent= new DossierContentView(self);
 	    self.views.userlist = new DossierUsersView(self);
+	    self.views.embed= new addEmbedButton(self);
 	    self.views.share = new ShareButtonView(self);
 
        //the following views run only when we are authenticated
@@ -61,6 +62,7 @@ function dossierController() {
     	   self.views.dossierBanner.open();
     	   self.views.dossierContent.open();
     	   self.views.userlist.open();
+    	   self.views.embed.open();
        });
        
 //       $(document).bind("BookmarkModelNotLoaded", function() {
