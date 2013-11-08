@@ -10,6 +10,7 @@
 
 function dossierController() {
     var self=this;
+    this.id="dossierController";
     this.debugMode = debugMode;
     this.baseURL = baseURL;
     this.hostURL = hostURL;
@@ -62,10 +63,10 @@ function dossierController() {
     	   self.views.userlist.open();
        });
        
-       $(document).bind("BookmarkModelNotLoaded", function() {
-    	   self.views.dossierContent.open(); 
-       });
-	
+//       $(document).bind("BookmarkModelNotLoaded", function() {
+//    	   self.views.dossierContent.open(); 
+//       });
+//	
 	
 	//console.log("dossiersController is initialized"+this.models.bookmark.loaded);
     }

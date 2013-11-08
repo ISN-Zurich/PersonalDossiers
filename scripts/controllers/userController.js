@@ -46,6 +46,14 @@ function userController() {
 		$("#st_dossiers").removeClass("pd_disable");
 		
 	}
+	
+	$(document).bind('UserProfileUpdate', function(){
+		
+		console.log("binded User profile update in dossier list model");
+		
+		self.models.dossierList.getUserDossiers();
+	});
+
 
 	$(document).bind('DossierListUpdate', function(){
 		console.log("dossier list update in user controller");

@@ -295,7 +295,15 @@ font-color:blue;
 #st_addDossier{
 	background-image:url(../images/add.png);
 }
-
+#st_editDosser{
+	border-left:1px solid white;
+	float:right;
+	padding-left:5px;
+	padding-left:6px;
+	padding-right:6px;
+	font-size:16px;
+	color:#4C5160;
+}
 
 /***** Dossier List Styles *****/
 #L1, #L2, #followingListHeader {

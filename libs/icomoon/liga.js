@@ -25,7 +25,7 @@
 	var icons;
 	if (!supportsProperty('fontFeatureSettings')) {
 		icons = {
-			'Li': '&#x41;',
+			'': '&#x;',
 			'0': 0
 		};
 		delete icons['0'];

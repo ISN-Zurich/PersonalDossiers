@@ -68,7 +68,7 @@ DossierUsersView.prototype.update = function(){
 	
 DossierUsersView.prototype.closeDiv= closeView;
 
-DossiersButtonView.prototype.close = function(){
+DossierUsersView.prototype.close = function(){
 	
 	console.log("close dossier users view");
 	this.closeDiv();

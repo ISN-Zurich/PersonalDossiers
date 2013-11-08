@@ -18,11 +18,7 @@ function DossierListModel(controller){
 		self.getUserDossiers();
 	});
 	
-	$(document).bind('UserProfileUpdate', function(){
-		console.log("binded User profile update in dossier list model");
-		self.getUserDossiers();
-	});
-
+	
 	console.log("initialized dossier list model");
 }
 

@@ -49,3 +49,6 @@
 .icon-list:before {
 	content: "\44";
 }
+.icon-pencil:before {
+	content: "\45";
+}
