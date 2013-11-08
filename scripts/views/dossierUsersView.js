@@ -40,7 +40,7 @@ DossierUsersView.prototype.update = function(){
 			self.owners=true;
 			ownerContainer=$("<div/>",{
 				"id":"owner"+self.controller.models.bookmark.getUserid(),
-				"class":"pd_loginContainer clickable pd_listItem",
+				"class":"pd_loginContainer clickable userlistItem",
 				"text": self.controller.models.bookmark.getUsername()
 			}).appendTo("#pd_udossierOwners");
 		}
@@ -49,7 +49,7 @@ DossierUsersView.prototype.update = function(){
 			self.editors=true;
 			editorContainer=$("<div/>",{
 				"id":"editor"+self.controller.models.bookmark.getUserid(),
-				"class":"pd_loginContainer clickable pd_listItem",
+				"class":"pd_loginContainer clickable userlistItem",
 				"text": self.controller.models.bookmark.getUsername()
 			}).appendTo("#pd_udossierEditors");}
 		
@@ -57,7 +57,7 @@ DossierUsersView.prototype.update = function(){
 			self.user=true;
 			editorContainer=$("<div/>",{
 				"id":"user"+self.controller.models.bookmark.getUserid(),
-				"class":"pd_loginContainer clickable pd_listItem",
+				"class":"pd_loginContainer clickable userlistItem",
 				"text": self.controller.models.bookmark.getUsername()
 			}).appendTo("#pd_udossierUsers");}
 					
