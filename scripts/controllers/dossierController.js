@@ -122,7 +122,7 @@ function dossierController() {
 
     dossierController.prototype.initOAuth = function() {
         try {
-            this.oauth = new OAuthHelper(this.baseURL());
+            this.oauth = new OAuthHelper(this.baseURL);
         }
         catch (e) {
             this.oauth = null;

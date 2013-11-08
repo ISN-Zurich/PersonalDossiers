@@ -191,18 +191,21 @@ UserModel.prototype.sendUserProfileToServer = function(){
 	console.log("enter send user profile to server");
     var self=this;
     var url=this.controller.baseURL +'service/authentication.php';
+    console.log("url is "+url);
     var method = 'POST';
-//    var dataObject = {
-//    		"user_id":self.userProfile.user_id,
-//    		"title":self.userProfile.title,
-//    		"name": self.userProfile.name,
-//    		"email": self.userProfile.email,
-//    		"activedDossier": this.userProfile.activeDossierId
-//    };
+    var dataObject = {
+    		"user_id":self.userProfile.user_id,
+    		"title":self.userProfile.title,
+    		"name": self.userProfile.name,
+    		"username": self.userProfile.username,
+    		"email": self.userProfile.email,
+    		"activedDossier": this.userProfile.activeDossierId
+    };
    
- //  var data=JSON.stringify(dataObject);
+ var data=JSON.stringify(dataObject);
   
- var data=JSON.stringify(self.userProfile);
+  
+// var data=JSON.stringify(self.userProfile);
     
  $.ajax({
 	url:  url,

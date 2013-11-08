@@ -43,7 +43,7 @@ function GalleryController() {
 
 GalleryController.prototype.initOAuth = function() {
     try {
-        this.oauth = new OAuthHelper(this.baseURL());
+        this.oauth = new OAuthHelper(this.baseURL);
     }
     catch (e) {
         console.log( 'oauth error! ' + e.message);
