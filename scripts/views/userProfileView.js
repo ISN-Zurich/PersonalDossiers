@@ -129,9 +129,10 @@ function userProfileView(controller){
 	$("#usernameInput").focusout(function(){
 		console.log("focused out username input");
 		if (self.editMode){
-		var value_name = $("#usernameInput").text();
-		self.controller.models.user.setUsername(value_name);
+		var value_username = $("#usernameInput").text();
+		self.controller.models.user.setUsername(value_username);
 		self.controller.models.user.sendUserProfileToServer();
+		
 		//add a bluesih background to the edit fields
 		$("#pd_username_label").css('background-color', '#0089CF');
 		$("#pd_username_label").css('color', '#fff');

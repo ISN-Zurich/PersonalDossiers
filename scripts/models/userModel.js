@@ -276,6 +276,8 @@ UserModel.prototype.logout =function(){
 UserModel.prototype.sendUserPasswordToServer = function(password,username){
 	var self=this;
 	//self.email = self.getEmail();
+	console.log("username in send password is "+username);
+	console.log("password in send password is" +password);
 	var hash1= hex_sha1(username+password);
 	console.log(" hash1 in send password to server "+hash1);
 
