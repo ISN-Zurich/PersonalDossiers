@@ -87,6 +87,27 @@ background-color: #ebedee;
 color: #4C5160;
 cursor: pointer;
 }
+/*
+.box {
+padding: 1.5em;
+margin-bottom: 1.5em;
+background: #e5eCf9;
+background: #FFF none repeat scroll 0% 50%;
+margin-bottom: 0;
+padding: 0;
+}
 	
-	
+.snippetlist.box {
+margin: 0 0 1.7em 0 !important;
+}*/
+
+.userlist{
+padding: 1.5em;
+margin-bottom: 1.5em;
+background: #e5eCf9;
+background: #FFF none repeat scroll 0% 50%;
+/*margin-bottom: 0;*/
+padding: 0;
+margin: 0 0 10px 0 ;
+}
 
