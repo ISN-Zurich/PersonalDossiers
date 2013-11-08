@@ -3,20 +3,26 @@ function DossierUsersView(controller){
 	var self=this;
 	self.controller=controller;
 	self.tagID="dossierUsers";
+	self.owners=false;
+	self.editors=false;
+	self.users=false;
 }
 
 DossierUsersView.prototype.openDiv=openView;
 
 DossierUsersView.prototype.open = function(){
+	var self=this;
 	console.log("open dossierUsersView");
-	
-	this.update();
-	
-	$("#dossierOwners").show();
-	$("#dossierEditors").show();
-	$("#dossierUsers").show();
-	
-	
+	self.update();
+	if (self.owners){
+		$("#dossierOwners").show();
+	}
+	if (self.editors){
+		$("#dossierEditors").show();
+	}
+	if (self.users){
+		$("#dossierUsers").show();
+	}
 };
 
 DossierUsersView.prototype.update = function(){
@@ -31,6 +37,7 @@ DossierUsersView.prototype.update = function(){
 		do {
 
 		if (self.controller.models.bookmark.getUsertype() == "owner"){
+			self.owners=true;
 			ownerContainer=$("<div/>",{
 				"id":"owner"+self.controller.models.bookmark.getUserid(),
 				"class":"pd_loginContainer clickable pd_listItem",
@@ -39,6 +46,7 @@ DossierUsersView.prototype.update = function(){
 		}
 		
 		if (self.controller.models.bookmark.getUsertype() == "editor"){
+			self.editors=true;
 			editorContainer=$("<div/>",{
 				"id":"editor"+self.controller.models.bookmark.getUserid(),
 				"class":"pd_loginContainer clickable pd_listItem",
@@ -46,6 +54,7 @@ DossierUsersView.prototype.update = function(){
 			}).appendTo("#pd_udossierEditors");}
 		
 		if (self.controller.models.bookmark.getUsertype() == "user"){
+			self.user=true;
 			editorContainer=$("<div/>",{
 				"id":"user"+self.controller.models.bookmark.getUserid(),
 				"class":"pd_loginContainer clickable pd_listItem",
