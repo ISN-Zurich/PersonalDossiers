@@ -273,10 +273,10 @@ UserModel.prototype.logout =function(){
     
 };
 
-UserModel.prototype.sendUserPasswordToServer = function(password,mail){
+UserModel.prototype.sendUserPasswordToServer = function(password,username){
 	var self=this;
 	//self.email = self.getEmail();
-	var hash1= hex_sha1(mail+password);
+	var hash1= hex_sha1(username+password);
 	console.log(" hash1 in send password to server "+hash1);
 
 	 var url= this.controller.baseURL +'service/authentication.php/password';

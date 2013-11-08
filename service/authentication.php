@@ -330,10 +330,10 @@ class AuthenticationService extends OAUTHRESTService {
             if (!PEAR::isError($res2)) {
             	$this->log(' before the update of users table');
             	$this->log(' data to be inserted are '.$tmp['title']);
-            	$sqlstring2 = "UPDATE users SET title = ?, name = ?, email = ?  WHERE id = ?";
+            	$sqlstring2 = "UPDATE users SET title = ?, name = ?, username = ?, email = ?  WHERE id = ?";
             	$sth2->free();
             	$sth2 = $this->dbh->prepare($sqlstring2);
-            	$sth2->execute(array($tmp['title'],$tmp['name'],$tmp['email'], $uid));
+            	$sth2->execute(array($tmp['title'],$tmp['name'],$tmp['username'],$tmp['email'], $uid));
             	$sth2->free();
             }
             else {

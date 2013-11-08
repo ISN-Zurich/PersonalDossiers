@@ -133,8 +133,8 @@ function userProfileView(controller){
 		self.controller.models.user.setUsername(value_name);
 		self.controller.models.user.sendUserProfileToServer();
 		//add a bluesih background to the edit fields
-		$("#usernameInput").css('background-color', '#0089CF');
-		$("#usernameInput").css('color', '#fff');
+		$("#pd_username_label").css('background-color', '#0089CF');
+		$("#pd_username_label").css('color', '#fff');
 		}
 	});
 	
@@ -240,7 +240,7 @@ userProfileView.prototype.showPasswordForm= function(){
 userProfileView.prototype.savePasswordChanges= function(){
 	console.log("enter save password changes");
 	var new_password = $("#pd_newPassword").text();
-	var current_mail = this.controller.models.user.getEmail();
+	var username=this.controller.models.user.getUsername();
 	var form_validation=true;
 	var confirm_password = $("#pd_confirm_newPassword").text();
  if (new_password.length == 0 || confirm_password.length ==0) {
@@ -267,7 +267,7 @@ userProfileView.prototype.savePasswordChanges= function(){
  
  if (form_validation){
 	 console.log("passed the form validation");
-	 this.controller.models.user.sendUserPasswordToServer(new_password,current_mail);
+	 this.controller.models.user.sendUserPasswordToServer(new_password,username);
 	 $("#pd_newPassword").attr('contenteditable', 'false');
 	 $("#pd_confirm_newPassword").attr('contenteditable', 'false');
 	 $("#saveChangesPswd_container").addClass('hide');
