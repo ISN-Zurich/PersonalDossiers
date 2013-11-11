@@ -74,6 +74,14 @@ function userProfileView(controller){
 	
 	$("#edit_password").bind("click", function(e){
 		
+		//clear the background for the confirmated password
+		$("#pd_email_label").css('background-color', '#ebedee');
+		$("#pd_email_label").css('color', '#4C5160');
+		$("#pd_title_label").css('background-color', '#ebedee');
+		$("#pd_title_label").css('color', '#4C5160');
+		$("#pd_name_label").css('background-color', '#ebedee');
+		$("#pd_name_label").css('color', '#4C5160');
+			
 		//make uneditable the user profile fields 
 		 $("#titleInput").attr('contenteditable', 'false');
 		 $("#nameInput").attr('contenteditable', 'false');
@@ -106,7 +114,7 @@ function userProfileView(controller){
 		var value_title = $("#titleInput").text();
 		self.controller.models.user.setUserTitle(value_title);
 		self.controller.models.user.sendUserProfileToServer();
-		//add a bluesih background to the edit fields
+		//add a bluesih background to the edit fields 
 		$("#pd_title_label").css('background-color', '#0089CF');
 		$("#pd_title_label").css('color', '#fff');
 		}
@@ -183,7 +191,7 @@ userProfileView.prototype.update= function(){
 	var self=this;
 	console.log("enter update user profile view");
 	
-	self.controller.activeView=self.controller.views.user; 
+	//self.controller.activeView=self.controller.views.user; 
 	$("#profileViewContainer").removeClass("hide");
 		
 	var userModel=self.controller.models.user;
@@ -193,8 +201,6 @@ userProfileView.prototype.update= function(){
 		
 		$("#nameInput").text(userModel.getName());
 		
-		$("#usernameInput").text(userModel.getUsername());
-
 		$("#emailInput").text(userModel.getEmail());
 	}
 	
