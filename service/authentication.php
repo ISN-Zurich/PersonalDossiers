@@ -385,14 +385,14 @@ class AuthenticationService extends OAUTHRESTService {
     	//check if there is any error in the query
     	if (PEAR::isError($resCheck)) {
     		$this->log("pear error " . $resCheck->getMessage());
-    		$this->bad_request();
+    		$this->not_found();
     		return;
     	}
     	
     	//if the email existis already in the database
     	if ($resCheck->numRows() == 1) {
     		$this->log("the email exists already in the database");
-    		$this->bad_request();
+    		$this->forbidden();
     		return;
     	}
     	else { 
