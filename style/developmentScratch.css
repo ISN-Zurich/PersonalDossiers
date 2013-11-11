@@ -78,7 +78,7 @@ color: grey !important;
 font-size:12px;
 }
 
-#save_changes_submit,#save_password_submit,#pd_logoutBtn,#submit_confirmation{
+#save_changes_submit,#save_password_submit,#pd_logoutBtn,#submit_confirmation,#cancel_registration{
 border: solid 1px white;
 -webkit-appearance: none;
 -moz-appearance: none;

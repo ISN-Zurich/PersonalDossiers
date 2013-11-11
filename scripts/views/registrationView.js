@@ -17,6 +17,10 @@ function RegistrationView(controller){
 			
 	});
 	
+	$("#cancel_registration").bind("click", function(e){
+		self.controller.transitionToIntroduction();	
+	});
+	
 	$("#titleRegistrationInput").focusout(function(e){
 		console.log("focused out title in registration");
 		var value_title = $("#titleRegistrationInput").text();

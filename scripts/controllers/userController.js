@@ -118,7 +118,7 @@ userController.prototype.chooseView = function(){
 		 this.views.addDossier.close();
 			this.views.log.close();
 			this.views.welcome.close();
-		this.views.login.open();
+		this.views.login.close();
 		this.views.introduction.open();
 		
 		
@@ -231,7 +231,15 @@ userController.prototype.logout = function() {
 userController.prototype.transitionToRegistration = function(){
 	console.log("enter transition to registation");
 	this.views.introduction.close();
+	this.views.login.close();
 	this.views.registration.open();	
+};
+
+userController.prototype.transitionToIntroduction = function(){
+	console.log("enter transition to introduction");
+	this.views.registration.close();	
+	this.views.introduction.open();
+	this.views.login.open();
 };
 
 var controller;
