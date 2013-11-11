@@ -56,13 +56,6 @@ UserModel.prototype.setName = function(name){
 	this.userProfile.name=name;
 };
 
-UserModel.prototype.setUsername = function(username){
-	this.userProfile.username=username;
-};
-
-UserModel.prototype.getUsername = function(){
-    return this.userProfile.username;
-};
 
 UserModel.prototype.getPassword = function(){
     return this.userProfile.password;
@@ -276,12 +269,11 @@ UserModel.prototype.logout =function(){
     
 };
 
-UserModel.prototype.sendUserPasswordToServer = function(password,username){
+UserModel.prototype.sendUserPasswordToServer = function(password,mail){
 	var self=this;
 	//self.email = self.getEmail();
-	console.log("username in send password is "+username);
-	console.log("password in send password is" +password);
-	var hash1= hex_sha1(username+password);
+
+	var hash1= hex_sha1(mail+password);
 	console.log(" hash1 in send password to server "+hash1);
 
 	 var url= this.controller.baseURL +'service/authentication.php/password';
@@ -345,12 +337,9 @@ UserModel.prototype.register = function(password){
 	 var dataObject= { 
 			  "title": self.getTitle(),
 			  "name": self.getName(),
-			  "username": self.getUsername(),
 			  "email": mail,
 			  "password":hash1
 		};
-	 
-	 console.log("username is "+self.getUsername());
 	 
 	 var data=JSON.stringify(dataObject);
 	 

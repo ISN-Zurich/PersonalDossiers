@@ -162,10 +162,10 @@ class SessionManagement extends PDCommonClass {
      * Please note, that both email and password MUST NOT contain any leading or trailing whitespace
      * characters when they are passed into the hashing function!
      */
-    public function verifyUser($username, $credentialhash) {
+    public function verifyUser($usermail, $credentialhash) {
         $this->mark('>>>>>>> LOGIN');
-        $sth= $this->dbh->prepare("select id, password from users where username = ?");
-        $res = $sth->execute($username);
+        $sth= $this->dbh->prepare("select id, password from users where email = ?");
+        $res = $sth->execute($usermail);
         if (!PEAR::isError($res)) {
             if ($res->numRows()) {
                 $row = $res->fetchRow();

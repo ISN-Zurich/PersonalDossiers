@@ -11,7 +11,6 @@ function RegistrationView(controller){
 		
 		$("#titleRegistrationInput").attr('contenteditable', 'true');
 		$("#nameRegistrationInput").attr('contenteditable', 'true');
-		$("#usernameRegistrationInput").attr('contenteditable', 'true');
 		$("#emailRegistrationInput").attr('contenteditable', 'true');
 		$("#passwordRegistrationInput").attr('contenteditable', 'true');
 		$("#passwordRegConfirmInput").attr('contenteditable', 'true');
@@ -31,12 +30,6 @@ function RegistrationView(controller){
 		
 	});
 	
-	$("#usernameRegistrationInput").focusout(function(e){
-		console.log("focused out username in registration");
-		var value_username = $("#usernameRegistrationInput").text();
-		self.controller.models.user.setUsername(value_username);
-		
-	});
 	
 	$("#emailRegistrationInput").focusout(function(e){
 		console.log("focused out email in registration");

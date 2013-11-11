@@ -188,9 +188,9 @@ AuthenticationModel.prototype.obtainAuthorization = function(){
 
 
 
-AuthenticationModel.prototype.authenticateUser = function(username, password){
+AuthenticationModel.prototype.authenticateUser = function(email, password){
     var self=this;
-    var hash1= hex_sha1(username+password);
+    var hash1= hex_sha1(email+password);
     console.log(" hash1 "+hash1);
 
 
@@ -198,7 +198,7 @@ AuthenticationModel.prototype.authenticateUser = function(username, password){
     var hash_pswd=hex_sha1(string);
     console.log("credentials: " + hash_pswd);
     var data= {
-        "username":username,
+        "email":email,
         "credentials":hash_pswd
     };
 
@@ -237,7 +237,7 @@ AuthenticationModel.prototype.authenticateUser = function(username, password){
             action: url,
             parameters: [
                 ["oauth_signature_method","HMAC-SHA1"],
-                ["username", username],
+                ["email", email],
                 ["credentials",hash_pswd ]
             ]
         };
