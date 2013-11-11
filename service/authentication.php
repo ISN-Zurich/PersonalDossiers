@@ -382,10 +382,37 @@ class AuthenticationService extends OAUTHRESTService {
     	$sthCheck = $this->dbh->prepare("SELECT id FROM users WHERE email = ?");
     	$resCheck = $sthCheck->execute($email);
     	
+  		$empty_fields= array();
+		// population of array with empty fields
+  		if (empty($name)){
+  			array_push($empty_fields,"name");
+  		}
+  		
+  		if (empty($email)){
+  			array_push($empty_fields,"email");
+  		}
+  		
+  		if (empty($pswd)){
+  			array_push($empty_fields,"password");
+  		}
+			
+    	// check the lenght of this array
+    	
+  		if (length($empty_fields)>0){
+  				
+  			$jsonErrorObject=array(
+  					"empty"=>$empty_fields
+  			);
+  			//otherwise we must return 405
+  			$this->not_allowed($jsonErrorObject);
+  		}
+  		 
+    	
+    	
     	//check if there is any error in the query
     	if (PEAR::isError($resCheck)) {
     		$this->log("pear error " . $resCheck->getMessage());
-    		$this->not_found();
+    		$this->bad_request();
     		return;
     	}
     	
@@ -396,13 +423,13 @@ class AuthenticationService extends OAUTHRESTService {
     		return;
     	}
     	else { 
-    		 
-    		$sth = $mdb2->prepare("insert into users (title,name,email,password) values (?, ?, ?, ?, ?)");
+    		$this->log("will try insert register data to the database");
+    		$sth = $mdb2->prepare("insert into users (title,name,email,password) values (?, ?, ?, ?)");
     		$res1 = $sth->execute(array($ttl,$name,$email,$pswd));
     		if (PEAR::isError($res1)) {
+    			$this->log("couldnt inser the registered data");
     			$this->log("pear error " . $res1->getMessage());
     			$this->bad_request();
-    			return;
     		}
     	}
     	

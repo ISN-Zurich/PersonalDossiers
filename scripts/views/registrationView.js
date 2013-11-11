@@ -38,14 +38,17 @@ function RegistrationView(controller){
 	$("#emailRegistrationInput").focusout(function(e){
 		console.log("focused out email in registration");
 		var value_email = $("#emailRegistrationInput").text();
+		console.log("email to stored in model is "+value_email);
 		self.controller.models.user.setUserEmail(value_email);
 		
 	});
 	
+	
+
 	$("#registrationContainer").bind("click", function(e){
 		$("#pd_registration_email_label").css('background-color', '#ebedee');
 		$("#pd_registration_email_label").css('color', '#4C5160'); 
-		$("#registration_mail").hide();
+		$("#registration_mail").empty();
 	});
 	
 	$("#submit_confirmation").bind("click", function(e){

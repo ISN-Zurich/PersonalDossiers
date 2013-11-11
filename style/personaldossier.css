@@ -328,6 +328,11 @@ font-color:blue;
 }
 
 
+/************Registration*****/
+.pd_inactive{
+color: #c9cacf !important;
+cursor: default !important;
+}
 
 
 #headerText{

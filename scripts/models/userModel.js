@@ -10,6 +10,11 @@ function UserModel(userController){
     $(document).bind("ActiveDossierChanged", function() {
         self.sendUserProfileToServer();
     });  
+    
+    if (!self.controller.oauth){
+    	console.log("we are not logged in we reset the user profile");
+    	this.resetUserProfile();
+    }
 }
 
 UserModel.prototype.loadData = function() {
@@ -50,32 +55,56 @@ UserModel.prototype.getUserId = function(){
 
 
 UserModel.prototype.getName = function(){
+	if (this.userProfile){
     return this.userProfile.name;
+	}
+	return false;
 };
 UserModel.prototype.setName = function(name){
+	if (!this.userProfile){
+		this.userProfile={};
+	}
 	this.userProfile.name=name;
 };
 
 
 UserModel.prototype.getPassword = function(){
-    return this.userProfile.password;
+	if (this.userProfile){
+		return this.userProfile.password;
+	}
+	return false;
 };
 
 UserModel.prototype.getEmail = function(){
 	console.log("enter get email");
-    return this.userProfile.email;
+    if (this.userProfile){
+	return this.userProfile.email;
+    }
+    return false;
 };
 UserModel.prototype.setUserEmail = function(email){
+	console.log("enter set user mail");
+	if (!this.userProfile){
+		this.userProfile={};
+	}
 	this.userProfile.email=email;
+	console.log("email after set is "+this.userProfile.email);
+	
 };
 
 
 
 UserModel.prototype.getTitle = function(){
+	if (this.userProfile){
     return this.userProfile.title;
+	}
+	return false;
 };
 
 UserModel.prototype.setUserTitle = function(title){
+	if (!this.userProfile){
+		this.userProfile= {};
+	}
 	this.userProfile.title=title;
 };
 
@@ -351,7 +380,8 @@ UserModel.prototype.register = function(password){
 		dataType : 'json',
 		success : success,
 		error : function(request) {
-		    console.log("Error while registering the user to the server");
+			if (request.status === 403){
+		    console.log("Error while registering the user to the server: 403");
 		    $("#pd_registration_email_label").css('background-color', 'red');
 			$("#pd_registration_email_label").css('color', '#fff'); 
 			
@@ -360,10 +390,24 @@ UserModel.prototype.register = function(password){
 			    	"class":"pd_warning", 
 			    	text:"email already taken"
 			        }).appendTo("#emailRegistrationInput");
-			  
-//			$("#registration_mail").fadeIn();
-//			$("#registration_mail").fadeOut(5000);
+			
 		    showErrorResponses(request); 
+			}
+			
+			if (request.status === 404){
+			    console.log("Error while registering the user to the server:404");
+			    $("#pd_registration_email_label").css('background-color', 'red');
+				$("#pd_registration_email_label").css('color', '#fff'); 
+				
+				  var span=$("<span/>", {
+				    	"id":"registration_mail",
+				    	"class":"pd_warning", 
+				    	text:"you should type an email"
+				        }).appendTo("#emailRegistrationInput");
+				
+			    showErrorResponses(request); 
+			}
+			
 		},
 		beforeSend : setHeader
 	    });
@@ -380,4 +424,17 @@ UserModel.prototype.register = function(password){
         	var non_authenticationFlag=true;
        	 xhr.setRequestHeader('NonAuth', non_authenticationFlag);	
        }}
+};
+
+
+/**
+ * empty from the local storage the userprofile
+ * 
+ **/
+UserModel.prototype.resetUserProfile = function(){
+	console.log("enter reset user profile");
+	//empty the local storage
+	localStorage.removeItem("userProfile");
+	//empty the local variabl
+	this.userProfile=null;
 };
