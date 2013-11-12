@@ -398,13 +398,15 @@ class AuthenticationService extends OAUTHRESTService {
 			
     	// check the lenght of this array
     	
-  		if (length($empty_fields)>0){
+  		if (count($empty_fields)>0){
+  			$this->log("the empty array has elements");
   				
   			$jsonErrorObject=array(
   					"empty"=>$empty_fields
   			);
   			//otherwise we must return 405
   			$this->not_allowed($jsonErrorObject);
+  			return;
   		}
   		 
     	

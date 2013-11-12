@@ -394,7 +394,7 @@ UserModel.prototype.register = function(password){
 		    showErrorResponses(request); 
 			}
 			
-			if (request.status === 404){
+			if (request.status === 405){
 			    console.log("Error while registering the user to the server:404");
 			    $("#pd_registration_email_label").css('background-color', 'red');
 				$("#pd_registration_email_label").css('color', '#fff'); 

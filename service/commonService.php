@@ -474,6 +474,7 @@ class RESTServiceCommon extends PDCommonClass {
      */
     private function respond_with_message($message) {
         if (!empty($message)) {
+        	$this->log("message is not empty");
             if (is_scalar($message)) {
                 header('content-type: text/plain');
                 echo($message);
