@@ -30,8 +30,14 @@ function RegistrationView(controller){
 	$("#nameRegistrationInput").focusout(function(e){
 		console.log("focused out name in registration");
 		var value_name = $("#nameRegistrationInput").text();
+		if (value_name.length == 0){
+			console.log("name field is empty");
+			 $(this).hide();
+			 $("#empty_name").show();
+		}
+		else{
 		self.controller.models.user.setName(value_name);
-	
+		}
 	});
 	
 	
@@ -42,7 +48,6 @@ function RegistrationView(controller){
 		if (value_email.length == 0){
 			console.log("name field is empty");
 			 $(this).hide();
-			 $("#emailRegistrationInput").attr('contenteditable', 'true');
 			 $("#empty_mail").show();
 		}
 		else{
@@ -51,13 +56,31 @@ function RegistrationView(controller){
 		
 	});
 	
-//	$("#emailInputContainer").focusin(function(e){
-//		console.log("focused in email iput container in registration");
-//		$("#emailRegistrationInput").attr('contenteditable', 'true');
-//		$("#emailRegistrationInput").show();
-//		$("#empty_mail").hide();
-//	});
-//	
+	$("#passwordRegistrationInput").focusout(function(e){
+		console.log("focused out password in registration");
+		var value_password = $("#passwordRegistrationInput").text();
+
+		if (value_password.length == 0){
+			console.log("password field is empty");
+			 $(this).hide();
+			 $("#empty_password").show();
+		}
+		
+		//we would better avoid saving the password to the model for the safety reasons
+//		else{
+//			self.controller.models.user.setUserPassword(value_password);
+//		}
+		
+	});
+	
+
+	$("#empty_name").bind("click", function(e){
+		console.log("clicked on the empty name");
+		$(this).hide();
+		$("#nameRegistrationInput").show();
+		
+	});
+	
 	$("#empty_mail").bind("click", function(e){
 		console.log("clicked on the empty email");
 		$(this).hide();
@@ -65,7 +88,43 @@ function RegistrationView(controller){
 		
 	});
 	
+	$("#empty_password").bind("click", function(e){
+		console.log("clicked on the empty password");
+		$(this).hide();
+		$("#passwordRegistrationInput").show();
+	});
 
+	
+	$("#passwordRegConfirmInput").keyup(function(e){
+		console.log("enter focus in confirm password field");
+		
+		var new_password = $("#passwordRegistrationInput").text();
+		
+			
+		var confirm_password = $(this).text();
+		
+		if (confirm_password.length == 0){
+			console.log("confirm password is empty");
+			$("#pd_reg_password_confirm_label").css('background-color', '#ebedee');
+			$("#pd_reg_password_confirm_label").css('color', '#4C5160');
+		}
+				
+		if (new_password !== confirm_password){
+			$("#pd_reg_password_confirm_label").css('background-color', 'red');
+			$("#pd_reg_password_confirm_label").css('color', '#fff');
+		}
+		
+		if (new_password == confirm_password){
+			$("#pd_reg_password_confirm_label").css('background-color', '#0089CF');
+			$("#pd_reg_password_confirm_label").css('color', '#fff');
+		}
+		
+		
+	});
+	
+	
+	
+	
 	$("#registrationContainer").bind("click", function(e){
 		$("#pd_registration_email_label").css('background-color', '#ebedee');
 		$("#pd_registration_email_label").css('color', '#4C5160'); 
@@ -112,32 +171,7 @@ function RegistrationView(controller){
 	});
 	
 	
-	$("#passwordRegConfirmInput").keyup(function(e){
-		console.log("enter focus in confirm password field");
-		
-		var new_password = $("#passwordRegistrationInput").text();
-		
-			
-		var confirm_password = $(this).text();
-		
-		if (confirm_password.length == 0){
-			console.log("confirm password is empty");
-			$("#pd_reg_password_confirm_label").css('background-color', '#ebedee');
-			$("#pd_reg_password_confirm_label").css('color', '#4C5160');
-		}
-				
-		if (new_password !== confirm_password){
-			$("#pd_reg_password_confirm_label").css('background-color', 'red');
-			$("#pd_reg_password_confirm_label").css('color', '#fff');
-		}
-		
-		if (new_password == confirm_password){
-			$("#pd_reg_password_confirm_label").css('background-color', '#0089CF');
-			$("#pd_reg_password_confirm_label").css('color', '#fff');
-		}
-		
-		
-	});
+	
 	
 }
 

@@ -334,7 +334,7 @@ color: #c9cacf !important;
 cursor: default !important;
 }
 
-#empty_mail,#existing_mail{
+.registration_message{
 	color:red;
 }
 
