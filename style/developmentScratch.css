@@ -88,14 +88,15 @@ color: #4C5160;
 cursor: pointer;
 }
 
-.inactive_registration{
+.inactive_registration {
 	border: solid 1px white;
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	background-color: #4C5160;
 	background-color: #ebedee;
 	color: grey;
-	cursor: default;}
+	cursor: default;
+}
 
 .userlist{
 padding: 1.5em;

@@ -5,6 +5,7 @@ function UserModel(userController){
     var self=this;
     self.controller=userController;	
     self.userProfile;
+    self.validation_array=[];
     // self.checkActiveUser();
     self.loadData();
     $(document).bind("ActiveDossierChanged", function() {
@@ -61,10 +62,15 @@ UserModel.prototype.getName = function(){
 	return false;
 };
 UserModel.prototype.setName = function(name){
+	console.log("enter setName");
 	if (!this.userProfile){
 		this.userProfile={};
+		
 	}
 	this.userProfile.name=name;
+	//this.validation_array[0]=1;
+	this.validation_array.push(1);
+	console.log ("validation array: "+this.validation_array);
 };
 
 
@@ -86,9 +92,12 @@ UserModel.prototype.setUserEmail = function(email){
 	console.log("enter set user mail");
 	if (!this.userProfile){
 		this.userProfile={};
+		
 	}
 	this.userProfile.email=email;
 	console.log("email after set is "+this.userProfile.email);
+	//this.validation_array[1]=1;
+	this.validation_array.push(1);
 	
 };
 
@@ -437,4 +446,27 @@ UserModel.prototype.resetUserProfile = function(){
 	localStorage.removeItem("userProfile");
 	//empty the local variabl
 	this.userProfile=null;
+};
+
+
+/**
+ * Return true if
+ *  - all the manadatoy fields have been set (first 3 elements of array)
+ *  - the password matches the confirmed password (the 4th elemet of the array)
+ * Other wise return false
+ */
+UserModel.prototype.checkRegistrationValidation= function(){
+	var self=this;
+	console.log("enter check registation validation");
+	var sum=0, i; 
+	
+	for (i=0; i< 4; i++) {
+		console.log("valuse of item of validation array is "+this.validation_array[i]);
+		sum =  sum + self.validation_array[i];	
+	}
+	console.log("sumvalue is "+sum);
+	if (sum === this.validation_array.length){
+		return true;
+	}
+	return false;
 };
