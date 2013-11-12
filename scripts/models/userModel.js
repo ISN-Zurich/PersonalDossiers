@@ -395,15 +395,15 @@ UserModel.prototype.register = function(password){
 			}
 			
 			if (request.status === 405){
-			    console.log("Error while registering the user to the server:404");
+			    console.log("Error while registering the user to the server:405");
 			    $("#pd_registration_email_label").css('background-color', 'red');
 				$("#pd_registration_email_label").css('color', '#fff'); 
 				
-				  var span=$("<span/>", {
-				    	"id":"registration_mail",
-				    	"class":"pd_warning", 
-				    	text:"you should type an email"
-				        }).appendTo("#emailRegistrationInput");
+//				  var span=$("<span/>", {
+//				    	"id":"registration_mail",
+//				    	"class":"pd_warning", 
+//				    	text:"you should type an email"
+//				        }).appendTo("#emailRegistrationInput");
 				
 			    showErrorResponses(request); 
 			}

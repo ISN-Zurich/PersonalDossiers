@@ -334,6 +334,13 @@ color: #c9cacf !important;
 cursor: default !important;
 }
 
+#empty_mail,#existing_mail{
+	color:red;
+}
+
+#emailInputContainer{
+	/*border:1px solid red;*/
+}
 
 #headerText{
 	width: 22.72em;

@@ -31,7 +31,7 @@ function RegistrationView(controller){
 		console.log("focused out name in registration");
 		var value_name = $("#nameRegistrationInput").text();
 		self.controller.models.user.setName(value_name);
-		
+	
 	});
 	
 	
@@ -39,16 +39,36 @@ function RegistrationView(controller){
 		console.log("focused out email in registration");
 		var value_email = $("#emailRegistrationInput").text();
 		console.log("email to stored in model is "+value_email);
-		self.controller.models.user.setUserEmail(value_email);
+		if (value_email.length == 0){
+			console.log("name field is empty");
+			 $(this).hide();
+			 $("#emailRegistrationInput").attr('contenteditable', 'true');
+			 $("#empty_mail").show();
+		}
+		else{
+			self.controller.models.user.setUserEmail(value_email);
+		}
 		
 	});
 	
+//	$("#emailInputContainer").focusin(function(e){
+//		console.log("focused in email iput container in registration");
+//		$("#emailRegistrationInput").attr('contenteditable', 'true');
+//		$("#emailRegistrationInput").show();
+//		$("#empty_mail").hide();
+//	});
+//	
+	$("#empty_mail").bind("click", function(e){
+		console.log("clicked on the empty email");
+		$(this).hide();
+		$("#emailRegistrationInput").show();
+		
+	});
 	
 
 	$("#registrationContainer").bind("click", function(e){
 		$("#pd_registration_email_label").css('background-color', '#ebedee');
 		$("#pd_registration_email_label").css('color', '#4C5160'); 
-		$("#registration_mail").empty();
 	});
 	
 	$("#submit_confirmation").bind("click", function(e){
