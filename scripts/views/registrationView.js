@@ -6,6 +6,20 @@ function RegistrationView(controller){
 	self.tagID="registrationView";	
 	self.userModel= self.controller.models.user;
 	
+	
+	$(document).bind('RegistrationValidated', function(){
+		console.log("bound registation validated in registration view");
+		$("#submit_confirmation").removeClass("inactive_registration");
+		$("#submit_confirmation").addClass("active_registration");	
+	});
+
+
+	$(document).bind('RegistrationNotValidated', function(){
+		console.log("bound registation NOT validated in registration view");
+		$("#submit_confirmation").removeClass("active_registration");	
+		$("#submit_confirmation").addClass("inactive_registration");
+	});
+	
 	$("#registerButton").bind("click", function(e){
 		console.log("clicked on the register button");
 		self.controller.transitionToRegistration();
@@ -39,25 +53,13 @@ function RegistrationView(controller){
 	$("#nameRegistrationInput").focusout(function(e){
 		console.log("focused out name in registration");
 		var value_name = $("#nameRegistrationInput").text();
-		
+
 		self.userModel.setName(value_name);
-		
-		
+
 		if (!self.userModel.setName(value_name)) {
 			$("#nameRegistrationInput").hide();
 			$("#empty_name").show();
 		}
-		
-		//check for general validation status
-		var validation=self.userModel.checkRegistrationValidation();
-		if (validation){
-			$("#submit_confirmation").removeClass("inactive_registration");
-			$("#submit_confirmation").addClass("active_registration");
-		}else{
-			$("#submit_confirmation").removeClass("active_registration");	
-			$("#submit_confirmation").addClass("inactive_registration");	
-		}
-		
 	});
 	
 	
@@ -76,16 +78,6 @@ function RegistrationView(controller){
 			$("#emailRegistrationInput").hide();
 			$("#empty_mail").show();
 		}
-
-		//check for general validation status
-		var validation =self.userModel.checkRegistrationValidation();
-		if (validation){
-			$("#submit_confirmation").removeClass("inactive_registration");
-			$("#submit_confirmation").addClass("active_registration");
-		}else{
-			$("#submit_confirmation").removeClass("active_registration");	
-			$("#submit_confirmation").addClass("inactive_registration");	
-		}
 	});
 
 	
@@ -98,24 +90,15 @@ function RegistrationView(controller){
 	$("#passwordRegistrationInput").focusout(function(e){
 		console.log("focused out password in registration");
 		var value_password = $("#passwordRegistrationInput").text();
+		
+		console.log("password on focus out is"+value_password);
 		var hash_password = self.userModel.getHashPassword(value_password);
 		
-		self.userModel.setPassword(hash_password);
+		self.userModel.setPassword(value_password);
 
-		if (!self.userModel.setPassword(hash_password)) {
+		if (!self.userModel.setPassword(value_password)) {
 			$("#passwordRegistrationInput").hide();
 			$("#empty_password").show();
-		}
-
-		//check for general validaiton status
-		
-		var validation =self.userModel.checkRegistrationValidation();
-		if (validation){
-			$("#submit_confirmation").removeClass("inactive_registration");
-			$("#submit_confirmation").addClass("active_registration");
-		} else{
-			$("#submit_confirmation").removeClass("active_registration");	
-			$("#submit_confirmation").addClass("inactive_registration");	
 		}
 	});
 	
@@ -136,46 +119,18 @@ function RegistrationView(controller){
 		var hash_confirm = self.userModel.getHashPassword(confirm_password);
 		
 		self.userModel.setConfirmPassword(hash_confirm);
-		
-		
+			
 		if (!self.userModel.setConfirmPassword(hash_confirm)) {
 			$("#passwordRegConfirmInput").hide();
 			$("#empty_confirmPassword").show();
 			var firstCheck=false;
 		}
 		
-//		if (confirm_password.length == 0){
-//			console.log("confirm password is empty");
-//			$("#passwordRegConfirmInput").hide();
-//			$("#empty_confirmPassword").show();
-//			self.userModel.validation_array["confirmPassword"]=0;
-//			var firstCheck=false;
-//		}
-		
-		
-		
+			
 		//if the confirmed password has been set, check its matching with the password
 		if (firstCheck){
-//			if (password != confirm_password){
-//				self.userModel.validation_array["confirmPassword"]=0;
-//			} else{
-//				self.userModel.validation_array["confirmPassword"]=1;
-//			}
-		self.userModel.checkPasswordConfirmation(hash_password,hash_confirm);
-		
+			self.userModel.checkPasswordConfirmation(hash_password,hash_confirm);
 		}
-		
-		//check for general validation status
-		var validation =self.userModel.checkRegistrationValidation();
-		if (validation){
-			$("#submit_confirmation").removeClass("inactive_registration");
-			$("#submit_confirmation").addClass("active_registration");
-		}
-		else{
-			$("#submit_confirmation").removeClass("active_registration");	
-			$("#submit_confirmation").addClass("inactive_registration");	
-		}
-		
 	});
 	
 
@@ -247,32 +202,16 @@ function RegistrationView(controller){
 	$("#submit_confirmation").bind("click", function(e){
 		console.log("clicked submit confirmation");
 		form_validation=true;
-		//check if password is set 
-		var value_password = $("#passwordRegistrationInput").text();
-		var value_password_confirm = $("#passwordRegConfirmInput").text();
-		
-//		if (value_password_confirm.length != 0 && value_password.length !=0){
-//			if (value_password != value_password_confirm){
-//				$("#pd_registration_password_label").css('background-color', '#0089CF');
-//				$("#pd_registration_password_label").css('color', '#fff'); 
-//				$("#pd_reg_password_confirm_label").css('background-color', 'red');
-//				$("#pd_reg_password_confirm_label").css('color', '#fff'); 
-//			}
-//		}
-		
-		 if (form_validation){
-			 console.log("the password is filled in so validation done");
+		// if (form_validation){
+			
 			self.controller.models.user.register(value_password);
 			 
 			 $("#pd_registration_password_label").css('background-color', '#ebedee');
 			 $("#pd_registration_password_label").css('color', '#4C5160');
 			 $("#pd_reg_password_confirm_label").css('background-color', '#ebedee');
 			 $("#pd_reg_password_confirm_label").css('color', '#4C5160');
-		 }	
+	//	 }	
 	});
-	
-	
-	
 	
 }
 

@@ -124,22 +124,23 @@ UserModel.prototype.setUserEmail = function(email){
 };
 
 
-UserModel.prototype.setPassword = function(password){
-	console.log("enter set password");
+UserModel.prototype.setPassword = function(pwd){
+	console.log("enter set password and password is "+pwd);
 	if (!this.userProfile){
 		this.userProfile={};
 	}
-	this.userProfile.password=password;
+	this.userProfile.password=pwd;
 	
-	if(password.length === 0){
+	if(!pwd){
 		// return this.setValidationField("password", 0);
-		
+		console.log("password length is empty");
 		this.validation_array["password"]=0;
 		this.checkRegistrationValidation();
 		return this.validation_array["password"];
 	} 
 	// validate email here !
 	
+	console.log("password length is not empty");
 	this.validation_array["password"]=1;
 	this.checkRegistrationValidation();
 	return this.validation_array["password"];
@@ -518,13 +519,13 @@ UserModel.prototype.checkRegistrationValidation= function(){
 	var self=this;
 	console.log("enter check registation validation");
 	var sum=0, i; 
-	
 	sum= self.validation_array["name"]+self.validation_array["email"] + self.validation_array["password"] +self.validation_array["confirmPassword"];
 	console.log("sumvalue is "+sum);
 	if (sum === 4){
-		return true;
+		$(document).trigger('RegistrationValidated');
+		return;
 	}
-	return false;
+	$(document).trigger('RegistrationNotValidated');
 };
 
 
