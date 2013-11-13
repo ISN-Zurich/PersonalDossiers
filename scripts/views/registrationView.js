@@ -43,8 +43,8 @@ function RegistrationView(controller){
 			console.log("name field is empty");
 			 $(this).hide();
 			 $("#empty_name").show();
-				//self.userModel.validation_array[0]=0;
-				self.userModel.validation_array.push(0);
+				 self.userModel.validation_array["name"]=0;
+				//self.userModel.validation_array.push(0);
 		}
 		else{
 		self.userModel.setName(value_name);
@@ -54,6 +54,9 @@ function RegistrationView(controller){
 		if (validation){
 			$("#submit_confirmation").removeClass("inactive_registration");
 			$("#submit_confirmation").addClass("active_registration");
+		}else{
+			$("#submit_confirmation").removeClass("active_registration");	
+			$("#submit_confirmation").addClass("inactive_registration");	
 		}
 		
 	});
@@ -73,8 +76,8 @@ function RegistrationView(controller){
 			console.log("name field is empty");
 			 $(this).hide();
 			 $("#empty_mail").show();
-			 //self.userModel.validation_array[1]=0;
-			 self.userModel.validation_array.push(0);
+			// self.userModel.validation_array.push(0);
+			 self.userModel.validation_array["email"]=0;
 		}
 		else{
 			self.userModel.setUserEmail(value_email);
@@ -85,6 +88,9 @@ function RegistrationView(controller){
 		if (validation){
 			$("#submit_confirmation").removeClass("inactive_registration");
 			$("#submit_confirmation").addClass("active_registration");
+		}else{
+			$("#submit_confirmation").removeClass("active_registration");	
+			$("#submit_confirmation").addClass("inactive_registration");	
 		}
 	});
 	
@@ -103,11 +109,11 @@ function RegistrationView(controller){
 			console.log("password field is empty");
 			$(this).hide();
 			$("#empty_password").show();
-			//self.userModel.validation_array[2]=0;
-			self.userModel.validation_array.push(0);
+			//self.userModel.validation_array.push(0);
+			 self.userModel.validation_array["password"]=0;
 		} else{
-			//self.userModel.validation_array[2]=1;
-			self.userModel.validation_array.push(1);
+			//self.userModel.validation_array.push(1);
+			 self.userModel.validation_array["password"]=1;
 		}
 		
 		//check for general validaiton status
@@ -116,6 +122,9 @@ function RegistrationView(controller){
 		if (validation){
 			$("#submit_confirmation").removeClass("inactive_registration");
 			$("#submit_confirmation").addClass("active_registration");
+		} else{
+			$("#submit_confirmation").removeClass("active_registration");	
+			$("#submit_confirmation").addClass("inactive_registration");	
 		}
 	});
 	
@@ -137,19 +146,19 @@ function RegistrationView(controller){
 			console.log("confirm password is empty");
 			$(this).hide();
 			$("#empty_confirmPassword").show();
-			//self.userModel.validation_array[3]=0;
-			self.userModel.validation_array.push(0);
+			//self.userModel.validation_array.push(0);
+			 self.userModel.validation_array["confirmPassword"]=0;
 			var firstCheck=false;
 		}
 		
 		//if the confirmed password has been set, check its matching with the password
 		if (firstCheck){
 			if (password != confirm_password){
-				//self.userModel.validation_array[3]=0;
-				self.userModel.validation_array.push(0);
+				//self.userModel.validation_array.push(0);
+				self.userModel.validation_array["confirmPassword"]=0;
 			} else{
-				//self.userModel.validation_array[3]=1;
-				self.userModel.validation_array.push(1);
+				//self.userModel.validation_array.push(1);
+				self.userModel.validation_array["confirmPassword"]=1;
 			}
 		}
 		
@@ -158,6 +167,10 @@ function RegistrationView(controller){
 		if (validation){
 			$("#submit_confirmation").removeClass("inactive_registration");
 			$("#submit_confirmation").addClass("active_registration");
+		}
+		else{
+			$("#submit_confirmation").removeClass("active_registration");	
+			$("#submit_confirmation").addClass("inactive_registration");	
 		}
 		
 	});
@@ -212,7 +225,9 @@ function RegistrationView(controller){
 			$("#pd_reg_password_confirm_label").css('color', '#fff');
 		}
 		
-		
+		//clean any background color of the label
+		$("#pd_reg_password_confirm_label").css('background-color', '#ebedee');
+		$("#pd_reg_password_confirm_label").css('color', '#4C5160'); 
 	});
 	
 	/**

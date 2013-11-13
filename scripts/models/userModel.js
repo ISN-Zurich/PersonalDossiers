@@ -5,7 +5,12 @@ function UserModel(userController){
     var self=this;
     self.controller=userController;	
     self.userProfile;
-    self.validation_array=[];
+    self.validation_array={
+    		"name": 0,
+    		"email": 0,
+    		"password":0, 
+    		"confirmPassword":0
+    	};
     // self.checkActiveUser();
     self.loadData();
     $(document).bind("ActiveDossierChanged", function() {
@@ -69,8 +74,11 @@ UserModel.prototype.setName = function(name){
 	}
 	this.userProfile.name=name;
 	//this.validation_array[0]=1;
-	this.validation_array.push(1);
-	console.log ("validation array: "+this.validation_array);
+	//this.validation_array.push(1);
+	this.validation_array["name"]=1;
+	console.log ("validation array: "+JSON.stringify(this.validation_array));
+	x=JSON.stringify(this.validation_array);
+	console.log("name in valdiation array is" +x[0]["name"]);
 };
 
 
@@ -97,7 +105,8 @@ UserModel.prototype.setUserEmail = function(email){
 	this.userProfile.email=email;
 	console.log("email after set is "+this.userProfile.email);
 	//this.validation_array[1]=1;
-	this.validation_array.push(1);
+	//this.validation_array.push(1);
+	this.validation_array["email"]=1;
 	
 };
 
@@ -456,12 +465,13 @@ UserModel.prototype.checkRegistrationValidation= function(){
 	console.log("enter check registation validation");
 	var sum=0, i; 
 	
-	for (i=0; i< 4; i++) {
-		console.log("valuse of item of validation array is "+this.validation_array[i]);
-		sum =  sum + self.validation_array[i];	
-	}
+//	for (i=0; i< 4; i++) {
+//		console.log("valuse of item of validation array is "+self.validation_array[i]);
+//		sum =  sum + self.validation_array[i];	
+//	}
+	sum= self.validation_array["name"]+self.validation_array["email"] + self.validation_array["password"] +self.validation_array["confirmPassword"]
 	console.log("sumvalue is "+sum);
-	if (sum === this.validation_array.length){
+	if (sum === 4){
 		return true;
 	}
 	return false;
