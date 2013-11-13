@@ -362,10 +362,10 @@ UserModel.prototype.sendUserPasswordToServer = function(password,mail){
 UserModel.prototype.register = function(password){
 	console.log("enter register in user model");
 	var self=this;
-	var mail=self.getEmail();
-	console.log("mail is "+mail);
+	var email=self.getEmail();
+	console.log("mail is "+email);
 	console.log("password is "+password);
-	var hash1= hex_sha1(mail+password); 
+	var hash1= hex_sha1(email+password); 
 	console.log("hash1 is "+hash1);
 	
 	var url= self.controller.baseURL +'service/authentication.php/register';
@@ -375,7 +375,7 @@ UserModel.prototype.register = function(password){
 	 var dataObject= { 
 			  "title": self.getTitle(),
 			  "name": self.getName(),
-			  "email": mail,
+			  "email": email,
 			  "password":hash1
 		};
 	 
@@ -407,13 +407,7 @@ UserModel.prototype.register = function(password){
 			    console.log("Error while registering the user to the server:405");
 			    $("#pd_registration_email_label").css('background-color', 'red');
 				$("#pd_registration_email_label").css('color', '#fff'); 
-				
-//				  var span=$("<span/>", {
-//				    	"id":"registration_mail",
-//				    	"class":"pd_warning", 
-//				    	text:"you should type an email"
-//				        }).appendTo("#emailRegistrationInput");
-				
+								
 			    showErrorResponses(request); 
 			}
 			
@@ -423,7 +417,9 @@ UserModel.prototype.register = function(password){
 	 
 	    console.log("after ajax request");
 	    function success(data){
-		console.log("success in registering the user to the server");
+		console.log("success in registering the user to the server and mail is"+self.getEmail());
+		console.log("the password in success is "+password);
+		$(document).trigger('RegistrationDone', [self.getEmail(), password]); 
 	    }
 	    function setHeader(xhr){
 	    	if (self.controller.oauth)   {

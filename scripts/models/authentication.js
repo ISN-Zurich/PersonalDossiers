@@ -21,6 +21,17 @@ function AuthenticationModel(controller){
     this.dossierList =[];
 
     // create an eventlistener for the case when the user profile changes.
+    
+    //after a successful registation the user should automatically log into the dossier list area
+    
+    $(document).bind("RegistrationDone", function(e, mail, pswd){
+    	console.log("registration done is bound in authentication model");
+    	console.log("mail in bound is "+mail);
+    	console.log("password in bound is "+pswd);
+    	self.authenticateUser(mail, pswd);
+    });
+    
+    
 }
 
 
@@ -190,6 +201,8 @@ AuthenticationModel.prototype.obtainAuthorization = function(){
 
 AuthenticationModel.prototype.authenticateUser = function(email, password){
     var self=this;
+    console.log("email is"+email);
+    console.log("password is"+password);
     var hash1= hex_sha1(email+password);
     console.log(" hash1 "+hash1);
 
