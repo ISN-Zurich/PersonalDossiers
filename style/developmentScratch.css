@@ -95,7 +95,8 @@ cursor: pointer;
 	background-color: #4C5160;
 	background-color: #ebedee;
 	color: grey;
-	cursor: default;
+	/*"cursor: default;*/
+	pointer-events: none
 }
 
 .userlist{

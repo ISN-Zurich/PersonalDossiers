@@ -18,7 +18,6 @@ function DossierListModel(controller){
 		self.getUserDossiers();
 	});
 	
-	
 	console.log("initialized dossier list model");
 }
 

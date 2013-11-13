@@ -199,13 +199,7 @@ function RegistrationView(controller){
 		var new_password = $("#passwordRegistrationInput").text();
 		
 		var confirm_password = $(this).text();
-		
-//		if (confirm_password.length == 0){
-//			console.log("confirm password is empty");
-//			$("#pd_reg_password_confirm_label").css('background-color', '#ebedee');
-//			$("#pd_reg_password_confirm_label").css('color', '#4C5160');
-//		}
-				
+
 		if (new_password !== confirm_password){
 			
 			$("#pd_reg_password_confirm_label").css('background-color', 'red');
@@ -250,7 +244,7 @@ function RegistrationView(controller){
 		
 		 if (form_validation){
 			 console.log("the password is filled in so validation done");
-			 self.controller.models.user.register(value_password);
+			self.controller.models.user.register(value_password);
 			 
 			 $("#pd_registration_password_label").css('background-color', '#ebedee');
 			 $("#pd_registration_password_label").css('color', '#4C5160');

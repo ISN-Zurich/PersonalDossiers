@@ -49,7 +49,7 @@ function userController() {
 	
 	$(document).bind('UserProfileUpdate', function(){
 		
-		console.log("binded User profile update in dossier list model");
+		console.log("binded User profile update in user controller model");
 		
 		self.models.dossierList.getUserDossiers();
 	});
