@@ -73,12 +73,16 @@ UserModel.prototype.setName = function(name){
 		
 	}
 	this.userProfile.name=name;
-	//this.validation_array[0]=1;
-	//this.validation_array.push(1);
+	if (name.length===0){
+		
+		// return this.setValidationField("name", 0);
+		this.validation_array["name"]=0;
+		this.checkRegistrationValidation();
+		return this.validation_array["name"];
+	}
 	this.validation_array["name"]=1;
-	console.log ("validation array: "+JSON.stringify(this.validation_array));
-	x=JSON.stringify(this.validation_array);
-	console.log("name in valdiation array is" +x[0]["name"]);
+	this.checkRegistrationValidation();
+	return this.validation_array["name"];
 };
 
 
@@ -100,17 +104,47 @@ UserModel.prototype.setUserEmail = function(email){
 	console.log("enter set user mail");
 	if (!this.userProfile){
 		this.userProfile={};
-		
 	}
 	this.userProfile.email=email;
-	console.log("email after set is "+this.userProfile.email);
-	//this.validation_array[1]=1;
-	//this.validation_array.push(1);
-	this.validation_array["email"]=1;
 	
+	if(email.length === 0){
+		// return this.setValidationField("email", 0);
+		
+		this.validation_array["email"]=0;
+		this.checkRegistrationValidation();
+		return this.validation_array["email"];
+	} 
+	// validate email here !
+	
+	console.log("email after set is "+this.userProfile.email);
+	
+	this.validation_array["email"]=1;
+	this.checkRegistrationValidation();
+	return this.validation_array["email"];
 };
 
 
+UserModel.prototype.setPassword = function(password){
+	console.log("enter set password");
+	if (!this.userProfile){
+		this.userProfile={};
+	}
+	this.userProfile.password=password;
+	
+	if(password.length === 0){
+		// return this.setValidationField("password", 0);
+		
+		this.validation_array["password"]=0;
+		this.checkRegistrationValidation();
+		return this.validation_array["password"];
+	} 
+	// validate email here !
+	
+	this.validation_array["password"]=1;
+	this.checkRegistrationValidation();
+	return this.validation_array["password"];
+	
+};
 
 UserModel.prototype.getTitle = function(){
 	if (this.userProfile){
@@ -126,8 +160,30 @@ UserModel.prototype.setUserTitle = function(title){
 	this.userProfile.title=title;
 };
 
-UserModel.prototype.validatePasswordConfirmation=function(){
+
+UserModel.prototype.setConfirmPassword = function(confirm_password){
+	if (confirm_password.length==0){
+		this.validation_array["confirmPassword"]=0;
+		this.checkRegistrationValidation();
+		return this.validation_array["confirmPassword"];
+	}
 	
+	this.validation_array["confirmPassword"]=1;	
+	this.checkRegistrationValidation();
+	return this.validation_array["confirmPassword"];
+	
+};
+
+UserModel.prototype.checkPasswordConfirmation=function(password, confirm_password){
+	if (password != confirm_password){
+		this.validation_array["confirmPassword"]=0;	
+		this.checkRegistrationValidation();
+		return this.validation_array["password"];
+	} 
+	
+	this.validation_array["confirmPassword"]=1;	
+	this.checkRegistrationValidation();
+	return this.validation_array["password"];
 };
 
 UserModel.prototype.getUserProfile=function(){
@@ -372,8 +428,6 @@ UserModel.prototype.register = function(password){
 	console.log("enter register in user model");
 	var self=this;
 	var email=self.getEmail();
-	console.log("mail is "+email);
-	console.log("password is "+password);
 	var hash1= hex_sha1(email+password); 
 	console.log("hash1 is "+hash1);
 	
@@ -465,14 +519,19 @@ UserModel.prototype.checkRegistrationValidation= function(){
 	console.log("enter check registation validation");
 	var sum=0, i; 
 	
-//	for (i=0; i< 4; i++) {
-//		console.log("valuse of item of validation array is "+self.validation_array[i]);
-//		sum =  sum + self.validation_array[i];	
-//	}
-	sum= self.validation_array["name"]+self.validation_array["email"] + self.validation_array["password"] +self.validation_array["confirmPassword"]
+	sum= self.validation_array["name"]+self.validation_array["email"] + self.validation_array["password"] +self.validation_array["confirmPassword"];
 	console.log("sumvalue is "+sum);
 	if (sum === 4){
 		return true;
 	}
 	return false;
+};
+
+
+UserModel.prototype.getHashPassword = function(password){
+	var self=this;
+	console.log("enter hash password");
+	var email=self.getEmail();
+	var hash= hex_sha1(email+password); 
+	return hash;
 };
