@@ -163,7 +163,8 @@ UserModel.prototype.setUserTitle = function(title){
 
 
 UserModel.prototype.setConfirmPassword = function(confirm_password){
-	if (confirm_password.length==0){
+	
+	if (!confirm_password){
 		this.validation_array["confirmPassword"]=0;
 		this.checkRegistrationValidation();
 		return this.validation_array["confirmPassword"];
@@ -535,4 +536,13 @@ UserModel.prototype.getHashPassword = function(password){
 	var email=self.getEmail();
 	var hash= hex_sha1(email+password); 
 	return hash;
+};
+
+//avoid transferring the 
+UserModel.prototype.checkPasswortValidity = function(passwordlength){
+	if (passwordlength <6){
+		$(document).trigger('PasswortNotValidated');
+		return false;
+	}
+	return true;
 };

@@ -7,6 +7,13 @@ function RegistrationView(controller){
 	self.userModel= self.controller.models.user;
 	
 	
+	$(document).bind('PasswortNotValidated', function(){
+		console.log("bound passwort not validated in registration view");
+		$("#passwordRegistrationInput").hide();
+		$("#short_password").show();	
+	});
+
+	
 	$(document).bind('RegistrationValidated', function(){
 		console.log("bound registation validated in registration view");
 		$("#submit_confirmation").removeClass("inactive_registration");
@@ -90,13 +97,17 @@ function RegistrationView(controller){
 	$("#passwordRegistrationInput").focusout(function(e){
 		console.log("focused out password in registration");
 		var value_password = $("#passwordRegistrationInput").text();
-		
+		if (value_password){
+			self.userModel.checkPasswortValidity(value_password.length);
+		}
 		console.log("password on focus out is"+value_password);
+		if (value_password.length>0){
 		var hash_password = self.userModel.getHashPassword(value_password);
+		}
 		
-		self.userModel.setPassword(value_password);
+		self.userModel.setPassword(hash_password);
 
-		if (!self.userModel.setPassword(value_password)) {
+		if (!self.userModel.setPassword(hash_password)) {
 			$("#passwordRegistrationInput").hide();
 			$("#empty_password").show();
 		}
@@ -116,7 +127,9 @@ function RegistrationView(controller){
 		var password = $("#passwordRegistrationInput").text();
 		var hash_password = self.userModel.getHashPassword(password);
 		var confirm_password = $("#passwordRegConfirmInput").text();
+		if (confirm_password){
 		var hash_confirm = self.userModel.getHashPassword(confirm_password);
+		}
 		
 		self.userModel.setConfirmPassword(hash_confirm);
 			
@@ -149,6 +162,12 @@ function RegistrationView(controller){
 	});
 	
 	$("#empty_password").bind("click", function(e){
+		console.log("clicked on the empty password");
+		$(this).hide();
+		$("#passwordRegistrationInput").show();
+	});
+	
+	$("#short_password").bind("click", function(e){
 		console.log("clicked on the empty password");
 		$(this).hide();
 		$("#passwordRegistrationInput").show();
