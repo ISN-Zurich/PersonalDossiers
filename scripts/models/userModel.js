@@ -549,12 +549,16 @@ UserModel.prototype.setValidationField = function(fieldString, value){
 
 UserModel.prototype.checkEmailValidation = function(email){
 	console.log("enter check email validation");
-	if (email.indexOf("@")=== -1){
-		console.log("email does not contain the at character")
+
+	var reqExp=new RegExp("^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,3})$");
+	result= reqExp.exec(email);
+	console.log("result of execution of regular expression is "+result);
+	if (!result){
 		$(document).trigger('EmailNotValidated');
 		this.validation_array["email"]=0;
 		this.checkRegistrationValidation();
-	}	
+	}
+	
 	this.setValidationField("email", 1);
 };
 
