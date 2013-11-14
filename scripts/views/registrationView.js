@@ -7,6 +7,13 @@ function RegistrationView(controller){
 	self.userModel= self.controller.models.user;
 	
 	
+	$(document).bind('NameEmpty', function(){
+		console.log("bound name empty d in registration view");
+		$("#nameRegistrationInput").hide();
+		$("#empty_name").show();	
+	});
+	
+	
 	$(document).bind('PasswortNotValidated', function(){
 		console.log("bound passwort not validated in registration view");
 		$("#passwordRegistrationInput").hide();
@@ -59,30 +66,18 @@ function RegistrationView(controller){
 	
 	
 	/**
-	 * When focusing out from the name field check
-	 * - if the name field has been filled in
-	 * - if yes, then the validation status for this field is set to 1 (=true) otherwise to 0 (=false)
-	 * - check the general validation status of the registration form in order to display the registration button active or not
+	 * focusing out from the name field 
 	 */
 	
 	$("#nameRegistrationInput").focusout(function(e){
 		console.log("focused out name in registration");
 		var value_name = $("#nameRegistrationInput").text();
-
 		self.userModel.setName(value_name);
-
-		if (!self.userModel.setName(value_name)) {
-			$("#nameRegistrationInput").hide();
-			$("#empty_name").show();
-		}
 	});
 	
 	
 	/**
-	 * When focusing out from the email field check
-	 * - if the email field has been filled in
-	 * - if yes, then the validation status for this field is set to 1 (=true) otherwise to 0 (=false)
-	 * - check the general validation status of the registration form in order to display the registration button active or not
+	 * focusing out from the email field 
 	 */
 	$("#emailRegistrationInput").focusout(function(e){
 		console.log("focused out email in registration");
