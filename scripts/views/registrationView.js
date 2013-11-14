@@ -27,6 +27,12 @@ function RegistrationView(controller){
 		$("#short_password").hide();	
 		$("#empty_password").show();	
 	});
+	
+	$(document).bind('PasswortConfirmEmpty', function(){
+		console.log("bound confirm passwort empty in registration view");
+		$("#passwordRegConfirmInput").hide();	
+		$("#empty_confirmPassword").show();	
+	});
 
 	
 	$(document).bind('RegistrationValidated', function(){
@@ -103,8 +109,7 @@ function RegistrationView(controller){
 
 	
 	/**
-	 * When focusing out from the password field check
-	 * 
+	 * focusing out from the password field 
 	 * */
 	$("#passwordRegistrationInput").focusout(function(e){
 		console.log("focused out password in registration");
@@ -114,36 +119,23 @@ function RegistrationView(controller){
 	});
 	
 	/**
-	 * When focusing out from the confirmation of the password field the following check controlls take
-	 * - check if the field is empty
-	 * - check the matching of the field with the password field
-	 * - if the above conditions are met correctly, then the validation status for this field is set to 1 (=true)
-	 * - check the general validation status of the registration form in order to display the registration button active or not
+	 * * focusing out from the password field
 	 */
+	
 	$("#passwordRegConfirmInput").focusout(function(e){
 		console.log("focus out password confirmation");
 		
-		var firstCheck=true;
 		var password = $("#passwordRegistrationInput").text();
-		var hash_password = self.userModel.getHashPassword(password);
+		if(password){
+			var hash_password = self.userModel.getHashPassword(password);
+		}
 		var confirm_password = $("#passwordRegConfirmInput").text();
 		if (confirm_password){
-		var hash_confirm = self.userModel.getHashPassword(confirm_password);
+			var hash_confirm = self.userModel.getHashPassword(confirm_password);
 		}
-		
+
 		self.userModel.setConfirmPassword(hash_confirm);
-			
-		if (!self.userModel.setConfirmPassword(hash_confirm)) {
-			$("#passwordRegConfirmInput").hide();
-			$("#empty_confirmPassword").show();
-			var firstCheck=false;
-		}
-		
-			
-		//if the confirmed password has been set, check its matching with the password
-		if (firstCheck){
-			self.userModel.checkPasswordConfirmation(hash_password,hash_confirm);
-		}
+
 	});
 	
 

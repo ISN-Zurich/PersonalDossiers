@@ -159,18 +159,25 @@ UserModel.prototype.setUserTitle = function(title){
 };
 
 
-UserModel.prototype.setConfirmPassword = function(confirm_password){
+UserModel.prototype.setConfirmPassword = function(confirm_password,password){
+	
+	//check emptiness of confirmation password
 	if (!confirm_password){
-		return this.setValidationField("confirmPassword", 0);
+		$(document).trigger('PasswortConfirmEmpty');
+		this.setValidationField("confirmPassword", 0);
 	}
-	return this.setValidationField("confirmPassword", 1);
+	
+	//check matching of confirmation password with password
+	if(confirm_password){
+		this.checkPasswordConfirmation(password,confirm_password);
+	}
 };
 
 UserModel.prototype.checkPasswordConfirmation=function(password, confirm_password){
 	if (password != confirm_password){
-		return this.setValidationField("confirmPassword", 0);
+		 this.setValidationField("confirmPassword", 0);
 	} 
-	return this.setValidationField("confirmPassword", 1);
+	 this.setValidationField("confirmPassword", 1);
 };
 
 UserModel.prototype.getUserProfile=function(){
