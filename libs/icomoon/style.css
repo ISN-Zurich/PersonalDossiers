@@ -9,7 +9,7 @@
 	font-style: normal;
 }
 
-[class*="icon-"] {
+[class^="icon-"], [class*=" icon-"] {
 	font-family: 'icomoon';
 	speak: none;
 	font-style: normal;
@@ -51,4 +51,7 @@
 }
 .icon-pencil:before {
 	content: "\45";
+}
+.icon-embed:before {
+	content: "\42";
 }

@@ -143,6 +143,25 @@
 				"name": "pencil",
 				"ligatures": ""
 			}
+		},
+		{
+			"icon": {
+				"paths": [
+					"M288 256l-256 256 256 256h128l-256-256 256-256h-128zM736 256h-128l256 256-256 256h128l256-256-256-256z"
+				],
+				"tags": [
+					"embed"
+				],
+				"grid": 16
+			},
+			"properties": {
+				"order": 8,
+				"id": 348,
+				"prevSize": 32,
+				"code": 66,
+				"name": "embed",
+				"ligatures": ""
+			}
 		}
 	],
 	"height": 1024,

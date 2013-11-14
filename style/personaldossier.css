@@ -298,7 +298,7 @@ font-color:blue;
 #st_addDossier{
 	background-image:url(../images/add.png);
 }
-#st_editDosser, #embedDossier{
+.st_editDosser{
 	border-left:1px solid white;
 	float:right;
 	padding-left:5px;

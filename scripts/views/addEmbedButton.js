@@ -5,7 +5,7 @@ function addEmbedButton(controller){
 	console.log("enter add embed button");
 	var self=this;
 	self.controller=controller;
-	self.tagID="addEmbedBtn";
+	self.tagID="embedView";
 		
 	$("#addEmbedBtn").bind("click", function(e){
 		console.log("clicked the add Embed button");
