@@ -188,23 +188,27 @@ function RegistrationView(controller){
 		
 		var new_password = $("#passwordRegistrationInput").text();
 		
-		var confirm_password = $(this).text();
+		var confirm_password = $("#passwordRegConfirmInput").text();
 
+		
+		console.log("new password is" +new_password);
+		console.log("confirm password is" +confirm_password);
 		if (new_password !== confirm_password){
 			
+			console.log("the two fields are not matching with each other");
 			$("#pd_reg_password_confirm_label").css('background-color', 'red');
 			$("#pd_reg_password_confirm_label").css('color', '#fff');
 		}
 		
 		if (new_password == confirm_password){
-			
+			console.log("the two fields match with each other");
 			$("#pd_reg_password_confirm_label").css('background-color', '#0089CF');
 			$("#pd_reg_password_confirm_label").css('color', '#fff');
 		}
 		
 		//clean any background color of the label
-		$("#pd_reg_password_confirm_label").css('background-color', '#ebedee');
-		$("#pd_reg_password_confirm_label").css('color', '#4C5160'); 
+//		$("#pd_reg_password_confirm_label").css('background-color', '#ebedee');
+//		$("#pd_reg_password_confirm_label").css('color', '#4C5160'); 
 	});
 	
 	/**
@@ -222,7 +226,7 @@ function RegistrationView(controller){
 		console.log("clicked submit confirmation");
 		form_validation=true;
 		// if (form_validation){
-			
+			var value_password = $("#passwordRegistrationInput").text();
 			self.controller.models.user.register(value_password);
 			 
 			 $("#pd_registration_password_label").css('background-color', '#ebedee');
