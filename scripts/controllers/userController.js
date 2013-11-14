@@ -30,7 +30,6 @@ function userController() {
 	self.views.welcome= new WelcomeView(self);
 	self.views.introduction = new IntroductionView(self);
 	self.views.addDossier = new addDossierView(self);
-	self.views.log= new LogView(self);
 	self.views.user= new userProfileView(self);
 	self.views.registration= new RegistrationView(self);
 	

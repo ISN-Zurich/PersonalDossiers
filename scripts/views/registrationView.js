@@ -27,6 +27,7 @@ function RegistrationView(controller){
 	
 	$(document).bind('EmailEmpty', function(){
 		console.log("bound email empty in registration view");
+				
 		$("#emailRegistrationInput").hide();
 		$("#empty_mail").show();	
 	});

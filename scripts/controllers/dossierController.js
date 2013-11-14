@@ -50,12 +50,6 @@ function dossierController() {
 	    self.views.embed= new addEmbedButton(self);
 	    self.views.share = new ShareButtonView(self);
 
-       //the following views run only when we are authenticated
-	    if (self.oauth){
-	    	self.views.log = new LogView(self);
-	    	self.views.share = new ShareButtonView(self);
-	    }
-
      
        $(document).bind("BookmarkModelLoaded", function() {
     	   console.log("initialize views in controller");
@@ -65,12 +59,7 @@ function dossierController() {
     	   self.views.embed.open();
        });
        
-//       $(document).bind("BookmarkModelNotLoaded", function() {
-//    	   self.views.dossierContent.open(); 
-//       });
-//	
 	
-	//console.log("dossiersController is initialized"+this.models.bookmark.loaded);
     }
     else if (!self.oauth && !self.hashed) {
        console.log("the user is not loggedIn and there is no hash on the url");
