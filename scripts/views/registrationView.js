@@ -81,9 +81,20 @@ function RegistrationView(controller){
 		var value_email = $("#emailRegistrationInput").text();
 		self.userModel.setUserEmail(value_email);
 
+		// there is any kind of error during the set of email
 		if (!self.userModel.setUserEmail(value_email)) {
-			$("#emailRegistrationInput").hide();
-			$("#empty_mail").show();
+			
+			//email has not been set at all
+		if (self.userModel.emailEmpty){
+				$("#emailRegistrationInput").hide();
+				$("#empty_mail").show();
+		}
+			
+			//email is not set in a valid format
+//			if (!self.userModel.emailValidated){
+//				$("#emailRegistrationInput").hide();
+//				$("#empty_mail").show();
+//			}
 		}
 	});
 
@@ -206,9 +217,7 @@ function RegistrationView(controller){
 			$("#pd_reg_password_confirm_label").css('color', '#fff');
 		}
 		
-		//clean any background color of the label
-//		$("#pd_reg_password_confirm_label").css('background-color', '#ebedee');
-//		$("#pd_reg_password_confirm_label").css('color', '#4C5160'); 
+
 	});
 	
 	/**
@@ -224,18 +233,16 @@ function RegistrationView(controller){
 	
 	$("#submit_confirmation").bind("click", function(e){
 		console.log("clicked submit confirmation");
-		form_validation=true;
-		// if (form_validation){
-			var value_password = $("#passwordRegistrationInput").text();
-			self.controller.models.user.register(value_password);
-			 
-			 $("#pd_registration_password_label").css('background-color', '#ebedee');
-			 $("#pd_registration_password_label").css('color', '#4C5160');
-			 $("#pd_reg_password_confirm_label").css('background-color', '#ebedee');
-			 $("#pd_reg_password_confirm_label").css('color', '#4C5160');
-	//	 }	
+		var value_password = $("#passwordRegistrationInput").text();
+		self.controller.models.user.register(value_password);
+
+		//clean any background color of the label
+		$("#pd_registration_password_label").css('background-color', '#ebedee');
+		$("#pd_registration_password_label").css('color', '#4C5160');
+		$("#pd_reg_password_confirm_label").css('background-color', '#ebedee');
+		$("#pd_reg_password_confirm_label").css('color', '#4C5160');
 	});
-	
+
 }
 
 RegistrationView.prototype.openDiv= openView;

@@ -11,6 +11,10 @@ function UserModel(userController){
     		"password":0, 
     		"confirmPassword":0
     	};
+    
+    self.emailValidated=false;
+    self.emailEmpty=false;
+    
     // self.checkActiveUser();
     self.loadData();
     $(document).bind("ActiveDossierChanged", function() {
@@ -75,14 +79,16 @@ UserModel.prototype.setName = function(name){
 	this.userProfile.name=name;
 	if (name.length===0){
 		
-		// return this.setValidationField("name", 0);
-		this.validation_array["name"]=0;
-		this.checkRegistrationValidation();
-		return this.validation_array["name"];
+		 return this.setValidationField("name", 0);
+//		this.validation_array["name"]=0;
+//		this.checkRegistrationValidation();
+//		return this.validation_array["name"];
 	}
-	this.validation_array["name"]=1;
-	this.checkRegistrationValidation();
-	return this.validation_array["name"];
+//	this.validation_array["name"]=1;
+//	this.checkRegistrationValidation();
+//	return this.validation_array["name"];
+	
+	 return this.setValidationField("name", 1);
 };
 
 
@@ -100,51 +106,37 @@ UserModel.prototype.getEmail = function(){
     }
     return false;
 };
+
 UserModel.prototype.setUserEmail = function(email){
 	console.log("enter set user mail");
 	if (!this.userProfile){
 		this.userProfile={};
 	}
 	this.userProfile.email=email;
-	
+
 	if(email.length === 0){
-		// return this.setValidationField("email", 0);
-		
-		this.validation_array["email"]=0;
-		this.checkRegistrationValidation();
-		return this.validation_array["email"];
+		this.emailEmpty=true;
+		return this.setValidationField("email", 0);
 	} 
 	// validate email here !
-	
-	console.log("email after set is "+this.userProfile.email);
-	
-	this.validation_array["email"]=1;
-	this.checkRegistrationValidation();
-	return this.validation_array["email"];
+	//this.checkEmailValidation(email);
+
+	return this.setValidationField("email", 1);
 };
 
 
+
 UserModel.prototype.setPassword = function(pwd){
-	console.log("enter set password and password is "+pwd);
 	if (!this.userProfile){
 		this.userProfile={};
 	}
 	this.userProfile.password=pwd;
-	
+
 	if(!pwd){
-		// return this.setValidationField("password", 0);
-		console.log("password length is empty");
-		this.validation_array["password"]=0;
-		this.checkRegistrationValidation();
-		return this.validation_array["password"];
+		return this.setValidationField("password", 0);
 	} 
-	// validate email here !
-	
-	console.log("password length is not empty");
-	this.validation_array["password"]=1;
-	this.checkRegistrationValidation();
-	return this.validation_array["password"];
-	
+	return this.setValidationField("password", 1);
+
 };
 
 UserModel.prototype.getTitle = function(){
@@ -163,29 +155,17 @@ UserModel.prototype.setUserTitle = function(title){
 
 
 UserModel.prototype.setConfirmPassword = function(confirm_password){
-	
 	if (!confirm_password){
-		this.validation_array["confirmPassword"]=0;
-		this.checkRegistrationValidation();
-		return this.validation_array["confirmPassword"];
+		return this.setValidationField("confirmPassword", 0);
 	}
-	
-	this.validation_array["confirmPassword"]=1;	
-	this.checkRegistrationValidation();
-	return this.validation_array["confirmPassword"];
-	
+	return this.setValidationField("confirmPassword", 1);
 };
 
 UserModel.prototype.checkPasswordConfirmation=function(password, confirm_password){
 	if (password != confirm_password){
-		this.validation_array["confirmPassword"]=0;	
-		this.checkRegistrationValidation();
-		return this.validation_array["password"];
+		return this.setValidationField("confirmPassword", 0);
 	} 
-	
-	this.validation_array["confirmPassword"]=1;	
-	this.checkRegistrationValidation();
-	return this.validation_array["password"];
+	return this.setValidationField("confirmPassword", 1);
 };
 
 UserModel.prototype.getUserProfile=function(){
@@ -538,11 +518,25 @@ UserModel.prototype.getHashPassword = function(password){
 	return hash;
 };
 
-//avoid transferring the 
+//avoid transferring the actual password, and pass its length
 UserModel.prototype.checkPasswortValidity = function(passwordlength){
 	if (passwordlength <6){
 		$(document).trigger('PasswortNotValidated');
 		return false;
 	}
 	return true;
+};
+
+UserModel.prototype.setValidationField = function(fieldString, value){
+	this.validation_array[fieldString] = value;
+	this.checkRegistrationValidation();
+	return this.validation_array[fieldString];
+};
+
+UserModel.prototype.checkEmailValidation = function(password){
+	if (email.indexOf("@")!= 1){
+		this.validation_array["email"]=0;
+		this.checkRegistrationValidation();
+		return this.validation_array["email"];
+	}	
 };
