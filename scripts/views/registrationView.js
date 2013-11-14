@@ -10,7 +10,15 @@ function RegistrationView(controller){
 	$(document).bind('PasswortNotValidated', function(){
 		console.log("bound passwort not validated in registration view");
 		$("#passwordRegistrationInput").hide();
+		$("#empty_password").hide();
 		$("#short_password").show();	
+	});
+
+	$(document).bind('PasswortEmpty', function(){
+		console.log("bound passwort empty in registration view");
+		$("#passwordRegistrationInput").hide();
+		$("#short_password").hide();	
+		$("#empty_password").show();	
 	});
 
 	
@@ -101,27 +109,13 @@ function RegistrationView(controller){
 	
 	/**
 	 * When focusing out from the password field check
-	 * - if the password field has been filled in
-	 * - if yes, then the validation status for this field is set to 1 (=true) otherwise to 0 (=false)
-	 * - check the general validation status of the registration form in order to display the registration button active or not
+	 * 
 	 * */
 	$("#passwordRegistrationInput").focusout(function(e){
 		console.log("focused out password in registration");
 		var value_password = $("#passwordRegistrationInput").text();
-		if (value_password){
-			self.userModel.checkPasswortValidity(value_password.length);
-		}
-		console.log("password on focus out is"+value_password);
-		if (value_password.length>0){
 		var hash_password = self.userModel.getHashPassword(value_password);
-		}
-		
-		self.userModel.setPassword(hash_password);
-
-		if (!self.userModel.setPassword(hash_password)) {
-			$("#passwordRegistrationInput").hide();
-			$("#empty_password").show();
-		}
+		self.userModel.setPassword(hash_password ? hash_password : "", value_password ? value_password.length : "");
 	});
 	
 	/**

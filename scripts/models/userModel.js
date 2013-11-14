@@ -119,16 +119,28 @@ UserModel.prototype.setUserEmail = function(email){
 
 
 
-UserModel.prototype.setPassword = function(pwd){
+UserModel.prototype.setPassword = function(pwd_hash,pwd_length){
+	console.log("enter set password");
 	if (!this.userProfile){
 		this.userProfile={};
 	}
-	this.userProfile.password=pwd;
+	this.userProfile.password=pwd_hash;
 
-	if(!pwd){
-		return this.setValidationField("password", 0);
+	if(!pwd_hash){
+		$(document).trigger('PasswortEmpty');
+		this.setValidationField("password", 0);
+		//return this.setValidationField("password", 0);
 	} 
-	return this.setValidationField("password", 1);
+	
+	//check password validity
+	if (pwd_hash){
+		console.log("there is hash we will check for password validity");
+	this.checkPasswordValidity(pwd_length);
+	}
+	
+//	if (this.checkPasswordValidity(pwd_length)){
+//	return this.setValidationField("password", 1);
+//	}
 
 };
 
@@ -507,23 +519,28 @@ UserModel.prototype.getHashPassword = function(password){
 	var self=this;
 	console.log("enter hash password");
 	var email=self.getEmail();
+	if (password){
 	var hash= hex_sha1(email+password); 
 	return hash;
+	}
+	return false;
 };
 
 //avoid transferring the actual password, and pass its length
-UserModel.prototype.checkPasswortValidity = function(passwordlength){
+UserModel.prototype.checkPasswordValidity = function(passwordlength){
 	if (passwordlength <6){
 		$(document).trigger('PasswortNotValidated');
-		return false;
+		this.setValidationField("password", 0);
+		//return false;
 	}
-	return true;
+	this.setValidationField("password", 1);
+	//return true;
 };
 
 UserModel.prototype.setValidationField = function(fieldString, value){
 	this.validation_array[fieldString] = value;
 	this.checkRegistrationValidation();
-	return this.validation_array[fieldString];
+	//return this.validation_array[fieldString];
 };
 
 UserModel.prototype.checkEmailValidation = function(password){
