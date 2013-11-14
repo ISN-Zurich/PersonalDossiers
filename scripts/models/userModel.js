@@ -70,25 +70,18 @@ UserModel.prototype.getName = function(){
 	}
 	return false;
 };
+
 UserModel.prototype.setName = function(name){
 	console.log("enter setName");
 	if (!this.userProfile){
 		this.userProfile={};
-		
 	}
 	this.userProfile.name=name;
 	if (name.length===0){
-		
-		 return this.setValidationField("name", 0);
-//		this.validation_array["name"]=0;
-//		this.checkRegistrationValidation();
-//		return this.validation_array["name"];
+
+		return this.setValidationField("name", 0);
 	}
-//	this.validation_array["name"]=1;
-//	this.checkRegistrationValidation();
-//	return this.validation_array["name"];
-	
-	 return this.setValidationField("name", 1);
+	return this.setValidationField("name", 1);
 };
 
 
