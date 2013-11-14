@@ -342,6 +342,16 @@ cursor: default !important;
 	/*border:1px solid red;*/
 }
 
+/****EMBED VIEW *********/
+
+#dropdown_embed{
+	height:150px;
+	background-color:#ebedee;
+	
+}
+
+/*****END OF EMBED VIEW********/
+
 #headerText{
 	width: 22.72em;
     height: 27em; /*it was 6em, it can be set auto to get automatically the height of the filled content*/
