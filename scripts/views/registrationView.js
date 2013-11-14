@@ -14,6 +14,18 @@ function RegistrationView(controller){
 	});
 	
 	
+	$(document).bind('EmailEmpty', function(){
+		console.log("bound email empty in registration view");
+		$("#emailRegistrationInput").hide();
+		$("#empty_mail").show();	
+	});
+	
+	$(document).bind('EmailNotValidated', function(){
+		console.log("bound email not validated in registration view");
+		$("#emailRegistrationInput").hide();
+		$("#notvalid_mail").show();	
+	});
+	
 	$(document).bind('PasswortNotValidated', function(){
 		console.log("bound passwort not validated in registration view");
 		$("#passwordRegistrationInput").hide();
@@ -89,22 +101,6 @@ function RegistrationView(controller){
 		console.log("focused out email in registration");
 		var value_email = $("#emailRegistrationInput").text();
 		self.userModel.setUserEmail(value_email);
-
-		// there is any kind of error during the set of email
-		if (!self.userModel.setUserEmail(value_email)) {
-			
-			//email has not been set at all
-		if (self.userModel.emailEmpty){
-				$("#emailRegistrationInput").hide();
-				$("#empty_mail").show();
-		}
-			
-			//email is not set in a valid format
-//			if (!self.userModel.emailValidated){
-//				$("#emailRegistrationInput").hide();
-//				$("#empty_mail").show();
-//			}
-		}
 	});
 
 	
@@ -117,6 +113,7 @@ function RegistrationView(controller){
 		var hash_password = self.userModel.getHashPassword(value_password);
 		self.userModel.setPassword(hash_password ? hash_password : "", value_password ? value_password.length : "");
 	});
+	
 	
 	/**
 	 * * focusing out from the password field
@@ -133,22 +130,28 @@ function RegistrationView(controller){
 		if (confirm_password){
 			var hash_confirm = self.userModel.getHashPassword(confirm_password);
 		}
-
-		self.userModel.setConfirmPassword(hash_confirm);
-
+		self.userModel.setConfirmPassword(hash_confirm,hash_password);
 	});
 	
 
+	
 	$("#empty_name").bind("click", function(e){
 		console.log("clicked on the empty name");
-		$(this).hide();
+		$("#empty_name").hide();
 		$("#nameRegistrationInput").show();
 		
 	});
 	
 	$("#empty_mail").bind("click", function(e){
 		console.log("clicked on the empty email");
-		$(this).hide();
+		$("#empty_mail").hide();
+		$("#emailRegistrationInput").show();
+		
+	});
+	
+	$("#notvalid_mail").bind("click", function(e){
+		console.log("clicked on the not valid email");
+		$("#notvalid_mail").hide();
 		$("#emailRegistrationInput").show();
 		
 	});

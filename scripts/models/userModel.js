@@ -109,15 +109,19 @@ UserModel.prototype.setUserEmail = function(email){
 		this.userProfile={};
 	}
 	this.userProfile.email=email;
-
+	
+	//check emptiness of email field
+	
 	if(email.length === 0){
-		this.emailEmpty=true;
-		return this.setValidationField("email", 0);
+		//this.emailEmpty=true;
+		$(document).trigger('EmailEmpty');
+		 this.setValidationField("email", 0);
 	} 
 	// validate email here !
-	//this.checkEmailValidation(email);
-
-	return this.setValidationField("email", 1);
+	if (email){
+	this.checkEmailValidation(email);
+	}
+	
 };
 
 
@@ -544,17 +548,20 @@ UserModel.prototype.checkPasswordValidity = function(passwordlength){
 };
 
 
-
 UserModel.prototype.setValidationField = function(fieldString, value){
 	this.validation_array[fieldString] = value;
 	this.checkRegistrationValidation();
-	//return this.validation_array[fieldString];
 };
 
-UserModel.prototype.checkEmailValidation = function(password){
-	if (email.indexOf("@")!= 1){
+
+UserModel.prototype.checkEmailValidation = function(email){
+	console.log("enter check email validation");
+	if (email.indexOf("@")=== -1){
+		console.log("email does not contain the at character")
+		$(document).trigger('EmailNotValidated');
 		this.validation_array["email"]=0;
 		this.checkRegistrationValidation();
-		return this.validation_array["email"];
 	}	
+	this.setValidationField("email", 1);
 };
+
