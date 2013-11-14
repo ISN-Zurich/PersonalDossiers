@@ -451,24 +451,17 @@ UserModel.prototype.register = function(password){
 		success : success,
 		error : function(request) {
 			if (request.status === 403){
-		    console.log("Error while registering the user to the server: 403");
-		    $("#pd_registration_email_label").css('background-color', 'red');
-			$("#pd_registration_email_label").css('color', '#fff'); 
+		    console.log("Error while registering the user to the server, email taken : 403");
+		    $(document).trigger('EmailAlreadyTaken'); 
+		}
 			
-			  var span=$("<span/>", {
-			    	"id":"registration_mail",
-			    	"class":"pd_warning", 
-			    	text:"email already taken"
-			        }).appendTo("#emailRegistrationInput");
-			
-		    showErrorResponses(request); 
-			}
+		
+		//backend validation that checks the emptiness of the email field
 			
 			if (request.status === 405){
-			    console.log("Error while registering the user to the server:405");
-			    $("#pd_registration_email_label").css('background-color', 'red');
-				$("#pd_registration_email_label").css('color', '#fff'); 
-								
+			    console.log("Error while registering the user to the server: email empty :405");
+			    
+			    $(document).trigger('EmailEmpty'); 						
 			    showErrorResponses(request); 
 			}
 			

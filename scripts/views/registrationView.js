@@ -7,6 +7,17 @@ function RegistrationView(controller){
 	self.userModel= self.controller.models.user;
 	
 	
+	
+	$(document).bind('EmailAlreadyTaken', function(){
+		console.log("bound email already taken registration view");
+		$("#emailRegistrationInput").hide();
+		$("#existing_mail").show();	
+		
+		$("#pd_registration_email_label").css('background-color', 'red');
+		$("#pd_registration_email_label").css('color', '#fff'); 
+	});
+	
+	
 	$(document).bind('NameEmpty', function(){
 		console.log("bound name empty d in registration view");
 		$("#nameRegistrationInput").hide();
