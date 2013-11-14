@@ -1,5 +1,8 @@
+/*jslint vars: true, sloppy: true */
+
 /**
- * This views refers to the banner  
+ 
+* This views refers to the banner  
  * 
  * 
  * 
