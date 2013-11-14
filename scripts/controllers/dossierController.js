@@ -51,6 +51,12 @@ function dossierController() {
 	    self.views.share = new ShareButtonView(self);
 
      
+	    //the following views run only when we are authenticated
+	        if (self.oauth){
+	         self.views.log = new LogView(self);
+	        self.views.share = new ShareButtonView(self);
+	         };
+	    
        $(document).bind("BookmarkModelLoaded", function() {
     	   console.log("initialize views in controller");
     	   self.views.dossierBanner.open();
