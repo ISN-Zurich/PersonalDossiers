@@ -116,7 +116,7 @@ input#password, #pd_currentPassword, #pd_newPassword, #pd_confirm_newPassword, #
 	 text-security:disc;
 }
 
-#loginButton {
+#loginButton,#contentEmbed {
 	display:inline;
 	width:45px;
 	color:#4c5160;
@@ -131,7 +131,7 @@ input#password, #pd_currentPassword, #pd_newPassword, #pd_confirm_newPassword, #
 	padding-bottom:10px;
 }
 
-#registerButton{
+#registerButton, #badgeStyle{
 	display:inline;
 	color:#4c5160;
 	text-align: center;
@@ -345,10 +345,19 @@ cursor: default !important;
 /****EMBED VIEW *********/
 
 #dropdown_embed{
-	height:150px;
+	height:100px;
 	background-color:#ebedee;
 	
 }
+
+
+#embed_options{
+	font-weight:bold;
+	font-size:16px;
+	padding: 20px 0px 10px 10px;
+	
+}
+
 
 /*****END OF EMBED VIEW********/
 

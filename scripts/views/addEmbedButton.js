@@ -10,6 +10,7 @@ function addEmbedButton(controller){
 	$("#addEmbedBtn").bind("click", function(e){
 		console.log("clicked the add Embed button");
 		self.update();
+		$("#inputContainer").select();
 		$("#dropdown_embed").show();
 	});
 	
@@ -29,13 +30,15 @@ addEmbedButton.prototype.update= function(){
 		
 	var self=this;
 	var dossierId=this.controller.getActiveDossier();
-	var inputContainer=$("<input/>", {
-		"type":"text",
-		"width":"200px",
-		"value":"<iframe src=\" "+"http://yellowjacket.ethz.ch/tools/embedPageBig.html?id="+dossierId+"\""+" style= \""+ "width:475px;height:905px; border: none; overflow:hidden; \"></iframe>"
-	}).appendTo("#dropdown_embed");
+
+	$("#inputContainer").attr("value","<iframe src=\" "+"http://yellowjacket.ethz.ch/tools/embedPageBig.html?id="+dossierId+"\""+" style= \""+ "width:475px;height:905px; border: none; overflow:hidden; \"></iframe>");
 	
+	$("#inputContainer").bind("click",function(){
+		$("#inputContainer").select();
+	});
 	
+	$("#drop_info").show();
+
 };
 
 addEmbedButton.prototype.closeDiv=closeView;

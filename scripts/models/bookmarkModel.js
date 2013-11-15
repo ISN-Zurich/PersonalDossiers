@@ -391,6 +391,9 @@ BookmarkModel.prototype.getType = function() {
 };
 
 BookmarkModel.prototype.getISNURL = function() {
+	//itemType= this.getType();
+	// if (itemType === "publication")
+	//  return  'http://yellowjacket.ethz.ch/tools/service/streamtest.php?id'+ this.getItemId();
     return (this.index < this.dossierList.length) ? this.dossierList[this.index].metadata.isn_detail_url: false;	
 };
 
