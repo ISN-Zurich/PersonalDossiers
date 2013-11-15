@@ -2,6 +2,8 @@
 require_once('HTTP/Request.php');
 require_once('HTTP/Request/Listener.php');
 
+// get the pdf id 
+
 class HTTPStreamer extends HTTP_Request_Listener
 {
     private $fd;
@@ -33,6 +35,7 @@ class HTTPStreamer extends HTTP_Request_Listener
     }
 }
 
+// use the pdf id
 $r = new HTTP_Request("http://mercury.ethz.ch/serviceengine/Files/ISN/136414/ipublicationdocument_singledocument/cdb593a6-7909-4cf1-b812-03bbe49405d7/en/IB_ChinasWhitePapersonSpaceAnAnalysis.pdf", array('method'=> "GET"));
 
 $r->attach(new HTTPStreamer());
