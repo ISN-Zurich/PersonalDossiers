@@ -28,10 +28,11 @@ addEmbedButton.prototype.update= function(){
 	console.log("enter update in addEmbedd button");
 		
 	var self=this;
+	var dossierId=this.controller.getActiveDossier();
 	var inputContainer=$("<input/>", {
 		"type":"text",
 		"width":"200px",
-		"value":"<iframe src="+"http://yellowjacket.ethz.ch/tools/embedPageBig.html"+ "style="+ "width:475px;height:905px; border: none; overflow:hidden;></iframe>"
+		"value":"<iframe src=\" "+"http://yellowjacket.ethz.ch/tools/embedPageBig.html?id="+dossierId+"\""+" style= \""+ "width:475px;height:905px; border: none; overflow:hidden; \"></iframe>"
 	}).appendTo("#dropdown_embed");
 	
 	
