@@ -109,3 +109,16 @@ padding: 0;
 margin: 0 0 10px 0 ;
 }
 
+#pd_footer_gen {
+position: absolute;
+bottom: 0;
+width: 100%;
+maring-top:10px;
+}
+
+#pd_footer_links {
+clear: both;
+width: 100%;
+text-align: center;
+height:270px;
+}
