@@ -59,6 +59,16 @@ function DossierContentView(dController){
 DossierContentView.prototype.openDiv = openView;
 
 DossierContentView.prototype.open = function() {
+	this.update();
+
+	this.openDiv();
+};
+
+
+DossierContentView.prototype.update = function(){
+	
+	var self=this;
+	
 	$("#contentArea").empty();
     //TODO: only if we are loggedIn to display the logout button
     if (self.controller.oauth){
@@ -71,39 +81,11 @@ DossierContentView.prototype.open = function() {
          $('#loginButtonLink').removeClass("hidden");
     }
     console.log("open dossier list view");
-    //if (bookmarkModel.dossierList && bookmarkModel.dossierList.length > 0){ 
     this.renderList();
-//}
-//else{
-//this.loadErrorMessage();
-//}
-	this.openDiv();
-};
-
-/**
- * closes the view
- * @prototype
- * @function closeDiv
- **/ 
-DossierContentView.prototype.closeDiv = closeView;
-
-
-/**
- * empties the course list
- * @prototype
- * @function close
- **/ 
-DossierContentView.prototype.close = function() {
-	moblerlog("close course list view");
-	this.active = false;
-	this.closeDiv();
-	$("#contentArea").empty();
+	
 };
 
 
-
-
-//rename to renderItemList
 DossierContentView.prototype.renderList = function() {
 	
 	var bookmarkModel = self.controller.models.bookmark;
@@ -229,18 +211,26 @@ DossierContentView.prototype.arrangeItem=function(id){
 	$("#item"+ id).remove();
 };
 
-
-//the following function is used to display an error message
-//when the contents of a dossier cannot be displayed because it is private
-
-DossierContentView.prototype.loadErrorMessage = function(){
-	var divError=$("<div/>", {
-		"id": "dossiersError",
-		"class":"errorDossiers",
-		text: "Sorry you don't have permission to access the contents of this Dossier because it is private"
-	}).appendTo("#contentArea");
 	
-	
+
+/**
+ * closes the view
+ * @prototype
+ * @function closeDiv
+ **/ 
+DossierContentView.prototype.closeDiv = closeView;
+
+
+/**
+ * empties the course list
+ * @prototype
+ * @function close
+ **/ 
+DossierContentView.prototype.close = function() {
+	moblerlog("close course list view");
+	this.active = false;
+	this.closeDiv();
+	$("#contentArea").empty();
 };
-	
+
 	
