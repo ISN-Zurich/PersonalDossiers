@@ -360,7 +360,6 @@ cursor: default !important;
 
 #titleContainer{
 	background-color:#ebedee;
-	width:220px;
 	height:23px;
 	border-bottom:1px solid white;
 	padding-left:10px;
@@ -378,6 +377,11 @@ cursor: default !important;
 
 .liItem{
 	height:28px;
+}
+
+#pd_footer{
+	background-image:url(../images/logo_isn.gif);
+	border:1px solid red;
 }
 
 /*****END OF EMBED VIEW********/
