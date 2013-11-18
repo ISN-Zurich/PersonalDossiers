@@ -358,6 +358,27 @@ cursor: default !important;
 	
 }
 
+#titleContainer{
+	background-color:#ebedee;
+	width:220px;
+	height:23px;
+	border-bottom:1px solid white;
+	padding-left:10px;
+	padding-top:5px;
+	margin-top:1px;
+	font-size:14px;
+}
+
+.dossierItemText{
+	font-size:12px;
+	white-space: nowrap;
+	text-overflow:ellipsis;
+	overflow: hidden;
+}
+
+.liItem{
+	height:28px;
+}
 
 /*****END OF EMBED VIEW********/
 

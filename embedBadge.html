@@ -30,16 +30,13 @@
 	<script type="text/javascript" src="scripts/models/bookmarkModel.js"></script>
 	<script type="text/javascript" src="scripts/models/userModel.js"></script>
 	
+
+	<!-- <script type="text/javascript" src="scripts/views/dossierBannerView.js"></script> 
+	<script type="text/javascript" src="scripts/views/dossierContentView.js"></script> -->
 	
-   <!--  <script type="text/javascript" src="scripts/views/logView.js"></script>
-    <script type="text/javascript" src="scripts/views/shareButtonView.js"></script>
-	<script type="text/javascript" src="scripts/views/dossierUsersView.js"></script>
-	<script type="text/javascript" src="scripts/views/addEmbedButton.js"></script>-->
-	<script type="text/javascript" src="scripts/views/dossierBannerView.js"></script> 
-	
- 	<script type="text/javascript" src="scripts/views/dossierContentView.js"></script>
+	<script type="text/javascript" src="scripts/views/badgeView.js"></script>
  	
-	<script type="text/javascript" src="scripts/controllers/embedController.js"></script>
+	<script type="text/javascript" src="scripts/controllers/badgeController.js"></script>
    
    <title>Personal Dossiers in ISN</title> 
     		<meta http-equiv="X-UA-Compatible" content="IE=edge" >
@@ -100,8 +97,7 @@
 <div class="column span-12" id="content">
 
 				<div class="entry">
-	<div id="dossiercontentHeader" class="sidebar-header darkblue">My Dossier</div>
-
+	
 					<div class="wp-caption alignnone" style="width: 480px">
 						<div id="header_image">
 							<img id="bannerImage" class=" " alt=""">
@@ -232,19 +228,11 @@
 		<div class="column featured2 hide">
 
 
-
-
-
-
-
-
-
-
-									<div class="floatleft"><a href="/Digital-Library/Publications/Detail/?lng=en&amp;id=170138" ><img src="http://mercury.ethz.ch:80/serviceengine/Files/ISN/80x0/170485/iresourcemultiple_files/e993d4cb-55b5-4c3a-a012-a912a985910c/en/Refinery+in+Ras+Tanura+Saudi+Arabia.jpg " class="floatleft" alt="Oil refinery in Ras Tanura, Saudi Arabia, courtesy chrisevans/flickr" /></a>
-									<br style="clear:both;"/>
-													<a href="http://creativecommons.org/licenses/by-nc-nd/2.0/deed.en" target="_blank" style="text-decoration:none; border-bottom:none;"><img src="http://mercury.ethz.ch:80/serviceengine/Files/ISN/15x9/92846/ilicense_icons/d7330528-2a75-4cb0-a218-708ae01e293c/en/cc.gif" alt="Creative Commons - Attribution-Noncommercial-No Derivative Works 2.0 Generic" style="width:15px; height:9px; margin:3px 0 0 0"></a>
-														<a href="http://www.flickr.com/photos/chrisevans/2235358481/" target="_blank" style="text-decoration:none; border-bottom:none;"><img src="http://mercury.ethz.ch:80/serviceengine/Files/ISN/15x9/92846/ilicense_icons/63baaab4-edb4-4ec7-8069-289915548a5b/en/by.gif" alt="Creative Commons - Attribution-Noncommercial-No Derivative Works 2.0 Generic" style="width:15px; height:9px; margin:3px 0 0 0"></a>
-										</div>
+<div class="floatleft"><a href="/Digital-Library/Publications/Detail/?lng=en&amp;id=170138" ><img src="http://mercury.ethz.ch:80/serviceengine/Files/ISN/80x0/170485/iresourcemultiple_files/e993d4cb-55b5-4c3a-a012-a912a985910c/en/Refinery+in+Ras+Tanura+Saudi+Arabia.jpg " class="floatleft" alt="Oil refinery in Ras Tanura, Saudi Arabia, courtesy chrisevans/flickr" /></a>
+<br style="clear:both;"/>
+<a href="http://creativecommons.org/licenses/by-nc-nd/2.0/deed.en" target="_blank" style="text-decoration:none; border-bottom:none;"><img src="http://mercury.ethz.ch:80/serviceengine/Files/ISN/15x9/92846/ilicense_icons/d7330528-2a75-4cb0-a218-708ae01e293c/en/cc.gif" alt="Creative Commons - Attribution-Noncommercial-No Derivative Works 2.0 Generic" style="width:15px; height:9px; margin:3px 0 0 0"></a>
+<a href="http://www.flickr.com/photos/chrisevans/2235358481/" target="_blank" style="text-decoration:none; border-bottom:none;"><img src="http://mercury.ethz.ch:80/serviceengine/Files/ISN/15x9/92846/ilicense_icons/63baaab4-edb4-4ec7-8069-289915548a5b/en/by.gif" alt="Creative Commons - Attribution-Noncommercial-No Derivative Works 2.0 Generic" style="width:15px; height:9px; margin:3px 0 0 0"></a>
+</div>
 
 <div class="floatleft overviewcontent ">
 <p class="small">
@@ -302,64 +290,13 @@
 
 
   
-<div class="column span-6 last" id="sidebar_right">    
-                
-
-
-                                                                                                                                                                                                                                                                                                                    
-        
-         <div class="box snippetlist hide">
-
-	<div class="snippetlist-header darkgray hide">
-		<div class="snippetlist-title darkgray">ISN Announcements</div>
+<div class="column span-6 last" id="sidebar_right">  
+<div id="badgeHeader" class="sidebar-header darkblue">Personal Dossiers</div>  
+	<div id="badgeArea" class="hide">
+	<ul id="subnavi">
+	
+	</ul>
 	</div>
-
-
-
-															<div class="snippetlist-content first alt-lightgray hide ">
-					<h2>Attention ISN Researchers – We’ve rearranged and improved our Search Box! </h2>
-			<div class="body">
-
-<p>If you click on “Browse Information”, for example, you’ll be taken to a redesigned landing page that features multiple ways for you to retrieve our Digital Library content. Yes, changes are afoot and they’re all designed to make your research efforts that much easier. Check it out! – The ISN Staff</p>
-				&nbsp;<a class="endlink" href="/Browse-Information">More</a>
-			</div>
-		</div>
-										   	 	<div class="snippetlist-content hide">
-					<h2>Call for Applications: Model OSCE</h2>
-			<div class="body">
-
-<p>Are you between 18-30 years old? As part of Switzerland’s OSCE Chairmanship in 2014, would you like to participate in a year-long Model OSCE&nbsp;program with young delegates from 57 member states? If so, then continue on for more information on the program and how to apply.</p>
-				&nbsp;<a class="endlink" href="/Communities-and-Partners/Model-OSCE">More</a>
-			</div>
-		</div>
-										   	 	<div class="snippetlist-content hide">
-					<h2>EISA Young Researchers' Workshop 2013</h2>
-			<div class="body">
-
-<p>The title of this year’s EISA Young Researchers’ Workshop was as follows -- “The State Duty to Protect from Business-Related Human Rights Violations: Tracking the Emergence and Impact of a New Norm.” We at the ISN were proud to support this student-centered event.</p>
-				&nbsp;<a class="endlink" href="/Digital-Library/Articles/Detail/?lng=en&amp;id=169335">More</a>
-			</div>
-		</div>
-										   	 	<div class="snippetlist-content hide">
-					<h2>Mobile Learning in Security and Defense Organizations</h2>
-			<div class="body">
-
-<p>Last year the ISN organized a workshop entitled “Mobile Learning in Security and Defense Organizations,” which linked up the major projects being pursued in this area by the PfP Consortium's Advanced Distributed Learning (ADL) community. The workshop findings have now been published and are available on&nbsp;our website.</p>
-				&nbsp;<a class="endlink" href="http://www.isn.ethz.ch/Communities-and-Partners/ISN-CSS-Events/Detail/?lng=en&amp;id=168413">More</a>
-			</div>
-		</div>
-										   	 	<div class="snippetlist-content hide">
-					<h2>ISF Recordings</h2>
-			<div class="body">
-
-<p>We have now incorporated a selection of podcasts from the recently held 10th International Security Forum (ISF) into our Digital Library holdings.</p>
-				&nbsp;<a class="endlink" href="/Digital-Library/Audio/Detail/?ots591=40db1b50-7439-887d-706e-8ec00590bdb9&amp;lng=en&amp;id=156062">More</a>
-			</div>
-		</div>
-			</div>            
-
-
-
 <br/>
 
 

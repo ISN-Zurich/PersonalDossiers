@@ -15,11 +15,11 @@ function userProfileView(controller){
 	$("#pd_newPassword").bind("click", function(e){
 		console.log("click change password container");
 		if (!$("#warning_empty").hasClass("hide")){
-			$("#warning_empty").addClass("hide")
+			$("#warning_empty").addClass("hide");
 		}
 		
 		if (!$("#warning_confirm").hasClass("hide")){
-			$("#warning_confirm").addClass("hide")
+			$("#warning_confirm").addClass("hide");
 		}
 	});
 	

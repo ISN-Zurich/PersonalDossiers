@@ -18,8 +18,9 @@ function DossierBannerView(myController){
     self.controller= myController;
     self.tagID='header_image';	
     
-//    $('#header_image').bind('click', _clickHandler);
-//    $('#header_image').bind('click', _clickHandler);
+    //  $('#header_image').bind('click', _clickHandler);
+    // $('#header_image').bind('click', _clickHandler);
+    
     $('#header_image').bind('click', function(e){
 	if ( self.editMode ) {
 	    // always check for edits

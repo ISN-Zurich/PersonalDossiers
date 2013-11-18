@@ -14,15 +14,29 @@ function addEmbedButton(controller){
 		$("#dropdown_embed").show();
 	});
 	
+	
+	// TODO: add event handler when click on the content embed button
+	// - to show in the input container the link to the big embed html
+	
+	//TODO:add event handler when click on the badge embed button
+	// - to show in the input container the link to the badge html
+	
 }
 
 addEmbedButton.prototype.openDiv=openView;
 
 addEmbedButton.prototype.open= function(){
 	console.log("open add embed View");
-	//this.update();
 	this.openDiv();
 };
+
+
+/** 
+ * this function displays the drop-down box that contains
+ * all the information and links to the embedded pages
+ * by default the link to the content embed is displayed
+ * 
+ */ 
 
 addEmbedButton.prototype.update= function(){
 	
