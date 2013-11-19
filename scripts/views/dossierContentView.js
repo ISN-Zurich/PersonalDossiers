@@ -166,6 +166,8 @@ DossierContentView.prototype.renderItem = function() {
 	}).appendTo(divFloatText);
 
     if (self.controller.oauth){
+    	
+    	if (self.controller.id!=="embedController"){
 	div3 = $("<div/>", {
 		"class":"deletecontainer"
 	}).appendTo(divFloatText);
@@ -181,7 +183,7 @@ DossierContentView.prototype.renderItem = function() {
 		text: "Really delete?",
 		"class": "deleteConfirmButton"
 	}).appendTo(div3);
-    }
+    	}}
 	lastbr1=$("<br/>", {
 		
 	}).appendTo(divFloatText);
