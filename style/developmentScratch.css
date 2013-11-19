@@ -121,6 +121,7 @@ background:#fff;
 background-image:url(../images/logo_isn.gif);
 background-repeat:no-repeat;
 background-size: 62px 40px;
+border-top:1px dotted grey;
 }
 
 #pd_footer_image{
