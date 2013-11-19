@@ -109,27 +109,24 @@ padding: 0;
 margin: 0 0 10px 0 ;
 }
 
-#pd_footer_gen {
-position:fixed;
-bottom:0px;
-width: 250px;
-maring-top:30px;
-height:50px;
-border:0px solid blue;
-/*background:#ebedee;*/
-background:#fff;
-background-image:url(../images/logo_isn.gif);
-background-repeat:no-repeat;
-background-size: 62px 40px;
+/*#pd_footer_gen {
+position: absolute;
+bottom: 0;
+width: 100%;
+maring-top:10px;
 }
 
-#pd_footer_image{
-background-image:url(../images/logo_isn.gif);
-background-repeat:no-repeat;
+#pd_footer_links {
+clear: both;
+width: 100%;
+text-align: center;
+height:270px;
+}*/
+
+#pd_footer_ic {
+	text-align:left;
+	width:250px;
+	margin:0px auto;
+	height:50px;
+	bottom:0px;
 }
-
-
-#page_oc.pd_container{
-	padding-bottom:70px;
-}
-
