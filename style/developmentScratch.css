@@ -112,7 +112,7 @@ margin: 0 0 10px 0 ;
 #pd_footer_gen {
 position:fixed;
 bottom:0px;
-width: 250px;
+width: 100%;
 maring-top:30px;
 height:50px;
 border:0px solid blue;
