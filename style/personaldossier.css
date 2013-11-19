@@ -358,13 +358,17 @@ cursor: default !important;
 	
 }
 
+#badgeHeader{
+	top:0px;
+}
+
 #titleContainer{
 	background-color:#ebedee;
 	height:23px;
 	border-bottom:1px solid white;
 	padding-left:10px;
-	padding-top:5px;
 	margin-top:1px;
+	top:25px;
 	font-size:14px;
 }
 
@@ -379,6 +383,16 @@ cursor: default !important;
 	height:28px;
 }
 
+
+body.embedBadge {
+	/* overflow: hidden; */
+}
+
+.pd_overflow{
+	overflow-x:hidden;
+	overflow-y:scroll;
+	/*height: 270px; */ /* 380 - 87px*/
+}
 #pd_footer{
 	background-image:url(../images/logo_isn.gif);
 	background-repeat:none;

@@ -192,12 +192,7 @@ DossierContentView.prototype.renderItem = function() {
 		"class": "deleteConfirmButton"
 	}).appendTo(div3);
     	}}
-	lastbr1=$("<br/>", {
-		
-	}).appendTo(divFloatText);
-	lastbr2=$("<br/>", {
-		
-	}).appendTo(divFloatText);
+
 	
 };
 /**

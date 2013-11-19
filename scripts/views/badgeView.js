@@ -78,6 +78,15 @@ badgeView.prototype.renderBadgeList = function() {
 	
 	var bookmarkModel = self.controller.models.bookmark;
 	console.log("dossier list length in dossier content view "+bookmarkModel.dossierList.length);
+	
+	//calculate ul height
+	
+	var iFrameHeight= window.innerHeight || document.documentElement.clientHeight;
+	var headerHeight= $("#badgeHeader").height();
+	var titleHeight= $("#titleContainer").height();
+	var footerHeight = $("#pd_footer_gen").height();
+	var totalHeight = headerHeight + titleHeight + footerHeight + 15;
+	
 
 	if (bookmarkModel.dossierList && bookmarkModel.dossierList.length > 0) {
 		
@@ -97,6 +106,9 @@ badgeView.prototype.renderBadgeList = function() {
 	    	"text": "Your Dossier has no items. You can add items  to the personal dossier if you go to http://isn.ethz.ch/. In there, under both the dossiers and the digital library menus there are various content items. If you enter in the ones you are interested in you will see an addBookmark button on the right side. By clicking on it, this item will be added to your active dossier"
 	        }).appendTo(div);
 	}
+	var ulHeight=iFrameHeight - totalHeight;
+	console.log("ulheight is "+ulHeight);
+	$("#subnavi").css("height",ulHeight+"px" );
 	
 };
 
@@ -120,17 +132,12 @@ badgeView.prototype.renderItem = function() {
 	divA=$("<a/>", {
 		"class": "dossierItemText",
 		"href":bookmarkModel.getISNURL(), 
-		text:bookmarkModel.getTitle()
+		"text":bookmarkModel.getTitle(),
+		"target": "_blank"
 	}).appendTo(li);
 	
 
-	lastbr1=$("<br/>", {
-		
-	}).appendTo(li);
-	lastbr2=$("<br/>", {
-		
-	}).appendTo(li);
-	
+
 };
 /**
  *	In this function we delete a dossier item by performing two tasks

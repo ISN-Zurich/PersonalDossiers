@@ -1,0 +1,36 @@
+#header{
+	top:30px;
+	width:980px;
+	height:270px;
+	border:0px solid black;
+	background-image:url(../gallery/banner.jpg);
+	background-repeat:no-repeat;
+}
+
+.column{
+	width:240px;
+	height:auto;
+	padding:10px;
+	text-align:left;
+	border:0px solid black;
+	float:left;
+}
+
+
+#content{
+	width:475px;
+	border:0px solid red;
+	height:auto;
+	float:left;
+}
+
+#badge{
+	
+	float:left;
+}
+
+.sub_column_item{
+	border-bottom:1px dotted grey;
+	padding-bottom:10px;
+	margin-bottom:20px;
+}
