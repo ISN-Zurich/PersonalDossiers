@@ -8,6 +8,14 @@ function badgeView(dController){
 	var self=this;
 	self.controller=dController;
 	self.tagID = 'badgeArea';
+	
+	$("#pd_footer_gen").bind("click", function(){
+		window.open(
+				'http://yellowjacket.ethz.ch/tools/index.html',
+				'_blank' 
+		);
+	});	
+		
 }
 
 

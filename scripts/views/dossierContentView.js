@@ -48,6 +48,14 @@ function DossierContentView(dController){
 			e.stopPropagation();
 		}
 	}
+	
+	
+	$("#pd_footer_gen").bind("click", function(){
+			window.open(
+				  'http://yellowjacket.ethz.ch/tools/index.html',
+				  '_blank' 
+				);
+	});
 }
 
 

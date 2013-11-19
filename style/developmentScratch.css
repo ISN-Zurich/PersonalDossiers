@@ -116,17 +116,16 @@ width: 100%;
 maring-top:30px;
 height:50px;
 border:0px solid blue;
-/*background:#ebedee;*/
 background:#fff;
+border-top:1px dotted grey;
 background-image:url(../images/logo_isn.gif);
 background-repeat:no-repeat;
 background-size: 62px 40px;
-border-top:1px dotted grey;
+cursor:pointer;
 }
 
 #pd_footer_image{
-background-image:url(../images/logo_isn.gif);
-background-repeat:no-repeat;
+
 }
 
 
