@@ -122,12 +122,23 @@ cursor:pointer;
 clear:both;
 }
 
-#pd_footer_image{
-
-}
 
 
 .pd_container{
 	/*padding-bottom:90px;*/
 }
 
+
+.pd_sidebar-header.darkblue{
+	background-color:#0089CF;
+}
+
+
+.pd_sidebar-header{
+color: #FFFFFF;
+font-size: 1.2em;
+line-height: 1.2em;
+margin-left: 0;
+padding: 7px 15px 5px 10px;
+margin-bottom: 1px;
+}
