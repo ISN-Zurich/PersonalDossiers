@@ -98,6 +98,12 @@ DossierContentView.prototype.renderList = function() {
 	
 	var bookmarkModel = self.controller.models.bookmark;
 	console.log("dossier list length in dossier content view "+bookmarkModel.dossierList.length);
+	
+	var iFrameHeight= window.innerHeight || document.documentElement.clientHeight;
+//	var headerHeight= $("#dossiercontentHeader").height();
+//	var imageHeight= $("#bannerImage").height();
+//	var titleHeight= $("#titleContainer").height();
+//	var descriptionHeight= $("#descriptionContainer").height();
 
 	if (bookmarkModel.dossierList && bookmarkModel.dossierList.length > 0) {
 		//console.log("dossier list is "+JSON.stringify(bookmarkModel.dossierList));
@@ -120,6 +126,15 @@ DossierContentView.prototype.renderList = function() {
 	    	"text": "Your Dossier has no items. You can add items  to the personal dossier if you go to http://isn.ethz.ch/. In there, under both the dossiers and the digital library menus there are various content items. If you enter in the ones you are interested in you will see an addBookmark button on the right side. By clicking on it, this item will be added to your active dossier"
 	        }).appendTo(div);
 	}
+	
+	var bannerHeight= $("#bannerArea").height();
+	var footerHeight = $("#pd_footer_gen").height();
+	var totalHeight = bannerHeight + footerHeight ;	// we add 176 px for the image that might be still on its way
+	var contentAreaHeight=iFrameHeight - totalHeight;
+	console.log("banner height "+bannerHeight);
+	console.log("footer height "+footerHeight);
+	console.log("content area height is "+contentAreaHeight);
+	$("#contentArea").css("height",contentAreaHeight+"px" );
 	
 };
 
