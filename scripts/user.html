@@ -1,0 +1,704 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:article="http://ogp.me/ns/article#" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" >
+    
+	<style type="text/css" media="screen"> 
+	    @import url("http://www.isn.ethz.ch/extension/isndesign/design/isn/stylesheets/screen.css");
+	</style>
+    
+    <style type="text/css" media="print">
+	@import url("http://www.isn.ethz.ch/extension/isndesign/design/isn/stylesheets/print.css");
+    </style>
+
+    <!--[if !(IE 8)]>
+	<style type="text/css" media="screen, projection">
+	    @import url("/extension/isndesign/design/isn/stylesheets/screen.css");
+	</style>
+    <![endif]-->
+    <!--[if lt IE 8]>
+	<style type="text/css" media="screen, projection">
+    	    @import url("/extension/isndesign/design/isn/stylesheets/blueprint/ie.css");
+	</style>
+    <![endif]-->
+
+    <style type="text/css">
+	    	    @import url("http://www.isn.ethz.ch/extension/kmscomments/design/kmscomments/stylesheets/kmscomments.css");
+	    	    @import url("http://www.isn.ethz.ch/extension/kmssearch/design/kmssearch/stylesheets/kmssearch.css");
+	    	    @import url("http://www.isn.ethz.ch/extension/isndesign/design/isn/stylesheets/thickbox.css");
+	    	    @import url("http://www.isn.ethz.ch/extension/isndesign/design/isn/stylesheets/slider.css");
+	    	    @import url("http://www.isn.ethz.ch/extension/isndesign/design/isn/stylesheets/digilib.css");
+	    	    @import url("http://www.isn.ethz.ch/extension/isndesign/design/isn/stylesheets/staff.css");
+	    	    @import url("http://www.isn.ethz.ch/extension/isndesign/design/isn/stylesheets/ddmenu.css");
+	    	    @import url("http://www.isn.ethz.ch/extension/isndesign/design/isn/stylesheets/sectioned_article.css");
+	    	    @import url("http://www.isn.ethz.ch/extension/isndesign/design/isn/stylesheets/jobs.1.0.css");
+	    	    @import url("http://www.isn.ethz.ch/extension/isndesign/design/isn/stylesheets/video_overlay.1.0.css");
+	    	    @import url("http://www.isn.ethz.ch/extension/isndesign/design/isn/stylesheets/footer.1.0.css");
+	    	    @import url("http://www.isn.ethz.ch/extension/isndesign/design/isn/stylesheets/search_banner.1.1.css");
+	    	    @import url("http://www.isn.ethz.ch/extension/ezlightbox/design/standard/stylesheets/lightbox.css");
+	    
+	    </style>
+
+   <!--   <script src="http://www.isn.ethz.ch/extension/isndesign/design/isn/javascript/jquery.1.7.0.min.js"></script>
+
+    <script src="http://www.isn.ethz.ch/extension/isndesign/design/isn/javascript/jquery.ui.1.8.24.min.js"></script>
+    
+   <script src="http://www.isn.ethz.ch/extension/isndesign/design/isn/javascript/video_tn.1.0.js"></script>  
+    <script src="http://www.isn.ethz.ch/extension/isndesign/design/isn/javascript/jquery.hoverIntent.minified.js"></script>
+    <script src="http://www.isn.ethz.ch/extension/isndesign/design/isn/javascript/ddmenu_intent.js"></script>
+    <script src="http://www.isn.ethz.ch/extension/isndesign/design/isn/javascript/sectioned_article.1.0.js"></script>
+    <script src="http://www.isn.ethz.ch/extension/isndesign/design/isn/javascript/jobs.1.0.js"></script>
+
+    <script src="http://www.isn.ethz.ch/extension/isndesign/design/isn/javascript/search_banner.1.1.js"></script>-->
+    	                                        
+
+ <!-- Inclusion of dossiers-project javascript files -->
+    <script type="text/javascript" src="libs/jquery.js"></script>
+    <script type="text/javascript" src="libs/sha1.js"></script>
+    <script type="text/javascript" src="libs/oauth.js"></script>
+
+    <script type="text/javascript" src="scripts/common.js"></script>
+
+    <script type="text/javascript" src="scripts/models/oauthhelper.js"></script>
+    <script type="text/javascript" src="scripts/models/authentication.js"></script>
+    <script type="text/javascript" src="scripts/models/dossierListModel.js"></script>
+    <script type="text/javascript" src="scripts/models/userModel.js"></script>
+
+    <script type="text/javascript" src="scripts/views/loginView.js"></script>
+   	<script type="text/javascript" src="scripts/views/welcomeView.js"></script>
+   	<script type="text/javascript" src="scripts/views/introductionView.js"></script>
+   	 <script type="text/javascript" src="scripts/views/addDossierView.js"></script>
+   
+    <script type="text/javascript" src="scripts/views/registrationView.js"></script>
+    <script type="text/javascript" src="scripts/views/userProfileView.js"></script>
+    <script type="text/javascript" src="scripts/views/interactionBox.js"></script>
+    <script type="text/javascript" src="scripts/views/logView.js"></script>
+     <script type="text/javascript" src="scripts/views/notification.js"></script>
+
+    <script type="text/javascript" src="scripts/controllers/userController.js"></script>
+
+	
+        						    						    						    						    						    						    						    						    						    						    						    						    						    						    						    						    						    						    	
+
+    		  		      		  		  		      		  		      				        
+        
+	
+    		<title>Dossiers / ISN</title>
+    		<meta http-equiv="X-UA-Compatible" content="IE=edge" >
+					<meta name="author" content="ISN Editors" />
+    					<meta name="copyright" content="&amp;copy; Copyright (c) International Relations and Security Network (ISN)" />
+    					<meta name="description" content="The ISN is a leader in the international relations and security community as a provider of comprehensive, balanced, and timely information." />
+    					<meta name="keywords" content="International Relations, Security, Defense, Politics, Conflict, Peace, International Law, International Organizations, Terrorism, Armaments, Arms Control, Human Security, Human Rights, Economics, Finance, Trade, Aid, Development, Energy, Natural Resources, Environment, Society, Science, Technology, Transport, Space, Media, Communication, Information, Religion, Culture, Education" />
+    					<meta name="viewport" content="width=950" />
+    			    	
+	<meta http-equiv="Pragma" content="no-cache" />
+    
+        	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    	<meta http-equiv="Content-language" content="en-US" />
+        <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+    <meta name="generator" content="eZ Publish" />
+<link rel="alternate" type="application/rss+xml" title="Security Watch" href="http://kms1.isn.ethz.ch/serviceengine/ModeOWContent?ocid=311&amp;owid=627&amp;lng=en&amp;serviceid=47&amp;mode=1&amp;ots591=4888CAA0-B3DB-1461-98B9-E20E7B9C13D4" />
+<link rel="alternate" type="application/rss+xml" title="Publications" href="http://kms1.isn.ethz.ch/serviceengine/ModeOWContent?ocid=247&amp;owid=627&amp;lng=en&amp;serviceid=47&amp;mode=1&amp;ots591=0C54E3B3-1E9C-BE1E-2C24-A6A8C7060233" />
+<link rel="alternate" type="application/rss+xml" title="Organizations" href="http://kms1.isn.ethz.ch/serviceengine/ModeOWContent?ocid=303&amp;owid=627&amp;lng=en&amp;serviceid=47&amp;mode=1&amp;ots591=CAB359A3-9328-19CC-A1D2-8023E646B22C" />
+<link rel="alternate" type="application/rss+xml" title="Audio" href="http://kms1.isn.ethz.ch/serviceengine/ModeOWContent?ocid=503&amp;owid=627&amp;lng=en&amp;serviceid=47&amp;mode=1&amp;ots591=40DB1B50-7439-887D-706E-8EC00590BDB9" />
+<link rel="alternate" type="application/rss+xml" title="Video" href="http://kms1.isn.ethz.ch/serviceengine/ModeOWContent?ocid=507&amp;owid=627&amp;lng=en&amp;serviceid=47&amp;mode=1&amp;ots591=966c9813-6e74-4e0b-b884-8ed9f3f0978c" />
+
+    		
+
+<link rel="Home" href="/" title="ISN front page" />
+<link rel="Index" href="/" />
+<link rel="Top"  href="/" title="Dossiers / ISN" />
+
+<link rel="Shortcut icon" href="http://www.isn.ethz.ch/extension/isndesign/design/isn/images/icons/favicon.ico" type="image/x-icon" />
+<link rel="apple-touch-icon" href="http://www.isn.ethz.ch/extension/isndesign/design/isn/images/icons/favicon_apple.png" type="image/x-icon" />
+<link rel="Copyright" href="/ezinfo/copyright" />
+<link rel="Author" href="/ezinfo/about" />
+<link rel="Alternate" href="/layout/set/print/Dossiers" media="print" title="Printable version" />       
+
+
+<link type="text/css" href="style/personaldossier.css" rel="stylesheet"/>
+<link type="text/css" href="style/developmentScratch.css" rel="stylesheet"/>
+
+<link href="libs/icomoon/style.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="libs/icomoon/liga.js"></script>
+ </head>
+<body>
+<div id="page_oc">
+    <div class="container">
+		<div class="printhidden">
+    <span id="skip0"><a href="#search">Go to search</a></span><span class="none"> &middot; </span>
+    <span id="skip1"><a href="#content">Go to content</a></span><span class="none"> &middot; </span>
+    <span id="skip2"><a href="/Services/Accessibility-help">Go to Accessibility help</a></span>
+    <div class="column span-3"><a href="/isn/"><img src="http://www.isn.ethz.ch/extension/isndesign/design/isn/images/header/logo_isn.gif" alt="Logo ISN" class="logo_isn" width="92" height="59" /></a></div>
+    <div class="column span-15">&nbsp;</div>
+    <div class="column span-5"><a href="http://www.ethz.ch/index_EN"><img src="http://www.isn.ethz.ch/extension/isndesign/design/isn/images/header/logo_eth.gif" alt="Logo ETH Z&uuml;rich" class="logo_eth" width="196" height="61" /></a></div>
+    <hr class="header clearboth" />
+    <span class="text_slogan"><!--<span class="size12">I</span>NTERNATIONAL <span class="size12">R</span>ELATIONS <span class="size12">A</span>ND <span class="size12">S</span>ECURITY <span class="size12">N</span>ETWORK--><img src="http://www.isn.ethz.ch/extension/isndesign/design/isn/images/header/slogan_text.gif" alt="Logo ETH Z&uuml;rich" class="" width="322" height="9" /></span> 
+    <div class="column span-24" id="headernavi">
+    <ul class="headerlinks">
+      <li><a href="/">Home</a></li>
+<li><a href="/Services/Contact">Contact</a></li>
+<li><a href="/About-Us/Who-we-are">About Us</a></li>
+<li><a href="/Services/Newsletters">Newsletters</a></li>
+    </ul>
+    </div><!-- id="headernavi" -->
+
+  
+
+    <div class="column span-24 floatleft" style="border:solid 1px white;border-width:1px 0px;"><img src="http://www.isn.ethz.ch/extension/isndesign/design/isn/images/header/header.jpg" alt="Slogan: Managing Information - sharing knowledge" class="column span-24 floatleft" /></div>
+
+  
+    <div class="column span-24"><a name="navi"></a>
+      <div id="dd_menu_outer_container" class="nojs">
+  <ul id="dd_menu_container">
+                <li class="dd_menu_item">
+              <div class="dd_menu_item_text_container"><a class="dd_menu_item_text active" href="/Dossiers">Dossiers</a></div>
+      <ul class="dd_menu_subcontainer">
+                      <li class="dd_menu_subitem"><div class="dd_menu_subitem_text_container"><a class="dd_menu_subitem_text" href="/Dossiers">Issues / Regions</a></div></li>
+            </ul>
+    </li>
+                <li class="dd_menu_item">
+              <div class="dd_menu_item_text_container"><a class="dd_menu_item_text" href="/Security-Watch/Articles">Security Watch</a></div>
+      <ul class="dd_menu_subcontainer">
+                      <li class="dd_menu_subitem"><div class="dd_menu_subitem_text_container"><a class="dd_menu_subitem_text" href="/Security-Watch/Articles/List">View all Articles</a></div></li>
+            </ul>
+    </li>
+                <li class="dd_menu_item">
+              <div class="dd_menu_item_text_container"><a class="dd_menu_item_text" href="http://isnblog.ethz.ch">ISN Blog</a></div>
+      <ul class="dd_menu_subcontainer">
+                      <li class="dd_menu_subitem"><div class="dd_menu_subitem_text_container"><a class="dd_menu_subitem_text" href="http://isnblog.ethz.ch/week/our-perspectives">Our Perspectives</a></div></li>
+                      <li class="dd_menu_subitem"><div class="dd_menu_subitem_text_container"><a class="dd_menu_subitem_text" href="http://isnblog.ethz.ch/week/global-views">Global Views</a></div></li>
+                      <li class="dd_menu_subitem"><div class="dd_menu_subitem_text_container"><a class="dd_menu_subitem_text" href="http://isnblog.ethz.ch/week/partner-insights">Partner Insights</a></div></li>
+                      <li class="dd_menu_subitem"><div class="dd_menu_subitem_text_container"><a class="dd_menu_subitem_text" href="http://isnblog.ethz.ch/week/expert-opinion">Expert Opinion</a></div></li>
+            </ul>
+    </li>
+                <li class="dd_menu_item">
+              <div class="dd_menu_item_text_container"><a class="dd_menu_item_text" href="/Digital-Library/Overview">Digital Library</a></div>
+      <ul class="dd_menu_subcontainer">
+                      <li class="dd_menu_subitem"><div class="dd_menu_subitem_text_container"><a class="dd_menu_subitem_text" href="/Digital-Library/Publications">Publications</a></div></li>
+                      <li class="dd_menu_subitem"><div class="dd_menu_subitem_text_container"><a class="dd_menu_subitem_text" href="/Digital-Library/Articles">Articles</a></div></li>
+                      <li class="dd_menu_subitem"><div class="dd_menu_subitem_text_container"><a class="dd_menu_subitem_text" href="/Digital-Library/Audio">Audio</a></div></li>
+                      <li class="dd_menu_subitem"><div class="dd_menu_subitem_text_container"><a class="dd_menu_subitem_text" href="/Digital-Library/Video">Video</a></div></li>
+                      <li class="dd_menu_subitem"><div class="dd_menu_subitem_text_container"><a class="dd_menu_subitem_text" href="/Digital-Library/Organizations">Organizations</a></div></li>
+            </ul>
+    </li>
+                <li class="dd_menu_item dd_menu_item_cap">
+              <div class="dd_menu_item_text_container"><a class="dd_menu_item_text" href="/Communities-and-Partners/Partner-Network">Communities and Partners</a></div>
+      <ul class="dd_menu_subcontainer">
+                      <li class="dd_menu_subitem"><div class="dd_menu_subitem_text_container"><a class="dd_menu_subitem_text" href="/Communities-and-Partners/Partner-News">Partner News</a></div></li>
+                      <li class="dd_menu_subitem"><div class="dd_menu_subitem_text_container"><a class="dd_menu_subitem_text" href="/Communities-and-Partners/ISN-CSS-Events">ISN / CSS Events</a></div></li>
+                      <li class="dd_menu_subitem"><div class="dd_menu_subitem_text_container"><a class="dd_menu_subitem_text" href="/Communities-and-Partners/Model-OSCE">Model OSCE</a></div></li>
+                      <li class="dd_menu_subitem"><div class="dd_menu_subitem_text_container"><a class="dd_menu_subitem_text" href="/Communities-and-Partners/Related-Programs">Related Programs</a></div></li>
+                      <li class="dd_menu_subitem"><div class="dd_menu_subitem_text_container"><a class="dd_menu_subitem_text" href="/Communities-and-Partners/Expert-Communities">Expert Communities</a></div></li>
+            </ul>
+    </li>
+                <li class="dd_menu_item dd_menu_item_edu">
+              <div class="dd_menu_item_text_container"><a class="dd_menu_item_text" href="/e-Education/The-ISN-TACC">e-Education</a></div>
+      <ul class="dd_menu_subcontainer">
+                      <li class="dd_menu_subitem"><div class="dd_menu_subitem_text_container"><a class="dd_menu_subitem_text" href="/e-Education/Learning-Platform">Learning Platform</a></div></li>
+                      <li class="dd_menu_subitem"><div class="dd_menu_subitem_text_container"><a class="dd_menu_subitem_text" href="/e-Education/Mobile-Learning-Research">Mobile Learning / Research</a></div></li>
+                      <li class="dd_menu_subitem"><div class="dd_menu_subitem_text_container"><a class="dd_menu_subitem_text" href="/e-Education/Available-Resources">Available Resources</a></div></li>
+                      <li class="dd_menu_subitem"><div class="dd_menu_subitem_text_container"><a class="dd_menu_subitem_text" href="/e-Education/ISN-Mobler-Cards">ISN Mobler Cards</a></div></li>
+                      <li class="dd_menu_subitem"><div class="dd_menu_subitem_text_container"><a class="dd_menu_subitem_text" href="/e-Education/ADL-Working-Group">ADL Working Group</a></div></li>
+            </ul>
+    </li>
+    </ul>
+</div>    </div>
+
+    <hr class="row_white" />
+	</div>
+    
+    
+
+    	<div class="column span-6" id="sidebar_left">
+        <div class="column span-6 search_banner_section">
+            <a class="grey_bar_btn bi more" href="/Browse-Information">Browse Information <img src="http://www.isn.ethz.ch/extension/isndesign/design/isn/images/icons/search_banner/browse_info.png" /></a>
+            <a class="grey_bar_btn as more" href="/kmssearch/search/adv">Advanced Search <img src="http://www.isn.ethz.ch/extension/isndesign/design/isn/images/icons/search_banner/adv_search.png" /></a>
+        </div>
+        <div class="clearboth"></div>
+          			<!-- google_ad_section_start -->
+	                                
+
+                                                                                                                                                                                                                                                                                                                        
+        
+                        <div class="box snippetlist hide">
+
+	
+	
+		<div class="sidebar-header lightgray">Issues</div>
+		<div class="dossier_cats">
+			
+
+<ul>
+
+<li><a href="/Dossiers/List/?param0=Economics%20and%20Globalization">Economics and Globalization</a></li>
+
+<li><a href="/Dossiers/List/?param0=Geopolitics%20and%20Strategy">Geopolitics and Strategy</a></li>
+
+<li><a href="/Dossiers/List/?param0=Human%20Rights%20and%20the%20Rule%20of%20Law">Human Rights and the Rule of Law</a></li>
+
+<li><a href="/Dossiers/List/?param0=Warfare%20and%20Violence">Warfare and Violence</a></li>
+
+<li><a href="/Dossiers/List/?param0=Security">Security</a></li>
+
+<li><a href="/Dossiers/List/?param0=Technology">Technology</a></li>
+
+</ul>
+		</div>
+	
+		<div class="sidebar-header lightgray">Regions</div>
+		<div class="dossier_cats">
+			
+
+<ul>
+
+<li><a href="/Dossiers/List/?param0=North America">North America</a></li>
+
+<li><a href="/Dossiers/List/?param0=South America">South America</a></li>
+
+<li><a href="/Dossiers/List/?param0=Europe / Eurasia">Europe / Eurasia</a></li>
+
+<li><a href="/Dossiers/List/?param0=Sub-Saharan Africa">Sub-Saharan Africa</a></li>
+
+<li><a href="/Dossiers/List/?param0=Middle East / North Africa">Middle East / North Africa</a></li>
+
+<li><a href="/Dossiers/List/?param0=South and Central Asia">South and Central Asia</a></li>
+
+<li><a href="/Dossiers/List/?param0=East Asia-Pacific">East Asia-Pacific</a></li>
+
+</ul>
+		</div>
+	</div>    	        
+</div><!-- id="sidebar_left" -->
+
+
+
+    <div class="column span-12 search_banner_section">
+        <form method="post" action="/kmssearch/search/simpleall" id="search_form">
+            <input type="hidden" name="stage" value="search" />
+            <input type="hidden" value="Dossiers" name="red" />
+            <input type="hidden" value="en" name="l" />
+            <input type="hidden" value="standard" name="t" />
+            <input type="hidden" value="0" name="start" />
+            <input type="hidden" value="20" name="num" />
+            <input type="hidden" value="77233387-374f-4688-9a93-ed530a1b91ae" name="c" />
+            <input type="text" id="search_bar_text" value="Type your search here..." class="" name="q" />
+            <input type="submit" id="search_bar_submit" class="search_bar_button" value="Search" name="search" />
+        <div id="search_bar_select_pointer">Search within the section</div>
+        <div id="search_bar_select_container">
+            <select id="search_bar_select" name="ot">
+            <option value="">The ISN</option>
+                        <option value="0c54e3b3-1e9c-be1e-2c24-a6a8c7060233">Publications</option>
+                                <option value="26b029ba-8af6-464b-898a-d16dd7d15a02" selected="selected">Dossiers</option>
+                                <option value="4888caa0-b3db-1461-98b9-e20e7b9c13d4">Articles</option>
+                                <option value="40db1b50-7439-887d-706e-8ec00590bdb9">Audio</option>
+                                <option value="966c9813-6e74-4e0b-b884-8ed9f3f0978c">Videos</option>
+                                <option value="61995759-76d5-4913-aefc-68711537abb5">Special Features</option>
+                                <option value="cab359a3-9328-19cc-a1d2-8023e646b22c">IR Directory</option>
+                                <option value="3c7cd8ea-376b-af5b-2388-393bc970da60">Blog Posts</option>
+                                                                                                                                                                                                                                                            </select>
+        </div>
+        <a class="search_bar_button" id="search_bar_help" href="/isn/Services/Search-help">Help?</a>
+        </form>
+    </div>
+    <div class="column span-6 last search_banner_section">
+        <div class="grey_bar st">Share this 
+        <a href="https://plus.google.com/share?url=http://isn.ethz.ch/Dossiers" class="sb_icon" id="st_googleplus" title="Share on Google Plus" target="_blank"><span class="hide">Share on Google Plus</span></a>
+        <a href="http://reddit.com/submit?url=http://isn.ethz.ch/Dossiers" class="sb_icon" id="st_reddit" title="Submit to Reddit" target="_blank"><span class="hide">Submit to Reddit</span></a><a href="http://twitter.com/home/?status=http://isn.ethz.ch/Dossiers" class="sb_icon" id="st_twitter" title="Tweet about this" target="_blank"><span class="hide">Tweet about this</span></a><a href="https://www.facebook.com/sharer.php?u=http://isn.ethz.ch/Dossiers" class="sb_icon" id="st_facebook" title="Share on Facebook" target="_blank"><span class="hide">Share on Facebook</span></a></div>
+        <div class="grey_bar in">Interact <a href="#comments" class="sb_icon disabled" id="in_comment" title="Comments [disabled]"><span class="hide">Comment</span></a><a href="/layout/set/print/content/view/full/24140" class="sb_icon" id="in_print" title="Print"><span class="hide">Print</span></a><a href="http://pdfcreate.ethz.ch" class="sb_icon" id="in_pdf" title="PDF"><span class="hide">PDF</span></a><a href="/content/tipafriend/24140" class="sb_icon" id="in_mail" title="Mail"><span class="hide">Mail</span></a></div>
+    </div>
+    
+    
+<div class="column span-12" id="content">
+
+						
+					<div id="welcomeBox" class="hide">
+					<div id="dossierListHeader" class="sidebar-header darkblue "> Personal Dossiers</div>
+					<div id="modifiedListHeader" class="pd_grey_head">Created / modified </div>
+					<div id="welcome">
+					</div>
+						<!-- <ul id="dossiersUl"></ul> -->
+						<!-- <div id="item165880" class="column featured2 hideOT dossier_item "><div class="floatleft"><a href="http://www.isn.ethz.ch/Digital-Library/Audio/Detail/?lng=en&amp;id=165880"><img class="floatleft" src="http://mercury.ethz.ch:80/serviceengine/Files/ISN/160x120/166389/iresourcemultiple_files/a01bc06e-3a33-4f5f-9290-5662c2349516/en/HassanWirajuda160x120.jpg" style="width: 80px; height: 60px;"></a></div><div class="floatleft overviewcontent dossier_text"><h1><a class="header1" href="http://www.isn.ethz.ch/Digital-Library/Audio/Detail/?lng=en&amp;id=165880">Hassan Wirajuda on Indonesia’s Foreign Policy</a></h1>
+						<p class="small">2013-07-08 /Audio</p><p>In this podcast, the former Foreign Minister of Indonesia, Hassan Wirajuda, outlines the thinking behind Jakarta&amp;rsquo;s current &amp;lsquo;free and active&amp;rsquo; foreign policy (bebas aktif); how the policy is shaping its relationships with the US, China and other ASEAN states; and how it might impact Indonesia&amp;rsquo;s 2014 presidential election.</p>
+						<div class="deletecontainer"><div id="delete-165880" class="deleteButton">Delete</div><div id="delete-confirm-165880" class="deleteConfirmButton">Really delete?</div></div><br><br></div></div>
+						 -->
+					</div>
+					<div id="userProfile" class="hide">
+					<div id="userProfileContainer">
+					
+					<div id="userProfileHeader" class="sidebar-header darkblue"> Edit your profile </div>
+					<div>
+					 <div id="pd_title_label" class="adv_search_label"> Title</div>
+					<div id="titleInput" class="adv_search_label adv_search_input_container"></div>
+					</div>
+					<div>
+					 <div id="pd_name_label" class="adv_search_label"> Name</div>
+					<div id="nameInput" class="adv_search_label adv_search_input_container"></div>
+					</div>
+
+								
+					<div>
+					 <div id="pd_email_label" class="adv_search_label"> Email</div>
+					<div id="emailInput" class="adv_search_label adv_search_input_container"></div>
+					</div>
+					<div id="successful_message1" class=" pd_success hide">Your profile has been succesfully updated</div>
+					<div id="saveChanges_container" class="adv_search_buttons right hide" >
+        		<!-- <div id="save_changes_submit" class="search_bar_button right" value="Save" name="save">Save </div> -->
+        		 </div>
+        		</div>
+        		
+        		<div id="changePasswordContainer" class="hide">
+        		<div id="userProfileHeader" class="sidebar-header darkblue"> Change your password </div>
+					<div>
+					 <div class="adv_search_label"> Current Password</div>
+					<div id="pd_currentPassword" class="adv_search_label adv_search_input_container"></div>
+					</div>
+					<div>
+					 <div class="adv_search_label"> New Password</div>
+					<div id="pd_newPassword" class="adv_search_label adv_search_input_container"></div>
+					</div>
+					<div>
+					 <div id="pd_confirm_password_label" class="adv_search_label"> Confirm New Password</div>
+					<div id="pd_confirm_newPassword" class="adv_search_label adv_search_input_container"></div>
+					</div>
+					<div id="warning_empty" class=" pd_warning hide">You should complete all the fields</div>
+					<div id="warning_confirm" class=" pd_warning hide">The confirmation password should be the same with the new password. Try again</div>
+					<div id="successful_message2" class=" pd_success hide">Your password was changed succesfully</div>
+				
+				<div id="saveChangesPswd_container" class="adv_search_buttons right hide" >
+        		<div id="save_password_submit" class="search_bar_button right" value="Save" name="save">Confirm </div>
+        		 </div>
+        		</div>
+        
+    
+					
+					</div> <!-- end of user profile -->
+
+					<div id="registrationView" class="hide">
+					
+					<div id="registrationContainer">
+					
+					<div id="registrationHeader" class="sidebar-header darkblue"> Registration </div>
+					<div>
+					 <div id="pd_registration_title_label" class="adv_search_label"> Title</div>
+					<div id="titleRegistrationInput" class="adv_search_label adv_search_input_container"></div>
+					</div>
+
+						<div>
+							<div id="pd_registration_name_label" class="adv_search_label">
+								Name</div>
+							<div id="nameInputContainer">
+								<div id="nameRegistrationInput" class="adv_search_label adv_search_input_container"></div>
+								<div id="empty_name" class="adv_search_label adv_search_input_container registration_message hide">you should type a name</div>
+							</div>
+						</div>
+
+						<div>	
+					 <div id="pd_registration_email_label" class="adv_search_label"> Email</div>
+					 <div id="emailInputContainer">
+					<div id="emailRegistrationInput" class="adv_search_label adv_search_input_container"></div>
+					<div id="empty_mail" class="adv_search_label adv_search_input_container registration_message hide">you should type an email</div>
+					<div id="notvalid_mail" class="adv_search_label adv_search_input_container registration_message hide"> valid format: example@example.com</div>
+					<div id="existing_mail" class=" adv_search_label adv_search_input_container registration_message hide">email already taken</div>
+					</div>
+					</div>
+					
+					
+					<div>
+					 <div id="pd_registration_password_label" class="adv_search_label"> Password</div>
+					 <div id="passwordInputContainer">
+					<div id="passwordRegistrationInput" class="adv_search_label adv_search_input_container"></div>
+					<div id="empty_password" class="adv_search_label adv_search_input_container registration_message hide">you should type a password</div>
+					<div id="short_password" class="adv_search_label adv_search_input_container registration_message hide">you should type at least 6 characters</div>
+					
+					</div>
+					</div>
+					
+					
+					<div>
+					 <div id="pd_reg_password_confirm_label" class="adv_search_label"> Confirm Password</div>
+					<div id="passwordRegContainer">
+					<div id="passwordRegConfirmInput" class="adv_search_label adv_search_input_container"></div>
+					<div id="empty_confirmPassword" class="adv_search_label adv_search_input_container registration_message hide">you should confirm your password</div>
+					</div>
+					</div>
+					
+					<div id="registration_success" class=" pd_success hide">Your profile has been succesfully updated</div>
+					<div id="registration_incosistency_message" class=" pd_success hide">The thwo fields should be identical</div>
+					<div id="registration_empty" class=" pd_warning hide">You should complete all the fields</div>
+					<div id="saveChanges_container" class="adv_search_buttons right" >
+        		 	<div id="submit_confirmation" class="search_bar_button inactive_registration right" value="Submit" name="submit">Register</div> 
+        		 </div>
+        		 <div id="cancelRegistration_container" class="adv_search_buttons left" >
+        		 	<div id="cancel_registration" class="search_bar_button left" value="Submit" name="submit">Cancel</div> 
+        		 </div>
+        		</div>
+					
+					</div>
+					
+					<div id="notifications" class="hide"></div>
+				
+ 
+<!--<div id="followingListHeader" class="pd_grey_head hide" > My followed </div>-->
+
+<div id="introductionView">
+				<div id="videoView" class="video_container">
+					<h2 class="titlebar marginbottom1">
+						<div class="show_info"></div>
+						Featured Video
+					</h2>
+					<div class="video_overlay">
+						<div class="video_overlay_img_detail">
+							<div class="video_overlay_img_ic">
+								<div class="video_overlay_play"></div>
+
+								<img class="video_overlay_image"
+									src="http://mercury.ethz.ch:80/serviceengine/Files/ISN/160x120/169284/iresourcemultiple_files/5dda9998-dc9e-499b-b527-897eee11a50b/en/400px-South_African_soldier_with_ammo_belt+REGULAR.jpg"
+									width="160" height="120">
+							</div>
+							<div class="video_overlay_detail_oc">
+								<div class="video_overlay_detail_ic">
+									<div class="custom_height_br"></div>
+									<b>Duration: </b> 1:09:25<br>
+										<div class="custom_height_br"></div> <b>Video by: </b> <a
+										href="/Digital-Library/Organizations/Detail/?lng=en&amp;id=168711">Histories
+											of Violence </a><br>
+											<div class="custom_height_br"></div> <b>Image License: </b> <!-- http://commons.wikimedia.org/wiki/File:South_African_soldier_with_ammo_belt.jpg : 55709 : Public Domain : Public Domain (PD) : [FMD:[ pd.gif : SVN : 88 : image/gif : 63a725f3-b2d5-489b-8524-c859336ea23f ], FMD:[ by.gif : SVN : 836 : image/gif : 1ce4be89-658f-438b-9145-2a2bac12968b ]] :  -->
+											PD | <a
+											href="http://commons.wikimedia.org/wiki/File:South_African_soldier_with_ammo_belt.jpg"
+											target="_blank"
+											style="text-decoration: none; border-bottom: none;">BY</a>
+								</div>
+							</div>
+						</div>
+						<div class="video_overlay_text_oc">
+							<div class="video_overlay_text_ic featured1">
+								<p class="small">
+									<a class="OTName" href="/Digital-Library/Video">Videos</a>
+								</p>
+								<h1>
+									<a href="/Digital-Library/Video/Detail/?lng=en&amp;id=169234"
+										class="header1">Fanon &amp; Violence</a>
+								</h1>
+								<p>
+									In this 'evergreen' video, Lewis Gordon, who is a Professor of
+									Philosophy and African Studies at the University of
+									Connecticut, examines the question of revolutionary violence by
+									focusing on the writings of Frantz Fanon. <a
+										href="/Digital-Library/Video/Detail/?lng=en&amp;id=169234"
+										class="more">More<span class="hide"> on «Fanon
+											&amp; Violence»</span></a>
+								</p>
+							</div>
+							<div class="video_overlay_text_bi_link featured1">
+								<p class="small">
+									<a href="/Browse-Information" class="OTName">Browse here
+										for more content</a>
+								</p>
+							</div>
+						</div>
+					</div>
+
+					<iframe
+						src="http://player.vimeo.com/video/43036768?title=0&amp;byline=0&amp;portrait=0&amp;api=1&amp;player_id=vimeo_43036768"
+						id="vimeo_43036768" width="470" height="264" scrolling="no"
+						frameborder="0" webkitallowfullscreen="" mozallowfullscreen=""
+						allowfullscreen=""></iframe>
+				</div>
+
+
+	<hr class="overview" />
+	<div id="IntroductionPD"class="entry">
+	<p> This is an introductory text about personal dossier management area. Personal Dossiers gives the flexibility to the users to create their own dossiers that will contain the dossier itmes of their choice. Based on their interest and their learning needs they can regulate their learning resources.</p>
+	
+	</div>
+	</div>
+                                        
+    <div class="column span-6" id="contentbox_left">
+                                                                                                                                                                                                                                                                                                                    
+    
+    
+                                                		
+<div class="box hide">
+			<h2>Latest Dossiers</h2>
+		<ul class="linklist">
+				        
+    <li><a href="/Dossiers/Detail/?lng=en&amp;id=168079&contextid782=168079">Middle East and North Africa: Issues in Focus</a></li> 
+     
+				        
+    <li><a href="/Dossiers/Detail/?lng=en&amp;id=167800&contextid782=167800">The Middle East: Contexts and Dynamics</a></li> 
+     
+				        
+    <li><a href="/Dossiers/Detail/?lng=en&amp;id=167384&contextid782=167384">Central Asia: Issues in Focus</a></li> 
+     
+				        
+    <li><a href="/Dossiers/Detail/?lng=en&amp;id=167506&contextid782=167506">Central Asia’s Fragile Security Context</a></li> 
+     
+				        
+    <li><a href="/Dossiers/Detail/?lng=en&amp;id=165900&contextid782=165900">South Asia: Issues in Focus</a></li> 
+     
+							<li class="margintop6"><a href="/Dossiers/List/">View all</a></li>
+		 	</ul>
+</div>
+                                        </div><!-- id="contentbox_left" -->
+    <div class="column span-6 last" id="contentbox_right">
+
+        </div><!-- id="contentbox_right" -->
+</div><!-- id="content" -->
+
+<div class="column span-6 last" id="sidebar_right">    
+                
+
+                                                                                                                                                                                                                                                                                                                    
+        
+                        
+<div class="box snippetlist hide ">
+	<div class="sidebar-header darkblue">Welcome to the ISN’s Dossiers Page!</div>
+	<div class="snippetlist-content first alt-lightblue">
+		<div class="about_section_desc">
+<p>In November 2011, we concluded that at least one of our ‘daily attractors’ should not be driven by changing circumstances or events. Instead, we decided to identify an enduring international relations (IR) or security-centered topic and spend one or two weeks looking at it in some detail. The results of that effort are the dozens of ISN Dossiers now available on this page. They include publications, videos and audio presentations that will ideally help you look at various IR and security-related topics in fresh ways. Yes, in ways that are of value to you both privately and in formal educational settings.&nbsp; – The ISN Staff</p>
+</div>
+	</div></div>            
+
+<div id="InteractionBar" class="pd_grey_bar st"> <span class="pd_boxTitle">My Account</span> 
+<a href="http://yellowjacket.ethz.ch/tools/user.html#notifications" class="sb_icon pd_interactionItem disable" id="st_notifications" title="Share on Google Plus" target=" "><span id="span_notifications "  class=" pd_tabs_margin pd_active iconMoon">N</span></a>
+<a href="http://yellowjacket.ethz.ch/tools/user.html#userProfile" class="sb_icon pd_interactionItem disable" id="st_user" title="Submit to Reddit" target=""><span id= "span_user" class=" pd_tabs_margin pd_active iconMoon">T</span></a>
+<a href="http://yellowjacket.ethz.ch/tools/user.html#personalDossiers" class="sb_icon pd_interactionItem disable" id="st_dossiers" title="Tweet about this" target=""><span id= "span_dossiers" class="pd_tabs_margin pd_active iconMoon">D</span></a>
+<a  class="sb_icon pd_a_selected disable" id="logView" title="Personal Dossier List"><span id= "st_log_out" class="pd_tabs_margin pd_active iconMoon">L</span></a>
+
+</div><!-- id="sidebar_right" -->
+<br/>
+<div id="st_logout_confirm" class="box snippetlist hide">
+<div class="snippetlist-content sidebar-header darkblue">
+
+<div class="about_section_desc">
+<ul>
+<li class="pd_loginContainer">
+<div id="confirmationMsg" class="pd_loginContainer clickable">Do you really want to log out?</div>
+</li>
+</ul>
+ </div>
+</div>
+</div>
+
+				<div id="loginFormContainer" class="box snippetlist ">
+					<div class="sidebar-header darkblue"> User login</div>
+					<div class="snippetlist-content first greyBg pd_logoutConfirmPaddig">
+						<div class="about_section_desc">
+							<form id="loginForm">
+								<ul id="loginUl">
+									<li id="pd_uContainer1" class="pd_loginContainer">
+									 <input type="text" id="username" placeholder="Enter your username" class="pd_loginContainer"></input>									</li>
+									<li id="pd_pContainer2" class="pd_loginContainer">
+										 <input type="text" id="password" placeholder="Enter your password" class="pd_loginContainer"></input>
+									</li>
+ 									<li>
+ 									  
+ 									 <div class="buttonContainer"> <div id="loginButton" value="Login" class=" pd_loginContainer clickable"> Login</div>
+ 									 <div id="registerButton" value="Register" class=" pd_loginContainer clickable"> Register</div>
+        							 </div>
+        							
+        							</li>  
+								</ul>
+							</form>
+
+						</div>
+					</div>
+				</div>
+				
+								
+				
+				<div id="profileViewContainer" class="box snippetlist hide ">
+					<div class="sidebar-header darkblue">Profile</div>
+					<div class="snippetlist-content first greyBg">
+						<div class="about_section_desc">
+								<div id="pd_uContainer3" >
+									 <div type="text" id="edit_profile" class="pd_loginContainer clickable" disabled="disabled">Edit your user profile</div></div>
+									<div id="pd_pContainer4" >
+									<div type="text" id="edit_password" class="pd_loginContainer clickable" disabled="disabled">Edit your password</div>
+									</div>
+ 						</div>
+					</div>
+				</div>
+
+
+<br/>
+<br/>
+<div id="addDossierBtn" class="clickable hide">
+<div class="grey_bar st clickable"> Create a new Dossier <div class="pd_add_dossier" id="st_addDossier" title="Share on Google Plus" ></div> </div>
+</div>
+
+	<hr class="hidden" />
+    <div class="clearboth"></div>
+    </div><!-- id="container" -->
+	
+       
+    </div>
+    
+    <div id="footer_gen">
+    
+
+<div id="footer_links">
+	<div id="footer_links_ic">
+		<ul>
+		<li><a href="http://www.css.ethz.ch/index_EN">CSS</a></li>
+<li><a href="/content/view/sitemap/2">Sitemap</a></li>
+<li><a href="/content/view/full/3520">FAQs</a></li>
+<li><a href="/Services/Get-Involved">Get Involved</a></li>
+<li><a href="/Services/Disclaimer">Disclaimer</a></li><li><a href="/Services/Privacy-Policy">Privacy Policy</a></li>
+		</ul>
+	</div><!-- id="footer_links_ic" -->
+</div><!-- id="footer_links" --><div id="footer_oc">
+<div id="footer_ic">
+	<div class="column span-6">
+		<div class="footer_title">Contact the ISN</div>
+		<div class="footer_text">International Relations and<br />
+		Security Network (ISN)<br />
+		ETH Zurich<br />
+		Leonhardshalde 21, LEH<br />
+		8092 Zurich, Switzerland<br />
+		<br />
+		Tel: +41 44 632 07 57 / 40 25<br />
+		<br />
+		<a class="footer_link" href="/Users/ISN/DL/ISN">Send us an email</a></div>
+	</div>
+	<div class="column span-6">
+		<div class="footer_title">Sitemap</div>
+		<div class="footer_text"><ul id="footer_list">
+		<li><a class="footer_link" href="/Dossiers">Dossiers</a></li>
+		<li><a class="footer_link" href="/Browse-Information">Browse Information</a></li>
+		<li><a class="footer_link" href="/Security-Watch/Articles">Security Watch</a></li>
+		<li><a class="footer_link" href="/Communities-and-Partners/Partner-Network">Communities and Partners</a></li>
+		<li><a class="footer_link" href="/Digital-Library/Overview">Digital Library</a></li>
+		<li><a class="footer_link" href="/About-Us/Who-we-are">About Us</a></li>
+		<li><a class="footer_link" href="/e-Education/The-ISN-TACC">e-Education</a></li>
+
+		</ul>
+		</div>
+	</div>
+	<div class="column span-6">
+		<div class="footer_title">Newsletters</div>
+		<div class="footer_text"><a class="footer_link" href="/Services/Newsletters">Sign up here</a></div>
+		<div class="footer_title">Partner Network</div>
+		<div class="footer_text"><a class="footer_link" href="/Communities-and-Partners/Partner-Network">Become a partner</a></div>
+	</div>
+	<div class="column span-6 last">
+		<div class="footer_title">Follow us</div>
+		<div class="footer_text">
+			<a class="follow_icon_link" href="http://www.facebook.com/pages/International-Relations-and-Security-Network-ISN/141505796320"><img class="follow_icon" src="http://www.isn.ethz.ch/extension/isndesign/design/isn/images/icons/footer/facebook.png" /></a>
+			<a class="follow_icon_link" href="http://www.twitter.com/ISN_Zurich"><img class="follow_icon" src="http://www.isn.ethz.ch/extension/isndesign/design/isn/images/icons/footer/twitter.png" /></a>
+			<a class="follow_icon_link" href="http://plus.google.com/103191959462754817639"><img class="follow_icon" src="http://www.isn.ethz.ch/extension/isndesign/design/isn/images/icons/footer/googleplus.png" /></a>
+			<a class="follow_icon_link" href="http://www.linkedin.com/company/international-relations-and-security-network-isn"><img class="follow_icon" src="http://www.isn.ethz.ch/extension/isndesign/design/isn/images/icons/footer/linkedin.png" /></a>
+			<a class="follow_icon_link" href="http://www.youtube.com/user/isnzurich"><img class="follow_icon" src="http://www.isn.ethz.ch/extension/isndesign/design/isn/images/icons/footer/youtube.png" /></a>
+			<a class="follow_icon_link" href="/Services/ISN-RSS-feeds"><img class="follow_icon" src="http://www.isn.ethz.ch/extension/isndesign/design/isn/images/icons/footer/rss.png" /></a>
+		</div>
+		<div class="clearboth"></div>
+		<div class="footer_title">Parent Organizations</div>
+		<div class="footer_text"><a id="footer_css_logo" href="http://www.css.ethz.ch"><img src="http://www.isn.ethz.ch/extension/isndesign/design/isn/images/icons/footer/css.png" /></a><a id="footer_eth_logo" href="http://www.ethz.ch"><img src="/extension/isndesign/design/isn/images/icons/footer/ethz.png" /></a></div>
+	</div>
+</div>
+</div>
+</div>
+</body>
+</html>

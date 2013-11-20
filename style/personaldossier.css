@@ -116,7 +116,7 @@ input#password, #pd_currentPassword, #pd_newPassword, #pd_confirm_newPassword, #
 	 text-security:disc;
 }
 
-#loginButton,#contentEmbed {
+#loginButton {
 	display:inline;
 	width:45px;
 	color:#4c5160;
@@ -131,7 +131,7 @@ input#password, #pd_currentPassword, #pd_newPassword, #pd_confirm_newPassword, #
 	padding-bottom:10px;
 }
 
-#registerButton, #badgeStyle{
+#registerButton{
 	display:inline;
 	color:#4c5160;
 	text-align: center;
@@ -143,24 +143,59 @@ input#password, #pd_currentPassword, #pd_newPassword, #pd_confirm_newPassword, #
 	padding-right:30px;
 }
 
+.pd_embed_buttons{
+	display:inline;
+	color:#4c5160;
+	text-align: center;
+	cursor: pointer; 
+	border:0px solid red;
+	width:80px;
+	padding-left:30px;
+	padding-right:30px;
+	padding-top:5px;
+	clear:both;
+	font-size:12px;
+}
+
+#contentEmbed {
+	margin-top:5px;
+	border-right:1px solid white;
+	background-color:grey;
+	color:white;
+	padding-bottom:8px;
+
+}
+#badgeStyle{
+	margin-bottom:0px;
+	margin-top:5px;
+	padding-bottom:8px;
+}
+#contentBadgeContainer{
+	background-color:grey;
+}
+
 .buttonContainer{
 	width:229px;
 	border-top:1px solid white;
-	height:22px;
-	padding-top:5px;	
+	height:26px;
+	padding-top:5px;
+	border:0px solid blue;	
 }
+
+
+
+
 
 #loginUl{
 	border: 0px solid blue;
 }
 .pd_loginContainer{
-	height:28px:
-	border: 0px solid green;
+	/*height:28px;*/
+	border: 0'px solid green;
 	width:200px;
 	padding-left:-10px;
 	right:20px;
 	clear:both;
-	
 }
 
 form.placeholder{
@@ -345,29 +380,44 @@ cursor: default !important;
 /****EMBED VIEW *********/
 
 #dropdown_embed{
-	height:100px;
+	height:auto;
 	background-color:#ebedee;
+	margin-top:1px;
+	border:0px solid green;
+	padding:0px;
 	
 }
 
 
-#embed_options{
-	font-weight:bold;
-	font-size:16px;
-	padding: 20px 0px 10px 10px;
+input#inputContainer{
+	margin-left:5px;
+}
+ #drop_info{
+ 	padding-top:3px;
+	padding-left:7px;
+	color:#0089CF;
+	font-style:italic;
+}
+
+#embed_options,#embedButtons{
+	/*font-weight:bold;*/
+	font-size:12px;
+	margin-top:10px;
+	padding: 10px 0px 10px 00px;
+	border:0px solid red;
 	
 }
+
 
 #badgeHeader{
 	top:0px;
 }
 
 #titleContainer{
-	background-color:#ebedee;
+	/*background-color:#ebedee;*/
 	height:16px;
 	border-bottom:1px solid white;
 	margin-top:1px;
-	top:25px;
 	font-size:14px;
 	padding:3px 10px 4px 10px;
 }
