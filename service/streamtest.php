@@ -45,10 +45,6 @@ class HTTPStreamer extends HTTP_Request_Listener
 	$item_id=$_GET["id"];
 	error_log("item id id".$item_id);
 // get the JSON data for the id from the database
-// 	$query='SELECT metadata FROM library_metadata WHERE id=?';
-// 	$statement = $mdb2->prepare($query);
-	
-// 	$res= $statement->execute($item_id);
 		
 	$mdb2->setFetchMode(MDB2_FETCHMODE_ASSOC);
 
@@ -61,28 +57,36 @@ class HTTPStreamer extends HTTP_Request_Listener
  		
 	$res = $sth->execute($item_id);
 	
-// 	if (PEAR::isError($res)) {
-// 		$this->log("pear error " . $res->getMessage());
-// 		$this->bad_request();
-// 		$sth->free();
-// 		return;
-// 	}
+	if (PEAR::isError($res)) {
+		$this->log("pear error " . $res->getMessage());
+		$this->bad_request();
+		$sth->free();
+		return;
+	}
 
-// 	$idata= array();
+ 	$idata= array();
+
+
+	while ($row=$res->fetchRow()) {
+		error_log('row: ' . json_encode($row));
+		//parse the item meta data
+		$row = json_decode($row["metadata"],true);
+		array_push($idata,$row);
+	}
 	
-// 	while ($row=$res->fetchRow()) {
-// 		//parse the item meta data 
-// 		$row["metadata"] = json_decode($row["metadata"]);
-// 		array_push($idata,$row);
-// 	}
-	
-// 	error_log("metadata are ".$idata);
-	
-// check if this is indeed a pdf item, and them get its identifier and pass it as an argument to the Http_Request
+
+
+	// check if this is indeed a pdf item, and them get its identifier and pass it as an argument to the Http_Request
+
+	$type=$idata[0]["type"];
+	if ($type=="Publication"){
+		error_log("it is indeed a publication");
+		$url=$idata[0]["identifier"];
+	}
 
 	
-$r = new HTTP_Request("http://mercury.ethz.ch/serviceengine/Files/ISN/136414/ipublicationdocument_singledocument/cdb593a6-7909-4cf1-b812-03bbe49405d7/en/IB_ChinasWhitePapersonSpaceAnAnalysis.pdf", array('method'=> "GET"));
-
+$r = new HTTP_Request($url, array('method'=> "GET"));
+	
 $r->attach(new HTTPStreamer());
 
 $r->sendRequest();
