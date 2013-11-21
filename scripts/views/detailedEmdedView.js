@@ -28,7 +28,11 @@ detailEmbedView.prototype.update = function(){
 		"src": url		
 	}).appendTo("#contentFrame");
 	
-
+	var iFrameHeight= window.innerHeight || document.documentElement.clientHeight;
+	var headerHeight= $("#dossiercontentHeader").height();
+	var footerHeight = $("#pd_footer_gen").height();
+	var totalHeight = headerHeight + footerHeight + 15; 
+	$("#subnavi").css("height",ulHeight+"px" );
 };
 
 detailEmbedView.prototype.closeDiv = closeView;
