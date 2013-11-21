@@ -399,7 +399,7 @@ BookmarkModel.prototype.getISNURL = function() {
 BookmarkModel.prototype.getEmbedURL = function() {
 	itemType= this.getType();
 	if (itemType === "Publication"){
-		return  'http://yellowjacket.ethz.ch/tools/embedDetailPage.html';//+ this.getItemId();
+		return  'http://yellowjacket.ethz.ch/tools/embedDetailPage.html?id='+ this.getItemId();
 	}
 };
 
