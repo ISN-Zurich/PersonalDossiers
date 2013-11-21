@@ -167,7 +167,10 @@ DossierContentView.prototype.renderItem = function() {
 	
 	var divh1=$("<h1/>", {	}).appendTo(divFloatText);
 	
-	if (self.controller.id!=="embedController"){
+	// if we are not in the embedded page display the isn url
+	// if we are in the embed page, but if the dossier item type is different than publication display also the isn url
+	
+	if (self.controller.id!=="embedController" || self.getType() !== "Publication"){
 		divAText=$("<a/>", {
 			"class": "header1",
 			"href":bookmarkModel.getISNURL(), 
@@ -176,9 +179,9 @@ DossierContentView.prototype.renderItem = function() {
 	} else{
 		//if we are in the big embed view we need to open also a view that contains the header of the
 		//detailed embede for back and forth navigation
-		divA=$("<div/>", {
+		divA=$("<a/>", {
 			"class": "header1",
-			//"href":bookmarkModel.getISNURL(), 
+			"href":bookmarkModel.getEmbedURL(), 
 			text:bookmarkModel.getTitle()
 		}).appendTo(divh1);
 		

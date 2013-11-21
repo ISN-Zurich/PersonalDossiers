@@ -391,12 +391,19 @@ BookmarkModel.prototype.getType = function() {
 };
 
 BookmarkModel.prototype.getISNURL = function() {
-		itemType= this.getType();
-		if (itemType === "Publication"){
-		return  'http://yellowjacket.ethz.ch/tools/service/streamtest.php?id='+ this.getItemId();
-	}
+		
     return (this.index < this.dossierList.length) ? this.dossierList[this.index].metadata.isn_detail_url: false;	
 };
+
+
+BookmarkModel.prototype.getEmbedURL = function() {
+	itemType= this.getType();
+	if (itemType === "Publication"){
+		return  'http://yellowjacket.ethz.ch/tools/embedDetailPage.html';//+ this.getItemId();
+	}
+};
+
+
 
 BookmarkModel.prototype.getUsername = function() {
 	  return (this.user_index < this.userlist.length) ? this.userlist[this.user_index].username: false;	
