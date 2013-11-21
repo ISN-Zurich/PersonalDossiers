@@ -20,6 +20,7 @@ detailEmbedView.prototype.update = function(){
 	
 	var self=this;
 	var id= self.controller.getHashedURLId();
+	
 	console.log("id of the clicked item is "+id);
 	var url="http://yellowjacket.ethz.ch/tools/service/streamtest.php?id="+id;
 	iFrame = $("<iframe/>", {
@@ -32,7 +33,9 @@ detailEmbedView.prototype.update = function(){
 	var headerHeight= $("#dossiercontentHeader").height();
 	var footerHeight = $("#pd_footer_gen").height();
 	var totalHeight = headerHeight + footerHeight + 15; 
-	$("#subnavi").css("height",ulHeight+"px" );
+	var contentFrameHeight=iFrameHeight - totalHeight;
+	console.log("ulheight is "+contentFrameHeight);
+	$("#contentFrame").css("height",contentFrameHeight+"px" );
 };
 
 detailEmbedView.prototype.closeDiv = closeView;

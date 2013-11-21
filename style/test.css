@@ -36,8 +36,29 @@
 }
 
 .embediFrameBig {
-	width: 475px;
-	height: 620px;
+	width: 465px;
+	height: 520px;
 	border: none;
 	overflow: hidden;
+}
+
+.metadataItem{
+	padding-left:7px;
+	font-weight:bold;
+	font-size:12px;
+	paddig-right:20px;
+	
+}
+
+#metadataPdf{
+	background-color:#d3d3d3;
+	padding:10px;
+}
+
+#authorContainer{
+	margin-right:260px;
+}
+
+#dateContainer{
+	margin-right:10px;
 }
