@@ -100,13 +100,10 @@ DossierContentView.prototype.renderList = function() {
 	console.log("dossier list length in dossier content view "+bookmarkModel.dossierList.length);
 	
 	var iFrameHeight= window.innerHeight || document.documentElement.clientHeight;
-//	var headerHeight= $("#dossiercontentHeader").height();
-//	var imageHeight= $("#bannerImage").height();
-//	var titleHeight= $("#titleContainer").height();
-//	var descriptionHeight= $("#descriptionContainer").height();
+
 
 	if (bookmarkModel.dossierList && bookmarkModel.dossierList.length > 0) {
-		//console.log("dossier list is "+JSON.stringify(bookmarkModel.dossierList));
+	
 		console.log("dossier list index is "+bookmarkModel.index);
 		for (bookmarkModel.index=0; bookmarkModel.index < bookmarkModel.dossierList.length; bookmarkModel.index++){
 			this.renderItem();
@@ -131,9 +128,6 @@ DossierContentView.prototype.renderList = function() {
 	var footerHeight = $("#pd_footer_gen").height();
 	var totalHeight = bannerHeight + footerHeight ;	// we add 176 px for the image that might be still on its way
 	var contentAreaHeight=iFrameHeight - totalHeight;
-	console.log("banner height "+bannerHeight);
-	console.log("footer height "+footerHeight);
-	console.log("content area height is "+contentAreaHeight);
 	$("#contentArea").css("height",contentAreaHeight+"px" );
 	
 };
@@ -173,12 +167,22 @@ DossierContentView.prototype.renderItem = function() {
 	
 	var divh1=$("<h1/>", {	}).appendTo(divFloatText);
 	
-	divAText=$("<a/>", {
-		"class": "header1",
-		"href":bookmarkModel.getISNURL(), 
-		text:bookmarkModel.getTitle()
-	}).appendTo(divh1);
-	
+	if (self.controller.id!=="embedController"){
+		divAText=$("<a/>", {
+			"class": "header1",
+			"href":bookmarkModel.getISNURL(), 
+			text:bookmarkModel.getTitle()
+		}).appendTo(divh1);
+	} else{
+		//if we are in the big embed view we need to open also a view that contains the header of the
+		//detailed embede for back and forth navigation
+		divA=$("<div/>", {
+			"class": "header1",
+			//"href":bookmarkModel.getISNURL(), 
+			text:bookmarkModel.getTitle()
+		}).appendTo(divh1);
+		
+	}
 	 divp1=$("<p/>", {
 		"class":"small",
 		text:bookmarkModel.getDate()+"/"+bookmarkModel.getType() 
@@ -191,21 +195,21 @@ DossierContentView.prototype.renderItem = function() {
     if (self.controller.oauth){
     	
     	if (self.controller.id!=="embedController"){
-	div3 = $("<div/>", {
-		"class":"deletecontainer"
-	}).appendTo(divFloatText);
-	
-	delButton = $("<div/>", {
-		"id": "delete-"+ dossierID,
-		"text": "Delete",
-		"class": "deleteButton"
-	}).appendTo(div3);
-	
-	delConfirmButton = $("<div/>", {
-		id: "delete-confirm-" + dossierID,
-		text: "Really delete?",
-		"class": "deleteConfirmButton"
-	}).appendTo(div3);
+    		div3 = $("<div/>", {
+    			"class":"deletecontainer"
+    		}).appendTo(divFloatText);
+
+    		delButton = $("<div/>", {
+    			"id": "delete-"+ dossierID,
+    			"text": "Delete",
+    			"class": "deleteButton"
+    		}).appendTo(div3);
+
+    		delConfirmButton = $("<div/>", {
+    			id: "delete-confirm-" + dossierID,
+    			text: "Really delete?",
+    			"class": "deleteConfirmButton"
+    		}).appendTo(div3);
     	}}
 
 	
