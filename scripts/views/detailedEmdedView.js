@@ -20,6 +20,13 @@ detailEmbedView.prototype.update = function(){
 	
 	var self=this;
 	var id= self.controller.getHashedURLId();
+	var bookmarkModel=self.controller.models.bookmark;
+	console.log("authorlist is "+bookmarkModel.getAuthorList());
+	
+	author = $("<span/>", {
+		"class": "",
+		"text": bookmarkModel.getAuthorList()
+	}).appendTo("#metadataPdf");
 	
 	console.log("id of the clicked item is "+id);
 	var url="http://yellowjacket.ethz.ch/tools/service/streamtest.php?id="+id;

@@ -236,6 +236,7 @@ BookmarkModel.prototype.loadDossierList=function(){
 	    var header_request=self.controller.oauth.oauthHeader(method, url);
 	    xhr.setRequestHeader('Authorization', header_request);
         }else{
+        	console.log("we will send a non auth header");
         	var non_authenticationFlag=true;
         	 xhr.setRequestHeader('NonAuth', non_authenticationFlag);	
         }
@@ -398,8 +399,10 @@ BookmarkModel.prototype.getISNURL = function() {
 
 BookmarkModel.prototype.getEmbedURL = function() {
 	itemType= this.getType();
+	var dossierListModel=this.controller.models.dossierList;
 	if (itemType === "Publication"){
 		return  'http://yellowjacket.ethz.ch/tools/embedDetailPage.html?id='+ this.getItemId();
+		//return  'http://yellowjacket.ethz.ch/tools/embedDetailPage.html?dossier_id='+ dossierListModel.getDossierId() +'&item_id=+'this.getItemId();
 	}
 };
 

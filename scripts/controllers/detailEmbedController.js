@@ -50,7 +50,11 @@ function detailEmbedController() {
 } //end of constructor
 
 detailEmbedController.prototype.hashedUrl = function() {
-    	
+    
+	
+	//TODO: to calculate both dossier_id and item_id
+	//the new url string would be http://yellowjacket.ethz.ch/tools/embedDetailPage.html?dossier_id=123432&item_id=123123
+	
     	console.log("enter hasehd url"); 
 
     	url_ref=window.location.href;
