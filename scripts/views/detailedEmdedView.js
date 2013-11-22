@@ -4,6 +4,11 @@ function detailEmbedView(controller){
 	var self=this;
 	self.controller=controller;
 	self.tagID="contentFrame";
+	self.dossier_id=self.controller.getHashedURLId();
+	
+	$("#dossiercontentHeader").bind("click", function(){
+		window.location.href ="embedPageBig.html?id="+self.dossier_id;	
+	});
 }
 
 
@@ -19,7 +24,6 @@ detailEmbedView.prototype.update = function(){
 	
 	var self=this;
 	var item_id= self.controller.getdossierItemId();
-	var dossier_id= self.controller.getHashedURLId();
 	var bookmarkModel=self.controller.models.bookmark;
 	var authorsList=bookmarkModel.getAuthorList();
 	console.log("authorlist is "+bookmarkModel.getAuthorList());
