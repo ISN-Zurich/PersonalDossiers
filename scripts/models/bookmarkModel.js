@@ -476,11 +476,21 @@ BookmarkModel.prototype.setIndex=function(index){
 BookmarkModel.prototype.getItemIndex = function(){
 	console.log("get item index");
 	for (var index=0; index<this.dossierList.length;index++){
-		console.log("dossier list metadata id is "+this.dossierList[index].metadata.id);
-		console.log("dcontroller item id is "+this.controller.getdossierItemId());
-	if (this.dossierList[index].metadata.id === this.controller.getdossierItemId()){
-		console.log("the two ids are the same");
-		index_item = index;
-		return index_item;
-	}}
+		if (this.dossierList[index].metadata.id === this.controller.getdossierItemId()){
+			index_item = index;
+			return index_item;
+		}}
+};
+
+
+BookmarkModel.prototype.showAuthors= function(){
+	var self=this;
+	var authorList=self.getAuthorList();
+	var authorString="";
+	for (var i=0; i<authorList.length; i++){
+		var authorString=authorString + authorList[i] + ", ";
+	}
+	var finalString=authorString.substring(0,authorString.length-2);
+	console.log("final string is "+finalString);
+	return finalString;
 };

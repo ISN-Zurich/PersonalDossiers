@@ -24,11 +24,10 @@ detailEmbedView.prototype.update = function(){
 	var authorsList=bookmarkModel.getAuthorList();
 	console.log("authorlist is "+bookmarkModel.getAuthorList());
 	
-//	author = $("<span/>", {
-//		"class": "",
-//		"text": authorsList[0]+", "+authorsList[1]
-//	}).appendTo("#metadataPdf");
-	$("#authorValue").text(authorsList[0]+","+ authorsList[1]);
+	//$("#authorValue").text(authorsList[0]+","+ authorsList[1]);
+	//$("#authorValue").text(JSON.stringify(authorsList));
+	var authors = bookmarkModel.showAuthors();
+	$("#authorValue").text(authors);
 	
 	console.log("id of the clicked item is "+item_id);
 	var url="http://yellowjacket.ethz.ch/tools/service/streamtest.php?id="+item_id;
@@ -47,6 +46,9 @@ detailEmbedView.prototype.update = function(){
 	console.log("ulheight is "+contentFrameHeight);
 	$("#contentFrame").css("height",contentFrameHeight+"px" );
 };
+
+
+
 
 detailEmbedView.prototype.closeDiv = closeView;
 
