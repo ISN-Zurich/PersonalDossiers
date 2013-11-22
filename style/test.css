@@ -44,21 +44,19 @@
 
 .metadataItem{
 	padding-left:7px;
-	font-weight:bold;
 	font-size:12px;
 	paddig-right:20px;
+	padding-bottom:7px;
 	
+}
+
+
+.metadataLabel{
+	font-weight:bold;
 }
 
 #metadataPdf{
 	background-color:#d3d3d3;
-	padding:10px;
+	padding:10px 10px 0px 10px;
 }
 
-#authorContainer{
-	margin-right:260px;
-}
-
-#dateContainer{
-	margin-right:10px;
-}

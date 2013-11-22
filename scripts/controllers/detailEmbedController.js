@@ -40,7 +40,7 @@ function detailEmbedController() {
 	//initialization of views 
         self.views.detailEmbed = new detailEmbedView(self);
 	 
-//        
+  
        $(document).bind("BookmarkModelLoaded", function() {
     	   self.views.detailEmbed.open();
        }); 
@@ -51,31 +51,53 @@ function detailEmbedController() {
 
 detailEmbedController.prototype.hashedUrl = function() {
     
+	url=window.location.href;
+	var splited=url.split("?");
+	console.log("show splitted url array is "+splited);
+	var split1=splited[1]; // dossier_id=123432&item_id=123123
 	
 	//TODO: to calculate both dossier_id and item_id
 	//the new url string would be http://yellowjacket.ethz.ch/tools/embedDetailPage.html?dossier_id=123432&item_id=123123
 	
-    	console.log("enter hasehd url"); 
+	if (split1 && split1.length>0){
+		ids_partition=split1.split("&");
+		dossier_id_partition=ids_partition[0]; // dossier_id=123432
+		item_id_partition=ids_partition[1]; // item_id=123123
+		console.log("dossier id parition is "+dossier_id_partition);
+		console.log("item id parition is "+item_id_partition);
+	
+		if (dossier_id_partition && dossier_id_partition.length > 0){
+			dossier_id_sub_part=dossier_id_partition.split("=");
+			dossier_id=dossier_id_sub_part[1];
+			this.pubid=dossier_id;
+			this.hashed=true;
+			console.log("dossier id is "+dossier_id);
+		}
+		 	
 
-    	url_ref=window.location.href;
-    	var splited=url_ref.split("?");
-    	console.log("show splitted url array is "+splited);
-    	var split1=splited[1];
-    	if (split1 && split1.length>0){
-    	console.log("tools is "+split1);
-    	var split2=split1.split("=");
-    	var d_id=split2[1];
-    	if (d_id && d_id.length>0){
-    		console.log("there is id in the new url and it is "+d_id);
-    		this.pubid=d_id;
-    		this.hashed=true;
-    	}} else{
-    	
-    	 this.hashed=false;
-    	}
-    	
-    	              
-    };
+		if (item_id_partition && item_id_partition.length > 0){
+			item_id_sub_partition=item_id_partition.split("=");
+			item_id=item_id_sub_partition[1];
+			this.item_id=item_id;
+			this.hashed=true;
+			console.log("item id is "+item_id);
+		}
+		
+		
+	}
+	
+//	  	if (split1 && split1.length>0){
+//     	var split2=split1.split("=");
+//    	var d_id=split2[1];
+//    	if (d_id && d_id.length>0){
+//    		console.log("there is id in the new url and it is "+d_id);
+//    		this.pubid=d_id;
+//    		this.hashed=true;
+//    	}}
+	else{
+		this.hashed=false;
+	}              
+};
 
  
     detailEmbedController.prototype.getHashedURLId = function(){
@@ -85,6 +107,11 @@ detailEmbedController.prototype.hashedUrl = function() {
     };
 
 
+    detailEmbedController.prototype.getdossierItemId = function(){
+    	var item_id=this.item_id;
+    	console.log("item id after hash is "+item_id);
+    	return item_id;
+    };
 
     detailEmbedController.prototype.getActiveDossier = function(){
     	  console.log("in user controller to get active dossier");

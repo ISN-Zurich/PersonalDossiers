@@ -206,7 +206,8 @@ BookmarkModel.prototype.loadDossierList=function(){
 	console.log("dossier metadata is "+JSON.stringify(self.dossierMetadata));
 	
 	self.dossierList=self.dossierData.dossier_items;
-	//console.log("dossierList is "+JSON.stringify(self.dossierList));
+	console.log("dossier items are"+JSON.stringify(self.dossierList));
+	
 	if (self.dossierList && self.dossierList.length>0){
 	    var itemId= self.dossierList[0].metadata.id;	
 	    console.log("dossier item id in success is "+itemId);
@@ -219,10 +220,6 @@ BookmarkModel.prototype.loadDossierList=function(){
 	self.dossierImageURL=self.dossierMetadata.image;
 	self.dossierId=self.dossierMetadata.id;
 	
-	// var stringifiedMetadata = JSON.stringify(dossierMetadata);
-	// console.log("metadata is "+stringifiedMetadata);
-	
-	//self.loaded=true;
 	
 	self.userlist=self.dossierData.user_list;
 	console.log("user list is "+JSON.stringify(self.userlist));
@@ -375,8 +372,12 @@ BookmarkModel.prototype.getDate = function() {
     return (this.index < this.dossierList.length) ? this.dossierList[this.index].metadata.date : false;	
 };
 
+//this function is used in detail embed page
 BookmarkModel.prototype.getAuthorList = function() {
-    return (this.index < this.dossierList.length) ? this.dossierList[this.index].metadata.author : false;	
+	var item_index=this.getItemIndex();
+	console.log("item index is"+item_index);
+	console.log(" author is "+JSON.stringify(this.dossierList[item_index].metadata.author));
+    return (this.index < this.dossierList.length) ? this.dossierList[item_index].metadata.author : false;	
 };
 
 BookmarkModel.prototype.getDescription = function() {
@@ -401,8 +402,8 @@ BookmarkModel.prototype.getEmbedURL = function() {
 	itemType= this.getType();
 	var dossierListModel=this.controller.models.dossierList;
 	if (itemType === "Publication"){
-		return  'http://yellowjacket.ethz.ch/tools/embedDetailPage.html?id='+ this.getItemId();
-		//return  'http://yellowjacket.ethz.ch/tools/embedDetailPage.html?dossier_id='+ dossierListModel.getDossierId() +'&item_id=+'this.getItemId();
+		//return  'http://yellowjacket.ethz.ch/tools/embedDetailPage.html?id='+ this.getItemId();
+		return  'http://yellowjacket.ethz.ch/tools/embedDetailPage.html?dossier_id='+ dossierListModel.getDossierId() +'&item_id='+this.getItemId();
 	}
 };
 
@@ -467,4 +468,19 @@ BookmarkModel.prototype.resetUserIndex=function(){
 
 BookmarkModel.prototype.setIndex=function(index){
     this.index=index;
+    console.log("index set in bookmark model is "+this.index);
+};
+
+//this will be used in detail embed view to give the metadata for a specific dossier item
+// i.e. author, date 
+BookmarkModel.prototype.getItemIndex = function(){
+	console.log("get item index");
+	for (var index=0; index<this.dossierList.length;index++){
+		console.log("dossier list metadata id is "+this.dossierList[index].metadata.id);
+		console.log("dcontroller item id is "+this.controller.getdossierItemId());
+	if (this.dossierList[index].metadata.id === this.controller.getdossierItemId()){
+		console.log("the two ids are the same");
+		index_item = index;
+		return index_item;
+	}}
 };

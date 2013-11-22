@@ -4,7 +4,6 @@ function detailEmbedView(controller){
 	var self=this;
 	self.controller=controller;
 	self.tagID="contentFrame";
-	self.open();
 }
 
 
@@ -19,17 +18,20 @@ detailEmbedView.prototype.open = function(){
 detailEmbedView.prototype.update = function(){
 	
 	var self=this;
-	var id= self.controller.getHashedURLId();
+	var item_id= self.controller.getdossierItemId();
+	var dossier_id= self.controller.getHashedURLId();
 	var bookmarkModel=self.controller.models.bookmark;
+	var authorsList=bookmarkModel.getAuthorList();
 	console.log("authorlist is "+bookmarkModel.getAuthorList());
 	
-	author = $("<span/>", {
-		"class": "",
-		"text": bookmarkModel.getAuthorList()
-	}).appendTo("#metadataPdf");
+//	author = $("<span/>", {
+//		"class": "",
+//		"text": authorsList[0]+", "+authorsList[1]
+//	}).appendTo("#metadataPdf");
+	$("#authorValue").text(authorsList[0]+","+ authorsList[1]);
 	
-	console.log("id of the clicked item is "+id);
-	var url="http://yellowjacket.ethz.ch/tools/service/streamtest.php?id="+id;
+	console.log("id of the clicked item is "+item_id);
+	var url="http://yellowjacket.ethz.ch/tools/service/streamtest.php?id="+item_id;
 	iFrame = $("<iframe/>", {
 		"scrolling": "no",
 		"class": "embediFrameBig",
@@ -38,8 +40,9 @@ detailEmbedView.prototype.update = function(){
 	
 	var iFrameHeight= window.innerHeight || document.documentElement.clientHeight;
 	var headerHeight= $("#dossiercontentHeader").height();
+	var metadataHeight= $("#metadataPdf").height();
 	var footerHeight = $("#pd_footer_gen").height();
-	var totalHeight = headerHeight + footerHeight + 15; 
+	var totalHeight = headerHeight + footerHeight + metadataHeight + 40; 
 	var contentFrameHeight=iFrameHeight - totalHeight;
 	console.log("ulheight is "+contentFrameHeight);
 	$("#contentFrame").css("height",contentFrameHeight+"px" );
