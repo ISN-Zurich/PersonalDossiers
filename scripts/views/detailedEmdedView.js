@@ -27,7 +27,11 @@ detailEmbedView.prototype.update = function(){
 	//$("#authorValue").text(authorsList[0]+","+ authorsList[1]);
 	//$("#authorValue").text(JSON.stringify(authorsList));
 	var authors = bookmarkModel.showAuthors();
+	var dossierTitle=bookmarkModel.getTitle();
+	var date=bookmarkModel.getDate();
+	$("#titleValue").text(dossierTitle);
 	$("#authorValue").text(authors);
+	$("#dateValue").text(date);
 	
 	console.log("id of the clicked item is "+item_id);
 	var url="http://yellowjacket.ethz.ch/tools/service/streamtest.php?id="+item_id;
