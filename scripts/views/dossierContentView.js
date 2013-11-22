@@ -170,7 +170,7 @@ DossierContentView.prototype.renderItem = function() {
 	// if we are not in the embedded page display the isn url
 	// if we are in the embed page, but if the dossier item type is different than publication display also the isn url
 	
-	if (self.controller.id!=="embedController" || self.getType() !== "Publication"){
+	if (self.controller.id!=="embedController" || bookmarkModel.getType() !== "Publication"){
 		divAText=$("<a/>", {
 			"class": "header1",
 			"href":bookmarkModel.getISNURL(), 

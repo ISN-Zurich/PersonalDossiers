@@ -350,7 +350,7 @@ BookmarkModel.prototype.firstItem = function() {
 
 
 BookmarkModel.prototype.getItemId = function() {
-    self=this;
+    var self=this;
     console.log("this.index in getID is "+this.index);
     console.log("dossier list length in id is "+this.dossierList.length);
     return (this.index < this.dossierList.length ) ? this.dossierList[this.index].metadata.id : false;	
@@ -363,17 +363,25 @@ BookmarkModel.prototype.getItemId = function() {
  * @return {string}, the title of the dossier item
  */
 BookmarkModel.prototype.getTitle = function() {
-    return (this.index < this.dossierList.length ) ? this.dossierList[this.index].metadata.title : false;	
-    //return this.dossierList[this.index]['metadata']['title'];	
+	if (this.controller.id=="detailembedController"){
+	var item_index=this.getItemIndex();
+    return (this.index < this.dossierList.length ) ? this.dossierList[item_index].metadata.title : false;	
+    //return this.dossierList[this.index]['metadata']['title'];
+	}
+	else{
+		
+	}return (this.index < this.dossierList.length ) ? this.dossierList[this.index].metadata.title : false;
 };
 
 
 BookmarkModel.prototype.getDate = function() {
+	var item_index=this.getItemIndex();
     return (this.index < this.dossierList.length) ? this.dossierList[this.index].metadata.date : false;	
 };
 
 //this function is used in detail embed page
 BookmarkModel.prototype.getAuthorList = function() {
+	
 	var item_index=this.getItemIndex();
 	console.log("item index is"+item_index);
 	console.log(" author is "+JSON.stringify(this.dossierList[item_index].metadata.author));
@@ -475,11 +483,14 @@ BookmarkModel.prototype.setIndex=function(index){
 // i.e. author, date 
 BookmarkModel.prototype.getItemIndex = function(){
 	console.log("get item index");
+	if (this.controller.id=="detailembedController"){
 	for (var index=0; index<this.dossierList.length;index++){
 		if (this.dossierList[index].metadata.id === this.controller.getdossierItemId()){
 			index_item = index;
-			return index_item;
 		}}
+	
+	return index_item;
+	}
 };
 
 
@@ -488,7 +499,7 @@ BookmarkModel.prototype.showAuthors= function(){
 	var authorList=self.getAuthorList();
 	var authorString="";
 	for (var i=0; i<authorList.length; i++){
-		var authorString=authorString + authorList[i] + ", ";
+		authorString=authorString + authorList[i] + ", ";
 	}
 	var finalString=authorString.substring(0,authorString.length-2);
 	console.log("final string is "+finalString);
