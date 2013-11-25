@@ -188,43 +188,43 @@ BookmarkModel.prototype.loadDossierList=function(){
     }
 
     function createDossierList(data){
-	console.log("success in getting the dossier list in the model");
-	var dossierObject=null;
-	try{
-	    dossierObject=data;
-	}catch(err) {
-	    dossierObject={};
-	    console.log("couldnt load dossier items from the database");
-	}
-	
-	dossierItemMetadata={};
-	self.dossierData=dossierObject || {};
-	console.log("dossierData are "+JSON.stringify(self.dossierData));
-	//self.dossierList=JSON.stringify(self.dossierData['dossier_items']);
-	
-	self.dossierMetadata=self.dossierData.dossier_metadata;
-	console.log("dossier metadata is "+JSON.stringify(self.dossierMetadata));
-	
-	self.dossierList=self.dossierData.dossier_items;
-	console.log("dossier items are"+JSON.stringify(self.dossierList));
-	
-	if (self.dossierList && self.dossierList.length>0){
-	    var itemId= self.dossierList[0].metadata.id;	
-	    console.log("dossier item id in success is "+itemId);
-	}
-	//init values
-	
-	self.dossierTitle= self.dossierMetadata.title;
-	console.log("dossier title is "+self.dossierTitle);
-	self.dossierDescription=self.dossierMetadata.description;
-	self.dossierImageURL=self.dossierMetadata.image;
-	self.dossierId=self.dossierMetadata.id;
-	
-	
-	self.userlist=self.dossierData.user_list;
-	console.log("user list is "+JSON.stringify(self.userlist));
-	$(document).trigger("BookmarkModelLoaded");
-	
+    	console.log("success in getting the dossier list in the model");
+    	var dossierObject=null;
+    	try{
+    		dossierObject=data;
+    	}catch(err) {
+    		dossierObject={};
+    		console.log("couldnt load dossier items from the database");
+    	}
+
+    	dossierItemMetadata={};
+    	self.dossierData=dossierObject || {};
+    	console.log("dossierData are "+JSON.stringify(self.dossierData));
+    	//self.dossierList=JSON.stringify(self.dossierData['dossier_items']);
+
+    	self.dossierMetadata=self.dossierData.dossier_metadata;
+    	console.log("dossier metadata is "+JSON.stringify(self.dossierMetadata));
+
+    	self.dossierList=self.dossierData.dossier_items;
+    	console.log("dossier items are"+JSON.stringify(self.dossierList));
+
+    	if (self.dossierList && self.dossierList.length>0){
+    		var itemId= self.dossierList[0].metadata.id;	
+    		console.log("dossier item id in success is "+itemId);
+    	}
+    	//init values
+
+    	self.dossierTitle= self.dossierMetadata.title;
+    	console.log("dossier title is "+self.dossierTitle);
+    	self.dossierDescription=self.dossierMetadata.description;
+    	self.dossierImageURL=self.dossierMetadata.image;
+    	self.dossierId=self.dossierMetadata.id;
+
+
+    	self.userlist=self.dossierData.user_list;
+    	console.log("user list is "+JSON.stringify(self.userlist));
+    	$(document).trigger("BookmarkModelLoaded");
+
     }
     
     function setHeader(xhr) {
@@ -389,7 +389,16 @@ BookmarkModel.prototype.getAuthorList = function() {
 };
 
 BookmarkModel.prototype.getDescription = function() {
-    return (this.index < this.dossierList.length) ? this.dossierList[this.index].metadata.description : false;	
+	// sometimes the item description contains HTML code. In order to strip it from the content, we use a helper div.
+	var dtext;
+	if (this.index < this.dossierList.length) {
+		var dhtml = this.dossierList[this.index].metadata.description;
+		console.log('description text is: ' + dhtml);
+		dtext = $("<div/>", {'html':dhtml}).text();
+		console.log('description text is: ' + dtext);
+	}
+	
+    return  dtext;	
 };
 
 BookmarkModel.prototype.getThumbnail = function() {

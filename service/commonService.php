@@ -289,7 +289,7 @@ class RESTServiceCommon extends PDCommonClass {
      */
     protected function respond_json_data() {
         //$this->log('respond JSON data');
-        header('content-type: application/json');
+        header('content-type: application/json; charset=utf-8');
         if ( !empty($this->data)) {
             if (is_array($this->data) || is_object($this->data)) {
                  $this->log('json encode data');
@@ -317,7 +317,7 @@ class RESTServiceCommon extends PDCommonClass {
      */
     protected function respond_form_encoded() {
         $this->log('respond FORM encoded data');
-        header('content-type: application/x-www-form-urlencoded');
+        header('content-type: application/x-www-form-urlencoded; charset=utf-8');
         $retval = "";
         if (!empty($this->data)) {
             if (is_object($this->data)) {
@@ -344,7 +344,7 @@ class RESTServiceCommon extends PDCommonClass {
     }
 
     protected function respond_text_message($message) {
-        header('content-type: text/plain');
+        header('content-type: text/plain; charset=utf-8');
         echo($message);
     } 
     
@@ -476,11 +476,11 @@ class RESTServiceCommon extends PDCommonClass {
         if (!empty($message)) {
         	$this->log("message is not empty");
             if (is_scalar($message)) {
-                header('content-type: text/plain');
+                header('content-type: text/plain; charset=utf-8');
                 echo($message);
             }
             elseif (is_array($message) || is_object($message)) {
-                header('content-type: application/json');
+                header('content-type: application/json; charset=utf-8');
                 echo(json_encode($message));
             }
         }
