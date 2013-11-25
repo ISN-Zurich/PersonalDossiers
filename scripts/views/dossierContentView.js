@@ -124,11 +124,13 @@ DossierContentView.prototype.renderList = function() {
 	        }).appendTo(div);
 	}
 	
-	var bannerHeight= $("#bannerArea").height();
-	var footerHeight = $("#pd_footer_gen").height();
-	var totalHeight = bannerHeight + footerHeight ;	// we add 176 px for the image that might be still on its way
-	var contentAreaHeight=iFrameHeight - totalHeight;
-	$("#contentArea").css("height",contentAreaHeight+"px" );
+	if (self.controller.id ==="embedController"){
+		var bannerHeight= $("#bannerArea").height();
+		var footerHeight = $("#pd_footer_gen").height();
+		var totalHeight = bannerHeight + footerHeight ;	// we add 176 px for the image that might be still on its way
+		var contentAreaHeight=iFrameHeight - totalHeight;
+		$("#contentArea").css("height",contentAreaHeight+"px" );
+	}
 	
 };
 
