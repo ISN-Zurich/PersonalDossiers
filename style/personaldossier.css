@@ -17,7 +17,8 @@ height:34px;
 	margin-bottom:10px;
 }
 .pd_interactionItem{
-	background-image:url(../images/bluegreybg.png);
+	/*background-image:url(../images/bluegreybg.png);*/
+	background-color:#4c5160;
 	
 }
 .greyBg{
