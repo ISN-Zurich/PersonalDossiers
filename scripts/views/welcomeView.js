@@ -99,6 +99,7 @@ WelcomeView.prototype.renderDossierItem = function(parentE) {
 	
 	// This item should have a border by the CSS styles unless it is the last element in the parent container
 	div1 =$("<div/>", {
+		"id":"dossier"+self.controller.models.dossierList.getDossierId(),
 		"class": "column featured2  dossier_item dossier_item_border"
 	}).appendTo(parentE);
 
@@ -108,7 +109,7 @@ WelcomeView.prototype.renderDossierItem = function(parentE) {
 	}).appendTo(div1);
 
 	img=$("<img/>", {
-		"class": "floatleft",
+		"class": "floatleft clickable",
 		"src":self.controller.models.dossierList.getDossierImage(),
 		"width":"80px",
 		"height":"60px"
@@ -130,7 +131,8 @@ WelcomeView.prototype.renderDossierItem = function(parentE) {
 	}).appendTo(div3);
 
 	p =$("<p/>", {
-		"class":"small",
+		"class":"small clickable",
+		"id":"dossier"+self.controller.models.dossierList.getDossierId(),
 		// "text": "In this podcast, the former Foreign Minister of Indonesia, Hassan Wirajuda, outlines the thinking behind Jakarta&amp;rsquo;s current &amp;lsquo;free and active&amp;rsquo; foreign policy (bebas aktif); how the policy is shaping its relationships with the US, China and other ASEAN states; and how it might impact Indonesia&amp;rsquo;s 2014 presidential election."
 		"text":self.controller.models.dossierList.getDossierDescription()
 	}).appendTo(div3);
