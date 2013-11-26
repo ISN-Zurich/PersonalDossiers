@@ -110,6 +110,7 @@ input#password, #pd_currentPassword, #pd_newPassword, #pd_confirm_newPassword, #
 	text-aling:center;
 	padding-top:6px;
 	padding-bottom:10px;
+	height:28px;
 }
 
 #registerButton{
@@ -118,10 +119,12 @@ input#password, #pd_currentPassword, #pd_newPassword, #pd_confirm_newPassword, #
 	text-align: center;
 	cursor: pointer; 
 	border:0px solid red;
-	width:50px;
+	width:45px;
 	margin-bottom:0px;
 	padding-left:30px;
-	padding-right:30px;
+	padding-right:25px;
+	padding-top:6px;
+	height:28px;
 }
 
 .pd_embed_buttons{
@@ -158,7 +161,6 @@ input#password, #pd_currentPassword, #pd_newPassword, #pd_confirm_newPassword, #
 	border-top:1px solid white;
 	height:26px;
 	padding-top:5px;
-	border:0px solid blue;	
 }
 
 
@@ -167,6 +169,7 @@ input#password, #pd_currentPassword, #pd_newPassword, #pd_confirm_newPassword, #
 
 #loginUl{
 	border: 0px solid blue;
+	padding-left:0px;
 }
 .pd_loginContainer{
 	/*height:28px;*/
