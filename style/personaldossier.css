@@ -67,10 +67,10 @@ input#username, input#password, input#edit_password,  input#edit_profile  {
     border: none;
     margin-left:18px;
     margin-right:18px;
-    height:22px;   
+   /* height:22px;   */
 }
 
-#edit_password, #edit_profile, .pd_listItem, .userlistItem  {
+#edit_password, #edit_profile, .pd_listItem, .userlistItem {
     background-color:transparent;
     border: none;
     margin-left:18px;
@@ -83,14 +83,31 @@ input#username, input#password, input#edit_password,  input#edit_profile  {
    
 }
 
-input#username, #edit_profile,.pd_listItem  {
-	 border-bottom:1px solid #c9cacf;
-	 padding-bottom:3px;
+input#username{
+	height:10px;
+	 padding-bottom:5px;
+	 border-bottom:0px solid #c9cacf;
+	
 }
-input#password { 
+input#password{
+	height:16px;
+}
+
+#edit_profile,.pd_listItem  {
+	 border-bottom:1px solid #c9cacf;
+	 padding-bottom:5px;
+}
+#pd_uContainer1{
+	padding:0px;
+	margin-left:18px;
+    margin-right:18px;
+    border-bottom:1px solid #c9cacf;
+}
+
+/*input#password { 
 	margin-top:-3px;
 	 border:0px solid blue;
-}
+}*/
 
 input#password, #pd_currentPassword, #pd_newPassword, #pd_confirm_newPassword, #passwordRegistrationInput,#passwordRegConfirmInput {
 	 -webkit-text-security: disc;
@@ -127,7 +144,7 @@ input#password, #pd_currentPassword, #pd_newPassword, #pd_confirm_newPassword, #
 	height:28px;
 }
 #userloginHeader{
-	height:28px;
+	height:14px;
 }
 
 .pd_embed_buttons{
@@ -162,7 +179,7 @@ input#password, #pd_currentPassword, #pd_newPassword, #pd_confirm_newPassword, #
 .buttonContainer{
 	width:229px;
 	border-top:1px solid white;
-	height:26px;
+	height:22px;
 	padding-top:5px;
 }
 
@@ -175,7 +192,6 @@ input#password, #pd_currentPassword, #pd_newPassword, #pd_confirm_newPassword, #
 	padding-left:0px;
 }
 .pd_loginContainer{
-	/*height:28px;*/
 	border: 0'px solid green;
 	width:200px;
 	padding-left:-10px;
