@@ -3,13 +3,25 @@ function LoginView(controller){
 	self.controller=controller;
 	self.tagID="loginFormContainer";
 		
-	$("#loginButton").bind("click", function(){
+	$("#loginButton").bind("click", login);
+	
+	$(document).bind("keyup", keyfield);
+	
+	function keyfield(e){
+		console.log("keydown caught");
+		var keycode=e.keyCode;
+		if (keycode===13){
+			console.log("keydown is enter");
+			login();
+		}	
+	}
+	
+	function login(){
 		var authenticationModel = self.controller.models['authentication'];
 		var email=$("#username").val();
 		var password=$("#password").val();
 		authenticationModel.authenticateUser(email, password);			
-	});
-	
+	}
 };
 
 
