@@ -1,7 +1,9 @@
 function OAuthHelper(realm) {
     var data;
-    var tmp = localStorage.getItem("authentication");    
-    data = JSON.parse(tmp);   
+    var tmp = localStorage.getItem("authentication");
+    if (tmp){ //sanity check to test safari
+    	data = JSON.parse(tmp);   
+    }
 
 
     if ( !data ) {
