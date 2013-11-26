@@ -35,7 +35,7 @@ DesignBookmarkView.prototype.update = function(){
 	//design the bookmark button dynamically in the appropriate div
 	
 	var bookMarkbuttonContainer = $("<div/>", {
-		"id":"bookmark" //add id dynamically
+		"id":"bookmark", //add id dynamically
 	}).appendTo("#isn_pd_widget");
 	
 	var bookmarkButton = $("<p/>", {

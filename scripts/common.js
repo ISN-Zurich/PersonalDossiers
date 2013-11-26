@@ -67,6 +67,7 @@ function setDossiersColorization() {
 	$("#logView").removeClass("pd_sb_icon");
 	$("#logView").removeClass("disable");
 	$("#logView").addClass("pd_interactionItem");
+	$("#logView").addClass("sb_icon");
 	$("#logView").addClass("clickable");
 	
 };
@@ -92,6 +93,7 @@ function setUserProfileColorization(){
 	$("#st_dossiers").removeClass("disable");
 	$("#st_dossiers").removeClass("pd_sb_icon");
 	$("#logView").removeClass("pd_sb_icon");
+	$("#logView").addClass("sb_icon");
 	$("#logView").addClass("clickable");
 	$("#span_dossiers").addClass("pd_active");
 	
