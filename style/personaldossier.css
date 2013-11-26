@@ -126,6 +126,9 @@ input#password, #pd_currentPassword, #pd_newPassword, #pd_confirm_newPassword, #
 	padding-top:6px;
 	height:28px;
 }
+#userloginHeader{
+	height:28px;
+}
 
 .pd_embed_buttons{
 	display:inline;

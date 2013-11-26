@@ -146,3 +146,14 @@ margin: 0;
 padding: 1.1em 1em 1.1em 1.86em;
 margin-left: 0px;
 }
+
+.pd-sidebar-header {
+    color: #FFFFFF;
+    font-size: 1.2em;
+     padding: 9px 15px 5px 18px;
+    height:14px;
+}
+
+.pd-sidebar-header.darkblue {
+	background-color: #0089CF;
+}
