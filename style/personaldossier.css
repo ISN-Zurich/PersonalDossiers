@@ -13,21 +13,15 @@ height:34px;
 	
 }
 #InteractionBar{
-	background-image:url(../images/bluegreybg.png);
+	background-color:#4c5160;
 	margin-bottom:10px;
+
 }
 .pd_interactionItem{
-	/*background-image:url(../images/bluegreybg.png);*/
 	background-color:#4c5160;
-	
 }
 .greyBg{
-	background-image:url(../images/interactionItem.png);
-}
-
-.pd_a_selected{
-background-image:url(../images/selected.png);
-color:white;
+	background-color:#ebedee;
 }
 
 .pd_tabs_margin {
@@ -53,17 +47,6 @@ color:white;
 	font-size:18px;
 }
 
-#st_notifications{
-	/*background-image:url(../images/notifications.png);*/
-}
-
-#st_user{
-	/*background-image:url(../images/profile.png);*/
-}
-
-#st_dossiers{
-	/*background-image:url(../images/dossiers.png);*/
-}
 
 
 /***********************End of Interaction Box*********************/
@@ -84,9 +67,7 @@ input#username, input#password, input#edit_password,  input#edit_profile  {
     border: none;
     margin-left:18px;
     margin-right:18px;
-    height:22px;
-   /*color:#a1aab1;*/
-   
+    height:22px;   
 }
 
 #edit_password, #edit_profile, .pd_listItem, .userlistItem  {
@@ -105,7 +86,6 @@ input#username, input#password, input#edit_password,  input#edit_profile  {
 input#username, #edit_profile,.pd_listItem  {
 	 border-bottom:1px solid #c9cacf;
 	 padding-bottom:3px;
-	/* border:1px solid blue;*/
 }
 input#password { 
 	margin-top:-3px;

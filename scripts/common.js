@@ -58,15 +58,16 @@ function setDossiersColorization() {
 	
 	$("#span_dossiers").addClass("pd_selected");
 	$("#st_dossiers").removeClass("disable");
-	$("#st_dossiers").addClass("pd_a_selected");
+	$("#st_dossiers").addClass("pd_sb_icon");
 	
 	$("#st_user").removeClass("disable");
-	$("#st_user").removeClass("pd_a_selected");
+	$("#st_user").removeClass("pd_sb_icon");
 	$("#span_user").addClass("pd_active");
 	
-	$("#logView").removeClass("pd_a_selected");
+	$("#logView").removeClass("pd_sb_icon");
 	$("#logView").removeClass("disable");
 	$("#logView").addClass("pd_interactionItem");
+	$("#logView").addClass("clickable");
 	
 };
 
@@ -76,7 +77,7 @@ function setDossiersColorization() {
  * */
 
 function setLoggedOutColorization(){
-	$("#logView").addClass("pd_a_selected");
+	$("#logView").addClass("pd_sb_icon");
 	$("#span_dossiers").removeClass("pd_selected");
 	
 	$("#span_user").removeClass("selected");
@@ -89,65 +90,15 @@ function setLoggedOutColorization(){
 function setUserProfileColorization(){
 	
 	$("#st_dossiers").removeClass("disable");
-	$("#st_dossiers").removeClass("pd_a_selected");
-	$("#logView").removeClass("pd_a_selected");
+	$("#st_dossiers").removeClass("pd_sb_icon");
+	$("#logView").removeClass("pd_sb_icon");
+	$("#logView").addClass("clickable");
 	$("#span_dossiers").addClass("pd_active");
 	
 	$("#st_user").removeClass("disable");
-	$("#st_user").addClass("pd_a_selected");
+	$("#st_user").addClass("pd_sb_icon");
 	$("#span_user").removeClass("pd_active");
 	$("#span_user").addClass("pd_selected");
 
 };
 
-
-function base64_encode (data) {
-	console.log("enter base 64 encode");
-	  // http://kevin.vanzonneveld.net
-	  // +   original by: Tyler Akins (http://rumkin.com)
-	  // +   improved by: Bayron Guevara
-	  // +   improved by: Thunder.m
-	  // +   improved by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
-	  // +   bugfixed by: Pellentesque Malesuada
-	  // +   improved by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
-	  // +   improved by: Rafał Kukawski (http://kukawski.pl)
-	  // *     example 1: base64_encode('Kevin van Zonneveld');
-	  // *     returns 1: 'S2V2aW4gdmFuIFpvbm5ldmVsZA=='
-	  // mozilla has this native
-	  // - but breaks in 2.0.0.12!
-	  //if (typeof this.window['btoa'] === 'function') {
-	  //    return btoa(data);
-	  //}
-	  var b64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
-	  var o1, o2, o3, h1, h2, h3, h4, bits, i = 0,
-	    ac = 0,
-	    enc = "",
-	    tmp_arr = [];
-
-	  if (!data) {
-	    return data;
-	  }
-
-	  do { // pack three octets into four hexets
-	    o1 = data.charCodeAt(i++);
-	    o2 = data.charCodeAt(i++);
-	    o3 = data.charCodeAt(i++);
-
-	    bits = o1 << 16 | o2 << 8 | o3;
-
-	    h1 = bits >> 18 & 0x3f;
-	    h2 = bits >> 12 & 0x3f;
-	    h3 = bits >> 6 & 0x3f;
-	    h4 = bits & 0x3f;
-
-	    // use hexets to index into b64, and append result to encoded string
-	    tmp_arr[ac++] = b64.charAt(h1) + b64.charAt(h2) + b64.charAt(h3) + b64.charAt(h4);
-	  } while (i < data.length);
-
-	  enc = tmp_arr.join('');
-
-	  var r = data.length % 3;
-
-	  return (r ? enc.slice(0, r - 3) : enc) + '==='.slice(r || 3);
-
-	}

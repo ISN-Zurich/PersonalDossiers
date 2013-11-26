@@ -43,14 +43,15 @@ color: #fff !important;
 
 
 .pd_sb_icon{
-display:inline-block !important;
-	width:28px;
-	height:28px;
-	background-color:transparent;
-	background-position:0px 0px;
-	background-repeat:no-repeat;
-	background-attachment:scroll;
-	border-left:solid 1px white;
+display: inline-block !important;
+width: 28px;
+height: 28px;
+background-color: #0089CF !important;
+background-position: -1px -1px;
+background-repeat: no-repeat;
+background-attachment: scroll;
+border-left: solid 1px white;
+color:white;
 }
 
 

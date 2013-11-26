@@ -53,6 +53,9 @@ function LogView(controller){
 	 $("#logView").bind('click', function(){
 		 console.log("click loggout button");
 		 if(!$("#st_logout_confirm").is(':visible')){
+			 $("#st_user").removeClass("pd_sb_icon");
+			 $("#st_dossiers").removeClass("pd_sb_icon");
+			 $("#logView").addClass("pd_sb_icon");
 			 $("#st_logout_confirm").removeClass("hide");}
 		 else{
 			 $("#st_logout_confirm").addClass("hide"); 
