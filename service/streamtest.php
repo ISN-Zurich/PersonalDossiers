@@ -26,15 +26,15 @@ class HTTPStreamer extends HTTP_Request_Listener
 		   } 
  		   break; 
 	     case 'tick':
-	           error_log('tick');
+	           //error_log('tick');
                    fwrite($this->fd, $data, strlen($data));
 		   break;
-             case 'gotBody':
-                   error_log('data completely loaeded');
-                   fclose($this->fd);
-                   break;
-            default:
-                   break;
+         case 'gotBody':
+               error_log('data completely loaeded');
+               fclose($this->fd);
+               break;
+        default:
+               break;
         }
     }
 }
@@ -84,11 +84,15 @@ class HTTPStreamer extends HTTP_Request_Listener
 		$url=$idata[0]["identifier"];
 	}
 
-	
 $r = new HTTP_Request($url, array('method'=> "GET"));
 	
 $r->attach(new HTTPStreamer());
 
-$r->sendRequest();
+if (PEAR::isError($r->sendRequest())) {
+    // we are in trouble, mercury went down again
+    
+    echo "<!DOCTYPE html>\n<html><body>This Document is currently unavailable. Please try later.</body></html>";
+}
+    
 
 ?>
