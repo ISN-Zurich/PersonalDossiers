@@ -157,3 +157,16 @@ margin-left: 0px;
 .pd-sidebar-header.darkblue {
 	background-color: #0089CF;
 }
+
+.pd_bookmarked_bar { /*grey_bar*/
+display: inline-block;
+width: 212px;
+height: 28px;
+padding: 0px 0px 0px 18px;
+margin: 0;
+margin-bottom: 1px;
+vertical-align: middle;
+line-height: 28px;
+background: #4C5160 !important;
+color: #ebedee!important;
+}

@@ -7,35 +7,27 @@ function BookmarkController() {
     this.debugMode = debugMode;
     this.hostURL = hostURL;
     this.baseURL = baseURL;
+    var targetHost = 'http://www.isn.ethz.ch';
     document.domain = 'ethz.ch';
     
     self.initOAuth();
            
     self.models={};
 
-  
+    self.models.bookmark= new BookmarkModel(self);
     self.models.user = new UserModel(self);
     self.models.dossierList= new DossierListModel(self);
+    
 
     self.views={};
     self.views.bookmark = new bookmarkView(self);
     
     self.models.user.checkActiveUser();
     
-    
-    var search = window.location.search;
-
-    var params = search.split("&");
-    var i;
-    for ( i = 0; i < params.length; i++) {
-        var tmp = params[i].split('=');
-        if ( tmp[0] === "id" || tmp[0] === "?id" ) {
-            self.itemId = tmp[1];
-        }
-    }
-    
-    
-    
+    self.library_item_id=null;
+    self.getUrlId(); // assign a value to library_item_id
+    //checkBookmark(library_item_id);
+        
     //window.addEventListener('message', addDossierItem, false);
     
     
@@ -67,6 +59,34 @@ BookmarkController.prototype.initOAuth = function() {
     }
 };
 
+
+
+BookmarkController.prototype.getUrlId = function(){
+	var url_ref=window.location.href;
+	var splited=url_ref.split("?");
+	console.log("show splitted url array is "+splited);
+	var split1=splited[1];
+	if (split1 && split1.length>0){
+		console.log("tools is "+split1);
+		var split2=split1.split("=");
+		var d_id=split2[1];
+		if (d_id && d_id.length>0){
+			console.log("there is id in the new url and it is "+d_id);
+			this.library_item_id=d_id;
+			return this.library_item_id
+		}
+	}
+
+	return false;
+};
+
+BookmarkController.prototype.checkBookmark=function(item_id){
+	 if ( this.models.bookmark.hasItem(item_id) ){
+		 console.log('bookmark found!');
+         window.parent.postMessage(JSON.stringify({'bookmarkok': 1}), 
+                                   this.targetHost);
+	 }
+};
 
 var controller;
 console.log("enter bookmark main js");

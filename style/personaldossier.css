@@ -341,7 +341,15 @@ font-color:blue;
 	padding-left:6px;
 	padding-right:6px;
 	font-size:16px;
+	
+}
+
+.st_unbookmarked{
 	color:#4C5160;
+}
+
+.st_bookmarked{
+	color:#ebedee;
 }
 
 /***** Dossier List Styles *****/

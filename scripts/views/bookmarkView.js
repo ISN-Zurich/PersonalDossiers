@@ -45,6 +45,7 @@ bookmarkView.prototype.renderDossier=function(){
 	var dossierListModel=self.controller.models.dossierList;
 	var	dossierID = self.controller.models.dossierList.getDossierId();
 	var isFollowedDossier = dossierListModel.isFollowedDossier();
+	var library_id= self.controller.library_item_id;
 	
 	if (!isFollowedDossier){
 	
@@ -55,12 +56,14 @@ bookmarkView.prototype.renderDossier=function(){
 	
 	
 	var div2=$("<div/>", {
-		"class":"grey_bar st clickable",
+		//"class":"pd_bookmarked_bar st clickable",
+		"class":!bookmarkModel.hasItem(library_id) ? "grey_bar st clickable" : "pd_bookmarked_bar st clickable",
 		"text":self.controller.models.dossierList.getDossierTitle()
 	}).appendTo(div1);
 	
 	var span=$("<span/>", {
-		"class":"st_editDosser iconMoon",
+		//"class":"st_editDosser st_bookmarked iconMoon",
+		"class":!bookmarkModel.hasItem(library_id) ? "st_editDosser st_unbookmarked iconMoon" : "st_editDosser st_bookmarked iconMoon",
 		"text": "K"
 	}).appendTo(div2);
 	}

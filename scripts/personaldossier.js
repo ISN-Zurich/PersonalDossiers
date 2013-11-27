@@ -82,7 +82,7 @@ function embedBookmarkController() {
     
     $('<iframe/>', { 
         'id': 'isn_pd_authorize', 
-        'src': this.baseURL + 'bookmark.html',
+        'src': this.baseURL + 'bookmark.html?id='+this.itemId,
         "scrolling":"no"}).appendTo('#isn_pd_widget');
     
     
