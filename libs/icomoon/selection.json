@@ -100,30 +100,6 @@
 		{
 			"icon": {
 				"paths": [
-					"M358.4 768h512v102.4h-512v-102.4z",
-					"M153.6 768h102.4v102.4h-102.4v-102.4z",
-					"M358.4 460.8h512v102.4h-512v-102.4z",
-					"M153.6 460.8h102.4v102.4h-102.4v-102.4z",
-					"M358.4 153.6h512v102.4h-512v-102.4z",
-					"M153.6 153.6h102.4v102.4h-102.4v-102.4z"
-				],
-				"grid": 0,
-				"tags": [
-					"list"
-				]
-			},
-			"properties": {
-				"order": 6,
-				"id": 0,
-				"prevSize": 32,
-				"code": 68,
-				"name": "list",
-				"ligatures": ""
-			}
-		},
-		{
-			"icon": {
-				"paths": [
 					"M864 0c88.364 0 160 71.634 160 160 0 36.020-11.91 69.258-32 96l-64 64-224-224 64-64c26.742-20.090 59.978-32 96-32zM64 736l-64 288 288-64 592-592-224-224-592 592zM715.578 363.578l-448 448-55.156-55.156 448-448 55.156 55.156z"
 				],
 				"tags": [
@@ -136,7 +112,7 @@
 				"grid": 16
 			},
 			"properties": {
-				"order": 7,
+				"order": 6,
 				"id": 6,
 				"prevSize": 32,
 				"code": 69,
@@ -155,11 +131,57 @@
 				"grid": 16
 			},
 			"properties": {
-				"order": 8,
+				"order": 7,
 				"id": 348,
 				"prevSize": 32,
 				"code": 66,
 				"name": "embed",
+				"ligatures": ""
+			}
+		},
+		{
+			"icon": {
+				"paths": [
+					"M390.4 784h512v102.4h-512v-102.4z",
+					"M185.6 784h102.4v102.4h-102.4v-102.4z",
+					"M390.4 476.8h512v102.4h-512v-102.4z",
+					"M185.6 476.8h102.4v102.4h-102.4v-102.4z",
+					"M390.4 169.6h512v102.4h-512v-102.4z",
+					"M185.6 169.6h102.4v102.4h-102.4v-102.4z"
+				],
+				"grid": 0,
+				"tags": [
+					"list"
+				],
+				"defaultCode": 68,
+				"width": 1024
+			},
+			"properties": {
+				"order": 8,
+				"id": 0,
+				"prevSize": 32,
+				"name": "list",
+				"ligatures": "",
+				"code": 68
+			}
+		},
+		{
+			"icon": {
+				"paths": [
+					"M192 0v1024l320-320 320 320v-1024z"
+				],
+				"tags": [
+					"bookmark",
+					"ribbon"
+				],
+				"grid": 16
+			},
+			"properties": {
+				"order": 9,
+				"id": 202,
+				"prevSize": 32,
+				"code": 75,
+				"name": "bookmark",
 				"ligatures": ""
 			}
 		}
@@ -194,6 +216,8 @@
 		"showCodes": true,
 		"gridSize": 16,
 		"showLiga": true,
-		"showGrid": true
+		"showGrid": true,
+		"showGlyphs": true,
+		"showQuickUse": true
 	}
 }
