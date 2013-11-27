@@ -1,9 +1,9 @@
 function OAuthHelper(realm) {
     var data;
     var tmp = localStorage.getItem("authentication");    
-    data = JSON.parse(tmp);   
-
-
+//    if(tmp){
+    	data = JSON.parse(tmp);   
+//    }
     if ( !data ) {
         console.log( 'no data cannot be loaded' );
     throw new Error('No OAuth Data Stored');

@@ -54,7 +54,9 @@ AuthenticationModel.prototype.loadData=function(){
     //if there is an item in the local storage with the name "authentication"
     //then get it by parsing the string and convert it into a json object
     try {
+    	if (localStorage.getItem("authentication")){
         authObject = JSON.parse(localStorage.getItem("authentication"));
+    	}
     }
     catch (err) {
         console.log("error! while loading");
