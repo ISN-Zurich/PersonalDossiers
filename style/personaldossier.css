@@ -453,6 +453,13 @@ body.embedBadge {
 
 /*****END OF EMBED VIEW********/
 
+
+/********************************BOOOKMARK BUTTON *********************************/
+
+
+.bookmarkItem{
+	margin-bottom:0px;
+}
 #headerText{
 	width: 22.72em;
     height: 27em; /*it was 6em, it can be set auto to get automatically the height of the filled content*/

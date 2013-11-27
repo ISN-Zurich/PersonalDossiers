@@ -23,12 +23,14 @@ bookmarkView.prototype.update = function(){
 	
 	var dossierListModel=self.controller.models.dossierList;
 	
+	$("#bookmarkList").empty();
+	
 	if (dossierListModel.listIsPresent()){
 		dossierListModel.reset();
 		dossierId=dossierListModel.getDossierId();
 	
 	do {
-		this.renderDossierItem();
+		this.renderDossier();
 		
 	} while (dossierListModel.nextDossier());
 	
@@ -42,21 +44,27 @@ bookmarkView.prototype.renderDossier=function(){
 	var bookmarkModel = self.controller.models.bookmark;
 	var dossierListModel=self.controller.models.dossierList;
 	var	dossierID = self.controller.models.dossierList.getDossierId();
-		
-
-	var li=$("<li/>", {
-		"id": "item"+dossierID,
-		"class":"liItem"
+	var isFollowedDossier = dossierListModel.isFollowedDossier();
+	
+	if (!isFollowedDossier){
+	
+	var div1=$("<div/>", {
+	"id": "item"+dossierID,
+		"class":"clickable pd_editDossier bookmarkItem"
 	}).appendTo("#bookmarkList");
 	
-
-	divA=$("<a/>", {
-		"class": "dossierItemText",
-		//"href":bookmarkModel.getISNURL(), 
-		//"text":bookmarkModel.getTitle(),
-		"text":self.controller.models.dossierList.getDossierTitle(),
-		"target": "_blank"
-	}).appendTo(li);	
+	
+	var div2=$("<div/>", {
+		"class":"grey_bar st clickable",
+		"text":self.controller.models.dossierList.getDossierTitle()
+	}).appendTo(div1);
+	
+	var span=$("<span/>", {
+		"class":"st_editDosser iconMoon",
+		"text": "K"
+	}).appendTo(div2);
+	}
+	
 };
 
 

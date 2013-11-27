@@ -13,15 +13,26 @@ function BookmarkController() {
            
     self.models={};
 
-    self.models.authentication=new AuthenticationModel(self);
+  
     self.models.user = new UserModel(self);
     self.models.dossierList= new DossierListModel(self);
-    //self.models.bookmark = new BookmarkModel(self);	
 
     self.views={};
     self.views.bookmark = new bookmarkView(self);
     
     self.models.user.checkActiveUser();
+    
+    
+    var search = window.location.search;
+
+    var params = search.split("&");
+    var i;
+    for ( i = 0; i < params.length; i++) {
+        var tmp = params[i].split('=');
+        if ( tmp[0] === "id" || tmp[0] === "?id" ) {
+            self.itemId = tmp[1];
+        }
+    }
     
     
     $(document).bind('UserProfileUpdate', function(){
@@ -51,6 +62,7 @@ BookmarkController.prototype.initOAuth = function() {
         console.log('oauth failed');
     }
 };
+
 
 var controller;
 console.log("enter bookmark main js");
