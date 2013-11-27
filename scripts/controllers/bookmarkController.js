@@ -14,9 +14,10 @@ function BookmarkController() {
            
     self.models={};
 
-    self.models.bookmark= new BookmarkModel(self);
+    
     self.models.user = new UserModel(self);
     self.models.dossierList= new DossierListModel(self);
+    self.models.bookmark= new BookmarkModel(self);
     
 
     self.views={};

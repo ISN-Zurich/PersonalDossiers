@@ -46,6 +46,7 @@ bookmarkView.prototype.renderDossier=function(){
 	var	dossierID = self.controller.models.dossierList.getDossierId();
 	var isFollowedDossier = dossierListModel.isFollowedDossier();
 	var library_id= self.controller.library_item_id;
+	console.log("library id is "+library_id);
 	
 	if (!isFollowedDossier){
 	

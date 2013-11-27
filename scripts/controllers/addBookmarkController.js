@@ -14,7 +14,11 @@ function addBookmarkController() {
     self.login = false;
 
     console.log("do not initialize");
-    window.addEventListener('message', authorizationListener, false);
+    window.addEventListener('message', authorizationListener, false); //THIS WILL GO AWAY
+    
+    //  window.addEventListener('message', resizeListener, false);
+    //the resize listener will check for the resize event and will get the NEW height of the iframe
+    
     var search = window.location.search;
 
     var params = search.split("&");
@@ -28,12 +32,24 @@ function addBookmarkController() {
     // create a hidden window
     $('<iframe/>', {'class': 'none', 
                     'id': 'isn_pd_authorize', 
-                    'src': this.baseURL + 'authorize.html' }).appendTo('#isn_pd_widget').bind('load', function(){
+                    'src': this.baseURL + 'authorize.html?id='+this.itemId }).appendTo('#isn_pd_widget').bind('load', function(){
                         if ( self.itemId ) {
                             self.checkItem();
-                        }
+                        } //we remove the bind, we dont checkItem()
                     });
 
+    //add resizeListener(m)
+    
+    // if (m.origin== this.hostURL) if it comes from the right source
+    // var data = JSON.parse(m.data); {"resize" : {"height" :containerHeight}}
+    // if (data.resize && data.resize.height > 0){
+    // add the new height to the iframe style
+    // $(iframeId).height(data.resize.height);
+    //}
+    //  
+    // 
+    //
+    
 
     function authorizationListener(m) {
     	console.log("enter authorization listener");
@@ -59,7 +75,7 @@ function addBookmarkController() {
 };
 
 
-
+// will go away
 addBookmarkController.prototype.getActiveDossier = function() {
     var self=this;
     console.log("dossierList models is "+self.models.dossierList);
@@ -71,6 +87,8 @@ addBookmarkController.prototype.getActiveDossier = function() {
     return adID;
 };
 
+
+//will go away
 addBookmarkController.prototype.initOAuth = function() {
     try {
         this.oauth = new OAuthHelper(this.baseURL);
@@ -81,11 +99,14 @@ addBookmarkController.prototype.initOAuth = function() {
     }
 };
 
+// THIS WILL GO TO authorize.helper (add bookmark helper)
 addBookmarkController.prototype.addItem = function() {
     var data = {'operation': 'store', 'itemID': this.itemId};
     $('#isn_pd_authorize')[0].contentWindow.postMessage(JSON.stringify(data), 
                                                         this.hostURL);
 };
+
+//IT WILL COMPLETELY GO AWAY
 
 addBookmarkController.prototype.checkItem = function() {
     var data = {'operation': 'check', 'itemID': this.itemId};
@@ -97,6 +118,7 @@ addBookmarkController.prototype.checkItem = function() {
 };
 
 
+//wil go away
 addBookmarkController.prototype.isLoggedin = function() {
     return this.login;
 };

@@ -112,7 +112,7 @@ function AuthorizationController() {
         if ( self.activeItemID && bookmarks.hasItem(self.activeItemID) ){
             console.log('bookmark found!');
             window.parent.postMessage(JSON.stringify({'bookmarkok': 1}), 
-                                      self.tagetHost);
+                                      self.targetHost);
         }
     }
 }

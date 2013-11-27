@@ -325,9 +325,13 @@ BookmarkModel.prototype.nextUser = function() {
 };
 
 BookmarkModel.prototype.hasItem = function(id) {
+	console.log("enter hasItem");
     var retval = false, i = 0;
     if (this.dossierList && this.dossierList.length && id) {
         for (i; i < this.dossierList.length; i++) {
+        	console.log("existing library id is "+dossierList[i].digital_library_id);
+        	console.log("comparable id "+id);
+        	
             if ( this.dossierList[i].digital_library_id === id ) {
                 retval = true;
                 break;
