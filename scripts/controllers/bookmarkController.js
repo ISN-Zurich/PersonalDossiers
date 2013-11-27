@@ -35,6 +35,10 @@ function BookmarkController() {
     }
     
     
+    
+    //window.addEventListener('message', addDossierItem, false);
+    
+    
     $(document).bind('UserProfileUpdate', function(){
 		
 		console.log("binded User profile update in user controller model");

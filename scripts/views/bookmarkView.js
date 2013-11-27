@@ -22,7 +22,7 @@ bookmarkView.prototype.update = function(){
 	var self=this;
 	
 	var dossierListModel=self.controller.models.dossierList;
-	
+
 	$("#bookmarkList").empty();
 	
 	if (dossierListModel.listIsPresent()){
