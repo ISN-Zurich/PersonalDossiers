@@ -15,6 +15,10 @@ function bookmarkView(controller){
 	console.log("bound bookmarked dossier list update in bookmark view");
 	self.open();
 });
+	
+	$("#bookmarkList").bind("click", function(e){
+		//get the 
+	});
 }
 
 bookmarkView.prototype.openDiv=openView;
@@ -51,7 +55,7 @@ bookmarkView.prototype.renderDossier=function(){
 	
 	console.log("enter render Dossier");
 	
-	var bookmarkModel = self.controller.models.bookmark;
+	var libraryBookmarkModel = self.controller.models.bookmarkDossier;
 	var dossierListModel=self.controller.models.dossierList;
 	var	dossierID = self.controller.models.dossierList.getDossierId();
 	var isFollowedDossier = dossierListModel.isFollowedDossier();
@@ -67,14 +71,17 @@ bookmarkView.prototype.renderDossier=function(){
 
 
 		var div2=$("<div/>", {
-			"class":"pd_bookmarked_bar st clickable",
-			//"class":!bookmarkModel.hasItem(library_id) ? "grey_bar st clickable" : "pd_bookmarked_bar st clickable",
-					"text":self.controller.models.dossierList.getDossierTitle()
+			"class":"st clickable overflowText grey_bar",
+					
 		}).appendTo(div1);
+	
+		var tspan = $("<span/>", {
+			"class": "overflowText bookmarkButtonText",
+			"text":self.controller.models.dossierList.getDossierTitle()
+		}).appendTo(div2);
 
 		var span=$("<span/>", {
-			"class":"st_editDosser st_bookmarked iconMoon",
-			//"class":!bookmarkModel.hasItem(library_id) ? "st_editDosser st_unbookmarked iconMoon" : "st_editDosser st_bookmarked iconMoon",
+					"class":libraryBookmarkModel.hasItem(dossierID) ? "st_editDosser pd_bookkark_icon_exist iconMoon" : "st_editDosser pd_bookkark_icon iconMoon",
 					"text": "K"
 		}).appendTo(div2);
 	}

@@ -170,3 +170,11 @@ line-height: 28px;
 background: #4C5160 !important;
 color: #ebedee!important;
 }
+
+.pd_bookkark_icon {
+	color: #4C5160;
+}
+
+.pd_bookkark_icon_exist{
+	color: #0089CF;
+}

@@ -136,6 +136,10 @@ public function getUserRole($userId, $dossierId) {
 }
 
 public function hasUserPriviledges($userId, $dossierId){
+	
+	if (!is_numeric($dossierId)){
+		return true;
+	}
 	$user_role=$this->getUserRole($userId, $dossierId);
 
 	if ($user_role == "owner" || $user_role == "editor" || $user_role == "user"){
