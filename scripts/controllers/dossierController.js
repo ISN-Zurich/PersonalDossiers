@@ -47,8 +47,8 @@ function dossierController() {
 		self.views.dossierBanner = new DossierBannerView(self);
 		self.views.dossierContent= new DossierContentView(self);
 		self.views.userlist = new DossierUsersView(self);
-		self.views.embed= new addEmbedButton(self);
-		self.views.badge= new badgeView(self);
+		//self.views.embed= new addEmbedButton(self);
+		//self.views.badge= new badgeView(self);
 		self.views.share = new ShareButtonView(self);
 
 

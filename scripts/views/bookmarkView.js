@@ -3,7 +3,8 @@ function bookmarkView(controller){
 	var self=this;
 	self.controller=controller;
 	self.tagID="bookmarkList";	
-	
+	self.libBookmarkModel=self.controller.models.bookmarkDossier;
+		
 	//will move the binding of the dossier list update to the librarybookmark model
 	// it will load the bookmarkedossiers, and when this is ready, the bookmark view will open
 //	$(document).bind('DossierListUpdate', function(){
@@ -12,13 +13,20 @@ function bookmarkView(controller){
 //	});
 	
 	$(document).bind('BookmarkedDossierListUpdate', function(){
-	console.log("bound bookmarked dossier list update in bookmark view");
-	self.open();
-});
-	
-	$("#bookmarkList").bind("click", function(e){
-		//get the 
+		console.log("bound bookmarked dossier list update in bookmark view");
+		self.open();
 	});
+	
+//	$("#bookmarkList").bind("click", function(e){
+//		var targetE = e.target;
+//		//if ($(targetE)){
+//			var targetID = e.target.id;
+//			console.log("targetID is "+targetID);
+//			var dossierID = targetID.substring(4);
+//			console.log("dossier ID is "+dossierID);
+//			self.libBookmarkModel.addItem(dossierID);
+//		//}
+//	});
 }
 
 bookmarkView.prototype.openDiv=openView;
@@ -49,6 +57,9 @@ bookmarkView.prototype.update = function(){
 		this.controller.notifyNewHeight(height);
 	}
 	
+	
+	
+	
 };
 
 bookmarkView.prototype.renderDossier=function(){
@@ -60,6 +71,7 @@ bookmarkView.prototype.renderDossier=function(){
 	var	dossierID = self.controller.models.dossierList.getDossierId();
 	var isFollowedDossier = dossierListModel.isFollowedDossier();
 	var library_id= self.controller.library_item_id;
+	console.log("dossier id in render dossier is"+dossierID);
 	console.log("library id is "+library_id);
 
 	if (!isFollowedDossier){
@@ -84,6 +96,20 @@ bookmarkView.prototype.renderDossier=function(){
 					"class":libraryBookmarkModel.hasItem(dossierID) ? "st_editDosser pd_bookkark_icon_exist iconMoon" : "st_editDosser pd_bookkark_icon iconMoon",
 					"text": "K"
 		}).appendTo(div2);
+	
+	
+//		$("#item"+dossierID).bind("click", function(e){
+//			console.log("clicked item");
+//			var targetID = e.target.id;
+//			console.log("targetID in redner is "+targetID);
+//			var dosID =dossierID 
+//			console.log("dossier ID is "+dosID);
+//			libraryBookmarkModel.addItem(dosID);
+//
+//		});
+		
+	
+	
 	}
 	
 };

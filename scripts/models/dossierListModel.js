@@ -163,7 +163,7 @@ DossierListModel.prototype.getUserDossiers=function(){
 		console.log("dossier_id is "+JSON.stringify(self.dossierList[0].dossier_id));
 
 		// inform all dossier views that they need to update
-		$(document).trigger('DossierListUpdate'); // for the views   (dossierListButtons)
+		$(document).trigger('DossierListUpdate'); // for the models  librarybookmarkModel
 		$(document).trigger("ActiveDossierReady"); //  for the models  (bookmarkModel)
 	}
 
@@ -176,6 +176,7 @@ DossierListModel.prototype.getUserDossiers=function(){
 
 	}
 };
+
 
 
 

@@ -4,7 +4,8 @@ function LibraryBookmarkModel(controller){
 	var self=this;
 	self.controller=controller;
 	self.bookmarkedDossierList=[];
-	self.library_item_id=self.controller.library_item_id;
+	self.library_item_id=self.controller.getUrlId();
+	console.log("library item id in library bookmark models is "+self.library_item_id);
 
 	// this was previously bound in bookmarkview in order to open it
 	// now we need one step more in order to load the bookmarked dossiers list
