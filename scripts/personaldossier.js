@@ -22,7 +22,7 @@ function hostURL() {
     var debugURL = "http://yellowjacket.ethz.ch";
     var liveURL = "http://lab.isn.ethz.ch";
     
-    return this.debugMode ? debugURL : liveURL; 
+    return debugMode ? debugURL : liveURL; 
 }
 
 function baseURL() {
@@ -88,13 +88,23 @@ function embedBookmarkController() {
     
     
     function resizeListener(m){
-    	if (m.origin ==this.hostURL){
+    	console.log("receive message");
+    	if (m.origin === self.hostURL){
+
+    		console.log("receive message from known host");
     		var data=JSON.parse(m.data);
-    		if (data.resize && data.resize.length > 0) {
+    		if (data.resize && data.resize.height > 0) {
+    			console.log("received resize message");
     			// add the new height to the iframe style
-    		   $("#isn_pd_authorize").height(data.resize.height);
-    		   self.login = true;
-    		}	
+    			$("#isn_pd_authorize").height(data.resize.height);
+    			if($("#isn_pd_widget").hasClass("none")){
+    				$("#isn_pd_widget").removeClass("none");   
+    			}
+    		}
+    		else if(!$("#isn_pd_widget").hasClass("none")){
+    			$("#isn_pd_widget").addClass("none");   
+
+    		}
     	}
     	
     }

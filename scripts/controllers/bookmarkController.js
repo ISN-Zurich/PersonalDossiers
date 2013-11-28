@@ -7,7 +7,7 @@ function BookmarkController() {
     this.debugMode = debugMode;
     this.hostURL = hostURL;
     this.baseURL = baseURL;
-    var targetHost = 'http://www.isn.ethz.ch';
+    this.targetHost = 'http://www.isn.ethz.ch';
     document.domain = 'ethz.ch';
     
     self.initOAuth();
@@ -17,7 +17,9 @@ function BookmarkController() {
     
     self.models.user = new UserModel(self);
     self.models.dossierList= new DossierListModel(self);
-    self.models.bookmark= new BookmarkModel(self);
+    //self.models.bookmark= new BookmarkModel(self); for the first two steps we don't need it
+    self.models.bookmarkDossier= new LibraryBookmarkModel(self);
+  
     
 
     self.views={};
@@ -27,10 +29,7 @@ function BookmarkController() {
     
     self.library_item_id=null;
     self.getUrlId(); // assign a value to library_item_id
-    //checkBookmark(library_item_id);
-        
-    //window.addEventListener('message', addDossierItem, false);
-    
+     
     
     $(document).bind('UserProfileUpdate', function(){
 		
@@ -39,7 +38,7 @@ function BookmarkController() {
 		self.models.dossierList.getUserDossiers();
 	});
 
-}
+} //end of constructor
 
 
 BookmarkController.prototype.initOAuth = function() {
@@ -87,6 +86,15 @@ BookmarkController.prototype.checkBookmark=function(item_id){
          window.parent.postMessage(JSON.stringify({'bookmarkok': 1}), 
                                    this.targetHost);
 	 }
+};
+
+BookmarkController.prototype.notifyNewHeight = function(height){
+	var data={
+			"resize": {
+				"height":height
+			}		
+	};
+	 window.parent.postMessage(JSON.stringify(data), this.targetHost);	
 };
 
 var controller;
