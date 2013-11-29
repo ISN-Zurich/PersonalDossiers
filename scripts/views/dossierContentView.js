@@ -138,8 +138,15 @@ DossierContentView.prototype.renderList = function() {
 	
 	$( "#sortable" ).sortable({
 		placeholder : "placeholder",
-		forcePlaceholderSize:true		
+		forcePlaceholderSize:true,		
 		//placeholder: "ui-state-highlight"
+		start : function(event,ui) {
+			$(ui.item).addClass("currentSortedItem");
+			
+		},
+		stop : function(event,ui) {
+			(ui.item).removeClass("currentSortedItem");
+		}
 	});
     $( "#sortable" ).disableSelection();
 	
@@ -161,7 +168,7 @@ DossierContentView.prototype.renderItem = function() {
 	
 	var div1=$("<li/>", {
 		"id": "item"+dossierID, 
-		"class" : "featured2 hideOT dossier_item "
+		"class" : "ui-state-default featured2 hideOT dossier_item "
 	}).appendTo("#sortable");
 	
 	var divFloat=$("<div/>", {
@@ -210,6 +217,7 @@ DossierContentView.prototype.renderItem = function() {
 	}).appendTo(divFloatText);
 	
 	divp2=$("<p/>", {
+		"class":"dossierItemDescription",
 		text:bookmarkModel.getDescription()
 	}).appendTo(divFloatText);
 
