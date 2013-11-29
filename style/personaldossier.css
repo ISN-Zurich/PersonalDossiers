@@ -360,7 +360,7 @@ font-color:blue;
 
 .dossier_item{
 	border:0px solid red;
-	float: left;
+	/*float: left;*/
 	margin-right: 10px;	
 	padding-top:10px;
 	padding-bottom:10px;
@@ -618,4 +618,25 @@ padding-left:3px;
 
 .hidden{
 	display:none;
+}
+
+
+/**************SORTING IMPLEMENTATION*******/
+
+
+.ui-state-highlight {
+	border:1px solid #bebebe;
+	height: 150px;
+	line-height: 150px;
+}
+
+*[placeholder] {
+	color: #666;
+}
+
+.placeholder {
+	height: 180px;
+	line-height:180px;
+	background: #ccc;
+	border:1px solid black;:
 }

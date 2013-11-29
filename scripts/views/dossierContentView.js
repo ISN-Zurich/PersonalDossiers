@@ -136,7 +136,11 @@ DossierContentView.prototype.renderList = function() {
 		$("#contentArea").css("height",contentAreaHeight+"px" );
 	}
 	
-	$( "#sortable" ).sortable();
+	$( "#sortable" ).sortable({
+		placeholder : "placeholder",
+		forcePlaceholderSize:true		
+		//placeholder: "ui-state-highlight"
+	});
     $( "#sortable" ).disableSelection();
 	
 };
@@ -157,7 +161,7 @@ DossierContentView.prototype.renderItem = function() {
 	
 	var div1=$("<li/>", {
 		"id": "item"+dossierID, 
-		"class" : "column featured2 hideOT dossier_item "
+		"class" : "featured2 hideOT dossier_item "
 	}).appendTo("#sortable");
 	
 	var divFloat=$("<div/>", {
