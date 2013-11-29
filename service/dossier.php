@@ -314,66 +314,85 @@ class DossierService extends OAUTHRESTService {
 			return;
 		}
 		 
-		// get the item from the KMS
-		// $r = new HTTP_Request('http://yellowjacket.ethz.ch/tools/data/'.$itemid . '.json', "GET");
-		 
-		// TESTME: new KMS code
-		$r = new HTTP_Request('http://mercury.ethz.ch/serviceengine/OWContent', array('method'=> 'POST'));
-		 
-		try {
-			$r->addPostData('serviceid', 'ISN');
-			$r->addPostData('owid', '898');
-			$r->addPostData('ocid', '531');
-			$r->addPostData('lng', 'en');
-			$r->addPostData('id', $itemid);
-		  
-			$r->sendRequest();
-			if ( $r->getResponseCode() == 200 ) {
-				$itemmeta = $r->getResponseBody();
-				$this->log('response message itemmeta '. $itemmeta);
-				$tmp = json_decode($itemmeta);
-				 
-				if (json_last_error() !== JSON_ERROR_NONE) {
-					throw new Exception("JSON PARSING ERROR ".json_last_error());
+		// check if the item is already loaded from the KMS and stored in our library_metadata table
+		$sqlstring = "select digital_library_id from library_metadata where digital_library_id = ?";
+		$sth = $mdb2->prepare($sqlstring);
+		$res = $sth->execute(array($itemid))->numRows();
+		
+		if ( $res <= 0 ) { 
+			// get the item from the KMS
+			// $r = new HTTP_Request('http://yellowjacket.ethz.ch/tools/data/'.$itemid . '.json', "GET");
+				
+			// TESTME: new KMS code
+			$r = new HTTP_Request('http://mercury.ethz.ch/serviceengine/OWContent', array('method'=> 'POST'));
+				
+			try {
+				$r->addPostData('serviceid', 'ISN');
+				$r->addPostData('owid', '898');
+				$r->addPostData('ocid', '531');
+				$r->addPostData('lng', 'en');
+				$r->addPostData('id', $itemid);
+
+				$r->sendRequest();
+				if ( $r->getResponseCode() == 200 ) {
+					$itemmeta = $r->getResponseBody();
+					$this->log('response message itemmeta '. $itemmeta);
+					$tmp = json_decode($itemmeta);
+						
+					if (json_last_error() !== JSON_ERROR_NONE) {
+						throw new Exception("JSON PARSING ERROR ".json_last_error());
+					}
+						
+					if (empty($tmp)) {
+						throw new Exception("No JSON data returned from KMS");
+					}
+						
+					$tmp->{'image'} = html_entity_decode($tmp->{'image'});
+					$this->log( 'image url: '. $tmp->{'image'});
+						
+					$tmp->{'isn_detail_url'} = html_entity_decode($tmp->{'isn_detail_url'});
+					$this->log( 'isn_detail_url: '. $tmp->{'isn_detail_url'});
+					 
+					$itemmeta = json_encode($tmp);
+				}else {
+					$this->log('response code is:  '.$r->getResponseCode());
 				}
-				 
-				if (empty($tmp)) {
-					throw new Exception("No JSON data returned from KMS");
-				}
-				 
-				$tmp->{'image'} = html_entity_decode($tmp->{'image'});
-				$this->log( 'image url: '. $tmp->{'image'});
-				 
-				$tmp->{'isn_detail_url'} = html_entity_decode($tmp->{'isn_detail_url'});
-				$this->log( 'isn_detail_url: '. $tmp->{'isn_detail_url'});
-		   
-				$itemmeta = json_encode($tmp);
-			}else {
-				$this->log('response code is:  '.$r->getResponseCode());
 			}
-		}
-		catch (HttpException $e) {
-			$this->log("HTTP error while fetching the item: ". $e->getMessage());
+			catch (HttpException $e) {
+				$this->log("HTTP error while fetching the item: ". $e->getMessage());
 
-			$this->logtest(empty($tmp),"invalid JSON returned");
-	   
-			$this->bad_request();
-			return;
-		}
-		catch (Exception $e) {
-			$this->log("Data Error: ". $e->getMessage());
-			$this->bad_request();
-			return;
-		}
-		 
+				$this->logtest(empty($tmp),"invalid JSON returned");
 
-		// verify that the KMS actually returned something meaningful
-		if (empty($itemmeta)) {
-			$this->log("item not in KMS");
-			$this->not_found();
-			return;
-		}
-		 
+				$this->bad_request();
+				return;
+			}
+			catch (Exception $e) {
+				$this->log("Data Error: ". $e->getMessage());
+				$this->bad_request();
+				return;
+			}
+				
+
+			// verify that the KMS actually returned something meaningful
+			if (empty($itemmeta)) {
+				$this->log("item not in KMS");
+				$this->not_found();
+				return;
+			}
+
+			//insert library id and metadata for it into a separate table
+			$sth = $mdb2->prepare("insert into library_metadata (digital_library_id, metadata) values ( ?, ?)");
+			$res2 = $sth->execute(array($itemid, $itemmeta));
+			if (PEAR::isError($res2)) {
+				$this->log("pear error " . $res2->getMessage());
+				$this->bad_request();
+				return;
+			}
+
+		} //end of IF. now we know that the KMS metadata is in our database.
+		
+		// now we actually add the item to the very dossier
+		
 		// we no longer use the user id for the dossier items
 		$this->log('metadata for id: ' . $itemid . " is " . $itemmeta);
 		$sth = $mdb2->prepare("insert into dossier_items (digital_library_id, dossier_id) values (?, ?)");
@@ -383,16 +402,6 @@ class DossierService extends OAUTHRESTService {
 			$this->bad_request();
 			return;
 		}
-
-		//insert library id and metadata for it into a separate table
-		$sth = $mdb2->prepare("insert into library_metadata (digital_library_id, metadata) values ( ?, ?)");
-		$res2 = $sth->execute(array($itemid, $itemmeta));
-		if (PEAR::isError($res2)) {
-			$this->log("pear error " . $res2->getMessage());
-			$this->bad_request();
-			return;
-		}
-
 
 		$this->item_id = $mdb2->lastInsertID("dossiers", "id");
 		array_push($this->data, array("dossier_id"=> $this->dossier_id, "item_id" => $this->item_id));

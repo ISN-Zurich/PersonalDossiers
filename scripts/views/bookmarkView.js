@@ -17,16 +17,17 @@ function bookmarkView(controller){
 		self.open();
 	});
 	
-//	$("#bookmarkList").bind("click", function(e){
-//		var targetE = e.target;
-//		//if ($(targetE)){
-//			var targetID = e.target.id;
-//			console.log("targetID is "+targetID);
-//			var dossierID = targetID.substring(4);
-//			console.log("dossier ID is "+dossierID);
-//			self.libBookmarkModel.addItem(dossierID);
-//		//}
-//	});
+	$("#bookmarkList").bind("click", function(e){
+		var targetE = event.target.nodeName ;
+		console.log("target clicked "+targetE)
+		if ($(targetE)){
+			var targetID = e.target.id;
+			console.log("targetID is "+targetID);
+			var dossierID = targetID.substring(4);
+			console.log("dossier ID is "+dossierID);
+			self.libBookmarkModel.addItem(dossierID);
+		}
+	});
 }
 
 bookmarkView.prototype.openDiv=openView;
@@ -77,7 +78,7 @@ bookmarkView.prototype.renderDossier=function(){
 	if (!isFollowedDossier){
 
 		var div1=$("<div/>", {
-			"id": "item"+dossierID,
+			//"id": "item"+dossierID,
 			"class":"clickable pd_editDossier bookmarkItem"
 		}).appendTo("#bookmarkList");
 
@@ -88,6 +89,7 @@ bookmarkView.prototype.renderDossier=function(){
 		}).appendTo(div1);
 	
 		var tspan = $("<span/>", {
+			"id":"item"+dossierID,
 			"class": "overflowText bookmarkButtonText",
 			"text":self.controller.models.dossierList.getDossierTitle()
 		}).appendTo(div2);
