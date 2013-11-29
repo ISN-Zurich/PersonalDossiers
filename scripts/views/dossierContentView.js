@@ -136,6 +136,9 @@ DossierContentView.prototype.renderList = function() {
 		$("#contentArea").css("height",contentAreaHeight+"px" );
 	}
 	
+	$( "#sortable" ).sortable();
+    $( "#sortable" ).disableSelection();
+	
 };
 
 
