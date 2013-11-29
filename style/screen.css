@@ -1,0 +1,12 @@
+
+@import 'http://www.isn.ethz.ch/extension/isndesign/design/isn/stylesheets/blueprint/src/reset.css';
+
+@import 'http://www.isn.ethz.ch/extension/isndesign/design/isn/stylesheets/blueprint/src/typography.css';
+@import 'http://www.isn.ethz.ch/extension/isndesign/design/isn/stylesheets/blueprint/src/grid.css';
+@import 'http://www.isn.ethz.ch/extension/isndesign/design/isn/stylesheets/blueprint/src/forms.css';
+
+@import 'http://www.isn.ethz.ch/extension/isndesign/design/isn/stylesheets/src/measure.css';
+@import 'http://www.isn.ethz.ch/extension/isndesign/design/isn/stylesheets/src/forms.css';
+
+
+@import 'http://www.isn.ethz.ch/extension/isndesign/design/isn/stylesheets/src/src/styles.css'; 

@@ -104,6 +104,10 @@ DossierContentView.prototype.renderList = function() {
 
 	if (bookmarkModel.dossierList && bookmarkModel.dossierList.length > 0) {
 	
+		var divContainer=$("<ul/>", {
+			"id": "sortable",
+		}).appendTo("#contentArea");
+		
 		console.log("dossier list index is "+bookmarkModel.index);
 		for (bookmarkModel.index=0; bookmarkModel.index < bookmarkModel.dossierList.length; bookmarkModel.index++){
 			this.renderItem();
@@ -143,10 +147,15 @@ DossierContentView.prototype.renderItem = function() {
 	console.log("enter render Item");
 	var	dossierID = self.controller.models.bookmark.getItemId();
 	console.log("dossier item id is"+dossierID);
-	var div1=$("<div/>", {
-		"id": "item"+dossierID, //to get the itemID dynamically from the model
+	
+//	var divContainer=$("<div/>", {
+//			"id": "sortable",
+//		}).appendTo("#contentArea");
+	
+	var div1=$("<li/>", {
+		"id": "item"+dossierID, 
 		"class" : "column featured2 hideOT dossier_item "
-	}).appendTo("#contentArea");
+	}).appendTo("#sortable");
 	
 	var divFloat=$("<div/>", {
 		"class" : "floatleft"

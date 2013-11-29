@@ -178,3 +178,40 @@ color: #ebedee!important;
 .pd_bookkark_icon_exist{
 	color: #0089CF;
 }
+
+/*redefine the ul and li's in order the dossier list items to be displayed properly */
+
+#content ul li, #content ol li {
+
+}
+
+#content ul {
+
+}
+
+
+li {
+
+}
+
+#content ul li, #content ol li {
+
+}
+
+ul#sortable { /*font-size:10x;*/
+	font-size: 1em;
+	line-height: 1.5em;
+	margin: 0;
+	padding: 0;
+	list-style-image: none;
+	list-style-position: outside;
+	list-style-type: none;
+}
+
+/*we redefine this in order to remove the more icon from the li items, it was set as a background on the original css*/
+#content ul li a, #content a.more, #content a.pdf, #content ul li a:link, #content a.more:link, #content a.pdf:link, #sidebar_right a.more:link {
+background: none;
+padding-left: .8em;
+color: #333;
+border: none;
+}
