@@ -136,6 +136,7 @@ DossierContentView.prototype.renderList = function() {
 		$("#contentArea").css("height",contentAreaHeight+"px" );
 	}
 	
+	//make the list sortable
 	$( "#sortable" ).sortable({
 		placeholder : "placeholder",
 		forcePlaceholderSize:true,		
@@ -149,7 +150,18 @@ DossierContentView.prototype.renderList = function() {
 		}
 	});
     $( "#sortable" ).disableSelection();
-	
+    
+    //ellipsis in multiple lines
+
+//    	var $ellipsisText = $('.dossierItemDescription');
+//    	var textContainer = $('.desContainer').height();
+//    	while ($ellipsisText.outerHeight() > textContainer) {
+//    		$ellipsisText.text(function (index, text) {
+//    			return text.replace(/\W*\s(\S)*$/, '...');
+//    		});
+//    	}
+  
+  	
 };
 
 
@@ -216,10 +228,26 @@ DossierContentView.prototype.renderItem = function() {
 		text:bookmarkModel.getDate()+"/"+bookmarkModel.getType() 
 	}).appendTo(divFloatText);
 	
+	 desContainer=$("<div/>", {
+			"class":"pd_box",
+	 }).appendTo(divFloatText);
+	 
 	divp2=$("<p/>", {
-		"class":"dossierItemDescription",
+		"id":"itemDescription"+dossierID,
+		"class":"text",
 		text:bookmarkModel.getDescription()
-	}).appendTo(divFloatText);
+	}).appendTo(desContainer);
+	
+	
+// //display the dots when there is not enough space for the description
+//    
+//    var $p = $('#itemDescription'+dossierID);
+//    var divh = $('.desContainer').height();
+//    while ($p.outerHeight() > divh) {
+//        $p.text(function (index, text) {
+//            return text.replace(/\W*\s(\S)*$/, '...');
+//        });
+//    }
 
     if (self.controller.oauth){
     	
