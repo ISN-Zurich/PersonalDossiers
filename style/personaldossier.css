@@ -359,13 +359,13 @@ font-color:blue;
 
 
 .dossier_item{
-	border:0px solid red;
+	border:1px solid red;
 	/*float: left;*/
 	margin-right: 10px;	
 	padding-top:10px;
-	padding-bottom:10px;
+	padding-bottom:0px;
 	width:470px;
-	height:100px;
+	height:150px;
 }
 
 .dossier_item_border{
@@ -449,10 +449,11 @@ input#inputContainer{
 }
 
 .dossierItemDescription{
-	height:50px;
+	height:70px;
 	white-space: nowrap;
 	text-overflow:ellipsis;
 	overflow: hidden;
+	border:1px solid green;
 }
 
 body.embedBadge {
@@ -628,7 +629,26 @@ padding-left:3px;
 }
 
 
-/**************SORTING IMPLEMENTATION*******/
+/************************DOSSIER CONTENT VIEW *******************/
+
+
+.deletecontainer{
+	border:1px solid grey;
+}
+
+
+
+
+
+
+
+/*******************END DOSSIER CONTENT VIEW*********************/
+
+
+
+
+
+/***********************SORTING IMPLEMENTATION*******************/
 
 
 .ui-state-highlight {
