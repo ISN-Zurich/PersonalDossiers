@@ -365,11 +365,17 @@ font-color:blue;
 	padding-top:10px;
 	padding-bottom:0px;
 	width:470px;
-	height:145px;
+	/*height:145px;*/
 }
 
+ul#sortable li{
+	height:145px;
+	
+}
 .dossier_item_border{
 	border-bottom:1px solid #C9CACF;
+	height:auto;
+	padding-bottom:15px;
 }
 
 

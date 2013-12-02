@@ -37,7 +37,7 @@ WelcomeView.prototype.update = function(){
 	self.controller.colorizeInteractiveBox(hashTag);
 
 	 $("#welcome").empty();
-
+ 
 		 
 	if ( self.controller.models.user.userProfile ) {
 		console.log("user profile existis, design welcome view");
