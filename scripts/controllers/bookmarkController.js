@@ -9,12 +9,10 @@ function BookmarkController() {
     this.baseURL = baseURL;
     this.targetHost = 'http://www.isn.ethz.ch';
     document.domain = 'ethz.ch';
-    
+    this.allowedHosts = ['http://www.isn.ethz.ch', 'http://isn.ethz.ch', 'http://www.isn.ch', 'http://isn.ch']; 
     self.initOAuth();
-           
     self.models={};
 
-    
     self.models.user = new UserModel(self);
     self.models.dossierList= new DossierListModel(self);
     //self.models.bookmark= new BookmarkModel(self); for the first two steps we don't need it
@@ -89,12 +87,37 @@ BookmarkController.prototype.checkBookmark=function(item_id){
 };
 
 BookmarkController.prototype.notifyNewHeight = function(height){
-	var data={
-			"resize": {
-				"height":height
-			}		
+	console.log("enter notify new height");
+
+		 var data={
+					"resize": {
+						"height":height
+					}	
+			};
+		  
+		console.log("window parent location is "+window.parent.location.hostname);
+		var id = allowedHosts.indexOf(window.parent.location.hostname);
+		if (id >= 0) {
+			targetHost = allowedHosts[id];
+			window.parent.postMessage(JSON.stringify(data), targetHost);
+
+		}
+  	
+};
+
+BookmarkController.prototype.calculateHeight= function(m){
+	
+	var id = this.allowedHosts.indexOf(m.origin);
+	console.log('origin is id: '+ id);
+	if (id >= 0) {
+		targetHost = allowedHosts[id];
+		var data={
+				"resize": {
+					"height":height
+				}	
+		};
+		window.parent.postMessage(JSON.stringify(data), targetHost);
 	};
-	 window.parent.postMessage(JSON.stringify(data), this.targetHost);	
 };
 
 var controller;
@@ -103,3 +126,4 @@ $(document).ready(function(){
     console.log("document ready in bookmark controller");
     controller = new BookmarkController();
 });
+

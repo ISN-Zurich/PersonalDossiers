@@ -54,6 +54,7 @@ bookmarkView.prototype.update = function(){
 
 		} while (dossierListModel.nextDossier());
 
+		console.log("passed the design of the bookmarks list");
 		var height=	$("#bookmarkContainer").height();
 		this.controller.notifyNewHeight(height);
 	}
@@ -76,7 +77,8 @@ bookmarkView.prototype.renderDossier=function(){
 	console.log("library id is "+library_id);
 
 	if (!isFollowedDossier){
-
+		console.log("is not a following dossier, passed design");
+		
 		var div1=$("<div/>", {
 			//"id": "item"+dossierID,
 			"class":"clickable pd_editDossier bookmarkItem"
