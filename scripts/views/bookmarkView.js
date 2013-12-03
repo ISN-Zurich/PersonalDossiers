@@ -101,19 +101,6 @@ bookmarkView.prototype.renderDossier=function(){
 					"text": "K"
 		}).appendTo(div2);
 	
-	
-//		$("#item"+dossierID).bind("click", function(e){
-//			console.log("clicked item");
-//			var targetID = e.target.id;
-//			console.log("targetID in redner is "+targetID);
-//			var dosID =dossierID 
-//			console.log("dossier ID is "+dosID);
-//			libraryBookmarkModel.addItem(dosID);
-//
-//		});
-		
-	
-	
 	}
 	
 };

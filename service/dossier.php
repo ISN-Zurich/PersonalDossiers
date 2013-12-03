@@ -465,28 +465,12 @@ class DossierService extends OAUTHRESTService {
 		}
 		
 		//if no dossier has this item then 
-		//display all the dossiers to which the user is either an owner or an editor
+		//return an empty array
 		if ($res->numRows()<1){
-				
-			$sth2 = $dbh->prepare("SELECT du.dossier_id FROM dossier_users du WHERE du.user_id = ?");
-			$res2 = $sth2->execute(array($user_id));
 			$retval2 = array();
-			if ($res2->numRows() > 0) {
-				while ($row = $res2->fetchRow() ){
-					array_push($retval2,$row['dossier_id']);
-				}
-				$this->data["dossiers"]=$retval2;
-			}
-
+			$this->data["dossiers"]=$retval2;
 		}
 		
-		//COMMENT OLD CODE: BECAUSE IT PREVENTS FROM THE DISPLAY OF THE ADD BOOKMARK BUTTONS
-		// 		if ($res->numRows()<1){
-		// 			 $this->log("no dossier to add the item to");
-		// 				$this->not_found();
-		// 				return;
-		// 		}
-
 		
 		$retval = array();
 		if ($res->numRows() > 0) {
