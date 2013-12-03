@@ -265,7 +265,7 @@ class DossierService extends OAUTHRESTService {
 	 * This method expects an "id" parameter passed as POST url encoded form data that contains the
 	 * digital library id of the new dossier item.
 	 *
-	 * If the requested dossier does not exist, the method triggers a 404 Not Found error.
+	 * If the requested dossier does not exist, the method triggers a 404 Not Found error. 
 	 *
 	 * If the new item id is not present in the digital library, the method triggers a 404 Not Found error.
 	 *
@@ -419,7 +419,44 @@ class DossierService extends OAUTHRESTService {
 	 */
 	protected function update_item() {
 		$this->mark();
-		// load item data
+		//load item data
+		//$sorted_list=$_POST['sorted_list'] : to check if any json_encode is needed?
+		// sorted list looks like sl=[23434 543535 3244 34324 234342];
+		//$dossier_id=$this->dossier_id
+
+		
+		
+		//iterate over the sorted_List array
+		//for each item of this list insert into dossier_items the dig. library id in the order defined by the sorted list array
+		// $values = array();
+		// $values["dossier_id"]=$dossier_id; //NO NEED FOR UPDATE
+		
+		// for each($sorted_list as $key => $value){
+		// 1. select the list of 
+		// *******************************************
+		// 2.
+		// $values["digital_library_id"]=$value; NO NEED FOR UPDATE
+		// $values["position"]=$key;
+		// $mdb2->loadModule('Extended');
+		// key is the for the position for item id with id = value	
+		// $affectedRows = $mdb2->extended->autoExecute("dossiers_items",
+		//		$values,
+		//	MDB2_AUTOQUERY_UPDATE,
+		//		'digital_library_id = '.$mdb2->quote($value, 'integer'),
+		//
+		//		$types);	
+		// }
+		
+		
+	// 		if (PEAR::isError($affectedRows)) {
+	// 			$this->log("error " . $affectedRows->getMessage());
+	// 			$this->bad_request();
+	// 		}
+	// 		else {
+	// 		$this->log("Service 2: dossier updated");
+	// 		$this->no_content();
+	// 		}
+		
 	}
 	 
 	/**
@@ -682,6 +719,7 @@ class DossierService extends OAUTHRESTService {
 		  
 			if (!empty($ttl) || !empty($dsc) || !empty($img)) {
 				 
+				
 				$values = array();
 				$types = array();
 				 
