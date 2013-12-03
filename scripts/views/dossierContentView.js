@@ -136,6 +136,14 @@ DossierContentView.prototype.renderList = function() {
 		$("#contentArea").css("height",contentAreaHeight+"px" );
 	}
 	
+	
+   // self.activateSorting();
+  	
+};
+
+
+DossierContentView.prototype.activateSorting = function(){
+	
 	//make the list sortable
 	$( "#sortable" ).sortable({
 		placeholder : "placeholder",
@@ -150,20 +158,7 @@ DossierContentView.prototype.renderList = function() {
 		}
 	});
     $( "#sortable" ).disableSelection();
-    
-    //ellipsis in multiple lines
-
-//    	var $ellipsisText = $('.dossierItemDescription');
-//    	var textContainer = $('.desContainer').height();
-//    	while ($ellipsisText.outerHeight() > textContainer) {
-//    		$ellipsisText.text(function (index, text) {
-//    			return text.replace(/\W*\s(\S)*$/, '...');
-//    		});
-//    	}
-  
-  	
 };
-
 
 DossierContentView.prototype.renderItem = function() {
 	//var self=this;
@@ -173,10 +168,6 @@ DossierContentView.prototype.renderItem = function() {
 	console.log("enter render Item");
 	var	dossierID = self.controller.models.bookmark.getItemId();
 	console.log("dossier item id is"+dossierID);
-	
-//	var divContainer=$("<div/>", {
-//			"id": "sortable",
-//		}).appendTo("#contentArea");
 	
 	var div1=$("<li/>", {
 		"id": "item"+dossierID, 
@@ -238,16 +229,6 @@ DossierContentView.prototype.renderItem = function() {
 		text:bookmarkModel.getDescription()
 	}).appendTo(desContainer);
 	
-	
-// //display the dots when there is not enough space for the description
-//    
-//    var $p = $('#itemDescription'+dossierID);
-//    var divh = $('.desContainer').height();
-//    while ($p.outerHeight() > divh) {
-//        $p.text(function (index, text) {
-//            return text.replace(/\W*\s(\S)*$/, '...');
-//        });
-//    }
 
     if (self.controller.oauth){
     	
@@ -287,11 +268,22 @@ DossierContentView.prototype.removeItem=function(id){
 
 
 DossierContentView.prototype.arrangeItem=function(id){
-	// call the model removeBookmark()
-		// remove the visuals
-	$("#item"+ id).remove();
+	
 };
 
+/**stores the current sorting order in the bookmark model
+ * @prototype
+ * @function storeOrder
+ **/
+//DossierContentView.prototype.storeOrder = function() {
+//	var orderList = new Array();
+//
+//	$("#sortable").find("li.ui-state-default").each(function(index) {
+//		var id = $(this).attr("id").substring(4);
+//		answers.push(id);
+//	});
+//	controller.models["bookmark"].setOrder(orderList);
+//};
 	
 
 /**
@@ -310,6 +302,7 @@ DossierContentView.prototype.closeDiv = closeView;
 DossierContentView.prototype.close = function() {
 	moblerlog("close course list view");
 	this.active = false;
+	//this.storeOrder();
 	this.closeDiv();
 	$("#contentArea").empty();
 };
