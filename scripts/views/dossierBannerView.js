@@ -100,23 +100,7 @@ DossierBannerView.prototype.activateBannerEditMode = function() {
     
     $("#editDossier").addClass('hide');
     $("#lock-editDossier").removeClass('hide');
-    
-    
-    //activate sorting
-    $( "#sortable" ).sortable({
-		placeholder : "placeholder",
-		forcePlaceholderSize:true,		
-		//placeholder: "ui-state-highlight"
-		start : function(event,ui) {
-			$(ui.item).addClass("currentSortedItem");
-			
-		},
-		stop : function(event,ui) {
-			(ui.item).removeClass("currentSortedItem");
-		}
-	});
-    $( "#sortable" ).disableSelection();
-    
+        
 };
 
 DossierBannerView.prototype.deactivateBannerEditMode = function() {
@@ -130,7 +114,6 @@ DossierBannerView.prototype.deactivateBannerEditMode = function() {
     
     $("#lock-editDossier").addClass('hide');
     $("#editDossier").removeClass('hide');
-    $( "#sortable" ).sortable( "disable" );
     this.editMode = false;
 };
 

@@ -56,7 +56,16 @@ function DossierContentView(dController){
 				  '_blank' 
 				);
 	});
-}
+	
+	 $('#editDossier').bind('click', function(){
+		 self.activateSorting();		 
+	 });
+	 
+	 $('#lock-editDossier').bind('click', function(){
+		 $( "#sortable" ).sortable( "disable" );	 
+	 });
+	
+} //end of constructor
 
 
 /**
