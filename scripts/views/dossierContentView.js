@@ -58,11 +58,24 @@ function DossierContentView(dController){
 	});
 	
 	 $('#editDossier').bind('click', function(){
+		 // 1. display the grey sortable icon next to the titles of the items
+		 // self. showDraggableIcon();
+		 
+		 // 2 enable sortability
 		 self.activateSorting();		 
+	 
+	 
+	 
 	 });
 	 
 	 $('#lock-editDossier').bind('click', function(){
-		 $( "#sortable" ).sortable( "disable" );	 
+		 // 1.store the positioning of the items
+		 self.storeOrder();
+		 
+		 // 2. remove the sortability from the list
+		 $( "#sortable" ).sortable( "disable" );
+		 
+		 // 3. remove the grey sortable icon from the titles of the items
 	 });
 	
 } //end of constructor
@@ -284,16 +297,20 @@ DossierContentView.prototype.arrangeItem=function(id){
  * @prototype
  * @function storeOrder
  **/
-//DossierContentView.prototype.storeOrder = function() {
-//	var orderList = new Array();
-//
-//	$("#sortable").find("li.ui-state-default").each(function(index) {
-//		var id = $(this).attr("id").substring(4);
-//		answers.push(id);
-//	});
-//	controller.models["bookmark"].setOrder(orderList);
-//};
+DossierContentView.prototype.storeOrder = function() {
 	
+	console.log("enter store Order");
+	var orderList = new Array();
+
+	$("#sortable").find("li.ui-state-default").each(function(index) {
+		var id = $(this).attr("id").substring(4);
+		orderList.push(id);
+	});
+	controller.models["bookmark"].setOrder(orderList);
+};
+
+
+DossierContentView.prototype.showDraggableIcon = function(){};
 
 /**
  * closes the view
@@ -311,7 +328,6 @@ DossierContentView.prototype.closeDiv = closeView;
 DossierContentView.prototype.close = function() {
 	moblerlog("close course list view");
 	this.active = false;
-	//this.storeOrder();
 	this.closeDiv();
 	$("#contentArea").empty();
 };

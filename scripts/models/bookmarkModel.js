@@ -32,6 +32,7 @@ function BookmarkModel(dController){
     this.index=0;
     this.userlist=[];
     this.user_index=0;
+    this.storedPosition=[];
     
     this.editMode=false;
     //load the list of dossier items for the active dossier
@@ -147,7 +148,29 @@ BookmarkModel.prototype.removeItem=function(id){
     
 };
 
-BookmarkModel.prototype.arrangeItem=function(){};
+BookmarkModel.prototype.arrangeItem=function(){
+	
+	//stored_order = this.getStoredOrder();
+	//url will look like this: 
+	// var url=self.controller.baseURL +'service/dossier.php/'+ dossierID / + itemID;
+	//method : POST
+	// data: {
+	//sortedList: stored_order
+	//}
+	
+};
+
+
+BookmarkModel.prototype.setOrder=function(array_order){
+	console.log("enter set Order in bookmark model");
+	this.storedPosition = array_order;	
+	console.log("stored order is "+this.storedPosition);
+};
+
+
+BookmarkModel.prototype.storeOrder=function(){
+	return this.storedPosition;
+};
 
 /*
  * Load the list of dossier items for the active dossier

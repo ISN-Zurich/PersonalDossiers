@@ -64,7 +64,7 @@ function dossierController() {
 			self.views.dossierContent.open();
 			self.views.userlist.open();
 			self.views.embed.open();
-			self.views.badge.open();
+			//self.views.badge.open();
 		});
 
 

@@ -31,7 +31,7 @@ function DossierBannerView(myController){
     e.stopPropagation();}}
     );
     
-    $('#editDossier').bind('click', function(){
+    $('#editDossier').bind('click', function(e){
     	if ( self.editMode ) {
     	    // always check for edits
     	    self.checkDescriptionEdit();
@@ -41,7 +41,7 @@ function DossierBannerView(myController){
 	    e.stopPropagation();
     });
     
-    $('#lock-editDossier').bind('click', function(){
+    $('#lock-editDossier').bind('click', function(e){
     	if ( self.editMode ) {
     	    // always check for edits
     	    self.checkDescriptionEdit();
