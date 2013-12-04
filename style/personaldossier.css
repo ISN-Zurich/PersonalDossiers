@@ -695,6 +695,12 @@ padding-left:3px;
 	/*background-color: #ddd;*/
 }
 
+.dragIcon{
+	padding-left:7px;
+	font-size:11px;
+	/*color:white;
+	background:#888;*/
+}
 
 /**  ELLIPSIS FOR DOSSIER DESCRIPTION */
 
@@ -713,7 +719,7 @@ padding-left:3px;
 
 .pd_box .text {
 	color: #333;
-	padding: 8px 20px 20px 8px;
+	padding: 8px 20px 20px 2px;
 	/*width: 204px;*/
 	overflow: hidden;
 	/*background: #E0E0E0;

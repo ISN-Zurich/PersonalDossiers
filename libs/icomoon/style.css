@@ -50,3 +50,6 @@
 .icon-bookmark:before {
 	content: "\4b";
 }
+.icon-expand:before {
+	content: "\53";
+}

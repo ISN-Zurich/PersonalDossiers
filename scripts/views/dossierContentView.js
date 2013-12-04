@@ -59,7 +59,7 @@ function DossierContentView(dController){
 	
 	 $('#editDossier').bind('click', function(){
 		 // 1. display the grey sortable icon next to the titles of the items
-		 // self. showDraggableIcon();
+		 	$('.iconMoon').show();
 		 
 		 // 2 enable sortability
 		 self.activateSorting();		 
@@ -215,11 +215,26 @@ DossierContentView.prototype.renderItem = function() {
 		"class" : "floatleft overviewcontent dossier_text"
 	}).appendTo(div1);
 	
-	var divh1=$("<h1/>", {	}).appendTo(divFloatText);
+	
 	
 	// if we are not in the embedded page display the isn url
 	// if we are in the embed page, but if the dossier item type is different than publication display also the isn url
 	
+	 firstLineContainer=$("<div/>", {
+	}).appendTo(divFloatText); 
+	
+	divp1=$("<span/>", {
+			"class":"small",
+			text:bookmarkModel.getDate()+"/"+bookmarkModel.getType() 
+	}).appendTo(firstLineContainer);
+	
+	icon=$("<span/>", {
+		"class":"st_EditDosser iconMoon dragIcon hide",
+		text:"S" 
+	}).appendTo(firstLineContainer);
+	 
+	var divh1=$("<h1/>", {	}).appendTo(divFloatText);
+	 
 	if (self.controller.id!=="embedController" || bookmarkModel.getType() !== "Publication"){
 		divAText=$("<a/>", {
 			"class": "header1",
@@ -236,10 +251,7 @@ DossierContentView.prototype.renderItem = function() {
 		}).appendTo(divh1);
 		
 	}
-	 divp1=$("<p/>", {
-		"class":"small",
-		text:bookmarkModel.getDate()+"/"+bookmarkModel.getType() 
-	}).appendTo(divFloatText);
+
 	
 	 desContainer=$("<div/>", {
 			"class":"pd_box",
