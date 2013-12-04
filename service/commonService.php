@@ -582,6 +582,7 @@ class OAUTHRESTService extends RESTServiceCommon {
 
         $myheaders = getallheaders();
     	if (!array_key_exists("NonAuth",$myheaders)){ 
+    		$this->log("will check the validation for access token since no NonAuth available");
        	$this->session->validateAccessToken();
           }
     

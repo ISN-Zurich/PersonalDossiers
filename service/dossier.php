@@ -138,8 +138,15 @@ class DossierService extends OAUTHRESTService {
 	 */
 	protected function handle_POST() {
 		$this->mark();
+		// make sure that the post parameters are read
+		$content = file_get_contents("php://input");
+		$this->log($content);
+		$data = json_decode($content, true);
+		if (!data) {
+			parse_str($content, $_POST);
+		}
 		if ($this->item_id > 0 ) {
-			$this->update_item();
+			$this->update_item($data);
 		}
 		else if ( $this->dossier_id > 0 ) {
 			$this->update_dossier();
@@ -417,12 +424,21 @@ class DossierService extends OAUTHRESTService {
 	 *
 	 * TODO: Implement item positioning
 	 */
-	protected function update_item() {
+	protected function update_item($data) {
 		$this->mark();
+		$this->log("enter update item");
+		
 		//load item data
-		//$sorted_list=$_POST['sorted_list'] : to check if any json_encode is needed?
+		
+		if (array_key_exists('sortedList', $data)) {
+			$this->log("update sortedList");
+			$sorted_list=$data['sortedList'];
+		}
+		
 		// sorted list looks like sl=[23434 543535 3244 34324 234342];
-		//$dossier_id=$this->dossier_id
+		$this->log("sorted list is".json_encode($sorted_list));
+		$dossier_id=$this->dossier_id;
+		$this->log("dossier id in update item is ".$dossier_id);
 
 		
 		
@@ -962,24 +978,27 @@ class DossierService extends OAUTHRESTService {
 					}
 					break;
 				case 'POST':
+					$this->user = new UserManagement($this->dbh);
 					$this->log("enter POST in prepare statement in dossier.php");
 
 					//or update a dossier item (its metadata like title, description, author, etc.)
 					if ( $this->item_id) {
+						
 						// only access if the user is an editor
 						if (!$this->user->hasEditorPriviledges($this->session->getUserID(),$this->dossier_id)){
+							$this->log("we will return false in post in prepare statement");
 							$retval = false;
-						}
-					}
-					else {
-						$this->user = new UserManagement($this->dbh);
-						// only access if the user is an owner: dossierId > 0 or any other case
-						// update a dossier (title, description, image),
-						if (!$this->user->isOwner($this->session->getUserID(),$this->dossier_id)){
-							$retval = false;
-						}
-					}
-					break;
+						} 
+						
+					} break;
+// 					else {
+// 						$this->user = new UserManagement($this->dbh);
+// 						// only access if the user is an owner: dossierId > 0 or any other case
+// 						// update a dossier (title, description, image),
+// 						if (!$this->user->isOwner($this->session->getUserID(),$this->dossier_id)){
+// 							$retval = false;
+// 						}
+					//}
 				case 'DELETE':
 					$this->log("enter DELETE in prepare statement in dossier.php");
 					if ( $this->item_id) {
@@ -1004,6 +1023,7 @@ class DossierService extends OAUTHRESTService {
 			}
 		}
 		if (!$retval) {
+			
 			$this->authentication_required();
 		}
 		 
