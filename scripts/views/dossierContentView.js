@@ -76,6 +76,7 @@ function DossierContentView(dController){
 		 $( "#sortable" ).sortable( "disable" );
 		 
 		 // 3. remove the grey sortable icon from the titles of the items
+		 $('.iconMoon').hide();
 	 });
 	
 } //end of constructor
@@ -229,7 +230,7 @@ DossierContentView.prototype.renderItem = function() {
 	}).appendTo(firstLineContainer);
 	
 	icon=$("<span/>", {
-		"class":"st_EditDosser iconMoon dragIcon hide",
+		"class":"iconMoon dragIcon hide",
 		text:"S" 
 	}).appendTo(firstLineContainer);
 	 
