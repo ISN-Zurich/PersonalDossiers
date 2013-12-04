@@ -682,16 +682,16 @@ padding-left:3px;
 	position: -3px -3px;
 	height: 120px;
 	line-height:180px;
-	background: #ccc;
-	border:1px solid black;:
+	background: #888;
+	border:0x solid black;:
 }
 
 .currentSortedItem {
 	position:0px 0px;
-	border: 1px solid red;
+	border: 0px solid red;
 	height:150px;
 	line-height:150x;
-	background:#fff8dc;
+	background:#ebedee;
 	/*background-color: #ddd;*/
 }
 
