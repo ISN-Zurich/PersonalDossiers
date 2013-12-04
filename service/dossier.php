@@ -175,7 +175,7 @@ class DossierService extends OAUTHRESTService {
 		$content = file_get_contents("php://input");
 		$this->log($content);
 		$data = json_decode($content, true);
-		if (!data) {
+		if (!$data) {
 			parse_str($content, $_POST);
 		}
 		 
@@ -398,18 +398,45 @@ class DossierService extends OAUTHRESTService {
 
 		} //end of IF. now we know that the KMS metadata is in our database.
 		
-		// now we actually add the item to the very dossier
 		
-		// we no longer use the user id for the dossier items
+		
+		//calculate the position id of the newly inserted item
+		// 1 select the records from dossier items where dossier_id = dossier id
+		// count the number of the results
+		// position id is the number of results + 1
+		$dbh = $this->dbh;
+		$sthPosition = $dbh->prepare("SELECT * FROM dossier_items di WHERE di.dossier_id = ?");
+		$resPosition = $sthPosition->execute(array($this->dossier_id));
+		if (PEAR::isError($resPosition)) {
+			$this->log("pear error " . $res1->getMessage());
+			$this->bad_request();
+			return;
+		}
+		$tempArray= array();
+		if ($resPosition->numRows() > 0) {
+			while ($row = $resPosition->fetchRow() ){
+				$this->log('row: ' . json_encode($row));
+				array_push($tempArray,$row['dossier_id']);
+			}
+			
+		}
+		
+		$this->log("temp Array lenght is ".count($tempArray));
+		$position_id = count($tempArray);
+		$this->log('position id is '.$position_id);
+		// now we actually add the item to the very dossier (we no longer use the user id for the dossier items)
 		$this->log('metadata for id: ' . $itemid . " is " . $itemmeta);
-		$sth = $mdb2->prepare("insert into dossier_items (digital_library_id, dossier_id) values (?, ?)");
-		$res1 = $sth->execute(array($itemid, $this->dossier_id));
+		$sth = $mdb2->prepare("insert into dossier_items (digital_library_id, dossier_id, position) values (?, ?, ?)");
+		$res1 = $sth->execute(array($itemid, $this->dossier_id,$position_id));
+		
 		if (PEAR::isError($res1)) {
 			$this->log("pear error " . $res1->getMessage());
 			$this->bad_request();
 			return;
 		}
 
+		
+				
 		$this->item_id = $mdb2->lastInsertID("dossiers", "id");
 		array_push($this->data, array("dossier_id"=> $this->dossier_id, "item_id" => $this->item_id));
 		$this->respond_json_data();
@@ -514,7 +541,7 @@ class DossierService extends OAUTHRESTService {
 		$this->log("user id in read item is ".$user_id);
 		$this->log("item id  ".$item_id);
 		
-		$sth = $dbh->prepare("SELECT di.dossier_id FROM dossier_items di,dossier_users du WHERE du.dossier_id = di.dossier_id AND du.user_id = ? AND di.digital_library_id=?");
+		$sth= $dbh->prepare("SELECT di.dossier_id FROM dossier_items di,dossier_users du WHERE du.dossier_id = di.dossier_id AND du.user_id = ? AND di.digital_library_id=?");
 		$res = $sth->execute(array($user_id,$item_id));
 		
 		if (PEAR::isError($res)){
