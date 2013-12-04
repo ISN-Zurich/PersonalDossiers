@@ -790,7 +790,7 @@ class DossierService extends OAUTHRESTService {
 			$sth->free();
 		  
 			// load the dossier item list
-			$sth = $mdb2->prepare('SELECT lm.metadata, di.dossier_id FROM dossier_items di,library_metadata lm  WHERE di.dossier_id=? AND di.digital_library_id = lm.digital_library_id  ');
+			$sth = $mdb2->prepare('SELECT lm.metadata, di.dossier_id, di.position FROM dossier_items di,library_metadata lm  WHERE di.dossier_id=? AND di.digital_library_id = lm.digital_library_id ORDER BY di.position ASC ');
 			$res = $sth->execute($this->dossier_id);
 			$idata= array();
 			while ($row=$res->fetchRow()) {
