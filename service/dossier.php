@@ -422,8 +422,7 @@ class DossierService extends OAUTHRESTService {
 	 * This method is called by handle_post() in dossier item mode and changes the position of a
 	 * dossier item inside the provided dossier.
 	 *
-	 * TODO: Implement item positioning
-	 */
+	 * */
 	protected function update_item($data) {
 		$this->mark();
 		$this->log("enter update item");
@@ -435,45 +434,53 @@ class DossierService extends OAUTHRESTService {
 			$sorted_list=$data['sortedList'];
 		}
 		
-		// sorted list looks like sl=[23434 543535 3244 34324 234342];
 		$this->log("sorted list is".json_encode($sorted_list));
 		$dossier_id=$this->dossier_id;
 		$this->log("dossier id in update item is ".$dossier_id);
 
-		
-		
+			
 		//iterate over the sorted_List array
 		//for each item of this list insert into dossier_items the dig. library id in the order defined by the sorted list array
-		// $values = array();
-		// $values["dossier_id"]=$dossier_id; //NO NEED FOR UPDATE
+		$values = array();
+		$types = array();
 		
-		// for each($sorted_list as $key => $value){
-		// 1. select the list of 
-		// *******************************************
-		// 2.
-		// $values["digital_library_id"]=$value; NO NEED FOR UPDATE
-		// $values["position"]=$key;
-		// $mdb2->loadModule('Extended');
-		// key is the for the position for item id with id = value	
-		// $affectedRows = $mdb2->extended->autoExecute("dossiers_items",
-		//		$values,
-		//	MDB2_AUTOQUERY_UPDATE,
-		//		'digital_library_id = '.$mdb2->quote($value, 'integer'),
-		//
-		//		$types);	
-		// }
+		if (!empty($sorted_list)){
+			
+		 foreach($sorted_list as $key => $value){
+		 	$this->log("enter foreach loop");
+		 	
+		 	$values["dossier_id"]=$dossier_id;
+		 	array_push($types, "integer");
+		 	$values["digital_library_id"]=$value; 
+		 	array_push($types, "integer");
+		 	$values["position"]=$key;
+		 	array_push($types, "integer");
+		 	$mdb2 = $this->dbh;
+		 	$mdb2->loadModule('Extended');
+		 	
+		 //	key is the for the position for item id with id = value
+		 	$affectedRows = $mdb2->extended->autoExecute("dossier_items",
+		 			$values,
+		 			MDB2_AUTOQUERY_UPDATE,
+		 			'digital_library_id = '.$mdb2->quote($value, 'integer'),
+
+		 			$types);
+
+
+		 	if (PEAR::isError($affectedRows)) {
+		 		$this->log("error " . $affectedRows->getMessage());
+		 		$this->bad_request();
+		 	}
+		 	else {
+		 		$this->log("Service: item updated");
+		 		$this->no_content();
+		 	}
+		 	 
+		 } //end of for
+
 		
-		
-	// 		if (PEAR::isError($affectedRows)) {
-	// 			$this->log("error " . $affectedRows->getMessage());
-	// 			$this->bad_request();
-	// 		}
-	// 		else {
-	// 		$this->log("Service 2: dossier updated");
-	// 		$this->no_content();
-	// 		}
-		
-	}
+	} //end of if
+} //end of function
 	 
 	/**
 	 * read_item()
