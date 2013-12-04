@@ -59,7 +59,7 @@ function DossierContentView(dController){
 	
 	 $('#editDossier').bind('click', function(){
 		 // 1. display the grey sortable icon next to the titles of the items
-		 	$('.iconMoon').show();
+		 	$('.dragIcon').show();
 		 
 		 // 2 enable sortability
 		 self.activateSorting();		 
@@ -76,7 +76,7 @@ function DossierContentView(dController){
 		 $( "#sortable" ).sortable( "disable" );
 		 
 		 // 3. remove the grey sortable icon from the titles of the items
-		 $('.iconMoon').hide();
+		 $('.dragIcon').hide();
 	 });
 	
 } //end of constructor
@@ -167,6 +167,9 @@ DossierContentView.prototype.renderList = function() {
 
 DossierContentView.prototype.activateSorting = function(){
 	
+	console.log("enter activateSorting");
+	//$( "#sortable" ).removeClass("ui-sortable-disabled");
+	$( "#sortable" ).sortable( "enable" );
 	//make the list sortable
 	$( "#sortable" ).sortable({
 		placeholder : "placeholder",
