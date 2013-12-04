@@ -72,10 +72,14 @@ function DossierContentView(dController){
 		 // 1.store the positioning of the items
 		 self.storeOrder();
 		 
-		 // 2. remove the sortability from the list
+		 // 2. send the new positions to the server
+		 
+		 self.controller.models.bookmark.arrangeItems();
+		 
+		 // 3. remove the sortability from the list
 		 $( "#sortable" ).sortable( "disable" );
 		 
-		 // 3. remove the grey sortable icon from the titles of the items
+		 // 4. remove the grey sortable icon from the titles of the items
 		 $('.dragIcon').hide();
 	 });
 	

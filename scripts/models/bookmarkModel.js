@@ -148,16 +148,51 @@ BookmarkModel.prototype.removeItem=function(id){
     
 };
 
-BookmarkModel.prototype.arrangeItem=function(){
+BookmarkModel.prototype.arrangeItems=function(){
+	var self=this;
+	console.log("enter arrange Items in Bookmark model");
+	var sorted_order = this.getOrder();
+	console.log("sorted order is "+sorted_order);
+	var dossierID=self.controller.getActiveDossier();
+	console.log("dossierID  in arrangeItems is" +dossierID);
 	
-	//stored_order = this.getStoredOrder();
 	//url will look like this: 
-	// var url=self.controller.baseURL +'service/dossier.php/'+ dossierID / + itemID;
-	//method : POST
-	// data: {
-	//sortedList: stored_order
-	//}
+	var url=self.controller.baseURL +'service/dossier.php/'+ dossierID + '/100'; 
+	var method="POST";
+	var dataObject = {
+		"sortedList": sorted_order
+	};
+	var data=JSON.stringify(dataObject);
 	
+//	var myData={};
+//	myData.sortedList=sorted_order;
+	console.log("data to be sent are "+data);
+	$.ajax({
+	    url:  url,
+	    type : method,
+	    data: data,
+	    dataType : 'json',
+	    success : sentData,
+	    error : function(request) {
+		console.log("Error while sending arranging order of items to the server");
+		console.log("ERROR status text: "+ request.statusText); 
+		console.log("ERROR status code: "+ request.statusCode()); 
+		console.log("ERROR status code is : " + request.status);
+		console.log("ERROR responsetext: "+ request.responseText); 
+	    },
+	    beforeSend : setHeader
+	});
+	
+	
+	function sentData(){
+		console.log("success in sending arranging order to the server");
+		//$(document).trigger("dataSuccessfullySent"); DO WEE NEED THIS
+	}
+	
+	function setHeader(xhr){
+		var header_request=self.controller.oauth.oauthHeader(method, url);
+		xhr.setRequestHeader('Authorization', header_request);
+	}
 };
 
 
@@ -168,7 +203,7 @@ BookmarkModel.prototype.setOrder=function(array_order){
 };
 
 
-BookmarkModel.prototype.storeOrder=function(){
+BookmarkModel.prototype.getOrder=function(){
 	return this.storedPosition;
 };
 
@@ -270,7 +305,7 @@ BookmarkModel.prototype.sendDataToServer=function(){
     var self=this;
     var dossierID = self.dossierId;
     var url=self.controller.baseURL +"service/dossier.php/"+dossierID;
-    var method="POST";
+    var method="POST ";
     var myData = {};
     
     if ( dossierID &&
@@ -281,7 +316,7 @@ BookmarkModel.prototype.sendDataToServer=function(){
 	if (self.dossierTitle && self.dossierTitle.length) {
 	    myData.title = self.dossierTitle;
 	}
-	if (self.dossierDescription && self.dossierDescription.length) {
+	if (self.dossierDescription && self.dossierDescription.length) { 
             console.log('send description to server ' + self.dossierDescription );
 	    myData.description = self.dossierDescription;
 	}
