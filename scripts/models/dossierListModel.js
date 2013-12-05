@@ -64,6 +64,7 @@ DossierListModel.prototype.getDossierImage = function(){
 };
 
 DossierListModel.prototype.getUserType=function(){
+	console.log("enter getUserType");
 	if( this.dossierList && this.dossierList.length > 0) {		
 		return this.dossierList[this.index].user_type;
 	}
@@ -159,7 +160,7 @@ DossierListModel.prototype.getUserDossiers=function(){
 	function success(data){
 		self.dossierList=data;
 
-		console.log("dossier list is "+JSON.stringify(self.dossierList));
+		console.log("dossier list in dossier LIST MODEL is "+JSON.stringify(self.dossierList));
 		console.log("dossier_id is "+JSON.stringify(self.dossierList[0].dossier_id));
 
 		// inform all dossier views that they need to update

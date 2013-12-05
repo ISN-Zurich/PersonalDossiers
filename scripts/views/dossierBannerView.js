@@ -37,8 +37,15 @@ function DossierBannerView(myController){
     	    self.checkDescriptionEdit();
     	    self.checkTitleEdit();			
     	}
+    	
+    	var userType=self.controller.models.dossierList.getUserType();
+    	console.log("user type in dossier banner view is "+userType);
+    	if (userType!== "user"){
+    		console.log("will activate banner edit mode, we are not users");
     	self.activateBannerEditMode();
 	    e.stopPropagation();
+    	}
+    	// //TODO: implement the else: display to the user a dropdown message that he does not have the rights to edit 
     });
     
     $('#lock-editDossier').bind('click', function(e){

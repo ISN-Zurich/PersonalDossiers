@@ -240,6 +240,7 @@ UserModel.prototype.getUserProfile=function(){
 
 
 UserModel.prototype.setActiveDossier = function(dossierId){
+	console.log("enter set Active Dossier in user model");
     if( this.controller.models.dossierList.dossierList && this.controller.models.dossierList.dossierList.length > 0) {
 	this.activeDossier=dossierId;
 	//store in the local storage
@@ -316,6 +317,8 @@ UserModel.prototype.sendUserProfileToServer = function(){
     
     function success(data){
 	console.log("success in sending the user profile data to the server");
+	//TODO: we can add here the transition to index.html instead in the welcome view, after set of active dossier
+	// we will be sure in this way that the profile will be sent to the server.
     }
     
     function setHeader(xhr){

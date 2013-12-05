@@ -58,13 +58,18 @@ function DossierContentView(dController){
 	});
 	
 	 $('#editDossier').bind('click', function(){
-		 // 1. display the grey sortable icon next to the titles of the items
-		 	$('.dragIcon').show();
+		 var userType=self.controller.models.dossierList.getUserType();
+		 console.log("user type in dossier content view is "+userType);
+		 if (userType!== "user"){
+
+			 // 1. display the grey sortable icon next to the titles of the items
+			 $('.dragIcon').show();
+
+			 // 2 enable sortability
+			 self.activateSorting();		 
+		 }
 		 
-		 // 2 enable sortability
-		 self.activateSorting();		 
-	 
-	 
+		 //TODO: implement the else: display to the user a dropdown message that he does not have the rights to edit 
 	 
 	 });
 	 

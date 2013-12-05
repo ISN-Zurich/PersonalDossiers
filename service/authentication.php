@@ -268,6 +268,8 @@ class AuthenticationService extends OAUTHRESTService {
     	
         $data = file_get_contents("php://input");
         $this->log('data found are: '. $data);
+        
+        /******OLD COMMENT********************/
         try {
              $tmp = json_decode($data, true);
              $this->log('encoded user data succesfully');
@@ -288,12 +290,13 @@ class AuthenticationService extends OAUTHRESTService {
         $this->log('user id in update profile is'.$uid);
         
         // strip the user id, email and username from the profile
-//         unset($tmp['user_id']);
-//         unset($tmp['title']);
-//         unset($tmp['name']);
-//         unset($tmp['email']);
+        //*** VERY OLD COMMENT *****/
+        //unset($tmp['user_id']);
+        //unset($tmp['title']);
+        //unset($tmp['name']);
+        //unset($tmp['email']);
     
-        $data = json_encode($tmp);
+     	$data = json_encode($tmp);
         
         $types = array();
         array_push($types, "text");
@@ -316,10 +319,14 @@ class AuthenticationService extends OAUTHRESTService {
             	
             }
             else {
-                // insert
-                $sqlstring = "INSERT INTO userprofile (profile_data, user_id) VALUES (?,?)";
-                
-                
+                //  if for the specific user the active dossier is not set yet, then insert it into profile_data in userprofile table 
+                $sth2 = $mdb2->prepare("INSERT INTO userprofile (profile_data, user_id) VALUES (?,?)");
+                $res2 = $sth2->execute(array($data, $uid));
+                if (PEAR::isError($res2)) {
+                	$this->log("pear error " . $res2->getMessage());
+                	$this->bad_request();
+                	return;
+                }
             }
             
            //Update the user table
@@ -336,7 +343,7 @@ class AuthenticationService extends OAUTHRESTService {
             	$sth2->free();
             }
             else {
-            	//inser user data : This part of the user registration
+            	//insert user data : This part of the user registration
             	
             	     	
             	
