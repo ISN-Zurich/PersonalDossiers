@@ -178,6 +178,8 @@ DossierBannerView.prototype.renderBanner= function(){
     //Design the Banner area 
     $("#header_image").empty();
     var bookmarkModel = self.controller.models['bookmark'];
+    var dossierListModel=self.controller.models['dossierList'];
+    var userType=dossierListModel.getUserType();
     //var dossierId= bookmarkModel.getDossierID();
     var dossierId=bookmarkModel.dossierId;
     
@@ -216,7 +218,7 @@ DossierBannerView.prototype.renderBanner= function(){
 		"class":"overview white"
 	}).appendTo("#header_image");
       
-    if (self.controller.oauth){
+    if (self.controller.oauth && userType !== "user"){
     	$("#editDossier").removeClass("hide");
     	
     }

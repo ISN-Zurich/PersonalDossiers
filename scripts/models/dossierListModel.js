@@ -63,17 +63,48 @@ DossierListModel.prototype.getDossierImage = function(){
 	return undefined;
 };
 
-DossierListModel.prototype.getUserType=function(){
+DossierListModel.prototype.getUserTypeOld=function(){
+	
 	console.log("enter getUserType");
-	if( this.dossierList && this.dossierList.length > 0) {		
+
+	if(this.dossierList && this.dossierList.length > 0) {		
 		return this.dossierList[this.index].user_type;
 	}
 	return undefined;
 };
 
+
+
+DossierListModel.prototype.getUserType= function(){
+	console.log("enter get user type");
+	console.log("active dossier is "+this.controller.getActiveDossier());
+	console.log("dossier list in THIS MODEL is"+this.dossierList);
+//	myArray=new Array();
+//	$.each(this.dossierList, function(key, value) { 
+//	  myArray.push(value);
+//	});
+//	console.log("my ARRAY IS "+myArray);
+//	console.log("THRID dos id ITEM IN MY ARRAY "+JSON.parse(myArray[2]["dossier_id"]));
+	console.log("raw user type " +this.dossierList[0]["user_type"]);
+	console.log("stringified user type " +JSON.stringify(this.dossierList[1]["user_type"]));
+	var userType="";
+	console.log("dossier list length "+ this.dossierList.length);
+		for (var i=0; i <=this.dossierList.length -1; i++){
+		//console.log("dossier id for current items is "+this.dossierList[i]['dossier_id']);
+			console.log("i iss "+i);
+		if ((this.dossierList[i]["dossier_id"])===this.controller.getActiveDossier()){
+			userType=this.dossierList[i]["user_type"];
+		
+		}
+	}
+		console.log("userType is "+userType);
+	return userType;
+};
+
+
 DossierListModel.prototype.isFollowedDossier = function(){
 	console.log("enter isFollowedDossier");
-	userType=this.getUserType();
+	userType=this.getUserTypeOld();
 	if (userType == "user"){
 		console.log("userType is user");
 		return true;
