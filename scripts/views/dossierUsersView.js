@@ -54,7 +54,7 @@ DossierUsersView.prototype.update = function(){
 			}).appendTo("#pd_udossierEditors");}
 		
 		if (self.controller.models.bookmark.getUsertype() == "user"){
-			self.user=true;
+			self.users=true;
 			editorContainer=$("<div/>",{
 				"id":"user"+self.controller.models.bookmark.getUserid(),
 				"class":"pd_loginContainer clickable userlistItem",
