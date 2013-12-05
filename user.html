@@ -534,7 +534,7 @@
 						</div>
 					</div>
 				</div>	<!-- end of user profile -->
-
+			<form method="POST" action="verify.php">
 				<div id="registrationView" class="hide">
 
 					<div id="registrationContainer">
@@ -608,6 +608,25 @@
 							</div>
 						</div>
 
+						<!-- CAPTCHA -->
+						<div class="captcha">
+							<script type="text/javascript"
+								src="http://www.google.com/recaptcha/api/challenge?k=6LfmWesSAAAAACG80Y8-X7VXC-ElpXkqnfFWf4Ry">
+								
+							</script>
+							<noscript>
+								<iframe
+									src="http://www.google.com/recaptcha/api/noscript?k=6LfmWesSAAAAACG80Y8-X7VXC-ElpXkqnfFWf4Ry"
+									height="300" width="500" frameborder="0"></iframe>
+								<br>
+								<textarea name="recaptcha_challenge_field" rows="3" cols="40">
+     					</textarea>
+								<input type="hidden" name="recaptcha_response_field"
+									value="manual_challenge">
+							</noscript>
+						</div>
+
+
 						<div id="registration_success" class=" pd_success hide">Your
 							profile has been succesfully updated</div>
 						<div id="registration_incosistency_message"
@@ -628,7 +647,8 @@
 					</div>
 
 				</div> <!-- end of registaiton view -->
-
+				</form>
+				
 				<div id="notifications" class="hide"></div>
 
 
