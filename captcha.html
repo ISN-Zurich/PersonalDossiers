@@ -1,0 +1,198 @@
+<html>
+<head>
+<title>Captcha</title>
+
+<style type="text/css" media="screen">
+@import
+	url("http://www.isn.ethz.ch/extension/isndesign/design/isn/stylesheets/screen.css")
+	;
+</style>
+<style type="text/css">
+@import
+	url("http://www.isn.ethz.ch/extension/kmscomments/design/kmscomments/stylesheets/kmscomments.css")
+	;
+
+@import
+	url("http://www.isn.ethz.ch/extension/kmssearch/design/kmssearch/stylesheets/kmssearch.css")
+	;
+
+@import
+	url("http://www.isn.ethz.ch/extension/isndesign/design/isn/stylesheets/thickbox.css")
+	;
+
+@import
+	url("http://www.isn.ethz.ch/extension/isndesign/design/isn/stylesheets/slider.css")
+	;
+
+@import
+	url("http://www.isn.ethz.ch/extension/isndesign/design/isn/stylesheets/digilib.css")
+	;
+
+@import
+	url("http://www.isn.ethz.ch/extension/isndesign/design/isn/stylesheets/staff.css")
+	;
+
+@import
+	url("http://www.isn.ethz.ch/extension/isndesign/design/isn/stylesheets/ddmenu.css")
+	;
+
+@import
+	url("http://www.isn.ethz.ch/extension/isndesign/design/isn/stylesheets/sectioned_article.css")
+	;
+
+@import
+	url("http://www.isn.ethz.ch/extension/isndesign/design/isn/stylesheets/jobs.1.0.css")
+	;
+
+@import
+	url("http://www.isn.ethz.ch/extension/isndesign/design/isn/stylesheets/video_overlay.1.0.css")
+	;
+
+@import
+	url("http://www.isn.ethz.ch/extension/isndesign/design/isn/stylesheets/footer.1.0.css")
+	;
+
+@import
+	url("http://www.isn.ethz.ch/extension/isndesign/design/isn/stylesheets/search_banner.1.1.css")
+	;
+
+@import
+	url("http://www.isn.ethz.ch/extension/ezlightbox/design/standard/stylesheets/lightbox.css")
+	;
+</style>
+
+<link type="text/css" href="style/personaldossier.css" rel="stylesheet" />
+<link type="text/css" href="style/developmentScratch.css" 	rel="stylesheet" />
+<link type="text/css" href="style/captcha.css" rel="stylesheet" />
+	
+
+</head>
+
+<body>
+
+	<div class="column span-12" id="content">
+		<form method="POST" action="verify.php">
+			<div id="registrationView" class="" style="display: block;">
+
+				<div id="registrationContainer">
+
+					<div id="registrationHeader" class="sidebar-header darkblue">
+						Registration</div>
+					<div>
+						<div id="pd_registration_title_label" class="adv_search_label">
+							Title</div>
+						<div id="titleRegistrationInput"
+							class="adv_search_label adv_search_input_container"
+							contenteditable="true"></div>
+					</div>
+
+					<div>
+						<div id="pd_registration_name_label" class="adv_search_label">
+							Name</div>
+						<div id="nameInputContainer">
+							<div id="nameRegistrationInput"
+								class="adv_search_label adv_search_input_container"
+								contenteditable="true"></div>
+							<div id="empty_name"
+								class="adv_search_label adv_search_input_container registration_message hide">you
+								should type a name</div>
+						</div>
+					</div>
+
+					<div>
+						<div id="pd_registration_email_label" class="adv_search_label">
+							Email</div>
+						<div id="emailInputContainer">
+							<div id="emailRegistrationInput"
+								class="adv_search_label adv_search_input_container"
+								contenteditable="true"></div>
+							<div id="empty_mail"
+								class="adv_search_label adv_search_input_container registration_message hide">you
+								should type an email</div>
+							<div id="notvalid_mail"
+								class="adv_search_label adv_search_input_container registration_message hide">
+								valid format: example@example.com</div>
+							<div id="existing_mail"
+								class=" adv_search_label adv_search_input_container registration_message hide">email
+								already taken</div>
+						</div>
+					</div>
+
+
+					<div>
+						<div id="pd_registration_password_label" class="adv_search_label">
+							Password</div>
+						<div id="passwordInputContainer">
+							<div id="passwordRegistrationInput"
+								class="adv_search_label adv_search_input_container"
+								contenteditable="true"></div>
+							<div id="empty_password"
+								class="adv_search_label adv_search_input_container registration_message hide">you
+								should type a password</div>
+							<div id="short_password"
+								class="adv_search_label adv_search_input_container registration_message hide">you
+								should type at least 6 characters</div>
+
+						</div>
+					</div>
+
+
+					<div id="passwordconfirmarea">
+						<div id="pd_reg_password_confirm_label" class="adv_search_label">
+							Confirm Password</div>
+						<div id="passwordRegContainer">
+							<div id="passwordRegConfirmInput"
+								class="adv_search_label adv_search_input_container"
+								contenteditable="true"></div>
+							<div id="empty_confirmPassword"
+								class="adv_search_label adv_search_input_container registration_message hide">you
+								should confirm your password</div>
+						</div>
+					</div>
+
+				<!-- CAPTCHA -->
+					<div class="captcha">
+					<script type="text/javascript"
+						src="http://www.google.com/recaptcha/api/challenge?k=6LfmWesSAAAAACG80Y8-X7VXC-ElpXkqnfFWf4Ry">
+						
+					</script>
+					<noscript>
+						<iframe
+							src="http://www.google.com/recaptcha/api/noscript?k=6LfmWesSAAAAACG80Y8-X7VXC-ElpXkqnfFWf4Ry"
+							height="300" width="500" frameborder="0"></iframe>
+						<br>
+						<textarea name="recaptcha_challenge_field" rows="3" cols="40">
+     					</textarea>
+						<input type="hidden" name="recaptcha_response_field"
+							value="manual_challenge">
+					</noscript>
+					</div>
+					
+				
+				
+				
+					<div id="registration_success" class=" pd_success hide">Your
+						profile has been succesfully updated</div>
+					<div id="registration_incosistency_message"
+						class=" pd_success hide">The thwo fields should be identical</div>
+					<div id="registration_empty" class=" pd_warning hide">You
+						should complete all the fields</div>
+					<div id="saveChanges_container" class="adv_search_buttons right">
+						<div id="submit_confirmation"
+							class="search_bar_button inactive_registration right"
+							value="Submit" name="submit">Register</div>
+					</div>
+					<div id="cancelRegistration_container"
+						class="adv_search_buttons left">
+						<div id="cancel_registration" class="search_bar_button left"
+							value="Submit" name="submit">Cancel</div>
+					</div>
+				</div>
+
+			</div>
+
+
+			</form>
+	</div>
+</body>
+</html>
