@@ -11,5 +11,6 @@
         "(reCAPTCHA said: " . $resp->error . ")");
  } else {
    // Your code here to handle a successful verification
+   header('Location: http://www.google.com');
  }
  ?>
