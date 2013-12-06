@@ -32,6 +32,12 @@ function RegistrationView(controller){
 		$("#empty_mail").show();	
 	});
 	
+	$(document).bind('CaptchaError', function(){
+		console.log("bound CaptchaError in registration view");
+				
+		$("#captcha_message").show();	
+	});
+	
 	$(document).bind('EmailNotValidated', function(){
 		console.log("bound email not validated in registration view");
 		$("#emailRegistrationInput").hide();
@@ -153,6 +159,13 @@ function RegistrationView(controller){
 		$("#nameRegistrationInput").show();
 		
 	});
+	
+	$("#recaptcha_response_field").bind("click", function(e){
+		console.log("clicked on recaptcha response field");
+		$("#captcha_message").hide();		
+	});
+	
+	
 	
 	$("#empty_mail").bind("click", function(e){
 		console.log("clicked on the empty email");

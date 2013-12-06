@@ -816,4 +816,9 @@ padding-left:3px;
 }
 */
 
+#captcha_message{
+	color:red;
+	font-size:12px;
+	padding:10px;
+}
 
