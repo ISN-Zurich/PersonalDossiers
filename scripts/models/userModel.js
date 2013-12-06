@@ -427,21 +427,28 @@ UserModel.prototype.sendUserPasswordToServer = function(password,mail){
 
 UserModel.prototype.register = function(password){
 	console.log("enter register in user model");
+	
+	//this.validateCapcha();
 	var self=this;
 	var email=self.getEmail();
 	var hash1= hex_sha1(email+password); 
 	console.log("hash1 is "+hash1);
+	var recaptcha_response_field=$("#recaptcha_response_field").val();
+	var recaptcha_challenge_field=$("#recaptcha_challenge_field").val();
+	console.log("recaptcha_response_field is "+recaptcha_response_field);
 	
 	var url= self.controller.baseURL +'service/authentication.php/register';
 	var method = 'POST';
 	console.log("url is "+url);
 	
-	 var dataObject= { 
-			  "title": self.getTitle(),
-			  "name": self.getName(),
-			  "email": email,
-			  "password":hash1
-		};
+	var dataObject= { 
+			"title": self.getTitle(),
+			"name": self.getName(),
+			"email": email,
+			"password":hash1,
+			"recaptcha_challenge_field":recaptcha_challenge_field,
+			"recaptcha_response_field":recaptcha_response_field
+	};
 	 
 	 var data=JSON.stringify(dataObject);
 	 
@@ -468,6 +475,14 @@ UserModel.prototype.register = function(password){
 			    showErrorResponses(request); 
 			}
 			
+			//backend validation that checks the CAPTCHA entry of the user
+			if (request.status === 400){
+			    console.log("Error while registering the user to the server: CAPTCHA response incorret :400");
+			    
+			    $(document).trigger('CaptchaError'); 						
+			    showErrorResponses(request); 
+			}
+			
 		},
 		beforeSend : setHeader
 	    });
@@ -480,13 +495,22 @@ UserModel.prototype.register = function(password){
 	    }
 	    function setHeader(xhr){
 	    	if (self.controller.oauth)   {
-		var header_request=self.controller.oauth.oauthHeader(method,url);
+		var header_request=self.controller.oauth.oauthHeader(method,url,data);
 		xhr.setRequestHeader('Authorization', header_request);
 	    }else{
         	var non_authenticationFlag=true;
        	 xhr.setRequestHeader('NonAuth', non_authenticationFlag);	
        }}
 };
+
+
+
+//UserModel.prototype.validateCapcha = function(){
+//	//calculate captcha field values
+//	var recaptcha_response_field=$("#recaptcha_response_field").val();
+//	var recaptcha_challenge_field=$("#recaptcha_challenge_field").val();
+//	console.log("recaptcha_response_field is "+recaptcha_response_field);
+//};
 
 
 /**

@@ -226,7 +226,7 @@ function RegistrationView(controller){
 	});
 	
 	
-	
+
 	$("#submit_confirmation").bind("click", function(e){
 		console.log("clicked submit confirmation");
 		var value_password = $("#passwordRegistrationInput").text();
@@ -238,7 +238,7 @@ function RegistrationView(controller){
 		$("#pd_reg_password_confirm_label").css('background-color', '#ebedee');
 		$("#pd_reg_password_confirm_label").css('color', '#4C5160');
 	});
-
+	
 }
 
 RegistrationView.prototype.openDiv= openView;

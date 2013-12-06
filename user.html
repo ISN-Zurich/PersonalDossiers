@@ -143,7 +143,6 @@
 	rel="stylesheet" />
 
 <link href="libs/icomoon/style.css" rel="stylesheet" type="text/css">
-<script type="text/javascript" src="libs/icomoon/liga.js"></script>
 </head>
 <body>
 	<div id="page_oc">
@@ -534,14 +533,19 @@
 						</div>
 					</div>
 				</div>	<!-- end of user profile -->
-			<form method="POST" action="verify.php">
+		
+		
+		
 				<div id="registrationView" class="hide">
+				
 
 					<div id="registrationContainer">
 
-						<div id="registrationHeader" class="sidebar-header darkblue">
-							Registration</div>
-						<div>
+						<div id="registrationHeader" class="sidebar-header darkblue"> Registration </div>
+						
+						<!-- <form method="POST" action="http://yellowjacket.ethz.ch/tools/service/authentication.php/register"> -->
+						<div>			
+				
 							<div id="pd_registration_title_label" class="adv_search_label">
 								Title</div>
 							<div id="titleRegistrationInput"
@@ -607,26 +611,28 @@
 									should confirm your password</div>
 							</div>
 						</div>
-
-						<!-- CAPTCHA -->
-						<div class="captcha">
-							<script type="text/javascript"
-								src="http://www.google.com/recaptcha/api/challenge?k=6LfmWesSAAAAACG80Y8-X7VXC-ElpXkqnfFWf4Ry">
-								
-							</script>
-							<noscript>
-								<iframe
-									src="http://www.google.com/recaptcha/api/noscript?k=6LfmWesSAAAAACG80Y8-X7VXC-ElpXkqnfFWf4Ry"
-									height="300" width="500" frameborder="0"></iframe>
-								<br>
-								<textarea name="recaptcha_challenge_field" rows="3" cols="40">
+												
+							<!-- CAPTCHA -->
+						
+							<div class="captcha">
+								<script type="text/javascript"
+									src="http://www.google.com/recaptcha/api/challenge?k=6LfmWesSAAAAACG80Y8-X7VXC-ElpXkqnfFWf4Ry">
+									
+								</script>
+								<noscript>
+									<iframe
+										src="http://www.google.com/recaptcha/api/noscript?k=6LfmWesSAAAAACG80Y8-X7VXC-ElpXkqnfFWf4Ry"
+										height="300" width="500" frameborder="0"></iframe>
+									<br>
+									<textarea name="recaptcha_challenge_field" rows="3" cols="40">
      					</textarea>
-								<input type="hidden" name="recaptcha_response_field"
-									value="manual_challenge">
-							</noscript>
-						</div>
-							
-							<input style="margin-top:10px; margin-left:10px;"  type="submit" />
+									<input type="hidden" name="recaptcha_response_field"
+										value="manual_challenge">
+								</noscript>
+							</div>
+
+						
+						
 
 						<div id="registration_success" class=" pd_success hide">Your
 							profile has been succesfully updated</div>
@@ -638,17 +644,17 @@
 						<div id="saveChanges_container" class="adv_search_buttons right">
 							<div id="submit_confirmation"
 								class="search_bar_button inactive_registration right"
-								value="Submit" name="submit">Register</div>
+								value="Submit" name="submit"> Register</div>
 						</div>
 						<div id="cancelRegistration_container"
 							class="adv_search_buttons left">
 							<div id="cancel_registration" class="search_bar_button left"
 								value="Submit" name="submit">Cancel</div>
-						</div>
-					</div>
-
+						</div>	
+				<!-- </form> -->
+					</div> <!-- end of registation container -->
 				</div> <!-- end of registaiton view -->
-				</form>
+				
 				
 				<div id="notifications" class="hide"></div>
 

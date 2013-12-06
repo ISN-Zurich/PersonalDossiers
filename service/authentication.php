@@ -1,5 +1,6 @@
 <?php
 
+require_once('recaptchalib.php');
 require_once 'MDB2.php';
 include 'dbConnect.php';
 include_once 'commonService.php';
@@ -357,6 +358,9 @@ class AuthenticationService extends OAUTHRESTService {
     
     
     protected function register_user(){
+    	
+      	
+    	
     	$this->mark();
     	$this->dbh->setFetchMode(MDB2_FETCHMODE_ASSOC);
     	$mdb2 = $this->dbh;
@@ -384,7 +388,9 @@ class AuthenticationService extends OAUTHRESTService {
     	$name =$tmp['name'];
     	$email = $tmp['email'];
     	$pswd = $tmp['password'];
-    	
+       	$recaptcha_challenge_field=$tmp['recaptcha_challenge_field'];
+       	$recaptcha_response_field=$tmp['recaptcha_response_field'];
+       	
     	//to check if the email already exists in the database
     	$sthCheck = $this->dbh->prepare("SELECT id FROM users WHERE email = ?");
     	$resCheck = $sthCheck->execute($email);
@@ -403,7 +409,7 @@ class AuthenticationService extends OAUTHRESTService {
   			array_push($empty_fields,"password");
   		}
 			
-    	// check the lenght of this array
+    	// check the length of this array
     	
   		if (count($empty_fields)>0){
   			$this->log("the empty array has elements");
@@ -424,6 +430,19 @@ class AuthenticationService extends OAUTHRESTService {
     		$this->bad_request();
     		return;
     	}
+   		// check CAPTCHA
+    	
+    	$privatekey = "6LfmWesSAAAAADqZYJv8K2FL_GGBk4kcBxsj7YCJ";
+    	$resp = recaptcha_check_answer ($privatekey,
+    			$_SERVER["REMOTE_ADDR"],
+    			$recaptcha_challenge_field,
+    			$recaptcha_response_field);
+    	if (!$resp->is_valid) {
+    		// What happens when the CAPTCHA was entered incorrectly
+    		$this->log("couldnt inser the registered data");
+    		$this->bad_request();
+    		return;
+    	}
     	
     	//if the email existis already in the database
     	if ($resCheck->numRows() == 1) {
@@ -431,7 +450,8 @@ class AuthenticationService extends OAUTHRESTService {
     		$this->forbidden();
     		return;
     	}
-    	else { 
+    	//we proceed to registration only if 1.the email is not already taken 2.the captcha was completed correctly
+    	if ($resCheck->numRows() !== 1 && $resp->is_valid){ 
     		$this->log("will try insert register data to the database");
     		$sth = $mdb2->prepare("insert into users (title,name,email,password) values (?, ?, ?, ?)");
     		$res1 = $sth->execute(array($ttl,$name,$email,$pswd));
@@ -440,8 +460,7 @@ class AuthenticationService extends OAUTHRESTService {
     			$this->log("pear error " . $res1->getMessage());
     			$this->bad_request();
     		}
-    	}
-    	
+    	}   
     }
     
     /**
