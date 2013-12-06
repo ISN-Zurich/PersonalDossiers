@@ -822,7 +822,16 @@ padding-left:3px;
 	padding:10px;
 }
 
-.captcha{
-	
-	background-color:grey;
+.cap {
+	float: left;
+	width: 452px;
+	height: auto;
+	margin: 0px;
+	margin-bottom: 1px;
+	padding: 5px 0px 5px 17px;
+	line-height: 18px;
+	border: none;
+	border-right: solid 1px white;
+	background: #ebedee;
+	color: #4C5160;
 }
