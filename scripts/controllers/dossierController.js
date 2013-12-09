@@ -48,7 +48,7 @@ function dossierController() {
 		self.views.dossierContent= new DossierContentView(self);
 		self.views.userlist = new DossierUsersView(self);
 		self.views.embed= new addEmbedButton(self);
-		//self.views.badge= new badgeView(self);
+		self.views.invitation = new InvitationView(self);
 		self.views.share = new ShareButtonView(self);
 
 
@@ -64,7 +64,6 @@ function dossierController() {
 			self.views.dossierContent.open();
 			self.views.userlist.open();
 			self.views.embed.open();
-			//self.views.badge.open();
 		});
 
 
@@ -87,8 +86,19 @@ function dossierController() {
 //		self.colorizeInteractiveBox(hashTag);
 	});
 
+	//we get the user type in order to decide which views to open
+	
+	
+	
 
 } //end of constructor
+
+
+dossierController.prototype.getUserType = function(){
+	console.log("enter getUser Type in dossier Controller");
+	return this.models.dossierList.getUserType();
+};
+
 
 dossierController.prototype.hashedUrl = function() {
 
