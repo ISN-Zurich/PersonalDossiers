@@ -80,7 +80,6 @@ input#username, input#password, input#edit_password,  input#edit_profile  {
 	padding-top:10px;
 	color:#4c5160;
 	padding-bottom:2px;
-   
 }
 
 input#username{
@@ -182,10 +181,6 @@ input#password, #pd_currentPassword, #pd_newPassword, #pd_confirm_newPassword, #
 	height:22px;
 	padding-top:5px;
 }
-
-
-
-
 
 #loginUl{
 	border: 0px solid blue;
@@ -834,4 +829,47 @@ padding-left:3px;
 	border-right: solid 1px white;
 	background: #ebedee;
 	color: #4C5160;
+}
+
+
+/*******************************INVITATION VIEW *****************************************/
+
+#invitationView{
+	margin-top:10px;
+}
+
+#roleSelectorView{
+	background: #ebedee;
+	width:212px;
+	border-top:1px solid white;
+	padding-left:18px;
+	font-size:12px;
+	height:28px;
+	clear:both;
+}
+
+.roleSeparator {
+	border-right: 1px solid white;
+	background:#ebedee;
+	padding-right: 35px;
+	padding-top:10px;	
+	height:18px;
+	float:left;
+	
+}
+
+.roleLeftBorder{
+	padding-left:10px;
+}
+
+.selectedRole{
+	padding-top:8px;
+	padding-bottom:8px;
+	color:white;
+	background:#4C5160;
+	
+}
+.userRole{
+	padding-left:10px;
+	color:white;
 }

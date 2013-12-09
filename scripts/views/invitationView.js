@@ -13,6 +13,10 @@ function InvitationView(controller){
 		}
 	});
 	
+	$("#pd_invite_bar_text").bind("click", function() {
+		$("#roleSelectorView").show();
+	});
+	
 	
 } //end of constructor
 
