@@ -848,7 +848,7 @@ padding-left:3px;
 	clear:both;
 }
 
-.roleSeparator {
+.roleSeparatorUnselected {
 	border-right: 1px solid white;
 	background:#ebedee;
 	padding-right: 35px;
@@ -869,7 +869,17 @@ padding-left:3px;
 	background:#4C5160;
 	
 }
-.userRole{
-	padding-left:10px;
-	color:white;
+.UnselectedRole{
+	padding-top:8px;
+	padding-bottom:8px;
+	color:#4C5160;
+	background:#ebedee;
 }
+
+.userRoleSelected{
+	color:white;	
+}
+.userRoleUnSelected{
+	color:#4C5160;
+}
+
