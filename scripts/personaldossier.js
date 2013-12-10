@@ -83,8 +83,9 @@ function embedBookmarkController() {
     $('<iframe/>', { 
         'id': 'isn_pd_authorize', 
         'src': this.baseURL + 'bookmark.html?id='+this.itemId,
+        "style": "height:0px;",
         "scrolling":"no"}).appendTo('#isn_pd_widget');
-    
+    $("#isn_pd_widget").removeClass("none");   
     
     
     function resizeListener(m){
@@ -93,6 +94,7 @@ function embedBookmarkController() {
 
     		console.log("receive message from known host");
     		var data=JSON.parse(m.data);
+    		console.log("m.data is "+m.data);
     		if (data.resize && data.resize.height > 0) {
     			console.log("received resize message");
     			// add the new height to the iframe style
@@ -101,10 +103,17 @@ function embedBookmarkController() {
     				$("#isn_pd_widget").removeClass("none");   
     			}
     		}
-    		else if(!$("#isn_pd_widget").hasClass("none")){
-    			$("#isn_pd_widget").addClass("none");   
+    		else {
+    			// if(!$("#isn_pd_widget").hasClass("none")){
+    			console.log("handle message else if");
+    			$("#isn_pd_authorize").height(0);
+    			
+    			// $("#isn_pd_widget").addClass("none");   
 
     		}
+//    		else{
+//    			console.log(" handle message else");
+//    		}
     	}
     	
     }

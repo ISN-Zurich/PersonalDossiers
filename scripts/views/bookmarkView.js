@@ -18,8 +18,8 @@ function bookmarkView(controller){
 	});
 	
 	$("#bookmarkList").bind("click", function(e){
-		var targetE = event.target.nodeName ;
-		console.log("target clicked "+targetE)
+		var targetE = e.target.nodeName;
+		console.log("target clicked "+targetE);
 		if ($(targetE)){
 			var targetID = e.target.id;
 			console.log("targetID is "+targetID);
@@ -55,7 +55,8 @@ bookmarkView.prototype.update = function(){
 		} while (dossierListModel.nextDossier());
 
 		console.log("passed the design of the bookmarks list");
-		var height=	$("#bookmarkContainer").height();
+		var height=	$("#bookmarkContainer").outerHeight();
+		console.log("height of bookmark container is "+height);
 		this.controller.notifyNewHeight(height);
 	}
 	
@@ -82,22 +83,25 @@ bookmarkView.prototype.renderDossier=function(){
 		var div1=$("<div/>", {
 			//"id": "item"+dossierID,
 			"class":"clickable pd_editDossier bookmarkItem"
+			
 		}).appendTo("#bookmarkList");
 
 
 		var div2=$("<div/>", {
+			"id": "item"+dossierID,
 			"class":"st clickable overflowText grey_bar",
-					
+			"text":self.controller.models.dossierList.getDossierTitle()
 		}).appendTo(div1);
 	
-		var tspan = $("<span/>", {
-			"id":"item"+dossierID,
-			"class": "overflowText bookmarkButtonText",
-			"text":self.controller.models.dossierList.getDossierTitle()
-		}).appendTo(div2);
+//		var tspan = $("<span/>", {
+//			"id":"item"+dossierID,
+//			"class": "overflowText bookmarkButtonText",
+//			"text":self.controller.models.dossierList.getDossierTitle()
+//		}).appendTo(div2);
 
 		var span=$("<span/>", {
-					"class":libraryBookmarkModel.hasItem(dossierID) ? "st_editDosser pd_bookkark_icon_exist iconMoon" : "st_editDosser pd_bookkark_icon iconMoon",
+					"id": "icon"+ dossierID,
+					"class":libraryBookmarkModel.hasItem(dossierID) ? "st_editDosser pd_bookmark_icon_exist iconMoon" : "st_editDosser pd_bookmark_icon iconMoon",
 					"text": "K"
 		}).appendTo(div2);
 	

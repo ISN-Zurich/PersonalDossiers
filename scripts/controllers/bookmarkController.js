@@ -8,8 +8,9 @@ function BookmarkController() {
     this.hostURL = hostURL;
     this.baseURL = baseURL;
     this.targetHost = 'http://www.isn.ethz.ch';
-    document.domain = 'ethz.ch';
+    // document.domain = 'ethz.ch';
     this.allowedHosts = ['http://www.isn.ethz.ch', 'http://isn.ethz.ch', 'http://www.isn.ch', 'http://isn.ch']; 
+    
     self.initOAuth();
     self.models={};
 
@@ -95,22 +96,20 @@ BookmarkController.prototype.notifyNewHeight = function(height){
 					}	
 			};
 		  
-		console.log("window parent location is "+window.parent.location.hostname);
-		var id = allowedHosts.indexOf(window.parent.location.hostname);
-		if (id >= 0) {
-			targetHost = allowedHosts[id];
-			window.parent.postMessage(JSON.stringify(data), targetHost);
-
+		
+		var id, mdata= JSON.stringify(data);
+		for (id = 0; id < this.allowedHosts.length; id++) {
+			window.parent.postMessage(mdata, this.allowedHosts[id]);
 		}
-  	
 };
 
+//it is deprecated and is not beeing used
 BookmarkController.prototype.calculateHeight= function(m){
 	
 	var id = this.allowedHosts.indexOf(m.origin);
 	console.log('origin is id: '+ id);
 	if (id >= 0) {
-		targetHost = allowedHosts[id];
+		targetHost = this.allowedHosts[id];
 		var data={
 				"resize": {
 					"height":height
