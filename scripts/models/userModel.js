@@ -349,10 +349,10 @@ UserModel.prototype.logout =function(){
 		}
 
 		localStorage.setItem('authentication', JSON.stringify(authentication));
-                self.controller.initOAuth();
-		self.checkActiveUser();
+        self.controller.initOAuth();
+		//self.checkActiveUser();
 		//self.setInitParameters();
-		//self.controller.transition("login");
+		self.controller.transition("login");
 	    }else{
 		console.log("Error while invalidating access token");
 	    }
