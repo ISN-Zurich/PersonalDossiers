@@ -73,8 +73,10 @@ function userController() {
 		 if (index >0){
 			 window.location = loc.substring(0,index);
 		 }
-
-				 
+		 
+		 self.models.authentication.request_token="";
+		 console.log("request token after logout is "+self.models.authentication.request_token);
+		 self.models.authentication.getRequestToken();
 		 self.chooseView();
 		 self.colorizeInteractiveBox();
 
@@ -118,7 +120,7 @@ userController.prototype.chooseView = function(){
 		 this.views.addDossier.close();
 			this.views.log.close();
 			this.views.welcome.close();
-		this.views.login.close();
+			this.views.login.open();
 		this.views.introduction.open();
 		
 		

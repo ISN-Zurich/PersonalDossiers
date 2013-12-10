@@ -258,20 +258,20 @@ UserModel.prototype.setActiveDossier = function(dossierId){
 
 
 UserModel.prototype.checkActiveUser = function(){
-    if(this.controller.oauth) {
-	console.log("get user profile");
-	this.getUserProfile();
-    }
-    else if (this.controller.models.authentication) {
-        // we are on the login page so we can play some magic.
-        this.controller.models.authentication.getRequestToken();
-    }
-    else {
-        // send the user to the login page
-        window.location.href = '/tools/user.html';
-	//console.log("get request token in checkactiveUser");
-	
-    }
+	if(this.controller.oauth) {
+		console.log("get user profile");
+		this.getUserProfile();
+	}
+	else if (this.controller.models.authentication) {
+		// we are on the login page so we can play some magic.
+		this.controller.models.authentication.getRequestToken();
+	}
+	else {
+		// send the user to the login page
+		window.location.href = '/tools/user.html';
+		//console.log("get request token in checkactiveUser");
+
+	}
 };
 
 /**
@@ -351,8 +351,9 @@ UserModel.prototype.logout =function(){
 		localStorage.setItem('authentication', JSON.stringify(authentication));
         self.controller.initOAuth();
 		//self.checkActiveUser();
-		//self.setInitParameters();
-		self.controller.transition("login");
+       
+        //self.setInitParameters();
+		//self.controller.transition("login");
 	    }else{
 		console.log("Error while invalidating access token");
 	    }

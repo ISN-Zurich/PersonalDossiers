@@ -42,10 +42,10 @@ function InvitationView(controller){
 		$("#userRoleSpan").removeClass("userRoleSelected");
 		$("#userRoleSpan").addClass("userRoleUnSelected");
 		
-		
-		
-		
+			
 		$("#adminRole").removeClass("selectedRole");
+		
+		
 		$("#editorRole").removeClass("roleSeparator");
 		$("#editorRole").addClass("selectedRole");
 		$("#editorRole").addClass("roleSeparator");
