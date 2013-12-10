@@ -101,27 +101,32 @@ dossierController.prototype.getUserType = function(){
 
 
 dossierController.prototype.hashedUrl = function() {
-
-	console.log("enter hasehd url"); 
-
-	url_ref=window.location.href;
-	var splited=url_ref.split("?");
-	console.log("show splitted url array is "+splited);
-	var split1=splited[1];
-	if (split1 && split1.length>0){
-		console.log("tools is "+split1);
-		var split2=split1.split("=");
-		var d_id=split2[1];
-		if (d_id && d_id.length>0){
-			console.log("there is id in the new url and it is "+d_id);
-			this.pubid=d_id;
-			this.hashed=true;
-		}} else{
-
-			this.hashed=false;
-		}
-
-
+    console.log("enter hasehd url");
+    this.hashed = false;
+    
+    url_ref = window.location.search;
+    if (url_ref && url_ref.length) {
+        var splited = url_ref.slice(1).split('&');
+        console.log("show splitted url array is " + splited);
+        var split1 = splited;
+        if (split1 && split1.length > 0) {
+            var i;
+            for (i=0; i < split1.length; i++) {
+                console.log("tools is " + split1[i]);
+                var split2 = split1[i].split("=");
+                // only the id parameter is accepted!
+                if ( split2[0] && split2[0].length && split2[0] === 'id' ) {
+                    var d_id = split2[1];
+                    if (d_id && d_id.length > 0) {
+                        console.log("there is id in the new url and it is " + d_id);
+                        this.pubid = d_id;
+                        this.hashed = true;
+                        break;
+                    }
+                }
+            }
+        } 
+    }
 };
 
 dossierController.prototype.getHashedURLId = function(){

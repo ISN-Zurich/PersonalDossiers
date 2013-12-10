@@ -16,7 +16,7 @@ function WelcomeView(controller){
 			console.log("dosID is "+dosID);
 			var userModel = self.controller.models.user;
 			userModel.setActiveDossier(dosID);
-			window.location.href="index.html";
+			window.location.href="index.html?id="+dosID;
 			e.stopPropagation();
 		}
 	});
@@ -133,7 +133,6 @@ WelcomeView.prototype.renderDossierItem = function(parentE) {
 	p =$("<p/>", {
 		"class":"small clickable",
 		"id":"dossier"+self.controller.models.dossierList.getDossierId(),
-		// "text": "In this podcast, the former Foreign Minister of Indonesia, Hassan Wirajuda, outlines the thinking behind Jakarta&amp;rsquo;s current &amp;lsquo;free and active&amp;rsquo; foreign policy (bebas aktif); how the policy is shaping its relationships with the US, China and other ASEAN states; and how it might impact Indonesia&amp;rsquo;s 2014 presidential election."
 		"text":self.controller.models.dossierList.getDossierDescription()
 	}).appendTo(div3);
 	if (self.controller.oauth){
