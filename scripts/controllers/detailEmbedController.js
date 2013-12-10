@@ -51,10 +51,10 @@ function detailEmbedController() {
 
 detailEmbedController.prototype.hashedUrl = function() {
     
-	url=window.location.href;
-	var splited=url.split("?");
-	console.log("show splitted url array is "+splited);
-	var split1=splited[1]; // dossier_id=123432&item_id=123123
+	url=window.location.search;
+	var split1=url.slice(1);
+	console.log("show splitted url array is "+split1);
+	// var split1=splited; // dossier_id=123432&item_id=123123
 	
 	//TODO: to calculate both dossier_id and item_id
 	//the new url string would be http://yellowjacket.ethz.ch/tools/embedDetailPage.html?dossier_id=123432&item_id=123123

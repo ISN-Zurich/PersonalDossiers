@@ -570,7 +570,7 @@ BookmarkModel.prototype.getItemIndex = function(){
 
 BookmarkModel.prototype.showAuthors= function(){
 	var self=this;
-	var authorList=self.getAuthorList();
+	var authorList=self.getAuthorList() || [];
 	var authorString="";
 	for (var i=0; i<authorList.length; i++){
 		authorString=authorString + authorList[i] + ", ";
