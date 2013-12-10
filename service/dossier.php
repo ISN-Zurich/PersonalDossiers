@@ -958,8 +958,8 @@ class DossierService extends OAUTHRESTService {
 		// select private_flag from dossiers table
 		$this->dbh->setFetchMode(MDB2_FETCHMODE_ASSOC);
 		$mdb2 = $this->dbh;
-		$sth = $mdb2->prepare('SELECT * FROM dossiers WHERE id=? AND private_flag=?');
-		$res = $sth->execute(array($this->dossier_id, false));
+		$sth = $mdb2->prepare('SELECT * FROM dossiers WHERE id=? AND (private_flag is NULL OR private_flag = 0)');
+		$res = $sth->execute(array($this->dossier_id));
 		if ($res->numRows() == 1) {
 			//there should be only one dossier with that id
 			$row=$res->fetchRow();
@@ -981,12 +981,20 @@ class DossierService extends OAUTHRESTService {
 		 
 		//if any external guest user access a dossier via a shared link
 		//he should be able to
-		if ( !$retval && $meth == 'GET' && $this->dossier_id) {
+		if ($meth == 'GET' && 
+            $this->dossier_id && 
+            $this->dossierIsPublic($this->dossier_id)) {
+            // all visitors are allowed to access any public dossier for reading.
+            // This is required for external linking
+            $this->log('public dossier is accessed');
+            
 			$retval = true;
 		}
-		 
-		// now check if the user is allowed to perform the requested method
-		if ( $this->session && $this->session->getUserID() && $this->dossier_id ) {
+        else if ($this->session && 
+                 $this->session->getUserID() && 
+                 $this->dossier_id) {
+            // now check if the user is allowed to perform the requested method
+		
 			// authenticated user
 			// check if the user is allowed to perform the requested operation
 			switch($meth) {
@@ -994,7 +1002,9 @@ class DossierService extends OAUTHRESTService {
 					$this->log("enter GET in prepare statement in dossier.php");
 					// only access if the dossier is public or if the user is a "user" (or editor or owner)
 					$this->user = new UserManagement($this->dbh);
-					if ( $this->dossierIsPublic($this->dossier_id) || $this->user->hasUserPriviledges($this->session->getUserID(),$this->dossier_id)){
+					if ($this->dossierIsPublic($this->dossier_id) || 
+                        $this->user->hasUserPriviledges($this->session->getUserID(),
+                                                        $this->dossier_id)) {
 						$retval = true;
 					}
 					else  {
@@ -1024,7 +1034,8 @@ class DossierService extends OAUTHRESTService {
 							$retval = false;
 						} 
 						
-					} break;
+					} 
+                    break;
 // 					else {
 // 						$this->user = new UserManagement($this->dbh);
 // 						// only access if the user is an owner: dossierId > 0 or any other case
@@ -1048,16 +1059,9 @@ class DossierService extends OAUTHRESTService {
 					break;
 			}
 		}
-		else if ( $this->dossier_id ) {
-			// anonymous user (not logged in)
-			$this->log("anonymous user tries to login");
-			// check if the requested dossier is public
-			if (!$this->dossierIsPublic($this->dossier_id)){
-				$retval = false;
-			}
-		}
+        
 		if (!$retval) {
-			
+            $this->log('session prerequisite failed');
 			$this->authentication_required();
 		}
 		 
