@@ -27,7 +27,7 @@ function AuthenticationModel(controller){
     $(document).bind("RegistrationDone", function(e, mail, pswd){
     	console.log("registration done is bound in authentication model");
     	console.log("mail in bound is "+mail);
-    	console.log("password in bound is "+pswd);
+    	console.log("password in bound is "+pswd); 
     	self.authenticateUser(mail, pswd);
     });
     
@@ -159,6 +159,11 @@ AuthenticationModel.prototype.obtainAuthorization = function(){
             console.log("Error while getting verification code");
             showErrorResponses(request);
 
+            //clear access token
+           self.authentication.accessToken = "";
+           self.authentication.accessSecret = "";
+            
+           // then do transition to login
             self.controller.transition("login");
         },
         beforeSend : setHeaderO
