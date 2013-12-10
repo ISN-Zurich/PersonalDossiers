@@ -305,7 +305,7 @@ BookmarkModel.prototype.sendDataToServer=function(){
     var self=this;
     var dossierID = self.dossierId;
     var url=self.controller.baseURL +"service/dossier.php/"+dossierID;
-    var method="POST ";
+    var method="POST";
     var myData = {};
     
     if ( dossierID &&
