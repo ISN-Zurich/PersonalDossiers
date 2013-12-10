@@ -413,16 +413,8 @@ class DossierService extends OAUTHRESTService {
 			return;
 		}
 		$tempArray= array();
-		if ($resPosition->numRows() > 0) {
-			while ($row = $resPosition->fetchRow() ){
-				$this->log('row: ' . json_encode($row));
-				array_push($tempArray,$row['dossier_id']);
-			}
-			
-		}
+        $position_id = $resPosition->numRows();
 		
-		$this->log("temp Array lenght is ".count($tempArray));
-		$position_id = count($tempArray);
 		$this->log('position id is '.$position_id);
 		// now we actually add the item to the very dossier (we no longer use the user id for the dossier items)
 		$this->log('metadata for id: ' . $itemid . " is " . $itemmeta);
