@@ -1,8 +1,6 @@
 <?php 
 
-require_once 'MDB2.php';
 require_once 'HTTP/Request.php';
-include 'dbConnect.php';
 include_once 'commonService.php';
 
 include 'session.php';
@@ -57,9 +55,8 @@ include 'user.php';
  *
  */
 class DossierService extends OAUTHRESTService {
-	protected $uri = "/tools/service/dossier.php";
+	protected $servicepath = '/service/dossier.php';
 	 
-	protected $dbh;
 	protected $dossier_id;
 	protected $item_id;
 	 
@@ -71,9 +68,10 @@ class DossierService extends OAUTHRESTService {
 	 * The service constructor initializes all important parameters of the class.
 	 * The database handler is required for storing the values into the database.
 	 */
-	public function __construct($dbh) {
-		parent::__construct($dbh);
-		 
+	public function __construct() {
+		parent::__construct();
+
+        
 		$this->mark();
 		 
 		if ( !empty($this->path_info) ) {
@@ -87,12 +85,11 @@ class DossierService extends OAUTHRESTService {
 		if ( count($parts) > 0) {
 			$this->dossier_id = $parts[0];
 		}
-		// init the database connection
-		$this->dbh = $dbh;
-		$this->log(" dbh in dossier constructor is ".$dbh);
+		        
 		$this->data = array();
 	}
 	 
+
 	/**
 	 * handle_get()
 	 *
@@ -1062,11 +1059,10 @@ class DossierService extends OAUTHRESTService {
 }
 
 
-$service = new DossierService($mdb2);
+$service = new DossierService();
 // check if the active user is allowed to run the service with the given parameter
 
 // if everything is OK run the actual service
 $service->run();
-$mdb2->disconnect();
 
 ?>
