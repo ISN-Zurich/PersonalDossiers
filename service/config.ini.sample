@@ -1,0 +1,15 @@
+;; ini file for the service configuration
+;; complete this file with the appropriate values and rename it to config.ini
+
+[database]
+phptype  = "mysql"
+username = "YOUR DB USER"
+password = "YOUR DB PASSWORD"
+hostspec = "YOUR DB HOST"
+database = "YOUR Database"
+debug = 2
+charset = "utf8"
+
+[service]
+debug = 0
+pathprefix = ""
