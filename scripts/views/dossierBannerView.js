@@ -34,8 +34,9 @@ function DossierBannerView(myController){
     $('#editDossier').bind('click', function(e){
     	if ( self.editMode ) {
     	    // always check for edits
+    		  self.checkTitleEdit();	
     	    self.checkDescriptionEdit();
-    	    self.checkTitleEdit();			
+    	  		
     	}
     	
     	var userType=self.controller.models.dossierList.getUserType();
@@ -45,14 +46,15 @@ function DossierBannerView(myController){
     	self.activateBannerEditMode();
 	    e.stopPropagation();
     	}
-    	// //TODO: implement the else: display to the user a dropdown message that he does not have the rights to edit 
+    	//TODO: implement the else: display to the user a dropdown message that he does not have the rights to edit 
     });
     
     $('#lock-editDossier').bind('click', function(e){
     	if ( self.editMode ) {
     	    // always check for edits
+    		self.checkTitleEdit();	
     	    self.checkDescriptionEdit();
-    	    self.checkTitleEdit();			
+    	    		
     	}
     	
     	self.deactivateBannerEditMode();
@@ -64,33 +66,33 @@ function DossierBannerView(myController){
 	var targetID = e.target.id;
 	
 	if ( self.editMode ) {
-	    // always check for edits
-	    self.checkDescriptionEdit();
-	    self.checkTitleEdit();			
+		// always check for edits
+		self.checkDescriptionEdit();
+		self.checkTitleEdit();			
 	}
 	
 	switch (targetID) {
 	case 'editDossier':
-	    self.activateBannerEditMode();
-	    e.stopPropagation();
-	    break;
+		self.activateBannerEditMode();
+		e.stopPropagation();
+		break;
 	case 'lock-editDossier':
-	    self.deactivateBannerEditMode();
-	    e.stopPropagation();
-	    break;
+		self.deactivateBannerEditMode();
+		e.stopPropagation();
+		break;
 	case 'bannerImage':
-	    // go to image gallery
-	    self.changeImage();
-	    e.stopPropagation();
-	    break;
+		// go to image gallery
+		self.changeImage();
+		e.stopPropagation();
+		break;
 	default:
-	    break;
+		break;
 	}
     }
 
     $(document).bind('dataSuccessfullySent', function() {
-        self.waitForUpload--;
-        self.transitionToGallery();
+    	self.waitForUpload--;
+    	self.transitionToGallery();
     });
     
 } //end of constructor
@@ -140,11 +142,15 @@ DossierBannerView.prototype.transitionToGallery = function() {
 };
 
 DossierBannerView.prototype.checkTitleEdit = function() {
-    var value = $("#headerTitle").text();
+   
     var oldVal= self.controller.models['bookmark'].getDossierTitle();
+    var value = $("#headerTitle").text();
     
-    if ( value !== oldVal) {
+    if (value !== oldVal) {
+    console.log('old val in title is: '+oldVal);
+  
 	console.log('Change the title content! and make it: '+value);
+	
 	this.controller.models['bookmark'].setDossierTitle(value);
 
 	this.waitForUpload++;
@@ -156,12 +162,12 @@ DossierBannerView.prototype.checkDescriptionEdit = function() {
     var value = $("#headerDescription").text();
     var oldVal= self.controller.models['bookmark'].getDossierDescription();
     
-    if ( value !== oldVal) {
+    if (value !== oldVal) {
 	console.log('Change the description content! ' + value);
 	this.controller.models['bookmark'].setDossierDescription(value);
 	// safe the edit in the backend
 
-        this.waitForUpload++;
+    this.waitForUpload++;
 	this.controller.models['bookmark'].sendDataToServer();
     }
 }; 
@@ -193,12 +199,12 @@ DossierBannerView.prototype.renderBanner= function(){
 	"src": bookmarkModel.getDossierImageURL()
     }).appendTo("#header_image");
     
-  var titleContainer=$("<p/>", {
+  var titleContainer=$("<div/>", {
 	"id":"titleContainer",
     }).appendTo("#header_image");
     
     
-    var span=$("<span/>", {
+    var span=$("<div/>", {
     	"id":"headerTitle",//we need to provide the dossierId dynamically
     	"class":"headerTitle", 
     	text:bookmarkModel.getDossierTitle()
