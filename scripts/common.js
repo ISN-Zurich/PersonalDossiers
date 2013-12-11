@@ -17,6 +17,7 @@ function debugMode() {
     return debugMode;
 }
 
+// this will go away
 function hostURL() {
     var debugURL = "http://yellowjacket.ethz.ch";
     var liveURL = "http://lab.isn.ethz.ch";
@@ -24,6 +25,7 @@ function hostURL() {
     return this.debugMode ? debugURL : liveURL; 
 }
 
+// this will go way
 function baseURL() {
     var debugPath = "/tools/";
     var livePath = "/";
@@ -104,3 +106,24 @@ function setUserProfileColorization(){
 
 };
 
+function pdInitServiceHost() {
+    var h = window.location.host;
+    var p = window.location.protocol;
+    
+    this.hostURL = p + '//' + h + '/';
+    
+    if (h === 'yellowjacket.ethz.ch') {
+        h = h + '/tools';   
+    }
+    
+    this.baseURL = p + '//' + h + '/'; // the trailing slash should be part of the service call.
+}
+
+function pdGetServiceHost() {
+    return this.baseURL;   
+}
+
+// not used
+function pdPrepareServiceURL(service) {
+    return this.controller.serviceHost() + service;
+}

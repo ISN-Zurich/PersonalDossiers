@@ -12,8 +12,10 @@ function badgeController() {
     var self=this;
     this.id="badgeController";
     this.debugMode = debugMode;
-    this.baseURL = baseURL;
-    this.hostURL = hostURL;
+    this.initServiceHost();
+
+//    this.baseURL = baseURL;
+//    this.hostURL = hostURL;
     
     document.domain = 'ethz.ch';
     self.hashed=false;
@@ -52,6 +54,9 @@ function badgeController() {
        });
     }
 } //end of constructor
+
+badgeController.prototype.initServiceHost = pdInitServiceHost;
+badgeController.prototype.getServiceHost = pdGetServiceHost;
 
 badgeController.prototype.hashedUrl = function() {
 	console.log("enter hasehd url"); 

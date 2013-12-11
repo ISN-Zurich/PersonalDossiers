@@ -5,9 +5,11 @@ function userController() {
 	
 	var self=this;
     this.debugMode = debugMode;
-    this.baseURL = baseURL;
-    this.hostURL = hostURL;
+    // this.baseURL = baseURL;
+    // this.hostURL = hostURL;
     this.appLoaded=false;
+    
+    this.initServiceHost();
     
 	document.domain = 'ethz.ch';
 	
@@ -106,6 +108,9 @@ function userController() {
 	
 	
 } //end of constructor
+
+userController.prototype.initServiceHost = pdInitServiceHost;
+userController.prototype.getServiceHost = pdGetServiceHost;
 
 
 userController.prototype.getHash = function(){

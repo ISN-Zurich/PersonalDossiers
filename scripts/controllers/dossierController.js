@@ -12,8 +12,11 @@ function dossierController() {
 	var self=this;
 	this.id="dossierController";
 	this.debugMode = debugMode;
-	this.baseURL = baseURL;
-	this.hostURL = hostURL;
+    this.initServiceHost();
+    console.log("hostURL is"+this.hostURL);
+    console.log("baseURL is"+this.baseURL);
+//	this.baseURL = baseURL;
+//	this.hostURL = hostURL;
 
 	document.domain = 'ethz.ch';
 	self.hashed=false;
@@ -93,6 +96,8 @@ function dossierController() {
 
 } //end of constructor
 
+dossierController.prototype.initServiceHost = pdInitServiceHost;
+// dossierController.prototype.getServiceHost = pdGetServiceHost;
 
 dossierController.prototype.getUserType = function(){
 	console.log("enter getUser Type in dossier Controller");

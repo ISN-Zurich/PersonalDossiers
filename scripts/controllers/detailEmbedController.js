@@ -7,9 +7,11 @@
 function detailEmbedController() {
     var self=this;
     this.id="detailembedController";
-    this.baseURL = baseURL;
-    this.hostURL = hostURL;
-    
+    this.initServiceHost();
+
+//    this.baseURL = baseURL;
+//    this.hostURL = hostURL;
+
     document.domain = 'ethz.ch';
     self.hashed=false;
     self.hashedUrl();
@@ -99,7 +101,10 @@ detailEmbedController.prototype.hashedUrl = function() {
 	}              
 };
 
- 
+detailEmbedController.prototype.initServiceHost = pdInitServiceHost;
+detailEmbedController.prototype.getServiceHost = pdGetServiceHost; 
+
+
     detailEmbedController.prototype.getHashedURLId = function(){
     	var dossierId=this.pubid;
     	console.log("dossier id after hash is "+dossierId);

@@ -16,10 +16,11 @@ function AuthorizationController() {
 //    this.hostURL = hostURL;
 //    this.baseURL = baseURL;
     this.debugMode = true;
-    this.hostURL = "http://yellowjacket.ethz.ch";
-    this.baseURL = "http://yellowjacket.ethz.ch/tools/";
-   
+    this.initServiceHost();
 
+//    this.hostURL = "http://yellowjacket.ethz.ch";
+//    this.baseURL = "http://yellowjacket.ethz.ch/tools/";
+   
     var bookmarks = null;
     var  mUser = null, mDossiers = 0;
     // document.domain = 'ethz.ch';
@@ -116,6 +117,9 @@ function AuthorizationController() {
         }
     }
 }
+
+AuthorizationController.prototype.initServiceHost = pdInitServiceHost;
+AuthorizationController.prototype.getServiceHost = pdGetServiceHost;
 
 var controller;
 console.log("enter main js");

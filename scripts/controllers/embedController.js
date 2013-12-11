@@ -14,9 +14,12 @@ function embedController() {
     var self=this;
     this.id="embedController";
     this.debugMode = debugMode;
-    this.baseURL = baseURL;
-    this.hostURL = hostURL;
     
+    this.initServiceHost();
+//
+//    this.baseURL = baseURL;
+//    this.hostURL = hostURL;
+//    
     document.domain = 'ethz.ch';
     self.hashed=false;
     self.hashedUrl();
@@ -61,6 +64,9 @@ function embedController() {
    
 
 } //end of constructor
+
+embedController.prototype.initServiceHost = pdInitServiceHost;
+embedController.prototype.getServiceHost = pdGetServiceHost;
 
 embedController.prototype.hashedUrl = function() {
     	

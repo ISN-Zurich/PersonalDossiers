@@ -10,9 +10,9 @@
 function GalleryController() {
     var self = this;
     this.debugMode = debugMode;
-    this.baseURL = baseURL;
-    this.hostURL = hostURL;
     
+    this.initServiceHost();
+
     console.log('Gallery Controller starts');
     document.domain = 'ethz.ch';
 
@@ -50,6 +50,9 @@ GalleryController.prototype.initOAuth = function() {
         this.oauth = null;
     }
 };
+
+GalleryController.prototype.initServiceHost = pdInitServiceHost;
+GalleryController.prototype.getServiceHost = pdGetServiceHost;
 
 GalleryController.prototype.updateUserData = function() {
     if ( this.oauth ) {

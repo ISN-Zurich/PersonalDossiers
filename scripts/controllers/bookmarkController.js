@@ -5,8 +5,11 @@ function BookmarkController() {
     
 	var self=this;
     this.debugMode = debugMode;
-    this.hostURL = hostURL;
-    this.baseURL = baseURL;
+    
+    this.initServiceHost();
+//    this.hostURL = hostURL;
+//    this.baseURL = baseURL;
+    
     this.targetHost = 'http://www.isn.ethz.ch';
     // document.domain = 'ethz.ch';
     this.allowedHosts = ['http://www.isn.ethz.ch', 'http://isn.ethz.ch', 'http://www.isn.ch', 'http://isn.ch']; 
@@ -39,6 +42,8 @@ function BookmarkController() {
 
 } //end of constructor
 
+BookmarkController.prototype.initServiceHost = pdInitServiceHost;
+BookmarkController.prototype.getServiceHost = pdGetServiceHost;
 
 BookmarkController.prototype.initOAuth = function() {
     console.log('initialize the oauth helper class');

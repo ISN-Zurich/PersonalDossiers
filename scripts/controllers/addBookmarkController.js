@@ -4,8 +4,9 @@ function addBookmarkController() {
     var self=this;
 
     this.debugMode = debugMode;
-    this.hostURL = hostURL;
-    this.baseURL = baseURL;
+    this.initServiceHost();
+//    this.hostURL = hostURL;
+//    this.baseURL = baseURL;
     console.log("debugMode is"+this.debugMode);
     console.log("hostURL is"+this.hostURL);
     console.log("baseURL is"+this.baseURL);
@@ -54,17 +55,17 @@ function addBookmarkController() {
     function authorizationListener(m) {
     	console.log("enter authorization listener");
     	console.log("self.hostURL is "+self.hostURL);
-    	console.log("this.hostURL is "+this.hostURL);
-        if (m.origin == this.hostURL) {
+    	console.log("this.hostURL is "+self.hostURL);
+        if (m.origin == self.hostURL) {
             var data = JSON.parse(m.data);
             console.log('received a message: ' + m.data);
             // store the data into the local storage. 
             if ( data.userok ) {
                 self.login = true;
-            self.views ={};
-            self.views.addBookmark = new DesignBookmarkView(self);
+                self.views ={};
+                self.views.addBookmark = new DesignBookmarkView(self);
             
-            console.log("add bookmark controller is initialized");
+                console.log("add bookmark controller is initialized");
             }
             if ( data.bookmarkok ) {
                 console.log('item is already bookmarked' ); 
@@ -74,6 +75,8 @@ function addBookmarkController() {
     }
 };
 
+addBookmarkController.prototype.initServiceHost = pdInitServiceHost;
+addBookmarkController.prototype.getServiceHost = pdGetServiceHost;
 
 // will go away
 addBookmarkController.prototype.getActiveDossier = function() {
