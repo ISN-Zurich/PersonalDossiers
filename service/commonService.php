@@ -1,4 +1,5 @@
 <?php
+require_once 'MDB2.php';
 
 /**
  * CoreService
@@ -154,14 +155,35 @@ class RESTServiceCommon extends PDCommonClass {
      * This property can hold arbitary data and the response_*() function will choose how to send it to the
      * client.
      */
+    protected $servicepath;
     protected $data;
     protected $uri;
     protected $bURIOK = true; // helper variable for identifying valid service calls
     protected $path_info;
+    
+    protected $config; // this holds the application configuration
 
+    protected function loadConfiguration() {
+        $this->config = parse_ini_file( 'config.ini', true );   
+    }
+    
     public function __construct() {
+        $this->loadConfiguration();
+        $this->setDebugMode($this->config['service']['debug'] ? true : false);
+                            
         $this->mark( "********** NEW SERVICE REQUEST ***********");
-        $this->checkServiceURI($_SERVER['REQUEST_URI']);
+        $this->setServiceURI();
+        $this->checkServiceURI($_SERVER['REQUEST_URI']);        
+    }
+    
+    public function setServiceURI() {
+        $path = $this->servicepath;
+        if ( !empty($this->config['service']['pathprefix']) ) {
+            $this->uri = $this->config['service']['pathprefix'] . $path;
+        }
+        else {
+            $this->uri = $path;
+        }
     }
     
     /**
@@ -208,7 +230,7 @@ class RESTServiceCommon extends PDCommonClass {
             }
         }
         else {
-            $this->log('URI is not ok! ');
+            $this->log('URI is not ok! (' . $this->uri . ')');
             $this->not_allowed();
         }
     }
@@ -500,7 +522,7 @@ class RESTServiceCommon extends PDCommonClass {
         // decides whether or not to run the service
         if (!empty($this->uri) && strncmp($uri, $this->uri, strlen($this->uri)) !== 0) {
             // we test the URI only if the service has the URI set
-	    $this->log('invalid URI');
+	        $this->log('invalid URI');
             $this->bURIOK = false;
             return $this->bURIOK;
         }
@@ -549,12 +571,42 @@ class OAUTHRESTService extends RESTServiceCommon {
      *
      * Initializes the OAuth session management of the service.
      */
-    public function __construct($dbh) {
+    public function __construct() {
         parent::__construct();
-        $this->dbh = $dbh;
+        $this->initDatabase();
         // instantiate the session manamgenet
-        $this->session = new SessionManagement($dbh);
+        $this->session = new SessionManagement($this->dbh);
     }
+    
+    public function __destruct() {
+        $this->dbh->disconnect();
+        parent::__destruct();   
+    }
+    
+    private function initDatabase() {
+        $cfg = $this->config['database'];
+        $dsn = array(
+            'phptype'  => $cfg['phptype'],
+            'username' => $cfg['username'],
+            'password' => $cfg['password'],
+            'hostspec' => $cfg['hostspec'],
+            'database' => $cfg['database']
+        );
+        
+        $options = array(
+            'debug'       => $cfg['debug'],
+            'portability' => MDB2_PORTABILITY_ALL,
+        );
+        
+        $this->dbh =& MDB2::connect($dsn, $options);
+        if (PEAR::isError($this->dbh)) {
+            die($this->dbh->getMessage());
+        } else {
+            //echo 'Connected Successufly';
+            $this->dbh->setCharset($cfg['charset']);
+        }
+    }
+    
     
     /**
      * @method prepareOperation($meth)

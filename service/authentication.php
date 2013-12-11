@@ -1,8 +1,6 @@
 <?php
 
 require_once('recaptchalib.php');
-require_once 'MDB2.php';
-include 'dbConnect.php';
 include_once 'commonService.php';
 
 include 'session.php';
@@ -27,14 +25,12 @@ include 'session.php';
  */
  
 class AuthenticationService extends OAUTHRESTService {
-    protected $uri = '/tools/service/authentication.php';
-    
-    protected $dbh;
+    protected $servicepath = '/service/authentication.php';
     protected $session;
     protected $mode;
     
-    public function __construct($dbh) {
-        parent::__construct($dbh);
+    public function __construct() {
+        parent::__construct();
         
         $this->mark();
        
@@ -546,9 +542,8 @@ class AuthenticationService extends OAUTHRESTService {
 }
 
 
-$service = new AuthenticationService($mdb2);
+$service = new AuthenticationService();
 $service->run();
 
-$mdb2->disconnect();
 
 ?>
