@@ -381,6 +381,21 @@ color: #c9cacf !important;
 cursor: default !important;
 }
 
+#titleRegistrationInput {
+display: inline-block;
+float: left;
+width: 184px;
+height: 18px;
+padding: 0px;
+margin: 5px 17px 5px 15px;
+line-height: 16px;
+border: none;
+background: #fff;
+color: #4C5160;
+text-align: left;
+}
+
+
 .registration_message{
 	color:red;
 }
