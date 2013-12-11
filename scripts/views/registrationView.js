@@ -34,7 +34,7 @@ function RegistrationView(controller){
 	
 	$(document).bind('CaptchaError', function(){
 		console.log("bound CaptchaError in registration view");
-				
+		//self.refreshCapcha();		
 		$("#captcha_message").show();	
 	});
 	
@@ -265,6 +265,48 @@ RegistrationView.prototype.update = function(){
 	
 };
 
+
+//RegistrationView.prototype.refreshCapcha = function(){
+//	console.log("empty CAPCHA");
+//	$("#capchaContainer").empty();	
+//	var script=$("<script/>", {
+//		"type":"text/javascript",
+//		"src": "http://www.google.com/recaptcha/api/challenge?k=6LfmWesSAAAAACG80Y8-X7VXC-ElpXkqnfFWf4Ry"
+//	}).appendTo("#capchaContainer");
+//	
+//	
+////	var script = document.createElement("script");
+////	script.setAttribute("type","text/javascript");
+////	script.setAttribute("src","http://www.google.com/recaptcha/api/challenge?k=6LfmWesSAAAAACG80Y8-X7VXC-ElpXkqnfFWf4Ry/javascript");
+////	script.src ="http://www.google.com/recaptcha/api/challenge?k=6LfmWesSAAAAACG80Y8-X7VXC-ElpXkqnfFWf4Ry"
+////	$("#capchaContainer").append(script);
+//	
+//	
+//	var noscript=script=$("<noscript/>", {
+//		  }).appendTo("#capchaContainer");
+//	
+//	var iFrame=$("<iframe/>", {
+//		"src":"http://www.google.com/recaptcha/api/noscript?k=6LfmWesSAAAAACG80Y8-X7VXC-ElpXkqnfFWf4Ry",
+//		"height": "100",
+//		"width": "150",
+//		"frameborder": "0"
+//	  }).appendTo(noscript);
+//	
+//	var br=$("<br/>", {}).appendTo(noscript);
+//	
+//	var textarea=$("<textarea/>", {
+//		"name":"recaptcha_challenge_field",
+//		"rows": "3",
+//		"cols": "40"
+//	}).appendTo(noscript);
+//	
+//	var input=$("<input/>", {
+//		"type":"hidden",
+//		"name": "recaptcha_response_field",
+//		"value": "manual_challenge"
+//	}).appendTo(noscript);
+//	
+//};
 
 RegistrationView.prototype.closeDiv=closeView;
 

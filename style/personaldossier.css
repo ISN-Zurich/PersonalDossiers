@@ -819,11 +819,11 @@ padding-left:3px;
 
 .cap {
 	float: left;
-	width: 452px;
+	width: 454px;
 	height: auto;
 	margin: 0px;
 	margin-bottom: 1px;
-	padding: 5px 0px 5px 17px;
+	padding: 5px 8px 5px 8px;
 	line-height: 18px;
 	border: none;
 	border-right: solid 1px white;

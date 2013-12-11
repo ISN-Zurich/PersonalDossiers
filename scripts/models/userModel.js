@@ -479,7 +479,7 @@ UserModel.prototype.register = function(password){
 			//backend validation that checks the CAPTCHA entry of the user
 			if (request.status === 400){
 			    console.log("Error while registering the user to the server: CAPTCHA response incorret :400");
-			    
+			    Recaptcha.reload();
 			    $(document).trigger('CaptchaError'); 						
 			    showErrorResponses(request); 
 			}
