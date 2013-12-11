@@ -163,7 +163,7 @@ class RESTServiceCommon extends PDCommonClass {
     
     protected $config; // this holds the application configuration
 
-    protected loadConfiguration() {
+    protected function loadConfiguration() {
         $this->config = parse_ini_file( 'config.ini', true );   
     }
     
@@ -230,7 +230,7 @@ class RESTServiceCommon extends PDCommonClass {
             }
         }
         else {
-            $this->log('URI is not ok! ');
+            $this->log('URI is not ok! (' . $this->uri . ')');
             $this->not_allowed();
         }
     }
