@@ -96,8 +96,8 @@ function RegistrationView(controller){
 	
 	$("#titleRegistrationInput").focusout(function(e){
 		console.log("focused out title in registration");
-		//var value_title = $("#titleRegistrationInput").text();
 		var value_title = $("#titleRegistrationInput option:selected").text();
+		console.log("value_title is "+value_title);
 		self.userModel.setUserTitle(value_title);
 	});
 	
