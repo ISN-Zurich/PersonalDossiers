@@ -381,6 +381,7 @@ color: #c9cacf !important;
 cursor: default !important;
 }
 
+
 #titleRegistrationInput {
 display: inline-block;
 float: left;
@@ -395,6 +396,12 @@ color: #4C5160;
 text-align: left;
 }
 
+#pd_reg_title_container {
+display: inline-block;
+width: 279px;
+background: #ebedee;
+background: #ebedee;
+}
 
 .registration_message{
 	color:red;
