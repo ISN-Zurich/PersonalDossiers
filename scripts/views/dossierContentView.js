@@ -72,10 +72,7 @@ function DossierContentView(dController){
 			 if (self.controller.oauth){
 				 $('.deletecontainer').show();
 			 }
-		 }
-		 
-		 //TODO: implement the else: display to the user a drop-down message that he does not have the rights to edit 
-	 
+		 }	 
 	 });
 	 
 	 $('#lock-editDossier').bind('click', function(){
@@ -270,17 +267,23 @@ DossierContentView.prototype.renderItem = function() {
 		
 	}
 
-	
-	 desContainer=$("<div/>", {
-			"class":"pd_box",
-	 }).appendTo(divFloatText);
+//	
+//	 desContainer=$("<div/>", {
+//			"class":"pd_box",
+//	 }).appendTo(divFloatText);
 	 
 	divp2=$("<p/>", {
 		"id":"itemDescription"+dossierID,
-		"class":"text",
+		"class":"left",
 		text:bookmarkModel.getDescription()
-	}).appendTo(desContainer);
+	}).appendTo(divFloatText);
 	
+	a2=$("<a/>", {
+		"class":"more more_a",
+		"href":bookmarkModel.getISNURL(), 
+		"style":"padding-left:5px",
+		"text":"More"
+	}).appendTo(divp2);
 
    // if (self.controller.oauth){
     	

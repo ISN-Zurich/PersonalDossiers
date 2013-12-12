@@ -411,6 +411,9 @@ background: #ebedee;
 	/*border:1px solid red;*/
 }
 
+.dossier_text p a{
+	color:#0089CF;
+}
 /****EMBED VIEW *********/
 
 #dropdown_embed{
