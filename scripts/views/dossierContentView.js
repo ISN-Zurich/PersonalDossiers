@@ -66,10 +66,15 @@ function DossierContentView(dController){
 			 $('.dragIcon').show();
 
 			 // 2 enable sortability
-			 self.activateSorting();		 
+			 self.activateSorting();
+			 
+			 //3. show delete button
+			 if (self.controller.oauth){
+				 $('.deletecontainer').show();
+			 }
 		 }
 		 
-		 //TODO: implement the else: display to the user a dropdown message that he does not have the rights to edit 
+		 //TODO: implement the else: display to the user a drop-down message that he does not have the rights to edit 
 	 
 	 });
 	 
@@ -277,11 +282,11 @@ DossierContentView.prototype.renderItem = function() {
 	}).appendTo(desContainer);
 	
 
-    if (self.controller.oauth){
+   // if (self.controller.oauth){
     	
     	if (self.controller.id!=="embedController"){
     		div3 = $("<div/>", {
-    			"class":"deletecontainer"
+    			"class":"deletecontainer hide"
     		}).appendTo(divFloatText);
 
     		delButton = $("<div/>", {
@@ -295,7 +300,8 @@ DossierContentView.prototype.renderItem = function() {
     			text: "Really delete?",
     			"class": "deleteConfirmButton"
     		}).appendTo(div3);
-    	}}
+    	}
+    //	}
 
 	
 };
