@@ -88,6 +88,9 @@ function DossierContentView(dController){
 		 
 		 // 4. remove the grey sortable icon from the titles of the items
 		 $('.dragIcon').hide();
+		 
+		 //5.  remove the delete button
+		 $('.deletecontainer').hide();
 	 });
 	
 } //end of constructor
