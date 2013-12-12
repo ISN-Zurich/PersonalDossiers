@@ -28,12 +28,13 @@ detailEmbedView.prototype.update = function(){
 	var authorsList=bookmarkModel.getAuthorList();
 	console.log("authorlist is "+bookmarkModel.getAuthorList());
 	
-	//$("#authorValue").text(authorsList[0]+","+ authorsList[1]);
-	//$("#authorValue").text(JSON.stringify(authorsList));
 	var authors = bookmarkModel.showAuthors();
 	var dossierTitle=bookmarkModel.getTitle();
 	var date=bookmarkModel.getDate();
+	var publisherTitle=bookmarkModel.getPublisher();
+	
 	$("#titleValue").text(dossierTitle);
+	$("#publisherValue").text(publisherTitle);
 	$("#authorValue").text(authors);
 	$("#dateValue").text(date);
 	

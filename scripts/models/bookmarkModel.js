@@ -436,6 +436,17 @@ BookmarkModel.prototype.getTitle = function() {
 };
 
 
+BookmarkModel.prototype.getPublisher = function() {
+	if (this.controller.id=="detailembedController"){
+	var item_index=this.getItemIndex();
+    return (this.index < this.dossierList.length ) ? this.dossierList[item_index].metadata.publisher["name"] : false;	
+    //return this.dossierList[this.index]['metadata']['title'];
+	}
+	else{
+		
+	}return (this.index < this.dossierList.length ) ? this.dossierList[this.index].metadata.title : false;
+};
+
 BookmarkModel.prototype.getDate = function() {
 	var item_index=this.getItemIndex();
     return (this.index < this.dossierList.length) ? this.dossierList[this.index].metadata.date : false;	
