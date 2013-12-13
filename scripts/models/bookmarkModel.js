@@ -474,17 +474,34 @@ BookmarkModel.prototype.getDescription = function() {
     return  dtext;	
 };
 
+BookmarkModel.prototype.getDescriptionShort = function(strlen) {
+	// sometimes the item description contains HTML code. In order to strip it from the content, we use a helper div.
+	var dtext = this.getDescription();
+	if ( dtext.length > strlen ) {
+		dtext = dtext.slice(0,strlen);
+		dtext = dtext + "...";
+	}
+	
+    return  dtext;	
+};
+
 BookmarkModel.prototype.getThumbnail = function() {
-    return (this.index < this.dossierList.length) ? this.dossierList[this.index].metadata.image : false;	
+
+	if (this.index < this.dossierList.length && 
+		this.dossierList[this.index].metadata.image &&
+		this.dossierList[this.index].metadata.image.length){
+		return this.dossierList[this.index].metadata.image;
+	} 
+	return "images/default_item_images/default_" +this.getType()+ ".jpg";	
 };
 
 BookmarkModel.prototype.getType = function() {
-    return (this.index < this.dossierList.length) ? this.dossierList[this.index].metadata.type : false;	
+    return (this.index < this.dossierList.length) ? this.dossierList[this.index].metadata.type : "Publication";	
 };
 
 BookmarkModel.prototype.getISNURL = function() {
 		
-    return (this.index < this.dossierList.length) ? this.dossierList[this.index].metadata.isn_detail_url: false;	
+    return (this.index < this.dossierList.length) ? this.dossierList[this.index].metadata.isn_detail_url: "";	
 };
 
 
@@ -558,8 +575,21 @@ BookmarkModel.prototype.resetUserIndex=function(){
     this.user_index=0;
 };
 
+BookmarkModel.prototype.setIndexToItemId=function(id){
+	var index = 0;
+	for (index; index < this.dossierList.length;index++){
+		if (this.dossierList[index].metadata.id === id ) {
+			this.setIndex(index);
+			break;
+		}
+	}
+	
+    this.index = index;
+    console.log("index set in bookmark model is "+this.index);
+};
+
 BookmarkModel.prototype.setIndex=function(index){
-    this.index=index;
+    this.index = index;
     console.log("index set in bookmark model is "+this.index);
 };
 
@@ -567,6 +597,8 @@ BookmarkModel.prototype.setIndex=function(index){
 // i.e. author, date 
 BookmarkModel.prototype.getItemIndex = function(){
 	console.log("get item index");
+	return this.index;
+	
 	var index_item;
 	if (this.controller.id=="detailembedController"){
 		for (var index=0; index<this.dossierList.length;index++){
