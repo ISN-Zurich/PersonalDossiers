@@ -11,7 +11,8 @@ function DossierContentView(dController){
 	self.tagID = 'contentArea';
 
 	self.deleteMode = 0;
-	$(document).bind("click", deleteClickHandler);
+	$(document).bind("click", clickHandler);
+	
 	$(window).bind("click", function(){
 		// rescue click to cancel a delete request
 		if (self.deleteMode > 0) {
@@ -20,7 +21,7 @@ function DossierContentView(dController){
 			self.deleteMode = 0;
 		}
 	});
-	
+
 	$(window).bind('keydown', function(e){
 		if (e.keyCode === 27 && self.deleteMode > 0) {
 			$('#delete-confirm-'+self.deleteMode).hide();
@@ -28,8 +29,8 @@ function DossierContentView(dController){
 			self.deleteMode = 0;
 		}
 	});
-	
-	function deleteClickHandler(e) {
+
+	function clickHandler(e) {
 		var targetE = e.target;
 		var targetID = targetE.id;
 		if($(targetE).hasClass("deleteButton") ) {
@@ -47,52 +48,91 @@ function DossierContentView(dController){
 			self.deleteMode = 0;
 			e.stopPropagation();
 		}
+		else if($(targetE).hasClass("more")) {
+			//get the siblings of the currentnode and check which ones has class 
+			// var otherOpen = $(".less").map(function() {self.closeDescription(this);}); 
+
+			
+			console.log( " parent elements: " + $(targetE).parents().map(function() {return this.tagName;})
+			  .get()
+			  .join( ", " ));
+			
+			var containerE= $(targetE).parents().get(2);
+			
+			console.log("tag name of id parent " + containerE.tagName + " and its id " + containerE.id);
+			
+			var myID = containerE.id.substring(4);
+			console.log(" my item id is "+ myID);
+			
+			var descE = $(targetE).parents().get(0).firstChild;
+			self.controller.models.bookmark.setIndexToItemId(myID);
+			var description= self.controller.models.bookmark.getDescription();
+			console.log(" our description is " + description);
+			
+			descE.nodeValue = description;
+			$(targetE).removeClass("more");
+			$(targetE).addClass("less");
+			$(targetE).text("Less");
+		}
+		else if($(targetE).hasClass("less")) {
+			//this.closeDescrio
+			var containerE= $(targetE).parents().get(2);
+			var myID = containerE.id.substring(4);
+			var descE = $(targetE).parents().get(0).firstChild;
+			self.controller.models.bookmark.setIndexToItemId(myID);
+			var description=self.controller.models.bookmark.getDescriptionShort(136);
+			descE.nodeValue = description;
+			$(targetE).removeClass("less");
+			$(targetE).addClass("more");
+			$(targetE).text("More");
+		}
+			
 	}
-	
-	
+
+
 	$("#pd_footer_gen").bind("click", function(){
-			window.open(
-				  'http://yellowjacket.ethz.ch/tools/index.html',
-				  '_blank' 
-				);
+		window.open(
+				'http://yellowjacket.ethz.ch/tools/index.html',
+				'_blank' 
+		);
 	});
-	
-	 $('#editDossier').bind('click', function(){
-		 var userType=self.controller.models.dossierList.getUserType();
-		 console.log("user type in dossier content view is "+userType);
-		 if (userType!== "user"){
 
-			 // 1. display the grey sortable icon next to the titles of the items
-			 $('.dragIcon').show();
+	$('#editDossier').bind('click', function(){
+		var userType=self.controller.models.dossierList.getUserType();
+		console.log("user type in dossier content view is "+userType);
+		if (userType!== "user"){
 
-			 // 2 enable sortability
-			 self.activateSorting();
-			 
-			 //3. show delete button
-			 if (self.controller.oauth){
-				 $('.deletecontainer').show();
-			 }
-		 }	 
-	 });
-	 
-	 $('#lock-editDossier').bind('click', function(){
-		 // 1.store the positioning of the items
-		 self.storeOrder();
-		 
-		 // 2. send the new positions to the server
-		 
-		 self.controller.models.bookmark.arrangeItems();
-		 
-		 // 3. remove the sortability from the list
-		 $( "#sortable" ).sortable( "disable" );
-		 
-		 // 4. remove the grey sortable icon from the titles of the items
-		 $('.dragIcon').hide();
-		 
-		 //5.  remove the delete button
-		 $('.deletecontainer').hide();
-	 });
-	
+			// 1. display the grey sortable icon next to the titles of the items
+			$('.dragIcon').show();
+
+			// 2 enable sortability
+			self.activateSorting();
+
+			//3. show delete button
+			if (self.controller.oauth){
+				$('.deletecontainer').show();
+			}
+		}	 
+	});
+
+	$('#lock-editDossier').bind('click', function(){
+		// 1.store the positioning of the items
+		self.storeOrder();
+
+		// 2. send the new positions to the server
+
+		self.controller.models.bookmark.arrangeItems();
+
+		// 3. remove the sortability from the list
+		$( "#sortable" ).sortable( "disable" );
+
+		// 4. remove the grey sortable icon from the titles of the items
+		$('.dragIcon').hide();
+
+		//5.  remove the delete button
+		$('.deletecontainer').hide();
+	});
+
 } //end of constructor
 
 
@@ -111,40 +151,40 @@ DossierContentView.prototype.open = function() {
 
 
 DossierContentView.prototype.update = function(){
-	
-	var self=this;
-	
-	$("#contentArea").empty();
-    //TODO: only if we are loggedIn to display the logout button
-    if (self.controller.oauth){
-        $("#delete").removeClass("hidden");
-        $('#findinformation').removeClass("hidden");
-        $('#shareButton').removeClass("hidden");
-    }
 
-    if (self.controller.hashed){
-         $('#loginButtonLink').removeClass("hidden");
-    }
-    console.log("open dossier list view");
-    this.renderList();
-	
+	var self=this;
+
+	$("#contentArea").empty();
+	//TODO: only if we are loggedIn to display the logout button
+	if (self.controller.oauth){
+		$("#delete").removeClass("hidden");
+		$('#findinformation').removeClass("hidden");
+		$('#shareButton').removeClass("hidden");
+	}
+
+	if (self.controller.hashed){
+		$('#loginButtonLink').removeClass("hidden");
+	}
+	console.log("open dossier list view");
+	this.renderList();
+
 };
 
 
 DossierContentView.prototype.renderList = function() {
-	
+
 	var bookmarkModel = self.controller.models.bookmark;
 	console.log("dossier list length in dossier content view "+bookmarkModel.dossierList.length);
-	
+
 	var iFrameHeight= window.innerHeight || document.documentElement.clientHeight;
 
 
 	if (bookmarkModel.dossierList && bookmarkModel.dossierList.length > 0) {
-	
+
 		var divContainer=$("<ul/>", {
 			"id": "sortable",
 		}).appendTo("#contentArea");
-		
+
 		console.log("dossier list index is "+bookmarkModel.index);
 		for (bookmarkModel.index=0; bookmarkModel.index < bookmarkModel.dossierList.length; bookmarkModel.index++){
 			this.renderItem();
@@ -158,13 +198,13 @@ DossierContentView.prototype.renderList = function() {
 		//if the specific dossier has no dossier items
 		console.log("the dossier has no dossier items");
 		var div=$("<div/>", {
-	    	"id":"noContent"
-	        }).appendTo("#contentArea");
+			"id":"noContent"
+		}).appendTo("#contentArea");
 		var p=$("<p/>", {
-	    	"text": "Your Dossier has no items. You can add items  to the personal dossier if you go to http://isn.ethz.ch/. In there, under both the dossiers and the digital library menus there are various content items. If you enter in the ones you are interested in you will see an addBookmark button on the right side. By clicking on it, this item will be added to your active dossier"
-	        }).appendTo(div);
+			"text": "Your Dossier has no items. You can add items  to the personal dossier if you go to http://isn.ethz.ch/. In there, under both the dossiers and the digital library menus there are various content items. If you enter in the ones you are interested in you will see an addBookmark button on the right side. By clicking on it, this item will be added to your active dossier"
+		}).appendTo(div);
 	}
-	
+
 	if (self.controller.id ==="embedController"){
 		var bannerHeight= $("#bannerArea").height();
 		var footerHeight = $("#pd_footer_gen").height();
@@ -172,15 +212,15 @@ DossierContentView.prototype.renderList = function() {
 		var contentAreaHeight=iFrameHeight - totalHeight;
 		$("#contentArea").css("height",contentAreaHeight+"px" );
 	}
-	
-	
-   // self.activateSorting();
-  	
+
+
+	// self.activateSorting();
+
 };
 
 
 DossierContentView.prototype.activateSorting = function(){
-	
+
 	console.log("enter activateSorting");
 	//$( "#sortable" ).removeClass("ui-sortable-disabled");
 	$( "#sortable" ).sortable( "enable" );
@@ -191,68 +231,68 @@ DossierContentView.prototype.activateSorting = function(){
 		//placeholder: "ui-state-highlight"
 		start : function(event,ui) {
 			$(ui.item).addClass("currentSortedItem");
-			
+
 		},
 		stop : function(event,ui) {
 			(ui.item).removeClass("currentSortedItem");
 		}
 	});
-    $( "#sortable" ).disableSelection();
+	$( "#sortable" ).disableSelection();
 };
 
 DossierContentView.prototype.renderItem = function() {
 	//var self=this;
 
 	var bookmarkModel = self.controller.models.bookmark;
-	
+
 	console.log("enter render Item");
 	var	dossierID = self.controller.models.bookmark.getItemId();
 	console.log("dossier item id is"+dossierID);
-	
+
 	var div1=$("<li/>", {
 		"id": "item"+dossierID, 
 		"class" : "ui-state-default featured2 hideOT dossier_item "
 	}).appendTo("#sortable");
-	
+
 	var divFloat=$("<div/>", {
 		"class" : "floatleft"
 	}).appendTo(div1);
-	
+
 	var divA=$("<a/>", {
 		"href":bookmarkModel.getISNURL()
 	}).appendTo(divFloat);
-	
+
 	img=$("<img/>", {
 		"class" : "floatleft",
 		"src": bookmarkModel.getThumbnail(),
 		"width":"80",
 		"height":"60"
 	}).appendTo(divA);
-	
+
 	var divFloatText=$("<div/>", {
 		"class" : "floatleft overviewcontent dossier_text"
 	}).appendTo(div1);
-	
-	
-	
+
+
+
 	// if we are not in the embedded page display the isn url
 	// if we are in the embed page, but if the dossier item type is different than publication display also the isn url
-	
-	 firstLineContainer=$("<div/>", {
+
+	firstLineContainer=$("<div/>", {
 	}).appendTo(divFloatText); 
-	
+
 	divp1=$("<span/>", {
-			"class":"small",
-			text:bookmarkModel.getDate()+"/"+bookmarkModel.getType() 
+		"class":"small",
+		text:bookmarkModel.getDate()+"/"+bookmarkModel.getType() 
 	}).appendTo(firstLineContainer);
-	
+
 	icon=$("<span/>", {
 		"class":"iconMoon dragIcon hide",
 		text:"S" 
 	}).appendTo(firstLineContainer);
-	 
+
 	var divh1=$("<h1/>", {	}).appendTo(divFloatText);
-	 
+
 	if (self.controller.id!=="embedController" || bookmarkModel.getType() !== "Publication"){
 		divAText=$("<a/>", {
 			"class": "header1",
@@ -267,49 +307,42 @@ DossierContentView.prototype.renderItem = function() {
 			"href":bookmarkModel.getEmbedURL(), 
 			text:bookmarkModel.getTitle()
 		}).appendTo(divh1);
-		
+
 	}
 
-//	
-//	 desContainer=$("<div/>", {
-//			"class":"pd_box",
-//	 }).appendTo(divFloatText);
-	 
+
 	divp2=$("<p/>", {
 		"id":"itemDescription"+dossierID,
 		"class":"left",
-		text:bookmarkModel.getDescription()
+		text:bookmarkModel.getDescriptionShort(136)
 	}).appendTo(divFloatText);
-	
-	a2=$("<a/>", {
+
+	var divMore=$("<span/>", {
 		"class":"more more_a",
-		"href":bookmarkModel.getISNURL(), 
 		"style":"padding-left:5px",
 		"text":"More"
 	}).appendTo(divp2);
-
-   // if (self.controller.oauth){
-    	
-    	if (self.controller.id!=="embedController"){
-    		div3 = $("<div/>", {
-    			"class":"deletecontainer hide"
-    		}).appendTo(divFloatText);
-
-    		delButton = $("<div/>", {
-    			"id": "delete-"+ dossierID,
-    			"text": "Delete",
-    			"class": "deleteButton"
-    		}).appendTo(div3);
-
-    		delConfirmButton = $("<div/>", {
-    			id: "delete-confirm-" + dossierID,
-    			text: "Really delete?",
-    			"class": "deleteConfirmButton"
-    		}).appendTo(div3);
-    	}
-    //	}
-
 	
+	
+
+	if (self.controller.id!=="embedController"){
+		div3 = $("<div/>", {
+			"class":"deletecontainer hide"
+		}).appendTo(divFloatText);
+
+		delButton = $("<div/>", {
+			"id": "delete-"+ dossierID,
+			"text": "Delete",
+			"class": "deleteButton"
+		}).appendTo(div3);
+
+		delConfirmButton = $("<div/>", {
+			id: "delete-confirm-" + dossierID,
+			text: "Really delete?",
+			"class": "deleteConfirmButton"
+		}).appendTo(div3);
+	}
+
 };
 /**
  *	In this function we delete a dossier item by performing two tasks
@@ -327,7 +360,7 @@ DossierContentView.prototype.removeItem=function(id){
 
 
 DossierContentView.prototype.arrangeItem=function(id){
-	
+
 };
 
 /**stores the current sorting order in the bookmark model
@@ -335,7 +368,7 @@ DossierContentView.prototype.arrangeItem=function(id){
  * @function storeOrder
  **/
 DossierContentView.prototype.storeOrder = function() {
-	
+
 	console.log("enter store Order");
 	var orderList = new Array();
 
@@ -369,4 +402,4 @@ DossierContentView.prototype.close = function() {
 	$("#contentArea").empty();
 };
 
-	
+

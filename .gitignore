@@ -20,3 +20,7 @@ scripts/userController.js
 "scripts/views/emitsopo\302\252"
 "scripts/views/emitsopo\302\252"
 service/config.ini
+images/default_item_images/default_article.jpg
+images/default_item_images/default_audio.jpg
+images/default_item_images/default_publication.jpg
+images/default_item_images/default_video.jpg
