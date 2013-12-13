@@ -75,16 +75,16 @@ function DossierContentView(dController){
 			$(targetE).text("Less");
 		}
 		else if($(targetE).hasClass("less")) {
-			//this.closeDescrio
-			var containerE= $(targetE).parents().get(2);
-			var myID = containerE.id.substring(4);
-			var descE = $(targetE).parents().get(0).firstChild;
-			self.controller.models.bookmark.setIndexToItemId(myID);
-			var description=self.controller.models.bookmark.getDescriptionShort(136);
-			descE.nodeValue = description;
-			$(targetE).removeClass("less");
-			$(targetE).addClass("more");
-			$(targetE).text("More");
+			self.closeDescription(targetE);
+//			var containerE= $(targetE).parents().get(2);
+//			var myID = containerE.id.substring(4);
+//			var descE = $(targetE).parents().get(0).firstChild;
+//			self.controller.models.bookmark.setIndexToItemId(myID);
+//			var description=self.controller.models.bookmark.getDescriptionShort(136);
+//			descE.nodeValue = description;
+//			$(targetE).removeClass("less");
+//			$(targetE).addClass("more");
+//			$(targetE).text("More");
 		}
 			
 	}
@@ -359,9 +359,19 @@ DossierContentView.prototype.removeItem=function(id){
 };
 
 
-DossierContentView.prototype.arrangeItem=function(id){
-
+DossierContentView.prototype.closeDescription=function(targetE){
+	var self=this;
+	var containerE= $(targetE).parents().get(2);
+	var myID = containerE.id.substring(4);
+	var descE = $(targetE).parents().get(0).firstChild;
+	self.controller.models.bookmark.setIndexToItemId(myID);
+	var description=self.controller.models.bookmark.getDescriptionShort(136);
+	descE.nodeValue = description;
+	$(targetE).removeClass("less");
+	$(targetE).addClass("more");
+	$(targetE).text("More");	
 };
+
 
 /**stores the current sorting order in the bookmark model
  * @prototype
