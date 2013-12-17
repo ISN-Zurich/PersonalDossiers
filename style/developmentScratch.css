@@ -219,7 +219,7 @@ border
 #pd_invite_bar_text{
 display: inline-block;
 float: left;
-width: 212px;/*it was width: 373px;*/
+width: 176px;/*it was width: 373px;*/
 height: 18px; 
 margin: 0px;
 margin-bottom: 1px;

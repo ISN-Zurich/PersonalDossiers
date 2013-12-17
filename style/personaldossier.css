@@ -875,17 +875,17 @@ padding-left:3px;
 
 .roleSeparatorUnselected {
 	border-right: 1px solid white;
-	background:#ebedee;
-	padding-right: 35px;
-	padding-top:10px;	
+	background:#4C5160;;
+	color:#ebedee ;
+	padding-right:5px;
+	padding-top:10px;
+	padding-left:5px;	
 	height:18px;
 	float:left;
 	
 }
 
-.roleLeftBorder{
-	padding-left:10px;
-}
+
 
 .selectedRole{
 	padding-top:8px;
