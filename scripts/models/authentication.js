@@ -88,7 +88,7 @@ AuthenticationModel.prototype.setInitParameters=function(){
     };
     var message={
         method:"GET",
-        action: self.controller.baseURL +"service/authentication.php/request_token",
+        action: baseURL() +"service/authentication.php/request_token",
         parameters: [
             ["oauth_signature_method","HMAC-SHA1"],
             ["oauth_version","1.0"]
@@ -147,7 +147,7 @@ AuthenticationModel.prototype.getRequestToken=function(){
 
 AuthenticationModel.prototype.obtainAuthorization = function(){
     var self=this;
-    var url= self.controller.baseURL + 'service/authentication.php/authorize';
+    var url= baseURL() + 'service/authentication.php/authorize';
     var method="GET";
     $.ajax({
         url: url,
@@ -222,7 +222,7 @@ AuthenticationModel.prototype.authenticateUser = function(email, password){
         "credentials":hash_pswd
     };
 
-    var url=self.controller.baseURL +'service/authentication.php/authorize';
+    var url= baseURL() + 'service/authentication.php/authorize';
     ISNLogger.log("url in authenticate user is "+url);
     var method="POST";
 
@@ -295,7 +295,7 @@ AuthenticationModel.prototype.requestAccessToken = function() {
 
     var message={
         method:"GET",
-        action: self.controller.baseURL + "service/authentication.php/access_token",
+        action: baseURL() + "service/authentication.php/access_token",
         parameters: [
             ["oauth_signature_method","HMAC-SHA1"],
             ["oauth_verifier", self.verificationCode]
@@ -311,7 +311,7 @@ AuthenticationModel.prototype.requestAccessToken = function() {
     var header_request= OAuth.getAuthorizationHeader(self.controller.baseURL, parameters);
 
     $.ajax({
-        url:  self.controller.baseURL +'service/authentication.php/access_token',
+        url:  baseURL() + 'service/authentication.php/access_token',
         type : 'GET',
         dataType : 'json',
         success : success,
@@ -364,7 +364,7 @@ AuthenticationModel.prototype.clearAccessToken=function(){
 
 AuthenticationModel.prototype.logout =function(){
     var self=this;
-    var url= self.controller.baseURL +"service/authentication.php/access_token";
+    var url= baseURL() +"service/authentication.php/access_token";
     $.ajax({
         url: url,
         type : 'DELETE',
