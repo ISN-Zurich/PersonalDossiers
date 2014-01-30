@@ -8,12 +8,12 @@
 
 // this will go away
 function hostURL() {
-    return ISNLogger.choose("http://yellowjacket.ethz.ch", "http://lab.isn.ethz.ch");
+    return ISNLogger.choose(, "http://lab.isn.ethz.ch","http://yellowjacket.ethz.ch");
 }
 
 // this will go way
 function baseURL() {
-    return ISNLogger.choose("http://yellowjacket.ethz.ch/tools/", "http://lab.isn.ethz.ch/");
+    return ISNLogger.choose("http://lab.isn.ethz.ch/", "http://yellowjacket.ethz.ch/tools/");
 }
 
 function openView() {
@@ -39,8 +39,8 @@ function embedBookmarkController() {
     var self=this;
 
     this.debugMode = debugMode;
-    this.hostURL = hostURL;
-    this.baseURL = baseURL;
+    this.hostURL = hostURL();
+    this.baseURL = baseURL();
     
     // document.domain = 'ethz.ch';
     self.login = false;
