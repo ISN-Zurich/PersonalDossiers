@@ -2,12 +2,9 @@
 
 function addBookmarkController() {
     var self=this;
-
-    this.debugMode = debugMode;
     this.initServiceHost();
 //    this.hostURL = hostURL;
 //    this.baseURL = baseURL;
-    ISNLogger.log("debugMode is"+this.debugMode);
     ISNLogger.log("hostURL is"+this.hostURL);
     ISNLogger.log("baseURL is"+this.baseURL);
     
@@ -117,6 +114,8 @@ var controller;
 ISNLogger.log("enter addBookmark main js");
 $(document).ready(function(){
     ISNLogger.log("document ready");
+    
+    ISNLogger.debugMode = false;
     controller = new addBookmarkController();
 });
 

@@ -9,8 +9,6 @@
 
 function GalleryController() {
     var self = this;
-    this.debugMode = debugMode;
-    
     this.initServiceHost();
 
     ISNLogger.log('Gallery Controller starts');
@@ -96,9 +94,14 @@ GalleryController.prototype.logout = function() {
     this.models.user.logout();
 }
 
-var controller;
-ISNLogger.log("enter main js");
-$(document).ready(function(){
-    ISNLogger.log("document ready");
-    controller = new GalleryController();
-});
+var controlerObject = GalleryController;
+//
+//var controller;
+//ISNLogger.log("enter main js");
+//$(document).ready(function(){
+//    ISNLogger.log("document ready");
+//    
+//    ISNLogger.debugMode = false;
+//    
+//    controller = new GalleryController();
+//});

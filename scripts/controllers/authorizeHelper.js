@@ -15,7 +15,6 @@ function AuthorizationController() {
 //    this.debugMode = debugMode;
 //    this.hostURL = hostURL;
 //    this.baseURL = baseURL;
-    this.debugMode = true;
     this.initServiceHost();
 
 //    this.hostURL = "http://yellowjacket.ethz.ch";
@@ -125,5 +124,7 @@ var controller;
 ISNLogger.log("enter main js");
 $(document).ready(function() {
     ISNLogger.log("document ready");
+    
+    ISNLogger.debugMode = false;
     controller = new AuthorizationController();
 });

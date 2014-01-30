@@ -5,10 +5,8 @@
  * @function openView 
  * */ 
 
-var debugMode = ISNLogger.debugMode;
 var hostURL = ISNLogger.choose("http://yellowjacket.ethz.ch", "http://lab.isn.ethz.ch");
 var baseURL = ISNLogger.choose("http://yellowjacket.ethz.ch/tools/", "http://lab.isn.ethz.ch/");
-
 
 // this will go away
 function hostURL() {
@@ -20,13 +18,11 @@ function baseURL() {
     return ISNLogger.choose("http://yellowjacket.ethz.ch/tools/", "http://lab.isn.ethz.ch/");
 }
 
-
 function openView() {
 	ISNLogger.log("first console log message");
 	$("#" + this.tagID).show();
 }
  
-
 /**closes  a view
  * @function closeView  
  * */
@@ -34,14 +30,12 @@ function closeView() {
 	$("#" + this.tagID).hide();
 }
 
-
 function showErrorResponses(request){
 	ISNLogger.log("ERROR status text: "+ request.statusText); 
 	ISNLogger.log("ERROR status code: "+ request.statusCode()); 
 	ISNLogger.log("ERROR status code is : " + request.status);
 	ISNLogger.log("ERROR responsetext: "+ request.responseText);
 }
-
 
 function embedBookmarkController() {
     var self=this;
@@ -53,7 +47,7 @@ function embedBookmarkController() {
     document.domain = 'ethz.ch';
     self.login = false;
     
-   window.addEventListener('message', resizeListener, false);
+    window.addEventListener('message', resizeListener, false);
     //the resize listener will check for the resize event and will get the NEW height of the iframe
     
     var search = window.location.search;
@@ -73,7 +67,6 @@ function embedBookmarkController() {
         "style": "height:0px;",
         "scrolling":"no"}).appendTo('#isn_pd_widget');
     $("#isn_pd_widget").removeClass("none");   
-    
     
     function resizeListener(m){
     	ISNLogger.log("receive message");
@@ -102,11 +95,8 @@ function embedBookmarkController() {
 //    			ISNLogger.log(" handle message else");
 //    		}
     	}
-    	
     }
-
 }
-
 
 embedBookmarkController.prototype.isLoggedin = function() {
     return this.login;
@@ -116,5 +106,6 @@ var controller;
 ISNLogger.log("enter embedBookmar main js");
 $(document).ready(function(){
     ISNLogger.log("document ready in embedBookmarkController");
+    ISNLogger.debugMode = false;
     controller = new embedBookmarkController();
 });

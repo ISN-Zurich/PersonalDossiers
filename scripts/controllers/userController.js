@@ -249,8 +249,11 @@ userController.prototype.transitionToIntroduction = function(){
 	this.views.login.open();
 };
 
-var controller;
-$(document).ready(function(){
-	ISNLogger.log("document ready");
-	controller = new userController();
-});
+var controlerObject = userController;
+//var controller;
+//$(document).ready(function(){
+//	ISNLogger.log("document ready");
+//    
+//    ISNLogger.debugMode = false;
+//	controller = new userController();
+//});

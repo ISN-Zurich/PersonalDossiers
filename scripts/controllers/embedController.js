@@ -13,8 +13,6 @@ ISNLogger.log("enter embed controller file");
 function embedController() {
     var self=this;
     this.id="embedController";
-    this.debugMode = debugMode;
-    
     this.initServiceHost();
 //
 //    this.baseURL = baseURL;
@@ -121,12 +119,14 @@ embedController.prototype.hashedUrl = function() {
 
 
  
-
+var controlerObject = embedController;
  
-
-var controller;
-ISNLogger.log("enter main js");
-$(document).ready(function(){
-    ISNLogger.log("document ready");
-    controller = new embedController();
-});
+//
+//var controller;
+//ISNLogger.log("enter main js");
+//$(document).ready(function(){
+//    ISNLogger.log("document ready");
+//    
+//    ISNLogger.debugMode = false;
+//    controller = new embedController();
+//});

@@ -11,7 +11,6 @@
 function dossierController() {
 	var self=this;
 	this.id="dossierController";
-	this.debugMode = debugMode;
     this.initServiceHost();
     ISNLogger.log("hostURL is"+this.hostURL);
     ISNLogger.log("baseURL is"+this.baseURL);
@@ -197,9 +196,13 @@ dossierController.prototype.logout = function() {
 	authentication.logout();
 };
 
-var controller;
-ISNLogger.log("enter main js");
-$(document).ready(function(){
-	ISNLogger.log("document ready");
-	controller = new dossierController();
-});
+var controlerObject = dossierController;
+//
+//var controller;
+//ISNLogger.log("enter main js");
+//$(document).ready(function(){
+//	ISNLogger.log("document ready");
+//    
+//    ISNLogger.debugMode = false;
+//	controller = new dossierController();
+//});

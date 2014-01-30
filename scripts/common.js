@@ -4,7 +4,8 @@
  * @function openView 
  * */ 
 
-var debugMode = ISNLogger.debugMode;
+var controlerObject;
+
 var hostURL = ISNLogger.choose("http://yellowjacket.ethz.ch", "http://lab.isn.ethz.ch");
 var baseURL = ISNLogger.choose("http://yellowjacket.ethz.ch/tools/", "http://lab.isn.ethz.ch/");
 

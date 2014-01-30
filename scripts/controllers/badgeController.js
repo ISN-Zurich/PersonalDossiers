@@ -11,7 +11,6 @@
 function badgeController() {
     var self=this;
     this.id="badgeController";
-    this.debugMode = debugMode;
     this.initServiceHost();
 
 //    this.baseURL = baseURL;
@@ -106,9 +105,13 @@ badgeController.prototype.getActiveDossier = function(){
 };
 
 
-var controller;
-ISNLogger.log("enter main js");
-$(document).ready(function(){
-	ISNLogger.log("document ready");
-	controller = new badgeController();
-});
+var controlerObject = badgeController;
+
+//var controler;
+//ISNLogger.log("enter main js");
+//$(document).ready(function(){
+//	ISNLogger.log("document ready");
+//    
+//    ISNLogger.debugMode = false;
+//	controller = new badgeController();
+//});

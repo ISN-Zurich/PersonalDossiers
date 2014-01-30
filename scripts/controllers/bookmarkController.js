@@ -4,7 +4,7 @@
 function BookmarkController() {
     
 	var self=this;
-    this.debugMode = debugMode;
+
     
     this.initServiceHost();
 //    this.hostURL = hostURL;
@@ -124,10 +124,14 @@ BookmarkController.prototype.calculateHeight= function(m){
 	};
 };
 
-var controller;
-ISNLogger.log("enter bookmark main js");
-$(document).ready(function(){
-    ISNLogger.log("document ready in bookmark controller");
-    controller = new BookmarkController();
-});
+var controlerObject = BookmarkController;
+//
+//var controller;
+//ISNLogger.log("enter bookmark main js");
+//$(document).ready(function(){
+//    ISNLogger.log("document ready in bookmark controller");
+//    
+//    ISNLogger.debugMode = false;
+//    controller = new BookmarkController();
+//});
 
