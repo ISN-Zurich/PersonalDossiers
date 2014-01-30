@@ -98,7 +98,7 @@ AuthenticationModel.prototype.setInitParameters=function(){
     OAuth.completeRequest(message, accessor);
 
     var parameters=message.parameters;
-    var header_request= OAuth.getAuthorizationHeader(self.controller.baseURL, parameters);
+    var header_request= OAuth.getAuthorizationHeader(baseURL(), parameters);
     ISNLogger.log("request header is "+header_request);
     self.requestToken_header=header_request;
 };
@@ -113,7 +113,7 @@ AuthenticationModel.prototype.setInitParameters=function(){
 AuthenticationModel.prototype.getRequestToken=function(){
     var self=this;
     $.ajax({
-        url:  self.controller.baseURL +'service/authentication.php/request_token',
+        url:  baseURL() +'service/authentication.php/request_token',
         type : 'GET',
         dataType : 'json',
         success : getAuthenticationInitData,
@@ -194,7 +194,7 @@ AuthenticationModel.prototype.obtainAuthorization = function(){
 
         OAuth.completeRequest(message, accessor);
         var parameters=message.parameters;
-        var header_request= OAuth.getAuthorizationHeader(self.controller.baseURL, parameters);
+        var header_request= OAuth.getAuthorizationHeader(baseURL(), parameters);
 
         ISNLogger.log('set obtainAccessToken authorization header ' + header_request);
         //create the new header the will contain also the request token
@@ -265,7 +265,7 @@ AuthenticationModel.prototype.authenticateUser = function(email, password){
         OAuth.completeRequest(message, accessor);
         ISNLogger.log(OAuth.SignatureMethod.getBaseString(message));
         var parameters=message.parameters;
-        var header_request= OAuth.getAuthorizationHeader(self.controller.baseURL, parameters);
+        var header_request= OAuth.getAuthorizationHeader(baseURL(), parameters);
 
         //use the Authorization header that contains also the request token and token secret
         ISNLogger.log( 'set authorization header ' + header_request);
@@ -308,7 +308,7 @@ AuthenticationModel.prototype.requestAccessToken = function() {
 //	ISNLogger.log("set timestamp and nonce");
 //	OAuth.SignatureMethod.sign(message, accessor);
     var parameters=message.parameters;
-    var header_request= OAuth.getAuthorizationHeader(self.controller.baseURL, parameters);
+    var header_request= OAuth.getAuthorizationHeader(baseURL(), parameters);
 
     $.ajax({
         url:  baseURL() + 'service/authentication.php/access_token',
