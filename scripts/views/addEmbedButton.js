@@ -2,14 +2,14 @@
 
 function addEmbedButton(controller){
 	
-	console.log("enter add embed button");
+	ISNLogger.log("enter add embed button");
 	var self=this;
 	self.controller=controller;
 	self.tagID="embedView";
 	self.dossierId=self.controller.getActiveDossier();
 		
 	$("#addEmbedBtn").bind("click", function(e){
-		console.log("clicked the add Embed button");
+		ISNLogger.log("clicked the add Embed button");
 		if ($("#dropdown_embed").is(":visible")){
 			$("#dropdown_embed").hide();
 		}
@@ -48,7 +48,7 @@ function addEmbedButton(controller){
 addEmbedButton.prototype.openDiv=openView;
 
 addEmbedButton.prototype.open= function(){
-	console.log("open add embed View");
+	ISNLogger.log("open add embed View");
 	this.openDiv();
 };
 
@@ -62,7 +62,7 @@ addEmbedButton.prototype.open= function(){
 
 addEmbedButton.prototype.update= function(){
 	
-	console.log("enter update in addEmbedd button");
+	ISNLogger.log("enter update in addEmbedd button");
 		
 	var self=this;
 	var dossierId=this.controller.getActiveDossier();
@@ -81,6 +81,6 @@ addEmbedButton.prototype.update= function(){
 addEmbedButton.prototype.closeDiv=closeView;
 
 addEmbedButton.prototype.close= function(){
-	console.log("close add embed view");
+	ISNLogger.log("close add embed view");
 	this.closeDiv();
 };

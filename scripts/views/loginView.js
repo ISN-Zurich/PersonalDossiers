@@ -8,10 +8,10 @@ function LoginView(controller){
 	$(document).bind("keyup", keyfield);
 	
 	function keyfield(e){
-		console.log("keydown caught");
+		ISNLogger.log("keydown caught");
 		var keycode=e.keyCode;
 		if (keycode===13){
-			console.log("keydown is enter");
+			ISNLogger.log("keydown is enter");
 			login();
 		}	
 	}

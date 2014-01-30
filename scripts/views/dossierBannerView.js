@@ -40,9 +40,9 @@ function DossierBannerView(myController){
     	}
     	
     	var userType=self.controller.models.dossierList.getUserType();
-    	console.log("user type in dossier banner view is "+userType);
+    	ISNLogger.log("user type in dossier banner view is "+userType);
     	if (userType!== "user"){
-    		console.log("will activate banner edit mode, we are not users");
+    		ISNLogger.log("will activate banner edit mode, we are not users");
     	self.activateBannerEditMode();
 	    e.stopPropagation();
     	}
@@ -99,7 +99,7 @@ function DossierBannerView(myController){
 
 DossierBannerView.prototype.activateBannerEditMode = function() {
     this.editMode = true;
-    console.log("activate Banner Edit");
+    ISNLogger.log("activate Banner Edit");
     
     // TODO: add visual cues that some parts are now editable
     
@@ -113,7 +113,7 @@ DossierBannerView.prototype.activateBannerEditMode = function() {
 };
 
 DossierBannerView.prototype.deactivateBannerEditMode = function() {
-    console.log("deactivate Banner Edit");
+    ISNLogger.log("deactivate Banner Edit");
     
     // TODO: remove visual cues that from editable parts
     
@@ -128,7 +128,7 @@ DossierBannerView.prototype.deactivateBannerEditMode = function() {
 
 DossierBannerView.prototype.changeImage= function(){
     if (this.editMode) {
-        console.log('wait for Transition');
+        ISNLogger.log('wait for Transition');
         this.goToGallery = true;
         this.transitionToGallery();
     }
@@ -136,7 +136,7 @@ DossierBannerView.prototype.changeImage= function(){
 
 DossierBannerView.prototype.transitionToGallery = function() {
     if ( this.waitForUpload === 0 && this.goToGallery === true ) {
-        console.log('upload done');
+        ISNLogger.log('upload done');
 	window.location.href = "gallery.php";
     }
 };
@@ -147,9 +147,9 @@ DossierBannerView.prototype.checkTitleEdit = function() {
     var value = $("#headerTitle").text();
     
     if (value !== oldVal) {
-    console.log('old val in title is: '+oldVal);
+    ISNLogger.log('old val in title is: '+oldVal);
   
-	console.log('Change the title content! and make it: '+value);
+	ISNLogger.log('Change the title content! and make it: '+value);
 	
 	this.controller.models['bookmark'].setDossierTitle(value);
 
@@ -163,7 +163,7 @@ DossierBannerView.prototype.checkDescriptionEdit = function() {
     var oldVal= self.controller.models['bookmark'].getDossierDescription();
     
     if (value !== oldVal) {
-	console.log('Change the description content! ' + value);
+	ISNLogger.log('Change the description content! ' + value);
 	this.controller.models['bookmark'].setDossierDescription(value);
 	// safe the edit in the backend
 
@@ -174,7 +174,7 @@ DossierBannerView.prototype.checkDescriptionEdit = function() {
 
 
 DossierBannerView.prototype.open=function(){
-    console.log("open dossier banner view");	
+    ISNLogger.log("open dossier banner view");	
     this.renderBanner();
     // this.openDiv();	
 };
@@ -189,7 +189,7 @@ DossierBannerView.prototype.renderBanner= function(){
     //var dossierId= bookmarkModel.getDossierID();
     var dossierId=bookmarkModel.dossierId;
     
-    console.log("dossier id in banner view is "+dossierId);
+    ISNLogger.log("dossier id in banner view is "+dossierId);
     
     var img=$("<img/>", {
 	"id":"bannerImage",//we need to provide the dossierId dynamically

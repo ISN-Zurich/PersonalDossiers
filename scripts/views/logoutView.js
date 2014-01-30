@@ -7,7 +7,7 @@ function LogoutView(controller){
 	self.tagID="delete";
 	this.open();
 	$("#delete").bind("click", function(){
-		console.log("clicked the logout button");
+		ISNLogger.log("clicked the logout button");
 		self.controller.logout();			
 	});
 	
@@ -24,7 +24,7 @@ LogoutView.prototype.open = function(){
 
 LogoutView.prototype.update = function(){
     $('#delete').empty();
-    console.log("design dynamically logout button");
+    ISNLogger.log("design dynamically logout button");
     var p = $("<p/>", {
 	"class": "bold active clickable",
 	"text": "Logout"

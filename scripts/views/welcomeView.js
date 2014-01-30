@@ -8,12 +8,12 @@ function WelcomeView(controller){
 	$("#welcomeBox").bind("click", function(e){
 		// ensure that clicks on the headers are ignored
 		
-		console.log("clicked the dossier category");
+		ISNLogger.log("clicked the dossier category");
 		var targetE = e.target;
 		if (targetE.id !== "followingListHeader") {
 			var targetID = targetE.id;
 			var dosID = targetID.substring(7);
-			console.log("dosID is "+dosID);
+			ISNLogger.log("dosID is "+dosID);
 			var userModel = self.controller.models.user;
 			userModel.setActiveDossier(dosID);
 			window.location.href="index.html?id="+dosID;
@@ -31,7 +31,7 @@ WelcomeView.prototype.open = function(){
 
 WelcomeView.prototype.update = function(){
 	var self=this;
-	console.log("update the welcome view");
+	ISNLogger.log("update the welcome view");
 	var hash= window.location.hash;
 	var hashTag = hash.substring(1);
 	self.controller.colorizeInteractiveBox(hashTag);
@@ -40,7 +40,7 @@ WelcomeView.prototype.update = function(){
  
 		 
 	if ( self.controller.models.user.userProfile ) {
-		console.log("user profile existis, design welcome view");
+		ISNLogger.log("user profile existis, design welcome view");
 	}
 
 	var dossierListModel=self.controller.models.dossierList;
@@ -48,7 +48,7 @@ WelcomeView.prototype.update = function(){
 	if (dossierListModel.listIsPresent()) { 
 		dossierListModel.reset();
 
-		console.log("dossier list is present design dossier list - welcome view");
+		ISNLogger.log("dossier list is present design dossier list - welcome view");
 		dossierId=dossierListModel.getDossierId();
 		
 		welcomeElement=$("#welcome");
@@ -164,7 +164,7 @@ WelcomeView.prototype.renderDossierItem = function(parentE) {
 WelcomeView.prototype.closeDiv=closeView;
 
 WelcomeView.prototype.close = function(){
-	console.log("close welcome view");
+	ISNLogger.log("close welcome view");
 	this.closeDiv();
 	
 };

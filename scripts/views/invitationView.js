@@ -8,7 +8,7 @@ function InvitationView(controller){
 	$(document).bind("BookmarkModelLoaded", function() {
 		self.usertype=self.controller.getUserType();
 		if (self.usertype === "owner"){
-			console.log("we will open the invtiation box, we have an owner");
+			ISNLogger.log("we will open the invtiation box, we have an owner");
 			self.open();
 		}
 	});
@@ -73,7 +73,7 @@ function InvitationView(controller){
 InvitationView.prototype.openDiv=openView;
 
 InvitationView.prototype.open=function(){
-	console.log("open invitation view");
+	ISNLogger.log("open invitation view");
 	this.update();
 	this.openDiv();
 };
@@ -86,6 +86,6 @@ InvitationView.prototype.update=function(){
 InvitationView.prototype.closeDiv=closeView;
 
 InvitationView.prototype.close= function(){
-	console.log("close invitation view");
+	ISNLogger.log("close invitation view");
 	this.closeDiv();
 };

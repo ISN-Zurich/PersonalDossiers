@@ -12,7 +12,7 @@ DossierUsersView.prototype.openDiv=openView;
 
 DossierUsersView.prototype.open = function(){
 	var self=this;
-	console.log("open dossierUsersView");
+	ISNLogger.log("open dossierUsersView");
 	self.update();
 	if (self.owners){
 		$("#dossierOwners").show();
@@ -27,13 +27,13 @@ DossierUsersView.prototype.open = function(){
 
 DossierUsersView.prototype.update = function(){
 	var self=this;
-	console.log("enter update users list for a dossier");
+	ISNLogger.log("enter update users list for a dossier");
 	
 	var bookmarkModel=self.controller.models.bookmark;
 	bookmarkModel.resetUserIndex();
-	console.log("userlist is in View is "+JSON.stringify(self.controller.models.bookmark.userlist));
+	ISNLogger.log("userlist is in View is "+JSON.stringify(self.controller.models.bookmark.userlist));
 	if (bookmarkModel.userlist && bookmarkModel.userlist.length >0) {
-		console.log("dossierUsersView: userlist exists ");
+		ISNLogger.log("dossierUsersView: userlist exists ");
 		do {
 
 		if (self.controller.models.bookmark.getUsertype() == "owner"){
@@ -70,6 +70,6 @@ DossierUsersView.prototype.closeDiv= closeView;
 
 DossierUsersView.prototype.close = function(){
 	
-	console.log("close dossier users view");
+	ISNLogger.log("close dossier users view");
 	this.closeDiv();
 };

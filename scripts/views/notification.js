@@ -3,19 +3,18 @@
 */
 
 function notificationView(controller){
-	console.log("enter notification view constructor");
+	ISNLogger.log("enter notification view constructor");
 	var self=this;
 	self.controller = controller;
 	self.tagID='st_notifications';
 }
 
 notificationView.prototype.open = function(){
-	console.log("open notifications page");
+	ISNLogger.log("open notifications page");
 	this.update();
 };
 
 notificationView.prototype.update = function(){
-	
 	var self=this;
 
 	$("#welcome").empty();

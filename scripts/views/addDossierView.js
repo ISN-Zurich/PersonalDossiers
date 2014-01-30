@@ -1,13 +1,13 @@
 /*jslint vars: true, sloppy: true */
 
 function addDossierView(controller){
-	console.log("enter AddDossierView");
+	ISNLogger.log("enter AddDossierView");
 	var self=this;
 	self.controller=controller;
 	self.tagID="addDossierBtn";
 		
 	$("#addDossierBtn").bind("click", function(e){
-		console.log("clicked the add Dossier button");
+		ISNLogger.log("clicked the add Dossier button");
 		self.controller.models.dossierList.addDossier();
 	});
 
@@ -19,7 +19,7 @@ function addDossierView(controller){
 addDossierView.prototype.openDiv=openView;
 
 addDossierView.prototype.open= function(){
-	console.log("open add Dossier View");
+	ISNLogger.log("open add Dossier View");
 	this.update();
 	this.openDiv();
 };
@@ -31,6 +31,6 @@ addDossierView.prototype.update= function(){
 addDossierView.prototype.closeDiv=closeView;
 
 addDossierView.prototype.close= function(){
-	console.log("close add dossier view");
+	ISNLogger.log("close add dossier view");
 	this.closeDiv();
 };

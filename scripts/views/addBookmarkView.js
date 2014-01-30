@@ -7,7 +7,7 @@
  * 
  */
 function DesignBookmarkView(dcontroller) {
-    console.log("enter design bookmark view");
+    ISNLogger.log("enter design bookmark view");
     var self = this;
     
     self.controller=dcontroller;
@@ -25,13 +25,13 @@ function DesignBookmarkView(dcontroller) {
 
 
 DesignBookmarkView.prototype.open = function() {
-	console.log("open add bookmark view");
+	ISNLogger.log("open add bookmark view");
 	this.update();
 };
 
 
 DesignBookmarkView.prototype.update = function(){
-    console.log('update bookmark button');
+    ISNLogger.log('update bookmark button');
 	//design the bookmark button dynamically in the appropriate div
 	
 	var bookMarkbuttonContainer = $("<div/>", {

@@ -77,7 +77,7 @@ badgeView.prototype.close = function() {
 badgeView.prototype.renderBadgeList = function() {
 	
 	var bookmarkModel = self.controller.models.bookmark;
-	console.log("dossier list length in dossier content view "+bookmarkModel.dossierList.length);
+	ISNLogger.log("dossier list length in dossier content view "+bookmarkModel.dossierList.length);
 	
 	//calculate ul height
 	
@@ -90,7 +90,7 @@ badgeView.prototype.renderBadgeList = function() {
 
 	if (bookmarkModel.dossierList && bookmarkModel.dossierList.length > 0) {
 		
-		console.log("dossier list index is "+bookmarkModel.index);
+		ISNLogger.log("dossier list index is "+bookmarkModel.index);
 		for (bookmarkModel.index=0; bookmarkModel.index < bookmarkModel.dossierList.length; bookmarkModel.index++){
 			this.renderItem();
 			bookmarkModel.setIndex(bookmarkModel.index++);
@@ -98,7 +98,7 @@ badgeView.prototype.renderBadgeList = function() {
 	
 	} else{
 		//if the specific dossier has no dossier items
-		console.log("the dossier has no dossier items");
+		ISNLogger.log("the dossier has no dossier items");
 		var div=$("<div/>", {
 	    	"id":"noContent"
 	        }).appendTo("#badgeArea");
@@ -107,7 +107,7 @@ badgeView.prototype.renderBadgeList = function() {
 	        }).appendTo(div);
 	}
 	var ulHeight=iFrameHeight - totalHeight;
-	console.log("ulheight is "+ulHeight);
+	ISNLogger.log("ulheight is "+ulHeight);
 	$("#subnavi").css("height",ulHeight+"px" );
 	
 };
@@ -118,9 +118,9 @@ badgeView.prototype.renderItem = function() {
 
 	var bookmarkModel = self.controller.models.bookmark;
 	
-	console.log("enter render Item");
+	ISNLogger.log("enter render Item");
 	var	dossierID = self.controller.models.bookmark.getItemId();
-	console.log("dossier item id is"+dossierID);
+	ISNLogger.log("dossier item id is"+dossierID);
 	
 
 	var li=$("<li/>", {

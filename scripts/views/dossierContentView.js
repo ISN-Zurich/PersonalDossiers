@@ -53,21 +53,21 @@ function DossierContentView(dController){
 			// var otherOpen = $(".less").map(function() {self.closeDescription(this);}); 
 
 			
-			console.log( " parent elements: " + $(targetE).parents().map(function() {return this.tagName;})
+			ISNLogger.log( " parent elements: " + $(targetE).parents().map(function() {return this.tagName;})
 			  .get()
 			  .join( ", " ));
 			
 			var containerE= $(targetE).parents().get(2);
 			
-			console.log("tag name of id parent " + containerE.tagName + " and its id " + containerE.id);
+			ISNLogger.log("tag name of id parent " + containerE.tagName + " and its id " + containerE.id);
 			
 			var myID = containerE.id.substring(4);
-			console.log(" my item id is "+ myID);
+			ISNLogger.log(" my item id is "+ myID);
 			
 			var descE = $(targetE).parents().get(0).firstChild;
 			self.controller.models.bookmark.setIndexToItemId(myID);
 			var description= self.controller.models.bookmark.getDescription();
-			console.log(" our description is " + description);
+			ISNLogger.log(" our description is " + description);
 			
 			descE.nodeValue = description;
 			$(targetE).removeClass("more");
@@ -99,7 +99,7 @@ function DossierContentView(dController){
 
 	$('#editDossier').bind('click', function(){
 		var userType=self.controller.models.dossierList.getUserType();
-		console.log("user type in dossier content view is "+userType);
+		ISNLogger.log("user type in dossier content view is "+userType);
 		if (userType!== "user"){
 
 			// 1. display the grey sortable icon next to the titles of the items
@@ -165,7 +165,7 @@ DossierContentView.prototype.update = function(){
 	if (self.controller.hashed){
 		$('#loginButtonLink').removeClass("hidden");
 	}
-	console.log("open dossier list view");
+	ISNLogger.log("open dossier list view");
 	this.renderList();
 
 };
@@ -174,7 +174,7 @@ DossierContentView.prototype.update = function(){
 DossierContentView.prototype.renderList = function() {
 
 	var bookmarkModel = self.controller.models.bookmark;
-	console.log("dossier list length in dossier content view "+bookmarkModel.dossierList.length);
+	ISNLogger.log("dossier list length in dossier content view "+bookmarkModel.dossierList.length);
 
 	var iFrameHeight= window.innerHeight || document.documentElement.clientHeight;
 
@@ -185,7 +185,7 @@ DossierContentView.prototype.renderList = function() {
 			"id": "sortable",
 		}).appendTo("#contentArea");
 
-		console.log("dossier list index is "+bookmarkModel.index);
+		ISNLogger.log("dossier list index is "+bookmarkModel.index);
 		for (bookmarkModel.index=0; bookmarkModel.index < bookmarkModel.dossierList.length; bookmarkModel.index++){
 			this.renderItem();
 			bookmarkModel.setIndex(bookmarkModel.index++);
@@ -196,7 +196,7 @@ DossierContentView.prototype.renderList = function() {
 		//	}while (bookmarkModel.index<bookmarkModel.dossierList.length);
 	} else{
 		//if the specific dossier has no dossier items
-		console.log("the dossier has no dossier items");
+		ISNLogger.log("the dossier has no dossier items");
 		var div=$("<div/>", {
 			"id":"noContent"
 		}).appendTo("#contentArea");
@@ -221,7 +221,7 @@ DossierContentView.prototype.renderList = function() {
 
 DossierContentView.prototype.activateSorting = function(){
 
-	console.log("enter activateSorting");
+	ISNLogger.log("enter activateSorting");
 	//$( "#sortable" ).removeClass("ui-sortable-disabled");
 	$( "#sortable" ).sortable( "enable" );
 	//make the list sortable
@@ -245,9 +245,9 @@ DossierContentView.prototype.renderItem = function() {
 
 	var bookmarkModel = self.controller.models.bookmark;
 
-	console.log("enter render Item");
+	ISNLogger.log("enter render Item");
 	var	dossierID = self.controller.models.bookmark.getItemId();
-	console.log("dossier item id is"+dossierID);
+	ISNLogger.log("dossier item id is"+dossierID);
 
 	var div1=$("<li/>", {
 		"id": "item"+dossierID, 
@@ -379,7 +379,7 @@ DossierContentView.prototype.closeDescription=function(targetE){
  **/
 DossierContentView.prototype.storeOrder = function() {
 
-	console.log("enter store Order");
+	ISNLogger.log("enter store Order");
 	var orderList = new Array();
 
 	$("#sortable").find("li.ui-state-default").each(function(index) {

@@ -9,7 +9,7 @@ function RegistrationView(controller){
 	
 	
 	$(document).bind('EmailAlreadyTaken', function(){
-		console.log("bound email already taken registration view");
+		ISNLogger.log("bound email already taken registration view");
 		$("#emailRegistrationInput").hide();
 		$("#existing_mail").show();	
 		
@@ -19,67 +19,67 @@ function RegistrationView(controller){
 	
 	
 	$(document).bind('NameEmpty', function(){
-		console.log("bound name empty d in registration view");
+		ISNLogger.log("bound name empty d in registration view");
 		$("#nameRegistrationInput").hide();
 		$("#empty_name").show();	
 	});
 	
 	
 	$(document).bind('EmailEmpty', function(){
-		console.log("bound email empty in registration view");
+		ISNLogger.log("bound email empty in registration view");
 				
 		$("#emailRegistrationInput").hide();
 		$("#empty_mail").show();	
 	});
 	
 	$(document).bind('CaptchaError', function(){
-		console.log("bound CaptchaError in registration view");
+		ISNLogger.log("bound CaptchaError in registration view");
 		//self.refreshCapcha();		
 		$("#captcha_message").show();	
 	});
 	
 	$(document).bind('EmailNotValidated', function(){
-		console.log("bound email not validated in registration view");
+		ISNLogger.log("bound email not validated in registration view");
 		$("#emailRegistrationInput").hide();
 		$("#notvalid_mail").show();	
 	});
 	
 	$(document).bind('PasswortNotValidated', function(){
-		console.log("bound passwort not validated in registration view");
+		ISNLogger.log("bound passwort not validated in registration view");
 		$("#passwordRegistrationInput").hide();
 		$("#empty_password").hide();
 		$("#short_password").show();	
 	});
 
 	$(document).bind('PasswortEmpty', function(){
-		console.log("bound passwort empty in registration view");
+		ISNLogger.log("bound passwort empty in registration view");
 		$("#passwordRegistrationInput").hide();
 		$("#short_password").hide();	
 		$("#empty_password").show();	
 	});
 	
 	$(document).bind('PasswortConfirmEmpty', function(){
-		console.log("bound confirm passwort empty in registration view");
+		ISNLogger.log("bound confirm passwort empty in registration view");
 		$("#passwordRegConfirmInput").hide();	
 		$("#empty_confirmPassword").show();	
 	});
 
 	
 	$(document).bind('RegistrationValidated', function(){
-		console.log("bound registation validated in registration view");
+		ISNLogger.log("bound registation validated in registration view");
 		$("#submit_confirmation").removeClass("inactive_registration");
 		$("#submit_confirmation").addClass("active_registration");	
 	});
 
 
 	$(document).bind('RegistrationNotValidated', function(){
-		console.log("bound registation NOT validated in registration view");
+		ISNLogger.log("bound registation NOT validated in registration view");
 		$("#submit_confirmation").removeClass("active_registration");	
 		$("#submit_confirmation").addClass("inactive_registration");
 	});
 	
 	$("#registerButton").bind("click", function(e){
-		console.log("clicked on the register button");
+		ISNLogger.log("clicked on the register button");
 		self.controller.transitionToRegistration();
 		
 		$("#titleRegistrationInput").attr('contenteditable', 'true');
@@ -95,9 +95,9 @@ function RegistrationView(controller){
 	});
 	
 	$("#titleRegistrationInput").focusout(function(e){
-		console.log("focused out title in registration");
+		ISNLogger.log("focused out title in registration");
 		var value_title = $("#titleRegistrationInput option:selected").text();
-		console.log("value_title is "+value_title);
+		ISNLogger.log("value_title is "+value_title);
 		self.userModel.setUserTitle(value_title);
 	});
 	
@@ -107,7 +107,7 @@ function RegistrationView(controller){
 	 */
 	
 	$("#nameRegistrationInput").focusout(function(e){
-		console.log("focused out name in registration");
+		ISNLogger.log("focused out name in registration");
 		var value_name = $("#nameRegistrationInput").text();
 		self.userModel.setName(value_name);
 	});
@@ -117,7 +117,7 @@ function RegistrationView(controller){
 	 * focusing out from the email field 
 	 */
 	$("#emailRegistrationInput").focusout(function(e){
-		console.log("focused out email in registration");
+		ISNLogger.log("focused out email in registration");
 		var value_email = $("#emailRegistrationInput").text();
 		self.userModel.setUserEmail(value_email);
 	});
@@ -127,7 +127,7 @@ function RegistrationView(controller){
 	 * focusing out from the password field 
 	 * */
 	$("#passwordRegistrationInput").focusout(function(e){
-		console.log("focused out password in registration");
+		ISNLogger.log("focused out password in registration");
 		var value_password = $("#passwordRegistrationInput").text();
 		var hash_password = self.userModel.getHashPassword(value_password);
 		self.userModel.setPassword(hash_password ? hash_password : "", value_password ? value_password.length : "");
@@ -139,7 +139,7 @@ function RegistrationView(controller){
 	 */
 	
 	$("#passwordRegConfirmInput").focusout(function(e){
-		console.log("focus out password confirmation");
+		ISNLogger.log("focus out password confirmation");
 		
 		var password = $("#passwordRegistrationInput").text();
 		if(password){
@@ -155,47 +155,47 @@ function RegistrationView(controller){
 
 	
 	$("#empty_name").bind("click", function(e){
-		console.log("clicked on the empty name");
+		ISNLogger.log("clicked on the empty name");
 		$("#empty_name").hide();
 		$("#nameRegistrationInput").show();
 		
 	});
 	
 	$("#recaptcha_response_field").bind("click", function(e){
-		console.log("clicked on recaptcha response field");
+		ISNLogger.log("clicked on recaptcha response field");
 		$("#captcha_message").hide();		
 	});
 	
 	
 	
 	$("#empty_mail").bind("click", function(e){
-		console.log("clicked on the empty email");
+		ISNLogger.log("clicked on the empty email");
 		$("#empty_mail").hide();
 		$("#emailRegistrationInput").show();
 		
 	});
 	
 	$("#notvalid_mail").bind("click", function(e){
-		console.log("clicked on the not valid email");
+		ISNLogger.log("clicked on the not valid email");
 		$("#notvalid_mail").hide();
 		$("#emailRegistrationInput").show();
 		
 	});
 	
 	$("#empty_password").bind("click", function(e){
-		console.log("clicked on the empty password");
+		ISNLogger.log("clicked on the empty password");
 		$(this).hide();
 		$("#passwordRegistrationInput").show();
 	});
 	
 	$("#short_password").bind("click", function(e){
-		console.log("clicked on the empty password");
+		ISNLogger.log("clicked on the empty password");
 		$(this).hide();
 		$("#passwordRegistrationInput").show();
 	});
 	
 	$("#empty_confirmPassword").bind("click", function(e){
-		console.log("clicked on the empty password");
+		ISNLogger.log("clicked on the empty password");
 		$(this).hide();
 		$("#passwordRegConfirmInput").show();
 	});
@@ -205,24 +205,24 @@ function RegistrationView(controller){
 	 * during the completeness of the confirmation password field
 	 */
 	$("#passwordRegConfirmInput").keyup(function(e){
-		console.log("enter focus in confirm password field");
+		ISNLogger.log("enter focus in confirm password field");
 		
 		var new_password = $("#passwordRegistrationInput").text();
 		
 		var confirm_password = $("#passwordRegConfirmInput").text();
 
 		
-		console.log("new password is" +new_password);
-		console.log("confirm password is" +confirm_password);
+		ISNLogger.log("new password is" +new_password);
+		ISNLogger.log("confirm password is" +confirm_password);
 		if (new_password !== confirm_password){
 			
-			console.log("the two fields are not matching with each other");
+			ISNLogger.log("the two fields are not matching with each other");
 			$("#pd_reg_password_confirm_label").css('background-color', 'red');
 			$("#pd_reg_password_confirm_label").css('color', '#fff');
 		}
 		
 		if (new_password == confirm_password){
-			console.log("the two fields match with each other");
+			ISNLogger.log("the two fields match with each other");
 			$("#pd_reg_password_confirm_label").css('background-color', '#0089CF');
 			$("#pd_reg_password_confirm_label").css('color', '#fff');
 		}
@@ -242,7 +242,7 @@ function RegistrationView(controller){
 	
 
 	$("#submit_confirmation").bind("click", function(e){
-		console.log("clicked submit confirmation");
+		ISNLogger.log("clicked submit confirmation");
 		var value_password = $("#passwordRegistrationInput").text();
 		self.controller.models.user.register(value_password);
 
@@ -268,7 +268,7 @@ RegistrationView.prototype.update = function(){
 
 
 //RegistrationView.prototype.refreshCapcha = function(){
-//	console.log("empty CAPCHA");
+//	ISNLogger.log("empty CAPCHA");
 //	$("#capchaContainer").empty();	
 //	var script=$("<script/>", {
 //		"type":"text/javascript",
@@ -313,7 +313,7 @@ RegistrationView.prototype.closeDiv=closeView;
 
 
 RegistrationView.prototype.close = function(){
-	console.log("close welcome view");
+	ISNLogger.log("close welcome view");
 	this.closeDiv();
 };
 

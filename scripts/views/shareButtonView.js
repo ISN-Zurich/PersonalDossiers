@@ -7,14 +7,14 @@
  * */
 
 function ShareButtonView(controller){
-    console.log("enter sharebuttonView");
+    ISNLogger.log("enter sharebuttonView");
     var self=this;
     self.controller=controller;
     self.tagID="#shareButton";
 
        	
 	$("#st_facebook").bind("click", function(e){
-		console.log("click facebook button in ");
+		ISNLogger.log("click facebook button in ");
 		var bookmarkModel=self.controller.models['bookmark'];
 		var shared_title=encodeURIComponent(bookmarkModel.getDossierTitle());
 		var shared_url=encodeURIComponent(self.getPublicLink());
@@ -22,10 +22,10 @@ function ShareButtonView(controller){
 		
 		var whole_image_string=window.location.href;
 		var trim_url=whole_image_string.substring(0, whole_image_string.indexOf('index.html'));
-		console.log("trimed url is "+trim_url);
+		ISNLogger.log("trimed url is "+trim_url);
 		
 		var shared_image= encodeURIComponent(trim_url+'/'+bookmarkModel.getDossierImageURL());
-		console.log("sharedimage is "+shared_image);
+		ISNLogger.log("sharedimage is "+shared_image);
 
 		window.open('http://www.facebook.com/sharer.php?s=100&p[title]='+ shared_title + '&p[summary]=' + shared_description + '&p[url]=' + shared_url + '&p[images][0]='+shared_image, 
 				 'facebook-share-dialog', 
@@ -35,20 +35,20 @@ function ShareButtonView(controller){
 	});
 	
 	$("#st_twitter").bind("click", function(e){
-		console.log("clicked the twitter icon");
+		ISNLogger.log("clicked the twitter icon");
 		var url1='http://twitter.com/home?status=';
-		console.log("final twitter url is "+url1+self.getPublicLink());
+		ISNLogger.log("final twitter url is "+url1+self.getPublicLink());
 		$("#st_twitter").attr("href",url1+self.getPublicLink());
 	}
 	);  
 	
 	
 	$("#st_googleplus").bind("click", function(e){
-		console.log("clicked the twitter icon");
+		ISNLogger.log("clicked the twitter icon");
 		var url='https://plus.google.com/share?url=';
 		$('meta[property="og:description"]').attr('content',"$modified_desc" );
 		
-		console.log("final twitter url is "+url+self.getPublicLink());
+		ISNLogger.log("final twitter url is "+url+self.getPublicLink());
 		$("#st_googleplus").attr("href",url+self.getPublicLink());
 	}
 	);   
@@ -65,7 +65,7 @@ ShareButtonView.prototype.getPublicLink=function(){
     }
     else{
         var hashedUrl= url + "?id=" + this.controller.getActiveDossier();
-        console.log("hashedUrl so far is "+hashedUrl);
+        ISNLogger.log("hashedUrl so far is "+hashedUrl);
     }
   return hashedUrl;
 

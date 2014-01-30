@@ -26,7 +26,7 @@ detailEmbedView.prototype.update = function(){
 	var item_id= self.controller.getdossierItemId();
 	var bookmarkModel=self.controller.models.bookmark;
 	var authorsList=bookmarkModel.getAuthorList();
-	console.log("authorlist is "+bookmarkModel.getAuthorList());
+	ISNLogger.log("authorlist is "+bookmarkModel.getAuthorList());
 	
 	var authors = bookmarkModel.showAuthors();
 	var dossierTitle=bookmarkModel.getTitle();
@@ -38,7 +38,7 @@ detailEmbedView.prototype.update = function(){
 	$("#authorValue").text(authors);
 	$("#dateValue").text(date);
 	
-	console.log("id of the clicked item is "+item_id);
+	ISNLogger.log("id of the clicked item is "+item_id);
 	var url="http://yellowjacket.ethz.ch/tools/service/streamtest.php?id="+item_id;
 	iFrame = $("<iframe/>", {
 		"scrolling": "no",
@@ -52,7 +52,7 @@ detailEmbedView.prototype.update = function(){
 	var footerHeight = $("#pd_footer_gen").height();
 	var totalHeight = headerHeight + footerHeight + metadataHeight + 40; 
 	var contentFrameHeight=iFrameHeight - totalHeight;
-	console.log("ulheight is "+contentFrameHeight);
+	ISNLogger.log("ulheight is "+contentFrameHeight);
 	$("#contentFrame").css("height",contentFrameHeight+"px" );
 };
 

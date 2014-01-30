@@ -24,7 +24,7 @@ IntroductionView.prototype.update = function(){
 IntroductionView.prototype.closeDiv=closeView;
 
 IntroductionView.prototype.close = function(){
-	console.log("close introduction view");
+	ISNLogger.log("close introduction view");
 	this.closeDiv();
 	
 };

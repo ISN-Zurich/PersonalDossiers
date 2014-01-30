@@ -7,7 +7,7 @@
  * 
  */
 function DesignBookmarkView(dcontroller) {
-	console.log("enter design bookmark view");
+	ISNLogger.log("enter design bookmark view");
 	var self = this;
 
 	self.controller=dcontroller;
@@ -16,9 +16,9 @@ function DesignBookmarkView(dcontroller) {
 		if ( e.target.id === "addbmbutton" ) {
 			self.addItemToDossier();
 		}
-//		console.log("clicked on the submit button");
+//		ISNLogger.log("clicked on the submit button");
 //		var dossierItemId= $('input#inputValue').val();
-//		console.log("got the input value and it is "+dossierItemId);
+//		ISNLogger.log("got the input value and it is "+dossierItemId);
 //		var bookmarkModel=controller.models["bookmark"];
 //		bookmarkModel.addItem(dossierItemId);
 	});	
@@ -30,13 +30,13 @@ function DesignBookmarkView(dcontroller) {
 
 
 DesignBookmarkView.prototype.open = function() {
-	console.log("open add bookmark view");
+	ISNLogger.log("open add bookmark view");
 	this.update();
 };
 
 
 DesignBookmarkView.prototype.update = function(){
-    console.log('update bookmark button');
+    ISNLogger.log('update bookmark button');
 	//design the bookmark button dynamically in the appropriate div
 	
 	var bookMarkbuttonContainer = $("<div/>", {
@@ -58,7 +58,7 @@ DesignBookmarkView.prototype.update = function(){
 };
 
 DesignBookmarkView.prototype.addItemToDossier = function() {
-    console.log('click on add bookmark');
+    ISNLogger.log('click on add bookmark');
 
     var search = window.location.search;
 
@@ -71,7 +71,7 @@ DesignBookmarkView.prototype.addItemToDossier = function() {
         }
     }
 
-    console.log( 'add id ' + this.itemId);
+    ISNLogger.log( 'add id ' + this.itemId);
     this.controller.addItem(this.itemId);
 };
 

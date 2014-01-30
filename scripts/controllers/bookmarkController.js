@@ -49,7 +49,7 @@ BookmarkController.prototype.initOAuth = function() {
     ISNLogger.log('initialize the oauth helper class');
     try {
 	this.oauth = new OAuthHelper(this.baseURL);
-	 $(document).trigger('oauthSet');
+        $(document).trigger('oauthSet');
     }
     catch (e) {
         this.oauth = undefined;
@@ -77,7 +77,7 @@ BookmarkController.prototype.getUrlId = function(){
 		if (d_id && d_id.length>0){
 			ISNLogger.log("there is id in the new url and it is "+d_id);
 			this.library_item_id=d_id;
-			return this.library_item_id
+			return this.library_item_id;
 		}
 	}
 
@@ -85,32 +85,29 @@ BookmarkController.prototype.getUrlId = function(){
 };
 
 BookmarkController.prototype.checkBookmark=function(item_id){
-	 if ( this.models.bookmark.hasItem(item_id) ){
-		 ISNLogger.log('bookmark found!');
-         window.parent.postMessage(JSON.stringify({'bookmarkok': 1}), 
+    if ( this.models.bookmark.hasItem(item_id) ){
+        ISNLogger.log('bookmark found!');
+        window.parent.postMessage(JSON.stringify({'bookmarkok': 1}), 
                                    this.targetHost);
-	 }
+	}
 };
 
 BookmarkController.prototype.notifyNewHeight = function(height){
 	ISNLogger.log("enter notify new height");
-
-		 var data={
-					"resize": {
-						"height":height
-					}	
-			};
-		  
-		
-		var id, mdata= JSON.stringify(data);
-		for (id = 0; id < this.allowedHosts.length; id++) {
-			window.parent.postMessage(mdata, this.allowedHosts[id]);
-		}
+    var data={
+        "resize": {
+            "height":height
+        }	
+    };
+    
+    var id, mdata= JSON.stringify(data);
+    for (id = 0; id < this.allowedHosts.length; id++) {
+        window.parent.postMessage(mdata, this.allowedHosts[id]);
+	}
 };
 
 //it is deprecated and is not beeing used
 BookmarkController.prototype.calculateHeight= function(m){
-	
 	var id = this.allowedHosts.indexOf(m.origin);
 	ISNLogger.log('origin is id: '+ id);
 	if (id >= 0) {
@@ -121,7 +118,7 @@ BookmarkController.prototype.calculateHeight= function(m){
 				}	
 		};
 		window.parent.postMessage(JSON.stringify(data), targetHost);
-	};
+	}
 };
 
 var controlerObject = BookmarkController;

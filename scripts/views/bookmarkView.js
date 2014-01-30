@@ -8,23 +8,23 @@ function bookmarkView(controller){
 	//will move the binding of the dossier list update to the librarybookmark model
 	// it will load the bookmarkedossiers, and when this is ready, the bookmark view will open
 //	$(document).bind('DossierListUpdate', function(){
-//		console.log("bound dossier list update in bookmark view");
+//		ISNLogger.log("bound dossier list update in bookmark view");
 //		self.open();
 //	});
 	
 	$(document).bind('BookmarkedDossierListUpdate', function(){
-		console.log("bound bookmarked dossier list update in bookmark view");
+		ISNLogger.log("bound bookmarked dossier list update in bookmark view");
 		self.open();
 	});
 	
 	$("#bookmarkList").bind("click", function(e){
 		var targetE = e.target.nodeName;
-		console.log("target clicked "+targetE);
+		ISNLogger.log("target clicked "+targetE);
 		if ($(targetE)){
 			var targetID = e.target.id;
-			console.log("targetID is "+targetID);
+			ISNLogger.log("targetID is "+targetID);
 			var dossierID = targetID.substring(4);
-			console.log("dossier ID is "+dossierID);
+			ISNLogger.log("dossier ID is "+dossierID);
 			self.libBookmarkModel.addItem(dossierID);
 		}
 	});
@@ -54,9 +54,9 @@ bookmarkView.prototype.update = function(){
 
 		} while (dossierListModel.nextDossier());
 
-		console.log("passed the design of the bookmarks list");
+		ISNLogger.log("passed the design of the bookmarks list");
 		var height=	$("#bookmarkContainer").outerHeight();
-		console.log("height of bookmark container is "+height);
+		ISNLogger.log("height of bookmark container is "+height);
 		this.controller.notifyNewHeight(height);
 	}
 	
@@ -67,18 +67,18 @@ bookmarkView.prototype.update = function(){
 
 bookmarkView.prototype.renderDossier=function(){
 	
-	console.log("enter render Dossier");
+	ISNLogger.log("enter render Dossier");
 	
 	var libraryBookmarkModel = self.controller.models.bookmarkDossier;
 	var dossierListModel=self.controller.models.dossierList;
 	var	dossierID = self.controller.models.dossierList.getDossierId();
 	var isFollowedDossier = dossierListModel.isFollowedDossier();
 	var library_id= self.controller.library_item_id;
-	console.log("dossier id in render dossier is"+dossierID);
-	console.log("library id is "+library_id);
+	ISNLogger.log("dossier id in render dossier is"+dossierID);
+	ISNLogger.log("library id is "+library_id);
 
 	if (!isFollowedDossier){
-		console.log("is not a following dossier, passed design");
+		ISNLogger.log("is not a following dossier, passed design");
 		
 		var div1=$("<div/>", {
 			//"id": "item"+dossierID,

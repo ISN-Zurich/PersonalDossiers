@@ -7,7 +7,7 @@
 
 
 function interactionBox(controller){
-	console.log("enter interaction box constructor");
+	ISNLogger.log("enter interaction box constructor");
 	var self=this;
 	self.controller=controller;
 	
