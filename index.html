@@ -1,103 +1,74 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:article="http://ogp.me/ns/article#" xml:lang="en" lang="en">
-<head>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" >
-    
-	<style type="text/css" media="screen"> 
-	    @import url("http://www.isn.ethz.ch/extension/isndesign/design/isn/stylesheets/screen.css");
-	</style> 
-    
-<!--  <link type="text/css" href="style/screen.css" rel="stylesheet"/>-->
-
-    <style type="text/css">
-	    	  @import url("http://www.isn.ethz.ch/extension/kmscomments/design/kmscomments/stylesheets/kmscomments.css");
-	    	    @import url("http://www.isn.ethz.ch/extension/kmssearch/design/kmssearch/stylesheets/kmssearch.css");
-	    	    @import url("http://www.isn.ethz.ch/extension/isndesign/design/isn/stylesheets/thickbox.css");
-	    	    @import url("http://www.isn.ethz.ch/extension/isndesign/design/isn/stylesheets/slider.css");
-	    	    @import url("http://www.isn.ethz.ch/extension/isndesign/design/isn/stylesheets/digilib.css");
-	    	    @import url("http://www.isn.ethz.ch/extension/isndesign/design/isn/stylesheets/staff.css");
-	    	    @import url("http://www.isn.ethz.ch/extension/isndesign/design/isn/stylesheets/ddmenu.css");
-	    	    @import url("http://www.isn.ethz.ch/extension/isndesign/design/isn/stylesheets/sectioned_article.css");
-	    	    @import url("http://www.isn.ethz.ch/extension/isndesign/design/isn/stylesheets/jobs.1.0.css");
-	    	    @import url("http://www.isn.ethz.ch/extension/isndesign/design/isn/stylesheets/video_overlay.1.0.css");
-	    	    @import url("http://www.isn.ethz.ch/extension/isndesign/design/isn/stylesheets/footer.1.0.css");
-	    	    @import url("http://www.isn.ethz.ch/extension/isndesign/design/isn/stylesheets/search_banner.1.1.css");
-	    	    @import url("http://www.isn.ethz.ch/extension/ezlightbox/design/standard/stylesheets/lightbox.css");
-
-	    </style>
-
-
-
-
-
- <!-- Inclusion of dossiers-project javascript files -->
-
-	<script type="text/javascript" src="libs/jquery.js"></script>
-	<script type="text/javascript" src="libs/jquery-ui.js"></script>
-	<script type="text/javascript" src="libs/sha1.js"></script>
-	<script type="text/javascript" src="libs/oauth.js"></script>
-
-	<script type="text/javascript" src="scripts/common.js"></script>
-
-	<script type="text/javascript" src="scripts/models/oauthhelper.js"></script>
-	<script type="text/javascript" src="scripts/models/authentication.js"></script>
-	<script type="text/javascript" src="scripts/models/dossierListModel.js"></script>
-	<script type="text/javascript" src="scripts/models/bookmarkModel.js"></script>
-	<script type="text/javascript" src="scripts/models/userModel.js"></script>
-	
-	
-    <script type="text/javascript" src="scripts/views/logView.js"></script>
-    <script type="text/javascript" src="scripts/views/shareButtonView.js"></script>
-
-	
-	<script type="text/javascript" src="scripts/views/dossierUsersView.js"></script>
-	<script type="text/javascript" src="scripts/views/addEmbedButton.js"></script>
-	<script type="text/javascript" src="scripts/views/dossierBannerView.js"></script>
- 	<script type="text/javascript" src="scripts/views/dossierContentView.js"></script>
- 	<script type="text/javascript" src="scripts/views/invitationView.js"></script>
- 	
-	<script type="text/javascript" src="scripts/controllers/dossierController.js"></script>
-    		<title>Personal Dossiers in ISN</title>  
-    		<meta http-equiv="X-UA-Compatible" content="IE=edge" >
-					<meta name="author" content="ISN Editors" />
-    					<meta name="copyright" content="&amp;copy; Copyright (c) International Relations and Security Network (ISN)" />
-    					<!-- <meta name="description" content=" Personal Dossiers Management Area in ISN is a service that gives the ability to the users to create their own collections about international relations and security issues." /> -->
-    					<meta name="keywords" content="International Relations, Security, Defense, Politics, Conflict, Peace, International Law, International Organizations, Terrorism, Armaments, Arms Control, Human Security, Human Rights, Economics, Finance, Trade, Aid, Development, Energy, Natural Resources, Environment, Society, Science, Technology, Transport, Space, Media, Communication, Information, Religion, Culture, Education" />
-    					<meta name="viewport" content="width=950" />
-    			    	
-	<meta http-equiv="Pragma" content="no-cache" />
-    
-        	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    	<meta http-equiv="Content-language" content="en-US" />
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="MSSmartTagsPreventParsing" content="TRUE" />
-    <meta name="generator" content="eZ Publish" />
-<meta property="og:title" content="Personal Dossiers in ISN" />
-<meta property="og:description" content="Personal Dossiers Management Area in ISN is a service that gives the ability to the users to create their own collections about international relations and security issues." />
-<meta property="og:image" content="thumbnail_image" />
+        
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="Content-language" content="en-US" />
+        
+        <meta http-equiv="Pragma" content="no-cache" />
+        
+        <meta name="copyright" content="&amp;copy; Copyright (c) International Relations and Security Network (ISN), ETH Zürich" />
+        
+        <title>Personal Dossiers in ISN</title>  
+        
+        <style type="text/css" media="screen"> 
+	    @import url("http://www.isn.ethz.ch/extension/isndesign/design/isn/stylesheets/screen.css");
+        </style> 
+    
+        <!--  <link type="text/css" href="style/screen.css" rel="stylesheet"/>-->
+        <style type="text/css">
+	    	  @import url("http://www.isn.ethz.ch/extension/kmscomments/design/kmscomments/stylesheets/kmscomments.css");
+	    	  @import url("http://www.isn.ethz.ch/extension/kmssearch/design/kmssearch/stylesheets/kmssearch.css");
+	    	  @import url("http://www.isn.ethz.ch/extension/isndesign/design/isn/stylesheets/thickbox.css");
+	    	  @import url("http://www.isn.ethz.ch/extension/isndesign/design/isn/stylesheets/slider.css");
+	    	  @import url("http://www.isn.ethz.ch/extension/isndesign/design/isn/stylesheets/digilib.css");
+	    	  @import url("http://www.isn.ethz.ch/extension/isndesign/design/isn/stylesheets/staff.css");
+	    	  @import url("http://www.isn.ethz.ch/extension/isndesign/design/isn/stylesheets/ddmenu.css");
+	    	  @import url("http://www.isn.ethz.ch/extension/isndesign/design/isn/stylesheets/sectioned_article.css");
+	    	  @import url("http://www.isn.ethz.ch/extension/isndesign/design/isn/stylesheets/jobs.1.0.css");
+	    	  @import url("http://www.isn.ethz.ch/extension/isndesign/design/isn/stylesheets/video_overlay.1.0.css");
+	    	  @import url("http://www.isn.ethz.ch/extension/isndesign/design/isn/stylesheets/footer.1.0.css");
+	    	  @import url("http://www.isn.ethz.ch/extension/isndesign/design/isn/stylesheets/search_banner.1.1.css");
+	    	  @import url("http://www.isn.ethz.ch/extension/ezlightbox/design/standard/stylesheets/lightbox.css");
+        </style>
+        
+        <link href="libs/icomoon/style.css" rel="stylesheet" type="text/css">
+        <script type="text/javascript" src="libs/icomoon/liga.js"></script>
 
-<link rel="alternate" type="application/rss+xml" title="Security Watch" href="http://kms1.isn.ethz.ch/serviceengine/ModeOWContent?ocid=311&amp;owid=627&amp;lng=en&amp;serviceid=47&amp;mode=1&amp;ots591=4888CAA0-B3DB-1461-98B9-E20E7B9C13D4" />
-<link rel="alternate" type="application/rss+xml" title="Publications" href="http://kms1.isn.ethz.ch/serviceengine/ModeOWContent?ocid=247&amp;owid=627&amp;lng=en&amp;serviceid=47&amp;mode=1&amp;ots591=0C54E3B3-1E9C-BE1E-2C24-A6A8C7060233" />
-<link rel="alternate" type="application/rss+xml" title="Organizations" href="http://kms1.isn.ethz.ch/serviceengine/ModeOWContent?ocid=303&amp;owid=627&amp;lng=en&amp;serviceid=47&amp;mode=1&amp;ots591=CAB359A3-9328-19CC-A1D2-8023E646B22C" />
-<link rel="alternate" type="application/rss+xml" title="Audio" href="http://kms1.isn.ethz.ch/serviceengine/ModeOWContent?ocid=503&amp;owid=627&amp;lng=en&amp;serviceid=47&amp;mode=1&amp;ots591=40DB1B50-7439-887D-706E-8EC00590BDB9" />
-<link rel="alternate" type="application/rss+xml" title="Video" href="http://kms1.isn.ethz.ch/serviceengine/ModeOWContent?ocid=507&amp;owid=627&amp;lng=en&amp;serviceid=47&amp;mode=1&amp;ots591=966c9813-6e74-4e0b-b884-8ed9f3f0978c" />
+        <!-- Personal Dossiers special styles --> 
+        <link type="text/css" href="style/personaldossier.css" rel="stylesheet" />
+        <link type="text/css" href="style/developmentScratch.css" rel="stylesheet" />
+        
+        <!-- Inclusion of dossiers-project javascript files -->
 
-    		
+        <script type="text/javascript" src="libs/jquery.js"></script>
+	    <script type="text/javascript" src="libs/jquery-ui.js"></script>
+	    <script type="text/javascript" src="libs/sha1.js"></script>
+	    <script type="text/javascript" src="libs/oauth.js"></script>
 
-<link rel="Home" href="/" title="ISN front page" />
-<link rel="Index" href="/" />
-<link rel="Top"  href="/" title="ISN" />
+        <script type="text/javascript" src="scripts/isnlogger.js"></script>
+	    <script type="text/javascript" src="scripts/common.js"></script>
 
-<link rel="Shortcut icon" href="/extension/isndesign/design/isn/images/icons/favicon.ico" type="image/x-icon" />
-<link rel="apple-touch-icon" href="/extension/isndesign/design/isn/images/icons/favicon_apple.png" type="image/x-icon" />
-<link rel="Copyright" href="/ezinfo/copyright" />
-<link rel="Author" href="/ezinfo/about" />
-<link rel="Alternate" href="/layout/set/print" media="print" title="Printable version" />
-<link type="text/css" href="style/personaldossier.css" rel="stylesheet"/>
-<link type="text/css" href="style/developmentScratch.css" rel="stylesheet"/>
+        <script type="text/javascript" src="scripts/models/oauthhelper.js"></script>
+        <script type="text/javascript" src="scripts/models/authentication.js"></script>
+        <script type="text/javascript" src="scripts/models/dossierListModel.js"></script>
+        <script type="text/javascript" src="scripts/models/bookmarkModel.js"></script>
+        <script type="text/javascript" src="scripts/models/userModel.js"></script>
+        	
+        <script type="text/javascript" src="scripts/views/logView.js"></script>
+        <script type="text/javascript" src="scripts/views/shareButtonView.js"></script>
 
-<link href="libs/icomoon/style.css" rel="stylesheet" type="text/css">
-<script type="text/javascript" src="libs/icomoon/liga.js"></script>
-</head>
+        <script type="text/javascript" src="scripts/views/dossierUsersView.js"></script>
+        <script type="text/javascript" src="scripts/views/addEmbedButton.js"></script>
+        <script type="text/javascript" src="scripts/views/dossierBannerView.js"></script>
+        <script type="text/javascript" src="scripts/views/dossierContentView.js"></script>
+        <script type="text/javascript" src="scripts/views/invitationView.js"></script>
+        
+        <script type="text/javascript" src="scripts/controllers/dossierController.js"></script>
+       
+    </head>
 <body>
 <div id="page_oc">
     <div class="container">
