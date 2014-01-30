@@ -11,14 +11,14 @@
 
 function BookmarkModel(dController){
 
-    console.log("enter BookmarkModel");
+    ISNLogger.log("enter BookmarkModel");
     var self=this;
     self.controller=dController;
     this.loaded=false;
     //dossier attributes 
     //this.dossierId=self.controller.getActiveDossier();
     
-    // console.log("default dossier is "+this.dossierId);
+    // ISNLogger.log("default dossier is "+this.dossierId);
     
     this.dossierTitle= null;
     this.dossierDescription = null;
@@ -39,16 +39,16 @@ function BookmarkModel(dController){
     // this.loadDossierList();
     //this.initValues();
     if (self.controller.hashed) {
-    	console.log("in bookmark model constructor, to get the active dossier id");
+    	ISNLogger.log("in bookmark model constructor, to get the active dossier id");
         self.dossierId = self.controller.getActiveDossier();
         self.loadDossierList();
     }
     $(document).bind("ActiveDossierReady", loadActiveDossier);
        
     function loadActiveDossier() {
-    	console.log("enter event handler in bookmark model to load activeDossier");
+    	ISNLogger.log("enter event handler in bookmark model to load activeDossier");
     	if (!self.controller.hashed){
-    	console.log("load Active Dossier");
+    	ISNLogger.log("load Active Dossier");
     	self.dossierId=self.controller.getActiveDossier();
     	self.loadDossierList();
     	}
@@ -65,23 +65,23 @@ BookmarkModel.prototype.initValues=function(){
 };
 
 BookmarkModel.prototype.setEditModeOn=function(){
-	console.log();
+	ISNLogger.log();
     this.editMode=true;
 };
 
 
 BookmarkModel.prototype.addItem=function(id){
-    console.log("enter addItem in Bookmark Model");
+    ISNLogger.log("enter addItem in Bookmark Model");
     var self=this;
     var dossierID = self.dossierId || self.controller.getActiveDossier();
-    console.log("dossierID in addItem is "+dossierID);
+    ISNLogger.log("dossierID in addItem is "+dossierID);
     var url=self.controller.baseURL +'service/dossier.php/'+ dossierID;
     var method="PUT";
     var pdata= JSON.stringify({'id': id });
     
-    console.log( 'addItem: data is ' + pdata);
+    ISNLogger.log( 'addItem: data is ' + pdata);
     if ( dossierID && id ) {
-	console.log("before AJAX");
+	ISNLogger.log("before AJAX");
 	$.ajax({
 	    url :url,
 	    type : method,
@@ -95,17 +95,17 @@ BookmarkModel.prototype.addItem=function(id){
 
     function success(){
 	// great! well done!
-	console.log("great the insertion of the bookmark was succesfull");
+	ISNLogger.log("great the insertion of the bookmark was succesfull");
         $(document).trigger('BOOKMARKSTORED');
     }
     
     function error(request) {
 	// the server rejected the request!
-	console.log("the server rejected the request of adding an item");
-	console.log("ERROR status text: "+ request.statusText); 
-	console.log("ERROR status code: "+ request.statusCode()); 
-	console.log("ERROR status code is : " + request.status);
-	console.log("ERROR responsetext: "+ request.responseText); 
+	ISNLogger.log("the server rejected the request of adding an item");
+	ISNLogger.log("ERROR status text: "+ request.statusText); 
+	ISNLogger.log("ERROR status code: "+ request.statusCode()); 
+	ISNLogger.log("ERROR status code is : " + request.status);
+	ISNLogger.log("ERROR responsetext: "+ request.responseText); 
     }
     
     function setHeader(xhr){
@@ -135,11 +135,11 @@ BookmarkModel.prototype.removeItem=function(id){
     }
     
     function success(){
-	console.log("success in deleting the dossier item");	
+	ISNLogger.log("success in deleting the dossier item");	
     }
 
     function error(){
-	console.log("error in deleting the dossier item");
+	ISNLogger.log("error in deleting the dossier item");
     }
     function setHeader(xhr) {
 	var header_request=self.controller.oauth.oauthHeader(method, url);
@@ -150,11 +150,11 @@ BookmarkModel.prototype.removeItem=function(id){
 
 BookmarkModel.prototype.arrangeItems=function(){
 	var self=this;
-	console.log("enter arrange Items in Bookmark model");
+	ISNLogger.log("enter arrange Items in Bookmark model");
 	var sorted_order = this.getOrder();
-	console.log("sorted order is "+sorted_order);
+	ISNLogger.log("sorted order is "+sorted_order);
 	var dossierID=self.controller.getActiveDossier();
-	console.log("dossierID  in arrangeItems is" +dossierID);
+	ISNLogger.log("dossierID  in arrangeItems is" +dossierID);
 	
 	//url will look like this: 
 	var url=self.controller.baseURL +'service/dossier.php/'+ dossierID + '/100'; 
@@ -166,7 +166,7 @@ BookmarkModel.prototype.arrangeItems=function(){
 	
 //	var myData={};
 //	myData.sortedList=sorted_order;
-	console.log("data to be sent are "+data);
+	ISNLogger.log("data to be sent are "+data);
 	$.ajax({
 	    url:  url,
 	    type : method,
@@ -174,18 +174,18 @@ BookmarkModel.prototype.arrangeItems=function(){
 	    dataType : 'json',
 	    success : sentData,
 	    error : function(request) {
-		console.log("Error while sending arranging order of items to the server");
-		console.log("ERROR status text: "+ request.statusText); 
-		console.log("ERROR status code: "+ request.statusCode()); 
-		console.log("ERROR status code is : " + request.status);
-		console.log("ERROR responsetext: "+ request.responseText); 
+		ISNLogger.log("Error while sending arranging order of items to the server");
+		ISNLogger.log("ERROR status text: "+ request.statusText); 
+		ISNLogger.log("ERROR status code: "+ request.statusCode()); 
+		ISNLogger.log("ERROR status code is : " + request.status);
+		ISNLogger.log("ERROR responsetext: "+ request.responseText); 
 	    },
 	    beforeSend : setHeader
 	});
 	
 	
 	function sentData(){
-		console.log("success in sending arranging order to the server");
+		ISNLogger.log("success in sending arranging order to the server");
 		//$(document).trigger("dataSuccessfullySent"); DO WEE NEED THIS
 	}
 	
@@ -197,9 +197,9 @@ BookmarkModel.prototype.arrangeItems=function(){
 
 
 BookmarkModel.prototype.setOrder=function(array_order){
-	console.log("enter set Order in bookmark model");
+	ISNLogger.log("enter set Order in bookmark model");
 	this.storedPosition = array_order;	
-	console.log("stored order is "+this.storedPosition);
+	ISNLogger.log("stored order is "+this.storedPosition);
 };
 
 
@@ -212,17 +212,17 @@ BookmarkModel.prototype.getOrder=function(){
  *
  */
 BookmarkModel.prototype.loadDossierList=function(){
-    console.log("enter loadDossier list");
+    ISNLogger.log("enter loadDossier list");
     var self=this;
     var data = {};
     
     //var dossierID = this.dossierId;
     var dossierID= self.dossierId;
-    console.log("dossier ID in loadDossierList is "+dossierID);
+    ISNLogger.log("dossier ID in loadDossierList is "+dossierID);
     var url= self.controller.baseURL +'service/dossier.php/' + dossierID;
     var method="GET";
     if ( dossierID ) {
-	console.log("before executing the ajax request for " + dossierID);
+	ISNLogger.log("before executing the ajax request for " + dossierID);
 	$.ajax({
 	    url:  url,
 	    type : 'GET',
@@ -230,14 +230,14 @@ BookmarkModel.prototype.loadDossierList=function(){
 	    success : createDossierList,
 	    error : function(request) {
 		//localStorage.setItem("pendingCourseList", true);
-		console.log("Error while loading dossier list from server");
-		console.log("ERROR status text: "+ request.statusText); 
-		console.log("ERROR status code: "+ request.statusCode()); 
-		console.log("ERROR status code is : " + request.status);
-		console.log("ERROR responsetext: "+ request.responseText); 
+		ISNLogger.log("Error while loading dossier list from server");
+		ISNLogger.log("ERROR status text: "+ request.statusText); 
+		ISNLogger.log("ERROR status code: "+ request.statusCode()); 
+		ISNLogger.log("ERROR status code is : " + request.status);
+		ISNLogger.log("ERROR responsetext: "+ request.responseText); 
 		if (request.status === 401){
 		    //	window.location.href ="user.html";
-		    console.log("received 401, we should load the login page");
+		    ISNLogger.log("received 401, we should load the login page");
 			$(document).trigger("BookmarkModelNotLoaded");
 		}
 	    },
@@ -246,52 +246,52 @@ BookmarkModel.prototype.loadDossierList=function(){
     }
 
     function createDossierList(data){
-    	console.log("success in getting the dossier list in the model");
+    	ISNLogger.log("success in getting the dossier list in the model");
     	var dossierObject=null;
     	try{
     		dossierObject=data;
     	}catch(err) {
     		dossierObject={};
-    		console.log("couldnt load dossier items from the database");
+    		ISNLogger.log("couldnt load dossier items from the database");
     	}
 
     	dossierItemMetadata={};
     	self.dossierData=dossierObject || {};
-    	console.log("dossierData are "+JSON.stringify(self.dossierData));
+    	ISNLogger.log("dossierData are "+JSON.stringify(self.dossierData));
     	//self.dossierList=JSON.stringify(self.dossierData['dossier_items']);
 
     	self.dossierMetadata=self.dossierData.dossier_metadata;
-    	console.log("dossier metadata is "+JSON.stringify(self.dossierMetadata));
+    	ISNLogger.log("dossier metadata is "+JSON.stringify(self.dossierMetadata));
 
     	self.dossierList=self.dossierData.dossier_items;
-    	console.log("dossier items are"+JSON.stringify(self.dossierList));
+    	ISNLogger.log("dossier items are"+JSON.stringify(self.dossierList));
 
     	if (self.dossierList && self.dossierList.length>0){
     		var itemId= self.dossierList[0].metadata.id;	
-    		console.log("dossier item id in success is "+itemId);
+    		ISNLogger.log("dossier item id in success is "+itemId);
     	}
     	//init values
 
     	self.dossierTitle= self.dossierMetadata.title;
-    	console.log("dossier title is "+self.dossierTitle);
+    	ISNLogger.log("dossier title is "+self.dossierTitle);
     	self.dossierDescription=self.dossierMetadata.description;
     	self.dossierImageURL=self.dossierMetadata.image;
     	self.dossierId=self.dossierMetadata.id;
 
 
     	self.userlist=self.dossierData.user_list;
-    	console.log("user list is "+JSON.stringify(self.userlist));
+    	ISNLogger.log("user list is "+JSON.stringify(self.userlist));
     	$(document).trigger("BookmarkModelLoaded");
 
     }
     
     function setHeader(xhr) {
         if (self.controller.oauth)   {
-        	console.log("we are authenticated and we will send a header");
+        	ISNLogger.log("we are authenticated and we will send a header");
 	    var header_request=self.controller.oauth.oauthHeader(method, url);
 	    xhr.setRequestHeader('Authorization', header_request);
         }else{
-        	console.log("we will send a non auth header");
+        	ISNLogger.log("we will send a non auth header");
         	var non_authenticationFlag=true;
         	 xhr.setRequestHeader('NonAuth', non_authenticationFlag);	
         }
@@ -301,7 +301,7 @@ BookmarkModel.prototype.loadDossierList=function(){
 };
 
 BookmarkModel.prototype.sendDataToServer=function(){
-    console.log("enter send data to server");
+    ISNLogger.log("enter send data to server");
     var self=this;
     var dossierID = self.dossierId;
     var url=self.controller.baseURL +"service/dossier.php/"+dossierID;
@@ -317,7 +317,7 @@ BookmarkModel.prototype.sendDataToServer=function(){
 	    myData.title = self.dossierTitle;
 	}
 	if (self.dossierDescription && self.dossierDescription.length) { 
-            console.log('send description to server ' + self.dossierDescription );
+            ISNLogger.log('send description to server ' + self.dossierDescription );
 	    myData.description = self.dossierDescription;
 	}
 	if (self.dossierImageURL && self.dossierImageURL.length) {
@@ -333,18 +333,18 @@ BookmarkModel.prototype.sendDataToServer=function(){
 	    success : sentData,
 	    error : function(request) {
 		//localStorage.setItem("pendingCourseList", true);
-		console.log("Error while sending dossier data to the server");
-		console.log("ERROR status text: "+ request.statusText); 
-		console.log("ERROR status code: "+ request.statusCode()); 
-		console.log("ERROR status code is : " + request.status);
-		console.log("ERROR responsetext: "+ request.responseText); 
+		ISNLogger.log("Error while sending dossier data to the server");
+		ISNLogger.log("ERROR status text: "+ request.statusText); 
+		ISNLogger.log("ERROR status code: "+ request.statusCode()); 
+		ISNLogger.log("ERROR status code is : " + request.status);
+		ISNLogger.log("ERROR responsetext: "+ request.responseText); 
 	    },
 	    beforeSend : setHeader
 	});
     }
     
     function sentData(){
-	console.log("success in sending the data to the server");
+	ISNLogger.log("success in sending the data to the server");
 	$(document).trigger("dataSuccessfullySent");
 	// do nothing, just update the database with the new information
     }
@@ -369,26 +369,26 @@ BookmarkModel.prototype.sendDataToServer=function(){
  */
 BookmarkModel.prototype.nextItem = function() {
     this.index++;
-    console.log("this.index in nextItem is "+this.index);
+    ISNLogger.log("this.index in nextItem is "+this.index);
     return this.index < this.dossierList.length;
 };
 
 
 BookmarkModel.prototype.nextUser = function() {
-	console.log("user_index before increase is "+this.user_index);
+	ISNLogger.log("user_index before increase is "+this.user_index);
     this.user_index++;
-    console.log("user_index in nextUseris "+this.user_index);
-    console.log("userlist length is "+this.userlist.length);
+    ISNLogger.log("user_index in nextUseris "+this.user_index);
+    ISNLogger.log("userlist length is "+this.userlist.length);
     return  this.user_index < this.userlist.length;
 };
 
 BookmarkModel.prototype.hasItem = function(id) {
-	console.log("enter hasItem");
+	ISNLogger.log("enter hasItem");
     var retval = false, i = 0;
     if (this.dossierList && this.dossierList.length && id) {
         for (i; i < this.dossierList.length; i++) {
-        	console.log("existing library id is "+dossierList[i].digital_library_id);
-        	console.log("comparable id "+id);
+        	ISNLogger.log("existing library id is "+dossierList[i].digital_library_id);
+        	ISNLogger.log("comparable id "+id);
         	
             if ( this.dossierList[i].digital_library_id === id ) {
                 retval = true;
@@ -413,8 +413,8 @@ BookmarkModel.prototype.firstItem = function() {
 
 BookmarkModel.prototype.getItemId = function() {
     var self=this;
-    console.log("this.index in getID is "+this.index);
-    console.log("dossier list length in id is "+this.dossierList.length);
+    ISNLogger.log("this.index in getID is "+this.index);
+    ISNLogger.log("dossier list length in id is "+this.dossierList.length);
     return (this.index < this.dossierList.length ) ? this.dossierList[this.index].metadata.id : false;	
     //return self.dossierList[this.index]['metadata']['id'];	
 };
@@ -456,8 +456,8 @@ BookmarkModel.prototype.getDate = function() {
 BookmarkModel.prototype.getAuthorList = function() {
 	
 	var item_index=this.getItemIndex();
-	console.log("item index is"+item_index);
-	console.log(" author is "+JSON.stringify(this.dossierList[item_index].metadata.author));
+	ISNLogger.log("item index is"+item_index);
+	ISNLogger.log(" author is "+JSON.stringify(this.dossierList[item_index].metadata.author));
     return (this.index < this.dossierList.length) ? this.dossierList[item_index].metadata.author : false;	
 };
 
@@ -466,9 +466,9 @@ BookmarkModel.prototype.getDescription = function() {
 	var dtext;
 	if (this.index < this.dossierList.length) {
 		var dhtml = this.dossierList[this.index].metadata.description;
-		console.log('description text is: ' + dhtml);
+		ISNLogger.log('description text is: ' + dhtml);
 		dtext = $("<div/>", {'html':dhtml}).text();
-		console.log('description text is: ' + dtext);
+		ISNLogger.log('description text is: ' + dtext);
 	}
 	
     return  dtext;	
@@ -532,7 +532,7 @@ BookmarkModel.prototype.getUserid = function() {
 //Dossier functions
 
 BookmarkModel.prototype.getDossierID=function(){
-	console.log("get dossier iD is "+thos.dossierMetadata.id);
+	ISNLogger.log("get dossier iD is "+thos.dossierMetadata.id);
     return this.dossierMetadata.id;	
 };
 
@@ -543,7 +543,7 @@ BookmarkModel.prototype.getDossierTitle=function(){
 };
 
 BookmarkModel.prototype.getDossierDescription=function(){
-    console.log("this.index in get description is "+this.index);
+    ISNLogger.log("this.index in get description is "+this.index);
     //return (this.index > this.dossierMetadata.length - 1) ? false :
     return this.dossierMetadata.description;	
 };
@@ -557,12 +557,12 @@ BookmarkModel.prototype.setDossierTitle=function(title){
 };
 
 BookmarkModel.prototype.setDossierDescription=function(description){
-    console.log( 'set description to ' + description);
+    ISNLogger.log( 'set description to ' + description);
     this.dossierDescription=description;
 };
 
 BookmarkModel.prototype.setDossierImageURL=function(url){
-    console.log("enter dossier image url");
+    ISNLogger.log("enter dossier image url");
     this.dossierImageURL=url;
 };
 
@@ -585,18 +585,18 @@ BookmarkModel.prototype.setIndexToItemId=function(id){
 	}
 	
     this.index = index;
-    console.log("index set in bookmark model is "+this.index);
+    ISNLogger.log("index set in bookmark model is "+this.index);
 };
 
 BookmarkModel.prototype.setIndex=function(index){
     this.index = index;
-    console.log("index set in bookmark model is "+this.index);
+    ISNLogger.log("index set in bookmark model is "+this.index);
 };
 
 //this will be used in detail embed view to give the metadata for a specific dossier item
 // i.e. author, date 
 BookmarkModel.prototype.getItemIndex = function(){
-	console.log("get item index");
+	ISNLogger.log("get item index");
 	return this.index;
 	
 	var index_item;
@@ -619,6 +619,6 @@ BookmarkModel.prototype.showAuthors= function(){
 		authorString=authorString + authorList[i] + ", ";
 	}
 	var finalString=authorString.substring(0,authorString.length-2);
-	console.log("final string is "+finalString);
+	ISNLogger.log("final string is "+finalString);
 	return finalString;
 };

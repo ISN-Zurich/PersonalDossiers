@@ -4,39 +4,24 @@
  * @function openView 
  * */ 
 
-var debugMode = debugMode();
-var hostURL = hostURL();
-var baseURL = baseURL();
+var debugMode = ISNLogger.debugMode;
+var hostURL = ISNLogger.choose("http://yellowjacket.ethz.ch", "http://lab.isn.ethz.ch");
+var baseURL = ISNLogger.choose("http://yellowjacket.ethz.ch/tools/", "http://lab.isn.ethz.ch/");
 
-if ( !window.console ) {
-    window.console = {'log': function(m){}};
-} 
-
-function debugMode() {
-    var debugMode = true;
-    return debugMode;
-}
 
 // this will go away
 function hostURL() {
-    var debugURL = "http://yellowjacket.ethz.ch";
-    var liveURL = "http://lab.isn.ethz.ch";
-    
-    return this.debugMode ? debugURL : liveURL; 
+    return ISNLogger.choose("http://yellowjacket.ethz.ch", "http://lab.isn.ethz.ch");
 }
 
 // this will go way
 function baseURL() {
-    var debugPath = "/tools/";
-    var livePath = "/";
-    
-    //return this.hostURL() + (this.debugMode() ? debugPath : livePath); 
-    return this.hostURL + debugPath; 
+    return ISNLogger.choose("http://yellowjacket.ethz.ch/tools/", "http://lab.isn.ethz.ch/");
 }
 
 
 function openView() {
-	console.log("first console log message");
+	ISNLogger.log("first console log message");
 	$("#" + this.tagID).show();
 }
  
@@ -48,12 +33,11 @@ function closeView() {
 	$("#" + this.tagID).hide();
 }
 
-
 function showErrorResponses(request){
-	console.log("ERROR status text: "+ request.statusText); 
-	console.log("ERROR status code: "+ request.statusCode()); 
-	console.log("ERROR status code is : " + request.status);
-	console.log("ERROR responsetext: "+ request.responseText);
+	ISNLogger.log("ERROR status text: "+ request.statusText); 
+	ISNLogger.log("ERROR status code: "+ request.statusCode()); 
+	ISNLogger.log("ERROR status code is : " + request.status);
+	ISNLogger.log("ERROR responsetext: "+ request.responseText);
 }
 
 function setDossiersColorization() {
@@ -110,13 +94,9 @@ function pdInitServiceHost() {
     var h = window.location.host;
     var p = window.location.protocol;
     
-    this.hostURL = p + '//' + h + '/';
-    
-    if (h === 'yellowjacket.ethz.ch') {
-        h = h + '/tools';   
-    }
-    
-    this.baseURL = p + '//' + h + '/'; // the trailing slash should be part of the service call.
+    // this.hostURL = p + '//' + h + '/';    
+    this.hostURL = ISNLogger.choose("http://yellowjacket.ethz.ch", "http://lab.isn.ethz.ch");
+    this.baseURL = ISNLogger.choose("http://yellowjacket.ethz.ch/tools/", "http://lab.isn.ethz.ch/"); // the trailing slash should be part of the service call.
 }
 
 function pdGetServiceHost() {

@@ -1,7 +1,7 @@
 
 var controller;
-console.log("enter main js");
+ISNLogger.log("enter main js");
 $(document).ready(function(){
-	console.log("document ready");
+	ISNLogger.log("document ready");
 	controller = new dossierController();
 });

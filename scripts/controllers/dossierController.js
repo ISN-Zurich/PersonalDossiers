@@ -13,8 +13,8 @@ function dossierController() {
 	this.id="dossierController";
 	this.debugMode = debugMode;
     this.initServiceHost();
-    console.log("hostURL is"+this.hostURL);
-    console.log("baseURL is"+this.baseURL);
+    ISNLogger.log("hostURL is"+this.hostURL);
+    ISNLogger.log("baseURL is"+this.baseURL);
 //	this.baseURL = baseURL;
 //	this.hostURL = hostURL;
 
@@ -42,7 +42,7 @@ function dossierController() {
 		self.models.bookmark = new BookmarkModel(self);
 
 
-		console.log("model is initialized");
+		ISNLogger.log("model is initialized");
 
 		self.views = {};
 
@@ -62,7 +62,7 @@ function dossierController() {
 		};
 
 		$(document).bind("BookmarkModelLoaded", function() {
-			console.log("initialize views in controller");
+			ISNLogger.log("initialize views in controller");
 			self.views.dossierBanner.open();
 			self.views.dossierContent.open();
 			self.views.userlist.open();
@@ -72,18 +72,18 @@ function dossierController() {
 
 	}
 	else if (!self.oauth && !self.hashed) {
-		console.log("the user is not loggedIn and there is no hash on the url");
+		ISNLogger.log("the user is not loggedIn and there is no hash on the url");
 		// user is not logged in go to user.html
 		window.location.href = 'user.html';
 	}
 
 	$(document).bind("LogoutSent", function(){
-		console.log("binded logout sent in constructor");
+		ISNLogger.log("binded logout sent in constructor");
 		window.location.href = 'user.html';
 	});
 
 	$(window).bind( "hashchange",function(){
-//		console.log("hash change event binded");
+//		ISNLogger.log("hash change event binded");
 //		var hashTag = self.getHash();
 //		self.chooseView(hashTag);
 //		self.colorizeInteractiveBox(hashTag);
@@ -100,30 +100,30 @@ dossierController.prototype.initServiceHost = pdInitServiceHost;
 // dossierController.prototype.getServiceHost = pdGetServiceHost;
 
 dossierController.prototype.getUserType = function(){
-	console.log("enter getUser Type in dossier Controller");
+	ISNLogger.log("enter getUser Type in dossier Controller");
 	return this.models.dossierList.getUserType();
 };
 
 
 dossierController.prototype.hashedUrl = function() {
-    console.log("enter hasehd url");
+    ISNLogger.log("enter hasehd url");
     this.hashed = false;
     
     url_ref = window.location.search;
     if (url_ref && url_ref.length) {
         var splited = url_ref.slice(1).split('&');
-        console.log("show splitted url array is " + splited);
+        ISNLogger.log("show splitted url array is " + splited);
         var split1 = splited;
         if (split1 && split1.length > 0) {
             var i;
             for (i=0; i < split1.length; i++) {
-                console.log("tools is " + split1[i]);
+                ISNLogger.log("tools is " + split1[i]);
                 var split2 = split1[i].split("=");
                 // only the id parameter is accepted!
                 if ( split2[0] && split2[0].length && split2[0] === 'id' ) {
                     var d_id = split2[1];
                     if (d_id && d_id.length > 0) {
-                        console.log("there is id in the new url and it is " + d_id);
+                        ISNLogger.log("there is id in the new url and it is " + d_id);
                         this.pubid = d_id;
                         this.hashed = true;
                         break;
@@ -136,7 +136,7 @@ dossierController.prototype.hashedUrl = function() {
 
 dossierController.prototype.getHashedURLId = function(){
 	var dossierId=this.pubid;
-	console.log("dossier id after hash is "+dossierId);
+	ISNLogger.log("dossier id after hash is "+dossierId);
 	return dossierId;
 };
 
@@ -158,17 +158,17 @@ dossierController.prototype.updateUserData = function() {
 
 dossierController.prototype.initImageHandler=function(){
 	var self=this;
-	console.log("runs in controller image handler");
+	ISNLogger.log("runs in controller image handler");
 	self.imageHandler= new ImageHandler(this);
 
 };
 
 dossierController.prototype.test = function(){
-	console.log("after initializing image gallery");
+	ISNLogger.log("after initializing image gallery");
 };
 
 dossierController.prototype.getActiveDossier = function(){
-	console.log("in user controller to get active dossier");
+	ISNLogger.log("in user controller to get active dossier");
 	if (this.hashed){
 		var activedosId = this.getHashedURLId();
 		return activedosId;
@@ -192,14 +192,14 @@ dossierController.prototype.transition = function(){
 };
 
 dossierController.prototype.logout = function() {
-	console.log("enter logout in dossier controller");
+	ISNLogger.log("enter logout in dossier controller");
 	authentication = new AuthenticationModel(this);
 	authentication.logout();
 };
 
 var controller;
-console.log("enter main js");
+ISNLogger.log("enter main js");
 $(document).ready(function(){
-	console.log("document ready");
+	ISNLogger.log("document ready");
 	controller = new dossierController();
 });

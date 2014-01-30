@@ -39,7 +39,7 @@ function badgeController() {
 	self.models.dossierList = new DossierListModel(self);
 	self.models.bookmark = new BookmarkModel(self);
 	
-	console.log("model is initialized");
+	ISNLogger.log("model is initialized");
 	
 	self.views = {};
 
@@ -49,7 +49,7 @@ function badgeController() {
 	    self.views.badge= new badgeView(self);
 
        $(document).bind("BookmarkModelLoaded", function() {
-    	   console.log("initialize views in controller");
+    	   ISNLogger.log("initialize views in controller");
    	   self.views.badge.open();
        });
     }
@@ -59,17 +59,17 @@ badgeController.prototype.initServiceHost = pdInitServiceHost;
 badgeController.prototype.getServiceHost = pdGetServiceHost;
 
 badgeController.prototype.hashedUrl = function() {
-	console.log("enter hasehd url"); 
+	ISNLogger.log("enter hasehd url"); 
 	url_ref=window.location.href;
 	var splited=url_ref.split("?");
-	console.log("show splitted url array is "+splited);
+	ISNLogger.log("show splitted url array is "+splited);
 	var split1=splited[1];
 	if (split1 && split1.length>0){
-		console.log("tools is "+split1);
+		ISNLogger.log("tools is "+split1);
 		var split2=split1.split("=");
 		var d_id=split2[1];
 		if (d_id && d_id.length>0){
-			console.log("there is id in the new url and it is "+d_id);
+			ISNLogger.log("there is id in the new url and it is "+d_id);
 			this.pubid=d_id;
 			this.hashed=true;
 		}} else{
@@ -80,14 +80,14 @@ badgeController.prototype.hashedUrl = function() {
 
 badgeController.prototype.getHashedURLId = function(){
     	var dossierId=this.pubid;
-    	console.log("dossier id after hash is "+dossierId);
+    	ISNLogger.log("dossier id after hash is "+dossierId);
     	return dossierId;
 };
 
 
 
 badgeController.prototype.getActiveDossier = function(){
-    	console.log("in user controller to get active dossier");
+    	ISNLogger.log("in user controller to get active dossier");
     	if (this.hashed){
     		var activedosId = this.getHashedURLId();
     		return activedosId;
@@ -107,8 +107,8 @@ badgeController.prototype.getActiveDossier = function(){
 
 
 var controller;
-console.log("enter main js");
+ISNLogger.log("enter main js");
 $(document).ready(function(){
-	console.log("document ready");
+	ISNLogger.log("document ready");
 	controller = new badgeController();
 });

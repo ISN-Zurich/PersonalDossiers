@@ -23,7 +23,7 @@ function userController() {
 	self.models.authentication = new AuthenticationModel(self);
 	self.models.dossierList= new DossierListModel(self);
 	self.models.user= new UserModel(self);
-	console.log("model is initialized");
+	ISNLogger.log("model is initialized");
 
 	self.views = {};
 
@@ -51,14 +51,14 @@ function userController() {
 	
 	$(document).bind('UserProfileUpdate', function(){
 		
-		console.log("binded User profile update in user controller model");
+		ISNLogger.log("binded User profile update in user controller model");
 		
 		self.models.dossierList.getUserDossiers();
 	});
 
 
 	$(document).bind('DossierListUpdate', function(){
-		console.log("dossier list update in user controller");
+		ISNLogger.log("dossier list update in user controller");
 		self.chooseView();
 		self.colorizeInteractiveBox();
 	});
@@ -66,7 +66,7 @@ function userController() {
 	//we want to update the Log View once we have logged out
 	//in order to display the Li in the interaction box
 	 $(document).bind("LogoutSent", function(){
-		 console.log("logout sent is binded");
+		 ISNLogger.log("logout sent is binded");
 					 
 		//3. clear the url from hash
 		 var loc = window.location.href;
@@ -77,7 +77,7 @@ function userController() {
 		 }
 		 
 		 self.models.authentication.request_token="";
-		 console.log("request token after logout is "+self.models.authentication.request_token);
+		 ISNLogger.log("request token after logout is "+self.models.authentication.request_token);
 		 self.models.authentication.getRequestToken();
 		 self.chooseView();
 		 self.colorizeInteractiveBox();
@@ -87,7 +87,7 @@ function userController() {
 	
 	 
 	 $(window).bind( "hashchange",function(){
-		 console.log("hash change event binded");
+		 ISNLogger.log("hash change event binded");
 		 self.chooseView();
 		 self.colorizeInteractiveBox();
 	 });
@@ -95,11 +95,11 @@ function userController() {
  // when we are coming from the index.html
  // the page during its loading should colorize the interaction box based on the hashed url
 //	 $(window).load(function(){
-//		 console.log("window load event binded");
+//		 ISNLogger.log("window load event binded");
 //		 //we use the loggoutClicked flag to prevent the automatic loading of the page
 //		 //when click on the <a> logView.
 //		 if (!self.loggoutClicked){
-//		 console.log("enter on window load");
+//		 ISNLogger.log("enter on window load");
 //		 self.colorizeInteractiveBox();
 //		 self.chooseView();
 //		 }
@@ -159,22 +159,22 @@ userController.prototype.chooseView = function(){
 
 userController.prototype.colorizeInteractiveBox = function(){
 	 var hash = this.getHash();
-	console.log("enter colorize interactive box");
+	ISNLogger.log("enter colorize interactive box");
 
 	switch (hash){
 	case 'personalDossiers':
 		setDossiersColorization();
 		break;
 	case 'userProfile':
-		console.log("user profile colorization");
+		ISNLogger.log("user profile colorization");
 		setUserProfileColorization();
 		break;
 	case '':
 		if (this.oauth){
-			console.log("we are authenticated in colorize interactive box");
+			ISNLogger.log("we are authenticated in colorize interactive box");
 			setDossiersColorization();
 		}else {
-			console.log("we are NOT authenticated in colorize interactive box");
+			ISNLogger.log("we are NOT authenticated in colorize interactive box");
 			setLoggedOutColorization();
 		}
 		break;
@@ -182,7 +182,7 @@ userController.prototype.colorizeInteractiveBox = function(){
 };
 
 userController.prototype.initOAuth = function() {
-    console.log('initialize the oauth helper class');
+    ISNLogger.log('initialize the oauth helper class');
     try {
 	this.oauth = new OAuthHelper(this.baseURL);
 	 $(document).trigger('oauthSet');
@@ -192,10 +192,10 @@ userController.prototype.initOAuth = function() {
     }
 
     if (this.oauth) {
-        console.log('oauth ok');
+        ISNLogger.log('oauth ok');
     }
     else {
-        console.log('oauth failed');
+        ISNLogger.log('oauth failed');
     }
 };
 
@@ -209,15 +209,15 @@ userController.prototype.updateUserData = function() {
 
 userController.prototype.transition = function(targetView){
 	if (!this.activeView || this.activeView !== this.views[targetView]) {
-		console.log("do transition to "+targetView);
+		ISNLogger.log("do transition to "+targetView);
 		if (this.activeView) {
 			this.activeView.close();
 		}
-		console.log("setting active view in controller");
+		ISNLogger.log("setting active view in controller");
 		this.activeView = this.views[targetView];
-		console.log("just set active view");
+		ISNLogger.log("just set active view");
 		this.activeView.open();
-		console.log("opened active view in controller");
+		ISNLogger.log("opened active view in controller");
 	}
 };
 
@@ -236,14 +236,14 @@ userController.prototype.logout = function() {
 };
 
 userController.prototype.transitionToRegistration = function(){
-	console.log("enter transition to registation");
+	ISNLogger.log("enter transition to registation");
 	this.views.introduction.close();
 	this.views.login.close();
 	this.views.registration.open();	
 };
 
 userController.prototype.transitionToIntroduction = function(){
-	console.log("enter transition to introduction");
+	ISNLogger.log("enter transition to introduction");
 	this.views.registration.close();	
 	this.views.introduction.open();
 	this.views.login.open();
@@ -251,7 +251,6 @@ userController.prototype.transitionToIntroduction = function(){
 
 var controller;
 $(document).ready(function(){
-	console.log("document ready");
+	ISNLogger.log("document ready");
 	controller = new userController();
-	
 });

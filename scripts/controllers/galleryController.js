@@ -13,7 +13,7 @@ function GalleryController() {
     
     this.initServiceHost();
 
-    console.log('Gallery Controller starts');
+    ISNLogger.log('Gallery Controller starts');
     document.domain = 'ethz.ch';
 
     self.initOAuth();
@@ -28,9 +28,9 @@ function GalleryController() {
     self.models.dossierList = new DossierListModel(self);
     self.models.bookmark = new BookmarkModel(self);
 
-    console.log("model is initialized");
+    ISNLogger.log("model is initialized");
     
-    console.log("loaded from model is "+self.models.bookmark.loaded);
+    ISNLogger.log("loaded from model is "+self.models.bookmark.loaded);
     self.views = {};
 
         self.initImageHandler();
@@ -46,7 +46,7 @@ GalleryController.prototype.initOAuth = function() {
         this.oauth = new OAuthHelper(this.baseURL);
     }
     catch (e) {
-        console.log( 'oauth error! ' + e.message);
+        ISNLogger.log( 'oauth error! ' + e.message);
         this.oauth = null;
     }
 };
@@ -63,7 +63,7 @@ GalleryController.prototype.updateUserData = function() {
 
 GalleryController.prototype.initImageHandler=function(){
     var self=this;
-    console.log("runs in controller image handler");
+    ISNLogger.log("runs in controller image handler");
     self.imageHandler= new ImageHandler(this);
     
 };
@@ -97,8 +97,8 @@ GalleryController.prototype.logout = function() {
 }
 
 var controller;
-console.log("enter main js");
+ISNLogger.log("enter main js");
 $(document).ready(function(){
-    console.log("document ready");
+    ISNLogger.log("document ready");
     controller = new GalleryController();
 });

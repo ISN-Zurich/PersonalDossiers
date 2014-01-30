@@ -5,37 +5,24 @@
  * @function openView 
  * */ 
 
-var debugMode = debugMode();
-var hostURL = hostURL();
-var baseURL = baseURL();
+var debugMode = ISNLogger.debugMode;
+var hostURL = ISNLogger.choose("http://yellowjacket.ethz.ch", "http://lab.isn.ethz.ch");
+var baseURL = ISNLogger.choose("http://yellowjacket.ethz.ch/tools/", "http://lab.isn.ethz.ch/");
 
-if ( !window.console ) {
-    window.console = {'log': function(m){}};
-} 
 
-function debugMode() {
-    var debugMode = true;
-    return debugMode;
-}
-
+// this will go away
 function hostURL() {
-    var debugURL = "http://yellowjacket.ethz.ch";
-    var liveURL = "http://lab.isn.ethz.ch";
-    
-    return debugMode ? debugURL : liveURL; 
+    return ISNLogger.choose("http://yellowjacket.ethz.ch", "http://lab.isn.ethz.ch");
 }
 
+// this will go way
 function baseURL() {
-    var debugPath = "/tools/";
-    var livePath = "/";
-    
-    //return this.hostURL() + (this.debugMode() ? debugPath : livePath); 
-    return this.hostURL + debugPath; 
+    return ISNLogger.choose("http://yellowjacket.ethz.ch/tools/", "http://lab.isn.ethz.ch/");
 }
 
 
 function openView() {
-	console.log("first console log message");
+	ISNLogger.log("first console log message");
 	$("#" + this.tagID).show();
 }
  
@@ -49,10 +36,10 @@ function closeView() {
 
 
 function showErrorResponses(request){
-	console.log("ERROR status text: "+ request.statusText); 
-	console.log("ERROR status code: "+ request.statusCode()); 
-	console.log("ERROR status code is : " + request.status);
-	console.log("ERROR responsetext: "+ request.responseText);
+	ISNLogger.log("ERROR status text: "+ request.statusText); 
+	ISNLogger.log("ERROR status code: "+ request.statusCode()); 
+	ISNLogger.log("ERROR status code is : " + request.status);
+	ISNLogger.log("ERROR responsetext: "+ request.responseText);
 }
 
 
@@ -89,14 +76,14 @@ function embedBookmarkController() {
     
     
     function resizeListener(m){
-    	console.log("receive message");
+    	ISNLogger.log("receive message");
     	if (m.origin === self.hostURL){
 
-    		console.log("receive message from known host");
+    		ISNLogger.log("receive message from known host");
     		var data=JSON.parse(m.data);
-    		console.log("m.data is "+m.data);
+    		ISNLogger.log("m.data is "+m.data);
     		if (data.resize && data.resize.height > 0) {
-    			console.log("received resize message");
+    			ISNLogger.log("received resize message");
     			// add the new height to the iframe style
     			$("#isn_pd_authorize").height(data.resize.height);
     			if($("#isn_pd_widget").hasClass("none")){
@@ -105,14 +92,14 @@ function embedBookmarkController() {
     		}
     		else {
     			// if(!$("#isn_pd_widget").hasClass("none")){
-    			console.log("handle message else if");
+    			ISNLogger.log("handle message else if");
     			$("#isn_pd_authorize").height(0);
     			
     			// $("#isn_pd_widget").addClass("none");   
 
     		}
 //    		else{
-//    			console.log(" handle message else");
+//    			ISNLogger.log(" handle message else");
 //    		}
     	}
     	
@@ -126,8 +113,8 @@ embedBookmarkController.prototype.isLoggedin = function() {
 };
 
 var controller;
-console.log("enter embedBookmar main js");
+ISNLogger.log("enter embedBookmar main js");
 $(document).ready(function(){
-    console.log("document ready in embedBookmarkController");
+    ISNLogger.log("document ready in embedBookmarkController");
     controller = new embedBookmarkController();
 });

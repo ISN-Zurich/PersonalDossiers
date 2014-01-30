@@ -1,4 +1,4 @@
-console.log("enter embed controller file");
+ISNLogger.log("enter embed controller file");
 
 /**
  * This controller is responsible for the indx.html
@@ -43,7 +43,7 @@ function embedController() {
 	self.models.bookmark = new BookmarkModel(self);
 
 	
-	console.log("model is initialized");
+	ISNLogger.log("model is initialized");
 	
 	self.views = {};
 
@@ -54,7 +54,7 @@ function embedController() {
 
 
        $(document).bind("BookmarkModelLoaded", function() {
-    	   console.log("initialize views in controller");
+    	   ISNLogger.log("initialize views in controller");
     	   self.views.dossierBanner.open();
     	   self.views.dossierContent.open();
        });
@@ -70,18 +70,18 @@ embedController.prototype.getServiceHost = pdGetServiceHost;
 
 embedController.prototype.hashedUrl = function() {
     	
-    	console.log("enter hasehd url"); 
+    	ISNLogger.log("enter hasehd url"); 
 
     	url_ref=window.location.href;
     	var splited=url_ref.split("?");
-    	console.log("show splitted url array is "+splited);
+    	ISNLogger.log("show splitted url array is "+splited);
     	var split1=splited[1];
     	if (split1 && split1.length>0){
-    	console.log("tools is "+split1);
+    	ISNLogger.log("tools is "+split1);
     	var split2=split1.split("=");
     	var d_id=split2[1];
     	if (d_id && d_id.length>0){
-    		console.log("there is id in the new url and it is "+d_id);
+    		ISNLogger.log("there is id in the new url and it is "+d_id);
     		this.pubid=d_id;
     		this.hashed=true;
     	}} else{
@@ -94,14 +94,14 @@ embedController.prototype.hashedUrl = function() {
 
     embedController.prototype.getHashedURLId = function(){
                  var dossierId=this.pubid;
-                  console.log("dossier id after hash is "+dossierId);
+                  ISNLogger.log("dossier id after hash is "+dossierId);
                   return dossierId;
     };
 
 
 
     embedController.prototype.getActiveDossier = function(){
-    	  console.log("in user controller to get active dossier");
+    	  ISNLogger.log("in user controller to get active dossier");
         if (this.hashed){
         var activedosId = this.getHashedURLId();
             return activedosId;
@@ -125,8 +125,8 @@ embedController.prototype.hashedUrl = function() {
  
 
 var controller;
-    console.log("enter main js");
-    $(document).ready(function(){
-        console.log("document ready");
-        controller = new embedController();
-    });
+ISNLogger.log("enter main js");
+$(document).ready(function(){
+    ISNLogger.log("document ready");
+    controller = new embedController();
+});

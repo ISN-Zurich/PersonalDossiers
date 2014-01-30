@@ -5,19 +5,19 @@ function OAuthHelper(realm) {
     	data = JSON.parse(tmp);   
 //    }
     if ( !data ) {
-        console.log( 'no data cannot be loaded' );
+        ISNLogger.log( 'no data cannot be loaded' );
     throw new Error('No OAuth Data Stored');
         return;
     }
 
     if ( !data.accessToken) {
-        console.log('lost my accesstoken');
+        ISNLogger.log('lost my accesstoken');
         localStorage.setItem("authentication", "");
         throw new Error( 'no token');
         return;
     }
 
-    console.log('oauth helper ok');
+    ISNLogger.log('oauth helper ok');
 
     this.realm = realm;
 
@@ -28,7 +28,7 @@ function OAuthHelper(realm) {
         'token':          data.accessToken
     };
 
-    console.log('accessor ' + JSON.stringify(this.accessor));
+    ISNLogger.log('accessor ' + JSON.stringify(this.accessor));
 
     this.oauthHeader = function (method, url, data) {
         var message = {
@@ -38,17 +38,17 @@ function OAuthHelper(realm) {
                 ["oauth_signature_method", "HMAC-SHA1"]
             ]
         };
-        console.log("method: "+method+" url "+url);
+        ISNLogger.log("method: "+method+" url "+url);
         if (data){
-            console.log("data found");
+            ISNLogger.log("data found");
             for ( var key in data ) {
-                console.log("key: "+key);
+                ISNLogger.log("key: "+key);
                 message.parameters.push([key, data[key]]);
             }
         }
         
         OAuth.completeRequest(message, this.accessor);
-        console.log("passed completion");
+        ISNLogger.log("passed completion");
         return OAuth.getAuthorizationHeader(this.realm, message.parameters);
     };
 }

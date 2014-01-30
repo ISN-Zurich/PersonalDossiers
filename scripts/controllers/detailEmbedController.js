@@ -35,7 +35,7 @@ function detailEmbedController() {
 	self.models.bookmark = new BookmarkModel(self);
 
 	
-	console.log("model is initialized");
+	ISNLogger.log("model is initialized");
 	
 	self.views = {};
 
@@ -55,7 +55,7 @@ detailEmbedController.prototype.hashedUrl = function() {
     
 	url=window.location.search;
 	var split1=url.slice(1);
-	console.log("show splitted url array is "+split1);
+	ISNLogger.log("show splitted url array is "+split1);
 	// var split1=splited; // dossier_id=123432&item_id=123123
 	
 	//TODO: to calculate both dossier_id and item_id
@@ -65,15 +65,15 @@ detailEmbedController.prototype.hashedUrl = function() {
 		ids_partition=split1.split("&");
 		dossier_id_partition=ids_partition[0]; // dossier_id=123432
 		item_id_partition=ids_partition[1]; // item_id=123123
-		console.log("dossier id parition is "+dossier_id_partition);
-		console.log("item id parition is "+item_id_partition);
+		ISNLogger.log("dossier id parition is "+dossier_id_partition);
+		ISNLogger.log("item id parition is "+item_id_partition);
 	
 		if (dossier_id_partition && dossier_id_partition.length > 0){
 			dossier_id_sub_part=dossier_id_partition.split("=");
 			dossier_id=dossier_id_sub_part[1];
 			this.pubid=dossier_id;
 			this.hashed=true;
-			console.log("dossier id is "+dossier_id);
+			ISNLogger.log("dossier id is "+dossier_id);
 		}
 		 	
 
@@ -82,7 +82,7 @@ detailEmbedController.prototype.hashedUrl = function() {
 			item_id=item_id_sub_partition[1];
 			this.item_id=item_id;
 			this.hashed=true;
-			console.log("item id is "+item_id);
+			ISNLogger.log("item id is "+item_id);
 		}
 		
 		
@@ -92,7 +92,7 @@ detailEmbedController.prototype.hashedUrl = function() {
 //     	var split2=split1.split("=");
 //    	var d_id=split2[1];
 //    	if (d_id && d_id.length>0){
-//    		console.log("there is id in the new url and it is "+d_id);
+//    		ISNLogger.log("there is id in the new url and it is "+d_id);
 //    		this.pubid=d_id;
 //    		this.hashed=true;
 //    	}}
@@ -107,19 +107,19 @@ detailEmbedController.prototype.getServiceHost = pdGetServiceHost;
 
     detailEmbedController.prototype.getHashedURLId = function(){
     	var dossierId=this.pubid;
-    	console.log("dossier id after hash is "+dossierId);
+    	ISNLogger.log("dossier id after hash is "+dossierId);
     	return dossierId;
     };
 
 
     detailEmbedController.prototype.getdossierItemId = function(){
     	var item_id=this.item_id;
-    	console.log("item id after hash is "+item_id);
+    	ISNLogger.log("item id after hash is "+item_id);
     	return item_id;
     };
 
     detailEmbedController.prototype.getActiveDossier = function(){
-    	  console.log("in user controller to get active dossier");
+    	  ISNLogger.log("in user controller to get active dossier");
         if (this.hashed){
         var activedosId = this.getHashedURLId();
             return activedosId;
@@ -139,8 +139,8 @@ detailEmbedController.prototype.getServiceHost = pdGetServiceHost;
 
 
 var controller;
-    console.log("enter main js");
+    ISNLogger.log("enter main js");
     $(document).ready(function(){
-        console.log("document ready");
+        ISNLogger.log("document ready");
         controller = new detailEmbedController();
     });

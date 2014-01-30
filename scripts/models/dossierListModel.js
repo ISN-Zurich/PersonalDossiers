@@ -1,9 +1,9 @@
 /*jslint vars: true, sloppy: true */
 
-//console.log("DLM: parse start!");
+//ISNLogger.log("DLM: parse start!");
 
 function DossierListModel(controller){
-	console.log("enter dossier list model");
+	ISNLogger.log("enter dossier list model");
 	var self=this;
 	self.controller=controller;
 	self.dossierList=[];
@@ -14,11 +14,11 @@ function DossierListModel(controller){
 
 	//when we add a new dossier, to update the list of dossiers 
 	$(document).bind('DossierAdded', function(){
-		console.log("binded dossierAdded");
+		ISNLogger.log("binded dossierAdded");
 		self.getUserDossiers();
 	});
 	
-	console.log("initialized dossier list model");
+	ISNLogger.log("initialized dossier list model");
 }
 
 DossierListModel.prototype.reset=function(){
@@ -65,7 +65,7 @@ DossierListModel.prototype.getDossierImage = function(){
 
 DossierListModel.prototype.getUserTypeOld=function(){
 	
-	console.log("enter getUserType");
+	ISNLogger.log("enter getUserType");
 
 	if(this.dossierList && this.dossierList.length > 0) {		
 		return this.dossierList[this.index].user_type;
@@ -76,44 +76,44 @@ DossierListModel.prototype.getUserTypeOld=function(){
 
 
 DossierListModel.prototype.getUserType= function(){
-	console.log("enter get user type");
+	ISNLogger.log("enter get user type");
 	var userType="";
 	for (var i=0; i <=this.dossierList.length -1; i++){
-		console.log("i iss "+i);
+		ISNLogger.log("i iss "+i);
 		if ((this.dossierList[i]["dossier_id"])===this.controller.getActiveDossier()){
 			userType=this.dossierList[i]["user_type"];
 
 		}
 	}
-	console.log("userType is "+userType);
+	ISNLogger.log("userType is "+userType);
 	return userType;
 };
 
 
 DossierListModel.prototype.isFollowedDossier = function(){
-	console.log("enter isFollowedDossier");
+	ISNLogger.log("enter isFollowedDossier");
 	userType=this.getUserTypeOld();
 	if (userType == "user"){
-		console.log("userType is user");
+		ISNLogger.log("userType is user");
 		return true;
 	}
-	console.log("userType is other");
+	ISNLogger.log("userType is other");
 	return false;
 	
 };
 
 DossierListModel.prototype.getActiveDossier = function(){
-	console.log("get active dossier in dossier list model");
+	ISNLogger.log("get active dossier in dossier list model");
 	activeDossierId = this.controller.getActiveDossier(); // in the controller: this.models.usermodel.getActiveDossier();
 
 	if (activeDossierId) {
 		// take the dossier with the smallest ID == DEFAULT ID
-		console.log("no active dossier found check for the default! ");
+		ISNLogger.log("no active dossier found check for the default! ");
 		//this.getDefaultDossierId();
 		//end of if !activeDossierId
 		this.activeDossier=activeDossierId;
 
-		console.log("active dossier should beeeee: "+this.activeDossier);
+		ISNLogger.log("active dossier should beeeee: "+this.activeDossier);
 		return this.activeDossier;
 	}
 	return undefined;
@@ -125,16 +125,16 @@ DossierListModel.prototype.getDefaultDossierId = function() {
 	var minId=null;
 	var i;
 	if (self.dossierList && self.dossierList.length >0){
-		console.log("enter if, list exists");
+		ISNLogger.log("enter if, list exists");
 		for ( i = 0;  i < self.dossierList.length; i++) {
-			console.log("enter for " + i);
+			ISNLogger.log("enter for " + i);
 			if (!minId || self.dossierList[i].dossier_id < minId) {
-				console.log("before set to smaller minId");
+				ISNLogger.log("before set to smaller minId");
 				minId = self.dossierList[i].dossier_id;
 			}
 		}
 	}
-	console.log("default id is "+minId);
+	ISNLogger.log("default id is "+minId);
 	// now store the active dossier id to the profile
 	var defaultDossierId = minId;
 
@@ -147,15 +147,15 @@ DossierListModel.prototype.getDefaultDossierId = function() {
 
 DossierListModel.prototype.getUserDossiers=function(){
 
-	console.log("enter getUserDossiers");
+	ISNLogger.log("enter getUserDossiers");
 	var self = this;
 
 	var url=self.controller.baseURL +'service/dossier.php';
 	var method = 'GET';
-	console.log( 'request to load dossier list');
+	ISNLogger.log( 'request to load dossier list');
 
 	if (self.controller.oauth) {
-		console.log( 'load dossier list because there is oauth');
+		ISNLogger.log( 'load dossier list because there is oauth');
 		$.ajax({
 			url:  url,
 			type : method,
@@ -163,7 +163,7 @@ DossierListModel.prototype.getUserDossiers=function(){
 			success : success,
 			error : function(request) {
 
-				console.log("Error while getting the user dossiers");
+				ISNLogger.log("Error while getting the user dossiers");
 				showErrorResponses(request); 
 			},
 			beforeSend : setHeader
@@ -173,14 +173,14 @@ DossierListModel.prototype.getUserDossiers=function(){
 		//Trigger the activeDossierReady, it will be bound in the bookmark model which in turn
 		//will ask the activeDossier in the controller
 		$(document).trigger("ActiveDossierReady"); //  for the models  (bookmarkModel)
-		console.log('the controller lacks the oauth helper! but has a hash key');
+		ISNLogger.log('the controller lacks the oauth helper! but has a hash key');
 	}
 
 	function success(data){
 		self.dossierList=data;
 
-		console.log("dossier list in dossier LIST MODEL is "+JSON.stringify(self.dossierList));
-		console.log("dossier_id is "+JSON.stringify(self.dossierList[0].dossier_id));
+		ISNLogger.log("dossier list in dossier LIST MODEL is "+JSON.stringify(self.dossierList));
+		ISNLogger.log("dossier_id is "+JSON.stringify(self.dossierList[0].dossier_id));
 
 		// inform all dossier views that they need to update
 		$(document).trigger('DossierListUpdate'); // for the models  librarybookmarkModel
@@ -191,7 +191,7 @@ DossierListModel.prototype.getUserDossiers=function(){
 	function setHeader(xhr){
 
 		var header_request=self.controller.oauth.oauthHeader(method, url);
-		console.log("oauth header: " + header_request);
+		ISNLogger.log("oauth header: " + header_request);
 		xhr.setRequestHeader('Authorization', header_request);
 
 	}
@@ -201,14 +201,14 @@ DossierListModel.prototype.getUserDossiers=function(){
 
 
 DossierListModel.prototype.addDossier=function(){
-	console.log("enter addDossier in Bookmark Model");
+	ISNLogger.log("enter addDossier in Bookmark Model");
 	var self=this;
 
 	var url= self.controller.baseURL +'service/dossier.php/' ;
 	var method="PUT";
 
 
-	console.log("before AJAX");
+	ISNLogger.log("before AJAX");
 	$.ajax({
 		url :url,
 		type : method,
@@ -220,17 +220,17 @@ DossierListModel.prototype.addDossier=function(){
 
 	function success(){
 		// great! well done!
-		console.log("great the insertion of the dossier was succesfull");
+		ISNLogger.log("great the insertion of the dossier was succesfull");
 		$(document).trigger('DossierAdded'); 
 	}
 
 	function error(request) {
 		// the server rejected the request!
-		console.log("the server rejected the creation of a new dossier");
-		console.log("ERROR status text: "+ request.statusText); 
-		console.log("ERROR status code: "+ request.statusCode()); 
-		console.log("ERROR status code is : " + request.status);
-		console.log("ERROR responsetext: "+ request.responseText); 
+		ISNLogger.log("the server rejected the creation of a new dossier");
+		ISNLogger.log("ERROR status text: "+ request.statusText); 
+		ISNLogger.log("ERROR status code: "+ request.statusCode()); 
+		ISNLogger.log("ERROR status code is : " + request.status);
+		ISNLogger.log("ERROR responsetext: "+ request.responseText); 
 	}
 
 	function setHeader(xhr){
@@ -240,4 +240,4 @@ DossierListModel.prototype.addDossier=function(){
 };
 
 
-//console.log("DLM: parse end!");
+//ISNLogger.log("DLM: parse end!");

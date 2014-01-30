@@ -35,7 +35,7 @@ function BookmarkController() {
     
     $(document).bind('UserProfileUpdate', function(){
 		
-		console.log("binded User profile update in user controller model");
+		ISNLogger.log("binded User profile update in user controller model");
 		
 		self.models.dossierList.getUserDossiers();
 	});
@@ -46,7 +46,7 @@ BookmarkController.prototype.initServiceHost = pdInitServiceHost;
 BookmarkController.prototype.getServiceHost = pdGetServiceHost;
 
 BookmarkController.prototype.initOAuth = function() {
-    console.log('initialize the oauth helper class');
+    ISNLogger.log('initialize the oauth helper class');
     try {
 	this.oauth = new OAuthHelper(this.baseURL);
 	 $(document).trigger('oauthSet');
@@ -56,10 +56,10 @@ BookmarkController.prototype.initOAuth = function() {
     }
 
     if (this.oauth) {
-        console.log('oauth ok');
+        ISNLogger.log('oauth ok');
     }
     else {
-        console.log('oauth failed');
+        ISNLogger.log('oauth failed');
     }
 };
 
@@ -68,14 +68,14 @@ BookmarkController.prototype.initOAuth = function() {
 BookmarkController.prototype.getUrlId = function(){
 	var url_ref=window.location.href;
 	var splited=url_ref.split("?");
-	console.log("show splitted url array is "+splited);
+	ISNLogger.log("show splitted url array is "+splited);
 	var split1=splited[1];
 	if (split1 && split1.length>0){
-		console.log("tools is "+split1);
+		ISNLogger.log("tools is "+split1);
 		var split2=split1.split("=");
 		var d_id=split2[1];
 		if (d_id && d_id.length>0){
-			console.log("there is id in the new url and it is "+d_id);
+			ISNLogger.log("there is id in the new url and it is "+d_id);
 			this.library_item_id=d_id;
 			return this.library_item_id
 		}
@@ -86,14 +86,14 @@ BookmarkController.prototype.getUrlId = function(){
 
 BookmarkController.prototype.checkBookmark=function(item_id){
 	 if ( this.models.bookmark.hasItem(item_id) ){
-		 console.log('bookmark found!');
+		 ISNLogger.log('bookmark found!');
          window.parent.postMessage(JSON.stringify({'bookmarkok': 1}), 
                                    this.targetHost);
 	 }
 };
 
 BookmarkController.prototype.notifyNewHeight = function(height){
-	console.log("enter notify new height");
+	ISNLogger.log("enter notify new height");
 
 		 var data={
 					"resize": {
@@ -112,7 +112,7 @@ BookmarkController.prototype.notifyNewHeight = function(height){
 BookmarkController.prototype.calculateHeight= function(m){
 	
 	var id = this.allowedHosts.indexOf(m.origin);
-	console.log('origin is id: '+ id);
+	ISNLogger.log('origin is id: '+ id);
 	if (id >= 0) {
 		targetHost = this.allowedHosts[id];
 		var data={
@@ -125,9 +125,9 @@ BookmarkController.prototype.calculateHeight= function(m){
 };
 
 var controller;
-console.log("enter bookmark main js");
+ISNLogger.log("enter bookmark main js");
 $(document).ready(function(){
-    console.log("document ready in bookmark controller");
+    ISNLogger.log("document ready in bookmark controller");
     controller = new BookmarkController();
 });
 

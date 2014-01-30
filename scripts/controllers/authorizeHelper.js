@@ -8,7 +8,7 @@
 
 function AuthorizationController() {
 	
-	console.log("enter authorize controller");
+	ISNLogger.log("enter authorize controller");
    
     var self = this;
     
@@ -40,7 +40,7 @@ function AuthorizationController() {
         if (!did) {
             did = mDossiers.getDefaultDossierId();
         }
-        console.log( 'active dossier is : ' + did);
+        ISNLogger.log( 'active dossier is : ' + did);
         return did;
     };
 
@@ -50,7 +50,7 @@ function AuthorizationController() {
     });
 
     if (self.oauth) {
-    	console.log("we send the message event in authorize helper");
+    	ISNLogger.log("we send the message event in authorize helper");
         // indeed we want to verify the tokens first
         window.addEventListener('message', handshake, false);    
         
@@ -64,9 +64,9 @@ function AuthorizationController() {
     }    
 
     function handshake(m) {
-        console.log( 'received a message from ' + m.origin);
+        ISNLogger.log( 'received a message from ' + m.origin);
         var id = allowedHosts.indexOf(m.origin);
-        console.log('origin is id: '+ id);
+        ISNLogger.log('origin is id: '+ id);
         if (id >= 0) {
             targetHost = allowedHosts[id];
             
@@ -79,25 +79,25 @@ function AuthorizationController() {
     }
     
     function addDossierItem(m) {
-        console.log( 'received a message from ' + m.origin);
+        ISNLogger.log( 'received a message from ' + m.origin);
         var id = allowedHosts.indexOf(m.origin);
-        console.log('origin is id: '+ id);
+        ISNLogger.log('origin is id: '+ id);
         if (id >= 0) {
             targetHost = allowedHosts[id];
             
-            console.log( 'data is ' + m.data);
+            ISNLogger.log( 'data is ' + m.data);
             var data = JSON.parse(m.data);
             // use only for our digital library
-            console.log( 'item id? ' + data.itemID);
+            ISNLogger.log( 'item id? ' + data.itemID);
             if ( data.itemID ) {
-                console.log('operation is ' + data.operation);
+                ISNLogger.log('operation is ' + data.operation);
                 switch (data.operation) {
                 case 'store':
-                    console.log('add the bookmark');
+                    ISNLogger.log('add the bookmark');
                     bookmarks.addItem(data.itemID);                
                     break;
                 case 'check':
-                    console.log( 'check bookmark');
+                    ISNLogger.log( 'check bookmark');
                     self.activeItemID = data.itemID;
                     checkBookmark();
                     break;
@@ -109,9 +109,9 @@ function AuthorizationController() {
     }
 
     function checkBookmark() {
-        console.log('check bookmark! ' + self.activeItemID);
+        ISNLogger.log('check bookmark! ' + self.activeItemID);
         if ( self.activeItemID && bookmarks.hasItem(self.activeItemID) ){
-            console.log('bookmark found!');
+            ISNLogger.log('bookmark found!');
             window.parent.postMessage(JSON.stringify({'bookmarkok': 1}), 
                                       self.targetHost);
         }
@@ -122,8 +122,8 @@ AuthorizationController.prototype.initServiceHost = pdInitServiceHost;
 AuthorizationController.prototype.getServiceHost = pdGetServiceHost;
 
 var controller;
-console.log("enter main js");
+ISNLogger.log("enter main js");
 $(document).ready(function() {
-    console.log("document ready");
+    ISNLogger.log("document ready");
     controller = new AuthorizationController();
 });
