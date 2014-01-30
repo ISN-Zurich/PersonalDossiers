@@ -101,9 +101,24 @@ BookmarkController.prototype.notifyNewHeight = function(height){
     };
     
     var id, mdata= JSON.stringify(data);
-    for (id = 0; id < this.allowedHosts.length; id++) {
-        window.parent.postMessage(mdata, this.allowedHosts[id]);
-	}
+    if (this.targetHostId >=0) {
+        window.parent.postMessage(mdata, this.allowedHosts[this.targetHostId]);
+    }
+    else {
+        for (id = 0; id < this.allowedHosts.length; id++) {
+            var isok = true;
+            try {
+                window.parent.postMessage(mdata, this.allowedHosts[id]);
+            }
+            catch(e) {
+                isok = false;
+            }
+            if (isok) {
+                this.targetHostId = id;
+                break;
+            }
+        }
+    }
 };
 
 //it is deprecated and is not beeing used
