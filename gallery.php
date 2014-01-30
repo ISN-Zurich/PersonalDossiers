@@ -20,6 +20,7 @@
     <script type="text/javascript" src="scripts/views/addImage.js"></script>
     
     <script type="text/javascript" src="scripts/controllers/galleryController.js"></script>
+    <script type="text/javascript" src="scripts/main.js"></script>
 </head>
 
 <body>
