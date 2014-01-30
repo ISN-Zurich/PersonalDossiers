@@ -12,14 +12,8 @@ function AuthorizationController() {
    
     var self = this;
     
-//    this.debugMode = debugMode;
-//    this.hostURL = hostURL;
-//    this.baseURL = baseURL;
     this.initServiceHost();
 
-//    this.hostURL = "http://yellowjacket.ethz.ch";
-//    this.baseURL = "http://yellowjacket.ethz.ch/tools/";
-   
     var bookmarks = null;
     var  mUser = null, mDossiers = 0;
     // document.domain = 'ethz.ch';
@@ -49,7 +43,7 @@ function AuthorizationController() {
     });
 
     if (self.oauth) {
-    	ISNLogger.log("we send the message event in authorize helper");
+        ISNLogger.log("we send the message event in authorize helper");
         // indeed we want to verify the tokens first
         window.addEventListener('message', handshake, false);    
         

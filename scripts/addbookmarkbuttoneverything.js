@@ -27,7 +27,7 @@ function BookmarkModel(dController){
 	this.dossierList=[];
 	this.dossiers=[];
 	this.index=0;
-	var realm= "http://yellowjacket.ethz.ch/tools/";
+	var realm= baseURL();
 	this.oauthHelper= new OAuthHelper(realm);
 	
 	this.editMode=false;
@@ -53,7 +53,7 @@ BookmarkModel.prototype.addItem=function(id){
 	var self=this;
 	var dossierID = self.dossierId;
 	ISNLogger.log("dossierID in addItem is "+dossierID);
-	var url='http://yellowjacket.ethz.ch/tools/service/service2.php/'+ dossierID;
+	var url= baseURL() + 'service/service2.php/'+ dossierID;
 	var method="PUT";
 	data= {'id': id };
 	
@@ -95,7 +95,7 @@ BookmarkModel.prototype.removeItem=function(id){
 	var self=this;
 	//send delete request via ajax
 	var dossierID = self.dossierId;
-	var url='http://yellowjacket.ethz.ch/tools/service/service2.php/' + dossierID + '/' + id;
+	var url= baseURL() + 'service/service2.php/' + dossierID + '/' + id;
 	var method="DELETE";
 	
 	
@@ -133,7 +133,7 @@ BookmarkModel.prototype.loadDossierList=function(){
 	
 	//var dossierID = this.dossierId;
 	var dossierID= self.dossierId;
-	var url='http://yellowjacket.ethz.ch/tools/service/service2.php/' + dossierID;
+	var url= baseURL() + 'service/service2.php/' + dossierID;
 	var method="GET";
 	if ( dossierID ) {
 		ISNLogger.log("before executing the ajax request for " + dossierID);
@@ -210,7 +210,7 @@ BookmarkModel.prototype.sendDataToServer=function(){
 	ISNLogger.log("enter send data to server");
 	var self=this;
 	var dossierID = self.dossierId;
-	var url="http://yellowjacket.ethz.ch/tools/service/service2.php/"+dossierID;
+	var url=baseURL() + "service/service2.php/"+dossierID;
 	var method="POST";
 	
 	if ( dossierID &&

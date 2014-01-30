@@ -511,7 +511,7 @@ BookmarkModel.prototype.getEmbedURL = function() {
 	if (itemType === "Publication"){
 		//return  'http://yellowjacket.ethz.ch/tools/embedDetailPage.html?id='+ this.getItemId();
 		//return  'http://yellowjacket.ethz.ch/tools/embedDetailPage.html?dossier_id='+ dossierListModel.getDossierId() +'&item_id='+this.getItemId();
-		return  'http://yellowjacket.ethz.ch/tools/embedDetailPage.html?dossier_id='+ this.dossierId +'&item_id='+this.getItemId();
+		return  baseURL() + 'embedDetailPage.html?dossier_id='+ this.dossierId +'&item_id='+this.getItemId();
 	}
 };
 

@@ -30,14 +30,14 @@ function addEmbedButton(controller){
 	
 
 	$("#contentEmbed").bind("click", function(e){
-		$("#inputContainer").attr("value","<iframe scrolling=\"no\" src=\""+"http://yellowjacket.ethz.ch/tools/embedPageBig.html?id="+self.dossierId+"\""+" style= \""+ "width:475px;height:905px; border: none; overflow:hidden; \"></iframe>");
+		$("#inputContainer").attr("value","<iframe scrolling=\"no\" src=\""+ baseURL() +"embedPageBig.html?id="+self.dossierId+"\""+" style= \""+ "width:475px;height:905px; border: none; overflow:hidden; \"></iframe>");
 		$("#badgeStyle").removeClass("pd_activeBadge");
 		$("#contentEmbed").addClass("pd_activeBadge");
 		
 	});
 	
 	$("#badgeStyle").bind("click", function(e){
-		$("#inputContainer").attr("value","<iframe scrolling=\"no\" src=\""+"http://yellowjacket.ethz.ch/tools/embedBadge.html?id="+self.dossierId+"\""+" style= \""+ "width:250px;height:480px; border: none; overflow:hidden; \"></iframe>");
+		$("#inputContainer").attr("value","<iframe scrolling=\"no\" src=\""+baseURL()+"embedBadge.html?id="+self.dossierId+"\""+" style= \""+ "width:250px;height:480px; border: none; overflow:hidden; \"></iframe>");
 		$("#contentEmbed").removeClass("pd_activeBadge");
 		$("#badgeStyle").addClass("pd_activeBadge");
 		
@@ -68,7 +68,7 @@ addEmbedButton.prototype.update= function(){
 	var dossierId=this.controller.getActiveDossier();
 	$("#addEmbedBtn").css("margin-bottom", "1px");
 	
-	$("#inputContainer").attr("value","<iframe scrolling=\"no\" src=\""+"http://yellowjacket.ethz.ch/tools/embedPageBig.html?id="+dossierId+"\""+" style= \""+ "width:475px;height:905px; border: none; overflow:hidden; \"></iframe>");
+	$("#inputContainer").attr("value","<iframe scrolling=\"no\" src=\""+baseURL()+"embedPageBig.html?id="+dossierId+"\""+" style= \""+ "width:475px;height:905px; border: none; overflow:hidden; \"></iframe>");
 	
 	$("#inputContainer").focus();
 	

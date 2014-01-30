@@ -39,7 +39,7 @@ detailEmbedView.prototype.update = function(){
 	$("#dateValue").text(date);
 	
 	ISNLogger.log("id of the clicked item is "+item_id);
-	var url="http://yellowjacket.ethz.ch/tools/service/streamtest.php?id="+item_id;
+	var url=baseURL()+"service/streamtest.php?id="+item_id;
 	iFrame = $("<iframe/>", {
 		"scrolling": "no",
 		"class": "embediFrameBig",

@@ -6,8 +6,8 @@
 
 var controlerObject;
 
-var hostURL = ISNLogger.choose("http://yellowjacket.ethz.ch", "http://lab.isn.ethz.ch");
-var baseURL = ISNLogger.choose("http://yellowjacket.ethz.ch/tools/", "http://lab.isn.ethz.ch/");
+//var hostURL = ISNLogger.choose("http://yellowjacket.ethz.ch", "http://lab.isn.ethz.ch");
+//var baseURL = ISNLogger.choose("http://yellowjacket.ethz.ch/tools/", "http://lab.isn.ethz.ch/");
 
 
 // this will go away
@@ -55,9 +55,8 @@ function setDossiersColorization() {
 	$("#logView").removeClass("disable");
 	$("#logView").addClass("pd_interactionItem");
 	$("#logView").addClass("sb_icon");
-	$("#logView").addClass("clickable");
-	
-};
+	$("#logView").addClass("clickable");	
+}
 
 
 /**
@@ -71,12 +70,10 @@ function setLoggedOutColorization(){
 	$("#span_user").removeClass("selected");
 	$("#st_dossiers").addClass("disable");
 	$("#st_user").addClass("disable");
-	
-};
+}
 
 
 function setUserProfileColorization(){
-	
 	$("#st_dossiers").removeClass("disable");
 	$("#st_dossiers").removeClass("pd_sb_icon");
 	$("#logView").removeClass("pd_sb_icon");
@@ -88,8 +85,7 @@ function setUserProfileColorization(){
 	$("#st_user").addClass("pd_sb_icon");
 	$("#span_user").removeClass("pd_active");
 	$("#span_user").addClass("pd_selected");
-
-};
+}
 
 function pdInitServiceHost() {
     var h = window.location.host;

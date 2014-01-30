@@ -505,7 +505,7 @@ class DossierService extends OAUTHRESTService {
 	 * order to check which dossiers of the current user have already the specific dossier item.
 	 *  
 	 * The retrieved from the client REQUEST URL has the following format: http://baseURL/service/dossier.php/string/item_id, where:
-	 * - baseURL : is the address of the server that hosts the service. In our case it is http://yellowjacket.ethz.ch
+	 * - baseURL : is the address of the server that hosts the service. 
 	 * - string: it is "dossiers". We pass this string and not a specific dossier id in order to check all the dossiers
 	 * - item_id: it is the id of the a dossier item of any dossier.
 	 * 

@@ -11,7 +11,7 @@ function badgeView(dController){
 	
 	$("#pd_footer_gen").bind("click", function(){
 		window.open(
-				'http://yellowjacket.ethz.ch/tools/index.html',
+				baseURL()+ 'index.html',
 				'_blank' 
 		);
 	});	
