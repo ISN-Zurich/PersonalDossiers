@@ -210,14 +210,20 @@ class RESTServiceCommon extends PDCommonClass {
             $cmeth = "handle_" . $meth;
             // check if a method is supported by the service class
             if ( method_exists($this, $cmeth) ) {
-		// force IE to obey!
-		header('X-UA-Compatible: IE=edge');
-                // TODO: generalize the Access control!
-                header('Access-Control-Allow-Origin: http://www.isn.ethz.ch');
-                header('Access-Control-Allow-Methods: POST, PUT, GET');
-                header('Access-Control-Allow-Headers: Authorization');
-                header('Cache-Control: no-cache');
-
+                // force IE to obey!
+		        header('X-UA-Compatible: IE=edge');
+                
+                // TODO: generalize the Access control!        
+                // the access control origin should be defined in the config and only if the domain
+                // matches the allowed domains, it should respond appropriately.
+                $origin = $_SERVER['HTTP_ORIGIN'];
+                
+                if ( !empty($origin) && in_array($origin, array('http://www.isn.ethz.ch', 'http://yellowjacket.ethz.ch', 'http://lab.isn.ethz.ch')) ){
+                    header('Access-Control-Allow-Origin: ' . $origin);
+                    header('Access-Control-Allow-Methods: POST, PUT, GET');
+                    header('Access-Control-Allow-Headers: Authorization');
+                    header('Cache-Control: no-cache');
+                }
                 if ($this->prepareOperation($meth)) {
                     
 
