@@ -4,7 +4,7 @@
 function userController() {
 	
 	var self=this;
-    this.debugMode = debugMode;
+
     // this.baseURL = baseURL;
     // this.hostURL = hostURL;
     this.appLoaded=false;
@@ -46,7 +46,6 @@ function userController() {
 	if (this.oauth){
 		$("#st_user").removeClass("pd_disable");
 		$("#st_dossiers").removeClass("pd_disable");
-		
 	}
 	
 	$(document).bind('UserProfileUpdate', function(){
