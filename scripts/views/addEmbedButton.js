@@ -33,14 +33,12 @@ function addEmbedButton(controller){
 		$("#inputContainer").attr("value","<iframe scrolling=\"no\" src=\""+ baseURL() +"embedPageBig.html?id="+self.dossierId+"\""+" style= \""+ "width:475px;height:905px; border: none; overflow:hidden; \"></iframe>");
 		$("#badgeStyle").removeClass("pd_activeBadge");
 		$("#contentEmbed").addClass("pd_activeBadge");
-		
 	});
 	
 	$("#badgeStyle").bind("click", function(e){
 		$("#inputContainer").attr("value","<iframe scrolling=\"no\" src=\""+baseURL()+"embedBadge.html?id="+self.dossierId+"\""+" style= \""+ "width:250px;height:480px; border: none; overflow:hidden; \"></iframe>");
 		$("#contentEmbed").removeClass("pd_activeBadge");
 		$("#badgeStyle").addClass("pd_activeBadge");
-		
 	});
 	
 }

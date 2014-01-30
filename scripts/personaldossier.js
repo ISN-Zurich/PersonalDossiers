@@ -95,7 +95,6 @@ function showErrorResponses(request){
 function embedBookmarkController() {
     var self=this;
 
-    this.debugMode = debugMode;
     this.hostURL = hostURL();
     this.baseURL = baseURL();
     
@@ -157,10 +156,12 @@ embedBookmarkController.prototype.isLoggedin = function() {
     return this.login;
 };
 
+ISNLogger.debugMode = false;
+
 var controller;
 ISNLogger.log("enter embedBookmar main js");
 $(document).ready(function(){
     ISNLogger.log("document ready in embedBookmarkController");
-    ISNLogger.debugMode = false;
+    
     controller = new embedBookmarkController();
 });
