@@ -8,7 +8,7 @@
 
 // this will go away
 function hostURL() {
-    return ISNLogger.choose(, "http://lab.isn.ethz.ch","http://yellowjacket.ethz.ch");
+    return ISNLogger.choose("http://lab.isn.ethz.ch", "http://yellowjacket.ethz.ch");
 }
 
 // this will go way
