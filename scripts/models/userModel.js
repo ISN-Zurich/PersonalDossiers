@@ -186,7 +186,7 @@ UserModel.prototype.checkPasswordConfirmation=function(password, confirm_passwor
 
 UserModel.prototype.getUserProfile=function(){
     var self = this;
-    var url= this.controller.baseURL +'service/authentication.php';
+    var url= baseURL() +'service/authentication.php';
     var method = 'GET';
     
     $.ajax({
@@ -285,7 +285,7 @@ UserModel.prototype.checkActiveUser = function(){
 UserModel.prototype.sendUserProfileToServer = function(){
 	ISNLogger.log("enter send user profile to server");
     var self=this;
-    var url=this.controller.baseURL +'service/authentication.php';
+    var url=baseURL() +'service/authentication.php';
     ISNLogger.log("url is "+url);
     var method = 'POST';
     var dataObject = {
@@ -329,7 +329,7 @@ UserModel.prototype.sendUserProfileToServer = function(){
 
 UserModel.prototype.logout =function(){
     var self=this;
-    var url= this.controller.baseURL +"service/authentication.php/access_token";
+    var url= baseURL() +"service/authentication.php/access_token";
     $.ajax({
 	url: url,
 	type : 'DELETE',
@@ -381,7 +381,7 @@ UserModel.prototype.sendUserPasswordToServer = function(password,mail){
 	var hash1= hex_sha1(mail+password);
 	ISNLogger.log(" hash1 in send password to server "+hash1);
 
-	 var url= this.controller.baseURL +'service/authentication.php/password';
+	 var url= baseURL() +'service/authentication.php/password';
 	 var method = 'POST';
 	 
 	 var dataObject= { 
@@ -438,7 +438,7 @@ UserModel.prototype.register = function(password){
 	var recaptcha_challenge_field=$("#recaptcha_challenge_field").val();
 	ISNLogger.log("recaptcha_response_field is "+recaptcha_response_field);
 	
-	var url= self.controller.baseURL +'service/authentication.php/register';
+	var url= baseURL() +'service/authentication.php/register';
 	var method = 'POST';
 	ISNLogger.log("url is "+url);
 	

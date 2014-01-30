@@ -92,8 +92,8 @@ function pdInitServiceHost() {
     var p = window.location.protocol;
     
     // this.hostURL = p + '//' + h + '/';    
-    this.hostURL = ISNLogger.choose("http://yellowjacket.ethz.ch", "http://lab.isn.ethz.ch");
-    this.baseURL = ISNLogger.choose("http://yellowjacket.ethz.ch/tools/", "http://lab.isn.ethz.ch/"); // the trailing slash should be part of the service call.
+    this.hostURL = hostURL()
+    this.baseURL = baseURL(); // the trailing slash should be part of the service call.
 }
 
 function pdGetServiceHost() {
