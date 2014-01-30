@@ -8,7 +8,7 @@ function addBookmarkController() {
     ISNLogger.log("hostURL is"+this.hostURL);
     ISNLogger.log("baseURL is"+this.baseURL);
     
-    document.domain = 'ethz.ch';
+//    document.domain = 'ethz.ch';
     self.login = false;
 
     ISNLogger.log("do not initialize");

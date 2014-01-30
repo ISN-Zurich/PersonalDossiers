@@ -42,7 +42,7 @@ function embedBookmarkController() {
     this.hostURL = hostURL;
     this.baseURL = baseURL;
     
-    document.domain = 'ethz.ch';
+    // document.domain = 'ethz.ch';
     self.login = false;
     
     window.addEventListener('message', resizeListener, false);

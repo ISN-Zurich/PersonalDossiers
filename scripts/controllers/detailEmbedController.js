@@ -12,7 +12,7 @@ function detailEmbedController() {
 //    this.baseURL = baseURL;
 //    this.hostURL = hostURL;
 
-    document.domain = 'ethz.ch';
+//    document.domain = 'ethz.ch';
     self.hashed=false;
     self.hashedUrl();
   

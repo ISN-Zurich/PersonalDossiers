@@ -11,7 +11,7 @@ function userController() {
     
     this.initServiceHost();
     
-	document.domain = 'ethz.ch';
+	// document.domain = 'ethz.ch';
 	
 	self.activeView=false;
 	self.loggoutClicked=false;

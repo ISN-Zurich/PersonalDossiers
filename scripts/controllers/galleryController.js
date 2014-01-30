@@ -12,7 +12,7 @@ function GalleryController() {
     this.initServiceHost();
 
     ISNLogger.log('Gallery Controller starts');
-    document.domain = 'ethz.ch';
+//    document.domain = 'ethz.ch';
 
     self.initOAuth();
 
