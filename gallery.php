@@ -9,7 +9,8 @@
     <script type="text/javascript" src="libs/sha1.js"></script>
     <script type="text/javascript" src="libs/oauth.js"></script>
 
-    <script type="text/javascript" src="scripts/common.js"></script>
+    <script type="text/javascript" src="scripts/isnlogger.js"></script>
+	<script type="text/javascript" src="scripts/common.js"></script>
 
     <script type="text/javascript" src="scripts/models/oauthhelper.js"></script>
     
