@@ -101,7 +101,7 @@ WelcomeView.prototype.renderDossierItem = function(parentE) {
 	// This item should have a border by the CSS styles unless it is the last element in the parent container
 	div1 =$("<div/>", {
 		"id":"dossier"+self.controller.models.dossierList.getDossierId(),
-		"class": "column featured2  dossier_item dossier_item_border"
+		"class": "column featured2  dossier_item dossier_item_border clickable"
 	}).appendTo(parentE);
 
 
