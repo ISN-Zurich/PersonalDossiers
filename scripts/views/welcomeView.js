@@ -13,11 +13,13 @@ function WelcomeView(controller){
 		if (targetE.id !== "followingListHeader") {
 			var targetID = targetE.id;
 			var dosID = targetID.substring(7);
-			ISNLogger.log("dosID is "+dosID);
-			var userModel = self.controller.models.user;
-			userModel.setActiveDossier(dosID);
-			window.location.href="index.html?id="+dosID;
-			e.stopPropagation();
+			if (dosID.length && parseInt(dosID) > 0) {
+                ISNLogger.log("dosID is "+dosID);
+                var userModel = self.controller.models.user;
+                userModel.setActiveDossier(dosID);
+                window.location.href="index.html?id="+dosID;
+                e.stopPropagation();
+            }
 		}
 	});
 }
@@ -81,7 +83,6 @@ WelcomeView.prototype.update = function(){
 		return; // stop here
 		
 		// END OF DESIGN OF FIRST LIST OF DOSSIERS
-
 	}
 
 };
@@ -110,7 +111,7 @@ WelcomeView.prototype.renderDossierItem = function(parentE) {
 
 	img=$("<img/>", {
 		"class": "floatleft clickable",
-		"src":self.controller.models.dossierList.getDossierImage(),
+		"src": self.controller.models.dossierList.getDossierImage(),
 		"width":"80px",
 		"height":"60px"
 	}).appendTo(div2);
