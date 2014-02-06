@@ -103,9 +103,6 @@ function pdGetServiceHost() {
 }
 
 function pdIsAuthenticated() {
-    if (this.models.authentication && this.models.authentication.isLoggedIn) {
-        return this.models.authentication.isLoggedIn();
-    }
     if (this.models.user && this.models.user.getUserId) {
         return this.models.user.getUserId() > 0 ? true : false;
     }
