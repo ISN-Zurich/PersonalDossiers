@@ -124,11 +124,7 @@ UserModel.prototype.setUserEmail = function(email){
 	
 };
 
-
-
-
 UserModel.prototype.setPassword = function(pwd_hash,pwd_length){
-	
 	if (!this.userProfile){
 		this.userProfile={};
 	}
@@ -164,7 +160,6 @@ UserModel.prototype.setUserTitle = function(title){
 
 
 UserModel.prototype.setConfirmPassword = function(confirm_password,password){
-	
 	//check emptiness of confirmation password
 	if (!confirm_password){
 		$(document).trigger('PasswortConfirmEmpty');
@@ -242,16 +237,16 @@ UserModel.prototype.getUserProfile=function(){
 UserModel.prototype.setActiveDossier = function(dossierId){
 	ISNLogger.log("enter set Active Dossier in user model");
     if( this.controller.models.dossierList.dossierList && this.controller.models.dossierList.dossierList.length > 0) {
-	this.activeDossier=dossierId;
-	//store in the local storage
+        this.activeDossier=dossierId;
+        //store in the local storage
         if (!this.userProfile) {
             this.userProfile = {};
         }
-	this.userProfile.activeDossierId=dossierId;
-	var profileString = JSON.stringify(this.userProfile);
-	localStorage.setItem("userProfile", profileString);
-	$(document).trigger("ActiveDossierChanged");
-	ISNLogger.log("local storage after store of active dossier id "+ localStorage.getItem("userProfile"));
+        this.userProfile.activeDossierId=dossierId;
+        var profileString = JSON.stringify(this.userProfile);
+        localStorage.setItem("userProfile", profileString);
+        $(document).trigger("ActiveDossierChanged");
+        ISNLogger.log("local storage after store of active dossier id "+ localStorage.getItem("userProfile"));
     }
 };
 
@@ -297,33 +292,31 @@ UserModel.prototype.sendUserProfileToServer = function(){
     		"activedDossier": this.userProfile.activeDossierId
     };
    
- var data=JSON.stringify(dataObject);
-  
-  
-// var data=JSON.stringify(self.userProfile);
-    
- $.ajax({
-	url:  url,
-	type : method,
-	data: data,
-	dataType : 'json',
-	success : success,
-	error : function(request) {
-	    ISNLogger.log("Error while sending the user profile data to the server");
-	    showErrorResponses(request); 
-	},
-	beforeSend : setHeader
-    });
-    
+     var data=JSON.stringify(dataObject);
+    // var data=JSON.stringify(self.userProfile);
+        
+     $.ajax({
+            url:  url,
+            type : method,
+            data: data,
+            dataType : 'json',
+            success : success,
+            error : function(request) {
+                ISNLogger.log("Error while sending the user profile data to the server");
+                showErrorResponses(request); 
+            },
+            beforeSend : setHeader
+        });
+        
     function success(data){
-	ISNLogger.log("success in sending the user profile data to the server");
-	//TODO: we can add here the transition to index.html instead in the welcome view, after set of active dossier
-	// we will be sure in this way that the profile will be sent to the server.
+        ISNLogger.log("success in sending the user profile data to the server");
+        //TODO: we can add here the transition to index.html instead in the welcome view, after set of active dossier
+        // we will be sure in this way that the profile will be sent to the server.
     }
     
     function setHeader(xhr){
-	var header_request=self.controller.oauth.oauthHeader(method,url);
-	xhr.setRequestHeader('Authorization', header_request);
+        var header_request=self.controller.oauth.oauthHeader(method,url);
+        xhr.setRequestHeader('Authorization', header_request);
     }
 };
 
