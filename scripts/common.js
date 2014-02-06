@@ -87,6 +87,8 @@ function setUserProfileColorization(){
 	$("#span_user").addClass("pd_selected");
 }
 
+
+
 function pdInitServiceHost() {
     var h = window.location.host;
     var p = window.location.protocol;
@@ -98,6 +100,16 @@ function pdInitServiceHost() {
 
 function pdGetServiceHost() {
     return this.baseURL;   
+}
+
+function pdIsAuthenticated() {
+    if (this.models.authentication && this.models.authentication.isLoggedIn) {
+        return this.models.authentication.isLoggedIn();
+    }
+    if (this.models.user && this.models.user.getUserId) {
+        return this.models.user.getUserId() > 0 ? true : false;
+    }
+    return false;
 }
 
 // not used

@@ -110,7 +110,7 @@ function userController() {
 
 userController.prototype.initServiceHost = pdInitServiceHost;
 userController.prototype.getServiceHost = pdGetServiceHost;
-
+userController.prototype.isAuthenticated = pdIsAuthenticated;
 
 userController.prototype.getHash = function(){
 	var hash= window.location.hash;
@@ -184,7 +184,7 @@ userController.prototype.initOAuth = function() {
     ISNLogger.log('initialize the oauth helper class');
     try {
 	this.oauth = new OAuthHelper(this.baseURL);
-	 $(document).trigger('oauthSet');
+	   $(document).trigger('oauthSet');
     }
     catch (e) {
         this.oauth = undefined;

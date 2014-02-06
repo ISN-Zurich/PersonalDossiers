@@ -13,10 +13,11 @@ function LogView(controller){
 	this.tagID='logView';
 	this.logView = null;
 	//this.open();
-	
+	this.update();
+    
 	 $(document).bind('UserProfileUpdate', function(){
 		 ISNLogger.log("caught user profile update in log view");
-	  // self.update();
+         self.update();
 		 $("#logView").removeClass("disable"); 
 	 });
 	  
@@ -76,6 +77,9 @@ LogView.prototype.open = function(){
 	this.openDiv();
 };
 
+LogView.prototype.update = function(){
+    $("#" + this.tagID).attr('title', this.controller.isAuthenticated() ? 'Logout' : 'Login');
+};
 
 //LogView.prototype.update = function(){
 //	var self=this;

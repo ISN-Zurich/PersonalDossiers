@@ -51,6 +51,7 @@ GalleryController.prototype.initOAuth = function() {
 
 GalleryController.prototype.initServiceHost = pdInitServiceHost;
 GalleryController.prototype.getServiceHost = pdGetServiceHost;
+GalleryController.prototype.isAuthenticated = pdIsAuthenticated;
 
 GalleryController.prototype.updateUserData = function() {
     if ( this.oauth ) {

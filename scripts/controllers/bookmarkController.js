@@ -44,6 +44,7 @@ function BookmarkController() {
 
 BookmarkController.prototype.initServiceHost = pdInitServiceHost;
 BookmarkController.prototype.getServiceHost = pdGetServiceHost;
+BookmarkController.prototype.isAuthenticated = pdIsAuthenticated;
 
 BookmarkController.prototype.initOAuth = function() {
     ISNLogger.log('initialize the oauth helper class');

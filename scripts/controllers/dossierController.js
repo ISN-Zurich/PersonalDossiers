@@ -97,6 +97,7 @@ function dossierController() {
 
 dossierController.prototype.initServiceHost = pdInitServiceHost;
 // dossierController.prototype.getServiceHost = pdGetServiceHost;
+dossierController.prototype.isAuthenticated = pdIsAuthenticated;
 
 dossierController.prototype.getUserType = function(){
 	ISNLogger.log("enter getUser Type in dossier Controller");

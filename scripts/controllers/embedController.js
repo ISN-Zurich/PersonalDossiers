@@ -65,6 +65,7 @@ function embedController() {
 
 embedController.prototype.initServiceHost = pdInitServiceHost;
 embedController.prototype.getServiceHost = pdGetServiceHost;
+embedController.prototype.isAuthenticated = pdIsAuthenticated;
 
 embedController.prototype.hashedUrl = function() {
     	
