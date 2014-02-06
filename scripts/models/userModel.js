@@ -60,7 +60,7 @@ UserModel.prototype.getActiveDossier = function(){
 
 
 UserModel.prototype.getUserId = function(){
-    return this.userProfile.user_id;
+    return this.userProfile ? this.userProfile.user_id : undefined;
 };
 
 
