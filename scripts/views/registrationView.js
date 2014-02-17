@@ -243,6 +243,10 @@ function RegistrationView(controller){
 
 	$("#submit_confirmation").bind("click", function(e){
 		ISNLogger.log("clicked submit confirmation");
+        // assure that the user's title is stored even if the title is never explicitly selected. 
+        var value_title = $("#titleRegistrationInput option:selected").text();
+        self.userModel.setUserTitle(value_title);
+        
 		var value_password = $("#passwordRegistrationInput").text();
 		self.controller.models.user.register(value_password);
 
