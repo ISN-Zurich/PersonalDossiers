@@ -4,37 +4,38 @@
  */
 
 /*jslint vars: true, sloppy: true */
-function badgeView(dController){
+function BadgeView(dController){
 	var self=this;
 	self.controller=dController;
 	self.tagID = 'badgeArea';
 	
-	$("#pd_footer_gen").bind("click", function(){
+	$("#pd_footer_gen, #badgeHeader").bind("click", function(){
 		window.open(
 				baseURL()+ 'index.html',
 				'_blank' 
 		);
-	});	
-		
+	});		
 }
-
 
 /**
  * opens the view
  * @prototype
  * @function openDiv
  **/ 
-badgeView.prototype.openDiv = openView;
+BadgeView.prototype.openDiv = openView;
 
-badgeView.prototype.open = function() {
+/**
+ * 
+ */
+BadgeView.prototype.open = function() {
 	this.update();
 	this.openDiv();
 };
 
-
-
-badgeView.prototype.update= function(){
-	
+/**
+ * 
+ */
+BadgeView.prototype.update= function(){
 	var self=this;
 	var bookmarkModel= self.controller.models.bookmark;
 
@@ -42,15 +43,10 @@ badgeView.prototype.update= function(){
 		"id":"titleContainer",
 		"class":"widget-title"
 	}).prependTo("#badgeArea");
-
-
-	var span=$("<span/>", {
-		"id":"headerTitle",
-		text:bookmarkModel.getDossierTitle()
-	}).appendTo(titleContainer);
-	
+        
+    $('<a/>', {'href':hostURL() + '?id=' + this.controller.pubid, 'text': bookmarkModel.getDossierTitle(), 'target': '_blank' }).appendTo(titleContainer);
+    
     this.renderBadgeList();
-	
 };
 
 /**
@@ -58,24 +54,21 @@ badgeView.prototype.update= function(){
  * @prototype
  * @function closeDiv
  **/ 
-badgeView.prototype.closeDiv = closeView;
-
+BadgeView.prototype.closeDiv = closeView;
 
 /**
  * empties the course list
  * @prototype
  * @function close
  **/ 
-badgeView.prototype.close = function() {
+BadgeView.prototype.close = function() {
 	moblerlog("close course list view");
 	this.active = false;
 	this.closeDiv();
 	$("#badgeArea").empty();
 };
 
-
-badgeView.prototype.renderBadgeList = function() {
-	
+BadgeView.prototype.renderBadgeList = function() {
 	var bookmarkModel = self.controller.models.bookmark;
 	ISNLogger.log("dossier list length in dossier content view "+bookmarkModel.dossierList.length);
 	
@@ -86,16 +79,13 @@ badgeView.prototype.renderBadgeList = function() {
 	var titleHeight= $("#titleContainer").height();
 	var footerHeight = $("#pd_footer_gen").height();
 	var totalHeight = headerHeight + titleHeight + footerHeight + 15;
-	
 
 	if (bookmarkModel.dossierList && bookmarkModel.dossierList.length > 0) {
-		
 		ISNLogger.log("dossier list index is "+bookmarkModel.index);
 		for (bookmarkModel.index=0; bookmarkModel.index < bookmarkModel.dossierList.length; bookmarkModel.index++){
 			this.renderItem();
-			bookmarkModel.setIndex(bookmarkModel.index++);
-		}
-	
+			bookmarkModel.nextItem();
+		} 
 	} else{
 		//if the specific dossier has no dossier items
 		ISNLogger.log("the dossier has no dossier items");
@@ -103,26 +93,25 @@ badgeView.prototype.renderBadgeList = function() {
 	    	"id":"noContent"
 	        }).appendTo("#badgeArea");
 		var p=$("<p/>", {
-	    	"text": "Your Dossier has no items. You can add items  to the personal dossier if you go to http://isn.ethz.ch/. In there, under both the dossiers and the digital library menus there are various content items. If you enter in the ones you are interested in you will see an addBookmark button on the right side. By clicking on it, this item will be added to your active dossier"
+	    	"text": "This dossier has no entries"
 	        }).appendTo(div);
 	}
+    
 	var ulHeight=iFrameHeight - totalHeight;
 	ISNLogger.log("ulheight is "+ulHeight);
-	$("#subnavi").css("height",ulHeight+"px" );
-	
+	$("#subnavi").css("height",ulHeight+"px" );	
 };
 
-
-badgeView.prototype.renderItem = function() {
-	//var self=this;
-
+/**
+ * 
+ */
+BadgeView.prototype.renderItem = function() {
 	var bookmarkModel = self.controller.models.bookmark;
 	
 	ISNLogger.log("enter render Item");
 	var	dossierID = self.controller.models.bookmark.getItemId();
 	ISNLogger.log("dossier item id is"+dossierID);
 	
-
 	var li=$("<li/>", {
 		"id": "item"+dossierID,
 		"class":"liItem"
@@ -131,21 +120,18 @@ badgeView.prototype.renderItem = function() {
 
 	divA=$("<a/>", {
 		"class": "dossierItemText",
-		"href":bookmarkModel.getISNURL(), 
-		"text":bookmarkModel.getTitle(),
+		"href": bookmarkModel.getISNURL(), 
+		"text": bookmarkModel.getTitle(),
 		"target": "_blank"
 	}).appendTo(li);
-	
-
-
 };
+
 /**
  *	In this function we delete a dossier item by performing two tasks
  *	1. Remove its visual representation
  *	2. Actual remove it by deleting the data from the database
  */
-
-badgeView.prototype.removeItem=function(id){
+BadgeView.prototype.removeItem=function(id){
 	var bookmarkModel = self.controller.models.bookmark;
 	//call the model removeBookmark()
 	bookmarkModel.removeItem(id);	
@@ -153,23 +139,23 @@ badgeView.prototype.removeItem=function(id){
 	$("#item"+id).remove();
 };
 
-
-badgeView.prototype.arrangeItem=function(id){
+/**
+ * 
+ */
+BadgeView.prototype.arrangeItem=function(id){
 	// call the model removeBookmark()
 		// remove the visuals
 	$("#item"+ id).remove();
 };
 
-
-//the following function is used to display an error message
-//when the contents of a dossier cannot be displayed because it is private
-
-badgeView.prototype.loadErrorMessage = function(){
+/**
+ * the following function is used to display an error message
+ * when the contents of a dossier cannot be displayed because it is private 
+ */
+BadgeView.prototype.loadErrorMessage = function(){
 	var divError=$("<div/>", {
 		"id": "dossiersError",
 		"class":"errorDossiers",
 		text: "Sorry you don't have permission to access the contents of this Dossier because it is private"
 	}).appendTo("#contentArea");	
 };
-	
-	
