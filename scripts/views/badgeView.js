@@ -70,18 +70,18 @@ BadgeView.prototype.close = function() {
 
 BadgeView.prototype.renderBadgeList = function() {
 	var bookmarkModel = self.controller.models.bookmark;
-	ISNLogger.log("dossier list length in dossier content view "+bookmarkModel.dossierList.length);
+	ISNLogger.log("dossier list length in dossier content view " + bookmarkModel.dossierList.length);
 	
 	//calculate ul height
 	
-	var iFrameHeight= window.innerHeight || document.documentElement.clientHeight;
-	var headerHeight= $("#badgeHeader").height();
-	var titleHeight= $("#titleContainer").height();
+	var iFrameHeight = window.innerHeight || document.documentElement.clientHeight;
+	var headerHeight = $("#badgeHeader").height();
+	var titleHeight = $("#titleContainer").height();
 	var footerHeight = $("#pd_footer_gen").height();
-	var totalHeight = headerHeight + titleHeight + footerHeight + 15;
+	var totalHeight = headerHeight + titleHeight + 2*footerHeight + 10;
 
 	if (bookmarkModel.dossierList && bookmarkModel.dossierList.length > 0) {
-		ISNLogger.log("dossier list index is "+bookmarkModel.index);
+		ISNLogger.log("dossier list index is " + bookmarkModel.index);
 		for (bookmarkModel.index=0; bookmarkModel.index < bookmarkModel.dossierList.length; bookmarkModel.index++){
 			this.renderItem();
 			bookmarkModel.nextItem();
@@ -89,7 +89,7 @@ BadgeView.prototype.renderBadgeList = function() {
 	} else{
 		//if the specific dossier has no dossier items
 		ISNLogger.log("the dossier has no dossier items");
-		var div=$("<div/>", {
+		var div = $("<div/>", {
 	    	"id":"noContent"
 	        }).appendTo("#badgeArea");
 		var p=$("<p/>", {
@@ -97,9 +97,9 @@ BadgeView.prototype.renderBadgeList = function() {
 	        }).appendTo(div);
 	}
     
-	var ulHeight=iFrameHeight - totalHeight;
-	ISNLogger.log("ulheight is "+ulHeight);
-	$("#subnavi").css("height",ulHeight+"px" );	
+	var ulHeight = iFrameHeight - totalHeight;
+	ISNLogger.log("ulheight is " + ulHeight);
+	$("#subnavi").css("height", ulHeight + "px" );	
 };
 
 /**
