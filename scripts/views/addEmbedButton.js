@@ -50,7 +50,7 @@ AddEmbedButton.prototype.openDiv=openView;
 AddEmbedButton.prototype.closeDiv=closeView;
 AddEmbedButton.prototype.getDossierID = pdGetActiveDossierID;
 
-AddEmbedButton.prototype.open= function(){
+AddEmbedButton.prototype.open = function(){
 	ISNLogger.log("open add embed View");
 	this.openDiv();
 };
@@ -63,7 +63,7 @@ AddEmbedButton.prototype.open= function(){
  * by default the link to the content embed is displayed
  * 
  */ 
-AddEmbedButton.prototype.update= function(){
+AddEmbedButton.prototype.update = function(){
 	ISNLogger.log("enter update in addEmbedd button");
 		
 	var self=this;
@@ -85,7 +85,7 @@ AddEmbedButton.prototype.update= function(){
  * 
  * generates the embedURL for the different embed types.
  */
-AddEmbedButton.prototype.embedURL(embedType, options) {
+AddEmbedButton.prototype.embedURL = function(embedType, options) {
     return baseURL() + 'embed' + (embedType === 'badge'? 'Badge' : 'PageBig') + '.html?id=' + this.getDossierID();
 };
 
@@ -96,7 +96,7 @@ AddEmbedButton.prototype.embedURL(embedType, options) {
  * 
  * generates the style for the embedded iframe.
  */
-AddEmbedButton.prototype.embedStyle(embedType) {
+AddEmbedButton.prototype.embedStyle = function(embedType) {
     var cssStyle = {
         'width'   : '100%',
         'height'  : (embedType === 'badge' ? '450px' : '900px'),
@@ -113,12 +113,12 @@ AddEmbedButton.prototype.embedStyle(embedType) {
  * 
  * generates the embedstring for the requested embed type. 
  */
-AddEmbedButton.prototype.generateEmbedCode(embedType) {
+AddEmbedButton.prototype.generateEmbedCode = function(embedType) {
     return '<iframe id="isnpdid' + this.getDossierID() + '" scrolling="no" src="' + this.embedURL(embedType) + '" style="' + this.embedStyle(embedType) 
             + '"></iframe>';
 };
 
-AddEmbedButton.prototype.close= function(){
+AddEmbedButton.prototype.close = function(){
 	ISNLogger.log("close add embed view");
 	this.closeDiv();
 };
