@@ -1,6 +1,4 @@
-
 /**a should have a different font color if not clicked
-
 
 /*add an extra formatting to disabled links. the pointer is not hand.*/
 
@@ -16,43 +14,37 @@ a.disable  {
 	padding:0px 0px 0px 0px;
 }
 
-
-
 .pd_grey_bar{
-display: inline-block;
-width: 212px;
-height: 28px;
-padding: 0px 0px 0px 18px;
-margin: 0;
-margin-bottom: 1px;
-vertical-align: middle;
-line-height: 28px;
-background: #4c5160 !important;
-color: #fff !important;
+    display: inline-block;
+    width: 212px;
+    height: 28px;
+    padding: 0px 0px 0px 18px;
+    margin: 0;
+    margin-bottom: 1px;
+    vertical-align: middle;
+    line-height: 28px;
+    background: #4c5160 !important;
+    color: #fff !important;
 }
 
-
-.pd_grey_bar.st a  {
+.pd_grey_bar.st a {
 	float:right;
 	text-decoration:none;
-	
 }
 
-
-.pd_sb_icon{
-display: inline-block !important;
-width: 28px;
-height: 28px;
-background-color: #0089CF !important;
-background-position: -1px -1px;
-background-repeat: no-repeat;
-background-attachment: scroll;
-border-left: solid 1px white;
-color:white;
+.pd_sb_icon {
+    display: inline-block !important;
+    width: 28px;
+    height: 28px;
+    background-color: #0089CF !important;
+    background-position: -1px -1px;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    border-left: solid 1px white;
+    color:white;
 }
 
-
-.pd_add_dossier{
+.pd_add_dossier {
 	display:inline;
 	width:28px;
 	height:28px;
@@ -60,30 +52,32 @@ color:white;
 	float:right;
 }
 
-
-
-.pd_grey_head{
-/*display: inline-block;*/
-width: 452px;
-height: 28px;
-padding: 0px 0px 0px 18px;
-margin-left: 0px;
-margin-bottom: 1px;
-vertical-align: middle;
-line-height: 28px;
-background: #ebedee !important;
-color: grey !important;
-font-size:12px;
+.pd_grey_head {
+    /*display: inline-block;*/
+    width: 452px;
+    height: 28px;
+    padding: 0px 0px 0px 18px;
+    margin-left: 0px;
+    margin-bottom: 1px;
+    vertical-align: middle;
+    line-height: 28px;
+    background: #ebedee !important;
+    color: grey !important;
+    font-size:12px;
 }
 
-#save_changes_submit,#save_password_submit,#pd_logoutBtn,#cancel_registration,.active_registration{
-border: solid 1px white;
--webkit-appearance: none;
--moz-appearance: none;
-background-color: #4C5160;
-background-color: #ebedee;
-color: #4C5160;
-cursor: pointer;
+#save_changes_submit,
+#save_password_submit,
+#pd_logoutBtn,
+#cancel_registration,
+.active_registration {
+    border: solid 1px white;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: #4C5160;
+    background-color: #ebedee;
+    color: #4C5160;
+    cursor: pointer;
 }
 
 .inactive_registration {
@@ -97,60 +91,57 @@ cursor: pointer;
 	pointer-events: none
 }
 
-.userlist{
-padding: 1.5em;
-margin-bottom: 1.5em;
-background: #e5eCf9;
-background: #FFF none repeat scroll 0% 50%;
-/*margin-bottom: 0;*/
-padding: 0;
-margin: 0 0 10px 0 ;
+.userlist {
+    padding: 1.5em;
+    margin-bottom: 1.5em;
+    background: #e5eCf9;
+    background: #FFF none repeat scroll 0% 50%;
+    /*margin-bottom: 0;*/
+    padding: 0;
+    margin: 0 0 10px 0 ;
 }
+
 #pd_footer_gen {
-width: 100%;
-maring-top:30px;
-height:50px;
-border:0px solid blue;
-background:#fff;
-/*border-top:1px dotted grey;*/
-background-image:url(../images/logo_isn.gif);
-background-repeat:no-repeat;
-background-size: 62px 40px;
-cursor:pointer;
-clear:both;
+    width: 100%;
+    margin-top: 30px;
+    height:50px;
+    border:0px solid blue;
+    background:#fff;
+    /*border-top:1px dotted grey;*/
+    background-image:url(../images/logo_isn.gif);
+    background-repeat:no-repeat;
+    background-size: 62px 40px;
+    cursor:pointer;
+    clear:both;
 }
 
-
-
-.pd_container{
+.pd_container {
 	/*padding-bottom:90px;*/
 }
 
-
-.pd_sidebar-header.darkblue{
+.pd_sidebar-header.darkblue {
 	background-color:#0089CF;
 }
 
-
-.pd_sidebar-header{
-color: #FFFFFF;
-font-size: 1.2em;
-line-height: 1.2em;
-margin-left: 0;
-padding: 7px 15px 5px 10px;
-margin-bottom: 1px;
+.pd_sidebar-header {
+    color: #FFFFFF;
+    font-size: 1.2em;
+    line-height: 1.2em;
+    margin-left: 0;
+    padding: 7px 15px 5px 10px;
+    margin-bottom: 1px;
 }
 
 div.pd-snippetlist-content {
-margin: 0;
-padding: 1.1em 1em 1.1em 1.86em;
-margin-left: 0px;
+    margin: 0;
+    padding: 1.1em 1em 1.1em 1.86em;
+    margin-left: 0px;
 }
 
 .pd-sidebar-header {
     color: #FFFFFF;
     font-size: 1.2em;
-     padding: 9px 15px 5px 18px;
+    padding: 9px 15px 5px 18px;
     height:14px;
 }
 
@@ -159,46 +150,45 @@ margin-left: 0px;
 }
 
 .pd_bookmarked_bar { /*grey_bar*/
-display: inline-block;
-width: 212px;
-height: 28px;
-padding: 0px 0px 0px 18px;
-margin: 0;
-margin-bottom: 1px;
-vertical-align: middle;
-line-height: 28px;
-background: #4C5160 !important;
-color: #ebedee!important;
+    display: inline-block;
+    width: 212px;
+    height: 28px;
+    padding: 0px 0px 0px 18px;
+    margin: 0;
+    margin-bottom: 1px;
+    vertical-align: middle;
+    line-height: 28px;
+    background: #4C5160 !important;
+    color: #ebedee !important;
 }
 
 .pd_bookmark_icon {
 	color: #4C5160;
 }
 
-.pd_bookmark_icon_exist{
+.pd_bookmark_icon_exist {
 	color: #0089CF;
 }
 
 /*redefine the ul and li's in order the dossier list items to be displayed properly */
 
-#content ul li, #content ol li {
-
+#content ul li, 
+#content ol li {
 }
 
 #content ul {
-
 }
 
 
 li {
-
 }
 
-#content ul li, #content ol li {
-
+#content ul li, 
+#content ol li {
 }
 
-ul#sortable { /*font-size:10x;*/
+ul#sortable { 
+    /*font-size:10x;*/
 	font-size: 1em;
 	line-height: 1.5em;
 	margin: 0;
@@ -208,26 +198,42 @@ ul#sortable { /*font-size:10x;*/
 	list-style-type: none;
 }
 
-/*we redefine this in order to remove the more icon from the li items, it was set as a background on the original css*/
-#content ul li a, #content a.more, #content a.pdf, #content ul li a:link, #content a.more:link, #content a.pdf:link, #sidebar_right a.more:link {
-background: none;
-padding-left: .8em;
-color: #333;
-border
+/* we redefine this in order to remove the more icon from the li items, it was set as a background on the original css */
+#content ul li a, 
+#content a.more, 
+#content a.pdf, 
+#content ul li a:link, 
+#content a.more:link, 
+#content a.pdf:link, 
+#sidebar_right a.more:link {
+    background: none;
+    padding-left: .8em;
+    color: #333;
 }
 
-#pd_invite_bar_text{
-display: inline-block;
-float: left;
-width: 176px;/*it was width: 373px;*/
-height: 18px; 
-margin: 0px;
-margin-bottom: 1px;
-padding: 5px 0px 5px 17px;
-line-height: 18px;
-border: none;
-border-right: solid 1px white;
-background: #ebedee;
-color: #4C5160;
-font-size:12px;
+#pd_invite_bar_text {
+    display: inline-block;
+    float: left;
+    width: 176px;/*it was width: 373px;*/
+    height: 18px; 
+    margin: 0px;
+    margin-bottom: 1px;
+    padding: 5px 0px 5px 17px;
+    line-height: 18px;
+    border: none;
+    border-right: solid 1px white;
+    background: #ebedee;
+    color: #4C5160;
+    font-size:12px;
+}
+
+#titleContainer a, 
+#titleContainer a:visited, 
+#titleContainer a:link {
+    text-decoration: none;
+    color: #000;
+}
+
+#titleContainer a:hover {
+    color: #0089CF;
 }

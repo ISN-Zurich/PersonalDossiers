@@ -1,26 +1,25 @@
-
-
 /********************************Interaction Box************************
 dimensions of interaction box items
 width:38px;
 height:34px;
 **/
 
-
 .pd_boxTitle{
 	font-size:12px;
 	color:#fff;
 	
 }
-#InteractionBar{
+
+#InteractionBar {
 	background-color:#4c5160;
 	margin-bottom:1px;
-
 }
-.pd_interactionItem{
+
+.pd_interactionItem {
 	background-color:#4c5160;
 }
-.greyBg{
+
+.greyBg {
 	background-color:#ebedee;
 }
 
@@ -28,11 +27,9 @@ height:34px;
 	padding-left:5px;
 }
 
-
 .pd_selected {
 	color:white;
 }
-
 
 .pd_active{
 	color:#fff;
@@ -42,27 +39,24 @@ height:34px;
 	color: #bebebe;
 }
 
-.iconMoon{
+.iconMoon {
 	font-family:'icomoon';
 	font-size:18px;
 }
 
-
-
 /***********************End of Interaction Box*********************/
-
-
 
 /******LOGIN FORM******************/
 
-#loginForm{
-	
+#loginForm {
 	border:0px solid black;
 	padding-bottom:0px;
-	
 }
 
-input#username, input#password, input#edit_password,  input#edit_profile  {
+input#username, 
+input#password,
+input#edit_password,
+input#edit_profile {
     background-color:transparent;
     border: none;
     margin-left:18px;
@@ -70,7 +64,10 @@ input#username, input#password, input#edit_password,  input#edit_profile  {
    /* height:22px;   */
 }
 
-#edit_password, #edit_profile, .pd_listItem, .userlistItem {
+#edit_password,
+#edit_profile, 
+.pd_listItem,
+.userlistItem {
     background-color:transparent;
     border: none;
     margin-left:18px;
@@ -82,21 +79,23 @@ input#username, input#password, input#edit_password,  input#edit_profile  {
 	padding-bottom:2px;
 }
 
-input#username{
-	height:10px;
-	 padding-bottom:5px;
-	 border-bottom:0px solid #c9cacf;
-	
+input#username {
+    height:10px;
+    padding-bottom:5px;
+    border-bottom:0px solid #c9cacf;
 }
-input#password{
+
+input#password {
 	height:16px;
 }
 
-#edit_profile,.pd_listItem  {
+#edit_profile,
+.pd_listItem  {
 	 border-bottom:1px solid #c9cacf;
 	 padding-bottom:5px;
 }
-#pd_uContainer1{
+
+#pd_uContainer1 {
 	padding:0px;
 	margin-left:18px;
     margin-right:18px;
@@ -108,9 +107,14 @@ input#password{
 	 border:0px solid blue;
 }*/
 
-input#password, #pd_currentPassword, #pd_newPassword, #pd_confirm_newPassword, #passwordRegistrationInput,#passwordRegConfirmInput {
-	 -webkit-text-security: disc;
-	 text-security:disc;
+input#password, 
+#pd_currentPassword, 
+#pd_newPassword, 
+#pd_confirm_newPassword, 
+#passwordRegistrationInput,
+#passwordRegConfirmInput {
+    -webkit-text-security: disc;
+    text-security:disc;
 }
 
 #loginButton {
@@ -123,13 +127,13 @@ input#password, #pd_currentPassword, #pd_newPassword, #pd_confirm_newPassword, #
 	/*border:1px solid green;*/
 	padding-left:40px;
 	padding-right:40px;
-	text-aling:center;
+	text-align:center;
 	padding-top:6px;
 	padding-bottom:10px;
 	height:28px;
 }
 
-#registerButton{
+#registerButton {
 	display:inline;
 	color:#4c5160;
 	text-align: center;
@@ -142,11 +146,12 @@ input#password, #pd_currentPassword, #pd_newPassword, #pd_confirm_newPassword, #
 	padding-top:6px;
 	height:28px;
 }
-#userloginHeader{
+
+#userloginHeader {
 	height:14px;
 }
 
-.pd_embed_buttons{
+.pd_embed_buttons {
 	display:inline;
 	color:#4c5160;
 	text-align: center;
@@ -164,29 +169,31 @@ input#password, #pd_currentPassword, #pd_newPassword, #pd_confirm_newPassword, #
 	margin-top:5px;
 	border-right:1px solid white;
 	padding-bottom:8px;
-
 }
-#badgeStyle{
+
+#badgeStyle {
 	margin-bottom:0px;
 	margin-top:5px;
 	padding-bottom:8px;
 }
-#contentBadgeContainer{
+
+#contentBadgeContainer {
 	background-color:grey;
 }
 
-.buttonContainer{
+.buttonContainer {
 	width:229px;
 	border-top:1px solid white;
 	height:22px;
 	padding-top:5px;
 }
 
-#loginUl{
+#loginUl {
 	border: 0px solid blue;
 	padding-left:0px;
 }
-.pd_loginContainer{
+
+.pd_loginContainer {
 	border: 0'px solid green;
 	width:200px;
 	padding-left:-10px;
@@ -200,151 +207,156 @@ form.placeholder{
 
 /*Webkit input fields*/
 
-input::-webkit-input-placeholder{
+input::-webkit-input-placeholder {
 	color:#a1aab1;
 }
 
-input#edit_profile::-webkit-input-placeholder{
+input#edit_profile::-webkit-input-placeholder {
 	color:#4c5160;
 }
-input#edit_password::-webkit-input-placeholder{
+
+input#edit_password::-webkit-input-placeholder {
 	color:#4c5160;
 }
-input:hover::-webkit-input-placeholder{
+
+input:hover::-webkit-input-placeholder {
 	color:#4c5160;
 }
-input:focus::-webkit-input-placeholder{
+
+input:focus::-webkit-input-placeholder {
 	text-indent:-999px;
 }
 
 /*Mozilla input fields*/
-input:-moz-placeholder, textarea:-moz-placeholder { 
+input:-moz-placeholder, 
+textarea:-moz-placeholder { 
    color:#a1aab1;
 }
-input:hover::-moz-placeholder, textarea:-moz-placeholder { 
+
+input:hover::-moz-placeholder, 
+textarea:-moz-placeholder { 
    color:#4c5160;
 }
-input:focus::hover-moz-placeholder, textarea:-moz-placeholder { 
-  text-indent:-999px;
+
+input:focus::hover-moz-placeholder, 
+textarea:-moz-placeholder { 
+    text-indent:-999px;
 }
 
 /*Microsoft input fields*/
-input:-ms-input-placeholder, textarea:-ms-input-placeholder { 
+input:-ms-input-placeholder, 
+textarea:-ms-input-placeholder { 
     color:#a1aab1;
 }
 
-input:hover::-ms-input-placeholder, textarea:-ms-input-placeholder { 
- color:#4c5160;
+input:hover::-ms-input-placeholder, 
+textarea:-ms-input-placeholder { 
+    color:#4c5160;
 }
-input:focus::-ms-input-placeholder, textarea:-ms-input-placeholder { 
-  text-indent:-999px;
+
+input:focus::-ms-input-placeholder, 
+textarea:-ms-input-placeholder { 
+    text-indent:-999px;
 }
 
 /*****end of login form***********/
 
-
-
-.profile{
+.profile {
 	color:#4c5160;
 	padding-left:18px;
 	height:28px;
 }
 
-
 /*****ADD DOSSIER BUTTON**********/
 
-.pd_generalButton{
-display: inline-block;
-width: 212px;
-height: 28px;
-padding: 0px 0px 0px 18px;
-margin: 0;
-margin-bottom: 1px;
-vertical-align: middle;
-line-height: 28px;
-background: #ebedee !important;
-color: #fff !important;	}
-
+.pd_generalButton {
+    display: inline-block;
+    width: 212px;
+    height: 28px;
+    padding: 0px 0px 0px 18px;
+    margin: 0;
+    margin-bottom: 1px;
+    vertical-align: middle;
+    line-height: 28px;
+    background: #ebedee !important;
+    color: #fff !important;	
+}
 
 /************** CHANGE PASSWORD FORM       *****************/
 
-.pd_warning{
+.pd_warning {
 	color:red;
 	maring-top:15px;
 	padding-left:25px;
 	font-size:14px:
 }
 
-
-.pd_success{
+.pd_success {
 	color:blue;
 	font-size:20px:
 }
 
-
-.pd_profile_selected{
-/*background-color:#D2D2D2;*/
-font-color:blue;
+.pd_profile_selected {
+    /*background-color:#D2D2D2;*/
+    font-color:blue;
 }
+
 /*************************end of change password***************/
 
 /***LOGOUT CONFIRMATION BUTTON**/
 
-
-.pd_logout_confirm{
+.pd_logout_confirm {
 	height:80px;
 }
 
-.logoutText{
+.logoutText {
 	color:white;
 }
 
-#st_log_out_confirm{
+#st_log_out_confirm {
 	border:0px solid green;
 }
 
-#confirmationMsg{
+#confirmationMsg {
 	color:white;
 	size:12px;
 }
 
 /**END OF LOGOUT CONFIRMATION BUTTON*/
-
-
 /******************  EDIT DOSSIER BUTTON     ********************/
 
-.pd_editDossier{
+.pd_editDossier {
 	font-size:12px;
 	margin-bottom:10px;
 }
 
-
-.pd_img{
+.pd_img {
 	float:left;
 }
+
 /**index.html css*/
-#addbmbutton, .clickable {
+#addbmbutton, 
+.clickable {
     cursor: pointer;
 }
 #st_addDossier{
 	background-image:url(../images/add.png);
 }
-.st_editDosser{
+
+.st_editDosser {
 	border-left:1px solid white;
 	float:right;
 	padding-left:5px;
 	padding-left:6px;
 	padding-right:6px;
-	font-size:16px;
-	
+	font-size:16px;	
 }
 
-
-.st_unbookmarked{
+.st_unbookmarked {
 	color:#4C5160;
 }
 
-.st_bookmarked{
+.st_bookmarked {
 	color:#ebedee;
 }
 
@@ -353,8 +365,7 @@ font-color:blue;
 	clear: both;
 }
 
-
-.dossier_item{
+.dossier_item {
 	border:0px solid red;
 	/*float: left;*/
 	margin-right: 10px;	
@@ -366,96 +377,93 @@ font-color:blue;
 
 ul#sortable li{
 	height:145px;
-	
 }
-.dossier_item_border{
+
+.dossier_item_border {
 	border-bottom:1px solid #C9CACF;
 	height:auto;
 	padding-bottom:15px;
 }
 
-
 /************Registration*****/
-.pd_inactive{
-color: #c9cacf !important;
-cursor: default !important;
+.pd_inactive {
+    color: #c9cacf !important;
+    cursor: default !important;
 }
 
-
 #titleRegistrationInput {
-display: inline-block;
-float: left;
-width: 184px;
-height: 18px;
-padding: 0px;
-margin: 5px 17px 5px 15px;
-line-height: 16px;
-border: none;
-background: #fff;
-color: #4C5160;
-text-align: left;
+    display: inline-block;
+    float: left;
+    width: 184px;
+    height: 18px;
+    padding: 0px;
+    margin: 5px 17px 5px 15px;
+    line-height: 16px;
+    border: none;
+    background: #fff;
+    color: #4C5160;
+    text-align: left;
 }
 
 #pd_reg_title_container {
-display: inline-block;
-width: 279px;
-background: #ebedee;
-background: #ebedee;
+    display: inline-block;
+    width: 279px;
+    background: #ebedee;
 }
 
-.registration_message{
+.registration_message {
 	color:red;
 }
 
-#emailInputContainer{
+#emailInputContainer {
 	/*border:1px solid red;*/
 }
 
-.dossier_text p a{
+.dossier_text p a {
 	color:#0089CF;
 }
+
 /****EMBED VIEW *********/
 
-#dropdown_embed{
+#dropdown_embed {
 	height:auto;
 	background-color:#ebedee;
 	margin-top:1px;
 	border:0px solid green;
 	padding:0px;
-	
 }
 
-.pd_activeBadge{
+.pd_activeBadge {
 	background-color:grey;
 	color:white;
 }
 
-
-input#inputContainer{
+input#inputContainer {
 	margin-left:5px;
 }
- #drop_info{
+
+#drop_info{
  	padding-top:3px;
 	padding-left:7px;
 	color:#0089CF;
 	font-style:italic;
 }
 
-#embed_options,#embedButtons{
+#embed_options,
+#embedButtons {
 	/*font-weight:bold;*/
 	font-size:12px;
 	margin-top:10px;
 	padding: 10px 0px 10px 00px;
-	border:0px solid red;
-	
+	border:0px solid red;	
 }
 
-
-#badgeHeader{
+#badgeHeader {
+    cursor: pointer;
 	top:0px;
 }
 
-#titleContainer{
+#titleContainer {
 	/*background-color:#ebedee;*/
 	height:16px;
 	border-bottom:1px solid white;
@@ -464,42 +472,34 @@ input#inputContainer{
 	padding:3px 10px 4px 10px;
 }
 
-.dossierItemText{
+.dossierItemText {
 	font-size:12px;
 	white-space: nowrap;
 	text-overflow:ellipsis;
 	overflow: hidden;
 }
 
-.liItem{
+.liItem {
+    margin: 0px;
 	height:28px;
 }
-
-
-
-
-/*.dossierItemDescription:after { content: '...'; position: absolute; right: 0; bottom: 0; border:0px solid red;}*/
 
 body.embedBadge {
 	/* overflow: hidden; */
 }
 
-.pd_overflow{
+.pd_overflow {
 	overflow-x:hidden;
-	overflow-y:scroll;
+	overflow-y:auto;
 	/*height: 270px; */ /* 380 - 87px*/
 }
 
-
 /*****END OF EMBED VIEW********/
 
-
 /********************************BOOOKMARK BUTTON *********************************/
-
-
-.bookmarkItem{
+.bookmarkItem {
 	margin-bottom:0px;
-	}
+}
 	
 .overflowText {
 	/*white-space: nowrap;*/
@@ -513,7 +513,7 @@ body.embedBadge {
 	color:inherit;
 }
 
-#headerText{
+#headerText {
 	width: 22.72em;
     height: 27em; /*it was 6em, it can be set auto to get automatically the height of the filled content*/
     margin-bottom: 2em;
@@ -523,28 +523,26 @@ body.embedBadge {
     float:right;
 }
 
-#header_image{
+#header_image {
 	border:0px solid red;
 }
 
-#header_container{
+#header_container {
 	border:1px solid green;
 }
 
-#contentArea{
+#contentArea {
 	border:0px solid blue;
-	
 }
 
-#dossier_description{
+#dossier_description {
 	border:0px solid green;
 }
 
-.dossierItemActive{
+.dossierItemActive {
 	color: #0089CF;
 	border:0px solid blue;
 }
-
 
 .deleteButton {
 	text-align: right;
@@ -552,30 +550,32 @@ body.embedBadge {
 	cursor: pointer;
 }
 
-.deleteConfirmButton{
+.deleteConfirmButton {
 	display:none; 
 	color: red; 
 	text-align:right; 
 	cursor: pointer;
 }
 
-#addDossierBtn{
+#addDossierBtn {
 	font-size:12px;
 	margin-right:10px;
 }
-.headerTitleContainer{
-margin-bottom:10px;
-padding-left:3px;
+
+.headerTitleContainer {
+    margin-bottom:10px;
+    padding-left:3px;
 }
 
-.headerTitle{
+.headerTitle {
 	border:0px solid red;
 	font-size:16px;
 	font-weight:bold;
 	padding-left:3px;
 	padding-top: 5px;
 }
-.titleEdit{
+
+.titleEdit {
 	float:right;
 	color:#29a0d3;	
 	border:0px solid red;
@@ -588,21 +588,17 @@ padding-left:3px;
 	position:fixed;*/
 }
 
-.hidden{
+.hidden {
 	display:none;
 }
 
-.margingForEdit{
-/*	margin-bottom:120px; */
+.margingForEdit {
+    /*	margin-bottom:120px; */
 }
 
-
-
-
-.welcomeText{
+.welcomeText {
 	font-size:20px;
 	border:0px solid black;
-		
 }
 
 .dossierCat {
@@ -612,64 +608,58 @@ padding-left:3px;
 	list-style-type: square;
 }
 
-.titleWelcome{
+.titleWelcome {
 	font-style:italic;
 	font-size:18px;
 }
-.left{
+
+.left {
 	float:left;
 }
 
-.right{
+.right {
 	float:right;
 }
 
-.addB{
+.addB {
 	float:right;
 	padding-bottom:15px;
 	padding-right:30px;
 }
 
-.addInput{
+.addInput {
 	margin-top: 35px;
 	vertical-align:middle;
 }
 
-.errorDossiers{
+.errorDossiers {
 	font-size:20px;
 	line-height:70px;
-	height:70px;
-	
+	height:70px;	
 }
-
 
 .red {
 	color:red;
 }
 
-.hidden{
+.hidden {
 	display:none;
 }
 
-
 /************************DOSSIER CONTENT VIEW *******************/
-
-
-.deletecontainer{
+.deletecontainer {
 	border:0px solid grey;
 	padding-top:5px;
 }
 
-
-.desContainer{
+.desContainer {
 	max-height:75px;
 	display:block;
 	overflow:hidden;
 	float:right;	
 }
 
-
-.dossierItemDescription{
+.dossierItemDescription {
 	height:78px;
 	/*white-space: nowrap;*/
 	text-overflow:ellipsis;
@@ -678,15 +668,9 @@ padding-left:3px;
 	text-align:justify;
 }
 
-
 /*******************END DOSSIER CONTENT VIEW*********************/
 
-
-
-
-
 /***********************SORTING IMPLEMENTATION*******************/
-
 
 .ui-state-highlight {
 	border:1px solid #bebebe;
@@ -715,18 +699,13 @@ padding-left:3px;
 	/*background-color: #ddd;*/
 }
 
-.dragIcon{
+.dragIcon {
 	margin-left:7px;
 	font-size:10px;
 	color:#fffaf0;
 	background:#4c5160;
 	padding:5px;
 }
-
-/**  ELLIPSIS FOR DOSSIER DESCRIPTION */
-
-
-
 
 .pd_box {
 	position: relative;
@@ -787,56 +766,7 @@ padding-left:3px;
 		endColorstr='#e0e0e0', GradientType=1 );
 }
 
-/*
-.ellipsis {
-  overflow: hidden;
-  height: 70px;
-	line-height: 25px;
-	margin: 20px;
-	border: 1px solid #AAA; }
-
-.ellipsis:before {
-	content:"";
-	float: left;
-	width: 5px; height: 200px; }
-
-.ellipsis > *:first-child {
-	float: right;
-	width: 100%;
-	margin-left: -5px; }		
-
-.ellipsis:after {
-	content: "\02026";  
-
-	box-sizing: content-box;
-	-webkit-box-sizing: content-box;
-	-moz-box-sizing: content-box;
-
-	float: right; position: relative;
-	top: -25px; left: 100%; 
-	width: 3em; margin-left: -3em;
-	padding-right: 5px;
-	
-	text-align: right;
-
-  
-  background-size: 100% 100%;
-  
-   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABqoAAAABCAMAAACRxg/eAAAABGdBTUEAALGPC/xhBQAAAwBQTFRF////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////AAAA////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////wDWRdwAAAP90Uk5Tfet1sDrNWZIeSRDcocCFLWj1CbhSfuMl1EGoYJkYM8Zui/rwBk15FefYKrxGtKydZQzfIdDJNj1VpFyVcY6BBBwxw2yI/Pfy7RInQ09ie5B0eIMDD+kb5eEk2tbSMMs5QL66tkyyrqpYpl+fm5drAf0H+AoN8+4TFhkf3SIoKwDONDfHO8Q+wURHSlBTVlqiXWNmaZNvcox2iYZ/fAL+9vsFCPkL9A4R8e/sFOjqFxrm5B3i4CDeIybb2SnX1SzT0S/PMsw1yjjIxTzCP79CvbtFuUi3tUuzTrGvUa1Uq6lXp6Vbo16gYZ6cZJpnmJZqlG2RcI9zjYp6d4eChIAu7+D8pQAAASFJREFUOMtjqK+fG2y/UKVwkVDxEsOSZSFcyz3LV6tXrJOtXB/msImjaqtxzfZI8R1etbu16vbx/zsY63hYrvGoWdPxeJaWU+ZtZxIkz3l3XNTpvMzZdS1F9YZP922RnrsWvQ8y2PoeW014miX93HfiK4NJbwQmv89z/qgw9bPNtK8BTDN+Bqr98JvDIDr7r93voD98s365zPyuOP2b7Rf/T+xTPli/y30r8zrnpf6L7Gc8/U8sH2U+lLqffk/vTtot5pup13WvJl8RvpR0Qft84lne9tNOrSflm0+YHos7wtpwyORAzH6JvdF7NHdF7eSu3ma0JWKz2MbwDRprQtcyrvIoW6m8wr10qeB8t6LFSgtcC+b9HwWjYBSMglEw2AEA3ckkQdBniOMAAAAASUVORK5CYII=);
-  
-  background: -webkit-gradient(linear, left top, right top,
-		from(rgba(255, 255, 255, 0)), to(white), color-stop(50%, white));
-	background: -moz-linear-gradient(to right, rgba(255, 255, 255, 0), white 50%, white);			
-	background: -o-linear-gradient(to right, rgba(255, 255, 255, 0), white 50%, white);
-	background: -ms-linear-gradient(to right, rgba(255, 255, 255, 0), white 50%, white);
-	background: linear-gradient(to right, rgba(255, 255, 255, 0), white 50%, white);
-
-
-
-}
-*/
-
-#captcha_message{
+#captcha_message {
 	color:red;
 	font-size:12px;
 	padding:10px;
@@ -856,14 +786,13 @@ padding-left:3px;
 	color: #4C5160;
 }
 
-
 /*******************************INVITATION VIEW *****************************************/
 
-#invitationView{
+#invitationView {
 	margin-top:10px;
 }
 
-#roleSelectorView{
+#roleSelectorView {
 	background: #ebedee;
 	width:212px;
 	border-top:1px solid white;
@@ -881,30 +810,27 @@ padding-left:3px;
 	padding-top:10px;
 	padding-left:5px;	
 	height:18px;
-	float:left;
-	
+	float:left;	
 }
 
-
-
-.selectedRole{
+.selectedRole {
 	padding-top:8px;
 	padding-bottom:8px;
 	color:white;
 	background:#4C5160;
-	
 }
-.UnselectedRole{
+
+.UnselectedRole {
 	padding-top:8px;
 	padding-bottom:8px;
 	color:#4C5160;
 	background:#ebedee;
 }
 
-.userRoleSelected{
+.userRoleSelected {
 	color:white;	
 }
-.userRoleUnSelected{
+
+.userRoleUnSelected {
 	color:#4C5160;
 }
-
