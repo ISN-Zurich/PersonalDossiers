@@ -10,7 +10,6 @@
 /*jslint vars: true, sloppy: true */
 
 function BookmarkModel(dController){
-
     ISNLogger.log("enter BookmarkModel");
     var self=this;
     self.controller=dController;
