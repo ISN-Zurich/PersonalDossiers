@@ -103,7 +103,7 @@ AddEmbedButton.prototype.embedStyle = function(embedType) {
         'border'  : 'none',
         'overflow': 'hidden',
     };
-    return $.map(cssStyle, function(v,k){return k+ ': '+ v+ ';'}).join(' ');
+    return $.map(cssStyle, function(v,k){return k+ ': '+ v+ ';';}).join(' ');
 };
 
 /**
@@ -114,8 +114,7 @@ AddEmbedButton.prototype.embedStyle = function(embedType) {
  * generates the embedstring for the requested embed type. 
  */
 AddEmbedButton.prototype.generateEmbedCode = function(embedType) {
-    return '<iframe id="isnpdid' + this.getDossierID() + '" scrolling="no" src="' + this.embedURL(embedType) + '" style="' + this.embedStyle(embedType) 
-            + '"></iframe>';
+    return '<iframe id="isnpdid' + this.getDossierID() + '" scrolling="no" src="' + this.embedURL(embedType) + '" style="' + this.embedStyle(embedType) + '"></iframe>';
 };
 
 AddEmbedButton.prototype.close = function(){
