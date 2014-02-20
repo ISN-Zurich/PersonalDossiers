@@ -1,7 +1,6 @@
 /*jslint vars: true, sloppy: true */
 
-function addEmbedButton(controller){
-	
+function AddEmbedButton(controller){
 	ISNLogger.log("enter add embed button");
 	var self=this;
 	self.controller=controller;
@@ -43,9 +42,9 @@ function addEmbedButton(controller){
 	
 }
 
-addEmbedButton.prototype.openDiv=openView;
+AddEmbedButton.prototype.openDiv=openView;
 
-addEmbedButton.prototype.open= function(){
+AddEmbedButton.prototype.open= function(){
 	ISNLogger.log("open add embed View");
 	this.openDiv();
 };
@@ -58,7 +57,7 @@ addEmbedButton.prototype.open= function(){
  * 
  */ 
 
-addEmbedButton.prototype.update= function(){
+AddEmbedButton.prototype.update= function(){
 	
 	ISNLogger.log("enter update in addEmbedd button");
 		
@@ -76,9 +75,9 @@ addEmbedButton.prototype.update= function(){
 
 };
 
-addEmbedButton.prototype.closeDiv=closeView;
+AddEmbedButton.prototype.closeDiv=closeView;
 
-addEmbedButton.prototype.close= function(){
+AddEmbedButton.prototype.close= function(){
 	ISNLogger.log("close add embed view");
 	this.closeDiv();
 };
