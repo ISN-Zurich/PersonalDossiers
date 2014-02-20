@@ -8,11 +8,11 @@
 
 function AddEmbedButton(controller){
 	ISNLogger.log("enter add embed button");
-	var self=this;
-	self.controller=controller;
-	self.tagID="embedView";
-	self.dossierId=self.controller.getActiveDossier();
-		
+	var self = this;
+	self.controller = controller;
+	self.tagID      = "embedView";
+	self.dossierId  = self.controller.getActiveDossier();
+   
 	$("#addEmbedBtn").bind("click", function(e){
 		ISNLogger.log("clicked the add Embed button");
 		if ($("#dropdown_embed").is(":visible")){
@@ -25,11 +25,11 @@ function AddEmbedButton(controller){
 		}
 	});
 	
-	$("#inputContainer").bind("focus",function(){
+	$("#inputContainer").bind("focus", function(){
 		$("#inputContainer").select();
 	});
 
-	$("#inputContainer").bind("click",function(){
+	$("#inputContainer").bind("click", function(){
 		$("#inputContainer").select();
 	});
 
@@ -48,7 +48,6 @@ function AddEmbedButton(controller){
 
 AddEmbedButton.prototype.openDiv=openView;
 AddEmbedButton.prototype.closeDiv=closeView;
-AddEmbedButton.prototype.getDossierID = pdGetActiveDossierID;
 
 AddEmbedButton.prototype.open = function(){
 	ISNLogger.log("open add embed View");
@@ -86,7 +85,7 @@ AddEmbedButton.prototype.update = function(){
  * generates the embedURL for the different embed types.
  */
 AddEmbedButton.prototype.embedURL = function(embedType, options) {
-    return baseURL() + 'embed' + (embedType === 'badge'? 'Badge' : 'PageBig') + '.html?id=' + this.getDossierID();
+    return baseURL() + 'embed' + (embedType === 'badge'? 'Badge' : 'PageBig') + '.html?id=' + this.dossierId;
 };
 
 /**
@@ -114,7 +113,7 @@ AddEmbedButton.prototype.embedStyle = function(embedType) {
  * generates the embedstring for the requested embed type. 
  */
 AddEmbedButton.prototype.generateEmbedCode = function(embedType) {
-    return '<iframe id="isnpdid' + this.getDossierID() + '" scrolling="no" src="' + this.embedURL(embedType) + '" style="' + this.embedStyle(embedType) + '"></iframe>';
+    return '<iframe id="isnpdid' + this.dossierId + '" scrolling="no" src="' + this.embedURL(embedType) + '" style="' + this.embedStyle(embedType) + '"></iframe>';
 };
 
 AddEmbedButton.prototype.close = function(){

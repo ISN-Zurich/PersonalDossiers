@@ -19,6 +19,7 @@ function dossierController() {
 
 //	document.domain = 'ethz.ch';
 	self.hashed=false;
+    
 	self.hashedUrl();
 	self.initOAuth();
 
@@ -39,7 +40,6 @@ function dossierController() {
 
 		self.models.dossierList = new DossierListModel(self);
 		self.models.bookmark = new BookmarkModel(self);
-
 
 		ISNLogger.log("model is initialized");
 
@@ -100,16 +100,15 @@ dossierController.prototype.hashedUrl = function() {
     ISNLogger.log("enter hasehd url");
     this.hashed = false;
     
-    url_ref = window.location.search;
+    var url_ref = window.location.search;
     if (url_ref && url_ref.length) {
         var splited = url_ref.slice(1).split('&');
         ISNLogger.log("show splitted url array is " + splited);
-        var split1 = splited;
-        if (split1 && split1.length > 0) {
+        if (splited && splited.length > 0) {
             var i;
-            for (i=0; i < split1.length; i++) {
-                ISNLogger.log("tools is " + split1[i]);
-                var split2 = split1[i].split("=");
+            for (i=0; i < splited.length; i++) {
+                ISNLogger.log("tools is " + splited[i]);
+                var split2 = splited[i].split("=");
                 // only the id parameter is accepted!
                 if ( split2[0] && split2[0].length && split2[0] === 'id' ) {
                     var d_id = split2[1];
@@ -160,8 +159,8 @@ dossierController.prototype.test = function(){
 dossierController.prototype.getActiveDossier = function(){
 	ISNLogger.log("in user controller to get active dossier");
 	if (this.hashed){
-		var activedosId = this.getHashedURLId();
-		return activedosId;
+        ISNLogger.log('return query id ' + this.pubid);
+		return this.pubid;
 	}
 	if (!this.hashed){   //if there is no hash at the url
 		var activedossierId =  this.models.user.getActiveDossier();
