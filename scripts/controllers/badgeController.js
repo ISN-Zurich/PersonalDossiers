@@ -45,7 +45,7 @@ function badgeController() {
 	//initialization of views 
 	
 	//  self.views.dossierBanner = new DossierBannerView(self);
-	    self.views.badge= new badgeView(self);
+	    self.views.badge= new BadgeView(self);
 
        $(document).bind("BookmarkModelLoaded", function() {
     	   ISNLogger.log("initialize views in controller");
