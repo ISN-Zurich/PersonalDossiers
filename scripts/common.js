@@ -42,7 +42,6 @@ function showErrorResponses(request){
 }
 
 function setDossiersColorization() {
-	
 	$("#span_dossiers").addClass("pd_selected");
 	$("#st_dossiers").removeClass("disable");
 	$("#st_dossiers").addClass("pd_sb_icon");
@@ -87,8 +86,6 @@ function setUserProfileColorization(){
 	$("#span_user").addClass("pd_selected");
 }
 
-
-
 function pdInitServiceHost() {
     var h = window.location.host;
     var p = window.location.protocol;
@@ -107,6 +104,10 @@ function pdIsAuthenticated() {
         return this.models.user.getUserId() > 0 ? true : false;
     }
     return false;
+}
+
+function pdGetActiveDossierID() {
+    this.controller.getActiveDossier();
 }
 
 // not used

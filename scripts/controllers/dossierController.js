@@ -81,17 +81,9 @@ function dossierController() {
 		window.location.href = 'user.html';
 	});
 
-	$(window).bind( "hashchange",function(){
-//		ISNLogger.log("hash change event binded");
-//		var hashTag = self.getHash();
-//		self.chooseView(hashTag);
-//		self.colorizeInteractiveBox(hashTag);
-	});
+	$(window).bind( "hashchange",function(){});
 
 	//we get the user type in order to decide which views to open
-	
-	
-	
 
 } //end of constructor
 
@@ -103,7 +95,6 @@ dossierController.prototype.getUserType = function(){
 	ISNLogger.log("enter getUser Type in dossier Controller");
 	return this.models.dossierList.getUserType();
 };
-
 
 dossierController.prototype.hashedUrl = function() {
     ISNLogger.log("enter hasehd url");
@@ -155,7 +146,6 @@ dossierController.prototype.updateUserData = function() {
 	}
 };
 
-
 dossierController.prototype.initImageHandler=function(){
 	var self=this;
 	ISNLogger.log("runs in controller image handler");
@@ -186,7 +176,6 @@ dossierController.prototype.getActiveDossier = function(){
 	return undefined;    //if something goes wrong for any reason
 };
 
-
 dossierController.prototype.transition = function(){
 
 };
@@ -198,12 +187,3 @@ dossierController.prototype.logout = function() {
 };
 
 var controlerObject = dossierController;
-//
-//var controller;
-//ISNLogger.log("enter main js");
-//$(document).ready(function(){
-//	ISNLogger.log("document ready");
-//    
-//    ISNLogger.debugMode = false;
-//	controller = new dossierController();
-//});

@@ -1,3 +1,9 @@
+/**
+ * @class AddEmbedButton
+ * 
+ * View class for the embed code. 
+ */
+
 /*jslint vars: true, sloppy: true */
 
 function AddEmbedButton(controller){
@@ -26,56 +32,91 @@ function AddEmbedButton(controller){
 	$("#inputContainer").bind("click",function(){
 		$("#inputContainer").select();
 	});
-	
 
 	$("#contentEmbed").bind("click", function(e){
-		$("#inputContainer").attr("value","<iframe scrolling=\"no\" src=\""+ baseURL() +"embedPageBig.html?id="+self.dossierId+"\""+" style= \""+ "width:475px;height:905px; border: none; overflow:hidden; \"></iframe>");
+		$("#inputContainer").attr("value", self.generateEmbedCode('full'));
 		$("#badgeStyle").removeClass("pd_activeBadge");
 		$("#contentEmbed").addClass("pd_activeBadge");
 	});
 	
 	$("#badgeStyle").bind("click", function(e){
-		$("#inputContainer").attr("value","<iframe scrolling=\"no\" src=\""+baseURL()+"embedBadge.html?id="+self.dossierId+"\""+" style= \""+ "width:250px;height:480px; border: none; overflow:hidden; \"></iframe>");
+		$("#inputContainer").attr("value", self.generateEmbedCode('badge'));
 		$("#contentEmbed").removeClass("pd_activeBadge");
 		$("#badgeStyle").addClass("pd_activeBadge");
-	});
-	
+	});	
 }
 
 AddEmbedButton.prototype.openDiv=openView;
+AddEmbedButton.prototype.closeDiv=closeView;
+AddEmbedButton.prototype.getDossierID = pdGetActiveDossierID;
 
 AddEmbedButton.prototype.open= function(){
 	ISNLogger.log("open add embed View");
 	this.openDiv();
 };
 
-
 /** 
+ * @method update()
+ * 
  * this function displays the drop-down box that contains
  * all the information and links to the embedded pages
  * by default the link to the content embed is displayed
  * 
  */ 
-
 AddEmbedButton.prototype.update= function(){
-	
 	ISNLogger.log("enter update in addEmbedd button");
 		
 	var self=this;
 	var dossierId=this.controller.getActiveDossier();
 	$("#addEmbedBtn").css("margin-bottom", "1px");
 	
-	$("#inputContainer").attr("value","<iframe scrolling=\"no\" src=\""+baseURL()+"embedPageBig.html?id="+dossierId+"\""+" style= \""+ "width:475px;height:905px; border: none; overflow:hidden; \"></iframe>");
+	$("#inputContainer").attr("value",this.generateEmbedCode('full'));
 	
 	$("#inputContainer").focus();
 	
-
-	
 	$("#drop_info").show();
-
 };
 
-AddEmbedButton.prototype.closeDiv=closeView;
+/**
+ * @method embedURL(embedType, embedOptions)
+ * 
+ * @param String embedType ('badge'|'full')
+ * @param Object embedObject
+ * 
+ * generates the embedURL for the different embed types.
+ */
+AddEmbedButton.prototype.embedURL(embedType, options) {
+    return baseURL() + 'embed' + (embedType === 'badge'? 'Badge' : 'PageBig') + '.html?id=' + this.getDossierID();
+};
+
+/**
+ * @method embedStyle(embedType)
+ * 
+ * @param String embedType ('badge'|'full')
+ * 
+ * generates the style for the embedded iframe.
+ */
+AddEmbedButton.prototype.embedStyle(embedType) {
+    var cssStyle = {
+        'width'   : '100%',
+        'height'  : (embedType === 'badge' ? '450px' : '900px'),
+        'border'  : 'none',
+        'overflow': 'hidden',
+    };
+    return $.map(cssStyle, function(v,k){return k+ ': '+ v+ ';'}).join(' ');
+};
+
+/**
+ * @method generateEmbedCode(embedType)
+ * 
+ * @param String embedType ('badge'| 'full')
+ * 
+ * generates the embedstring for the requested embed type. 
+ */
+AddEmbedButton.prototype.generateEmbedCode(embedType) {
+    return '<iframe id="isnpdid' + this.getDossierID() + '" scrolling="no" src="' + this.embedURL(embedType) + '" style="' + this.embedStyle(embedType) 
+            + '"></iframe>';
+};
 
 AddEmbedButton.prototype.close= function(){
 	ISNLogger.log("close add embed view");
