@@ -1,5 +1,22 @@
-/**a should have a different font color if not clicked
+/**
+ * Development scratch Styles
+ * 
+ * This stylesheet contains CSS styles that are not fully tested for being part of the offical Personal Dossiers CSS. 
+ */
 
+.beta {
+    color: #de9409;
+}
+
+.beta.warning {
+    text-align: left;
+    font-weight: bold;
+    font-style: italic;
+}
+
+/**
+ * a should have a different font color if not clicked
+ */
 /*add an extra formatting to disabled links. the pointer is not hand.*/
 
 a.disable  {
@@ -225,6 +242,18 @@ ul#sortable {
     background: #ebedee;
     color: #4C5160;
     font-size:12px;
+}
+
+.btn {
+    cursor: pointer;
+}
+
+.btnBox {
+    background-color: inherit;
+}
+
+.btnBox:hover {
+    background-color: inherit;
 }
 
 #titleContainer a, 
