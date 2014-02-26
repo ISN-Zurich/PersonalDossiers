@@ -4,10 +4,6 @@
  * This stylesheet contains CSS styles that are not fully tested for being part of the offical Personal Dossiers CSS. 
  */
 
-.beta {
-    color: #de9409;
-}
-
 .beta.warning {
     text-align: left;
     font-weight: bold;
@@ -266,3 +262,17 @@ ul#sortable {
 #titleContainer a:hover {
     color: #0089CF;
 }
+
+
+/**
+ * more/less button styles
+ */
+
+.more_a {
+    color: #0089CF;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.more {}
+.less {}
