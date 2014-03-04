@@ -21,8 +21,6 @@ function BookmarkController() {
     self.models.dossierList= new DossierListModel(self);
     //self.models.bookmark= new BookmarkModel(self); for the first two steps we don't need it
     self.models.bookmarkDossier= new LibraryBookmarkModel(self);
-  
-    
 
     self.views={};
     self.views.bookmark = new bookmarkView(self);
@@ -45,6 +43,7 @@ function BookmarkController() {
 BookmarkController.prototype.initServiceHost = pdInitServiceHost;
 BookmarkController.prototype.getServiceHost = pdGetServiceHost;
 BookmarkController.prototype.isAuthenticated = pdIsAuthenticated;
+BookmarkController.prototype.keysRejected = pdNOOP;
 
 BookmarkController.prototype.initOAuth = function() {
     ISNLogger.log('initialize the oauth helper class');

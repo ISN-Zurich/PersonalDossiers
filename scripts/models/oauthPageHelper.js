@@ -1,3 +1,7 @@
+/**
+ * OAuthPageHelper is unused!
+ */
+
 /*jslint vars: true, sloppy: true */
 
 function OAuthPageHelper(controller) {
@@ -11,13 +15,10 @@ function OAuthPageHelper(controller) {
 
     this.serviceurl = this.controller.baseURL() +'service/authentication.php';
     this.authorizationurl = this.controller.baseURL() +'authorize.html';
-
-    
 }
 
 OAuthPageHelper.prototype.getRequestToken = function() {
     // use the request token so we can forward the user
-    
 };
 
 OAuthPageHelper.prototype.obtainAuthorization = function() {
@@ -37,8 +38,3 @@ OAuthPageHelper.prototype.getVerificationCode = function() {
 OAuthPageHelper.prototype.getAccessToken = function() {
     // use the verification code to get and store the access token
 };
-
-
-
-
-

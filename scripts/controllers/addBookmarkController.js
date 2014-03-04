@@ -30,7 +30,8 @@ function addBookmarkController() {
     // create a hidden window
     $('<iframe/>', {'class': 'none', 
                     'id': 'isn_pd_authorize', 
-                    'src': this.baseURL + 'authorize.html?id='+this.itemId }).appendTo('#isn_pd_widget').bind('load', function(){
+                    'src': this.baseURL + 'authorize.html?id='+this.itemId  
+                   }).appendTo('#isn_pd_widget').bind('load', function(){
                         if ( self.itemId ) {
                             self.checkItem();
                         } //we remove the bind, we dont checkItem()
@@ -73,7 +74,6 @@ addBookmarkController.prototype.getActiveDossier = function() {
     }
     return adID;
 };
-
 
 //will go away
 addBookmarkController.prototype.initOAuth = function() {

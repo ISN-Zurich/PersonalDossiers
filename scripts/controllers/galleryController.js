@@ -59,7 +59,6 @@ GalleryController.prototype.updateUserData = function() {
     } 
 };
 
-
 GalleryController.prototype.initImageHandler=function(){
     var self=this;
     ISNLogger.log("runs in controller image handler");
@@ -67,13 +66,11 @@ GalleryController.prototype.initImageHandler=function(){
     
 };
 
-
 // ************************* Old function ********************
 //GalleryController.prototype.getActiveDossier = function() {
 //	//return 1;
 //	return this.models.dossierList.getActiveDossier();
 //};
-
 
 GalleryController.prototype.getActiveDossier = function(){
     var activedossierId =  this.models.user.getActiveDossier();
@@ -85,7 +82,6 @@ GalleryController.prototype.getActiveDossier = function(){
     }
     return undefined;
 };
-
 
 GalleryController.prototype.transition = function(){
         

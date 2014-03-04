@@ -225,8 +225,6 @@ class RESTServiceCommon extends PDCommonClass {
                     header('Cache-Control: no-cache');
                 }
                 if ($this->prepareOperation($meth)) {
-                    
-
                     call_user_func(array($this, $cmeth));
                 }
             }

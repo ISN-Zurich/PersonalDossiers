@@ -46,14 +46,13 @@ UserModel.prototype.getActiveDossier = function(){
     }
     var profObj= localStorage.getItem("userProfile");
     if (profObj){
-	profObj=JSON.parse(profObj);
-	activeDossierId = profObj.activeDossierId;
-	if (activeDossierId) {
-            this.activeDossierId = activeDossierId;
-       //     $(document).trigger("ActiveDossierReady");
-	}
-	ISNLogger.log("active dossier Id from the storage is "+activeDossierId);
-	
+        profObj=JSON.parse(profObj);
+        activeDossierId = profObj.activeDossierId;
+        if (activeDossierId) {
+                this.activeDossierId = activeDossierId;
+           //     $(document).trigger("ActiveDossierReady");
+        }
+        ISNLogger.log("active dossier Id from the storage is "+activeDossierId);
     } //end of if profObj	
     return activeDossierId;
 };
