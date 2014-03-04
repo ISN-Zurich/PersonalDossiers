@@ -16,43 +16,30 @@ function detailEmbedController() {
     self.hashed=false;
     self.hashedUrl();
   
-  // if we are logged in or if there is a hash on the url then show & open the authorized views
-  // if there is a hash on the url don't show the logout button
+    // if we are logged in or if there is a hash on the url then show & open the authorized views
+    // if there is a hash on the url don't show the logout button
+    if (self.hashed) {
+        //initialization of models 
+        self.models = {};
+        //self.models.authentication = new AuthenticationModel(this);
 
-   if (self.oauth || self.hashed){
+        self.models.dossierList = new DossierListModel(self);
+        self.models.bookmark = new BookmarkModel(self);
 
-	//initialization of models 
-	self.models = {};
-	
-	//self.models.authentication = new AuthenticationModel(this);
+        ISNLogger.log("model is initialized");
 
-    //user model is run only when we are authenticated
-   if (self.oauth){
-       self.models.user = new UserModel(self);
-   }
-	
-	self.models.dossierList = new DossierListModel(self);
-	self.models.bookmark = new BookmarkModel(self);
+        self.views = {};
 
-	
-	ISNLogger.log("model is initialized");
-	
-	self.views = {};
-
-	//initialization of views 
+        //initialization of views 
         self.views.detailEmbed = new detailEmbedView(self);
-	 
-  
-       $(document).bind("BookmarkModelLoaded", function() {
-    	   self.views.detailEmbed.open();
-       }); 
-    }
-   
 
+        $(document).bind("BookmarkModelLoaded", function() {
+           self.views.detailEmbed.open();
+        }); 
+    }
 } //end of constructor
 
 detailEmbedController.prototype.hashedUrl = function() {
-    
 	url=window.location.search;
 	var split1=url.slice(1);
 	ISNLogger.log("show splitted url array is "+split1);
@@ -76,7 +63,6 @@ detailEmbedController.prototype.hashedUrl = function() {
 			ISNLogger.log("dossier id is "+dossier_id);
 		}
 		 	
-
 		if (item_id_partition && item_id_partition.length > 0){
 			item_id_sub_partition=item_id_partition.split("=");
 			item_id=item_id_sub_partition[1];
@@ -84,8 +70,6 @@ detailEmbedController.prototype.hashedUrl = function() {
 			this.hashed=true;
 			ISNLogger.log("item id is "+item_id);
 		}
-		
-		
 	}
 	
 //	  	if (split1 && split1.length>0){
@@ -104,45 +88,43 @@ detailEmbedController.prototype.hashedUrl = function() {
 detailEmbedController.prototype.initServiceHost = pdInitServiceHost;
 detailEmbedController.prototype.getServiceHost = pdGetServiceHost; 
 
+detailEmbedController.prototype.getHashedURLId = function(){
+    var dossierId=this.pubid;
+    ISNLogger.log("dossier id after hash is "+dossierId);
+    return dossierId;
+};
 
-    detailEmbedController.prototype.getHashedURLId = function(){
-    	var dossierId=this.pubid;
-    	ISNLogger.log("dossier id after hash is "+dossierId);
-    	return dossierId;
-    };
 
+detailEmbedController.prototype.getdossierItemId = function(){
+    var item_id=this.item_id;
+    ISNLogger.log("item id after hash is "+item_id);
+    return item_id;
+};
 
-    detailEmbedController.prototype.getdossierItemId = function(){
-    	var item_id=this.item_id;
-    	ISNLogger.log("item id after hash is "+item_id);
-    	return item_id;
-    };
-
-    detailEmbedController.prototype.getActiveDossier = function(){
-    	  ISNLogger.log("in user controller to get active dossier");
-        if (this.hashed){
+detailEmbedController.prototype.getActiveDossier = function(){
+    ISNLogger.log("in user controller to get active dossier");
+    if (this.hashed) {
         var activedosId = this.getHashedURLId();
-            return activedosId;
+        return activedosId;
+    }
+    if (!this.hashed) { //if there is no hash at the url
+        var activedossierId = this.models.user.getActiveDossier();
+        if (activedossierId) {
+            return activedossierId;
         }
-        if (!this.hashed){   //if there is no hash at the url
-        var activedossierId =  this.models.user.getActiveDossier();
-        if (activedossierId){
-        return activedossierId;
+        if (!this.activedossierId) {
+            var dossierId = this.models.dossierList.getDefaultDossierId();
+            return dossierId;
         }
-        if(!this.activedossierId){
-        var dossierId = this.models.dossierList.getDefaultDossierId();
-        return dossierId;
-        } 
-        }//is not hashed
-        return undefined;    //if something goes wrong for any reason
-    };
-
+    } //is not hashed
+    return undefined; //if something goes wrong for any reason
+};
 
 var controller;
-    ISNLogger.log("enter main js");
-    $(document).ready(function(){
-        ISNLogger.log("document ready");
-        
-        ISNLogger.debugMode = false;
-        controller = new detailEmbedController();
-    });
+ISNLogger.log("enter main js");
+$(document).ready(function(){
+    ISNLogger.log("document ready");
+
+    ISNLogger.debugMode = false;
+    controller = new detailEmbedController();
+});

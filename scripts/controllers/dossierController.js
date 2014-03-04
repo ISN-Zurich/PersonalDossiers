@@ -67,10 +67,8 @@ function dossierController() {
 			self.views.userlist.open();
 			self.views.embed.open();
 		});
-
-
 	}
-	else if (!self.oauth && !self.hashed) {
+	else {
 		ISNLogger.log("the user is not loggedIn and there is no hash on the url");
 		// user is not logged in go to user.html
 		window.location.href = 'user.html';
@@ -139,6 +137,13 @@ dossierController.prototype.initOAuth = function() {
 	}
 };
 
+dossierController.prototype.keysRejected = function() {
+    if (this.oauth) {
+        this.oauth.reset();
+        $(document).trigger("LogoutSent");
+    }
+};
+
 dossierController.prototype.updateUserData = function() {
 	if ( this.oauth ) {
 		this.models.dossierList.getUserDossiers();
@@ -175,9 +180,7 @@ dossierController.prototype.getActiveDossier = function(){
 	return undefined;    //if something goes wrong for any reason
 };
 
-dossierController.prototype.transition = function(){
-
-};
+dossierController.prototype.transition = function(){};
 
 dossierController.prototype.logout = function() {
 	ISNLogger.log("enter logout in dossier controller");

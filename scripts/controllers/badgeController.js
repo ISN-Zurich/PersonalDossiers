@@ -23,39 +23,32 @@ function badgeController() {
   // if we are logged in or if there is a hash on the url then show & open the authorized views
   // if there is a hash on the url don't show the logout button
 
-   if (self.oauth || self.hashed){
+   if (self.hashed){
+        //initialization of models 
+        self.models = {};
 
-	//initialization of models 
-	self.models = {};
-	
-	//self.models.authentication = new AuthenticationModel(this);
+        self.models.dossierList = new DossierListModel(self);
+        self.models.bookmark = new BookmarkModel(self);
 
-    //user model is run only when we are authenticated
-   if (self.oauth){
-       self.models.user = new UserModel(self);
-   }
-	
-	self.models.dossierList = new DossierListModel(self);
-	self.models.bookmark = new BookmarkModel(self);
-	
-	ISNLogger.log("model is initialized");
-	
-	self.views = {};
+        ISNLogger.log("model is initialized");
 
-	//initialization of views 
-	
-	//  self.views.dossierBanner = new DossierBannerView(self);
-	    self.views.badge= new BadgeView(self);
+        self.views = {};
 
-       $(document).bind("BookmarkModelLoaded", function() {
-    	   ISNLogger.log("initialize views in controller");
-   	   self.views.badge.open();
-       });
+        //initialization of views 
+
+        //  self.views.dossierBanner = new DossierBannerView(self);
+        self.views.badge= new BadgeView(self);
+
+        $(document).bind("BookmarkModelLoaded", function() {
+            ISNLogger.log("initialize views in controller");
+            self.views.badge.open();
+        });
     }
 } //end of constructor
 
 badgeController.prototype.initServiceHost = pdInitServiceHost;
 badgeController.prototype.getServiceHost = pdGetServiceHost;
+badgeController.prototype.keysRejected = pdNOOP;
 
 badgeController.prototype.hashedUrl = function() {
 	ISNLogger.log("enter hasehd url"); 
@@ -76,14 +69,11 @@ badgeController.prototype.hashedUrl = function() {
 		}              
 };
 
-
 badgeController.prototype.getHashedURLId = function(){
     	var dossierId=this.pubid;
     	ISNLogger.log("dossier id after hash is "+dossierId);
     	return dossierId;
 };
-
-
 
 badgeController.prototype.getActiveDossier = function(){
     	ISNLogger.log("in user controller to get active dossier");
@@ -103,7 +93,6 @@ badgeController.prototype.getActiveDossier = function(){
     	}//is not hashed
     	return undefined;    //if something goes wrong for any reason
 };
-
 
 var controlerObject = badgeController;
 

@@ -39,8 +39,6 @@ function userController() {
 	self.views.interaction = new interactionBox(self);
 	self.views.notifications = new notificationView(self);
 	
-	
-		
 	self.models.user.checkActiveUser();
 	
 	if (this.oauth){
@@ -54,7 +52,6 @@ function userController() {
 		
 		self.models.dossierList.getUserDossiers();
 	});
-
 
 	$(document).bind('DossierListUpdate', function(){
 		ISNLogger.log("dossier list update in user controller");
@@ -198,6 +195,12 @@ userController.prototype.initOAuth = function() {
     }
 };
 
+userController.prototype.keysRejected = function() {
+    if (this.oauth) {
+        this.oauth.reset();
+        $(document).trigger("LogoutSent");
+    }
+};
 
 userController.prototype.updateUserData = function() {
     if ( this.oauth ) {

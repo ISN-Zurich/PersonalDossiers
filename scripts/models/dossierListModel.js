@@ -162,9 +162,14 @@ DossierListModel.prototype.getUserDossiers=function(){
 			dataType : 'json',
 			success : success,
 			error : function(request) {
-
-				ISNLogger.log("Error while getting the user dossiers");
-				showErrorResponses(request); 
+                if (request.status == 401){
+                    // access keys have been rejected
+                    self.controller.keysRejected();
+                }
+                else {
+				    ISNLogger.log("Error while getting the user dossiers");
+				    showErrorResponses(request); 
+                }
 			},
 			beforeSend : setHeader
 		});
@@ -225,12 +230,16 @@ DossierListModel.prototype.addDossier=function(){
 	}
 
 	function error(request) {
-		// the server rejected the request!
-		ISNLogger.log("the server rejected the creation of a new dossier");
-		ISNLogger.log("ERROR status text: "+ request.statusText); 
-		ISNLogger.log("ERROR status code: "+ request.statusCode()); 
-		ISNLogger.log("ERROR status code is : " + request.status);
-		ISNLogger.log("ERROR responsetext: "+ request.responseText); 
+        // the server rejected the request!
+        ISNLogger.log("the server rejected the creation of a new dossier");
+        ISNLogger.log("ERROR status text: "+ request.statusText); 
+        ISNLogger.log("ERROR status code: "+ request.statusCode()); 
+        ISNLogger.log("ERROR status code is : " + request.status);
+        ISNLogger.log("ERROR responsetext: "+ request.responseText); 
+        if (request.status == 401){
+            // access keys have been rejected
+            self.controller.keysRejected();
+        }
 	}
 
 	function setHeader(xhr){

@@ -22,103 +22,83 @@ function embedController() {
     self.hashed=false;
     self.hashedUrl();
   
-  // if we are logged in or if there is a hash on the url then show & open the authorized views
-  // if there is a hash on the url don't show the logout button
+    // if we are logged in or if there is a hash on the url then show & open the authorized views
+    // if there is a hash on the url don't show the logout button
 
-   if (self.oauth || self.hashed){
+    if (self.hashed){
+        self.views = {};
+        self.models = {};
 
-	//initialization of models 
-	self.models = {};
-	
-	//self.models.authentication = new AuthenticationModel(this);
+        
+        //initialize models 
+        self.models.dossierList = new DossierListModel(self);
+        self.models.bookmark = new BookmarkModel(self);
+        
+        ISNLogger.log("model is initialized");
 
-    //user model is run only when we are authenticated
-   if (self.oauth){
-       self.models.user = new UserModel(self);
-   }
-	
-	self.models.dossierList = new DossierListModel(self);
-	self.models.bookmark = new BookmarkModel(self);
-
-	
-	ISNLogger.log("model is initialized");
-	
-	self.views = {};
-
-	//initialization of views 
+        //initialize views 
         self.views.dossierBanner = new DossierBannerView(self);
-	    self.views.dossierContent= new DossierContentView(self);
-
-
-
-       $(document).bind("BookmarkModelLoaded", function() {
-    	   ISNLogger.log("initialize views in controller");
-    	   self.views.dossierBanner.open();
-    	   self.views.dossierContent.open();
-       });
-       
-	
+        self.views.dossierContent= new DossierContentView(self);
+        
+        $(document).bind("BookmarkModelLoaded", function() {
+           ISNLogger.log("initialize views in controller");
+           self.views.dossierBanner.open();
+           self.views.dossierContent.open();
+        });
     }
-   
-
 } //end of constructor
 
 embedController.prototype.initServiceHost = pdInitServiceHost;
 embedController.prototype.getServiceHost = pdGetServiceHost;
 embedController.prototype.isAuthenticated = pdIsAuthenticated;
+embedController.prototype.keysRejected = pdNOOP;
 
 embedController.prototype.hashedUrl = function() {
-    	
-    	ISNLogger.log("enter hasehd url"); 
+    ISNLogger.log("enter hasehd url"); 
 
-    	url_ref=window.location.href;
-    	var splited=url_ref.split("?");
-    	ISNLogger.log("show splitted url array is "+splited);
-    	var split1=splited[1];
-    	if (split1 && split1.length>0){
-    	ISNLogger.log("tools is "+split1);
-    	var split2=split1.split("=");
-    	var d_id=split2[1];
-    	if (d_id && d_id.length>0){
-    		ISNLogger.log("there is id in the new url and it is "+d_id);
-    		this.pubid=d_id;
-    		this.hashed=true;
-    	}} else{
-    	
-    	 this.hashed=false;
-    	}
-    	
-    	              
-    };
-
-    embedController.prototype.getHashedURLId = function(){
-                 var dossierId=this.pubid;
-                  ISNLogger.log("dossier id after hash is "+dossierId);
-                  return dossierId;
-    };
-
-
-
-    embedController.prototype.getActiveDossier = function(){
-    	  ISNLogger.log("in user controller to get active dossier");
-        if (this.hashed){
-        var activedosId = this.getHashedURLId();
-            return activedosId;
+    url_ref=window.location.href;
+    var splited=url_ref.split("?");
+    ISNLogger.log("show splitted url array is "+splited);
+    var split1=splited[1];
+    if (split1 && split1.length>0){
+        ISNLogger.log("tools is "+split1);
+        var split2=split1.split("=");
+        var d_id=split2[1];
+        if (d_id && d_id.length>0){
+            ISNLogger.log("there is id in the new url and it is "+d_id);
+            this.pubid=d_id;
+            this.hashed=true;
         }
-        if (!this.hashed){   //if there is no hash at the url
+    } 
+    else{
+        this.hashed=false;
+    }	               
+};
+
+embedController.prototype.getHashedURLId = function(){
+    var dossierId=this.pubid;
+    ISNLogger.log("dossier id after hash is "+dossierId);
+    return dossierId;
+};
+
+embedController.prototype.getActiveDossier = function(){
+    ISNLogger.log("in user controller to get active dossier");
+    if (this.hashed){
+        var activedosId = this.getHashedURLId();
+        return activedosId;
+    }
+    if (!this.hashed){   //if there is no hash at the url
         var activedossierId =  this.models.user.getActiveDossier();
         if (activedossierId){
-        return activedossierId;
+            return activedossierId;
         }
         if(!this.activedossierId){
-        var dossierId = this.models.dossierList.getDefaultDossierId();
-        return dossierId;
+            var dossierId = this.models.dossierList.getDefaultDossierId();
+            return dossierId;
         } 
-        }//is not hashed
-        return undefined;    //if something goes wrong for any reason
-    };
-
-
+    } //is not hashed
+    return undefined;    //if something goes wrong for any reason
+};
  
 var controlerObject = embedController;
  

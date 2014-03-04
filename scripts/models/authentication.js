@@ -1,3 +1,8 @@
+/**
+ * 
+ */
+
+/*jslint vars: true, sloppy: true */
 
 function AuthenticationModel(controller){
     ISNLogger.log("enter authentication model");
@@ -21,19 +26,14 @@ function AuthenticationModel(controller){
     this.dossierList =[];
 
     // create an eventlistener for the case when the user profile changes.
-    
     //after a successful registation the user should automatically log into the dossier list area
     
     $(document).bind("RegistrationDone", function(e, mail, pswd){
     	ISNLogger.log("registration done is bound in authentication model");
     	ISNLogger.log("mail in bound is "+mail);
-    	ISNLogger.log("password in bound is "+pswd); 
     	self.authenticateUser(mail, pswd);
-    });
-    
-    
+    });    
 }
-
 
 AuthenticationModel.prototype.storeData = function(){
     var authString;
@@ -55,7 +55,7 @@ AuthenticationModel.prototype.loadData=function(){
     //then get it by parsing the string and convert it into a json object
     try {
     	if (localStorage.getItem("authentication")){
-        authObject = JSON.parse(localStorage.getItem("authentication"));
+            authObject = JSON.parse(localStorage.getItem("authentication"));
     	}
     }
     catch (err) {
@@ -160,10 +160,10 @@ AuthenticationModel.prototype.obtainAuthorization = function(){
             showErrorResponses(request);
 
             //clear access token
-           self.authentication.accessToken = "";
-           self.authentication.accessSecret = "";
-            
-           // then do transition to login
+            self.authentication.accessToken = "";
+            self.authentication.accessSecret = "";
+
+            // then do transition to login
             self.controller.transition("login");
         },
         beforeSend : setHeaderO
@@ -357,10 +357,8 @@ AuthenticationModel.prototype.clearAccessToken=function(){
     this.authentication.accessSecret = "";
     // overwrite the data in the local storage
     this.storeData();
+    this.controller.initOAuth();
 };
-
-
-
 
 AuthenticationModel.prototype.logout =function(){
     var self=this;
@@ -371,19 +369,11 @@ AuthenticationModel.prototype.logout =function(){
         dataType : 'json',
         success : success,
         error : function(request) {
-
             showErrorResponses(request);
             //display a message to the user that the logout was not successful
             if (request.status == 401){
-                ISNLogger.log("success in logging out from the server");
-                self.authentication={
-                    consumerSecret:"6a33d1d90067c005de32f5f6aafe082ae8375a6f",
-                    consumerKey :"ch.isn.personal-dossier",
-                    "accessToken":"",
-                    "access_secret":""
-                };
-                self.storeData();
-                self.controller.initOAuth();
+                ISNLogger.log("successfully logged out from the server");
+                self.clearAccessToken();
                 self.checkActiveUser();
                 //self.setInitParameters();
                 //self.controller.transition("login");
@@ -408,12 +398,9 @@ AuthenticationModel.prototype.logout =function(){
 
 };
 
-
-
 AuthenticationModel.prototype.isLoggedIn = function(){
     return this.authentication.accessToken && this.accessSecret ? true : false;
 };
-
 
 //AuthenticationModel.prototype.getConsumerKey = function(){
 //	authO

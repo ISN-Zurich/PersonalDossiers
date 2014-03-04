@@ -13,11 +13,7 @@ function LibraryBookmarkModel(controller){
 		ISNLogger.log("bound dossier list update in library bookmark model");
 		self.getUserBookmarkedDossiers();
 	});
-
-
-
 }
-
 
 /**
  * Get the list of dossiers for a specific user, that already contain a specific dossier item.
@@ -25,7 +21,6 @@ function LibraryBookmarkModel(controller){
  */
 
 LibraryBookmarkModel.prototype.getUserBookmarkedDossiers = function(){
-
 	var self = this;
 	var library_item_id=self.library_item_id;
 	var url=self.controller.baseURL +'service/dossier.php/dossiers/'+library_item_id;
@@ -48,7 +43,6 @@ LibraryBookmarkModel.prototype.getUserBookmarkedDossiers = function(){
 		});
 	} //should we include any else case?
 
-
 	function success(data){
 		self.bookmarkedDossierList=data.dossiers;		
 		ISNLogger.log("self.bookmarked list is "+self.bookmarkedDossierList);
@@ -57,20 +51,14 @@ LibraryBookmarkModel.prototype.getUserBookmarkedDossiers = function(){
 		$(document).trigger('BookmarkedDossierListUpdate'); // for the views (bookmark view)
 	}
 
-
 	function setHeader(xhr){
 
 		var header_request=self.controller.oauth.oauthHeader(method, url);
 		ISNLogger.log("oauth header: " + header_request);
 		xhr.setRequestHeader('Authorization', header_request);
-
 	}
-
-
 	//	trigger bookmarked list update	
-
 };
-
 
 LibraryBookmarkModel.prototype.addItem=function(dossierID){
 	ISNLogger.log("enter addItem in library bookmark model");
@@ -107,6 +95,10 @@ LibraryBookmarkModel.prototype.addItem=function(dossierID){
 		ISNLogger.log("ERROR status code: "+ request.statusCode()); 
 		ISNLogger.log("ERROR status code is : " + request.status);
 		ISNLogger.log("ERROR responsetext: "+ request.responseText); 
+        if (request.status == 401){
+            // access keys have been rejected
+            self.controller.keysRejected();
+        }
 	}
 
 	function setHeader(xhr){

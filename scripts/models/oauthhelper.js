@@ -51,6 +51,34 @@ function OAuthHelper(realm) {
         ISNLogger.log("passed completion");
         return OAuth.getAuthorizationHeader(this.realm, message.parameters);
     };
+    
+    this.setConsumer = function (key, secret) {
+        this.accessor.consumerKey = key;
+        this.accessor.consumerSecret = secret;
+        this.storeTokens();
+    };
+    
+    this.setAccess = function (key, secret) {
+        this.accessor.tokenKey = key;
+        this.accessor.tokenSecret = secret;
+        this.storeTokens();
+    };
+    
+    this.reset = function () {
+        this.accessor.token = "";
+        this.accessor.tokenSecret = "";
+        this.storeTokens();
+    };
+    
+    this.storeTokens = function (){
+        var data = JSON.stringify({
+            'consumerKey': this.accessor.consumerKey, 
+            'consumerSecret': this.accessor.consumerSecret,
+            'accessSecret': this.accessor.tokenSecret,
+            'accessToken': this.accessor.token
+                                  });
+        localStorage.setItem("authentication", data);
+    };
 }
 
 
