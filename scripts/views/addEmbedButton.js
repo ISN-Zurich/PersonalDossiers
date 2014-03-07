@@ -113,7 +113,7 @@ AddEmbedButton.prototype.embedStyle = function(embedType) {
  * generates the embedstring for the requested embed type. 
  */
 AddEmbedButton.prototype.generateEmbedCode = function(embedType) {
-    return '<iframe id="isnpdid' + this.dossierId + '" scrolling="no" src="' + this.embedURL(embedType) + '" style="' + this.embedStyle(embedType) + '"></iframe>';
+    return '<iframe id="isnpdid' + this.dossierId + '" scrolling="no" src="' + this.embedURL(embedType) + '" style="' + this.embedStyle(embedType) + '" frameBorder="0" ></iframe>';
 };
 
 AddEmbedButton.prototype.close = function(){
