@@ -178,7 +178,7 @@ input#password,
 }
 
 #contentBadgeContainer {
-	background-color:grey;
+	background-color:gray;
 }
 
 .buttonContainer {
@@ -194,7 +194,7 @@ input#password,
 }
 
 .pd_loginContainer {
-	border: 0'px solid green;
+	border: 0px solid green;
 	width:200px;
 	padding-left:-10px;
 	right:20px;
@@ -286,19 +286,19 @@ textarea:-ms-input-placeholder {
 
 .pd_warning {
 	color:red;
-	maring-top:15px;
+	margin-top:15px;
 	padding-left:25px;
-	font-size:14px:
+	font-size:14px;
 }
 
 .pd_success {
 	color:blue;
-	font-size:20px:
+	font-size:20px;
 }
 
 .pd_profile_selected {
     /*background-color:#D2D2D2;*/
-    font-color:blue;
+    color:blue;
 }
 
 /*************************end of change password***************/
@@ -434,7 +434,7 @@ ul#sortable li{
 }
 
 .pd_activeBadge {
-	background-color:grey;
+	background-color:gray;
 	color:white;
 }
 
@@ -648,7 +648,7 @@ body.embedBadge {
 
 /************************DOSSIER CONTENT VIEW *******************/
 .deletecontainer {
-	border:0px solid grey;
+	border:0px solid gray;
 	padding-top:5px;
 }
 
@@ -683,18 +683,22 @@ body.embedBadge {
 }
 
 .placeholder {
-	position: -3px -3px;
+	position:relative;
+	top: -3px;
+	left: -3px;
 	height: 120px;
 	line-height:180px;
 	background: #4c5160;
-	border:0x solid black;:
+	border:0px solid black;
 }
 
 .currentSortedItem {
-	position:0px 0px;
+	position:relative;
+	top: 0px;
+	left: 0px;
 	border: 0px solid red;
 	height:150px;
-	line-height:150x;
+	line-height:150px;
 	background:#ebedee;
 	/*background-color: #ddd;*/
 }
@@ -710,7 +714,7 @@ body.embedBadge {
 .pd_box {
 	position: relative;
 	/*font-family: sans-serif;*/
-	font-family:Times New Roman;
+	font-family:"Times New Roman", times, serif;
 	display: block;
 	/*width: 244px;*/
 	height: 7.2em;
@@ -804,7 +808,7 @@ body.embedBadge {
 
 .roleSeparatorUnselected {
 	border-right: 1px solid white;
-	background:#4C5160;;
+	background:#4C5160;
 	color:#ebedee ;
 	padding-right:5px;
 	padding-top:10px;
