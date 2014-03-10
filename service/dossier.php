@@ -751,6 +751,7 @@ class DossierService extends OAUTHRESTService {
 				$dsc = $_POST['description'];
 				$this->log("update description! " . $dsc);
 			}
+			
 			if (array_key_exists('image', $_POST)) {
 				$this->log("update image!");
 				$img = $_POST['image'];
@@ -766,10 +767,11 @@ class DossierService extends OAUTHRESTService {
 					$values["title"]= $ttl;
 					array_push($types, "text");
 				}
-				if (!empty($dsc)) {
+				// Commenting out to enable empty description
+				//if (!empty($dsc)) {
 					$values["description"]= $dsc;
 					array_push($types, "text");
-				}
+				//}
 				if (!empty($img)) {
 					$values["image"]= $img;
 					array_push($types, "text");
