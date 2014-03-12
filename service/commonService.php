@@ -222,8 +222,15 @@ class RESTServiceCommon extends PDCommonClass {
                     header('Access-Control-Allow-Origin: ' . $origin);
                     header('Access-Control-Allow-Methods: POST, PUT, GET');
                     header('Access-Control-Allow-Headers: Authorization');
-                    header('Cache-Control: no-cache');
                 }
+
+                //move cache control outside of HTTP_ORIGIN check, which is a browser dependent header!
+                header('Cache-Control: no-cache');
+
+                //extra cache control headers to try and make IE behave.
+                header('Pragma: no-cache');
+                header('Expires: -1');
+
                 if ($this->prepareOperation($meth)) {
                     call_user_func(array($this, $cmeth));
                 }

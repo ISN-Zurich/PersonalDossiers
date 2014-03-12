@@ -452,7 +452,7 @@ class AuthenticationService extends OAUTHRESTService {
     		$sth = $mdb2->prepare("insert into users (title,name,email,password) values (?, ?, ?, ?)");
     		$res1 = $sth->execute(array($ttl,$name,$email,$pswd));
     		if (PEAR::isError($res1)) {
-    			$this->log("couldnt inser the registered data");
+    			$this->log("couldnt insert the registered data");
     			$this->log("pear error " . $res1->getMessage());
     			$this->bad_request();
     		}
@@ -509,7 +509,7 @@ class AuthenticationService extends OAUTHRESTService {
     			$this->log(' before the update password query');
     			$this->log(' data to be inserted are '.$tmp['password']);
     			// update the user profile table
-    			$sqlstring1 = "UPDATE  users SET password = ? WHERE id = ?";
+    			$sqlstring1 = "UPDATE users SET password = ? WHERE id = ?";
     			$sth->free();
     			$sth = $this->dbh->prepare($sqlstring1);
     			$sth->execute(array($tmp['password'], $uid));

@@ -5,7 +5,7 @@
 /*jslint vars: true, sloppy: true */
 
 function AuthenticationModel(controller){
-    ISNLogger.log("enter authentication model");
+    ISNLogger.log( 'enter authentication model' );
     var self=this;
     self.controller=controller;
 
@@ -29,8 +29,8 @@ function AuthenticationModel(controller){
     //after a successful registation the user should automatically log into the dossier list area
     
     $(document).bind("RegistrationDone", function(e, mail, pswd){
-    	ISNLogger.log("registration done is bound in authentication model");
-    	ISNLogger.log("mail in bound is "+mail);
+    	ISNLogger.log( 'registration done is bound in authentication model' );
+    	ISNLogger.log( 'mail in bound is ' + mail );
     	self.authenticateUser(mail, pswd);
     });    
 }
@@ -42,10 +42,10 @@ AuthenticationModel.prototype.storeData = function(){
     }
     catch(err){
         authString="";
-        ISNLogger.log("error log while storing authentication data");
+        ISNLogger.log( 'error log while storing authentication data' );
     }
     localStorage.setItem("authentication",authString);
-    ISNLogger.log("Authentication storage after store Data "+localStorage.getItem("authentication"));
+    ISNLogger.log( 'Authentication storage after storeData ' + localStorage.getItem("authentication") );
 };
 
 
@@ -59,14 +59,14 @@ AuthenticationModel.prototype.loadData=function(){
     	}
     }
     catch (err) {
-        ISNLogger.log("error! while loading");
+        ISNLogger.log( 'error! while loading localStorage data' );
     }
 
-    ISNLogger.log("authenticationObject: " + JSON.stringify(authObject));
+    ISNLogger.log( 'authenticationObject: ' + JSON.stringify(authObject) );
 
 
     if (!authObject) {
-        ISNLogger.log("initialize the local storage");
+        ISNLogger.log( 'initialize the local storage' );
         authObject = {
             consumerSecret:"6a33d1d90067c005de32f5f6aafe082ae8375a6f",
             consumerKey :"ch.isn.personal-dossier"
@@ -99,7 +99,7 @@ AuthenticationModel.prototype.setInitParameters=function(){
 
     var parameters=message.parameters;
     var header_request= OAuth.getAuthorizationHeader(baseURL(), parameters);
-    ISNLogger.log("request header is "+header_request);
+    ISNLogger.log( 'request header is ' + header_request );
     self.requestToken_header=header_request;
 };
 
@@ -113,12 +113,12 @@ AuthenticationModel.prototype.setInitParameters=function(){
 AuthenticationModel.prototype.getRequestToken=function(){
     var self=this;
     $.ajax({
-        url:  baseURL() +'service/authentication.php/request_token',
+        url:  baseURL() + 'service/authentication.php/request_token',
         type : 'GET',
         dataType : 'json',
         success : getAuthenticationInitData,
         error : function(request) {
-            ISNLogger.log("Error while getting request token");
+            ISNLogger.log( 'Error while getting request token' );
             showErrorResponses(request);
             // REMINDER: tell the user that he/she it cannot get a request token
             // we must not show the login view
@@ -127,12 +127,12 @@ AuthenticationModel.prototype.getRequestToken=function(){
     });
 
     function getAuthenticationInitData(data){
-        ISNLogger.log("success in initializing authentication and data are "+JSON.stringify(data));
+        ISNLogger.log( 'success in initializing authentication. data is ' + JSON.stringify(data) );
 
         self.request_token=data.oauth_token;
         self.token_secret=data.oauth_token_secret;
-        ISNLogger.log("request token is "+self.request_token);
-        ISNLogger.log("request token secret "+self.token_secret);
+        ISNLogger.log( 'request token is ' + self.request_token );
+        ISNLogger.log( 'request token secret ' + self.token_secret );
 
         //try to get a verification code
         self.obtainAuthorization();
@@ -156,7 +156,7 @@ AuthenticationModel.prototype.obtainAuthorization = function(){
         dataType : 'json',
         success : getVerificationCode,
         error : function(request) {
-            ISNLogger.log("Error while getting verification code");
+            ISNLogger.log( 'Error while getting verification code' );
             showErrorResponses(request);
 
             //clear access token
@@ -170,7 +170,7 @@ AuthenticationModel.prototype.obtainAuthorization = function(){
     });
 
     function getVerificationCode(data){
-        ISNLogger.log("get successfully verification code");
+        ISNLogger.log( 'get successfully verification code' );
         self.verificationCode_code=data.verification_code;
         //since we got a verification code, we request as next step the access token
         self.requestAccessToken();
@@ -196,11 +196,11 @@ AuthenticationModel.prototype.obtainAuthorization = function(){
         var parameters=message.parameters;
         var header_request= OAuth.getAuthorizationHeader(baseURL(), parameters);
 
-        ISNLogger.log('set obtainAccessToken authorization header ' + header_request);
+        ISNLogger.log( 'set obtainAccessToken authorization header ' + header_request );
         //create the new header the will contain also the request token
         xhr.setRequestHeader('Authorization', header_request);
 
-        ISNLogger.log('obtain header set!');
+        ISNLogger.log( 'obtain header set!' );
     }
 };
 
@@ -208,22 +208,22 @@ AuthenticationModel.prototype.obtainAuthorization = function(){
 
 AuthenticationModel.prototype.authenticateUser = function(email, password){
     var self=this;
-    ISNLogger.log("email is"+email);
-    ISNLogger.log("password is"+password);
+    ISNLogger.log( 'email is ' + email );
+    ISNLogger.log( 'password is ' + password );
     var hash1= hex_sha1(email+password);
-    ISNLogger.log(" hash1 "+hash1);
+    ISNLogger.log( 'hash1 ' + hash1 );
 
 
     var string=self.token_secret +self.authentication.consumerSecret + hash1;
     var hash_pswd=hex_sha1(string);
-    ISNLogger.log("credentials: " + hash_pswd);
+    ISNLogger.log( 'credentials: ' + hash_pswd );
     var data= {
         "email":email,
         "credentials":hash_pswd
     };
 
     var url= baseURL() + 'service/authentication.php/authorize';
-    ISNLogger.log("url in authenticate user is "+url);
+    ISNLogger.log( 'url in authenticateUser is ' + url );
     var method="POST";
 
     $.ajax({
@@ -233,7 +233,7 @@ AuthenticationModel.prototype.authenticateUser = function(email, password){
         dataType : 'json',
         success : success,
         error : function(request) {
-            ISNLogger.log("Error while authenticating user");
+            ISNLogger.log( 'Error while authenticating user ');
             showErrorResponses(request);
             self.controller.transition("login");
         },
@@ -242,15 +242,15 @@ AuthenticationModel.prototype.authenticateUser = function(email, password){
 
     function setHeader(xhr){
 
-        ISNLogger.log("what token do we insert? " + self.request_token);
+        ISNLogger.log( 'what token do we insert? ' + self.request_token );
         var accessor={
             consumerKey: self.authentication.consumerKey,
             consumerSecret : self.authentication.consumerSecret,
             tokenSecret: self.token_secret,
             token: self.request_token
         };
-        ISNLogger.log("consumer Secret issssss "+self.authentication.consumerSecret);
-        ISNLogger.log("token Secret issssss "+self.token_secret);
+        ISNLogger.log( 'consumer Secret is ' + self.authentication.consumerSecret );
+        ISNLogger.log( 'token Secret is ' + self.token_secret );
 
         var message={
             method:method,
@@ -268,14 +268,14 @@ AuthenticationModel.prototype.authenticateUser = function(email, password){
         var header_request= OAuth.getAuthorizationHeader(baseURL(), parameters);
 
         //use the Authorization header that contains also the request token and token secret
-        ISNLogger.log( 'set authorization header ' + header_request);
+        ISNLogger.log( 'set authorization header ' + header_request );
         xhr.setRequestHeader('Authorization', header_request);
     }
 
     function success(data){
         //get the verification code
         self.verificationCode=data.oauth_verifier;
-        ISNLogger.log("verificaiton code is   "+self.verificationCode);
+        ISNLogger.log( 'verification code is ' + self.verificationCode );
         //grant accessToken
         self.requestAccessToken();
     }
@@ -283,7 +283,7 @@ AuthenticationModel.prototype.authenticateUser = function(email, password){
 
 
 AuthenticationModel.prototype.requestAccessToken = function() {
-    ISNLogger.log("enter request access token");
+    ISNLogger.log( 'enter request access token' );
     var self=this;
 
     var accessor={
@@ -317,7 +317,7 @@ AuthenticationModel.prototype.requestAccessToken = function() {
         success : success,
         error : function(request) {
             self.controller.transition("login");
-            ISNLogger.log("Error while getting access token");
+            ISNLogger.log( 'Error while getting access token' );
             showErrorResponses(request);
         },
         beforeSend : setHeader
@@ -325,8 +325,8 @@ AuthenticationModel.prototype.requestAccessToken = function() {
 
     function success(data){
         //get back from request the access_token and access_secret
-        ISNLogger.log("success in granting access token");
-        ISNLogger.log("access_token is "+self.accesstoken);
+        ISNLogger.log( 'success in granting access token' );
+        ISNLogger.log( 'access_token is ' + self.accesstoken );
         self.authentication.accessToken=data.oauth_token;
         self.authentication.accessSecret=data.oauth_token_secret;
         self.storeData();
@@ -341,13 +341,13 @@ AuthenticationModel.prototype.requestAccessToken = function() {
 };
 
 AuthenticationModel.prototype.checkActiveUser = function(){
-    ISNLogger.log("access token in checkActiveUser is  "+this.authentication.accessToken);
+    ISNLogger.log( 'access token in checkActiveUser is ' + this.authentication.accessToken );
     if(this.authentication.accessToken && this.authentication.accessToken.length>0){
-        ISNLogger.log("get user profile");
+        ISNLogger.log( 'get user profile' );
         this.controller.models['user'].getUserProfile();
     }
     else{
-        ISNLogger.log("get request token in checkactiveUser");
+        ISNLogger.log( 'get request token in checkactiveUser' );
         this.getRequestToken();
     }
 };
@@ -372,14 +372,14 @@ AuthenticationModel.prototype.logout =function(){
             showErrorResponses(request);
             //display a message to the user that the logout was not successful
             if (request.status == 401){
-                ISNLogger.log("successfully logged out from the server");
+                ISNLogger.log( 'successfully logged out from the server' );
                 self.clearAccessToken();
                 self.checkActiveUser();
                 //self.setInitParameters();
                 //self.controller.transition("login");
                 $(document).trigger("LogoutSent");
             }else{
-                ISNLogger.log("Error while invalidating access token");
+                ISNLogger.log( 'Error while invalidating access token' );
             }
         },
         beforeSend : setHeader

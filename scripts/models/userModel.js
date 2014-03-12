@@ -287,7 +287,7 @@ UserModel.prototype.sendUserProfileToServer = function(){
             "name": self.userProfile.name,
             "username": self.userProfile.username,
             "email": self.userProfile.email,
-            "activedDossier": this.userProfile.activeDossierId
+            "activeDossierId": this.userProfile.activeDossierId
     };
    
     var data=JSON.stringify(dataObject);
