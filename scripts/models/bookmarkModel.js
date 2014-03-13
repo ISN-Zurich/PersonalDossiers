@@ -512,7 +512,8 @@ BookmarkModel.prototype.getType = function() {
 };
 
 BookmarkModel.prototype.getISNURL = function() {
-    return (this.index < this.dossierList.length) ? this.dossierList[this.index].metadata.isn_detail_url: "";	
+    return (this.index < this.dossierList.length) ? 'http:\/\/www.isn.ethz.ch\/layout\/set\/pdembed\/Digital-Library\/'+this.dossierList[this.index].metadata.type+'\/Detail\/?lng=en\u0026id='+this.dossierList[this.index].metadata.id: "";
+//    return (this.index < this.dossierList.length) ? this.dossierList[this.index].metadata.isn_detail_url: "";
 };
 
 
