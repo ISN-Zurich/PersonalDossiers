@@ -169,9 +169,11 @@ userController.prototype.colorizeInteractiveBox = function(){
             break;
 
         case 'userProfile':
-            ISNLogger.log( 'user profile colorization' );
-            setUserProfileColorization();
+            //GET US OUT OF HERE
             break;
+            // ISNLogger.log( 'user profile colorization' );
+            // setUserProfileColorization();
+            // break;
 
         case '':
             if ( this.oauth ) {

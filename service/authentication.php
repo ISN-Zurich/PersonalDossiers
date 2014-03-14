@@ -99,12 +99,18 @@ class AuthenticationService extends OAUTHRESTService {
                 $this->register_user();
                 break;
 
+// Hide user profile editing #147
+// complementary: prevent service from reacting to profile changes sent to authentication service
+/*
             case 'password':
                 $this->update_password();
-//are we supposed to break here?
+//are we supposed to break here? or is this the desired behaviour?
+//I think maybe not for previous design but for new one it will be...
             default:
                 $this->update_userprofile();
                 break;
+*/
+
         }
     }
 

@@ -2,16 +2,16 @@
 /**
 * User Profile View
  */
-function userProfileView(controller){
+function userProfileView( controller ) {
 
-    ISNLogger.log("enter user profile view");
-    var self=this;
-    self.controller=controller;
-    self.tagID="userProfile";
-    self.editMode=false;
+    ISNLogger.log( 'enter user profile view' );
+    var self = this;
+    self.controller = controller;
+    self.tagID = "userProfile";
+    self.editMode = false;
 
     //remove the warning messages when start typing again
-    $("#pd_newPassword").bind("click", function(e){
+    $("#pd_newPassword").bind( "click" , function( e ) {
 
         ISNLogger.log("click change password container");
         if (!$("#warning_empty").hasClass("hide")){
@@ -36,6 +36,9 @@ function userProfileView(controller){
 //      }
 //  });
 
+
+// No profile editing in m1: #147
+/*
     $("#edit_profile").bind("click", function(e){
 
         ISNLogger.log("clicked the edit user profile button");
@@ -58,6 +61,7 @@ function userProfileView(controller){
         $(this).css('color', '#0089CF');
         self.editMode = true;
     });
+*/
 
     $("#save_changes_submit").bind("click", function(e){
 
@@ -195,8 +199,10 @@ userProfileView.prototype.openDiv = openView;
 userProfileView.prototype.open = function(){
 
     ISNLogger.log("enter open in user profile view");
-    this.update();
-    this.openDiv();
+
+    // No profile editing in m1: #147
+    // this.update();
+    // this.openDiv();
 };
 
 

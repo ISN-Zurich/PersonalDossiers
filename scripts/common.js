@@ -1,27 +1,31 @@
 /*jslint vars: true, sloppy: true */
 
-/**opens a view
- * @function openView
- * */
-
 var controllerObject;
 
 //var hostURL = ISNLogger.choose("http://yellowjacket.ethz.ch", "http://lab.isn.ethz.ch");
 //var baseURL = ISNLogger.choose("http://yellowjacket.ethz.ch/tools/", "http://lab.isn.ethz.ch/");
-function pdNOOP() {}
+function pdNOOP(){}
+
 
 // this will go away
-function hostURL() {
+function hostURL(){
+
     return ISNLogger.choose("http://lab.isn.ethz.ch", "http://yellowjacket.ethz.ch");
 }
 
+
 // this will go way
-function baseURL() {
+function baseURL(){
+
     return ISNLogger.choose("http://lab.isn.ethz.ch/", "http://yellowjacket.ethz.ch/tools/");
 }
 
 
-function openView() {
+/**opens a view
+ * @function openView
+ * */
+function openView(){
+
 	ISNLogger.log("first console log message");
 	$("#" + this.tagID).show();
 }
@@ -30,18 +34,23 @@ function openView() {
 /**closes  a view
  * @function closeView
  * */
-function closeView() {
+function closeView(){
+
 	$("#" + this.tagID).hide();
 }
 
-function showErrorResponses(request){
+
+function showErrorResponses( request ) {
+
 	ISNLogger.log("ERROR status text: "+ request.statusText);
 	ISNLogger.log("ERROR status code: "+ request.statusCode());
 	ISNLogger.log("ERROR status code is : " + request.status);
 	ISNLogger.log("ERROR responsetext: "+ request.responseText);
 }
 
-function setDossiersColorization() {
+
+function setDossiersColorization(){
+
 	$("#span_dossiers").addClass("pd_selected");
 	$("#st_dossiers").removeClass("disable");
 	$("#st_dossiers").addClass("pd_sb_icon");
@@ -61,8 +70,8 @@ function setDossiersColorization() {
 /**
  * Colorization of the interaction box when we are logged out
  * */
-
 function setLoggedOutColorization(){
+
 	$("#logView").addClass("pd_sb_icon");
 	$("#span_dossiers").removeClass("pd_selected");
 
@@ -73,6 +82,7 @@ function setLoggedOutColorization(){
 
 
 function setUserProfileColorization(){
+
 	$("#st_dossiers").removeClass("disable");
 	$("#st_dossiers").removeClass("pd_sb_icon");
 	$("#logView").removeClass("pd_sb_icon");
@@ -86,7 +96,9 @@ function setUserProfileColorization(){
 	$("#span_user").addClass("pd_selected");
 }
 
-function pdInitServiceHost() {
+
+function pdInitServiceHost(){
+
     var h = window.location.host;
     var p = window.location.protocol;
 
@@ -95,22 +107,31 @@ function pdInitServiceHost() {
     this.baseURL = baseURL(); // the trailing slash should be part of the service call.
 }
 
-function pdGetServiceHost() {
+
+function pdGetServiceHost(){
+
     return this.baseURL;
 }
 
-function pdIsAuthenticated() {
+
+function pdIsAuthenticated(){
+
     if (this.models.user && this.models.user.getUserId) {
+
         return this.models.user.getUserId() > 0 ? true : false;
     }
     return false;
 }
 
-function pdGetActiveDossierID() {
+
+function pdGetActiveDossierID(){
+
     this.controller.getActiveDossier();
 }
 
+
 // not used
-function pdPrepareServiceURL(service) {
+function pdPrepareServiceURL( service ) {
+
     return this.controller.serviceHost() + service;
 }

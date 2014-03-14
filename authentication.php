@@ -1,5 +1,12 @@
 <?php
 
+/**
+ *
+ *  ?replaceed by service/authentication.php?
+ *  SO FILE IS NOT IN USE? DELETE?
+ *
+ */
+
 require_once 'MDB2.php';
 include 'dbConnect.php';
 include_once 'commonService.php';
@@ -19,51 +26,51 @@ include 'session.php';
  *
  * The user profile of this service is a simple key value pair data structure. It acts as a
  * scratch pad for an application and is not compliant with any user profile standard. Therefore,
- * it should be only used for application specific data. 
+ * it should be only used for application specific data.
  *
  * This service (and all other consumer services) expects the OAuth information in
  * the Authorization Header of the Request
  */
- 
+
 class AuthenticationService extends OAUTHRESTService {
     protected $uri = '/tools/service/authentication.php';
-    
+
     protected $dbh;
     protected $session;
     protected $mode;
-    
+
     public function __construct($dbh) {
         parent::__construct($dbh);
-        
+
         $this->mark();
-       
+
         $this->mode = $this->path_info;
         $this->log("mode: " . $this->mode);
     }
-    
+
     /**
      * @method bool prepareOperation($HTTPmethod)
      *
      * @param string $HTTPmethod the HTTP method that is used to call the service
      *
      * This function determines whether the default OAuth AccessToken check should be
-     * performed. 
+     * performed.
      */
     protected function prepareOperation($meth) {
         if ($meth !== 'DELETE' && !empty($this->mode)) {
             // if the OAuth functions before the actual user authorization perform their specific
             // token validation. Therefore, the default access-token validation must be omitted.
-            
+
             $this->log('what is the mode? ' . $this->mode);
             $this->OAuthOmitCheck = true;
         }
 
         $this->logtest(  $meth === 'DELETE',                                        'user wants to DELETE');
         $this->logtest(( $meth === 'DELETE' ) && ( $this->mode === 'access_token'), 'user wants to log out');
-        
+
         return parent::prepareOperation($meth);
     }
-    
+
     protected function handle_GET() {
         $this->log("handle_GET");
         switch($this->mode) {
@@ -83,10 +90,10 @@ class AuthenticationService extends OAUTHRESTService {
                 break;
         }
     }
-    
+
     protected function handle_POST() {
         $this->log("handle post");
-        
+
         switch ($this->mode) {
             case 'authorize':
                 $this->authenticate_user();
@@ -101,10 +108,10 @@ class AuthenticationService extends OAUTHRESTService {
                 break;
         }
     }
-    
+
     protected function handle_DELETE() {
         $this->mark();
-        
+
         switch($this->mode) {
             case 'access_token':
                 $this->invalidate_accessToken();
@@ -114,7 +121,7 @@ class AuthenticationService extends OAUTHRESTService {
                 break;
         }
     }
-    
+
     protected function grant_requestToken() {
         // GET BASE_URI/request-token
         $this->log("grant request token");
@@ -124,17 +131,17 @@ class AuthenticationService extends OAUTHRESTService {
             $this->log("send the request token to the client");
             $this->data = $this->session->getRequestToken();
             $this->log(json_encode($this->data));
-            $this->respond_json_data();       
+            $this->respond_json_data();
         }
         else {
             $this->bad_request();
         }
     }
-    
+
     protected function obtain_authorization() {
         // GET BASE_URI/authorize
         $this->mark();
-        
+
         $this->session->validateRequestToken();
         if ( $this->session->requestVerified()) {
             // return verification code to the user
@@ -150,13 +157,13 @@ class AuthenticationService extends OAUTHRESTService {
             $this->authentication_required();
         }
     }
-    
+
     protected function authenticate_user() {
         // POST BASE_URI/authorize
         $this->mark();
-        
+
         $this->session->validateRequestToken(array('email'=>$_POST['email'], 'credentials'=> $_POST['credentials']));
-        
+
         if ($this->session->getOAuthState() === OAUTH_OK) {
             $this->session->verifyUser($_POST['email'], $_POST['credentials']);
             if ( $this->session->requestVerified()) {
@@ -176,7 +183,7 @@ class AuthenticationService extends OAUTHRESTService {
             $this->not_allowed();
         }
     }
-    
+
     protected function grant_accessToken() {
         // GET BASE_URI/access_token
         $this->mark();
@@ -192,7 +199,7 @@ class AuthenticationService extends OAUTHRESTService {
             $this->authenticate_user();
         }
     }
-    
+
     protected function get_userprofile() {
         // GET BASE_URI
         $this->mark();
@@ -213,7 +220,7 @@ class AuthenticationService extends OAUTHRESTService {
 
         	try {
         		$this->data = json_decode($row[0], true); //true means the returned object will be converted into an associative array
-        		
+
         	}
         	catch(Exception $e) {
         		$this->bad_request();
@@ -250,25 +257,25 @@ class AuthenticationService extends OAUTHRESTService {
         	$this->gone();
         	return;
             }
-            
+
             $sth->free();
-            
+
             $this->log('user profile is: '. json_encode($this->data));
-            
+
             $this->respond_json_data();
     }
-    
+
     protected function update_userprofile() {
     	$this->mark();
     	$this->dbh->setFetchMode(MDB2_FETCHMODE_ASSOC);
     	$mdb2 = $this->dbh;
-    	
+
         // POST BASE_URI
     	$this->log('update user profile');
-    	
+
         $data = file_get_contents("php://input");
         $this->log('data found are: '. $data);
-        
+
         /******OLD COMMENT********************/
         try {
              $tmp = json_decode($data, true);
@@ -279,32 +286,32 @@ class AuthenticationService extends OAUTHRESTService {
             $this->bad_request();
             return;
         }
-         
+
         if (!isset($tmp)) {
         	$this->log(' did not get any user data');
             $this->bad_request();
             return;
         }
-         
+
         $uid = $this->session->getUserID();
         $this->log('user id in update profile is'.$uid);
-        
+
         // strip the user id, email and username from the profile
         //*** VERY OLD COMMENT *****/
         //unset($tmp['user_id']);
         //unset($tmp['title']);
         //unset($tmp['name']);
         //unset($tmp['email']);
-    
+
      	$data = json_encode($tmp);
-        
+
         $types = array();
         array_push($types, "text");
-        
+
         // update or insert?
         $sth = $this->dbh->prepare("SELECT user_id FROM userprofile WHERE USER_ID = ?");
         $res = $sth->execute($uid);
-        
+
         if (!PEAR::isError($res)) {
         	//$mdb2->loadModule('Extended');
             if ($res->numRows() > 0) {
@@ -316,10 +323,10 @@ class AuthenticationService extends OAUTHRESTService {
                 $sth = $this->dbh->prepare($sqlstring1);
                 $sth->execute(array($data, $uid));
                 $sth->free();
-            	
+
             }
             else {
-                //  if for the specific user the active dossier is not set yet, then insert it into profile_data in userprofile table 
+                //  if for the specific user the active dossier is not set yet, then insert it into profile_data in userprofile table
                 $sth2 = $mdb2->prepare("INSERT INTO userprofile (profile_data, user_id) VALUES (?,?)");
                 $res2 = $sth2->execute(array($data, $uid));
                 if (PEAR::isError($res2)) {
@@ -328,9 +335,9 @@ class AuthenticationService extends OAUTHRESTService {
                 	return;
                 }
             }
-            
+
            //Update the user table
-            
+
             $sth2 = $this->dbh->prepare("SELECT id FROM users WHERE id = ?");
             $res2 = $sth2->execute($uid);
             if (!PEAR::isError($res2)) {
@@ -344,23 +351,23 @@ class AuthenticationService extends OAUTHRESTService {
             }
             else {
             	//insert user data : This part of the user registration
-            	
-            	     	
-            	
+
+
+
             }
-            
-             
-           
+
+
+
             $this->no_content();
         }
     }
-    
-    
+
+
     protected function register_user(){
     	$this->mark();
     	$this->dbh->setFetchMode(MDB2_FETCHMODE_ASSOC);
     	$mdb2 = $this->dbh;
-    	
+
     	$this->log('register user');
     	$data = file_get_contents("php://input");
     	$this->log('data found are: '. $data);
@@ -373,41 +380,41 @@ class AuthenticationService extends OAUTHRESTService {
     		$this->bad_request();
     		return;
     	}
-    	 
+
     	if (!isset($tmp)) {
     		$this->log(' did not get any user data');
     		$this->bad_request();
     		return;
     	}
-    	
+
     	$ttl = $tmp['title'];
     	$name =$tmp['name'];
     	$email = $tmp['email'];
     	$pswd = $tmp['password'];
-    	
+
     	//to check if the email already exists in the database
     	$sthCheck = $this->dbh->prepare("SELECT id FROM users WHERE email = ?");
     	$resCheck = $sthCheck->execute($email);
-    	
+
   		$empty_fields= array();
 		// population of array with empty fields
   		if (empty($name)){
   			array_push($empty_fields,"name");
   		}
-  		
+
   		if (empty($email)){
   			array_push($empty_fields,"email");
   		}
-  		
+
   		if (empty($pswd)){
   			array_push($empty_fields,"password");
   		}
-			
+
     	// check the lenght of this array
-    	
+
   		if (count($empty_fields)>0){
   			$this->log("the empty array has elements");
-  				
+
   			$jsonErrorObject=array(
   					"empty"=>$empty_fields
   			);
@@ -415,23 +422,23 @@ class AuthenticationService extends OAUTHRESTService {
   			$this->not_allowed($jsonErrorObject);
   			return;
   		}
-  		 
-    	
-    	
+
+
+
     	//check if there is any error in the query
     	if (PEAR::isError($resCheck)) {
     		$this->log("pear error " . $resCheck->getMessage());
     		$this->bad_request();
     		return;
     	}
-    	
+
     	//if the email existis already in the database
     	if ($resCheck->numRows() == 1) {
     		$this->log("the email exists already in the database");
     		$this->forbidden();
     		return;
     	}
-    	else { 
+    	else {
     		$this->log("will try insert register data to the database");
     		$sth = $mdb2->prepare("insert into users (title,name,email,password) values (?, ?, ?, ?)");
     		$res1 = $sth->execute(array($ttl,$name,$email,$pswd));
@@ -441,22 +448,22 @@ class AuthenticationService extends OAUTHRESTService {
     			$this->bad_request();
     		}
     	}
-    	
+
     }
-    
+
     /**
      * TODO: to write comments
-     * 
-     * 
+     *
+     *
      */
     protected function update_password() {
     	$this->mark();
     	$this->dbh->setFetchMode(MDB2_FETCHMODE_ASSOC);
     	$mdb2 = $this->dbh;
-    	 
+
     	// POST BASE_URI
     	$this->log('update password');
-    	
+
     	$data = file_get_contents("php://input");
     	$this->log('data found in update password: '. $data);
     	try {
@@ -468,26 +475,26 @@ class AuthenticationService extends OAUTHRESTService {
     		$this->bad_request();
     		return;
     	}
-    	 
+
     	if (!isset($tmp)) {
     		$this->log(' did not get any password data');
     		$this->bad_request();
     		return;
     	}
-    	 
-    	
-    	
+
+
+
     	//$uid = $this->session->getUserID();
-    	
+
     	$uid=$tmp['user_id'];
     	$this->log(' user id in update password is'.$uid);
     	$data = json_encode($tmp);
     	$uid2=$data['user_id'];
     	$this->log(' user id 2 in update password is'.$uid);
-    	
+
     	$sth = $this->dbh->prepare("SELECT id FROM users WHERE id = ?");
     	$res = $sth->execute($uid);
-    	
+
     	if (!PEAR::isError($res)) {
     		$this->log('there are no errors');
     		if ($res->numRows() > 0) {
@@ -498,31 +505,31 @@ class AuthenticationService extends OAUTHRESTService {
     			$sth->free();
     			$sth = $this->dbh->prepare($sqlstring1);
     			$sth->execute(array($tmp['password'], $uid));
-    			$sth->free(); 
+    			$sth->free();
     		}
     		else {
     			// insert
     			$sqlstring = "INSERT INTO userprofile (profile_data, user_id) VALUES (?,?)";
-    	
-    	
+
+
     		}
-    	
+
     }
     }
-    
+
     /**
      * @method void invalidateAccessToken()
      *
      * This method removes the current access token from the database.
      * De facto this means the end of the user session.
      *
-     * This function always returns an error code. 
+     * This function always returns an error code.
      */
     protected function invalidate_accessToken() {
         // DELETE BASE_URI/access_token
         $this->mark();
         $this->session->invalidateAccessToken();
-        $this->authentication_required();  
+        $this->authentication_required();
     }
 }
 
