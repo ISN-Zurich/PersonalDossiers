@@ -55,7 +55,8 @@ function setDossiersColorization(){
 	$("#st_dossiers").removeClass("disable");
 	$("#st_dossiers").addClass("pd_sb_icon");
 
-	$("#st_user").removeClass("disable");
+	// No editing profile #147
+	// $("#st_user").removeClass("disable");
 	$("#st_user").removeClass("pd_sb_icon");
 	$("#span_user").addClass("pd_active");
 
@@ -90,7 +91,8 @@ function setUserProfileColorization(){
 	$("#logView").addClass("clickable");
 	$("#span_dossiers").addClass("pd_active");
 
-	$("#st_user").removeClass("disable");
+	// No editing profile #147
+	// $("#st_user").removeClass("disable");
 	$("#st_user").addClass("pd_sb_icon");
 	$("#span_user").removeClass("pd_active");
 	$("#span_user").addClass("pd_selected");
