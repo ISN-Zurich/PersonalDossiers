@@ -2,7 +2,7 @@
  * This controller is responsible for the indx.html
 
  * (dossier banner view and dossier content view)
- * 
+ *
  * @returns
  */
 
@@ -19,7 +19,7 @@ function dossierController() {
 
 //	document.domain = 'ethz.ch';
 	self.hashed=false;
-    
+
 	self.hashedUrl();
 	self.initOAuth();
 
@@ -28,7 +28,7 @@ function dossierController() {
 
 	if (self.oauth || self.hashed){
 
-		//initialization of models 
+		//initialization of models
 		self.models = {};
 
 		//self.models.authentication = new AuthenticationModel(this);
@@ -45,7 +45,7 @@ function dossierController() {
 
 		self.views = {};
 
-		//initialization of views 
+		//initialization of views
 		self.views.dossierBanner = new DossierBannerView(self);
 		self.views.dossierContent= new DossierContentView(self);
 		self.views.userlist = new DossierUsersView(self);
@@ -97,7 +97,7 @@ dossierController.prototype.getUserType = function(){
 dossierController.prototype.hashedUrl = function() {
     ISNLogger.log("enter hasehd url");
     this.hashed = false;
-    
+
     var url_ref = window.location.search;
     if (url_ref && url_ref.length) {
         var splited = url_ref.slice(1).split('&');
@@ -118,7 +118,7 @@ dossierController.prototype.hashedUrl = function() {
                     }
                 }
             }
-        } 
+        }
     }
 };
 
@@ -175,7 +175,7 @@ dossierController.prototype.getActiveDossier = function(){
 		if(!this.activedossierId){
 			var dossierId = this.models.dossierList.getDefaultDossierId();
 			return dossierId;
-		} 
+		}
 	}//is not hashed
 	return undefined;    //if something goes wrong for any reason
 };
@@ -188,4 +188,4 @@ dossierController.prototype.logout = function() {
 	authentication.logout();
 };
 
-var controlerObject = dossierController;
+var controllerObject = dossierController;

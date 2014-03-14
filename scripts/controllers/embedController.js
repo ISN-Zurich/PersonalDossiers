@@ -4,7 +4,7 @@ ISNLogger.log("enter embed controller file");
  * This controller is responsible for the indx.html
 
  * (dossier banner view and dossier content view)
- * 
+ *
  * @returns
  */
 
@@ -17,11 +17,11 @@ function embedController() {
 //
 //    this.baseURL = baseURL;
 //    this.hostURL = hostURL;
-//    
+//
 //    document.domain = 'ethz.ch';
     self.hashed=false;
     self.hashedUrl();
-  
+
     // if we are logged in or if there is a hash on the url then show & open the authorized views
     // if there is a hash on the url don't show the logout button
 
@@ -29,17 +29,17 @@ function embedController() {
         self.views = {};
         self.models = {};
 
-        
-        //initialize models 
+
+        //initialize models
         self.models.dossierList = new DossierListModel(self);
         self.models.bookmark = new BookmarkModel(self);
-        
+
         ISNLogger.log("model is initialized");
 
-        //initialize views 
+        //initialize views
         self.views.dossierBanner = new DossierBannerView(self);
         self.views.dossierContent= new DossierContentView(self);
-        
+
         $(document).bind("BookmarkModelLoaded", function() {
            ISNLogger.log("initialize views in controller");
            self.views.dossierBanner.open();
@@ -54,7 +54,7 @@ embedController.prototype.isAuthenticated = pdIsAuthenticated;
 embedController.prototype.keysRejected = pdNOOP;
 
 embedController.prototype.hashedUrl = function() {
-    ISNLogger.log("enter hasehd url"); 
+    ISNLogger.log("enter hasehd url");
 
     url_ref=window.location.href;
     var splited=url_ref.split("?");
@@ -69,10 +69,10 @@ embedController.prototype.hashedUrl = function() {
             this.pubid=d_id;
             this.hashed=true;
         }
-    } 
+    }
     else{
         this.hashed=false;
-    }	               
+    }
 };
 
 embedController.prototype.getHashedURLId = function(){
@@ -95,19 +95,19 @@ embedController.prototype.getActiveDossier = function(){
         if(!this.activedossierId){
             var dossierId = this.models.dossierList.getDefaultDossierId();
             return dossierId;
-        } 
+        }
     } //is not hashed
     return undefined;    //if something goes wrong for any reason
 };
- 
-var controlerObject = embedController;
- 
+
+var controllerObject = embedController;
+
 //
 //var controller;
 //ISNLogger.log("enter main js");
 //$(document).ready(function(){
 //    ISNLogger.log("document ready");
-//    
+//
 //    ISNLogger.debugMode = false;
 //    controller = new embedController();
 //});

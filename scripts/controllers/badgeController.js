@@ -2,7 +2,7 @@
  * This controller is responsible for the indx.html
 
  * (dossier banner view and dossier content view)
- * 
+ *
  * @returns
  */
 
@@ -15,16 +15,16 @@ function badgeController() {
 
 //    this.baseURL = baseURL;
 //    this.hostURL = hostURL;
-    
+
     // document.domain = 'ethz.ch';
     self.hashed=false;
     self.hashedUrl();
-  
+
   // if we are logged in or if there is a hash on the url then show & open the authorized views
   // if there is a hash on the url don't show the logout button
 
    if (self.hashed){
-        //initialization of models 
+        //initialization of models
         self.models = {};
 
         self.models.dossierList = new DossierListModel(self);
@@ -34,7 +34,7 @@ function badgeController() {
 
         self.views = {};
 
-        //initialization of views 
+        //initialization of views
 
         //  self.views.dossierBanner = new DossierBannerView(self);
         self.views.badge= new BadgeView(self);
@@ -51,7 +51,7 @@ badgeController.prototype.getServiceHost = pdGetServiceHost;
 badgeController.prototype.keysRejected = pdNOOP;
 
 badgeController.prototype.hashedUrl = function() {
-	ISNLogger.log("enter hasehd url"); 
+	ISNLogger.log("enter hasehd url");
 	url_ref=window.location.href;
 	var splited=url_ref.split("?");
 	ISNLogger.log("show splitted url array is "+splited);
@@ -66,7 +66,7 @@ badgeController.prototype.hashedUrl = function() {
 			this.hashed=true;
 		}} else{
 			this.hashed=false;
-		}              
+		}
 };
 
 badgeController.prototype.getHashedURLId = function(){
@@ -89,18 +89,18 @@ badgeController.prototype.getActiveDossier = function(){
     		if(!this.activedossierId){
     			var dossierId = this.models.dossierList.getDefaultDossierId();
     			return dossierId;
-    		} 
+    		}
     	}//is not hashed
     	return undefined;    //if something goes wrong for any reason
 };
 
-var controlerObject = badgeController;
+var controllerObject = badgeController;
 
 //var controler;
 //ISNLogger.log("enter main js");
 //$(document).ready(function(){
 //	ISNLogger.log("document ready");
-//    
+//
 //    ISNLogger.debugMode = false;
 //	controller = new badgeController();
 //});

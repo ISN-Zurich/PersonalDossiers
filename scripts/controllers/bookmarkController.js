@@ -2,18 +2,18 @@
 /*jslint vars: true, sloppy: true */
 
 function BookmarkController() {
-    
+
 	var self=this;
 
-    
+
     this.initServiceHost();
 //    this.hostURL = hostURL;
 //    this.baseURL = baseURL;
-    
+
     this.targetHost = 'http://www.isn.ethz.ch';
     // document.domain = 'ethz.ch';
-    this.allowedHosts = ['http://www.isn.ethz.ch', 'http://isn.ethz.ch', 'http://www.isn.ch', 'http://isn.ch']; 
-    
+    this.allowedHosts = ['http://www.isn.ethz.ch', 'http://isn.ethz.ch', 'http://www.isn.ch', 'http://isn.ch'];
+
     self.initOAuth();
     self.models={};
 
@@ -24,17 +24,17 @@ function BookmarkController() {
 
     self.views={};
     self.views.bookmark = new bookmarkView(self);
-    
+
     self.models.user.checkActiveUser();
-    
+
     self.library_item_id=null;
     self.getUrlId(); // assign a value to library_item_id
-     
-    
+
+
     $(document).bind('UserProfileUpdate', function(){
-		
+
 		ISNLogger.log("binded User profile update in user controller model");
-		
+
 		self.models.dossierList.getUserDossiers();
 	});
 
@@ -87,7 +87,7 @@ BookmarkController.prototype.getUrlId = function(){
 BookmarkController.prototype.checkBookmark=function(item_id){
     if ( this.models.bookmark.hasItem(item_id) ){
         ISNLogger.log('bookmark found!');
-        window.parent.postMessage(JSON.stringify({'bookmarkok': 1}), 
+        window.parent.postMessage(JSON.stringify({'bookmarkok': 1}),
                                    this.targetHost);
 	}
 };
@@ -97,9 +97,9 @@ BookmarkController.prototype.notifyNewHeight = function(height){
     var data={
         "resize": {
             "height":height
-        }	
+        }
     };
-    
+
     var id, mdata= JSON.stringify(data);
     if (this.targetHostId >=0) {
         window.parent.postMessage(mdata, this.allowedHosts[this.targetHostId]);
@@ -130,19 +130,19 @@ BookmarkController.prototype.calculateHeight= function(m){
 		var data={
 				"resize": {
 					"height":height
-				}	
+				}
 		};
 		window.parent.postMessage(JSON.stringify(data), targetHost);
 	}
 };
 
-var controlerObject = BookmarkController;
+var controllerObject = BookmarkController;
 //
 //var controller;
 //ISNLogger.log("enter bookmark main js");
 //$(document).ready(function(){
 //    ISNLogger.log("document ready in bookmark controller");
-//    
+//
 //    ISNLogger.debugMode = false;
 //    controller = new BookmarkController();
 //});
