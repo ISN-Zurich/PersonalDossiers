@@ -36,7 +36,8 @@ function userController(){
     //if authenticated
     if ( this.oauth ) {
 
-        $("#st_user").removeClass("pd_disable");
+        // No editing profile as per #147
+        // $("#st_user").removeClass("pd_disable");
         $("#st_dossiers").removeClass("pd_disable");
     }
 
@@ -127,6 +128,8 @@ userController.prototype.chooseView = function(){
 
         switch ( hashTag ) {
 
+// No editing user profile as per #147
+/*
             case 'userProfile':
                 this.views.welcome.close();
                 this.views.introduction.close();
@@ -135,6 +138,7 @@ userController.prototype.chooseView = function(){
                 this.views.user.open();
                 this.activeView = this.views.user;
                 break;
+*/
 
             case 'notifications':
                 this.views.notifications.open();
