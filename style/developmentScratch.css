@@ -1,7 +1,7 @@
 /**
  * Development scratch Styles
- * 
- * This stylesheet contains CSS styles that are not fully tested for being part of the offical Personal Dossiers CSS. 
+ *
+ * This stylesheet contains CSS styles that are not fully tested for being part of the offical Personal Dossiers CSS.
  */
 
 .beta.warning {
@@ -27,14 +27,13 @@ a.disable  {
 	padding:0px 0px 0px 0px;
 }
 
-.pd_grey_bar{
+.pd_grey_bar {
     display: inline-block;
     width: 212px;
     height: 28px;
     padding: 0px 0px 0px 18px;
     margin: 0;
     margin-bottom: 1px;
-    vertical-align: middle;
     line-height: 28px;
     background: #4c5160 !important;
     color: #fff !important;
@@ -153,9 +152,11 @@ div.pd-snippetlist-content {
 
 .pd-sidebar-header {
     color: #FFFFFF;
-    font-size: 1.2em;
-    padding: 9px 15px 5px 18px;
-    height:14px;
+    height: 28px;
+    padding: 0px 0px 0px 18px;
+    margin: 0;
+    margin-bottom: 1px;
+    line-height: 28px;
 }
 
 .pd-sidebar-header.darkblue {
@@ -185,7 +186,7 @@ div.pd-snippetlist-content {
 
 /*redefine the ul and li's in order the dossier list items to be displayed properly */
 
-#content ul li, 
+#content ul li,
 #content ol li {
 }
 
@@ -196,11 +197,11 @@ div.pd-snippetlist-content {
 li {
 }
 
-#content ul li, 
+#content ul li,
 #content ol li {
 }
 
-ul#sortable { 
+ul#sortable {
     /*font-size:10x;*/
 	font-size: 1em;
 	line-height: 1.5em;
@@ -212,12 +213,12 @@ ul#sortable {
 }
 
 /* we redefine this in order to remove the more icon from the li items, it was set as a background on the original css */
-#content ul li a, 
-#content a.more, 
-#content a.pdf, 
-#content ul li a:link, 
-#content a.more:link, 
-#content a.pdf:link, 
+#content ul li a,
+#content a.more,
+#content a.pdf,
+#content ul li a:link,
+#content a.more:link,
+#content a.pdf:link,
 #sidebar_right a.more:link {
     background: none;
     padding-left: .8em;
@@ -228,7 +229,7 @@ ul#sortable {
     display: inline-block;
     float: left;
     width: 176px;/*it was width: 373px;*/
-    height: 18px; 
+    height: 18px;
     margin: 0px;
     margin-bottom: 1px;
     padding: 5px 0px 5px 17px;
@@ -252,8 +253,8 @@ ul#sortable {
     background-color: inherit;
 }
 
-#titleContainer a, 
-#titleContainer a:visited, 
+#titleContainer a,
+#titleContainer a:visited,
 #titleContainer a:link {
     text-decoration: none;
     color: #000;

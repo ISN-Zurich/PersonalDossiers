@@ -5,43 +5,46 @@ height:34px;
 **/
 
 .pd_boxTitle{
-	font-size:12px;
-	color:#fff;
-	
+    font-size:12px;
+    color:#fff;
 }
 
 #InteractionBar {
-	background-color:#4c5160;
-	margin-bottom:1px;
+    background-color:#4c5160;
+    margin-bottom:1px;
+}
+
+.sb_icon {
+    border-bottom:none !important;
 }
 
 .pd_interactionItem {
-	background-color:#4c5160;
+    background-color:#4c5160;
 }
 
 .greyBg {
-	background-color:#ebedee;
+    background-color:#ebedee;
 }
 
 .pd_tabs_margin {
-	padding-left:5px;
+    padding-left:5px;
 }
 
 .pd_selected {
-	color:white;
+    color:white;
 }
 
 .pd_active{
-	color:#fff;
+    color:#fff;
 }
 
 .pd_disable {
-	color: #bebebe;
+    color: #bebebe;
 }
 
 .iconMoon {
-	font-family:'icomoon';
-	font-size:18px;
+    font-family:'icomoon';
+    font-size:18px;
 }
 
 /***********************End of Interaction Box*********************/
@@ -49,23 +52,25 @@ height:34px;
 /******LOGIN FORM******************/
 
 #loginForm {
-	border:0px solid black;
-	padding-bottom:0px;
+    border:0px solid black;
+    padding-bottom:0px;
 }
 
-input#username, 
+input#username,
 input#password,
 input#edit_password,
 input#edit_profile {
     background-color:transparent;
     border: none;
-    margin-left:18px;
-    margin-right:18px;
+    margin: 0px 0px 0px 18px;
+    height:28px;
+    line-height:28px;
+
    /* height:22px;   */
 }
 
 #edit_password,
-#edit_profile, 
+#edit_profile,
 .pd_listItem,
 .userlistItem {
     background-color:transparent;
@@ -73,10 +78,10 @@ input#edit_profile {
     margin-left:18px;
     margin-right:18px;
     height:16px;
-	font-size:12px;
-	padding-top:10px;
-	color:#4c5160;
-	padding-bottom:2px;
+    font-size:12px;
+    padding-top:10px;
+    color:#4c5160;
+    padding-bottom:2px;
 }
 
 input#username {
@@ -86,31 +91,31 @@ input#username {
 }
 
 input#password {
-	height:16px;
+    height:16px;
 }
 
 #edit_profile,
 .pd_listItem  {
-	 border-bottom:1px solid #c9cacf;
-	 padding-bottom:5px;
+     border-bottom:1px solid #c9cacf;
+     padding-bottom:5px;
 }
 
 #pd_uContainer1 {
-	padding:0px;
-	margin-left:18px;
+    padding:0px;
+    margin-left:18px;
     margin-right:18px;
     border-bottom:1px solid #c9cacf;
 }
 
-/*input#password { 
-	margin-top:-3px;
-	 border:0px solid blue;
+/*input#password {
+    margin-top:-3px;
+     border:0px solid blue;
 }*/
 
-input#password, 
-#pd_currentPassword, 
-#pd_newPassword, 
-#pd_confirm_newPassword, 
+input#password,
+#pd_currentPassword,
+#pd_newPassword,
+#pd_confirm_newPassword,
 #passwordRegistrationInput,
 #passwordRegConfirmInput {
     -webkit-text-security: disc;
@@ -118,153 +123,155 @@ input#password,
 }
 
 #loginButton {
-	display:inline;
-	width:45px;
-	color:#4c5160;
-	text-align: center;
-	cursor: pointer; 
-	border-right:1px solid white;
-	/*border:1px solid green;*/
-	padding-left:40px;
-	padding-right:40px;
-	text-align:center;
-	padding-top:6px;
-	padding-bottom:10px;
-	height:28px;
+    display:inline;
+    width:45px;
+    color:#4c5160;
+    text-align: center;
+    cursor: pointer;
+    border-right:1px solid white;
+    /*border:1px solid green;*/
+    padding-left:40px;
+    padding-right:40px;
+    text-align:center;
+    padding-top:6px;
+    padding-bottom:10px;
+    height:28px;
 }
 
 #registerButton {
-	display:inline;
-	color:#4c5160;
-	text-align: center;
-	cursor: pointer; 
-	border:0px solid red;
-	width:45px;
-	margin-bottom:0px;
-	padding-left:30px;
-	padding-right:25px;
-	padding-top:6px;
-	height:28px;
+    display:inline;
+    color:#4c5160;
+    text-align: center;
+    cursor: pointer;
+    border:0px solid red;
+    width:45px;
+    margin-bottom:0px;
+    padding-left:30px;
+    padding-right:25px;
+    padding-top:6px;
+    height:28px;
 }
 
 #userloginHeader {
-	height:14px;
+    height:28px;
+    line-height: 28px;
+    padding:0px 0px 0px 18px;
 }
 
 .pd_embed_buttons {
-	display:inline;
-	color:#4c5160;
-	text-align: center;
-	cursor: pointer; 
-	border:0px solid red;
-	width:80px;
-	padding-left:25px;
-	padding-right:30px;
-	padding-top:5px;
-	clear:both;
-	font-size:12px;
+    display:inline;
+    color:#4c5160;
+    text-align: center;
+    cursor: pointer;
+    border:0px solid red;
+    width:80px;
+    padding-left:25px;
+    padding-right:30px;
+    padding-top:5px;
+    clear:both;
+    font-size:12px;
 }
 
 #contentEmbed {
-	margin-top:5px;
-	border-right:1px solid white;
-	padding-bottom:8px;
+    margin-top:5px;
+    border-right:1px solid white;
+    padding-bottom:8px;
 }
 
 #badgeStyle {
-	margin-bottom:0px;
-	margin-top:5px;
-	padding-bottom:8px;
+    margin-bottom:0px;
+    margin-top:5px;
+    padding-bottom:8px;
 }
 
 #contentBadgeContainer {
-	background-color:gray;
+    background-color:gray;
 }
 
 .buttonContainer {
-	width:229px;
-	border-top:1px solid white;
-	height:22px;
-	padding-top:5px;
+    width:229px;
+    border-top:1px solid white;
+    height:22px;
+    padding-top:5px;
 }
 
 #loginUl {
-	border: 0px solid blue;
-	padding-left:0px;
+    border: 0px solid blue;
+    padding-left:0px;
 }
 
 .pd_loginContainer {
-	border: 0px solid green;
-	width:200px;
-	padding-left:-10px;
-	right:20px;
-	clear:both;
+    border: 0px solid green;
+    width:200px;
+    padding-left:-10px;
+    right:20px;
+    clear:both;
 }
 
 form.placeholder{
-	color:red;
+    color:red;
 }
 
 /*Webkit input fields*/
 
 input::-webkit-input-placeholder {
-	color:#a1aab1;
+    color:#a1aab1;
 }
 
 input#edit_profile::-webkit-input-placeholder {
-	color:#4c5160;
+    color:#4c5160;
 }
 
 input#edit_password::-webkit-input-placeholder {
-	color:#4c5160;
+    color:#4c5160;
 }
 
 input:hover::-webkit-input-placeholder {
-	color:#4c5160;
+    color:#4c5160;
 }
 
 input:focus::-webkit-input-placeholder {
-	text-indent:-999px;
+    text-indent:-999px;
 }
 
 /*Mozilla input fields*/
-input:-moz-placeholder, 
-textarea:-moz-placeholder { 
+input:-moz-placeholder,
+textarea:-moz-placeholder {
    color:#a1aab1;
 }
 
-input:hover::-moz-placeholder, 
-textarea:-moz-placeholder { 
+input:hover::-moz-placeholder,
+textarea:-moz-placeholder {
    color:#4c5160;
 }
 
-input:focus::hover-moz-placeholder, 
-textarea:-moz-placeholder { 
+input:focus::hover-moz-placeholder,
+textarea:-moz-placeholder {
     text-indent:-999px;
 }
 
 /*Microsoft input fields*/
-input:-ms-input-placeholder, 
-textarea:-ms-input-placeholder { 
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {
     color:#a1aab1;
 }
 
-input:hover::-ms-input-placeholder, 
-textarea:-ms-input-placeholder { 
+input:hover::-ms-input-placeholder,
+textarea:-ms-input-placeholder {
     color:#4c5160;
 }
 
-input:focus::-ms-input-placeholder, 
-textarea:-ms-input-placeholder { 
+input:focus::-ms-input-placeholder,
+textarea:-ms-input-placeholder {
     text-indent:-999px;
 }
 
 /*****end of login form***********/
 
 .profile {
-	color:#4c5160;
-	padding-left:18px;
-	height:28px;
+    color:#4c5160;
+    padding-left:18px;
+    height:28px;
 }
 
 /*****ADD DOSSIER BUTTON**********/
@@ -279,21 +286,21 @@ textarea:-ms-input-placeholder {
     vertical-align: middle;
     line-height: 28px;
     background: #ebedee !important;
-    color: #fff !important;	
+    color: #fff !important;
 }
 
 /************** CHANGE PASSWORD FORM       *****************/
 
 .pd_warning {
-	color:red;
-	margin-top:15px;
-	padding-left:25px;
-	font-size:14px;
+    color:red;
+    margin-top:15px;
+    padding-left:25px;
+    font-size:14px;
 }
 
 .pd_success {
-	color:blue;
-	font-size:20px;
+    color:blue;
+    font-size:20px;
 }
 
 .pd_profile_selected {
@@ -306,83 +313,83 @@ textarea:-ms-input-placeholder {
 /***LOGOUT CONFIRMATION BUTTON**/
 
 .pd_logout_confirm {
-	height:80px;
+    height:80px;
 }
 
 .logoutText {
-	color:white;
+    color:white;
 }
 
 #st_log_out_confirm {
-	border:0px solid green;
+    border:0px solid green;
 }
 
 #confirmationMsg {
-	color:white;
-	size:12px;
+    color:white;
+    size:12px;
 }
 
 /**END OF LOGOUT CONFIRMATION BUTTON*/
 /******************  EDIT DOSSIER BUTTON     ********************/
 
 .pd_editDossier {
-	font-size:12px;
-	margin-bottom:10px;
+    font-size:12px;
+    margin-bottom:10px;
 }
 
 .pd_img {
-	float:left;
+    float:left;
 }
 
 /**index.html css*/
-#addbmbutton, 
+#addbmbutton,
 .clickable {
     cursor: pointer;
 }
 #st_addDossier{
-	background-image:url(../images/add.png);
+    background-image:url(../images/add.png);
 }
 
 .st_editDosser {
-	border-left:1px solid white;
-	float:right;
-	padding-left:5px;
-	padding-left:6px;
-	padding-right:6px;
-	font-size:16px;	
+    border-left:1px solid white;
+    float:right;
+    padding-left:5px;
+    padding-left:6px;
+    padding-right:6px;
+    font-size:16px;
 }
 
 .st_unbookmarked {
-	color:#4C5160;
+    color:#4C5160;
 }
 
 .st_bookmarked {
-	color:#ebedee;
+    color:#ebedee;
 }
 
 /***** Dossier List Styles *****/
 #L1, #L2, #followingListHeader {
-	clear: both;
+    clear: both;
 }
 
 .dossier_item {
-	border:0px solid red;
-	/*float: left;*/
-	margin-right: 10px;	
-	padding-top:10px;
-	padding-bottom:0px;
-	width:470px;
-	/*height:145px;*/
+    border:0px solid red;
+    /*float: left;*/
+    margin-right: 10px;
+    padding-top:10px;
+    padding-bottom:0px;
+    width:470px;
+    /*height:145px;*/
 }
 
 ul#sortable li{
-	height:145px;
+    height:145px;
 }
 
 .dossier_item_border {
-	border-bottom:1px solid #C9CACF;
-	height:auto;
-	padding-bottom:15px;
+    border-bottom:1px solid #C9CACF;
+    height:auto;
+    padding-bottom:15px;
 }
 
 /************Registration*****/
@@ -412,109 +419,109 @@ ul#sortable li{
 }
 
 .registration_message {
-	color:red;
+    color:red;
 }
 
 #emailInputContainer {
-	/*border:1px solid red;*/
+    /*border:1px solid red;*/
 }
 
 .dossier_text p a {
-	color:#0089CF;
+    color:#0089CF;
 }
 
 /****EMBED VIEW *********/
 
 #dropdown_embed {
-	height:auto;
-	background-color:#ebedee;
-	margin-top:1px;
-	border:0px solid green;
-	padding:0px;
+    height:auto;
+    background-color:#ebedee;
+    margin-top:1px;
+    border:0px solid green;
+    padding:0px;
 }
 
 .pd_activeBadge {
-	background-color:gray;
-	color:white;
+    background-color:gray;
+    color:white;
 }
 
 input#inputContainer {
-	margin-left:5px;
+    margin-left:5px;
 }
 
 #drop_info{
- 	padding-top:3px;
-	padding-left:7px;
-	color:#0089CF;
-	font-style:italic;
+    padding-top:3px;
+    padding-left:7px;
+    color:#0089CF;
+    font-style:italic;
 }
 
 #embed_options,
 #embedButtons {
-	/*font-weight:bold;*/
-	font-size:12px;
-	margin-top:10px;
-	padding: 10px 0px 10px 00px;
-	border:0px solid red;	
+    /*font-weight:bold;*/
+    font-size:12px;
+    margin-top:10px;
+    padding: 10px 0px 10px 00px;
+    border:0px solid red;
 }
 
 #badgeHeader {
     cursor: pointer;
-	top:0px;
+    top:0px;
 }
 
 #titleContainer {
-	/*background-color:#ebedee;*/
-	height:16px;
-	border-bottom:1px solid white;
-	margin-top:1px;
-	font-size:14px;
-	padding:3px 10px 4px 10px;
+    /*background-color:#ebedee;*/
+    height:16px;
+    border-bottom:1px solid white;
+    margin-top:1px;
+    font-size:14px;
+    padding:3px 10px 4px 10px;
 }
 
 .dossierItemText {
-	font-size:12px;
-	white-space: nowrap;
-	text-overflow:ellipsis;
-	overflow: hidden;
+    font-size:12px;
+    white-space: nowrap;
+    text-overflow:ellipsis;
+    overflow: hidden;
 }
 
 .liItem {
     margin: 0px;
-	height:28px;
+    height:28px;
 }
 
 body.embedBadge {
-	/* overflow: hidden; */
+    /* overflow: hidden; */
 }
 
 .pd_overflow {
-	overflow-x:hidden;
-	overflow-y:auto;
-	/*height: 270px; */ /* 380 - 87px*/
+    overflow-x:hidden;
+    overflow-y:auto;
+    /*height: 270px; */ /* 380 - 87px*/
 }
 
 /*****END OF EMBED VIEW********/
 
 /********************************BOOOKMARK BUTTON *********************************/
 .bookmarkItem {
-	margin-bottom:0px;
+    margin-bottom:0px;
 }
-	
+
 .overflowText {
-	/*white-space: nowrap;*/
-	text-overflow: ellipsis;
-	overflow: hidden;
+    /*white-space: nowrap;*/
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .bookmarkButtonText {
-	display: inline-block;
-	width:180px; 
-	color:inherit;
+    display: inline-block;
+    width:180px;
+    color:inherit;
 }
 
 #headerText {
-	width: 22.72em;
+    width: 22.72em;
     height: 27em; /*it was 6em, it can be set auto to get automatically the height of the filled content*/
     margin-bottom: 2em;
     background: #ebedee;
@@ -524,42 +531,42 @@ body.embedBadge {
 }
 
 #header_image {
-	border:0px solid red;
+    border:0px solid red;
 }
 
 #header_container {
-	border:1px solid green;
+    border:1px solid green;
 }
 
 #contentArea {
-	border:0px solid blue;
+    border:0px solid blue;
 }
 
 #dossier_description {
-	border:0px solid green;
+    border:0px solid green;
 }
 
 .dossierItemActive {
-	color: #0089CF;
-	border:0px solid blue;
+    color: #0089CF;
+    border:0px solid blue;
 }
 
 .deleteButton {
-	text-align: right;
-	color: red;
-	cursor: pointer;
+    text-align: right;
+    color: red;
+    cursor: pointer;
 }
 
 .deleteConfirmButton {
-	display:none; 
-	color: red; 
-	text-align:right; 
-	cursor: pointer;
+    display:none;
+    color: red;
+    text-align:right;
+    cursor: pointer;
 }
 
 #addDossierBtn {
-	font-size:12px;
-	margin-right:10px;
+    font-size:12px;
+    margin-right:10px;
 }
 
 .headerTitleContainer {
@@ -568,104 +575,104 @@ body.embedBadge {
 }
 
 .headerTitle {
-	border:0px solid red;
-	font-size:16px;
-	font-weight:bold;
-	padding-left:3px;
-	padding-top: 5px;
+    border:0px solid red;
+    font-size:16px;
+    font-weight:bold;
+    padding-left:3px;
+    padding-top: 5px;
 }
 
 .titleEdit {
-	float:right;
-	color:#29a0d3;	
-	border:0px solid red;
-	font-size:13px;
-	padding-right:7px;
-	/*margin-top:180px;*/
-	cursor: pointer;
-	/*right:155px;
-	bottom:80px;
-	position:fixed;*/
+    float:right;
+    color:#29a0d3;
+    border:0px solid red;
+    font-size:13px;
+    padding-right:7px;
+    /*margin-top:180px;*/
+    cursor: pointer;
+    /*right:155px;
+    bottom:80px;
+    position:fixed;*/
 }
 
 .hidden {
-	display:none;
+    display:none;
 }
 
 .margingForEdit {
-    /*	margin-bottom:120px; */
+    /*  margin-bottom:120px; */
 }
 
 .welcomeText {
-	font-size:20px;
-	border:0px solid black;
+    font-size:20px;
+    border:0px solid black;
 }
 
 .dossierCat {
-	color:#0089CF;
-	font-size:16px;
-	cursor:pointer;
-	list-style-type: square;
+    color:#0089CF;
+    font-size:16px;
+    cursor:pointer;
+    list-style-type: square;
 }
 
 .titleWelcome {
-	font-style:italic;
-	font-size:18px;
+    font-style:italic;
+    font-size:18px;
 }
 
 .left {
-	float:left;
+    float:left;
 }
 
 .right {
-	float:right;
+    float:right;
 }
 
 .addB {
-	float:right;
-	padding-bottom:15px;
-	padding-right:30px;
+    float:right;
+    padding-bottom:15px;
+    padding-right:30px;
 }
 
 .addInput {
-	margin-top: 35px;
-	vertical-align:middle;
+    margin-top: 35px;
+    vertical-align:middle;
 }
 
 .errorDossiers {
-	font-size:20px;
-	line-height:70px;
-	height:70px;	
+    font-size:20px;
+    line-height:70px;
+    height:70px;
 }
 
 .red {
-	color:red;
+    color:red;
 }
 
 .hidden {
-	display:none;
+    display:none;
 }
 
 /************************DOSSIER CONTENT VIEW *******************/
 .deletecontainer {
-	border:0px solid gray;
-	padding-top:5px;
+    border:0px solid gray;
+    padding-top:5px;
 }
 
 .desContainer {
-	max-height:75px;
-	display:block;
-	overflow:hidden;
-	float:right;	
+    max-height:75px;
+    display:block;
+    overflow:hidden;
+    float:right;
 }
 
 .dossierItemDescription {
-	height:78px;
-	/*white-space: nowrap;*/
-	text-overflow:ellipsis;
-	overflow: hidden;
-	border:0px solid green;
-	text-align:justify;
+    height:78px;
+    /*white-space: nowrap;*/
+    text-overflow:ellipsis;
+    overflow: hidden;
+    border:0px solid green;
+    text-align:justify;
 }
 
 /*******************END DOSSIER CONTENT VIEW*********************/
@@ -673,168 +680,168 @@ body.embedBadge {
 /***********************SORTING IMPLEMENTATION*******************/
 
 .ui-state-highlight {
-	border:1px solid #bebebe;
-	height: 150px;
-	line-height: 150px;
+    border:1px solid #bebebe;
+    height: 150px;
+    line-height: 150px;
 }
 
 *[placeholder] {
-	color: #666;
+    color: #666;
 }
 
 .placeholder {
-	position:relative;
-	top: -3px;
-	left: -3px;
-	height: 120px;
-	line-height:180px;
-	background: #4c5160;
-	border:0px solid black;
+    position:relative;
+    top: -3px;
+    left: -3px;
+    height: 120px;
+    line-height:180px;
+    background: #4c5160;
+    border:0px solid black;
 }
 
 .currentSortedItem {
-	position:relative;
-	top: 0px;
-	left: 0px;
-	border: 0px solid red;
-	height:150px;
-	line-height:150px;
-	background:#ebedee;
-	/*background-color: #ddd;*/
+    position:relative;
+    top: 0px;
+    left: 0px;
+    border: 0px solid red;
+    height:150px;
+    line-height:150px;
+    background:#ebedee;
+    /*background-color: #ddd;*/
 }
 
 .dragIcon {
-	margin-left:7px;
-	font-size:10px;
-	color:#fffaf0;
-	background:#4c5160;
-	padding:5px;
+    margin-left:7px;
+    font-size:10px;
+    color:#fffaf0;
+    background:#4c5160;
+    padding:5px;
 }
 
 .pd_box {
-	position: relative;
-	/*font-family: sans-serif;*/
-	font-family:"Times New Roman", times, serif;
-	display: block;
-	/*width: 244px;*/
-	height: 7.2em;
-	overflow: hidden;
+    position: relative;
+    /*font-family: sans-serif;*/
+    font-family:"Times New Roman", times, serif;
+    display: block;
+    /*width: 244px;*/
+    height: 7.2em;
+    overflow: hidden;
 }
 
 .pd_box .text {
-	color: #333;
-	padding: 8px 20px 20px 2px;
-	/*width: 204px;*/
-	overflow: hidden;
-	/*background: #E0E0E0;
-	/*font-size: .95em;*/
-	font-size:13px;
-	line-height: 1;
-	text-align: justify;
+    color: #333;
+    padding: 8px 20px 20px 2px;
+    /*width: 204px;*/
+    overflow: hidden;
+    /*background: #E0E0E0;
+    /*font-size: .95em;*/
+    font-size:13px;
+    line-height: 1;
+    text-align: justify;
 }
 
 .pd_box .text:after {
-	content: ' ';
-	position: absolute;
-	display: block;
-	width: 100%;
-	height: 1em;
-	bottom: 0px;
-	left: 0px;
-	/*background: #E0E0E0;*/
+    content: ' ';
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 1em;
+    bottom: 0px;
+    left: 0px;
+    /*background: #E0E0E0;*/
 }
 
 .pd_box .text:before {
-	content: '...';
-	text-align: right;
-	position: absolute;
-	display: block;
-	width: 2em;
-	height: 0.7em;
-	bottom: 0.09em;
-	right: 20px;
-	background: -moz-linear-gradient(left, rgba(224, 224, 224, 0) 0%,
-		rgba(224, 224, 224, 1) 38%, rgba(224, 224, 224, 1) 99% );
-	background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(224,
-		224, 224, 0) ), color-stop(38%, rgba(224, 224, 224, 1) ),
-		color-stop(99%, rgba(224, 224, 224, 1) ) );
-	background: -webkit-linear-gradient(left, rgba(224, 224, 224, 0) 0%,
-		rgba(224, 224, 224, 1) 38%, rgba(224, 224, 224, 1) 99% );
-	background: -o-linear-gradient(left, rgba(224, 224, 224, 0) 0%,
-		rgba(224, 224, 224, 1) 38%, rgba(224, 224, 224, 1) 99% );
-	background: -ms-linear-gradient(left, rgba(224, 224, 224, 0) 0%,
-		rgba(224, 224, 224, 1) 38%, rgba(224, 224, 224, 1) 99% );
-	background: linear-gradient(to right, rgba(224, 224, 224, 0) 0%,
-		rgba(224, 224, 224, 1) 38%, rgba(224, 224, 224, 1) 99% );
-	filter: progid:DXImageTransform.Microsoft.gradient(  startColorstr='#00e0e0e0',
-		endColorstr='#e0e0e0', GradientType=1 );
+    content: '...';
+    text-align: right;
+    position: absolute;
+    display: block;
+    width: 2em;
+    height: 0.7em;
+    bottom: 0.09em;
+    right: 20px;
+    background: -moz-linear-gradient(left, rgba(224, 224, 224, 0) 0%,
+        rgba(224, 224, 224, 1) 38%, rgba(224, 224, 224, 1) 99% );
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(224,
+        224, 224, 0) ), color-stop(38%, rgba(224, 224, 224, 1) ),
+        color-stop(99%, rgba(224, 224, 224, 1) ) );
+    background: -webkit-linear-gradient(left, rgba(224, 224, 224, 0) 0%,
+        rgba(224, 224, 224, 1) 38%, rgba(224, 224, 224, 1) 99% );
+    background: -o-linear-gradient(left, rgba(224, 224, 224, 0) 0%,
+        rgba(224, 224, 224, 1) 38%, rgba(224, 224, 224, 1) 99% );
+    background: -ms-linear-gradient(left, rgba(224, 224, 224, 0) 0%,
+        rgba(224, 224, 224, 1) 38%, rgba(224, 224, 224, 1) 99% );
+    background: linear-gradient(to right, rgba(224, 224, 224, 0) 0%,
+        rgba(224, 224, 224, 1) 38%, rgba(224, 224, 224, 1) 99% );
+    filter: progid:DXImageTransform.Microsoft.gradient(  startColorstr='#00e0e0e0',
+        endColorstr='#e0e0e0', GradientType=1 );
 }
 
 #captcha_message {
-	color:red;
-	font-size:12px;
-	padding:10px;
+    color:red;
+    font-size:12px;
+    padding:10px;
 }
 
 .cap {
-	float: left;
-	width: 454px;
-	height: auto;
-	margin: 0px;
-	margin-bottom: 1px;
-	padding: 5px 8px 5px 8px;
-	line-height: 18px;
-	border: none;
-	border-right: solid 1px white;
-	background: #ebedee;
-	color: #4C5160;
+    float: left;
+    width: 454px;
+    height: auto;
+    margin: 0px;
+    margin-bottom: 1px;
+    padding: 5px 8px 5px 8px;
+    line-height: 18px;
+    border: none;
+    border-right: solid 1px white;
+    background: #ebedee;
+    color: #4C5160;
 }
 
 /*******************************INVITATION VIEW *****************************************/
 
 #invitationView {
-	margin-top:10px;
+    margin-top:10px;
 }
 
 #roleSelectorView {
-	background: #ebedee;
-	width:212px;
-	border-top:1px solid white;
-	padding-left:18px;
-	font-size:12px;
-	height:28px;
-	clear:both;
+    background: #ebedee;
+    width:212px;
+    border-top:1px solid white;
+    padding-left:18px;
+    font-size:12px;
+    height:28px;
+    clear:both;
 }
 
 .roleSeparatorUnselected {
-	border-right: 1px solid white;
-	background:#4C5160;
-	color:#ebedee ;
-	padding-right:5px;
-	padding-top:10px;
-	padding-left:5px;	
-	height:18px;
-	float:left;	
+    border-right: 1px solid white;
+    background:#4C5160;
+    color:#ebedee ;
+    padding-right:5px;
+    padding-top:10px;
+    padding-left:5px;
+    height:18px;
+    float:left;
 }
 
 .selectedRole {
-	padding-top:8px;
-	padding-bottom:8px;
-	color:white;
-	background:#4C5160;
+    padding-top:8px;
+    padding-bottom:8px;
+    color:white;
+    background:#4C5160;
 }
 
 .UnselectedRole {
-	padding-top:8px;
-	padding-bottom:8px;
-	color:#4C5160;
-	background:#ebedee;
+    padding-top:8px;
+    padding-bottom:8px;
+    color:#4C5160;
+    background:#ebedee;
 }
 
 .userRoleSelected {
-	color:white;	
+    color:white;
 }
 
 .userRoleUnSelected {
-	color:#4C5160;
+    color:#4C5160;
 }
