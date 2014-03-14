@@ -65,8 +65,8 @@ input#edit_profile {
     margin: 0px 0px 0px 18px;
     height:28px;
     line-height:28px;
-
-   /* height:22px;   */
+    font-family: arial,verdana,sans-serif;
+    font-size:12px;
 }
 
 #edit_password,
@@ -85,13 +85,10 @@ input#edit_profile {
 }
 
 input#username {
-    height:10px;
-    padding-bottom:5px;
     border-bottom:0px solid #c9cacf;
 }
 
 input#password {
-    height:16px;
 }
 
 #edit_profile,

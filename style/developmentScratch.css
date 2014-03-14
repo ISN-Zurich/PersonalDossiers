@@ -157,6 +157,8 @@ div.pd-snippetlist-content {
     margin: 0;
     margin-bottom: 1px;
     line-height: 28px;
+    font-size:12px;
+    font-family: arial,verdana,sans-serif;
 }
 
 .pd-sidebar-header.darkblue {
