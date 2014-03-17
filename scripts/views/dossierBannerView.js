@@ -18,25 +18,24 @@ function DossierBannerView(myController){
     self.controller= myController;
     self.tagID='header_image';	
     
-      
     $('#header_image').bind('click', function(e){
-	if ( self.editMode ) {
-	    // always check for edits
-		self.checkDescriptionEdit();
-	    self.checkTitleEdit();	;		
-	}
-	var targetID = e.target.id;
-	if (targetID == "bannerImage"){
-    self.changeImage();
-    e.stopPropagation();}}
-    );
+        if ( self.editMode ) {
+            // always check for edits
+            self.checkDescriptionEdit();
+            self.checkTitleEdit();	;		
+        }
+        var targetID = e.target.id;
+        if (targetID == "bannerImage"){
+            self.changeImage();
+            e.stopPropagation();
+        }
+    });
     
     $('#editDossier').bind('click', function(e){
     	if ( self.editMode ) {
-    	    // always check for edits
-    		  self.checkTitleEdit();	
+            // always check for edits
+            self.checkTitleEdit();	
     	    self.checkDescriptionEdit();
-    	  		
     	}
     	
     	var userType=self.controller.models.dossierList.getUserType();
@@ -53,41 +52,40 @@ function DossierBannerView(myController){
     	if ( self.editMode ) {
     	    // always check for edits
     		self.checkTitleEdit();	
-    	    self.checkDescriptionEdit();
-    	    		
+    	    self.checkDescriptionEdit();   		
     	}
-    	
+    
     	self.deactivateBannerEditMode();
 	    e.stopPropagation();
     });
     
     // click handler
     function _clickHandler(e) {
-	var targetID = e.target.id;
-	
-	if ( self.editMode ) {
-		// always check for edits
-		self.checkDescriptionEdit();
-		self.checkTitleEdit();			
-	}
-	
-	switch (targetID) {
-	case 'editDossier':
-		self.activateBannerEditMode();
-		e.stopPropagation();
-		break;
-	case 'lock-editDossier':
-		self.deactivateBannerEditMode();
-		e.stopPropagation();
-		break;
-	case 'bannerImage':
-		// go to image gallery
-		self.changeImage();
-		e.stopPropagation();
-		break;
-	default:
-		break;
-	}
+        var targetID = e.target.id;
+
+        if ( self.editMode ) {
+            // always check for edits
+            self.checkDescriptionEdit();
+            self.checkTitleEdit();			
+        }
+
+        switch (targetID) {
+        case 'editDossier':
+            self.activateBannerEditMode();
+            e.stopPropagation();
+            break;
+        case 'lock-editDossier':
+            self.deactivateBannerEditMode();
+            e.stopPropagation();
+            break;
+        case 'bannerImage':
+            // go to image gallery
+            self.changeImage();
+            e.stopPropagation();
+            break;
+        default:
+            break;
+        }
     }
 
     $(document).bind('dataSuccessfullySent', function() {
@@ -147,14 +145,14 @@ DossierBannerView.prototype.checkTitleEdit = function() {
     var value = $("#headerTitle").text();
     
     if (value !== oldVal) {
-    ISNLogger.log('old val in title is: '+oldVal);
-  
-	ISNLogger.log('Change the title content! and make it: '+value);
-	
-	this.controller.models['bookmark'].setDossierTitle(value);
+        ISNLogger.log('old val in title is: '+oldVal);
 
-	this.waitForUpload++;
-	this.controller.models['bookmark'].sendDataToServer();
+        ISNLogger.log('Change the title content! and make it: '+value);
+
+        this.controller.models['bookmark'].setDossierTitle(value);
+
+        this.waitForUpload++;
+        this.controller.models['bookmark'].sendDataToServer();
     }
 }; 
 
@@ -163,12 +161,12 @@ DossierBannerView.prototype.checkDescriptionEdit = function() {
     var oldVal= self.controller.models['bookmark'].getDossierDescription();
     
     if (value !== oldVal) {
-	ISNLogger.log('Change the description content! ' + value);
-	this.controller.models['bookmark'].setDossierDescription(value);
-	// safe the edit in the backend
+        ISNLogger.log('Change the description content! ' + value);
+        this.controller.models['bookmark'].setDossierDescription(value);
+        // safe the edit in the backend
 
-    this.waitForUpload++;
-	this.controller.models['bookmark'].sendDataToServer();
+        this.waitForUpload++;
+        this.controller.models['bookmark'].sendDataToServer();
     }
 }; 
 
@@ -192,33 +190,32 @@ DossierBannerView.prototype.renderBanner= function(){
     ISNLogger.log("dossier id in banner view is "+dossierId);
     
     var img=$("<img/>", {
-	"id":"bannerImage",//we need to provide the dossierId dynamically
-	"class" : "big_img",
-	"width":"470px",
-	"height":"176px", 
-	"src": bookmarkModel.getDossierImageURL()
+        "id"     : "bannerImage", //we need to provide the dossierId dynamically
+        "class"  : "big_img",
+        "width"  : "470px",
+        "height" : "176px", 
+        "src"    : bookmarkModel.getDossierImageURL()
     }).appendTo("#header_image");
     
-  var titleContainer=$("<div/>", {
-	"id":"titleContainer",
+    var titleContainer=$("<div/>", {
+    "id":"titleContainer",
     }).appendTo("#header_image");
-    
     
     var span=$("<div/>", {
     	"id":"headerTitle",//we need to provide the dossierId dynamically
     	"class":"headerTitle", 
     	text:bookmarkModel.getDossierTitle()
-        }).appendTo(titleContainer);
+    }).appendTo(titleContainer);
         
-  var descriptionContainer=$("<p/>", {
-	"id":"descriptionContainer",
-	"class": "margingForEdit"
-  }).appendTo("#header_image");
-    
+    var descriptionContainer=$("<p/>", {
+    "id":"descriptionContainer",
+    "class": "margingForEdit"
+    }).appendTo("#header_image");
+
     var p=$("<p/>", {
     	"id":"headerDescription",
     	"text": bookmarkModel.getDossierDescription()
-        }).appendTo(descriptionContainer);
+    }).appendTo(descriptionContainer);
     
     hr=$("<hr/>", {
 		"class":"overview white"
@@ -226,6 +223,5 @@ DossierBannerView.prototype.renderBanner= function(){
       
     if (self.controller.oauth && userType !== "user"){
     	$("#editDossier").removeClass("hide");
-    	
     }
 };
