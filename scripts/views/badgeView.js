@@ -82,10 +82,10 @@ BadgeView.prototype.renderBadgeList = function() {
 
 	if (bookmarkModel.dossierList && bookmarkModel.dossierList.length > 0) {
 		ISNLogger.log("dossier list index is " + bookmarkModel.index);
-		for (bookmarkModel.index=0; bookmarkModel.index < bookmarkModel.dossierList.length; bookmarkModel.index++){
+        bookmarkModel.firstItem();
+		do {
 			this.renderItem();
-			bookmarkModel.nextItem();
-		} 
+        } while (bookmarkModel.nextItem());
 	} 
     else{
 		//if the specific dossier has no dossier items
