@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 require_once 'HTTP/Request.php';
 include_once 'commonService.php';
@@ -56,10 +56,10 @@ include 'user.php';
  */
 class DossierService extends OAUTHRESTService {
 	protected $servicepath = '/service/dossier.php';
-	 
+
 	protected $dossier_id;
 	protected $item_id;
-	 
+
 	/**
 	 * Constructor($dbh)
 	 *
@@ -71,9 +71,9 @@ class DossierService extends OAUTHRESTService {
 	public function __construct() {
 		parent::__construct();
 
-        
+
 		$this->mark();
-		 
+
 		if ( !empty($this->path_info) ) {
 			$parts = explode('/', $this->path_info);
 		} else {
@@ -85,10 +85,10 @@ class DossierService extends OAUTHRESTService {
 		if ( count($parts) > 0) {
 			$this->dossier_id = $parts[0];
 		}
-		        
+
 		$this->data = array();
 	}
-	 
+
 
 	/**
 	 * handle_get()
@@ -152,7 +152,7 @@ class DossierService extends OAUTHRESTService {
 			$this->bad_request();
 		}
 	}
-	 
+
 	/**
 	 * handle_put()
 	 *
@@ -175,7 +175,7 @@ class DossierService extends OAUTHRESTService {
 		if (!$data) {
 			parse_str($content, $_POST);
 		}
-		 
+
 		if ( $this->item_id ) {
 			$this->bad_request();
 		}
@@ -225,10 +225,10 @@ class DossierService extends OAUTHRESTService {
 	 */
 	protected function delete_item() {
 		$this->mark();
-		 
+
 		$this->dbh->setFetchMode(MDB2_FETCHMODE_ASSOC);
 		$mdb2 = $this->dbh;
-		 
+
 		// verify item
 		// first check if the item actually exists in the dossier
 		$sth = $mdb2->prepare('SELECT id FROM dossier_items WHERE dossier_id = ? and digital_library_id = ?');
@@ -239,16 +239,16 @@ class DossierService extends OAUTHRESTService {
 			$sth->free();
 			return;
 		}
-		 
+
 		$bItem = $res->numRows();
 		$sth->free();
-		 
+
 		if ( $bItem < 1 ) {
 			$this->log("item does not exist in this dossier");
 			$this->not_found();
 			return;
 		}
-		 
+
 		// delete item
 		$sth = $mdb2->prepare('DELETE FROM dossier_items WHERE dossier_id=? and digital_library_id = ?');
 		$res = $sth->execute(array($this->dossier_id, $this->item_id));
@@ -260,7 +260,7 @@ class DossierService extends OAUTHRESTService {
 		$sth->free();
 		$this->gone();
 	}
-	 
+
 	/**
 	 * add_item()
 	 *
@@ -269,7 +269,7 @@ class DossierService extends OAUTHRESTService {
 	 * This method expects an "id" parameter passed as POST url encoded form data that contains the
 	 * digital library id of the new dossier item.
 	 *
-	 * If the requested dossier does not exist, the method triggers a 404 Not Found error. 
+	 * If the requested dossier does not exist, the method triggers a 404 Not Found error.
 	 *
 	 * If the new item id is not present in the digital library, the method triggers a 404 Not Found error.
 	 *
@@ -293,7 +293,7 @@ class DossierService extends OAUTHRESTService {
 			$this->not_found();
 			return;
 		}
-		 
+
 		if (array_key_exists("id", $data)) {
 			$itemid = $data["id"];
 			if ( !(isset($itemid) && strlen($itemid))) {
@@ -307,7 +307,7 @@ class DossierService extends OAUTHRESTService {
 			$this->bad_request();
 			return;
 		}
-		 
+
 		// verify that the object is not already added
 		$sth = $mdb2->prepare('SELECT id FROM dossier_items WHERE dossier_id=? AND digital_library_id =?');
 		$res = $sth->execute(array($this->dossier_id, $itemid))->numRows();
@@ -317,19 +317,19 @@ class DossierService extends OAUTHRESTService {
 			$this->no_content();
 			return;
 		}
-		 
+
 		// check if the item is already loaded from the KMS and stored in our library_metadata table
 		$sqlstring = "select digital_library_id from library_metadata where digital_library_id = ?";
 		$sth = $mdb2->prepare($sqlstring);
 		$res = $sth->execute(array($itemid))->numRows();
-		
-		if ( $res <= 0 ) { 
+
+		if ( $res <= 0 ) {
 			// get the item from the KMS
 			// $r = new HTTP_Request('http://yellowjacket.ethz.ch/tools/data/'.$itemid . '.json', "GET");
-				
+
 			// TESTME: new KMS code
 			$r = new HTTP_Request('http://mercury.ethz.ch/serviceengine/OWContent', array('method'=> 'POST'));
-				
+
 			try {
 				$r->addPostData('serviceid', 'ISN');
 				$r->addPostData('owid', '898');
@@ -342,21 +342,21 @@ class DossierService extends OAUTHRESTService {
 					$itemmeta = $r->getResponseBody();
 					$this->log('response message itemmeta '. $itemmeta);
 					$tmp = json_decode($itemmeta);
-						
+
 					if (json_last_error() !== JSON_ERROR_NONE) {
 						throw new Exception("JSON PARSING ERROR ".json_last_error());
 					}
-						
+
 					if (empty($tmp)) {
 						throw new Exception("No JSON data returned from KMS");
 					}
-						
+
 					$tmp->{'image'} = html_entity_decode($tmp->{'image'});
 					$this->log( 'image url: '. $tmp->{'image'});
-						
+
 					$tmp->{'isn_detail_url'} = html_entity_decode($tmp->{'isn_detail_url'});
 					$this->log( 'isn_detail_url: '. $tmp->{'isn_detail_url'});
-					 
+
 					$itemmeta = json_encode($tmp);
 				}else {
 					$this->log('response code is:  '.$r->getResponseCode());
@@ -375,7 +375,7 @@ class DossierService extends OAUTHRESTService {
 				$this->bad_request();
 				return;
 			}
-				
+
 
 			// verify that the KMS actually returned something meaningful
 			if (empty($itemmeta)) {
@@ -394,9 +394,9 @@ class DossierService extends OAUTHRESTService {
 			}
 
 		} //end of IF. now we know that the KMS metadata is in our database.
-		
-		
-		
+
+
+
 		//calculate the position id of the newly inserted item
 		// 1 select the records from dossier items where dossier_id = dossier id
 		// count the number of the results
@@ -411,27 +411,27 @@ class DossierService extends OAUTHRESTService {
 		}
 		$tempArray= array();
         $position_id = $resPosition->numRows();
-		
+
 		$this->log('position id is '.$position_id);
 		// now we actually add the item to the very dossier (we no longer use the user id for the dossier items)
 		$this->log('metadata for id: ' . $itemid . " is " . $itemmeta);
 		$sth = $mdb2->prepare("insert into dossier_items (digital_library_id, dossier_id, position) values (?, ?, ?)");
 		$res1 = $sth->execute(array($itemid, $this->dossier_id,$position_id));
-		
+
 		if (PEAR::isError($res1)) {
 			$this->log("pear error " . $res1->getMessage());
 			$this->bad_request();
 			return;
 		}
 
-		
-				
+
+
 		$this->item_id = $mdb2->lastInsertID("dossiers", "id");
 		array_push($this->data, array("dossier_id"=> $this->dossier_id, "item_id" => $this->item_id));
 		$this->respond_json_data();
 		$sth->free();
 	}
-	 
+
 	/**
 	 * update_item()
 	 *
@@ -442,38 +442,38 @@ class DossierService extends OAUTHRESTService {
 	protected function update_item($data) {
 		$this->mark();
 		$this->log("enter update item");
-		
+
 		//load item data
-		
+
 		if (array_key_exists('sortedList', $data)) {
 			$this->log("update sortedList");
 			$sorted_list=$data['sortedList'];
 		}
-		
+
 		$this->log("sorted list is".json_encode($sorted_list));
 		$dossier_id=$this->dossier_id;
 		$this->log("dossier id in update item is ".$dossier_id);
 
-			
+
 		//iterate over the sorted_List array
 		//for each item of this list insert into dossier_items the dig. library id in the order defined by the sorted list array
 		$values = array();
 		$types = array();
-		
+
 		if (!empty($sorted_list)){
-			
+
 		 foreach($sorted_list as $key => $value){
 		 	$this->log("enter foreach loop");
-		 	
+
 		 	$values["dossier_id"]=$dossier_id;
 		 	array_push($types, "integer");
-		 	$values["digital_library_id"]=$value; 
+		 	$values["digital_library_id"]=$value;
 		 	array_push($types, "integer");
 		 	$values["position"]=$key;
 		 	array_push($types, "integer");
 		 	$mdb2 = $this->dbh;
 		 	$mdb2->loadModule('Extended');
-		 	
+
 		 //	key is the for the position for item id with id = value
 		 	$affectedRows = $mdb2->extended->autoExecute("dossier_items",
 		 			$values,
@@ -491,25 +491,25 @@ class DossierService extends OAUTHRESTService {
 		 		$this->log("Service: item updated");
 		 		$this->no_content();
 		 	}
-		 	 
+
 		 } //end of for
 
-		
+
 	} //end of if
 } //end of function
-	 
+
 	/**
 	 * read_item()
 	 *
-	 * This method is called by handle_get() in dossier item mode. It is used in getBoookmarkedDossiers in 
+	 * This method is called by handle_get() in dossier item mode. It is used in getBoookmarkedDossiers in
 	 * order to check which dossiers of the current user have already the specific dossier item.
-	 *  
+	 *
 	 * The retrieved from the client REQUEST URL has the following format: http://baseURL/service/dossier.php/string/item_id, where:
-	 * - baseURL : is the address of the server that hosts the service. 
+	 * - baseURL : is the address of the server that hosts the service.
 	 * - string: it is "dossiers". We pass this string and not a specific dossier id in order to check all the dossiers
 	 * - item_id: it is the id of the a dossier item of any dossier.
-	 * 
-	 * 
+	 *
+	 *
 	 * SELECT DISTINCT di.dossier_id
      * FROM  `dossier_items` di, dossier_users du
 	 * WHERE du.dossier_id = di.dossier_id
@@ -522,32 +522,32 @@ class DossierService extends OAUTHRESTService {
 		$this->log("enter read item");
 		$this->dbh->setFetchMode(MDB2_FETCHMODE_ASSOC);
 		$dbh = $this->dbh;
-		
+
 		// get the values of the variables that we will use in the query
 		$user_id=$this->session->getUserID();
 		$item_id= $this->item_id;
-		
+
 		$this->log("user id in read item is ".$user_id);
 		$this->log("item id  ".$item_id);
-		
+
 		$sth= $dbh->prepare("SELECT di.dossier_id FROM dossier_items di,dossier_users du WHERE du.dossier_id = di.dossier_id AND du.user_id = ? AND di.digital_library_id=?");
 		$res = $sth->execute(array($user_id,$item_id));
-		
+
 		if (PEAR::isError($res)){
 			$this->log('DB Error 1: ' . $res->getMessage());
 			$sth->free();
 			$this->bad_request();
 			return;
 		}
-		
-		//if no dossier has this item then 
+
+		//if no dossier has this item then
 		//return an empty array
 		if ($res->numRows()<1){
 			$retval2 = array();
 			$this->data["dossiers"]=$retval2;
 		}
-		
-		
+
+
 		$retval = array();
 		if ($res->numRows() > 0) {
 			while ($row = $res->fetchRow() ){
@@ -556,10 +556,10 @@ class DossierService extends OAUTHRESTService {
 			}
 			$this->data["dossiers"]=$retval;
 		}
-		
-		$this->respond_json_data();	
+
+		$this->respond_json_data();
 	}
-	 
+
 	/**
 	 * delete_dossier()
 	 *
@@ -574,7 +574,7 @@ class DossierService extends OAUTHRESTService {
 	protected function delete_dossier() {
 		$this->mark();
 		$this->dbh->loadModule('Extended');
-		 
+
 		$this->dbh->setFetchMode(MDB2_FETCHMODE_ASSOC);
 		$mdb2 = $this->dbh;
 		$sth = $mdb2->prepare('SELECT * FROM dossiers WHERE id=?');
@@ -585,7 +585,7 @@ class DossierService extends OAUTHRESTService {
 			$this->not_found();
 			return;
 		}
-		 
+
 		// first remove all the items in the dossier
 		$affectedRows = $this->dbh->extended->autoExecute("dossier_items",
 				array($this->dossier_id),
@@ -596,9 +596,9 @@ class DossierService extends OAUTHRESTService {
 			$this->bad_request();
 			return;
 		}
-		 
+
 		// now we should remove all dossier users, too
-		$affectedRows = $this->dbh->extended->autoExecute("dossier_items",
+		$affectedRows = $this->dbh->extended->autoExecute("dossier_users",
 				array($this->dossier_id),
 				MDB2_AUTOQUERY_DELETE,
 				'dossier_id = ?');
@@ -607,7 +607,7 @@ class DossierService extends OAUTHRESTService {
 			$this->bad_request();
 			return;
 		}
-		 
+
 		// if we removed all related items successfully, we also remove the dossier itself.
 		$affectedRows = $this->dbh->extended->autoExecute("dossiers",
 				array($this->dossier_id),
@@ -622,7 +622,7 @@ class DossierService extends OAUTHRESTService {
 			$this->gone();
 		}
 	}
-	 
+
 	/**
 	 * add_dossier()
 	 *
@@ -636,19 +636,19 @@ class DossierService extends OAUTHRESTService {
 	 */
 	protected function add_dossier() {
 		$this->mark();
-		 
+
 		$mdb2 = $this->dbh;
 		$ttl = "";
 		$dsc = "";
 		$img = "";
-		 
+
 		if (array_key_exists('title', $_POST)) {
 			$ttl = $_POST['title'];
 		}
 		if (array_key_exists('description', $_POST)) {
 			$dsc = $_POST['description'];
 		}
-		 
+
 		if (array_key_exists('image', $_POST)) {
 			$img = $_POST['image'];
 		}
@@ -662,7 +662,7 @@ class DossierService extends OAUTHRESTService {
 			$this->bad_request();
 		}
 	}
-	 
+
 	/**
 	 * @method bool create_dossier($title, $description, $image)
 	 *
@@ -679,7 +679,7 @@ class DossierService extends OAUTHRESTService {
 	 */
 	protected function create_dossier($title, $description, $image) {
 		$mdb2 = $this->dbh;
-		 
+
 		if (empty($title)) {
 			$title = "My Personal Dossier";
 		}
@@ -689,13 +689,13 @@ class DossierService extends OAUTHRESTService {
 		if (empty($image)) {
 			$image = "gallery/default3.jpg";
 		}
-		 
+
 		$sth = $mdb2->prepare("insert into dossiers (title, description, image) Values (?,?,?)");
 		$res = $sth->execute(array($title, $description, $image));
-		 
+
 		if (PEAR::isError($res)) {
 			$sth->free();
-			 
+
 			$this->log("DB error while creating the dossier " . $res->getMessage());
 			return false;
 		}
@@ -704,20 +704,20 @@ class DossierService extends OAUTHRESTService {
 			// get last inserted id
 			$this->dossier_id = $mdb2->lastInsertID("dossiers", "id");
 			array_push($this->data, array("dossier_id"=> $this->dossier_id));
-		  
+
 			// attach the active user as a dossier owner.
 			$sth = $mdb2->prepare('INSERT INTO dossier_users (user_id, dossier_id, user_type) VALUES (?,?,?)');
 			$res = $sth->execute(array($this->session->getUserID(), $this->dossier_id, 'owner'));
 			if (PEAR::isError($res)) {
 				$sth->free();
-				 
+
 				$this->log("DB error while adding the user privileges " . $res->getMessage());
 				return false;
 			}
 		}
 		return true;
 	}
-	 
+
 	/**
 	 * update_dossier()
 	 *
@@ -751,18 +751,18 @@ class DossierService extends OAUTHRESTService {
 				$dsc = $_POST['description'];
 				$this->log("update description! " . $dsc);
 			}
-			
+
 			if (array_key_exists('image', $_POST)) {
 				$this->log("update image!");
 				$img = $_POST['image'];
 			}
-		  
+
 			if (!empty($ttl) || !empty($dsc) || !empty($img)) {
-				 
-				
+
+
 				$values = array();
 				$types = array();
-				 
+
 				if (!empty($ttl)) {
 					$values["title"]= $ttl;
 					array_push($types, "text");
@@ -776,7 +776,7 @@ class DossierService extends OAUTHRESTService {
 					$values["image"]= $img;
 					array_push($types, "text");
 				}
-				 
+
 				$mdb2->loadModule('Extended');
 				$affectedRows = $mdb2->extended->autoExecute("dossiers",
 						$values,
@@ -791,7 +791,7 @@ class DossierService extends OAUTHRESTService {
 					$this->log("Service 2: dossier updated");
 					$this->no_content();
 				}
-				 
+
 			}
 			else {
 				$this->bad_request();
@@ -801,7 +801,7 @@ class DossierService extends OAUTHRESTService {
 			$this->not_found();
 		}
 	}
-	 
+
 	/**
 	 * read_dossier()
 	 *
@@ -813,23 +813,23 @@ class DossierService extends OAUTHRESTService {
 	 */
 	protected function read_dossier() {
 		$this->mark();
-		 
+
 		// verify dossier id
 		$this->dbh->setFetchMode(MDB2_FETCHMODE_ASSOC);
 		$mdb2 = $this->dbh;
-		 
+
 		$sth = $mdb2->prepare('SELECT * FROM dossiers WHERE id=?');
 		$this->log('dossierId in read dossier is '.$this->dossier_id);
 		$res = $sth->execute($this->dossier_id);
-		 
-		 
+
+
 		if ($res->numRows() == 1) {
 			// load the dossier meta data
 			// there should be only one dossier with that id
 			$row=$res->fetchRow();
 			$this->data['dossier_metadata'] = $row;
 			$sth->free();
-		  
+
 			// load the dossier item list
 			$sth = $mdb2->prepare('SELECT lm.metadata, di.dossier_id, di.position FROM dossier_items di,library_metadata lm  WHERE di.dossier_id=? AND di.digital_library_id = lm.digital_library_id ORDER BY di.position ASC ');
 			$res = $sth->execute($this->dossier_id);
@@ -839,11 +839,11 @@ class DossierService extends OAUTHRESTService {
 				$row["metadata"] = json_decode($row["metadata"]);
 				array_push($idata,$row);
 			}
-		  
+
 			$this->data["dossier_items"]=$idata;
-				
+
 			// load the users for the specific dossier
-		  
+
 			$sth = $mdb2->prepare("SELECT u.name, du.user_type, du.user_id FROM users u, dossier_users du WHERE u.id = du.user_id AND du.dossier_id = ?");
 			$res = $sth->execute($this->dossier_id);
 			if (PEAR::isError($res)) {
@@ -875,15 +875,15 @@ class DossierService extends OAUTHRESTService {
 		}
 		$sth->free();
 	}
-	 
+
 	protected function read_user_dossiers() {
 		$this->mark();
 		$dbh = $this->dbh;
 		$dbh->setFetchMode(MDB2_FETCHMODE_ASSOC);
-		 
+
 		$userid = $this->session->getUserID();
-		 
-		$sth = $dbh->prepare("SELECT d.id, d.title, d.description,d.image, d.private_flag, du.user_type FROM dossiers d, dossier_users du WHERE d.id = du.dossier_id AND du.user_id = ?");
+
+		$sth = $dbh->prepare("SELECT d.id, d.title, d.description, d.image, d.private_flag, du.user_type FROM dossiers d, dossier_users du WHERE d.id = du.dossier_id AND du.user_id = ?");
 		$res = $sth->execute($userid);
 		if (PEAR::isError($res)){
 			$this->log('DB Error 1: ' . $res->getMessage());
@@ -891,14 +891,14 @@ class DossierService extends OAUTHRESTService {
 			$this->bad_request();
 			return;
 		}
-		 
+
 		$retval = array();
-		 
+
 		if ($res->numRows() === 0) {
 			// if the user has no dossier yet, we create one for her/him
 			$sth->free();
 			if ($this->create_dossier('','','')){
-				$sth = $dbh->prepare("SELECT d.id, d.title, d.private_flag, du.user_type FROM dossiers d, dossier_users du WHERE d.id = du.dossier_id AND du.user_id = ?");
+				$sth = $dbh->prepare("SELECT d.id, d.title, d.description, d.image, d.private_flag, du.user_type FROM dossiers d, dossier_users du WHERE d.id = du.dossier_id AND du.user_id = ?");
 				$res = $sth->execute($userid);
 				if (PEAR::isError($res)){
 					$this->log('DB Error 2: ' . $res->getMessage());
@@ -923,13 +923,13 @@ class DossierService extends OAUTHRESTService {
 			'user_type' => $row['user_type']
 			));
 		}
-		 
+
 		$this->data = $retval;
 		$this->log("Dossier List is: " . json_encode($this->data));
 		$this->respond_json_data();
 	}
-	 
-	 
+
+
 
 	/**
 	 * dossierIsPublic()
@@ -943,7 +943,7 @@ class DossierService extends OAUTHRESTService {
 	 * Returns true if the dossier type is public and false if it is private
 	 *
 	 */
-	 
+
 	protected function dossierIsPublic($dossierId){
 		$this->mark();
 		// select private_flag from dossiers table
@@ -964,28 +964,28 @@ class DossierService extends OAUTHRESTService {
 		}
 
 	}
-	 
-	 
-	 
+
+
+
 	protected function prepareOperation($meth) {
 		$retval = parent::prepareOperation($meth);
-		 
+
 		//if any external guest user access a dossier via a shared link
 		//he should be able to
-		if ($meth == 'GET' && 
-            $this->dossier_id && 
+		if ($meth == 'GET' &&
+            $this->dossier_id &&
             $this->dossierIsPublic($this->dossier_id)) {
             // all visitors are allowed to access any public dossier for reading.
             // This is required for external linking
             $this->log('public dossier is accessed');
-            
+
 			$retval = true;
 		}
-        else if ($this->session && 
-                 $this->session->getUserID() && 
+        else if ($this->session &&
+                 $this->session->getUserID() &&
                  $this->dossier_id) {
             // now check if the user is allowed to perform the requested method
-		
+
 			// authenticated user
 			// check if the user is allowed to perform the requested operation
 			switch($meth) {
@@ -993,7 +993,7 @@ class DossierService extends OAUTHRESTService {
 					$this->log("enter GET in prepare statement in dossier.php");
 					// only access if the dossier is public or if the user is a "user" (or editor or owner)
 					$this->user = new UserManagement($this->dbh);
-					if ($this->dossierIsPublic($this->dossier_id) || 
+					if ($this->dossierIsPublic($this->dossier_id) ||
                         $this->user->hasUserPriviledges($this->session->getUserID(),
                                                         $this->dossier_id)) {
 						$retval = true;
@@ -1018,14 +1018,14 @@ class DossierService extends OAUTHRESTService {
 
 					//or update a dossier item (its metadata like title, description, author, etc.)
 					if ( $this->item_id) {
-						
+
 						// only access if the user is an editor
 						if (!$this->user->hasEditorPriviledges($this->session->getUserID(),$this->dossier_id)){
 							$this->log("we will return false in post in prepare statement");
 							$retval = false;
-						} 
-						
-					} 
+						}
+
+					}
                     break;
 // 					else {
 // 						$this->user = new UserManagement($this->dbh);
@@ -1050,12 +1050,12 @@ class DossierService extends OAUTHRESTService {
 					break;
 			}
 		}
-        
+
 		if (!$retval) {
             $this->log('session prerequisite failed');
 			$this->authentication_required();
 		}
-		 
+
 		return $retval;
 	}
 }
