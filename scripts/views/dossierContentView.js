@@ -186,10 +186,10 @@ DossierContentView.prototype.renderList = function() {
 		}).appendTo("#contentArea");
 
 		ISNLogger.log("dossier list index is "+bookmarkModel.index);
-		for (bookmarkModel.index=0; bookmarkModel.index < bookmarkModel.dossierList.length; bookmarkModel.index++){
+        bookmarkModel.firstItem();
+        do {
 			this.renderItem();
-			bookmarkModel.setIndex(bookmarkModel.index++);
-		}
+        } while (bookmarkModel.nextItem());
 		//	do{
 		//	this.renderItem();	
 		//	}while (bookmarkModel.nextItem());
