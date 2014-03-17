@@ -44,7 +44,6 @@ function DossierContentView( dController ) {
             self.deleteMode = 0;
         }
     });
-
     $(window).bind('keydown', function( e ) {
 
         if ( e.keyCode === 27 && self.deleteMode > 0 ) {
@@ -88,7 +87,6 @@ function DossierContentView( dController ) {
         self.storeOrder();
 
         // 2. send the new positions to the server
-
         self.controller.models.bookmark.arrangeItems();
 
         // 3. remove the sortability from the list
@@ -103,6 +101,7 @@ function DossierContentView( dController ) {
 } //end of constructor
 
 
+
 /**
  * opens the view
  * @prototype
@@ -112,13 +111,28 @@ DossierContentView.prototype.openDiv = openView;
 
 
 
-DossierContentView.prototype.open = function(){
-    this.update();
-    this.openDiv();
+/**
+ * closes the view
+ * @prototype
+ * @function closeDiv
+ **/
+DossierContentView.prototype.closeDiv = closeView;
+
+
+
+/**
+ * TODO: Documentation
+ */
+DossierContentView.prototype.open = function() {
+	this.update();
+	this.openDiv();
 };
 
 
 
+/**
+ * TODO: Documentation
+ */
 DossierContentView.prototype.update = function(){
 
     var self=this;
@@ -141,9 +155,12 @@ DossierContentView.prototype.update = function(){
 
 
 
+/**
+ * TODO: Documentation
+ */
 DossierContentView.prototype.renderList = function(){
 
-    var iFrameHeight= window.innerHeight || document.documentElement.clientHeight;
+    var iFrameHeight = window.innerHeight || document.documentElement.clientHeight;
     var bookmarkModel = self.controller.models.bookmark;
     ISNLogger.log( 'dossier list length in dossier content view ' + bookmarkModel.dossierList.length );
 
@@ -152,7 +169,6 @@ DossierContentView.prototype.renderList = function(){
         var divContainer = $("<ul/>", {
             "id" : "sortable",
         }).appendTo("#contentArea");
-
         ISNLogger.log( 'dossier list index is ' + bookmarkModel.index );
         bookmarkModel.firstItem();
         do {
@@ -184,10 +200,12 @@ DossierContentView.prototype.renderList = function(){
 
 
 
+/**
+ * TODO: Documentation
+ */
 DossierContentView.prototype.activateSorting = function(){
 
     ISNLogger.log( 'enter activateSorting' );
-    //$( "#sortable" ).removeClass("ui-sortable-disabled");
     $('#sortable').sortable("enable");
 
     //make the list sortable
@@ -196,11 +214,11 @@ DossierContentView.prototype.activateSorting = function(){
         placeholder : "placeholder",
         forcePlaceholderSize : true,
         //placeholder : "ui-state-highlight"
-        start : function(event,ui) {
+        start : function( event , ui ) {
 
             $(ui.item).addClass("currentSortedItem");
         },
-        stop : function(event,ui) {
+        stop : function( event , ui ) {
 
             $(ui.item).removeClass("currentSortedItem");
         }
@@ -210,6 +228,9 @@ DossierContentView.prototype.activateSorting = function(){
 
 
 
+/**
+ * TODO: Documentation
+ */
 DossierContentView.prototype.renderItem = function(){
 
     //var self=this;
@@ -243,7 +264,6 @@ DossierContentView.prototype.renderItem = function(){
         "class" : "floatleft overviewcontent dossier_text"
     }).appendTo(div1);
 
-
     // if we are not in the embedded page display the isn url
     // if we are in the embed page, but if the dossier item type is different than publication display also the isn url
     firstLineContainer = $("<div/>").appendTo(divFloatText);
@@ -261,7 +281,6 @@ DossierContentView.prototype.renderItem = function(){
     var divh1 = $("<h1/>").appendTo(divFloatText);
 
     if ( self.controller.id !== "embedController" || bookmarkModel.getType() !== "Publication" ) {
-
         divAText = $("<a/>", {
             "class" : "header1",
             "href" : bookmarkModel.getISNURL(),
@@ -278,11 +297,12 @@ DossierContentView.prototype.renderItem = function(){
         }).appendTo(divh1);
     }
 
-
+    //FIX #136 get short description removed
     divp2 = $("<p/>", {
         "id" : "itemDescription" + dossierID,
         "class" : "left",
-        text : bookmarkModel.getDescriptionShort(136)
+        // text : bookmarkModel.getDescriptionShort(136)
+        text : bookmarkModel.getDescription()
     }).appendTo(divFloatText);
 
     var divMore = $("<span/>", {
@@ -292,6 +312,7 @@ DossierContentView.prototype.renderItem = function(){
     }).appendTo(divp2);
 
     if ( self.controller.id !== "embedController" ) {
+
         div3 = $("<div/>", {
             "class" : "deletecontainer hide"
         }).appendTo(divFloatText);
@@ -335,7 +356,6 @@ DossierContentView.prototype.removeItem = function( id ) {
  * @function storeOrder
  **/
 DossierContentView.prototype.storeOrder = function() {
-
     ISNLogger.log("enter store Order");
     var orderList = new Array();
 
@@ -358,7 +378,6 @@ DossierContentView.prototype.showDraggableIcon = function(){};
  * @function closeDiv
  **/
 DossierContentView.prototype.closeDiv = closeView;
-
 
 
 /**
