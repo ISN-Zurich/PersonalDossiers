@@ -47,15 +47,12 @@ function BookmarkModel(dController){
     function loadActiveDossier() {
     	ISNLogger.log("enter event handler in bookmark model to load activeDossier");
     	if (!self.controller.hashed){
-    	ISNLogger.log("load Active Dossier");
-    	self.dossierId=self.controller.getActiveDossier();
-    	self.loadDossierList();
-    	}
-    }
-    
-  
+            ISNLogger.log("load Active Dossier");
+            self.dossierId=self.controller.getActiveDossier();
+            self.loadDossierList();
+        }
+    }  
  }
-
 
 BookmarkModel.prototype.initValues=function(){
     this.dossierTitle= this.getDossierTitle();
@@ -67,7 +64,6 @@ BookmarkModel.prototype.setEditModeOn=function(){
 	ISNLogger.log();
     this.editMode=true;
 };
-
 
 BookmarkModel.prototype.addItem=function(id){
     ISNLogger.log("enter addItem in Bookmark Model");
@@ -193,7 +189,6 @@ BookmarkModel.prototype.arrangeItems=function(){
 	    beforeSend : setHeader
 	});
 	
-	
 	function sentData(){
 		ISNLogger.log("success in sending arranging order to the server");
 		//$(document).trigger("dataSuccessfullySent"); DO WEE NEED THIS
@@ -204,7 +199,6 @@ BookmarkModel.prototype.arrangeItems=function(){
 		xhr.setRequestHeader('Authorization', header_request);
 	}
 };
-
 
 BookmarkModel.prototype.setOrder=function(array_order){
 	ISNLogger.log("enter set Order in bookmark model");
@@ -232,27 +226,27 @@ BookmarkModel.prototype.loadDossierList=function(){
     var url= self.controller.baseURL +'service/dossier.php/' + dossierID;
     var method="GET";
     if ( dossierID ) {
-	ISNLogger.log("before executing the ajax request for " + dossierID);
-	$.ajax({
-	    url:  url,
-	    type : 'GET',
-	    dataType : 'json',
-	    success : createDossierList,
-	    error : function(request) {
-            //localStorage.setItem("pendingCourseList", true);
-            ISNLogger.log("Error while loading dossier list from server");
-            ISNLogger.log("ERROR status text: "+ request.statusText); 
-            ISNLogger.log("ERROR status code: "+ request.statusCode()); 
-            ISNLogger.log("ERROR status code is : " + request.status);
-            ISNLogger.log("ERROR responsetext: "+ request.responseText); 
-            if (request.status === 401){
-                //	window.location.href ="user.html";
-                ISNLogger.log("received 401, we should load the login page");
-                $(document).trigger("BookmarkModelNotLoaded");
-            }
-	    },
-	    beforeSend : setHeader
-	});
+        ISNLogger.log("before executing the ajax request for " + dossierID);
+        $.ajax({
+            url:  url,
+            type : 'GET',
+            dataType : 'json',
+            success : createDossierList,
+            error : function(request) {
+                //localStorage.setItem("pendingCourseList", true);
+                ISNLogger.log("Error while loading dossier list from server");
+                ISNLogger.log("ERROR status text: "+ request.statusText); 
+                ISNLogger.log("ERROR status code: "+ request.statusCode()); 
+                ISNLogger.log("ERROR status code is : " + request.status);
+                ISNLogger.log("ERROR responsetext: "+ request.responseText); 
+                if (request.status === 401){
+                    //	window.location.href ="user.html";
+                    ISNLogger.log("received 401, we should load the login page");
+                    $(document).trigger("BookmarkModelNotLoaded");
+                }
+            },
+            beforeSend : setHeader
+        });
     }
 
     function createDossierList(data){
@@ -260,7 +254,8 @@ BookmarkModel.prototype.loadDossierList=function(){
     	var dossierObject=null;
     	try{
     		dossierObject=data;
-    	}catch(err) {
+    	}
+        catch(err) {
     		dossierObject={};
     		ISNLogger.log("couldnt load dossier items from the database");
     	}
@@ -288,26 +283,23 @@ BookmarkModel.prototype.loadDossierList=function(){
     	self.dossierImageURL=self.dossierMetadata.image;
     	self.dossierId=self.dossierMetadata.id;
 
-
     	self.userlist=self.dossierData.user_list;
     	ISNLogger.log("user list is "+JSON.stringify(self.userlist));
     	$(document).trigger("BookmarkModelLoaded");
-
     }
     
     function setHeader(xhr) {
         if (self.controller.oauth)   {
         	ISNLogger.log("we are authenticated and we will send a header");
-	    var header_request=self.controller.oauth.oauthHeader(method, url);
-	    xhr.setRequestHeader('Authorization', header_request);
-        }else{
+            var header_request=self.controller.oauth.oauthHeader(method, url);
+            xhr.setRequestHeader('Authorization', header_request);
+        }
+        else{
         	ISNLogger.log("we will send a non auth header");
         	var non_authenticationFlag=true;
-        	 xhr.setRequestHeader('NonAuth', non_authenticationFlag);	
-        }
-        
+            xhr.setRequestHeader('NonAuth', non_authenticationFlag);	
+        }   
     }
-    
 };
 
 BookmarkModel.prototype.sendDataToServer=function(){
@@ -319,42 +311,41 @@ BookmarkModel.prototype.sendDataToServer=function(){
     var myData = {};
     
     if ( dossierID &&
-	 ((self.dossierTitle && self.dossierTitle.length ) ||
-	  (self.dossierDescription && self.dossierDescription.length) ||
-	  (self.dossierImageURL && self.dossierImageURL.length))) {
-	
-	if (self.dossierTitle && self.dossierTitle.length) {
-	    myData.title = self.dossierTitle;
-	}
-	if (self.dossierDescription && self.dossierDescription.length) { 
-            ISNLogger.log('send description to server ' + self.dossierDescription );
-	    myData.description = self.dossierDescription;
-	}
-	if (self.dossierImageURL && self.dossierImageURL.length) {
-	    myData.image = self.dossierImageURL;
-	}
-	// var data=myData;
-	
-	$.ajax({
-	    url:  url,
-	    type : method,
-	    data: myData,
-	    dataType : 'json',
-	    success : sentData,
-	    error : function(request) {
-            //localStorage.setItem("pendingCourseList", true);
-            ISNLogger.log("Error while sending dossier data to the server");
-            ISNLogger.log("ERROR status text: "+ request.statusText); 
-            ISNLogger.log("ERROR status code: "+ request.statusCode()); 
-            ISNLogger.log("ERROR status code is : " + request.status);
-            ISNLogger.log("ERROR responsetext: "+ request.responseText); 
-            if (request.status == 401){
-                // access keys have been rejected
-                self.controller.keysRejected();
-            }
-	    },
-	    beforeSend : setHeader
-	});
+        ((self.dossierTitle && self.dossierTitle.length ) ||
+         (self.dossierDescription && self.dossierDescription.length) ||
+         (self.dossierImageURL && self.dossierImageURL.length))) {
+        if (self.dossierTitle && self.dossierTitle.length) {
+            myData.title = self.dossierTitle;
+        }
+        if (self.dossierDescription && self.dossierDescription.length) { 
+                ISNLogger.log('send description to server ' + self.dossierDescription );
+            myData.description = self.dossierDescription;
+        }
+        if (self.dossierImageURL && self.dossierImageURL.length) {
+            myData.image = self.dossierImageURL;
+        }
+        // var data=myData;
+
+        $.ajax({
+            url:  url,
+            type : method,
+            data: myData,
+            dataType : 'json',
+            success : sentData,
+            error : function(request) {
+                //localStorage.setItem("pendingCourseList", true);
+                ISNLogger.log("Error while sending dossier data to the server");
+                ISNLogger.log("ERROR status text: "+ request.statusText); 
+                ISNLogger.log("ERROR status code: "+ request.statusCode()); 
+                ISNLogger.log("ERROR status code is : " + request.status);
+                ISNLogger.log("ERROR responsetext: "+ request.responseText); 
+                if (request.status == 401){
+                    // access keys have been rejected
+                    self.controller.keysRejected();
+                }
+            },
+            beforeSend : setHeader
+        });
     }
     
     function sentData(){
@@ -369,12 +360,6 @@ BookmarkModel.prototype.sendDataToServer=function(){
     }
 };
 
-
-
-
-
-
-
 /**
  * Increases the index in the dossiers-item list, which means we move to the next dossier item
  * @prototype
@@ -384,9 +369,8 @@ BookmarkModel.prototype.sendDataToServer=function(){
 BookmarkModel.prototype.nextItem = function() {
     this.index++;
     ISNLogger.log("this.index in nextItem is "+this.index);
-    return this.index < this.dossierList.length;
+    return (this.index < this.dossierList.length);
 };
-
 
 BookmarkModel.prototype.nextUser = function() {
 	ISNLogger.log("user_index before increase is "+this.user_index);
@@ -413,24 +397,20 @@ BookmarkModel.prototype.hasItem = function(id) {
     return retval;
 };
 
-
 /**
- * Increases the index in the dossiers-item list, which means we move to the next dossier item
- * @prototype
- * @function nextDossierItem
- * @return true if an item with an appropriate index exists, otherwise false
+ * @method firstItem()
+ * 
+ * Sets the class' iterator to the first item in the bookmark list.
  */
 BookmarkModel.prototype.firstItem = function() {
     this.index=0;	
 };
-
 
 BookmarkModel.prototype.getItemId = function() {
     var self=this;
     ISNLogger.log("this.index in getID is "+this.index);
     ISNLogger.log("dossier list length in id is "+this.dossierList.length);
     return (this.index < this.dossierList.length ) ? this.dossierList[this.index].metadata.id : false;	
-    //return self.dossierList[this.index]['metadata']['id'];	
 };
 
 /**
@@ -440,25 +420,19 @@ BookmarkModel.prototype.getItemId = function() {
  */
 BookmarkModel.prototype.getTitle = function() {
 	if (this.controller.id=="detailembedController"){
-	var item_index=this.getItemIndex();
-    return (this.index < this.dossierList.length ) ? this.dossierList[item_index].metadata.title : false;	
-    //return this.dossierList[this.index]['metadata']['title'];
-	}
-	else{
-		
-	}return (this.index < this.dossierList.length ) ? this.dossierList[this.index].metadata.title : false;
+        var item_index=this.getItemIndex();
+        return (this.index < this.dossierList.length ) ? this.dossierList[item_index].metadata.title : false;	
+    }
+	return (this.index < this.dossierList.length ) ? this.dossierList[this.index].metadata.title : false;
 };
 
 
 BookmarkModel.prototype.getPublisher = function() {
 	if (this.controller.id=="detailembedController"){
-	var item_index=this.getItemIndex();
-    return (this.index < this.dossierList.length ) ? this.dossierList[item_index].metadata.publisher["name"] : false;	
-    //return this.dossierList[this.index]['metadata']['title'];
-	}
-	else{
-		
-	}return (this.index < this.dossierList.length ) ? this.dossierList[this.index].metadata.title : false;
+        var item_index=this.getItemIndex();
+        return (this.index < this.dossierList.length ) ? this.dossierList[item_index].metadata.publisher["name"] : false;	
+    }
+	return (this.index < this.dossierList.length ) ? this.dossierList[this.index].metadata.title : false;
 };
 
 BookmarkModel.prototype.getDate = function() {
@@ -483,7 +457,7 @@ BookmarkModel.prototype.getDescription = function() {
 		dtext = $("<div/>", {'html':dhtml}).text();
 		ISNLogger.log('description text is: ' + dtext);
 	}
-	
+
     return  dtext;	
 };
 
@@ -528,15 +502,15 @@ BookmarkModel.prototype.getEmbedURL = function() {
 };
 
 BookmarkModel.prototype.getUsername = function() {
-	  return (this.user_index < this.userlist.length) ? this.userlist[this.user_index].username: false;	
+    return (this.user_index < this.userlist.length) ? this.userlist[this.user_index].username: false;	
 };
 
 BookmarkModel.prototype.getUsertype = function() {
-	  return (this.user_index < this.userlist.length) ? this.userlist[this.user_index].user_type: false;	
+    return (this.user_index < this.userlist.length) ? this.userlist[this.user_index].user_type: false;	
 };
 
 BookmarkModel.prototype.getUserid = function() {
-	  return (this.user_index < this.userlist.length) ? this.userlist[this.user_index].user_id: false;	
+    return (this.user_index < this.userlist.length) ? this.userlist[this.user_index].user_id: false;	
 };
 
 //Dossier functions
@@ -547,14 +521,11 @@ BookmarkModel.prototype.getDossierID=function(){
 };
 
 BookmarkModel.prototype.getDossierTitle=function(){
-    //return (this.index > this.dossierMetadata.length - 1) ? false :
     return	 this.dossierMetadata.title;	
-    
 };
 
 BookmarkModel.prototype.getDossierDescription=function(){
     ISNLogger.log("this.index in get description is "+this.index);
-    //return (this.index > this.dossierMetadata.length - 1) ? false :
     return this.dossierMetadata.description;	
 };
 

@@ -86,7 +86,8 @@ BadgeView.prototype.renderBadgeList = function() {
 			this.renderItem();
 			bookmarkModel.nextItem();
 		} 
-	} else{
+	} 
+    else{
 		//if the specific dossier has no dossier items
 		ISNLogger.log("the dossier has no dossier items");
 		var div = $("<div/>", {
@@ -117,7 +118,6 @@ BadgeView.prototype.renderItem = function() {
 		"class":"liItem"
 	}).appendTo("#subnavi");
 	
-
 	divA=$("<a/>", {
 		"class": "dossierItemText",
 		"href": bookmarkModel.getISNURL(), 

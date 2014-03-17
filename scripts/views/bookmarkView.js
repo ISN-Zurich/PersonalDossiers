@@ -7,10 +7,6 @@ function bookmarkView(controller){
 		
 	//will move the binding of the dossier list update to the librarybookmark model
 	// it will load the bookmarkedossiers, and when this is ready, the bookmark view will open
-//	$(document).bind('DossierListUpdate', function(){
-//		ISNLogger.log("bound dossier list update in bookmark view");
-//		self.open();
-//	});
 	
 	$(document).bind('BookmarkedDossierListUpdate', function(){
 		ISNLogger.log("bound bookmarked dossier list update in bookmark view");
@@ -34,7 +30,6 @@ bookmarkView.prototype.openDiv=openView;
 
 bookmarkView.prototype.open = function(){
 	this.update();
-	
 	this.openDiv();
 };
 
@@ -47,11 +42,10 @@ bookmarkView.prototype.update = function(){
 
 	if (dossierListModel.listIsPresent()){
 		dossierListModel.reset();
-		dossierId=dossierListModel.getDossierId();
+		dossierId = dossierListModel.getDossierId();
 
 		do {
 			this.renderDossier();
-
 		} while (dossierListModel.nextDossier());
 
 		ISNLogger.log("passed the design of the bookmarks list");
@@ -59,14 +53,9 @@ bookmarkView.prototype.update = function(){
 		ISNLogger.log("height of bookmark container is "+height);
 		this.controller.notifyNewHeight(height);
 	}
-	
-	
-	
-	
 };
 
 bookmarkView.prototype.renderDossier=function(){
-	
 	ISNLogger.log("enter render Dossier");
 	
 	var libraryBookmarkModel = self.controller.models.bookmarkDossier;
@@ -74,6 +63,7 @@ bookmarkView.prototype.renderDossier=function(){
 	var	dossierID = self.controller.models.dossierList.getDossierId();
 	var isFollowedDossier = dossierListModel.isFollowedDossier();
 	var library_id= self.controller.library_item_id;
+    
 	ISNLogger.log("dossier id in render dossier is"+dossierID);
 	ISNLogger.log("library id is "+library_id);
 
@@ -86,30 +76,19 @@ bookmarkView.prototype.renderDossier=function(){
 			
 		}).appendTo("#bookmarkList");
 
-
 		var div2=$("<div/>", {
 			"id": "item"+dossierID,
 			"class":"st clickable overflowText grey_bar",
 			"text":self.controller.models.dossierList.getDossierTitle()
 		}).appendTo(div1);
 	
-//		var tspan = $("<span/>", {
-//			"id":"item"+dossierID,
-//			"class": "overflowText bookmarkButtonText",
-//			"text":self.controller.models.dossierList.getDossierTitle()
-//		}).appendTo(div2);
-
 		var span=$("<span/>", {
 					"id": "icon"+ dossierID,
 					"class":libraryBookmarkModel.hasItem(dossierID) ? "st_editDosser pd_bookmark_icon_exist iconMoon" : "st_editDosser pd_bookmark_icon iconMoon",
 					"text": "K"
 		}).appendTo(div2);
-	
 	}
-	
 };
-
-
 
 bookmarkView.prototype.closeDiv= function(){};
 
