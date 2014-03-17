@@ -25,7 +25,6 @@ function baseURL(){
  * @function openView
  * */
 function openView(){
-
 	ISNLogger.log("first console log message");
 	$("#" + this.tagID).show();
 }
@@ -35,7 +34,6 @@ function openView(){
  * @function closeView
  * */
 function closeView(){
-
 	$("#" + this.tagID).hide();
 }
 
