@@ -380,7 +380,7 @@ textarea:-ms-input-placeholder {
 }
 
 ul#sortable li{
-    height:145px;
+    /* height:145px; */
 }
 
 .dossier_item_border {

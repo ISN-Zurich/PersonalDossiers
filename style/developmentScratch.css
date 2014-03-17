@@ -218,6 +218,28 @@ ul#sortable {
 	list-style-type: none;
 }
 
+ul#sortable > li {
+    padding-top: 8px;
+    border-bottom: 1px solid #C9CACF;
+    padding-bottom: 8px;
+}
+
+ul#sortable > li:first-child {
+    padding-top: 0px;
+}
+
+ul#sortable > li:last-child {
+    border-bottom: none;
+    padding-bottom: 10px;
+}
+
+
+div.overviewcontent {
+    width: 100%;
+    margin-right: 0px;
+    margin-left: 90px;
+}
+
 /* we redefine this in order to remove the more icon from the li items, it was set as a background on the original css */
 #content ul li a,
 #content a.more,
@@ -227,8 +249,15 @@ ul#sortable {
 #content a.pdf:link,
 #sidebar_right a.more:link {
     background: none;
-    padding-left: .8em;
+    padding-left: 0;
     color: #333;
+    text-decoration: none;
+}
+
+#content a.more:hover, #content ul li a:hover, #content a.more:visited, #content ul li a:visited {
+    background: none;
+    padding-left: 0;
+    text-decoration: none;
 }
 
 #pd_invite_bar_text {
@@ -283,3 +312,7 @@ ul#sortable {
 
 .more {}
 .less {}
+
+.embediFrameBig {
+    width: 100%;
+}
