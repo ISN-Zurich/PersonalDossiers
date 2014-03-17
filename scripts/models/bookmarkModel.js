@@ -486,19 +486,25 @@ BookmarkModel.prototype.getType = function() {
 };
 
 BookmarkModel.prototype.getISNURL = function() {
-    return (this.index < this.dossierList.length) ? 'http:\/\/www.isn.ethz.ch\/layout\/set\/pdembed\/Digital-Library\/'+this.dossierList[this.index].metadata.type+'\/Detail\/?lng=en\u0026id='+this.dossierList[this.index].metadata.id: "";
-//    return (this.index < this.dossierList.length) ? this.dossierList[this.index].metadata.isn_detail_url: "";
+    // return (this.index < this.dossierList.length) ? 'http:\/\/www.isn.ethz.ch\/layout\/set\/pdembed\/Digital-Library\/'+this.dossierList[this.index].metadata.type+'\/Detail\/?lng=en\u0026id='+this.dossierList[this.index].metadata.id: "";
+    return (this.index < this.dossierList.length) ? this.dossierList[this.index].metadata.isn_detail_url: "";
 };
 
 
 BookmarkModel.prototype.getEmbedURL = function() {
 	itemType= this.getType();
-	var dossierListModel=this.controller.models.dossierList;
-	if (itemType === "Publication"){
+    
+    if (itemType === "Publication"){
 		//return  'http://yellowjacket.ethz.ch/tools/embedDetailPage.html?id='+ this.getItemId();
 		//return  'http://yellowjacket.ethz.ch/tools/embedDetailPage.html?dossier_id='+ dossierListModel.getDossierId() +'&item_id='+this.getItemId();
-		return  baseURL() + 'embedDetailPage.html?dossier_id='+ this.dossierId +'&item_id='+this.getItemId();
+        return baseURL() + "service/streamtest.php?id="+this.getItemId();
+		// return  baseURL() + 'embedDetailPage.html?dossier_id='+ this.dossierId +'&item_id='+this.getItemId();
 	}
+   
+    if ( itemType !== 'Audio') {
+        itemType = itemType + 's';
+    }
+    return 'http:\/\/www.isn.ethz.ch\/layout\/set\/pdembed\/Digital-Library\/'+ itemType +'\/Detail\/?lng=en\u0026id='+this.getItemId();
 };
 
 BookmarkModel.prototype.getUsername = function() {
