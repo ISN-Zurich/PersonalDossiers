@@ -10,7 +10,7 @@ ISNLogger.log("enter embed controller file");
 
 /*jslint vars: true, sloppy: true */
 
-function embedController() {
+function EmbedController() {
     var self=this;
     this.id="embedController";
     this.initServiceHost();
@@ -29,7 +29,6 @@ function embedController() {
         self.views = {};
         self.models = {};
 
-
         //initialize models
         self.models.dossierList = new DossierListModel(self);
         self.models.bookmark = new BookmarkModel(self);
@@ -39,6 +38,7 @@ function embedController() {
         //initialize views
         self.views.dossierBanner = new DossierBannerView(self);
         self.views.dossierContent= new DossierContentView(self);
+        self.views.details       = new DetailEmbedView(self);
 
         $(document).bind("BookmarkModelLoaded", function() {
            ISNLogger.log("initialize views in controller");
@@ -48,12 +48,12 @@ function embedController() {
     }
 } //end of constructor
 
-embedController.prototype.initServiceHost = pdInitServiceHost;
-embedController.prototype.getServiceHost = pdGetServiceHost;
-embedController.prototype.isAuthenticated = pdIsAuthenticated;
-embedController.prototype.keysRejected = pdNOOP;
+EmbedController.prototype.initServiceHost = pdInitServiceHost;
+EmbedController.prototype.getServiceHost  = pdGetServiceHost;
+EmbedController.prototype.isAuthenticated = pdIsAuthenticated;
+EmbedController.prototype.keysRejected    = pdNOOP;
 
-embedController.prototype.hashedUrl = function() {
+EmbedController.prototype.hashedUrl = function() {
     ISNLogger.log("enter hasehd url");
 
     url_ref=window.location.href;
@@ -75,13 +75,13 @@ embedController.prototype.hashedUrl = function() {
     }
 };
 
-embedController.prototype.getHashedURLId = function(){
+EmbedController.prototype.getHashedURLId = function(){
     var dossierId=this.pubid;
     ISNLogger.log("dossier id after hash is "+dossierId);
     return dossierId;
 };
 
-embedController.prototype.getActiveDossier = function(){
+EmbedController.prototype.getActiveDossier = function(){
     ISNLogger.log("in user controller to get active dossier");
     if (this.hashed){
         var activedosId = this.getHashedURLId();
@@ -100,14 +100,28 @@ embedController.prototype.getActiveDossier = function(){
     return undefined;    //if something goes wrong for any reason
 };
 
-var controllerObject = embedController;
+/**
+ * @method openDetails()
+ * 
+ * Closes the overview page and opens the details view for the current item.
+ */
+EmbedController.prototype.openDetails = function() {
+    this.views.dossierBanner.close();
+    this.views.dossierContent.close();
+    $("#content").hide();
+    this.views.details.open();
+};
 
-//
-//var controller;
-//ISNLogger.log("enter main js");
-//$(document).ready(function(){
-//    ISNLogger.log("document ready");
-//
-//    ISNLogger.debugMode = false;
-//    controller = new embedController();
-//});
+/**
+ * @method openDossier() 
+ * 
+ * Closes the details view and opens the dossier list again.
+ */
+EmbedController.prototype.openDossier = function() {
+    this.views.details.close();
+    $("#content").show();
+    this.views.dossierBanner.open();
+    this.views.dossierContent.open();
+};
+
+var controllerObject = EmbedController;

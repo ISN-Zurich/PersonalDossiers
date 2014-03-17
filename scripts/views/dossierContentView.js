@@ -80,7 +80,17 @@ function DossierContentView(dController){
 		}
 		else if($(targetE).hasClass("less")) {
 			self.closeDescription(targetE);
-        }	
+        }
+        else if (targetID.indexOf('embeditem') === 0) {
+            // this opens the detailed view for the embedded item
+            var id = targetID.substring(9);
+            if (id > 0) {
+                // open view
+                self.controller.models.bookmark.setIndexToItemId(id);
+                self.controller.openDetails();
+                e.preventDefault();
+            }
+        }
 	}
 
 	$("#pd_footer_gen").bind("click", function(){
@@ -138,7 +148,7 @@ DossierContentView.prototype.openDiv = openView;
 /**
  * closes the view
  * @prototype
- * @function closeDiv
+ * @function close
  **/ 
 DossierContentView.prototype.closeDiv = closeView;
 
@@ -146,6 +156,7 @@ DossierContentView.prototype.closeDiv = closeView;
  * TODO: Documentation
  */
 DossierContentView.prototype.open = function() {
+    this.controller.models.bookmark.firstItem();
 	this.update();
 	this.openDiv();
 };
@@ -154,7 +165,6 @@ DossierContentView.prototype.open = function() {
  * TODO: Documentation
  */
 DossierContentView.prototype.update = function(){
-
 	var self=this;
 
 	$("#contentArea").empty();
@@ -206,10 +216,10 @@ DossierContentView.prototype.renderList = function() {
 
 	if (self.controller.id ==="embedController") {
 		var bannerHeight= $("#bannerArea").height();
-		var footerHeight = $("#pd_footer_gen").height();
+		var footerHeight = $("#pd_footer_gen").height() + $("#dossiercontentHeader").height();;
 		var totalHeight = bannerHeight + footerHeight ;	// we add 176 px for the image that might be still on its way
 		var contentAreaHeight=iFrameHeight - totalHeight;
-		$("#contentArea").css("height",contentAreaHeight+"px" );
+		$("#contentArea").css("height", contentAreaHeight+"px" );
 	}
 };
 
@@ -237,22 +247,32 @@ DossierContentView.prototype.activateSorting = function(){
 };
 
 /**
- * TODO: Documentation
+ * @method renderItem()
+ * 
+ * This function creates a content block of the current item of the Bookmark Model Iterator. 
+ * 
+ * If this method runs for an embed page, then the content links will be deactivated and the trigger 
+ * for a opening the detailed view will be set.
  */
 DossierContentView.prototype.renderItem = function() {
 	var bookmarkModel = self.controller.models.bookmark;
-
+    var embed = false;
+    
+    if (self.controller.id === "embedController") {
+        embed = true;
+    }
+    
 	ISNLogger.log("enter render Item");
 	var	dossierID = self.controller.models.bookmark.getItemId();
 	ISNLogger.log("dossier item id is"+dossierID);
 
 	var div1 = $("<li/>", {
 		"id": "item"+dossierID, 
-		"class" : "ui-state-default featured2 hideOT dossier_item "
+		"class" : "ui-state-default featured2 dossier_item "
 	}).appendTo("#sortable");
 
 	var divFloat = $("<div/>", {
-		"class" : "floatleft"
+		// "class" : "floatleft"
 	}).appendTo(div1);
 
 	var divA = $("<a/>", {
@@ -267,7 +287,8 @@ DossierContentView.prototype.renderItem = function() {
 	}).appendTo(divA);
 
 	var divFloatText=$("<div/>", {
-		"class" : "floatleft overviewcontent dossier_text"
+		// "class" : "floatleft overviewcontent dossier_text"
+        "class" : "overviewcontent dossier_text"
 	}).appendTo(div1);
 
 	// if we are not in the embedded page display the isn url
@@ -277,28 +298,38 @@ DossierContentView.prototype.renderItem = function() {
 	}).appendTo(divFloatText); 
 
 	var divp1 = $("<span/>", {
-		"class":"small",
-		text:bookmarkModel.getDate()+"/"+bookmarkModel.getType() 
+		"class":"small"
 	}).appendTo(firstLineContainer);
 
-	var icon = $("<span/>", {
-		"class":"iconMoon dragIcon hide",
-		text:"S" 
-	}).appendTo(firstLineContainer);
+    var btype = bookmarkModel.getType();
+    var btypeS = btype === 'Audio' ? btype : btype + 's';
+    
+    $('<span/>', {'class': 'overview_date', 'text': bookmarkModel.getDate() }).appendTo(divp1);
+    $('<a/>', {'class': 'OTName', 
+               'href': 'http://www.isn.ethz.ch/Digital-Library/' + btypeS + '/', 'text': btype,
+              }).appendTo(divp1);
 
+    if( !embed ) { 
+	   var icon = $("<span/>", {
+		  "class":"iconMoon dragIcon hide",
+		  text:"S" 
+	   }).appendTo(firstLineContainer);
+    }
 	var divh1 = $("<h1/>", {	}).appendTo(divFloatText);
-
-	if (self.controller.id!=="embedController" || bookmarkModel.getType() !== "Publication"){
-		divAText=$("<a/>", {
+    
+	if ( !embed ){
+		var divAText=$("<a/>", {
 			"class": "header1",
-			"href":bookmarkModel.getISNURL(), 
+			"href": bookmarkModel.getISNURL(), 
 			text:bookmarkModel.getTitle()
 		}).appendTo(divh1);
 	} 
     else {
 		//if we are in the big embed view we need to open also a view that contains the header of the
 		//detailed embede for back and forth navigation
-		divA = $("<a/>", {
+        
+		var divA = $("<a/>", {
+            "id" : "embeditem" + bookmarkModel.getItemId(),
 			"class": "header1",
 			"href":bookmarkModel.getEmbedURL(), 
 			text:bookmarkModel.getTitle()
@@ -307,17 +338,18 @@ DossierContentView.prototype.renderItem = function() {
     
 	var divp2=$("<p/>", {
 		"id":"itemDescription"+dossierID,
-		"class":"left",
-		text:bookmarkModel.getDescriptionShort(136)
+		// "class":"left",
+		text: bookmarkModel.getDescription()
 	}).appendTo(divFloatText);
 
-	var divMore=$("<span/>", {
-		"class":"more more_a",
-		"style":"padding-left:5px",
-		"text":"More"
-	}).appendTo(divp2);
+    // FIXME: check if this should go away
+//	var divMore=$("<span/>", {
+//		"class":"more more_a",
+//		"style":"padding-left:5px",
+//		"text":"More"
+//	}).appendTo(divp2);
 
-	if (self.controller.id!=="embedController"){
+	if (!embed){
 		var div3 = $("<div/>", {
 			"class":"deletecontainer hide"
 		}).appendTo(divFloatText);
@@ -395,7 +427,7 @@ DossierContentView.prototype.showDraggableIcon = pdNOOP;
  * @function close
  **/ 
 DossierContentView.prototype.close = function() {
-	moblerlog("close course list view");
+	ISNLogger.log("close course list view");
 	this.active = false;
 	this.closeDiv();
 	$("#contentArea").empty();

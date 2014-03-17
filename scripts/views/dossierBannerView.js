@@ -170,12 +170,14 @@ DossierBannerView.prototype.checkDescriptionEdit = function() {
     }
 }; 
 
-
-DossierBannerView.prototype.open=function(){
+DossierBannerView.prototype.open = function(){
     ISNLogger.log("open dossier banner view");	
     this.renderBanner();
-    // this.openDiv();	
+    this.openDiv();	
 };
+
+DossierBannerView.prototype.openDiv = openView;
+DossierBannerView.prototype.close   = closeView;
 
 DossierBannerView.prototype.renderBanner= function(){
     var self=this
