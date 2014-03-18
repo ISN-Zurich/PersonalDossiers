@@ -20,8 +20,10 @@
 /*add an extra formatting to disabled links. the pointer is not hand.*/
 
 a.disable  {
-   pointer-events: none;
-   cursor: default;
+    color: #C9CACF !important;
+    background-color: #ebedee !important;
+    pointer-events: none;
+    cursor: default;
 }
 
 /* this overrides the original class, by changing its paddings*/
