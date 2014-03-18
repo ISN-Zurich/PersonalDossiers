@@ -3,11 +3,11 @@
 function WelcomeView(controller){
 	var self=this;
 	self.controller=controller;
-	self.tagID="welcomeBox"; 
+	self.tagID="welcomeBox";
 
 	$("#welcomeBox").bind("click", function(e){
 		// ensure that clicks on the headers are ignored
-		
+
 		ISNLogger.log("clicked the dossier category");
 		var targetE = e.target;
 		if (targetE.id !== "followingListHeader") {
@@ -39,22 +39,22 @@ WelcomeView.prototype.update = function(){
 	self.controller.colorizeInteractiveBox(hashTag);
 
 	 $("#welcome").empty();
- 
-		 
+
+
 	if ( self.controller.models.user.userProfile ) {
 		ISNLogger.log("user profile existis, design welcome view");
 	}
 
 	var dossierListModel=self.controller.models.dossierList;
 
-	if (dossierListModel.listIsPresent()) { 
+	if (dossierListModel.listIsPresent()) {
 		dossierListModel.reset();
 
 		ISNLogger.log("dossier list is present design dossier list - welcome view");
 		dossierId=dossierListModel.getDossierId();
-		
+
 		welcomeElement=$("#welcome");
-		
+
 		//create non-optional elements
 		var l1 = this.createListBlock("L1");
 		welcomeElement.append(l1);
@@ -65,9 +65,9 @@ WelcomeView.prototype.update = function(){
 			"text":"Followed"
 		});
 		var l2 = this.createListBlock("L2");
-		
 
-		var isFollowedDossier, l2Uninitialized = false; 
+
+		var isFollowedDossier, l2Uninitialized = false;
 		do {
 			isFollowedDossier = dossierListModel.isFollowedDossier();
 			if (isFollowedDossier && !l2Uninitialized ) {
@@ -76,12 +76,12 @@ WelcomeView.prototype.update = function(){
 				welcomeElement.append(l2);
 			}
 			this.renderDossierItem(isFollowedDossier ? l2 : l1);
-		
+
 		} while (dossierListModel.nextDossier());
 		$(l1+":last-child").removeClass("dossier_item_border");
 		$(l2+":last-child").removeClass("dossier_item_border");
 		return; // stop here
-		
+
 		// END OF DESIGN OF FIRST LIST OF DOSSIERS
 	}
 
@@ -97,10 +97,10 @@ WelcomeView.prototype.createListBlock = function(listId){
 WelcomeView.prototype.renderDossierItem = function(parentE) {
 	var self = this;
 	var dossierListModel=self.controller.models.dossierList;
-	
+
 	// This item should have a border by the CSS styles unless it is the last element in the parent container
 	div1 =$("<div/>", {
-		"id":"dossier"+self.controller.models.dossierList.getDossierId(),
+		"id":"dossier" + self.controller.models.dossierList.getDossierId(),
 		"class": "column featured2  dossier_item dossier_item_border clickable"
 	}).appendTo(parentE);
 
@@ -117,7 +117,7 @@ WelcomeView.prototype.renderDossierItem = function(parentE) {
 	}).appendTo(div2);
 
 	div3 =$("<div/>", {
-		"class": "floatleft overviewcontent dossier_text"
+		"class": "overviewcontent dossier_text"
 	}).appendTo(div1);
 
 	h1 =$("<h1/>", {
@@ -152,20 +152,12 @@ WelcomeView.prototype.renderDossierItem = function(parentE) {
 			"text":"Really delete"
 		}).appendTo(divDelContainer);
 	}
-	lastbr1=$("<br/>", {
-
-	}).appendTo(div1);
-	lastbr2=$("<br/>", {
-
-	}).appendTo(div1);
-	
-
-}; 
+};
 
 WelcomeView.prototype.closeDiv=closeView;
 
 WelcomeView.prototype.close = function(){
 	ISNLogger.log("close welcome view");
 	this.closeDiv();
-	
+
 };
