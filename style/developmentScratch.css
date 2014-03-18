@@ -18,12 +18,14 @@
  * a should have a different font color if not clicked
  */
 /*add an extra formatting to disabled links. the pointer is not hand.*/
-
 a.disable  {
-    color: #C9CACF !important;
     background-color: #ebedee !important;
     pointer-events: none;
     cursor: default;
+}
+
+a.disable span.pd_active {
+    color: #C9CACF !important;
 }
 
 /* this overrides the original class, by changing its paddings*/
