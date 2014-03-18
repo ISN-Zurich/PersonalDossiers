@@ -1,38 +1,48 @@
 /*jslint vars: true, sloppy: true */
+function WelcomeView( controller ) {
 
-function WelcomeView(controller){
-	var self=this;
-	self.controller=controller;
-	self.tagID="welcomeBox";
+	var self = this;
+	self.controller = controller;
+	self.tagID = "welcomeBox";
 
-	$("#welcomeBox").bind("click", function(e){
+	$("#welcomeBox").bind("click", function( e ) {
+
 		// ensure that clicks on the headers are ignored
-
 		ISNLogger.log("clicked the dossier category");
 		var targetE = e.target;
-		if (targetE.id !== "followingListHeader") {
+		if ( targetE.id !== "followingListHeader" ) {
+
 			var targetID = targetE.id;
 			var dosID = targetID.substring(7);
-			if (dosID.length && parseInt(dosID) > 0) {
-                ISNLogger.log("dosID is "+dosID);
+			if ( dosID.length && parseInt( dosID ) > 0 ) {
+
+                ISNLogger.log( "dosID is " + dosID );
                 var userModel = self.controller.models.user;
-                userModel.setActiveDossier(dosID);
-                window.location.href="index.html?id="+dosID;
+                userModel.setActiveDossier( dosID );
+                window.location.href = "index.html?id=" + dosID;
                 e.stopPropagation();
             }
 		}
 	});
 }
 
-WelcomeView.prototype.openDiv=openView;
+
+
+WelcomeView.prototype.openDiv = openView;
+
+
 
 WelcomeView.prototype.open = function(){
+
 	this.update();
 	this.openDiv();
 };
 
+
+
 WelcomeView.prototype.update = function(){
-	var self=this;
+
+	var self = this;
 	ISNLogger.log("update the welcome view");
 	var hash= window.location.hash;
 	var hashTag = hash.substring(1);
@@ -137,19 +147,20 @@ WelcomeView.prototype.renderDossierItem = function(parentE) {
 		"text":self.controller.models.dossierList.getDossierDescription()
 	}).appendTo(div3);
 	if (self.controller.oauth){
-		divDelContainer =$("<div/>", {
+
+		divDelContainer = $("<div/>", {
 			"class": "deletecontainer"
 		}).appendTo(div1);
 
-		divDel1 =$("<div/>", {
-			"id":"delete-",// dossierID the id of the dossier
+		divDel1 = $("<div/>", {
+			"id":"delete-" + self.controller.models.dossierList.getDossierId(),// dossierID the id of the dossier
 			"class": "deleteButton"
-		}).appendTo("#divDelContainer");
+		}).appendTo(divDelContainer);
 
-		divDelConfirm =$("<div/>", {
-			"id":"delete-confirm",// dossierID the id of the dossier
-			"class": "deleteConfirmButton",
-			"text":"Really delete"
+		divDelConfirm = $("<div/>", {
+			"id" : "delete-confirm-" + self.controller.models.dossierList.getDossierId(),// dossierID the id of the dossier
+			"class" : "deleteConfirmButton",
+			"text" : "Click to confirm delete"
 		}).appendTo(divDelContainer);
 	}
 };

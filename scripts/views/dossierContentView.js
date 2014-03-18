@@ -16,7 +16,8 @@
     self.tagID = 'contentArea';
     self.deleteMode = 0;
 
-    $(window).bind("click", clickHandler );
+    $(document).bind("click", clickHandler );
+
     function clickHandler( e ) {
 
         var targetE = e.target;
@@ -24,7 +25,7 @@
         if ( $(targetE).hasClass("deleteButton") ) {
 
             self.deleteMode = true;
-            var myID = targetID.substring(7);
+            var myID = targetID.substring( 7 );
             self.deleteMode = myID;
             $(targetE).hide();
             $("#delete-confirm-" + myID).show();
@@ -32,15 +33,15 @@
         } else if ( $(targetE).hasClass("deleteConfirmButton") ) {
 
             // get rid of the element
-            var myIDf = targetID.substring(15);
+            var myIDf = targetID.substring( 15 );
             self.removeItem(myIDf);
             self.deleteMode = 0;
             e.stopPropagation();
         } else if ( targetID.indexOf('embeditem') === 0 ) {
 
             // this opens the detailed view for the embedded item
-            var id = targetID.substring(9);
-            if (id > 0) {
+            var id = targetID.substring( 9 );
+            if ( id > 0 ) {
 
                 // open view
                 self.controller.models.bookmark.setIndexToItemId(id);
@@ -50,18 +51,24 @@
         }
     }
 
+
     $(window).bind("click", function(){
 
         // rescue click to cancel a delete request
         if ( self.deleteMode > 0 ) {
+
             $('#delete-confirm-' + self.deleteMode).hide();
             $('#delete-' + self.deleteMode).show();
             self.deleteMode = 0;
         }
     });
+
+
     $(window).bind('keydown', function( e ) {
 
+        //keyCode 27 = escape
         if ( e.keyCode === 27 && self.deleteMode > 0 ) {
+
             $('#delete-confirm-' + self.deleteMode).hide();
             $('#delete-' + self.deleteMode).show();
             self.deleteMode = 0;
@@ -139,6 +146,7 @@ DossierContentView.prototype.closeDiv = closeView;
  * TODO: Documentation
  */
 DossierContentView.prototype.open = function() {
+
 	this.update();
 	this.openDiv();
 };
