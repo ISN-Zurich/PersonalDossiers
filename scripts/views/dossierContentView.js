@@ -350,7 +350,7 @@ DossierContentView.prototype.renderItem = function(){
 
         delConfirmButton = $("<div/>", {
             "id" : "delete-confirm-" + dossierID,
-            "text" : "Click to confirm delete"
+            "text" : "Click to confirm delete",
             "class" : "deleteConfirmButton"
         }).appendTo(div3);
     }
