@@ -98,9 +98,16 @@ BadgeView.prototype.renderBadgeList = function() {
 	        }).appendTo(div);
 	}
     
+    var ulRenderHeight = $('#subnavi').height();
 	var ulHeight = iFrameHeight - totalHeight;
+    
+    ulHeight = ulRenderHeight < ulHeight ? ulRenderHeight : ulHeight;
+    
 	ISNLogger.log("ulheight is " + ulHeight);
-	$("#subnavi").css("height", ulHeight + "px" );	
+	$("#subnavi").css("height", ulHeight + "px" );
+    
+    // inform the parent page about the new size.
+    // this.controller.postHeight(ulHeight);
 };
 
 /**
