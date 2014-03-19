@@ -80,7 +80,7 @@ BadgeView.prototype.renderBadgeList = function() {
 	var headerHeight = $("#badgeHeader").outerHeight();
 	var titleHeight = $("#titleContainer").outerHeight();
 	var footerHeight = $("#pd_footer_gen").outerHeight();
-	var totalHeight = headerHeight + titleHeight + 2*footerHeight + 0;
+	var totalHeight = headerHeight + titleHeight + footerHeight;
 
 	if (bookmarkModel.dossierList && bookmarkModel.dossierList.length > 0) {
 		ISNLogger.log("dossier list index is " + bookmarkModel.index);
@@ -119,7 +119,7 @@ BadgeView.prototype.renderBadgeList = function() {
 	$("#subnavi").css("height", ulHeight + "px" );
     
     // inform the parent page about the new size.
-    this.controller.postHeight(ulHeight);
+    this.controller.postHeight(ulHeight + totalHeight);
 };
 
 /**
