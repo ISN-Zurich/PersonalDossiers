@@ -5,7 +5,7 @@ if (typeof ISNLogger === 'undefined') {
         debugMode: false
         ,
         
-        devlopmentMode: false
+        developmentMode: false
         ,
         
         log: function(message) {
