@@ -5,6 +5,9 @@ if (typeof ISNLogger === 'undefined') {
         debugMode: false
         ,
         
+        devlopmentMode: false
+        ,
+        
         log: function(message) {
             if ( !window.console ) {
                 window.console = {'log': function(){}};
@@ -32,7 +35,7 @@ if (typeof ISNLogger === 'undefined') {
          */
         grep: function(config) {
             var rV = config;
-            if (!this.debugMode) {
+            if (!this.devMode) {
                 rV = [];
                 function filterDebug(i,o) {
                     if (typeof o === 'object' && (!o.debug || o.debug === "0") ) {
@@ -46,13 +49,13 @@ if (typeof ISNLogger === 'undefined') {
         ,
         
         /**
-         * @function choose(debugOption, productionOption)
+         * @function choose(productionOption, developmentOption)
          * 
          * this function chooses between the debug and the production option depending 
          * on the debug mode.
          */
-        choose: function(productionOption, debugOption) {
-            return this.debugMode ? debugOption : productionOption;
+        choose: function(productionOption, developmentOption) {
+            return this.devMode ? developmentOption : productionOption;
         }
     };
 }
