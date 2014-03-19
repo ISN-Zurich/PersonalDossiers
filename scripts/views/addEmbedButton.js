@@ -113,7 +113,7 @@ AddEmbedButton.prototype.embedStyle = function(embedType) {
  * generates the embedstring for the requested embed type. 
  */
 AddEmbedButton.prototype.generateEmbedCode = function(embedType) {
-    return '<iframe id="isnpdid' + this.dossierId + '" scrolling="no" src="' + this.embedURL(embedType) + '" style="' + this.embedStyle(embedType) + '" frameBorder="0" ></iframe>';
+    return '<script type="text/javascript">var ISNResizer; if (typeof ISNResizer === "undefined") { ISNResizer = function(m) { var d, i, k, ae, el, s, so, sl, oi; try {d=JSON.parse(m.data);} catch(e) { d = {}; } if ( d.isnpdid && d.height >= 0 ) { var k,ae = document.getElementsByTagName("iframe"); for (k=0; k< ae.length; k++) { el = ae[k]; if ( d.self === el.getAttribute("src") ) { s = el.getAttribute("style"), so = {}; if ( s && s.length ) { sl=s.split(";"); for (i = 0; i < sl.length; i++) { oi = sl[i].split(":"); so[oi[0]] = so[oi[1]];}} so.height = data.height + "px"; s = ""; for ( k in so ) { s = s + k + ":" + so[k] + ";"; } el.setAttribute("style", style); }}}}; window.addEventListener("message", ISNResizer, false); }</script><iframe scrolling="no" src="' + this.embedURL(embedType) + '" style="' + this.embedStyle(embedType) + '" frameBorder="0" ></iframe>';
 };
 
 AddEmbedButton.prototype.close = function(){

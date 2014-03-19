@@ -25,3 +25,7 @@ images/default_item_images/default_audio.jpg
 images/default_item_images/default_publication.jpg
 images/default_item_images/default_video.jpg
 *.js_backup
+
+scripts/views/dossierContentView.backup.js
+
+scripts/resizer.js

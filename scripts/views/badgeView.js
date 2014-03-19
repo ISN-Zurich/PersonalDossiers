@@ -9,6 +9,8 @@ function BadgeView(dController){
 	self.controller=dController;
 	self.tagID = 'badgeArea';
 	
+    // ISNLogger.debugMode = true;
+    
 	$("#pd_footer_gen, #badgeHeader").bind("click", function(){
 		window.open(
 				baseURL()+ 'index.html',
@@ -75,16 +77,17 @@ BadgeView.prototype.renderBadgeList = function() {
 	//calculate ul height
 	
 	var iFrameHeight = window.innerHeight || document.documentElement.clientHeight;
-	var headerHeight = $("#badgeHeader").height();
-	var titleHeight = $("#titleContainer").height();
-	var footerHeight = $("#pd_footer_gen").height();
-	var totalHeight = headerHeight + titleHeight + 2*footerHeight + 10;
+	var headerHeight = $("#badgeHeader").outerHeight();
+	var titleHeight = $("#titleContainer").outerHeight();
+	var footerHeight = $("#pd_footer_gen").outerHeight();
+	var totalHeight = headerHeight + titleHeight + 2*footerHeight + 0;
 
 	if (bookmarkModel.dossierList && bookmarkModel.dossierList.length > 0) {
 		ISNLogger.log("dossier list index is " + bookmarkModel.index);
         bookmarkModel.firstItem();
 		do {
 			this.renderItem();
+            ISNLogger.log( 'list content length: ' + $('#subnavi').text().length);
         } while (bookmarkModel.nextItem());
 	} 
     else{
@@ -98,16 +101,25 @@ BadgeView.prototype.renderBadgeList = function() {
 	        }).appendTo(div);
 	}
     
-    var ulRenderHeight = $('#subnavi').height();
-	var ulHeight = iFrameHeight - totalHeight;
+    /**
+     * Work around for determinating the height of the UL.
+     * All browsers appear to report 0 for the height of UL elements. In order 
+     * to calculate the actual height of the entry list, we need to measure the 
+     * framing div and substract all known values from it. 
+     */
+    var ulRenderHeight = $('#badgeArea').height() - titleHeight ;
+    ISNLogger.log('render height is ' + ulRenderHeight);
     
-    ulHeight = ulRenderHeight < ulHeight ? ulRenderHeight : ulHeight;
+	var ulHeight = iFrameHeight - totalHeight;
+    ISNLogger.log('available space is ' + ulHeight);
+    
+    ulHeight = (ulRenderHeight < ulHeight) ? ulRenderHeight : ulHeight;
     
 	ISNLogger.log("ulheight is " + ulHeight);
 	$("#subnavi").css("height", ulHeight + "px" );
     
     // inform the parent page about the new size.
-    // this.controller.postHeight(ulHeight);
+    this.controller.postHeight(ulHeight);
 };
 
 /**
@@ -125,6 +137,8 @@ BadgeView.prototype.renderItem = function() {
 		"class":"liItem"
 	}).appendTo("#subnavi");
 	
+    ISNLogger.log('item height ' + $('#item'+ dossierID).height());
+    
 	divA=$("<a/>", {
 		"class": "dossierItemText",
 		"href": bookmarkModel.getISNURL(), 
