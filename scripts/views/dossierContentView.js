@@ -284,7 +284,8 @@ DossierContentView.prototype.renderItem = function(){
     }).appendTo(divA);
 
     var divFloatText = $("<div/>", {
-        "class" : "floatleft overviewcontent dossier_text"
+        // "class" : "floatleft overviewcontent dossier_text"
+        "class" : "overviewcontent dossier_text"
     }).appendTo(div1);
 
     // if we are not in the embedded page display the isn url
@@ -293,21 +294,22 @@ DossierContentView.prototype.renderItem = function(){
 
     divp1 = $("<span/>", {
         "class" : "small",
-        text : bookmarkModel.getDate() + "/" + bookmarkModel.getType()
+        "text" : bookmarkModel.getDate() + "|" + bookmarkModel.getType()
     }).appendTo(firstLineContainer);
 
     icon = $("<span/>", {
         "class" : "iconMoon dragIcon hide",
-        text : "S"
+        "text" : "S"
     }).appendTo(firstLineContainer);
 
     var divh1 = $("<h1/>").appendTo(divFloatText);
 
     if ( self.controller.id !== "embedController" || bookmarkModel.getType() !== "Publication" ) {
+
         divAText = $("<a/>", {
             "class" : "header1",
             "href" : bookmarkModel.getISNURL(),
-            text : bookmarkModel.getTitle()
+            "text" : bookmarkModel.getTitle()
         }).appendTo(divh1);
     } else {
 
@@ -316,7 +318,7 @@ DossierContentView.prototype.renderItem = function(){
         divA = $("<a/>", {
             "class" : "header1",
             "href" : bookmarkModel.getEmbedURL(),
-            text : bookmarkModel.getTitle()
+            "text" : bookmarkModel.getTitle()
         }).appendTo(divh1);
     }
 
@@ -347,8 +349,8 @@ DossierContentView.prototype.renderItem = function(){
         }).appendTo(div3);
 
         delConfirmButton = $("<div/>", {
-            id : "delete-confirm-" + dossierID,
-            text : "Really delete?",
+            "id" : "delete-confirm-" + dossierID,
+            "text" : "Click to confirm delete"
             "class" : "deleteConfirmButton"
         }).appendTo(div3);
     }
