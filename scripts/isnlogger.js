@@ -25,7 +25,7 @@ if (typeof ISNLogger === 'undefined') {
          * return value: filtered configuration array
          * 
          * This function takes an array with configuration objects. Each object relates to 
-         * a configuration array that might present in production mode or in debug mode. 
+         * a configuration array that might present in production mode or in development mode. 
          * If debugging is deactivated this function filters all configuration variables that 
          * should be present only in debug mode. 
          * 
@@ -35,7 +35,7 @@ if (typeof ISNLogger === 'undefined') {
          */
         grep: function(config) {
             var rV = config;
-            if (!this.devMode) {
+            if (!this.developmentMode) {
                 rV = [];
                 function filterDebug(i,o) {
                     if (typeof o === 'object' && (!o.debug || o.debug === "0") ) {
@@ -55,7 +55,7 @@ if (typeof ISNLogger === 'undefined') {
          * on the debug mode.
          */
         choose: function(productionOption, developmentOption) {
-            return this.devMode ? developmentOption : productionOption;
+            return this.developmentMode ? developmentOption : productionOption;
         }
     };
 }
