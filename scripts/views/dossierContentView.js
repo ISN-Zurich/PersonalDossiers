@@ -325,16 +325,16 @@ DossierContentView.prototype.renderItem = function(){
     //FIX #136 get short description removed
     divp2 = $("<p/>", {
         "id" : "itemDescription" + dossierID,
-        "class" : "left",
+        // "class" : "left",
         // text : bookmarkModel.getDescriptionShort(136)
         text : bookmarkModel.getDescription()
     }).appendTo(divFloatText);
 
-    var divMore = $("<span/>", {
-        "class" : "more more_a",
-        "style" : "padding-left:5px",
-        "text" : "More"
-    }).appendTo(divp2);
+    // var divMore = $("<span/>", {
+    //     "class" : "more more_a",
+    //     "style" : "padding-left:5px",
+    //     "text" : "More"
+    // }).appendTo(divp2);
 
     if ( self.controller.id !== "embedController" ) {
 

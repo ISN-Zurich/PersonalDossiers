@@ -223,17 +223,18 @@ ul#sortable {
 }
 
 ul#sortable > li {
+    clear:both;
     padding-top: 8px;
-    border-bottom: 1px solid #C9CACF;
+    border-top: 1px solid #C9CACF;
     padding-bottom: 8px;
 }
 
 ul#sortable > li:first-child {
+    border-top: none;
     padding-top: 0px;
 }
 
 ul#sortable > li:last-child {
-    border-bottom: none;
     padding-bottom: 10px;
 }
 
