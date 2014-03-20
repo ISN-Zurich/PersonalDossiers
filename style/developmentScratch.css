@@ -152,6 +152,15 @@ a.disable span.pd_active {
     margin-bottom: 1px;
 }
 
+.pd_sidebar-header.standard {
+    color: #FFFFFF;
+    font-size: 12px;
+    margin-left: 0;
+    padding: 0px 0px 0px 18px;
+    line-height: 28px;
+    border-bottom: 1px solid #FFFFFF;
+}
+
 div.pd-snippetlist-content {
     margin: 0;
     padding: 1.1em 1em 1.1em 1.86em;

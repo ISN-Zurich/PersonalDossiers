@@ -8,7 +8,7 @@
 
 /*jslint vars: true, sloppy: true */
 
-function badgeController() {
+function BadgeController() {
     var self=this;
     this.id="badgeController";
     this.initServiceHost();
@@ -46,11 +46,11 @@ function badgeController() {
     }
 } //end of constructor
 
-badgeController.prototype.initServiceHost = pdInitServiceHost;
-badgeController.prototype.getServiceHost = pdGetServiceHost;
-badgeController.prototype.keysRejected = pdNOOP;
+BadgeController.prototype.initServiceHost = pdInitServiceHost;
+BadgeController.prototype.getServiceHost = pdGetServiceHost;
+BadgeController.prototype.keysRejected = pdNOOP;
 
-badgeController.prototype.hashedUrl = function() {
+BadgeController.prototype.hashedUrl = function() {
 	ISNLogger.log("enter hasehd url");
 	url_ref=window.location.href;
 	var splited=url_ref.split("?");
@@ -69,13 +69,13 @@ badgeController.prototype.hashedUrl = function() {
 		}
 };
 
-badgeController.prototype.getHashedURLId = function(){
+BadgeController.prototype.getHashedURLId = function(){
     	var dossierId=this.pubid;
     	ISNLogger.log("dossier id after hash is "+dossierId);
     	return dossierId;
 };
 
-badgeController.prototype.getActiveDossier = function(){
+BadgeController.prototype.getActiveDossier = function(){
     	ISNLogger.log("in user controller to get active dossier");
     	if (this.hashed){
     		var activedosId = this.getHashedURLId();
@@ -94,7 +94,32 @@ badgeController.prototype.getActiveDossier = function(){
     	return undefined;    //if something goes wrong for any reason
 };
 
-var controllerObject = badgeController;
+/**
+ * @method postHeight(height)
+ * 
+ * postHeight messages the own height to an embedding page. 
+ */
+BadgeController.prototype.postHeight= function(h) {
+    var lnk = document.referrer;
+    if ( lnk.length ) {
+        var url = $("<a/>", {'href': lnk})[0];
+        var targetHost = url.protocol + '//' +url.host;
+        if ( document.location.host !== targetHost ) {
+            window.parent.postMessage(JSON.stringify({'self' : document.location.href, 
+                                                      'height': h, 
+                                                      'isnpdid': this.pubid}), 
+                                      targetHost);
+        }
+        else {
+            ISNLogger.log('view embedded on the same page?');
+        }
+    }
+    else {
+        ISNLogger.log('view not embedded');
+    }
+};
+
+var controllerObject = BadgeController;
 
 //var controler;
 //ISNLogger.log("enter main js");
