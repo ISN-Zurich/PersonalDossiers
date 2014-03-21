@@ -25,7 +25,20 @@ function bookmarkView( controller ) {
             ISNLogger.log( "targetID is " + targetID );
             var dossierID = targetID.substring(4);
             ISNLogger.log( "dossier ID is " + dossierID );
-            self.libBookmarkModel.addItem( dossierID );
+
+            //disable the element from being clickable while we wait for a result
+
+            //check whether the item already exists in the dossier
+            if ( self.libBookmarkModel.hasItem( dossierID ) ) {
+
+                //exists, call to remove the item from a dossier
+                self.libBookmarkModel.removeItem( dossierID );
+            } else {
+
+                //does not exist, call to add item to a dossier
+                self.libBookmarkModel.addItem( dossierID );
+            }
+            //re-enable clickable is set within removeItem (?) & addItem
         }
     });
 }

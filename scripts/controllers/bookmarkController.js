@@ -1,7 +1,7 @@
 /*jslint vars: true, sloppy: true */
 function BookmarkController() {
 
-    var self=this;
+    var self = this;
 
     this.initServiceHost();
 //    this.hostURL = hostURL;
@@ -31,7 +31,6 @@ function BookmarkController() {
     $(document).bind('UserProfileUpdate', function(){
 
         ISNLogger.log("bound User profile update in user controller model");
-
         self.models.dossierList.getUserDossiers();
     });
 } //end of constructor
@@ -43,12 +42,14 @@ BookmarkController.prototype.getServiceHost = pdGetServiceHost;
 BookmarkController.prototype.isAuthenticated = pdIsAuthenticated;
 BookmarkController.prototype.keysRejected = pdNOOP;
 
+
+
 BookmarkController.prototype.initOAuth = function(){
 
     ISNLogger.log('initialize the oauth helper class');
     try {
 
-        this.oauth = new OAuthHelper(this.baseURL);
+        this.oauth = new OAuthHelper( this.baseURL );
         $(document).trigger('oauthSet');
     } catch ( e ) {
 
@@ -70,7 +71,7 @@ BookmarkController.prototype.getUrlId = function(){
 
     var url_ref = window.location.href;
     var split_url = url_ref.split("?");
-    ISNLogger.log("split url array is " + split_url);
+    ISNLogger.log( "split url array is " + split_url );
     var split1 = split_url[1];
     if ( split1 && split1.length > 0 ) {
 
@@ -104,7 +105,7 @@ BookmarkController.prototype.checkBookmark = function( item_id ) {
 
 BookmarkController.prototype.notifyNewHeight = function( height ) {
 
-    ISNLogger.log("enter notify new height");
+    ISNLogger.log( 'enter notify new height' );
     var data = {
         "resize" : {
             "height" : height
@@ -133,23 +134,6 @@ BookmarkController.prototype.notifyNewHeight = function( height ) {
                 break;
             }
         }
-    }
-};
-
-
-
-//it is deprecated and is not being used
-BookmarkController.prototype.calculateHeight= function(m){
-    var id = this.allowedHosts.indexOf(m.origin);
-    ISNLogger.log('origin is id: '+ id);
-    if (id >= 0) {
-        targetHost = this.allowedHosts[id];
-        var data={
-                "resize": {
-                    "height":height
-                }
-        };
-        window.parent.postMessage(JSON.stringify(data), targetHost);
     }
 };
 
