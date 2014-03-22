@@ -376,7 +376,6 @@ class DossierService extends OAUTHRESTService {
 				return;
 			}
 
-
 			// verify that the KMS actually returned something meaningful
 			if (empty($itemmeta)) {
 				$this->log("item not in KMS");
@@ -1039,14 +1038,19 @@ class DossierService extends OAUTHRESTService {
 					$this->log("enter DELETE in prepare statement in dossier.php");
 					if ( $this->item_id) {
 						// only access if the user is a editor
+                        if (!$this->user->hasEditorPriviledges($this->session->getUserID(),$this->dossier_id)){
+                            $retval = false;
+                        }
 					}
 					else {
 						// only access if the user is an owner
+                        if (!$this->user->isOwner($this->session->getUserID(),$this->dossier_id)){
+                            $retval = false;
+                        }
 					}
 					break;
 				default:
 					//ignore and accept the parent's prepareOperation
-					parent::prepareOperation($meth);
 					break;
 			}
 		}
