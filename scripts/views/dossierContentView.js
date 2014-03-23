@@ -61,30 +61,17 @@ function DossierContentView( dController ) {
      
     $(window).bind("click", function(){
         // rescue click to cancel a delete request
-        rescueFromDelete();
+        self.rescueFromDelete();
     });
 
     $(window).bind('keydown', function( e ) {
         //keyCode 27 = escape
         if ( e.keyCode === 27 ) {
-            rescueFromDelete();
+            self.rescueFromDelete();
         }
     });
 
-    /**
-     * @function rescueFromDelete()
-     * 
-     * This function resets the delete status when a user decides that 
-     * an entry should not get deleted from a dossier.
-     */
-    function rescueFromDelete(){
-        if ( !embed && self.deleteMode > 0 ) {
-            $('#delete-confirm-' + self.deleteMode).hide();
-            $('#delete-' + self.deleteMode).show();
-            self.deleteMode = 0;
-        } 
-    }
-     
+    
     $("#pd_footer_gen").bind("click", function() {
         window.open( baseURL() + 'index.html' , '_blank' );
     });
@@ -147,6 +134,20 @@ DossierContentView.prototype.open = function() {
 	this.openDiv();
 };
 
+/**
+ * @method rescueFromDelete()
+ * 
+ * This function resets the delete status when a user decides that 
+ * an entry should not get deleted from a dossier.
+ */
+DossierContentView.prototype.rescueFromDelete = function (){
+    if ( !embed && self.deleteMode > 0 ) {
+        $('#delete-confirm-' + this.deleteMode).hide();
+        $('#delete-' + this.deleteMode).show();
+        this.deleteMode = 0;
+    } 
+};
+     
 /**
  * TODO: Documentation
  */
@@ -219,7 +220,7 @@ DossierContentView.prototype.renderList = function(){
  * TODO: Documentation
  */
 DossierContentView.prototype.activateSorting = function(){
-
+    var self = this;
     ISNLogger.log( 'enter activateSorting' );
     $('#sortable').sortable("enable");
 
@@ -230,7 +231,7 @@ DossierContentView.prototype.activateSorting = function(){
         forcePlaceholderSize : true,
         //placeholder : "ui-state-highlight"
         start : function( event , ui ) {
-
+            self.rescueFromDelete();
             $(ui.item).addClass("currentSortedItem");
         },
         stop : function( event , ui ) {
