@@ -1,3 +1,7 @@
+pd_clearfloat {
+    clear: both;
+}
+
 /********************************Interaction Box************************
 dimensions of interaction box items
 width:38px;
@@ -36,6 +40,14 @@ height:34px;
 
 .pd_active{
     color:#fff;
+}
+
+.pd_dossiertext {
+    overflow: hidden;
+    float: left;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 180px; 
 }
 
 .pd_disable {
@@ -350,10 +362,9 @@ textarea:-ms-input-placeholder {
 .st_editDosser {
     border-left:1px solid white;
     float:right;
-    padding-left:5px;
     padding-left:6px;
     padding-right:6px;
-    font-size:16px;
+    font-size:18px;
 }
 
 .st_unbookmarked {
@@ -550,7 +561,8 @@ body.embedBadge {
 
 .deleteButton {
     text-align: right;
-    color: red;
+/*    color: red;*/
+    color:#4c5160;
     cursor: pointer;
 }
 
@@ -652,8 +664,8 @@ body.embedBadge {
 
 /************************DOSSIER CONTENT VIEW *******************/
 .deletecontainer {
-    border:0px solid gray;
-    padding-top:5px;
+    float: right;
+    font-size: 18px;
 }
 
 .desContainer {
@@ -709,10 +721,10 @@ body.embedBadge {
 
 .dragIcon {
     margin-left:7px;
-    font-size:10px;
-    color:#fffaf0;
-    background:#4c5160;
-    padding:5px;
+    color:#4c5160;
+    /* background:#4c5160; */ 
+    padding:0px;
+    cursor: move;
 }
 
 .pd_box {
