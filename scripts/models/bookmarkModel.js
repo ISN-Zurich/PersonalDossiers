@@ -242,6 +242,7 @@ BookmarkModel.prototype.loadDossierList=function(){
                 if (request.status === 401){
                     //	window.location.href ="user.html";
                     ISNLogger.log("received 401, we should load the login page");
+                    self.dossierForbidden = true;
                     $(document).trigger("BookmarkModelNotLoaded");
                 }
             },

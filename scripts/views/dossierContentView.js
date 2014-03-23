@@ -129,8 +129,13 @@ DossierContentView.prototype.closeDiv = closeView;
  * TODO: Documentation
  */
 DossierContentView.prototype.open = function() {
-
-	this.update();
+	if( this.controller.models['bookmark'].dossierForbidden ) {
+        // make sure that people can access only dossier that are indeed public
+        $('#privateDossier').show();    
+    }
+    else {
+        this.update();
+    }
 	this.openDiv();
 };
 

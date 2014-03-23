@@ -1,15 +1,11 @@
 /*jslint vars: true, sloppy: true */
 
 /**
- 
-* This views refers to the banner  
- * 
- * 
- * 
+ * This views refers to the banner  
  **/
 function DossierBannerView(myController){
     var self = this;
-    
+    self.embed = (self.controller.id === 'embedController');
     self.editMode = false;
     
     self.waitForUpload = 0;
@@ -19,72 +15,76 @@ function DossierBannerView(myController){
     self.tagID='header_image';	
     
     $('#header_image').bind('click', function(e){
-        if ( self.editMode ) {
+        if ( !self.embed && self.editMode ) {
             // always check for edits
             self.checkDescriptionEdit();
             self.checkTitleEdit();	;		
-        }
-        var targetID = e.target.id;
-        if (targetID == "bannerImage"){
-            self.changeImage();
-            e.stopPropagation();
+            var targetID = e.target.id;
+            if (targetID == "bannerImage"){
+                self.changeImage();
+                e.stopPropagation();
+            }
         }
     });
     
     $('#editDossier').bind('click', function(e){
-    	if ( self.editMode ) {
-            // always check for edits
-            self.checkTitleEdit();	
-    	    self.checkDescriptionEdit();
-    	}
-    	
-    	var userType=self.controller.models.dossierList.getUserType();
-    	ISNLogger.log("user type in dossier banner view is "+userType);
-    	if (userType!== "user"){
-    		ISNLogger.log("will activate banner edit mode, we are not users");
-    	self.activateBannerEditMode();
-	    e.stopPropagation();
-    	}
-    	//TODO: implement the else: display to the user a dropdown message that he does not have the rights to edit 
+        if ( !self.embed ) {
+            if ( self.editMode ) {
+                // always check for edits
+                self.checkTitleEdit();	
+                self.checkDescriptionEdit();
+            }
+
+            var userType=self.controller.models.dossierList.getUserType();
+            ISNLogger.log("user type in dossier banner view is "+userType);
+            if (userType!== "user"){
+                ISNLogger.log("will activate banner edit mode, we are not users");
+               self.activateBannerEditMode();
+               e.stopPropagation();
+            }
+        }
     });
     
     $('#lock-editDossier').bind('click', function(e){
-    	if ( self.editMode ) {
-    	    // always check for edits
-    		self.checkTitleEdit();	
-    	    self.checkDescriptionEdit();   		
-    	}
-    
-    	self.deactivateBannerEditMode();
-	    e.stopPropagation();
+        if ( !self.embed ){ 
+            if ( self.editMode ) {
+                // always check for edits
+                self.checkTitleEdit();	
+                self.checkDescriptionEdit();   		
+            }
+
+            self.deactivateBannerEditMode();
+            e.stopPropagation();
+        }
     });
     
     // click handler
     function _clickHandler(e) {
-        var targetID = e.target.id;
+        if (!self.embed) {
+            var targetID = e.target.id;
+            if ( self.editMode ) {
+                // always check for edits
+                self.checkDescriptionEdit();
+                self.checkTitleEdit();			
+            }
 
-        if ( self.editMode ) {
-            // always check for edits
-            self.checkDescriptionEdit();
-            self.checkTitleEdit();			
-        }
-
-        switch (targetID) {
-        case 'editDossier':
-            self.activateBannerEditMode();
-            e.stopPropagation();
-            break;
-        case 'lock-editDossier':
-            self.deactivateBannerEditMode();
-            e.stopPropagation();
-            break;
-        case 'bannerImage':
-            // go to image gallery
-            self.changeImage();
-            e.stopPropagation();
-            break;
-        default:
-            break;
+            switch (targetID) {
+            case 'editDossier':
+                self.activateBannerEditMode();
+                e.stopPropagation();
+                break;
+            case 'lock-editDossier':
+                self.deactivateBannerEditMode();
+                e.stopPropagation();
+                break;
+            case 'bannerImage':
+                // go to image gallery
+                self.changeImage();
+                e.stopPropagation();
+                break;
+            default:
+                break;
+            }
         }
     }
 
@@ -96,36 +96,38 @@ function DossierBannerView(myController){
 } //end of constructor
 
 DossierBannerView.prototype.activateBannerEditMode = function() {
-    this.editMode = true;
-    ISNLogger.log("activate Banner Edit");
-    
-    // TODO: add visual cues that some parts are now editable
-    
-    $("#titleContainer").attr('contenteditable', 'true');
-    $("#descriptionContainer").attr('contenteditable', 'true');
-    $('#bannerImage').attr('title', 'Click to Edit');
-    
-    $("#editDossier").addClass('hide');
-    $("#lock-editDossier").removeClass('hide');
-        
+    if ( !this.embed ) {
+        this.editMode = true;
+        ISNLogger.log("activate Banner Edit");
+
+        // TODO: add visual cues that some parts are now editable
+
+        $("#titleContainer").attr('contenteditable', 'true');
+        $("#descriptionContainer").attr('contenteditable', 'true');
+        $('#bannerImage').attr('title', 'Click to Edit');
+
+        $("#editDossier").addClass('hide');
+        $("#lock-editDossier").removeClass('hide');
+    }
 };
 
 DossierBannerView.prototype.deactivateBannerEditMode = function() {
     ISNLogger.log("deactivate Banner Edit");
-    
-    // TODO: remove visual cues that from editable parts
-    
-    $("#titleContainer").removeAttr('contenteditable');
-    $("#descriptionContainer").removeAttr('contenteditable');
-    $('#bannerImage').removeAttr('title');
-    
-    $("#lock-editDossier").addClass('hide');
-    $("#editDossier").removeClass('hide');
-    this.editMode = false;
+    if ( !this.embed ) {
+        // TODO: remove visual cues that from editable parts
+
+        $("#titleContainer").removeAttr('contenteditable');
+        $("#descriptionContainer").removeAttr('contenteditable');
+        $('#bannerImage').removeAttr('title');
+
+        $("#lock-editDossier").addClass('hide');
+        $("#editDossier").removeClass('hide');
+        this.editMode = false;
+    }
 };
 
 DossierBannerView.prototype.changeImage= function(){
-    if (this.editMode) {
+    if (!this.embed && this.editMode) {
         ISNLogger.log('wait for Transition');
         this.goToGallery = true;
         this.transitionToGallery();
@@ -135,45 +137,50 @@ DossierBannerView.prototype.changeImage= function(){
 DossierBannerView.prototype.transitionToGallery = function() {
     if ( this.waitForUpload === 0 && this.goToGallery === true ) {
         ISNLogger.log('upload done');
-	window.location.href = "gallery.php";
+	   window.location.href = "gallery.php";
     }
 };
 
 DossierBannerView.prototype.checkTitleEdit = function() {
-   
-    var oldVal= self.controller.models['bookmark'].getDossierTitle();
-    var value = $("#headerTitle").text();
-    
-    if (value !== oldVal) {
-        ISNLogger.log('old val in title is: '+oldVal);
+    if (!this.embed){
+        var oldVal= self.controller.models['bookmark'].getDossierTitle();
+        var value = $("#headerTitle").text();
 
-        ISNLogger.log('Change the title content! and make it: '+value);
+        if (value !== oldVal) {
+            ISNLogger.log('old val in title is: '+oldVal);
 
-        this.controller.models['bookmark'].setDossierTitle(value);
+            ISNLogger.log('Change the title content! and make it: '+value);
 
-        this.waitForUpload++;
-        this.controller.models['bookmark'].sendDataToServer();
+            this.controller.models['bookmark'].setDossierTitle(value);
+
+            this.waitForUpload++;
+            this.controller.models['bookmark'].sendDataToServer();
+        }
     }
 }; 
 
 DossierBannerView.prototype.checkDescriptionEdit = function() {
-    var value = $("#headerDescription").text();
-    var oldVal= self.controller.models['bookmark'].getDossierDescription();
-    
-    if (value !== oldVal) {
-        ISNLogger.log('Change the description content! ' + value);
-        this.controller.models['bookmark'].setDossierDescription(value);
-        // safe the edit in the backend
+    if ( !this.embed ) {
+        var value = $("#headerDescription").text();
+        var oldVal= self.controller.models['bookmark'].getDossierDescription();
 
-        this.waitForUpload++;
-        this.controller.models['bookmark'].sendDataToServer();
+        if (value !== oldVal) {
+            ISNLogger.log('Change the description content! ' + value);
+            this.controller.models['bookmark'].setDossierDescription(value);
+            // safe the edit in the backend
+
+            this.waitForUpload++;
+            this.controller.models['bookmark'].sendDataToServer();
+        }
     }
 }; 
 
 DossierBannerView.prototype.open = function(){
     ISNLogger.log("open dossier banner view");	
-    this.renderBanner();
-    this.openDiv();	
+    if(!this.controller.models['bookmark'].dossierForbidden) {
+        this.renderBanner();
+        this.openDiv();	
+    }
 };
 
 DossierBannerView.prototype.openDiv = openView;
