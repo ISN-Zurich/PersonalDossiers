@@ -263,7 +263,7 @@ class RESTServiceCommon extends PDCommonClass {
      * for injecting user authorization code.
      */
     protected function prepareOperation($meth) {
-        return false; // by default we always allow the service handlers to be run.
+        return true; // by default we always allow the service handlers to be run.
     }
     
     /**
