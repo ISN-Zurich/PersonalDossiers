@@ -152,7 +152,7 @@ LibraryBookmarkModel.prototype.removeItem = function( dossierID ) {
 	function success(){
 
 		// great! well done!
-		ISNLogger.log( "great the insertion of the bookmark was succesfull" );
+		ISNLogger.log( "great the removal of the bookmark was succesfull" );
 		self.getUserBookmarkedDossiers(); //the will colorize and upate the view
 	}
 
@@ -160,7 +160,7 @@ LibraryBookmarkModel.prototype.removeItem = function( dossierID ) {
 	function error( request ) {
 
 		// the server rejected the request!
-		ISNLogger.log( "the server rejected the request of adding an item" );
+		ISNLogger.log( "the server rejected the request of removing an item" );
 		ISNLogger.log( "ERROR status text: " + request.statusText );
 		ISNLogger.log( "ERROR status code: " + request.statusCode() );
 		ISNLogger.log( "ERROR status code is : " + request.status );

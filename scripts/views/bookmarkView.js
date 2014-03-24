@@ -28,6 +28,7 @@ function bookmarkView( controller ) {
 
             //disable the element from being clickable while we wait for a result
 
+
             //check whether the item already exists in the dossier
             if ( self.libBookmarkModel.hasItem( dossierID ) ) {
 
@@ -38,7 +39,8 @@ function bookmarkView( controller ) {
                 //does not exist, call to add item to a dossier
                 self.libBookmarkModel.addItem( dossierID );
             }
-            //re-enable clickable is set within removeItem (?) & addItem
+            //re-enable clickable is set within updatebookmarkeditems function
+            // self.update();
         }
     });
 }
