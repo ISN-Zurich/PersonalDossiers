@@ -263,7 +263,7 @@ class RESTServiceCommon extends PDCommonClass {
      * for injecting user authorization code.
      */
     protected function prepareOperation($meth) {
-        return false; // by default we always allow the service handlers to be run.
+        return true; // by default we always allow the service handlers to be run.
     }
     
     /**
@@ -646,7 +646,7 @@ class OAUTHRESTService extends RESTServiceCommon {
         $myheaders = getallheaders();
     	if (!array_key_exists("NonAuth",$myheaders)){ 
     		$this->log("will check the validation for access token since no NonAuth available");
-       	$this->session->validateAccessToken();
+            $this->session->validateAccessToken();
           }
     
         if ( $this->session->accessVerified() ){

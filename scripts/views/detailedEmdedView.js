@@ -38,10 +38,12 @@ DetailEmbedView.prototype.close = function() {
  * when navigating away from the details, the embed navigation must be properly reset.
  */
 DetailEmbedView.prototype.resetNavigation = function() {
-    $("#dossiercontentHeader").text("Personal Dossiers");
+    $("#dossiercontentHeader").removeClass('clickable');
+    $("#dossiercontentHeader").text("ISN Personal Dossiers");
 };
 
 DetailEmbedView.prototype.updateNavigation = function() {
+    $("#dossiercontentHeader").addClass('clickable');
     $("#dossiercontentHeader").text("Back to Dossier");
 };
 

@@ -108,11 +108,16 @@ bookmarkView.prototype.renderDossier = function(){
 
         var div2 = $("<div/>", {
             "id" : "item" + dossierID,
-            "class" : "st clickable overflowText grey_bar",
-            "text" : self.controller.models.dossierList.getDossierTitle()
+            "class" : "st clickable overflowText grey_bar pd_clearfloat"
         }).appendTo( div1 );
 
-        var span = $("<span/>", {
+        $("<span/>", {
+            "id" : "ittl" + dossierID,
+            'class': 'pd_dossiertext',
+            'text': self.controller.models.dossierList.getDossierTitle()
+        } ).appendTo(div2);
+        
+        $("<span/>", {
             "id" : "icon" + dossierID,
             "class" : libraryBookmarkModel.hasItem( dossierID ) ? "st_editDosser pd_bookmark_icon_exist iconMoon" : "st_editDosser pd_bookmark_icon iconMoon",
             "text" : "K"

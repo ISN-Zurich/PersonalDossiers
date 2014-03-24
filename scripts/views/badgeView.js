@@ -30,7 +30,12 @@ BadgeView.prototype.openDiv = openView;
  * 
  */
 BadgeView.prototype.open = function() {
-	this.update();
+    if (this.controller.models['bookmark'].dossierForbidden) {
+        $('#privateDossier').show();
+    }
+    else {
+	   this.update();
+    }
 	this.openDiv();
 };
 

@@ -61,30 +61,17 @@ function DossierContentView( dController ) {
      
     $(window).bind("click", function(){
         // rescue click to cancel a delete request
-        rescueFromDelete();
+        self.rescueFromDelete();
     });
 
     $(window).bind('keydown', function( e ) {
         //keyCode 27 = escape
         if ( e.keyCode === 27 ) {
-            rescueFromDelete();
+            self.rescueFromDelete();
         }
     });
 
-    /**
-     * @function rescueFromDelete()
-     * 
-     * This function resets the delete status when a user decides that 
-     * an entry should not get deleted from a dossier.
-     */
-    function rescueFromDelete(){
-        if ( !embed && self.deleteMode > 0 ) {
-            $('#delete-confirm-' + self.deleteMode).hide();
-            $('#delete-' + self.deleteMode).show();
-            self.deleteMode = 0;
-        } 
-    }
-     
+    
     $("#pd_footer_gen").bind("click", function() {
         window.open( baseURL() + 'index.html' , '_blank' );
     });
@@ -94,9 +81,6 @@ function DossierContentView( dController ) {
             var userType = self.controller.models.dossierList.getUserType();
             ISNLogger.log( 'user type in dossier content view is ' + userType );
             if ( userType !== "user" ) {
-
-                // 1. display the grey sortable icon next to the titles of the items
-                $('.dragIcon').show();
 
                 // 2. enable sortability
                 self.activateSorting();
@@ -120,9 +104,6 @@ function DossierContentView( dController ) {
 
             // 3. remove the sortability from the list
             $('#sortable').sortable('disable');
-
-            // 4. remove the grey sortable icon from the titles of the items
-            $('.dragIcon').hide();
 
             // 5. remove the delete button
             $('.deletecontainer').hide();
@@ -148,11 +129,30 @@ DossierContentView.prototype.closeDiv = closeView;
  * TODO: Documentation
  */
 DossierContentView.prototype.open = function() {
-
-	this.update();
+	if( this.controller.models['bookmark'].dossierForbidden ) {
+        // make sure that people can access only dossier that are indeed public
+        $('#privateDossier').show();    
+    }
+    else {
+        this.update();
+    }
 	this.openDiv();
 };
 
+/**
+ * @method rescueFromDelete()
+ * 
+ * This function resets the delete status when a user decides that 
+ * an entry should not get deleted from a dossier.
+ */
+DossierContentView.prototype.rescueFromDelete = function (){
+    if ( !embed && self.deleteMode > 0 ) {
+        $('#delete-confirm-' + this.deleteMode).hide();
+        $('#delete-' + this.deleteMode).show();
+        this.deleteMode = 0;
+    } 
+};
+     
 /**
  * TODO: Documentation
  */
@@ -225,7 +225,7 @@ DossierContentView.prototype.renderList = function(){
  * TODO: Documentation
  */
 DossierContentView.prototype.activateSorting = function(){
-
+    var self = this;
     ISNLogger.log( 'enter activateSorting' );
     $('#sortable').sortable("enable");
 
@@ -236,7 +236,7 @@ DossierContentView.prototype.activateSorting = function(){
         forcePlaceholderSize : true,
         //placeholder : "ui-state-highlight"
         start : function( event , ui ) {
-
+            self.rescueFromDelete();
             $(ui.item).addClass("currentSortedItem");
         },
         stop : function( event , ui ) {
@@ -299,6 +299,29 @@ DossierContentView.prototype.renderItem = function(){
     // if we are in the embed page, but if the dossier item type is different than publication display also the isn url
     var firstLineContainer = $("<div/>").appendTo(divFloatText);
 
+    if ( !embed ) {
+        var div3 = $("<div/>", {
+            "class" : "deletecontainer hide"
+        }).appendTo(firstLineContainer);
+
+        $("<span/>", {
+            "id" : "delete-"+ dossierID,
+            "text" : "R",
+            "class" : "deleteButton iconMoon"
+        }).appendTo(div3);
+
+        $("<span/>", {
+            "id" : "delete-confirm-" + dossierID,
+            "text" : "WR",
+            "class" : "iconMoon deleteConfirmButton"
+        }).appendTo(div3);
+         
+        $("<span/>", {
+            "class" : "iconMoon dragIcon",
+            "text" : "S"
+        }).appendTo(div3);
+    }
+    
     var divp1 = $("<span/>", {
 		"class":"small"
 	}).appendTo(firstLineContainer);
@@ -311,12 +334,8 @@ DossierContentView.prototype.renderItem = function(){
                'href': 'http://www.isn.ethz.ch/Digital-Library/' + btypeS + '/', 'text': btype,
               }).appendTo(divp1);
 
-    if (!embed) {
-        var icon = $("<span/>", {
-            "class" : "iconMoon dragIcon hide",
-            "text" : "S"
-        }).appendTo(firstLineContainer);
-    }
+    
+    
     
     var divh1 = $("<h1/>").appendTo(divFloatText);
 
@@ -353,23 +372,7 @@ DossierContentView.prototype.renderItem = function(){
     //     "text" : "More"
     // }).appendTo(divp2);
 
-    if ( !embed ) {
-        var div3 = $("<div/>", {
-            "class" : "deletecontainer hide"
-        }).appendTo(divFloatText);
-
-        var delButton = $("<div/>", {
-            "id" : "delete-"+ dossierID,
-            "text" : "Delete",
-            "class" : "deleteButton"
-        }).appendTo(div3);
-
-        var delConfirmButton = $("<div/>", {
-            "id" : "delete-confirm-" + dossierID,
-            "text" : "Click to confirm delete",
-            "class" : "deleteConfirmButton"
-        }).appendTo(div3);
-    }
+   
 };
 
 /**
