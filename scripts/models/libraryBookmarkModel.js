@@ -152,7 +152,7 @@ LibraryBookmarkModel.prototype.removeItem = function( dossierID ) {
 	function success(){
 
 		// great! well done!
-		ISNLogger.log( "great the removal of the bookmark was succesfull" );
+		ISNLogger.log( "great! the removal of the bookmark was succesfull" );
 		self.getUserBookmarkedDossiers(); //the will colorize and upate the view
 	}
 

@@ -258,7 +258,13 @@ class DossierService extends OAUTHRESTService {
 			return;
 		}
 		$sth->free();
-		$this->gone();
+
+		//HTTP spec defines 200 OK or 204 NO CONTENT as succesful DELETE operation.
+		//GONE is an error!
+		// $this->gone();
+
+		//return successful 204 NO CONTENT
+		$this->no_content();
 	}
 
 	/**
@@ -1035,6 +1041,7 @@ class DossierService extends OAUTHRESTService {
 // 						}
 					//}
 				case 'DELETE':
+					$this->user = new UserManagement($this->dbh);
 					$this->log("enter DELETE in prepare statement in dossier.php");
 					if ( $this->item_id) {
 						// only access if the user is a editor
