@@ -5,13 +5,15 @@
  **/
 function DossierBannerView(myController){
     var self = this;
-    self.embed = (self.controller.id === 'embedController');
+    self.controller= myController;
+    
+    self.embed = (self.controller.id && self.controller.id.length && (self.controller.id === 'badgeController' || self.controller.id === 'detailembedController'));
     self.editMode = false;
     
     self.waitForUpload = 0;
     self.goToGallery = false;
     self.activeEditElement = "";
-    self.controller= myController;
+    
     self.tagID='header_image';	
     
     $('#header_image').bind('click', function(e){

@@ -15,7 +15,7 @@ function DossierContentView( dController ) {
     self.tagID = 'contentArea';
     self.deleteMode = 0;
      
-    var embed = (self.controller.id === 'embedController');
+    var embed = (self.controller.id && self.controller.id.length && (self.controller.id === 'badgeController' || self.controller.id === 'detailembedController'));
     
     $(document).bind("click", globalClickHandler );
      
