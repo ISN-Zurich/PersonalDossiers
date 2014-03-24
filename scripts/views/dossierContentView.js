@@ -15,7 +15,7 @@ function DossierContentView( dController ) {
     self.tagID = 'contentArea';
     self.deleteMode = 0;
      
-    var embed = (self.controller.id && self.controller.id.length && (self.controller.id === 'badgeController' || self.controller.id === 'detailembedController'));
+    self.embed = (self.controller.id && self.controller.id.length && (self.controller.id === 'badgeController' || self.controller.id === 'detailembedController'));
     
     $(document).bind("click", globalClickHandler );
      
@@ -31,7 +31,7 @@ function DossierContentView( dController ) {
         var targetE = e.target;
         var targetID = targetE.id;
         
-        if ( !embed && $(targetE).hasClass("deleteButton") ) {
+        if ( !self.embed && $(targetE).hasClass("deleteButton") ) {
 
             self.deleteMode = true;
             var myID = targetID.substring( 7 );
@@ -40,14 +40,14 @@ function DossierContentView( dController ) {
             $("#delete-confirm-" + myID).show();
             e.stopPropagation();
         } 
-        else if ( !embed && $(targetE).hasClass("deleteConfirmButton") ) {
+        else if ( !self.embed && $(targetE).hasClass("deleteConfirmButton") ) {
             // get rid of the element
             var myIDf = targetID.substring( 15 );
             self.removeItem(myIDf);
             self.deleteMode = 0;
             e.stopPropagation();
         }
-        else if ( embed && targetID.indexOf('embeditem') === 0 ) {
+        else if ( self.embed && targetID.indexOf('embeditem') === 0 ) {
             // this opens the detailed view for the embedded item
             var id = targetID.substring( 9 );
             if ( id > 0 ) {
@@ -77,7 +77,7 @@ function DossierContentView( dController ) {
     });
 
     $('#editDossier').bind('click', function() {
-        if( !embed ) {
+        if( !self.embed ) {
             var userType = self.controller.models.dossierList.getUserType();
             ISNLogger.log( 'user type in dossier content view is ' + userType );
             if ( userType !== "user" ) {
@@ -95,7 +95,7 @@ function DossierContentView( dController ) {
     });
 
     $('#lock-editDossier').bind('click', function(){
-        if ( !embed ) {
+        if ( !self.embed ) {
             // 1. store the positioning of the items
             self.storeOrder();
 
@@ -146,7 +146,7 @@ DossierContentView.prototype.open = function() {
  * an entry should not get deleted from a dossier.
  */
 DossierContentView.prototype.rescueFromDelete = function (){
-    if ( !embed && this.deleteMode > 0 ) {
+    if ( !this.embed && this.deleteMode > 0 ) {
         $('#delete-confirm-' + this.deleteMode).hide();
         $('#delete-' + this.deleteMode).show();
         this.deleteMode = 0;
@@ -209,7 +209,7 @@ DossierContentView.prototype.renderList = function(){
         }).appendTo(div);
     }
 
-    if ( self.controller.id === "embedController" ) {
+    if ( this.embed ) {
 
         var bannerHeight = $("#bannerArea").outerHeight();
         var footerHeight = $("#pd_footer_gen").outerHeight();
@@ -261,14 +261,10 @@ DossierContentView.prototype.renderItem = function(){
     ISNLogger.log( 'enter renderItem' );
 
     var bookmarkModel = this.controller.models.bookmark, 
-        embed = false, 
         dossierID = this.controller.models.bookmark.getItemId();
     
     ISNLogger.log( 'dossier item id is ' + dossierID );
 
-    if (this.controller.id === "embedController") {
-        embed = true;
-    }
     
     var div1 = $("<li/>", {
         "id" : "item" + dossierID,
@@ -299,7 +295,7 @@ DossierContentView.prototype.renderItem = function(){
     // if we are in the embed page, but if the dossier item type is different than publication display also the isn url
     var firstLineContainer = $("<div/>").appendTo(divFloatText);
 
-    if ( !embed ) {
+    if ( !this.embed ) {
         var div3 = $("<div/>", {
             "class" : "deletecontainer hide"
         }).appendTo(firstLineContainer);
@@ -333,13 +329,10 @@ DossierContentView.prototype.renderItem = function(){
     $('<a/>', {'class': 'OTName', 
                'href': 'http://www.isn.ethz.ch/Digital-Library/' + btypeS + '/', 'text': btype,
               }).appendTo(divp1);
-
-    
-    
     
     var divh1 = $("<h1/>").appendTo(divFloatText);
 
-    if ( !embed ) {
+    if ( !this.embed ) {
 
         var divAText = $("<a/>", {
             "class" : "header1",
@@ -366,13 +359,6 @@ DossierContentView.prototype.renderItem = function(){
         "text" : bookmarkModel.getDescription()
     }).appendTo(divFloatText);
 
-    // var divMore = $("<span/>", {
-    //     "class" : "more more_a",
-    //     "style" : "padding-left:5px",
-    //     "text" : "More"
-    // }).appendTo(divp2);
-
-   
 };
 
 /**
@@ -381,7 +367,7 @@ DossierContentView.prototype.renderItem = function(){
  *  2. Actual remove it by deleting the data from the database
  */
 DossierContentView.prototype.removeItem = function( id ) {
-    if ( this.controller.id !== 'embedController') {
+    if ( !this.embed ) {
         this.controller.models.bookmark.removeItem(id);
         // remove the visuals
         $("#item" + id).remove();
@@ -393,7 +379,7 @@ DossierContentView.prototype.removeItem = function( id ) {
  * @function storeOrder
  **/
 DossierContentView.prototype.storeOrder = function() {
-    if ( this.controller.id !== 'embedController') {
+    if ( !this.embed) {
         ISNLogger.log("enter store Order");
         var orderList = new Array();
 
