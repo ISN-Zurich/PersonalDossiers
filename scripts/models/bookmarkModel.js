@@ -483,6 +483,13 @@ BookmarkModel.prototype.getThumbnail = function() {
 };
 
 BookmarkModel.prototype.getType = function() {
+
+    //chapters not just publications
+    if ( this.dossierList[this.index].metadata.type === 'Chapter / Section' ) {
+
+        return 'Publication';
+    }
+
     return (this.index < this.dossierList.length) ? this.dossierList[this.index].metadata.type : "Publication";
 };
 

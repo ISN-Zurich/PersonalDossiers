@@ -330,6 +330,10 @@ class DossierService extends OAUTHRESTService {
 		$res = $sth->execute(array($itemid))->numRows();
 
 		if ( $res <= 0 ) {
+
+			//in future if the load is too high on the KMS we can change to insert a placeholder,
+			//then update the library metadata table when the KMS responds.
+
 			// get the item from the KMS
 			// $r = new HTTP_Request('http://yellowjacket.ethz.ch/tools/data/'.$itemid . '.json', "GET");
 
@@ -390,7 +394,7 @@ class DossierService extends OAUTHRESTService {
 			}
 
 			//insert library id and metadata for it into a separate table
-			$sth = $mdb2->prepare("insert into library_metadata (digital_library_id, metadata) values ( ?, ?)");
+			$sth = $mdb2->prepare("replace into library_metadata (digital_library_id, metadata) values ( ?, ?)");
 			$res2 = $sth->execute(array($itemid, $itemmeta));
 			if (PEAR::isError($res2)) {
 				$this->log("pear error " . $res2->getMessage());
