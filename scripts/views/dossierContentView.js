@@ -146,7 +146,7 @@ DossierContentView.prototype.open = function() {
  * an entry should not get deleted from a dossier.
  */
 DossierContentView.prototype.rescueFromDelete = function (){
-    if ( !embed && self.deleteMode > 0 ) {
+    if ( !embed && this.deleteMode > 0 ) {
         $('#delete-confirm-' + this.deleteMode).hide();
         $('#delete-' + this.deleteMode).show();
         this.deleteMode = 0;
