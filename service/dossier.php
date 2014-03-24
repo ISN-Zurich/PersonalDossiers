@@ -892,7 +892,7 @@ class DossierService extends OAUTHRESTService {
 
 		$userid = $this->session->getUserID();
 
-		$sth = $dbh->prepare("SELECT d.id, d.title, d.description, d.image, d.private_flag, du.user_type FROM dossiers d, dossier_users du WHERE d.id = du.dossier_id AND du.user_id = ?");
+		$sth = $dbh->prepare("SELECT d.id, d.title, d.description, d.image, d.private_flag, du.user_type FROM dossiers d, dossier_users du WHERE d.id = du.dossier_id AND du.user_id = ? ORDER BY d.id DESC");
 		$res = $sth->execute($userid);
 		if (PEAR::isError($res)){
 			$this->log('DB Error 1: ' . $res->getMessage());
