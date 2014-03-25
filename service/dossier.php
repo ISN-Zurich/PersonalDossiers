@@ -320,6 +320,7 @@ class DossierService extends OAUTHRESTService {
             return;
         }
 
+
         // verify that the object is not already added
         $sth = $mdb2->prepare( 'SELECT id FROM dossier_items WHERE dossier_id = ? AND digital_library_id = ?' );
         $res = $sth->execute( array( $this->dossier_id , $digital_library_id ) )->numRows();
@@ -331,38 +332,6 @@ class DossierService extends OAUTHRESTService {
             return;
         }
 
-        //calculate the position id of the newly inserted item
-        // 1 select the records from dossier items where dossier_id = dossier id
-        // count the number of the results
-        // position id is the number of results + 1
-        $dbh = $this->dbh;
-        $sthPosition = $dbh->prepare( 'SELECT * FROM dossier_items WHERE dossier_id = ?' );
-        $resPosition = $sthPosition->execute( array( $this->dossier_id ) );
-        if ( PEAR::isError( $resPosition ) ) {
-
-            $this->log( 'pear error ' . $resPosition->getMessage() );
-            $this->bad_request();
-            return;
-        }
-        $position_id = $resPosition->numRows();
-        $this->log( 'position id is ' . $position_id );
-
-        // now we actually add the item to the very dossier (we no longer use the user id for the dossier items)
-        $this->log( 'data for insert id: ' . $digital_library_id . " - dossierid:" . $this->dossier_id . ' position:' . $position_id );
-        $sth = $mdb2->prepare( 'INSERT INTO dossier_items (digital_library_id, dossier_id, position) VALUES (?, ?, ?)' );
-        $res1 = $sth->execute( array( $digital_library_id , $this->dossier_id , $position_id ) );
-        if ( PEAR::isError( $res1 ) ) {
-
-            $this->log( 'pear error ' . $res1->getMessage() );
-            $this->bad_request();
-            return;
-        }
-
-        //assign the item to the dossier in the json array we will return
-        $this->item_id = $mdb2->lastInsertID( "dossiers" , "id" );
-        array_push( $this->data , array( "dossier_id" => $this->dossier_id , "item_id" => $this->item_id ) );
-
-        //now all the time sensitive processing has been done, let's pull the kms object for caching
         // check if the item is already loaded from the KMS and stored in our library_metadata table
         $sth = $mdb2->prepare( 'SELECT digital_library_id FROM library_metadata WHERE digital_library_id = ?' );
         $res = $sth->execute( array( $digital_library_id ) )->numRows();
@@ -441,8 +410,38 @@ class DossierService extends OAUTHRESTService {
                 $this->bad_request();
                 return;
             }
-
         } //end of IF. now we know that the KMS metadata is in our database.
+
+        //calculate the position id of the newly inserted item
+        // 1 select the records from dossier items where dossier_id = dossier id
+        // count the number of the results
+        // position id is the number of results + 1
+        $dbh = $this->dbh;
+        $sthPosition = $dbh->prepare( 'SELECT * FROM dossier_items WHERE dossier_id = ?' );
+        $resPosition = $sthPosition->execute( array( $this->dossier_id ) );
+        if ( PEAR::isError( $resPosition ) ) {
+
+            $this->log( 'pear error ' . $resPosition->getMessage() );
+            $this->bad_request();
+            return;
+        }
+        $item_position = $resPosition->numRows();
+        $this->log( 'item_position id is ' . $item_position );
+
+        // now we actually add the item to the very dossier (we no longer use the user id for the dossier items)
+        $this->log( 'data for insert - libraryid:' . $digital_library_id . " dossierid:" . $this->dossier_id . ' position:' . $item_position );
+        $sth = $mdb2->prepare( 'INSERT INTO dossier_items (digital_library_id, dossier_id, position) VALUES (?, ?, ?)' );
+        $res1 = $sth->execute( array( $digital_library_id , $this->dossier_id , $item_position ) );
+        if ( PEAR::isError( $res1 ) ) {
+
+            $this->log( 'pear error ' . $res1->getMessage() );
+            $this->bad_request();
+            return;
+        }
+
+        //assign the item to the dossier in the json array we will return
+        $this->item_id = $mdb2->lastInsertID( "dossiers" , "id" );
+        array_push( $this->data , array( "dossier_id" => $this->dossier_id , "item_id" => $this->item_id ) );
 
         //return the json data we stored and free the statement handler
         $this->respond_json_data();
@@ -701,7 +700,7 @@ class DossierService extends OAUTHRESTService {
             $title = "My Personal Dossier";
         }
         if (empty($description)) {
-            $description = "This is your new Dossier. You can change the title and description of the dossier  by clicking on the edit dossier button. You can also change the default image by clicking on it, after having previously clicked the edit button.";
+            $description = "This is your new Dossier. You can change the title and description of the dossier by clicking on the edit dossier button. You can also change the default image by clicking on it, after having previously clicked the edit button.";
         }
         if (empty($image)) {
             $image = "gallery/default3.jpg";
