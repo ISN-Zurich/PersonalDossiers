@@ -171,6 +171,10 @@ function DossierBannerView(myController){
     	self.transitionToGallery();
     });
 
+    $(document).bind('dossierDeleteSuccess', function(){
+        window.location.href = "user.html#personalDossiers";
+    });
+
 } //end of constructor
 
 DossierBannerView.prototype.activateBannerEditMode = function() {
@@ -238,7 +242,6 @@ DossierBannerView.prototype.deleteDossier = function() {
         self.controller.models['bookmark'].callServiceToDeleteDossier();
 
         ISNLogger.log('transition to welcome view');
-        window.location.href = "user.html#personalDossiers";
     }
     ISNLogger.log('leave deleteDossier');
 }
