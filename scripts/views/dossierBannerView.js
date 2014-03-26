@@ -235,7 +235,7 @@ ISNLogger.log('in deleteDossier');
         ISNLogger.log('about to call the model directly from the view on: callServiceToDeleteDossier()');
 
         //call our dossier delete service via the controller
-        self.models['bookmark'].callServiceToDeleteDossier();
+        self.controller.models['bookmark'].callServiceToDeleteDossier();
 
         ISNLogger.log('transition to welcome view');
         window.location.href = "index.html";
