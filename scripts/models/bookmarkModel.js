@@ -364,7 +364,7 @@ BookmarkModel.prototype.sendDataToServer=function(){
 //service call to delete dossier, called directly from the view apparently because sure, why not?
 BookmarkModel.prototype.callServiceToDeleteDossier = function(){
 
-    ISNLogger.log("enter send data to server");
+    ISNLogger.log("enter callServiceToDeleteDossier");
     var self=this;
     var dossierID = self.dossierId;
     var url=self.controller.baseURL +"service/dossier.php/"+dossierID;
@@ -407,7 +407,7 @@ BookmarkModel.prototype.callServiceToDeleteDossier = function(){
 
     function setHeader( xhr ) {
 
-        var header_request=self.controller.oauth.oauthHeader(method, url, myData);
+        var header_request=self.controller.oauth.oauthHeader(method, url);
         xhr.setRequestHeader('Authorization', header_request);
     }
 };

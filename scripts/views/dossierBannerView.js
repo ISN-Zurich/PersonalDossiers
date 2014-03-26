@@ -228,7 +228,7 @@ DossierBannerView.prototype.deactivateBannerDeleteMode = function() {
 
 DossierBannerView.prototype.deleteDossier = function() {
 
-ISNLogger.log('in deleteDossier');
+    ISNLogger.log('in deleteDossier');
     //if we aren't embedded and are in delete confirm mode
     if ( !this.embed && this.deleteMode ) {
 
@@ -238,9 +238,9 @@ ISNLogger.log('in deleteDossier');
         self.controller.models['bookmark'].callServiceToDeleteDossier();
 
         ISNLogger.log('transition to welcome view');
-        window.location.href = "index.html";
+        window.location.href = "user.html#personalDossiers";
     }
-ISNLogger.log('leave deleteDossier');
+    ISNLogger.log('leave deleteDossier');
 }
 
 
