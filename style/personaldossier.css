@@ -807,6 +807,9 @@ body.embedBadge {
 }
 
 /*******************************INVITATION VIEW *****************************************/
+#beta_announcement {
+    margin-top:10px !important;
+}
 
 #invitationView {
     margin-top:10px;
