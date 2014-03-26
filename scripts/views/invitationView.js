@@ -75,6 +75,8 @@ InvitationView.prototype.openDiv=openView;
 InvitationView.prototype.open=function(){
 	ISNLogger.log("open invitation view");
 	this.update();
+
+	//hold opening of the view until milestone 2
 	//this.openDiv();
 };
 

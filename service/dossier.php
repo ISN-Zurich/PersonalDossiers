@@ -456,6 +456,7 @@ class DossierService extends OAUTHRESTService {
      *
      * */
     protected function update_item($data) {
+
         $this->mark();
         $this->log("enter update item");
 
@@ -476,43 +477,36 @@ class DossierService extends OAUTHRESTService {
         $values = array();
         $types = array();
 
-        if (!empty($sorted_list)){
+        if ( !empty( $sorted_list ) ) {
 
-         foreach($sorted_list as $key => $value){
-            $this->log("enter foreach loop");
+            foreach( $sorted_list as $key => $value ) {
 
-            $values["dossier_id"]=$dossier_id;
-            array_push($types, "integer");
-            $values["digital_library_id"]=$value;
-            array_push($types, "integer");
-            $values["position"]=$key;
-            array_push($types, "integer");
-            $mdb2 = $this->dbh;
-            $mdb2->loadModule('Extended');
+                $this->log("enter foreach loop");
 
-         // key is the for the position for item id with id = value
-            $affectedRows = $mdb2->extended->autoExecute("dossier_items",
-                    $values,
-                    MDB2_AUTOQUERY_UPDATE,
-                    'digital_library_id = '.$mdb2->quote($value, 'integer'),
+                $values["dossier_id"]=$dossier_id;
+                array_push($types, "integer");
+                $values["digital_library_id"]=$value;
+                array_push($types, "integer");
+                $values["position"]=$key;
+                array_push($types, "integer");
+                $mdb2 = $this->dbh;
+                $mdb2->loadModule('Extended');
 
-                    $types);
+                // key is the for the position for item id with id = value
+                $affectedRows = $mdb2->extended->autoExecute( "dossier_items" , $values , MDB2_AUTOQUERY_UPDATE , 'digital_library_id = ' . $mdb2->quote( $value , 'integer' ) , $types );
 
+                if ( PEAR::isError( $affectedRows ) ) {
 
-            if (PEAR::isError($affectedRows)) {
-                $this->log("error " . $affectedRows->getMessage());
-                $this->bad_request();
-            }
-            else {
-                $this->log("Service: item updated");
-                $this->no_content();
-            }
+                    $this->log( "error " . $affectedRows->getMessage() );
+                    $this->bad_request();
+                } else {
 
-         } //end of for
-
-
-    } //end of if
-} //end of function
+                    $this->log( "Service: item updated" );
+                    $this->no_content();
+                }
+            } //end of for
+        } //end of if
+    } //end of function
 
     /**
      * read_item()
@@ -582,61 +576,72 @@ class DossierService extends OAUTHRESTService {
      * Removes an entire dossier and all its items from the service. This method is called by the
      * handle_delete() method in dossier mode.
      *
-     * On success the service returns 410 Gone.
+     * On success the service returns 204 NO CONTENT, as per HTTP spec.
      *
      * If the requested dossier cannot be found, the service responds
      * with a 404 Not Found error.
      */
     protected function delete_dossier() {
-        $this->mark();
-        $this->dbh->loadModule('Extended');
 
-        $this->dbh->setFetchMode(MDB2_FETCHMODE_ASSOC);
+        //mark the log file, load Extended module and configure the default fetch mode
+        $this->mark();
+        $this->dbh->loadModule( 'Extended' );
+        $this->dbh->setFetchMode( MDB2_FETCHMODE_ASSOC );
+
+        //handle on database
         $mdb2 = $this->dbh;
-        $sth = $mdb2->prepare('SELECT * FROM dossiers WHERE id=?');
-        $res = $sth->execute($this->dossier_id);
+
+        //prepare the statement then execute to check for dossier id
+        $sth = $mdb2->prepare( 'SELECT * FROM dossiers WHERE id = ?' );
+        $res = $sth->execute( $this->dossier_id );
+
+        //boolean?! dossier flag based on the number of rows returned
         $bDossier = $res->numRows();
+
+        //free the statement
         $sth->free();
-        if ($bDossier < 1) {
+        if ( $bDossier < 1 ) {
+
+            //couldn't find the dossier in the db, return a 404 not found
             $this->not_found();
             return;
         }
 
+        // if we get here we've found the dossier to delete!
         // first remove all the items in the dossier
-        $affectedRows = $this->dbh->extended->autoExecute("dossier_items",
-                array($this->dossier_id),
-                MDB2_AUTOQUERY_DELETE,
-                'dossier_id = ?');
-        if (PEAR::isError($affectedRows)) {
-            $this->log("error " . $affectedRows->getMessage());
+        $affectedRows = $this->dbh->extended->autoExecute( "dossier_items" , array( $this->dossier_id) , MDB2_AUTOQUERY_DELETE , 'dossier_id = ?' );
+        if ( PEAR::isError( $affectedRows ) ) {
+
+            $this->log( "error " . $affectedRows->getMessage() );
             $this->bad_request();
             return;
         }
 
         // now we should remove all dossier users, too
-        $affectedRows = $this->dbh->extended->autoExecute("dossier_users",
-                array($this->dossier_id),
-                MDB2_AUTOQUERY_DELETE,
-                'dossier_id = ?');
-        if (PEAR::isError($affectedRows)) {
-            $this->log("error " . $affectedRows->getMessage());
+        $affectedRows = $this->dbh->extended->autoExecute( "dossier_users" , array( $this->dossier_id) , MDB2_AUTOQUERY_DELETE , 'dossier_id = ?' );
+        if ( PEAR::isError( $affectedRows ) ) {
+
+            $this->log( "error " . $affectedRows->getMessage() );
             $this->bad_request();
             return;
         }
 
         // if we removed all related items successfully, we also remove the dossier itself.
-        $affectedRows = $this->dbh->extended->autoExecute("dossiers",
-                array($this->dossier_id),
-                MDB2_AUTOQUERY_DELETE,
-                'id = ?');
-        if (PEAR::isError($affectedRows)) {
-            $this->log("error " .$affectedRows->getMessage());
+        $affectedRows = $this->dbh->extended->autoExecute( "dossiers" , array($this->dossier_id) , MDB2_AUTOQUERY_DELETE , 'id = ?' );
+        if ( PEAR::isError( $affectedRows ) ) {
+
+            $this->log( "error " . $affectedRows->getMessage() );
             $this->bad_request();
+        } else {
+
+            //if we get here we've managed to delete the dossier and associated fragments successfully
+            $this->log( "Service 2: dossier deleted" );
+
+            // $this->gone();
+            //return 204 no content as per HTTP specification
+            $this->no_content();
         }
-        else {
-            $this->log("Service 2: dossier deleted");
-            $this->gone();
-        }
+        return;
     }
 
     /**

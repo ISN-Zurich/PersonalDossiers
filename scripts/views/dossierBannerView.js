@@ -1,26 +1,27 @@
 /*jslint vars: true, sloppy: true */
 
 /**
- * This views refers to the banner  
+ * This views refers to the banner
  **/
 function DossierBannerView(myController){
     var self = this;
     self.controller= myController;
-    
+
     self.embed = (self.controller.id && self.controller.id.length && (self.controller.id === 'badgeController' || self.controller.id === 'detailembedController'));
     self.editMode = false;
-    
+    self.deleteMode = false;
+
     self.waitForUpload = 0;
     self.goToGallery = false;
     self.activeEditElement = "";
-    
-    self.tagID='header_image';	
-    
+
+    self.tagID='header_image';
+
     $('#header_image').bind('click', function(e){
         if ( !self.embed && self.editMode ) {
             // always check for edits
             self.checkDescriptionEdit();
-            self.checkTitleEdit();	;		
+            self.checkTitleEdit();	;
             var targetID = e.target.id;
             if (targetID == "bannerImage"){
                 self.changeImage();
@@ -28,12 +29,12 @@ function DossierBannerView(myController){
             }
         }
     });
-    
+
     $('#editDossier').bind('click', function(e){
         if ( !self.embed ) {
             if ( self.editMode ) {
                 // always check for edits
-                self.checkTitleEdit();	
+                self.checkTitleEdit();
                 self.checkDescriptionEdit();
             }
 
@@ -46,20 +47,81 @@ function DossierBannerView(myController){
             }
         }
     });
-    
+
     $('#lock-editDossier').bind('click', function(e){
-        if ( !self.embed ){ 
+        if ( !self.embed ) {
             if ( self.editMode ) {
                 // always check for edits
-                self.checkTitleEdit();	
-                self.checkDescriptionEdit();   		
+                self.checkTitleEdit();
+                self.checkDescriptionEdit();
             }
 
             self.deactivateBannerEditMode();
             e.stopPropagation();
         }
     });
-    
+
+
+    $('#deleteDossier').bind('click', function(e){
+
+        if ( !self.embed ) {
+
+            var userType = self.controller.models.dossierList.getUserType();
+            ISNLogger.log( "user type in dossier banner view is " + userType );
+            if ( userType === "owner" ) {
+
+                ISNLogger.log("owners can delete the dossier, reveal confirm buttons");
+                self.activateBannerDeleteMode();
+                e.stopPropagation();
+            }
+            //else if editor
+            //delete their relation to the dossier only!
+        }
+    });
+
+
+    $('#confirmDeleteDossierButton').bind('click', function(e){
+
+        if ( !self.embed ) {
+
+            if ( self.deleteMode ) {
+
+                var userType = self.controller.models.dossierList.getUserType();
+                ISNLogger.log( "user type in dossier banner view is " + userType );
+                if ( userType === "owner" ) {
+
+                    ISNLogger.log("delete the dossier");
+                    self.deleteDossier();
+                }
+            }
+            e.stopPropagation();
+        }
+    });
+
+
+    $('#cancelDeleteDossierButton').bind('click', function(e){
+
+        if ( !self.embed ) {
+
+            if ( self.deleteMode ) {
+                var userType = self.controller.models.dossierList.getUserType();
+                ISNLogger.log( "user type in dossier banner view is " + userType );
+                if ( userType !== "user" ) {
+
+                    ISNLogger.log("owners can delete the dossier");
+                    self.deactivateBannerDeleteMode();
+                    e.stopPropagation();
+                }
+            }
+        }
+    });
+
+
+
+    /**
+    * IN USE? doesn't look like it!
+    */
+/*
     // click handler
     function _clickHandler(e) {
         if (!self.embed) {
@@ -67,7 +129,7 @@ function DossierBannerView(myController){
             if ( self.editMode ) {
                 // always check for edits
                 self.checkDescriptionEdit();
-                self.checkTitleEdit();			
+                self.checkTitleEdit();
             }
 
             switch (targetID) {
@@ -77,6 +139,19 @@ function DossierBannerView(myController){
                 break;
             case 'lock-editDossier':
                 self.deactivateBannerEditMode();
+                e.stopPropagation();
+                break;
+            case 'deleteDossier':
+                self.activateBannerDeleteMode();
+                e.stopPropagation();
+                break;
+            case 'confirmDeleteDossier':
+                self.removeDossier();
+                e.stopPropagation();
+                self.update();
+                break;
+            case 'cancelDeleteDossier':
+                self.deactivateBannerDeleteMode();
                 e.stopPropagation();
                 break;
             case 'bannerImage':
@@ -89,12 +164,13 @@ function DossierBannerView(myController){
             }
         }
     }
+*/
 
     $(document).bind('dataSuccessfullySent', function() {
     	self.waitForUpload--;
     	self.transitionToGallery();
     });
-    
+
 } //end of constructor
 
 DossierBannerView.prototype.activateBannerEditMode = function() {
@@ -128,6 +204,46 @@ DossierBannerView.prototype.deactivateBannerEditMode = function() {
     }
 };
 
+DossierBannerView.prototype.activateBannerDeleteMode = function() {
+
+    if ( !this.embed ) {
+
+        this.deleteMode = true;
+        ISNLogger.log("activate Banner Delete");
+        $("#deleteDossier").addClass('hide');
+        $("#confirmDeleteDossier").removeClass('hide');
+    }
+};
+
+DossierBannerView.prototype.deactivateBannerDeleteMode = function() {
+
+    if ( !this.embed ) {
+
+        this.deleteMode = false;
+        ISNLogger.log("deactivate Banner Delete");
+        $("#confirmDeleteDossier").addClass('hide');
+        $("#deleteDossier").removeClass('hide');
+    }
+};
+
+DossierBannerView.prototype.deleteDossier = function() {
+
+ISNLogger.log('in deleteDossier');
+    //if we aren't embedded and are in delete confirm mode
+    if ( !this.embed && this.deleteMode ) {
+
+        ISNLogger.log('about to call the model directly from the view on: callServiceToDeleteDossier()');
+
+        //call our dossier delete service via the controller
+        self.models['bookmark'].callServiceToDeleteDossier();
+
+        ISNLogger.log('transition to welcome view');
+        window.location.href = "index.html";
+    }
+ISNLogger.log('leave deleteDossier');
+}
+
+
 DossierBannerView.prototype.changeImage= function(){
     if (!this.embed && this.editMode) {
         ISNLogger.log('wait for Transition');
@@ -159,7 +275,7 @@ DossierBannerView.prototype.checkTitleEdit = function() {
             this.controller.models['bookmark'].sendDataToServer();
         }
     }
-}; 
+};
 
 DossierBannerView.prototype.checkDescriptionEdit = function() {
     if ( !this.embed ) {
@@ -175,13 +291,13 @@ DossierBannerView.prototype.checkDescriptionEdit = function() {
             this.controller.models['bookmark'].sendDataToServer();
         }
     }
-}; 
+};
 
 DossierBannerView.prototype.open = function(){
-    ISNLogger.log("open dossier banner view");	
+    ISNLogger.log("open dossier banner view");
     if(!this.controller.models['bookmark'].dossierForbidden) {
         this.renderBanner();
-        this.openDiv();	
+        this.openDiv();
     }
 };
 
@@ -190,34 +306,34 @@ DossierBannerView.prototype.close   = closeView;
 
 DossierBannerView.prototype.renderBanner= function(){
     var self=this
-    //Design the Banner area 
+    //Design the Banner area
     $("#header_image").empty();
     var bookmarkModel = self.controller.models['bookmark'];
     var dossierListModel=self.controller.models['dossierList'];
     var userType=dossierListModel.getUserType();
     //var dossierId= bookmarkModel.getDossierID();
     var dossierId=bookmarkModel.dossierId;
-    
+
     ISNLogger.log("dossier id in banner view is "+dossierId);
-    
+
     var img=$("<img/>", {
         "id"     : "bannerImage", //we need to provide the dossierId dynamically
         "class"  : "big_img",
         "width"  : "470px",
-        "height" : "176px", 
+        "height" : "176px",
         "src"    : bookmarkModel.getDossierImageURL()
     }).appendTo("#header_image");
-    
+
     var titleContainer=$("<div/>", {
     "id":"titleContainer",
     }).appendTo("#header_image");
-    
+
     var span=$("<div/>", {
     	"id":"headerTitle",//we need to provide the dossierId dynamically
-    	"class":"headerTitle", 
+    	"class":"headerTitle",
     	text:bookmarkModel.getDossierTitle()
     }).appendTo(titleContainer);
-        
+
     var descriptionContainer=$("<p/>", {
     "id":"descriptionContainer",
     "class": "margingForEdit"
@@ -227,12 +343,13 @@ DossierBannerView.prototype.renderBanner= function(){
     	"id":"headerDescription",
     	"text": bookmarkModel.getDossierDescription()
     }).appendTo(descriptionContainer);
-    
+
     hr=$("<hr/>", {
 		"class":"overview white"
 	}).appendTo("#header_image");
-      
+
     if (self.controller.oauth && userType !== "user"){
-    	$("#editDossier").removeClass("hide");
+        $("#editDossier").removeClass("hide");
+        $("#deleteDossier").removeClass("hide");
     }
 };

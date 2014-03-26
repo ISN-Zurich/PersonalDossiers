@@ -361,6 +361,57 @@ BookmarkModel.prototype.sendDataToServer=function(){
     }
 };
 
+//service call to delete dossier, called directly from the view apparently because sure, why not?
+BookmarkModel.prototype.callServiceToDeleteDossier = function(){
+
+    ISNLogger.log("enter send data to server");
+    var self=this;
+    var dossierID = self.dossierId;
+    var url=self.controller.baseURL +"service/dossier.php/"+dossierID;
+    var method="DELETE";
+
+    if ( dossierID ) {
+
+        // var data=myData;
+
+        $.ajax({
+            url:  url,
+            type : method,
+            dataType : 'json',
+            success : doOnSuccess,
+            error : doOnError,
+            beforeSend : setHeader
+        });
+    }
+
+    function doOnError( request ) {
+
+        ISNLogger.log("Error while requesting dossier delete");
+        ISNLogger.log("ERROR status text: "+ request.statusText);
+        ISNLogger.log("ERROR status code: "+ request.statusCode());
+        ISNLogger.log("ERROR status code is : " + request.status);
+        ISNLogger.log("ERROR responsetext: "+ request.responseText);
+        if ( request.status == 401 ) {
+
+            // access keys have been rejected
+            self.controller.keysRejected();
+        }
+    }
+
+    function doOnSuccess(){
+
+        //dossier deletion success, means trigger update view, means return to welcome view
+        ISNLogger.log("dossier successfully deleted");
+        $(document).trigger("dossierDeleteSuccess");
+    }
+
+    function setHeader( xhr ) {
+
+        var header_request=self.controller.oauth.oauthHeader(method, url, myData);
+        xhr.setRequestHeader('Authorization', header_request);
+    }
+};
+
 /**
  * Increases the index in the dossiers-item list, which means we move to the next dossier item
  * @prototype
