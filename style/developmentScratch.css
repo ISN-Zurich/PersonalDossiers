@@ -28,13 +28,6 @@ a.disable span.pd_active {
     color: #C9CACF !important;
 }
 
-/* this overrides the original class, by changing its paddings*/
-
-.snippetlist-content.first {
-	border: 0px solid green;
-	padding:0px 0px 0px 0px;
-}
-
 .pd_grey_bar {
     display: inline-block;
     width: 212px;
