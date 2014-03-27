@@ -1,4 +1,3 @@
-
 /**
  *  This views contains mostly the event handlers of :
  *  - facebook icon
@@ -18,6 +17,10 @@ function ShareButtonView(controller){
 		var bookmarkModel=self.controller.models['bookmark'];
 		var shared_title=encodeURIComponent(bookmarkModel.getDossierTitle());
 		var shared_url=encodeURIComponent(self.getPublicLink());
+		//Prepping the FB link
+		selfURL = self.getPublicLink();
+		var shared_url_fb = encodeURIComponent(selfURL.replace("lab.isn.ethz.ch","lab.isn.ethz.ch/share.html"));
+
 		var shared_description=encodeURIComponent(bookmarkModel.getDossierDescription());
 		
 		var whole_image_string=window.location.href;
@@ -27,7 +30,7 @@ function ShareButtonView(controller){
 		var shared_image= encodeURIComponent(trim_url+'/'+bookmarkModel.getDossierImageURL());
 		ISNLogger.log("sharedimage is "+shared_image);
 
-		window.open('http://www.facebook.com/sharer.php?s=100&p[title]='+ shared_title + '&p[summary]=' + shared_description + '&p[url]=' + shared_url + '&p[images][0]='+shared_image, 
+		window.open('http://www.facebook.com/sharer.php?s=100&p[title]='+ shared_title + '&p[summary]=' + shared_description + '&p[url]=' + shared_url_fb + '&p[images][0]='+shared_image, 
 				 'facebook-share-dialog', 
 				 'width=626,height=436'		
 		);
