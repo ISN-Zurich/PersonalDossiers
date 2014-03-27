@@ -353,8 +353,11 @@ textarea:-ms-input-placeholder {
     float:right;
     width:28px;
     height:28px;
-    padding:0px;
-    margin:0px;
+    padding:0px !important;
+    margin:0px !important;
+}
+#cancelDeleteDossierButton {
+    border-left:1px solid white !important;
 }
 
 /******************  EDIT DOSSIER BUTTON     ********************/
