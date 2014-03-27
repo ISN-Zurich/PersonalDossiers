@@ -40,7 +40,7 @@ height:34px;
 }
 
 .pd_active{
-    color:#fff;
+    color:#fff !important;
 }
 
 .pd_dossiertext {
@@ -60,6 +60,11 @@ height:34px;
     font-size:18px;
 }
 
+.sidebar-header {
+    line-height:28px !important;
+    padding-top:0px !important;
+    padding-bottom:0px !important;
+}
 /***********************End of Interaction Box*********************/
 
 /******LOGIN FORM******************/
