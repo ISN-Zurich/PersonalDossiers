@@ -742,7 +742,7 @@ body.embedBadge {
     color:#4c5160;
     /* background:#4c5160; */
     padding:0px;
-    cursor: ns-resize,move;
+    cursor: ns-resize;
 }
 
 .pd_box {
