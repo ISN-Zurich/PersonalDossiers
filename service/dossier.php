@@ -291,11 +291,19 @@ class DossierService extends OAUTHRESTService {
 
         // sanity check by firstly loading dossier data
         $this->dbh->setFetchMode( MDB2_FETCHMODE_ASSOC );
+
+        //reference the database handler
         $mdb2 = $this->dbh;
+
+        //prepare and execute, retrieve dossier id
         $sth = $mdb2->prepare( 'SELECT * FROM dossiers WHERE id = ?' );
-        $res = $sth->execute($this->dossier_id);
-        $bDossier = $res->numRows();
+        $res = $sth->execute( $this->dossier_id );
+
+        //free
         $sth->free();
+
+        //check if we have supplied a valid dossier id that exists in the db
+        $bDossier = $res->numRows();
         if ( $bDossier < 1 ) {
 
             $this->log( "no dossier to add the item to" );
@@ -303,12 +311,14 @@ class DossierService extends OAUTHRESTService {
             return;
         }
 
-        // verify an item id was passed in to the function
+        // verify a digital library id was passed in to the function
         if ( array_key_exists( "id" , $data ) ) {
 
+            //reference it and sanity check
             $digital_library_id = $data["id"];
-            if ( !( isset( $digital_library_id ) && strlen( $digital_library_id ) ) ) {
+            if ( !isset( $digital_library_id ) && !( strlen( $digital_library_id ) > 0 ) ) {
 
+                //what a strange way to check
                 $this->log( "no item id passed" );
                 $this->bad_request();
                 return;
@@ -320,12 +330,16 @@ class DossierService extends OAUTHRESTService {
             return;
         }
 
+        // verify that the object isn't already in the dossier
+        $sth = $mdb2->prepare( 'SELECT id FROM dossier_items WHERE dossier_id = ? AND digital_library_id = ? LIMIT 1' );
+        $res = $sth->execute( array( $this->dossier_id , $digital_library_id ) );
 
-        // verify that the object is not already added
-        $sth = $mdb2->prepare( 'SELECT id FROM dossier_items WHERE dossier_id = ? AND digital_library_id = ?' );
-        $res = $sth->execute( array( $this->dossier_id , $digital_library_id ) )->numRows();
+        //free
         $sth->free();
-        if ( $res <> 0 ) {
+
+        //check for item existence in the dossier already
+        $bItemInDossier = $res->numRows();
+        if ( $bItemInDossier > 0 ) {
 
             $this->log( 'Item already exists in this dossier, silently send OK' );
             $this->no_content();
@@ -333,10 +347,15 @@ class DossierService extends OAUTHRESTService {
         }
 
         // check if the item is already loaded from the KMS and stored in our library_metadata table
-        $sth = $mdb2->prepare( 'SELECT digital_library_id FROM library_metadata WHERE digital_library_id = ?' );
-        $res = $sth->execute( array( $digital_library_id ) )->numRows();
+        $sth = $mdb2->prepare( 'SELECT digital_library_id FROM library_metadata WHERE digital_library_id = ? LIMIT 1' );
+        $res = $sth->execute( array( $digital_library_id ) );
 
-        if ( $res <= 0 ) {
+        //free
+        $sth->free();
+
+        //check if item is already cached from the KMS in the db
+        $bItemCached = $res->numRows();
+        if ( $bItemCached <= 0 ) {
 
             //in future if the load is too high on the KMS we can change to insert a placeholder,
             //then update the library metadata table when the KMS responds.
@@ -402,11 +421,14 @@ class DossierService extends OAUTHRESTService {
             }
 
             //insert library id and metadata for it into a separate table
-            $sth = $mdb2->prepare( 'REPLACE INTO library_metadata (digital_library_id, metadata) VALUES ( ?, ?)' );
-            $res2 = $sth->execute( array( $digital_library_id , $itemmeta ) );
-            if ( PEAR::isError( $res2 ) ) {
+            $sth = $mdb2->prepare( 'REPLACE INTO library_metadata ( digital_library_id , metadata ) VALUES ( ? , ? )' );
+            $res = $sth->execute( array( $digital_library_id , $itemmeta ) );
 
-                $this->log( 'pear error ' . $res2->getMessage() );
+            //free
+            $sth->free();
+            if ( PEAR::isError( $res ) ) {
+
+                $this->log( 'pear error ' . $res->getMessage() );
                 $this->bad_request();
                 return;
             }
@@ -416,36 +438,45 @@ class DossierService extends OAUTHRESTService {
         // 1 select the records from dossier items where dossier_id = dossier id
         // count the number of the results
         // position id is the number of results + 1
-        $dbh = $this->dbh;
-        $sthPosition = $dbh->prepare( 'SELECT * FROM dossier_items WHERE dossier_id = ?' );
-        $resPosition = $sthPosition->execute( array( $this->dossier_id ) );
-        if ( PEAR::isError( $resPosition ) ) {
+        $sth = $mdb2->prepare( 'SELECT * FROM dossier_items WHERE dossier_id = ?' );
+        $res = $sth->execute( array( $this->dossier_id ) );
 
-            $this->log( 'pear error ' . $resPosition->getMessage() );
+        //free
+        $sth->free();
+        if ( PEAR::isError( $res ) ) {
+
+            $this->log( 'pear error ' . $res->getMessage() );
             $this->bad_request();
             return;
         }
-        $item_position = $resPosition->numRows();
-        $this->log( 'item_position id is ' . $item_position );
 
-        // now we actually add the item to the very dossier (we no longer use the user id for the dossier items)
-        $this->log( 'data for insert - libraryid:' . $digital_library_id . " dossierid:" . $this->dossier_id . ' position:' . $item_position );
-        $sth = $mdb2->prepare( 'INSERT INTO dossier_items (digital_library_id, dossier_id, position) VALUES (?, ?, ?)' );
-        $res1 = $sth->execute( array( $digital_library_id , $this->dossier_id , $item_position ) );
-        if ( PEAR::isError( $res1 ) ) {
+        //no error so far, the number of rows will be the new item's position
+        $item_position = $res->numRows();
 
-            $this->log( 'pear error ' . $res1->getMessage() );
+        //log our values so far, just before we insert
+        $this->log( 'data for insert - digital_library_id:' . $digital_library_id . " dossier_id:" . $this->dossier_id . ' item_position:' . $item_position );
+
+        //now we actually add the item to the very dossier (we no longer use the user id for the dossier items)
+        $sth = $mdb2->prepare( 'INSERT INTO dossier_items ( digital_library_id , dossier_id , position ) VALUES ( ? , ? , ? )' );
+        $res = $sth->execute( array( $digital_library_id , $this->dossier_id , $item_position ) );
+
+        //free
+        $sth->free();
+        if ( PEAR::isError( $res ) ) {
+
+            $this->log( 'pear error ' . $res->getMessage() );
             $this->bad_request();
             return;
         }
 
         //assign the item to the dossier in the json array we will return
         $this->item_id = $mdb2->lastInsertID( "dossiers" , "id" );
+
+        //form a 'data' array to be json'd
         array_push( $this->data , array( "dossier_id" => $this->dossier_id , "item_id" => $this->item_id ) );
 
-        //return the json data we stored and free the statement handler
+        //return the 'data' array as json data
         $this->respond_json_data();
-        $sth->free();
     }
 
     /**

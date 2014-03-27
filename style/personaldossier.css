@@ -422,6 +422,10 @@ ul#sortable li{
     padding-bottom:15px;
 }
 
+.small {
+    font-size:11px !important;
+}
+
 /************Registration*****/
 .pd_inactive {
     color: #c9cacf !important;
