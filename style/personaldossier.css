@@ -347,6 +347,16 @@ textarea:-ms-input-placeholder {
 }
 
 /**END OF LOGOUT CONFIRMATION BUTTON*/
+
+/* DELETE DOSSIER BUTTON */
+#cancelDeleteDossierButton , #confirmDeleteDossierButton {
+    float:right;
+    width:28px;
+    height:28px;
+    padding:0px;
+    margin:0px;
+}
+
 /******************  EDIT DOSSIER BUTTON     ********************/
 
 .pd_editDossier {
@@ -729,7 +739,7 @@ body.embedBadge {
     color:#4c5160;
     /* background:#4c5160; */
     padding:0px;
-    cursor: move;
+    cursor: ns-resize,move;
 }
 
 .pd_box {
