@@ -360,11 +360,12 @@ textarea:-ms-input-placeholder {
 }
 
 .st_editDosser {
-    border-left:1px solid white;
     float:right;
-    padding-left:6px;
-    padding-right:6px;
+    width:28px;
+    border-left:1px solid white;
     font-size:18px;
+    text-align:center;
+    color:#4C5160;
 }
 
 .st_unbookmarked {
