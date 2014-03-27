@@ -720,12 +720,8 @@ body.embedBadge {
 .currentSortedItem {
     position:relative;
     top: 0px;
-    left: 0px;
     border: 0px solid red;
-    height:150px;
-/*    line-height:150px; */
     background:#ebedee;
-    /*background-color: #ddd;*/
 }
 
 .dragIcon {
