@@ -92,6 +92,7 @@
                             <div class="dd_menu_item_text_container"><a class="dd_menu_item_text" href="http://www.isn.ethz.ch/Dossiers">Dossiers</a></div>
                             <ul class="dd_menu_subcontainer">
                                 <li class="dd_menu_subitem"><div class="dd_menu_subitem_text_container"><a class="dd_menu_subitem_text" href="http://www.isn.ethz.ch/Dossiers">Issues / Regions</a></div></li>
+                                <li class="dd_menu_subitem"><div class="dd_menu_subitem_text_container"><a class="dd_menu_subitem_text" href="http://lab.isn.ethz.ch/">Your Dossiers</a></div></li>
                             </ul>
                         </li>
                         <li class="dd_menu_item">
@@ -209,10 +210,10 @@
         <div class="column span-6 last" id="sidebar_right">
             <div id="InteractionBar" class="pd_grey_bar st">
                 <span class="pd_boxTitle">My Account</span>
-                <a href="user.html#notifications" class="sb_icon pd_interactionItem disable" id="st_notifications" title="Notifications" target=""><span id="span_notifications" class="pd_tabs_margin pd_active iconMoon">N</span></a>
-                <a href="user.html#userProfile" class="sb_icon pd_interactionItem disable" id="st_user" title="Your Profile" target=""><span id="span_user" class="pd_tabs_margin pd_active iconMoon">T</span></a>
-                <a href="user.html#personalDossiers" class="sb_icon pd_interactionItem clickable" id="st_dossiers" title="Your Dossiers" target=""><span id="span_dossiers" class="pd_tabs_margin pd_active iconMoon">D</span></a>
-                <a class="pd_sb_icon pd_a_selected clickable" id="logView" title="Logout"><span id="st_log_out" class="pd_tabs_margin pd_active iconMoon">L</span></a>
+                <a href="user.html#notifications" class="sb_icon pd_tabs_margin pd_interactionItem disable" id="st_notifications" title="Notifications" target=""><span id="span_notifications" class="pd_active iconMoon">N</span></a>
+                <a href="user.html#userProfile" class="sb_icon pd_tabs_margin pd_interactionItem disable" id="st_user" title="Your Profile" target=""><span id="span_user" class="pd_active iconMoon">T</span></a>
+                <a href="user.html#personalDossiers" class="sb_icon pd_tabs_margin pd_interactionItem clickable" id="st_dossiers" title="Your Dossiers" target=""><span id="span_dossiers" class="pd_active iconMoon">D</span></a>
+                <a class="pd_sb_icon pd_tabs_margin pd_a_selected clickable" id="logView" title="Logout"><span id="st_log_out" class="pd_active iconMoon">L</span></a>
             </div><!-- id="InteractionBar" -->
 
             <div id="st_logout_confirm" class="box snippetlist hide">
