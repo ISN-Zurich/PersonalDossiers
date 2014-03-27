@@ -65,6 +65,7 @@ height:34px;
     padding-top:0px !important;
     padding-bottom:0px !important;
 }
+
 /***********************End of Interaction Box*********************/
 
 /******LOGIN FORM******************/
@@ -341,7 +342,8 @@ textarea:-ms-input-placeholder {
 
 #confirmationMsg {
     color:white;
-    size:12px;
+    font-size:12px;
+    line-height: 38px;
 }
 
 /**END OF LOGOUT CONFIRMATION BUTTON*/
@@ -721,7 +723,7 @@ body.embedBadge {
     left: 0px;
     border: 0px solid red;
     height:150px;
-    line-height:150px;
+/*    line-height:150px; */
     background:#ebedee;
     /*background-color: #ddd;*/
 }
