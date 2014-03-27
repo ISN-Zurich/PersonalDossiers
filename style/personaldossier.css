@@ -424,6 +424,8 @@ ul#sortable li{
 
 .small {
     font-size:11px !important;
+    margin-bottom: 0px !important;
+    line-height: 12px !important;
 }
 
 /************Registration*****/
@@ -506,11 +508,7 @@ input#inputContainer {
 
 #titleContainer {
     /*background-color:#ebedee;*/
-    height:16px;
-    border-bottom:1px solid white;
-    margin-top:1px;
-    font-size:14px;
-    padding:3px 10px 4px 10px;
+    line-height:28px;
 }
 
 .dossierItemText {
@@ -604,30 +602,9 @@ body.embedBadge {
     margin-right:10px;
 }
 
-.headerTitleContainer {
-    margin-bottom:10px;
-    padding-left:3px;
-}
-
 .headerTitle {
-    border:0px solid red;
     font-size:16px;
     font-weight:bold;
-    padding-left:3px;
-    padding-top: 5px;
-}
-
-.titleEdit {
-    float:right;
-    color:#29a0d3;
-    border:0px solid red;
-    font-size:13px;
-    padding-right:7px;
-    /*margin-top:180px;*/
-    cursor: pointer;
-    /*right:155px;
-    bottom:80px;
-    position:fixed;*/
 }
 
 .hidden {
