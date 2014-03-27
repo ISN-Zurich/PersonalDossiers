@@ -509,6 +509,11 @@ input#inputContainer {
 #titleContainer {
     /*background-color:#ebedee;*/
     line-height:28px;
+    margin:2px 0px;
+}
+
+#descriptionContainer , #descriptionContainer p {
+    padding:0px;
 }
 
 .dossierItemText {
@@ -583,14 +588,14 @@ body.embedBadge {
     border:0px solid blue;
 }
 
-.deleteButton , .deleteDossierButton {
+.deleteButton {
     text-align: right;
 /*    color: red;*/
     color:#4c5160;
     cursor: pointer;
 }
 
-.deleteConfirmButton , .deleteDossierConfirmButton {
+.deleteConfirmButton {
     display:none;
     color: red;
     text-align:right;
@@ -609,10 +614,6 @@ body.embedBadge {
 
 .hidden {
     display:none;
-}
-
-.margingForEdit {
-    /*  margin-bottom:120px; */
 }
 
 .welcomeText {
