@@ -30,7 +30,7 @@ function ShareButtonView(controller){
 		var shared_image= encodeURIComponent(trim_url+'/'+bookmarkModel.getDossierImageURL());
 		ISNLogger.log("sharedimage is "+shared_image);
 
-		window.open('http://www.facebook.com/sharer.php?s=100&[title]='+ shared_title + '&[summary]=' + shared_description + '&[u]=' + shared_url_fb + '&[images][0]='+shared_image, 
+		window.open('http://www.facebook.com/sharer.php?s=100&title='+ shared_title + '&summary=' + shared_description + '&u='+ shared_url_fb +'&images='+shared_image, 
 				 'facebook-share-dialog', 
 				 'width=626,height=436'		
 		);
