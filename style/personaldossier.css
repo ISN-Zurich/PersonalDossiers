@@ -30,6 +30,11 @@ height:34px;
     background-color:#ebedee;
 }
 
+.pd_tabs_margin {
+    width:28px;
+    text-align:center;
+}
+
 .pd_selected {
     color:white;
 }
