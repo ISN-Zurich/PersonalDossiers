@@ -328,10 +328,6 @@ textarea:-ms-input-placeholder {
 
 /***LOGOUT CONFIRMATION BUTTON**/
 
-.pd_logout_confirm {
-    height:80px;
-}
-
 .logoutText {
     color:white;
 }
@@ -520,7 +516,7 @@ input#inputContainer {
 }
 
 #descriptionContainer , #descriptionContainer p {
-    padding:0px;
+    padding-top:0px;
 }
 
 .dossierItemText {
@@ -714,7 +710,6 @@ body.embedBadge {
     top: -3px;
     left: -3px;
     height: 120px;
-    line-height:180px;
     background: #4c5160;
     border:0px solid black;
 }

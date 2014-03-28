@@ -216,18 +216,18 @@ li {
 
 ul#sortable {
     /*font-size:10x;*/
-	font-size: 1em;
-	line-height: 1.5em;
+	font-size: 12px;
+	line-height: 16px;
 	margin: 0;
 	padding: 0;
 	list-style-image: none;
 	list-style-position: outside;
 	list-style-type: none;
+    overflow:auto; /* fix FF offset bug */
 }
 
 ul#sortable > li {
     clear:both;
-    padding-top: 8px;
     border-top: 1px solid #C9CACF;
     padding-bottom: 8px;
 }
