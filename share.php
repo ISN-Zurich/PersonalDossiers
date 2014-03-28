@@ -62,8 +62,9 @@
     <?php 
         // Need to cut apart the request URI, then build the redirect URL
         $qury =$_SERVER['REQUEST_URI'];
-        $pos = strpos ($qury, "/");
-        $urlParam = "?id=".substr($qury,$pos+1);
+        $pos = strripos ($qury, "/");
+        $pos++;
+        $urlParam = "?id=".substr($qury,$pos);
         echo "<body onload=share('http://lab.isn.ethz.ch/".$urlParam."')>";
     ?>
         
