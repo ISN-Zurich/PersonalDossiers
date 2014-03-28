@@ -49,9 +49,9 @@
         
         <script type="text/javascript">
             <!--
-            /* function share(url) {
+            function share(url) {
                 location.replace(url);  
-            }*/
+            }
             
             -->
         </script>
