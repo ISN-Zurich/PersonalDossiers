@@ -23,7 +23,7 @@ function DossierBannerView(myController){
             self.checkDescriptionEdit();
             self.checkTitleEdit();  ;
             var targetID = e.target.id;
-            if (targetID == "bannerImage"){
+            if ( ( targetID == "bannerImage" ) || ( targetID == "bannerImageEditOverlay" ) ) {
                 self.changeImage();
                 e.stopPropagation();
             }
