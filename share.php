@@ -60,7 +60,7 @@
 
     </head>
     <?php 
-        echo "<body onload=load('http://lab.isn.ethz.ch'".$_SERVER['REQUEST_URI'];.")">
+        echo "<body onload=load('http://lab.isn.ethz.ch'".$_SERVER['REQUEST_URI'].")">
     ?>
         
         <div class="pd_embed pd_details">
