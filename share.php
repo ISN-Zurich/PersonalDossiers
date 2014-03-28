@@ -63,7 +63,7 @@
         $pos = strripos ($qury, "/");
         $pos++;
         $urlParam = "?id=".substr($qury,$pos);
-        echo "<body onload=share('http://lab.isn.ethz.ch/".$urlParam."')>";
+        echo "<body onload=share('http://lab.isn.ethz.ch/index.html".$urlParam."')>";
     ?>
         
         <div class="pd_embed pd_details">
@@ -86,7 +86,7 @@
 
                         //setting baseURL and query
                         $qry_str = substr($qury,$pos);
-                        $baseURL = "http://lab.isn.ethz.ch/service/dossier.php";
+                        $baseURL = "http://lab.isn.ethz.ch/service/dossier.php/";
                         $getDossier = curl_init();
 
                         // Set CURL loose
