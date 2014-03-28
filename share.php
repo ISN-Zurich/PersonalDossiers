@@ -60,7 +60,11 @@
 
     </head>
     <?php 
-        echo "<body onload=share('http://lab.isn.ethz.ch".$_SERVER['REQUEST_URI']."')>";
+        // Need to cut apart the request URI, then build the redirect URL
+        $qury =$_SERVER['REQUEST_URI'];
+        $pos = strpos ($qury, "/");
+        $urlParam = "?id=".substr($qury,$pos+1);
+        echo "<body onload=share('http://lab.isn.ethz.ch/".$urlParam."')>";
     ?>
         
         <div class="pd_embed pd_details">
@@ -80,9 +84,10 @@
                 <div id="contentArea" class="pd_overflow">
                     <?php
                         // code to display the following: Title, image, description here
+
                         //setting baseURL and query
-                        $qry_str = $_SERVER['REQUEST_URI']; 
-                        $baseURL = "http://lab.isn.ethz.ch/service/dossier.php/";
+                        $qry_str = substr($qury,$pos);
+                        $baseURL = "http://lab.isn.ethz.ch/service/dossier.php";
                         $getDossier = curl_init();
 
                         // Set CURL loose
