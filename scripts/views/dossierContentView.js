@@ -37,17 +37,22 @@ function DossierContentView( dController ) {
             var myID = targetID.substring( 7 );
             self.deleteMode = myID;
             $(targetE).hide();
-            $("#delete-confirm-" + myID).show();
+            $("#delete-confirm-container-" + myID).show();
             e.stopPropagation();
-        }
-        else if ( !self.embed && $(targetE).hasClass("deleteConfirmButton") ) {
+        } else if ( !self.embed && $(targetE).hasClass("cancelButton") ) {
+
+            // cancel delete operation
+            self.rescueFromDelete();
+            e.stopPropagation();
+        } else if ( !self.embed && $(targetE).hasClass("confirmButton") ) {
+
             // get rid of the element
             var myIDf = targetID.substring( 15 );
             self.removeItem(myIDf);
             self.deleteMode = 0;
             e.stopPropagation();
-        }
-        else if ( self.embed && targetID.indexOf('embeditem') === 0 ) {
+        } else if ( self.embed && targetID.indexOf('embeditem') === 0 ) {
+
             // this opens the detailed view for the embedded item
             var id = targetID.substring( 9 );
             if ( id > 0 ) {
@@ -147,7 +152,7 @@ DossierContentView.prototype.open = function() {
  */
 DossierContentView.prototype.rescueFromDelete = function (){
     if ( !this.embed && this.deleteMode > 0 ) {
-        $('#delete-confirm-' + this.deleteMode).hide();
+        $('#delete-confirm-container-' + this.deleteMode).hide();
         $('#delete-' + this.deleteMode).show();
         this.deleteMode = 0;
     }
@@ -303,8 +308,7 @@ DossierContentView.prototype.renderItem = function(){
         }).appendTo(firstLineContainer);
 
         $("<div/>", {
-            "class" : "iconMoon dragIcon",
-            "text" : "S"
+            "class" : "dragIcon",
         }).appendTo(div3);
 
         $("<div/>", {
@@ -312,15 +316,20 @@ DossierContentView.prototype.renderItem = function(){
             "class" : "deleteButton"
         }).appendTo(div3);
 
+        var div4 = $("<div/>", {
+            "id" : "delete-confirm-container-" + dossierID,
+            "class" : "deleteConfirmContainer hide"
+        }).appendTo(div3);
+
         $("<div/>", {
             "id" : "delete-cancel-" + dossierID,
             "class" : "cancelButton"
-        }).appendTo(div3);
+        }).appendTo(div4);
 
         $("<div/>", {
             "id" : "delete-confirm-" + dossierID,
             "class" : "confirmButton"
-        }).appendTo(div3);
+        }).appendTo(div4);
 
     }
 
