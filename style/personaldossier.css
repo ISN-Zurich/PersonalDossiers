@@ -353,15 +353,20 @@ textarea:-ms-input-placeholder {
 
 /* CONFIRM & CANCEL BUTTONS */
 .cancelButton , .confirmButton {
+    display:inline-block;
     float:right;
     width:28px;
     height:28px;
     padding:0px !important;
     margin:0px !important;
+    background:transparent url(images/icons/confirm.png) top left no-repeat scroll;
 }
-#cancelDeleteDossierButton {
+
+.cancelButton {
+    background:transparent url(images/icons/abort.png) top left no-repeat scroll;
     border-left:1px solid white !important;
 }
+
 
 /******************  EDIT DOSSIER BUTTON     ********************/
 
