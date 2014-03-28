@@ -352,6 +352,7 @@ textarea:-ms-input-placeholder {
 
 /* CONFIRM & CANCEL BUTTONS */
 .cancelButton , .confirmButton {
+    cursor:pointer;
     display:inline-block;
     float:right;
     width:28px;
@@ -596,17 +597,11 @@ body.embedBadge {
 }
 
 .deleteButton {
-    text-align: right;
-/*    color: red;*/
-    color:#4c5160;
     cursor: pointer;
 }
 
-.deleteConfirmButton {
-    display:none;
-    color: red;
-    text-align:right;
-    cursor: pointer;
+.deleteConfirmContainer {
+    float:right;
 }
 
 #addDossierBtn {
