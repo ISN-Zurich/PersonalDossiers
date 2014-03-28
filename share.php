@@ -59,7 +59,9 @@
         </script>
 
     </head>
-    <body onload="load('http://www.lab.isn.ch')">
+    <?php 
+        echo "<body onload=load('http://lab.isn.ethz.ch'".$_SERVER['REQUEST_URI'];.")">
+    ?>
         
         <div class="pd_embed pd_details">
             <!-- ISN LOGO -->
