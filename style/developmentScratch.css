@@ -215,9 +215,8 @@ li {
 }
 
 ul#sortable {
-    /*font-size:10x;*/
-	font-size: 12px;
-	line-height: 16px;
+    font-size:1em;
+    line-height:1.5em;
 	margin: 0;
 	padding: 0;
 	list-style-image: none;
