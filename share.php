@@ -81,7 +81,7 @@
                         // code to display the following: Title, image, description here
 
                         //setting baseURL and query
-                        $qry_str = "/12;
+                        $qry_str = "/12";
                         $baseURL = "http://lab.isn.ethz.ch/share.html";
                         $getDossier = curl_init();
 
