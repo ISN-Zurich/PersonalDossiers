@@ -229,7 +229,7 @@ ul#sortable {
 ul#sortable > li {
     clear:both;
     border-top: 1px solid #C9CACF;
-    padding-bottom: 8px;
+    padding: 8px 0px;
 }
 
 ul#sortable > li:first-child {
