@@ -269,7 +269,7 @@ DossierContentView.prototype.renderItem = function(){
 
     var div1 = $("<li/>", {
         "id" : "item" + dossierID,
-        "class" : "ui-state-default featured2 dossier_item"
+        "class" : "featured2 dossier_item"
     }).appendTo("#sortable");
 
     var divFloat = $("<div/>", {
@@ -297,26 +297,31 @@ DossierContentView.prototype.renderItem = function(){
     var firstLineContainer = $("<div/>").appendTo(divFloatText);
 
     if ( !this.embed ) {
+
         var div3 = $("<div/>", {
             "class" : "deletecontainer hide"
         }).appendTo(firstLineContainer);
 
-        $("<span/>", {
-            "id" : "delete-"+ dossierID,
-            "text" : "R",
-            "class" : "deleteButton iconMoon"
-        }).appendTo(div3);
-
-        $("<span/>", {
-            "id" : "delete-confirm-" + dossierID,
-            "text" : "WR",
-            "class" : "iconMoon deleteConfirmButton"
-        }).appendTo(div3);
-
-        $("<span/>", {
+        $("<div/>", {
             "class" : "iconMoon dragIcon",
             "text" : "S"
         }).appendTo(div3);
+
+        $("<div/>", {
+            "id" : "delete-"+ dossierID,
+            "class" : "deleteButton"
+        }).appendTo(div3);
+
+        $("<div/>", {
+            "id" : "delete-cancel-" + dossierID,
+            "class" : "cancelButton"
+        }).appendTo(div3);
+
+        $("<div/>", {
+            "id" : "delete-confirm-" + dossierID,
+            "class" : "confirmButton"
+        }).appendTo(div3);
+
     }
 
     var divp1 = $("<span/>", {

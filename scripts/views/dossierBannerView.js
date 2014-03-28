@@ -339,7 +339,7 @@ DossierBannerView.prototype.renderBanner= function(){
 
     var descriptionContainer=$("<p/>", {
     "id":"descriptionContainer",
-    "class": "margingForEdit"
+    "class": "marginForEdit"
     }).appendTo("#header_image");
 
     var p=$("<p/>", {
