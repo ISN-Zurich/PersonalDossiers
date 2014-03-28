@@ -100,7 +100,7 @@
                         // handle content, spit it out
                         $dossierContent_json =json_decode($dossierContent,true);
                         $dossierPicture =  $dossierContent_json['dossier_metadata'][image];
-                        echo "<img src=http://lab.isn.ethz.ch/".$dossierPicture."/>";
+                        echo "<img src=http://lab.isn.ethz.ch/".$dossierPicture." />";
                         echo  "<h1>".$dossierContent_json['dossier_metadata'][title]."</h1>";
                         echo  "<p>".$dossierContent_json['dossier_metadata'][description]."</p>";                      
                         ?>
