@@ -1,6 +1,5 @@
-<!-- 
-This page will be shared with social media platforms that don't understand how to render the javascript (facebook for start)
--->
+// This page will be shared with social media platforms that don't understand how to render the javascript (facebook for start)
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -78,8 +77,22 @@ This page will be shared with social media platforms that don't understand how t
                     </div>
                 </div>
                 <div id="contentArea" class="pd_overflow">
-                    <? php
+                    <?php
                         // code to display the following: Title, image, description here
+
+                        //setting baseURL and query
+                        $qry_str = "/12";
+                        $baseURL = "http://lab.isn.ethz.ch/share.html";
+                        $getDossier = curl_init();
+
+                        // Set CURL loose
+                        curl_setopt($getDossier, CURLOPT_URL, $baseURL . $qry_str); 
+                        curl_setopt($getDossier, CURLOPT_RETURNTRANSFER, 1);
+                        curl_setopt($getDossier, CURLOPT_TIMEOUT, '3');
+                        $dossierContent = trim(curl_exec($getDossier));
+                        curl_close($getDossier);
+                        // handle content
+                        print $dossierContent;
                     ?>
                 </div>
             </div>
