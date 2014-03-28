@@ -81,8 +81,8 @@
                         // code to display the following: Title, image, description here
 
                         //setting baseURL and query
-                        $qry_str = "/12";
-                        $baseURL = "http://lab.isn.ethz.ch/share.html";
+                        $qry_str = $_SERVER['REQUEST_URI']; 
+                        $baseURL = "http://lab.isn.ethz.ch/service/dossier.php/";
                         $getDossier = curl_init();
 
                         // Set CURL loose
@@ -91,9 +91,14 @@
                         curl_setopt($getDossier, CURLOPT_TIMEOUT, '3');
                         $dossierContent = trim(curl_exec($getDossier));
                         curl_close($getDossier);
-                        // handle content
-                        print $dossierContent;
-                    ?>
+
+                        // handle content, spit it out
+                        $dossierContent_json =json_decode($dossierContent,true);
+                        $dossierPicture =  $dossierContent_json['dossier_metadata'][image];
+                        echo "<img src=http://lab.isn.ethz.ch/".$dossierPicture."/>";
+                        echo  "<h1>".$dossierContent_json['dossier_metadata'][title]."</h1>";
+                        echo  "<p>".$dossierContent_json['dossier_metadata'][description]."</p>";                      
+                        ?>
                 </div>
             </div>
 
