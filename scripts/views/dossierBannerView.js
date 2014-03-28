@@ -21,7 +21,7 @@ function DossierBannerView(myController){
         if ( !self.embed && self.editMode ) {
             // always check for edits
             self.checkDescriptionEdit();
-            self.checkTitleEdit();	;
+            self.checkTitleEdit();  ;
             var targetID = e.target.id;
             if (targetID == "bannerImage"){
                 self.changeImage();
@@ -167,8 +167,8 @@ function DossierBannerView(myController){
 */
 
     $(document).bind('dataSuccessfullySent', function() {
-    	self.waitForUpload--;
-    	self.transitionToGallery();
+        self.waitForUpload--;
+        self.transitionToGallery();
     });
 
     $(document).bind('dossierDeleteSuccess', function(){
@@ -258,7 +258,7 @@ DossierBannerView.prototype.changeImage= function(){
 DossierBannerView.prototype.transitionToGallery = function() {
     if ( this.waitForUpload === 0 && this.goToGallery === true ) {
         ISNLogger.log('upload done');
-	   window.location.href = "gallery.php";
+       window.location.href = "gallery.php";
     }
 };
 
@@ -332,9 +332,9 @@ DossierBannerView.prototype.renderBanner= function(){
     }).appendTo("#header_image");
 
     var span=$("<div/>", {
-    	"id":"headerTitle",//we need to provide the dossierId dynamically
-    	"class":"headerTitle",
-    	text:bookmarkModel.getDossierTitle()
+        "id":"headerTitle",//we need to provide the dossierId dynamically
+        "class":"headerTitle",
+        text:bookmarkModel.getDossierTitle()
     }).appendTo(titleContainer);
 
     var descriptionContainer=$("<p/>", {
@@ -343,13 +343,13 @@ DossierBannerView.prototype.renderBanner= function(){
     }).appendTo("#header_image");
 
     var p=$("<p/>", {
-    	"id":"headerDescription",
-    	"text": bookmarkModel.getDossierDescription()
+        "id":"headerDescription",
+        "text": bookmarkModel.getDossierDescription()
     }).appendTo(descriptionContainer);
 
-    hr=$("<hr/>", {
-		"class":"overview white"
-	}).appendTo("#header_image");
+    // hr=$("<hr/>", {
+    //     "class":"overview white"
+    // }).appendTo("#header_image");
 
     if (self.controller.oauth && userType !== "user"){
         $("#editDossier").removeClass("hide");

@@ -207,13 +207,12 @@ input#password,
 .buttonContainer {
     width:229px;
     border-top:1px solid white;
-    height:22px;
-    padding-top:5px;
+    height:28px;
 }
 
-#loginUl {
-    border: 0px solid blue;
-    padding-left:0px;
+.buttonContainer div {
+    font-size:12px;
+    line-height: 28px;
 }
 
 .pd_loginContainer {
@@ -222,6 +221,10 @@ input#password,
     padding-left:-10px;
     right:20px;
     clear:both;
+}
+
+#loginForm input.pd_loginContainer[type="text"] {
+    border-bottom:1px solid #C9CACF;
 }
 
 form.placeholder{
@@ -348,8 +351,8 @@ textarea:-ms-input-placeholder {
 
 /**END OF LOGOUT CONFIRMATION BUTTON*/
 
-/* DELETE DOSSIER BUTTON */
-#cancelDeleteDossierButton , #confirmDeleteDossierButton {
+/* CONFIRM & CANCEL BUTTONS */
+.cancelButton , .confirmButton {
     float:right;
     width:28px;
     height:28px;

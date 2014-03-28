@@ -19,14 +19,15 @@
  */
 /*add an extra formatting to disabled links. the pointer is not hand.*/
 a.disable  {
-    background-color: #ebedee !important;
     pointer-events: none;
     cursor: default;
 }
 
+/*
 a.disable span.pd_active {
     color: #C9CACF !important;
 }
+*/
 
 .pd_grey_bar {
     display: inline-block;
@@ -155,8 +156,8 @@ a.disable span.pd_active {
 }
 
 div.pd-snippetlist-content {
-    margin: 0;
-    padding: 1.1em 1em 1.1em 1.86em;
+    margin: 0px;
+    padding: 0px;
     margin-left: 0px;
 }
 
@@ -232,8 +233,6 @@ ul#sortable > li {
 }
 
 ul#sortable > li:first-child {
-    border-top: none;
-    padding-top: 0px;
 }
 
 ul#sortable > li:last-child {

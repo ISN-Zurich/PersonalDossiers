@@ -197,8 +197,8 @@
         <div class="column span-6 last" id="sidebar_right">
             <div id="InteractionBar" class="pd_grey_bar st">
                 <span class="pd_boxTitle">My Account</span>
-                <a href="user.html#notifications" class="sb_icon pd_tabs_margin pd_interactionItem disable" id="st_notifications" title="Notifications" target=""><span id="span_notifications" class="pd_active iconMoon">N</span></a>
-                <a href="user.html#userProfile" class="sb_icon pd_tabs_margin pd_interactionItem disable" id="st_user" title="Your Profile" target=""><span id="span_user" class="pd_active iconMoon">T</span></a>
+                <!--<a href="user.html#notifications" class="sb_icon pd_tabs_margin pd_interactionItem disable" id="st_notifications" title="Notifications" target=""><span id="span_notifications" class="pd_active iconMoon">N</span></a>
+                <a href="user.html#userProfile" class="sb_icon pd_tabs_margin pd_interactionItem disable" id="st_user" title="Your Profile" target=""><span id="span_user" class="pd_active iconMoon">T</span></a>-->
                 <a href="user.html#personalDossiers" class="sb_icon pd_tabs_margin pd_interactionItem clickable" id="st_dossiers" title="Your Dossiers" target=""><span id="span_dossiers" class="pd_active iconMoon">D</span></a>
                 <a class="pd_sb_icon pd_tabs_margin pd_a_selected clickable" id="logView" title="Logout"><span id="st_log_out" class="pd_active iconMoon">L</span></a>
             </div><!-- id="InteractionBar" -->
@@ -206,9 +206,7 @@
             <div id="st_logout_confirm" class="box snippetlist hide">
                 <div class="pd-snippetlist-content sidebar-header darkblue">
                     <div class="about_section_desc">
-                        <ul>
-                            <li class="pd_loginContainer"><div id="confirmationMsg" class="pd_loginContainer clickable">Click here to log out</div></li>
-                        </ul>
+                        <div id="confirmationMsg" class="pd_loginContainer clickable">Log out?<div id="cancelLogoutButton" class="cancelButton clickable" src="images/icons/abort.png"></div><div id="confirmLogoutButton" class="confirmButton clickable" src="images/icons/confirm.png"></div></div>
                     </div>
                 </div>
             </div>
@@ -253,7 +251,7 @@
             </div>
 
             <div id="confirmDeleteDossier" class="pd_editDossier hide">
-                <div class="grey_bar st">Are you sure?<img id="cancelDeleteDossierButton" class="clickable" src="images/icons/abort.png" /><img id="confirmDeleteDossierButton" class="clickable" src="images/icons/confirm.png" /></div>
+                <div class="grey_bar st">Are you sure?<div id="cancelDeleteDossierButton" class="cancelButton clickable" src="images/icons/abort.png"></div><div id="confirmDeleteDossierButton" class="confirmButton clickable" src="images/icons/confirm.png"></div></div>
             </div>
 
             <div id="embedView">
@@ -281,7 +279,7 @@
             <!-- Announcement Container -->
             <div id="beta_announcement" class="box snippetlist margintop">
                 <div class="snippetlist-header darkgray">
-                    <div class="snippetlist-title darkgray">ISN Announcements</div>
+                    <div class="snippetlist-title darkgray">Personal Dossiers - BETA</div>
                 </div>
                 <div class="snippetlist-content first alt-lightgray">
                     <h2>Cheese and wine port-salut cheeseburger</h2>
