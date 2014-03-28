@@ -1,5 +1,3 @@
-<!--  This page will be shared with social media platforms that dont understand how to render the javascript (facebook for start) -->
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -51,9 +49,9 @@
         
         <script type="text/javascript">
             <!--
-            function share(url) {
-                location.replace(url); 
-            }
+            /* function share(url) {
+                location.replace(url);  
+            }*/
             
             -->
         </script>
