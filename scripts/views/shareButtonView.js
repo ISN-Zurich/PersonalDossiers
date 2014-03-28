@@ -20,8 +20,8 @@ function ShareButtonView(controller){
 		//Prepping the FB link
 		selfURL = self.getPublicLink();
 		
-		var shared_url_fb = encodeURIComponent(selfURL.replace("lab.isn.ethz.ch/?id=","lab.isn.ethz.ch/share.php/"));
-		
+	// 	var shared_url_fb = encodeURIComponent(selfURL.replace("lab.isn.ethz.ch/?id=","lab.isn.ethz.ch/share.php/"));
+		var shared_url_fb = selfURL.replace("lab.isn.ethz.ch/?id=","lab.isn.ethz.ch/share.php/");
 		var shared_description=encodeURIComponent(bookmarkModel.getDossierDescription());
 		
 		var whole_image_string=window.location.href;
@@ -31,7 +31,7 @@ function ShareButtonView(controller){
 		var shared_image= encodeURIComponent(trim_url+'/'+bookmarkModel.getDossierImageURL());
 		ISNLogger.log("sharedimage is "+shared_image);
 
-		window.open('http://www.facebook.com/sharer.php?s=100&title='+ shared_title + '&summary=' + shared_description + '&u='+ shared_url_fb +'&images='+shared_image, 
+		window.open('http://www.facebook.com/sharer.php?title='+ shared_title + '&summary=' + shared_description + '&u='+ shared_url_fb +'&images='+shared_image, 
 				 'facebook-share-dialog', 
 				 'width=626,height=436'		
 		);
