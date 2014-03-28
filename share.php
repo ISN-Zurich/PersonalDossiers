@@ -1,5 +1,4 @@
-// This page will be shared with social media platforms that don't understand how to render the javascript (facebook for start)
-
+<!--  This page will be shared with social media platforms that dont understand how to render the javascript (facebook for start) -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -60,7 +59,9 @@
         </script>
 
     </head>
-    <body onload="load('http://www.lab.isn.ch')">
+    <?php 
+        echo "<body onload=load('http://lab.isn.ethz.ch'".$_SERVER['REQUEST_URI'].")">
+    ?>
         
         <div class="pd_embed pd_details">
             <!-- ISN LOGO -->
@@ -81,8 +82,8 @@
                         // code to display the following: Title, image, description here
 
                         //setting baseURL and query
-                        $qry_str = "/12";
-                        $baseURL = "http://lab.isn.ethz.ch/share.html";
+                        $qry_str = $_SERVER['REQUEST_URI']; 
+                        $baseURL = "http://lab.isn.ethz.ch/service/dossier.php/";
                         $getDossier = curl_init();
 
                         // Set CURL loose
@@ -91,9 +92,14 @@
                         curl_setopt($getDossier, CURLOPT_TIMEOUT, '3');
                         $dossierContent = trim(curl_exec($getDossier));
                         curl_close($getDossier);
-                        // handle content
-                        print $dossierContent;
-                    ?>
+
+                        // handle content, spit it out
+                        $dossierContent_json =json_decode($dossierContent,true);
+                        $dossierPicture =  $dossierContent_json['dossier_metadata'][image];
+                        echo "<img src=http://lab.isn.ethz.ch/".$dossierPicture."/>";
+                        echo  "<h1>".$dossierContent_json['dossier_metadata'][title]."</h1>";
+                        echo  "<p>".$dossierContent_json['dossier_metadata'][description]."</p>";                      
+                        ?>
                 </div>
             </div>
 
