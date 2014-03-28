@@ -80,7 +80,6 @@
                 <div id="contentArea" class="pd_overflow">
                     <?php
                         // code to display the following: Title, image, description here
-
                         //setting baseURL and query
                         $qry_str = $_SERVER['REQUEST_URI']; 
                         $baseURL = "http://lab.isn.ethz.ch/service/dossier.php/";
