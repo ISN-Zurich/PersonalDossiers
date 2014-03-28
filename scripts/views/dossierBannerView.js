@@ -247,7 +247,7 @@ DossierBannerView.prototype.deleteDossier = function() {
 }
 
 
-DossierBannerView.prototype.changeImage= function(){
+DossierBannerView.prototype.changeImage = function(){
     if (!this.embed && this.editMode) {
         ISNLogger.log('wait for Transition');
         this.goToGallery = true;

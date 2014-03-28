@@ -146,6 +146,8 @@ WelcomeView.prototype.renderDossierItem = function(parentE) {
 		"id":"dossier"+self.controller.models.dossierList.getDossierId(),
 		"text":self.controller.models.dossierList.getDossierDescription()
 	}).appendTo(div3);
+
+	/*
 	if (self.controller.oauth){
 
 		divDelContainer = $("<div/>", {
@@ -163,6 +165,7 @@ WelcomeView.prototype.renderDossierItem = function(parentE) {
 			"text" : "Click to confirm delete"
 		}).appendTo(divDelContainer);
 	}
+	*/
 };
 
 WelcomeView.prototype.closeDiv=closeView;
