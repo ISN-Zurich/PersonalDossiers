@@ -20,6 +20,8 @@ function ShareButtonView(controller){
 		//Prepping the FB link
 		selfURL = self.getPublicLink();
 		var dossierId = bookmarkModel.dossierId;
+		var parsedData = JSON.parse(dossierId);
+		dossierId = (parsedData.id);
 		var shared_url_fb = encodeURIComponent(selfURL.replace("lab.isn.ethz.ch/","lab.isn.ethz.ch/share.php"));
 		
 		var shared_description=encodeURIComponent(bookmarkModel.getDossierDescription());
