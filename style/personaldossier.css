@@ -579,6 +579,15 @@ body.embedBadge {
     border:0px solid red;
 }
 
+#bannerImageEditOverlay {
+    position:absolute;
+    width:470px;
+    height:176px;
+    z-index:5;
+    opacity:0.5;
+    background:#333 url(../images/click-to-edit.png) top left no-repeat scroll;
+}
+
 #header_container {
     border:1px solid green;
 }

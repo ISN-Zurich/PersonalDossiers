@@ -190,6 +190,7 @@ DossierBannerView.prototype.activateBannerEditMode = function() {
 
         $("#editDossier").addClass('hide');
         $("#lock-editDossier").removeClass('hide');
+        $("#bannerImageEditOverlay").removeClass('hide');
     }
 };
 
@@ -204,6 +205,7 @@ DossierBannerView.prototype.deactivateBannerEditMode = function() {
 
         $("#lock-editDossier").addClass('hide');
         $("#editDossier").removeClass('hide');
+        $("#bannerImageEditOverlay").addClass('hide');
         this.editMode = false;
     }
 };
@@ -325,6 +327,11 @@ DossierBannerView.prototype.renderBanner= function(){
         "width"  : "470px",
         "height" : "176px",
         "src"    : bookmarkModel.getDossierImageURL()
+    }).appendTo("#header_image");
+
+    var editImg = $( "<div/>", {
+        "id" : "bannerImageEditOverlay",
+        "class" : "hide"
     }).appendTo("#header_image");
 
     var titleContainer=$("<div/>", {
