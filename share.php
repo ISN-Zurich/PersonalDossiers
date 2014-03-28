@@ -1,4 +1,4 @@
-<!--  This page will be shared with social media platforms that don't understand how to render the javascript (facebook for start)-->
+<!--  This page will be shared with social media platforms that don't understand how to render the javascript (facebook for start) -->
 
 <!DOCTYPE html>
 <html lang="en">
