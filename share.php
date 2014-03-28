@@ -60,7 +60,7 @@
 
     </head>
     <?php 
-        echo "<body onload=load('http://lab.isn.ethz.ch'".$_SERVER['REQUEST_URI'].")>";
+        echo "<body onload=share('http://lab.isn.ethz.ch".$_SERVER['REQUEST_URI']."')>";
     ?>
         
         <div class="pd_embed pd_details">
@@ -80,7 +80,6 @@
                 <div id="contentArea" class="pd_overflow">
                     <?php
                         // code to display the following: Title, image, description here
-
                         //setting baseURL and query
                         $qry_str = $_SERVER['REQUEST_URI']; 
                         $baseURL = "http://lab.isn.ethz.ch/service/dossier.php/";
