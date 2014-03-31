@@ -47,7 +47,7 @@ function bookmarkView( controller ) {
             } else {
 
                 //we are not in the icon... redirect to the dossier view!
-                top.location.href = "index.html?id=" + dossierID ;
+                top.location.href = "http://lab.isn.ethz.ch/index.html?id=" + dossierID ;
             }
         }
     });
