@@ -26,21 +26,29 @@ function bookmarkView( controller ) {
             var dossierID = targetID.substring(4);
             ISNLogger.log( "dossier ID is " + dossierID );
 
-            //disable the element from being clickable while we wait for a result
+            //check the class of our clicked element, if it's not the icon we want to redirect to the dossier
+            //if it's the bookmark icon we want to continue and add the bookmark to the appropriate dossier
+            if ( targetID.substring(0,4) === 'icon' ) {
 
+                //disable the element from being clickable while we wait for a result
+                //done in the model!? what was I thinking?
+                //refactor it into here at some point!
 
-            //check whether the item already exists in the dossier
-            if ( self.libBookmarkModel.hasItem( dossierID ) ) {
+                //check whether the item already exists in the dossier
+                if ( self.libBookmarkModel.hasItem( dossierID ) ) {
 
-                //exists, call to remove the item from a dossier
-                self.libBookmarkModel.removeItem( dossierID );
+                    //exists, call to remove the item from a dossier
+                    self.libBookmarkModel.removeItem( dossierID );
+                } else {
+
+                    //does not exist, call to add item to a dossier
+                    self.libBookmarkModel.addItem( dossierID );
+                }
             } else {
 
-                //does not exist, call to add item to a dossier
-                self.libBookmarkModel.addItem( dossierID );
+                //we are not in the icon... redirect to the dossier view!
+                top.location.href = "index.html?id=" + dossierID ;
             }
-            //re-enable clickable is set within updatebookmarkeditems function
-            // self.update();
         }
     });
 }
@@ -116,7 +124,7 @@ bookmarkView.prototype.renderDossier = function(){
             'class': 'pd_dossiertext',
             'text': self.controller.models.dossierList.getDossierTitle()
         } ).appendTo(div2);
-        
+
         $("<span/>", {
             "id" : "icon" + dossierID,
             "class" : libraryBookmarkModel.hasItem( dossierID ) ? "st_editDosser pd_bookmark_icon_exist iconMoon" : "st_editDosser pd_bookmark_icon iconMoon",
