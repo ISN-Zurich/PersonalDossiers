@@ -113,6 +113,18 @@ BookmarkController.prototype.notifyNewHeight = function( height ) {
     };
 
     var id, mdata = JSON.stringify( data );
+
+    //try, catch won't work in this case as multiple tabs / windows may have other domains
+    //which will respond to the posted message, so let's strip the domain from the referrer
+
+    //instantiate an anchor DOM object with the document referrer as it's href which allows us to do funky JS 'parsing'
+    var temp_docRefObject = $('<a>', { href:document.referrer } )[0];
+
+    //domain now stored in 'temp_docRefObject.hostname'
+    //attempt to post our message to the host
+    window.parent.postMessage( mdata , temp_docRefObject.hostname );
+
+    /*
     if ( this.targetHostId >= 0 ) {
 
         window.parent.postMessage( mdata , this.allowedHosts[this.targetHostId] );
@@ -135,6 +147,7 @@ BookmarkController.prototype.notifyNewHeight = function( height ) {
             }
         }
     }
+    */
 };
 
 
