@@ -13,9 +13,7 @@ function GalleryView(controller){
     self.tagID = "imagegallery";
     
     self.controller=controller;
-    $(document).bind("dataSuccessfullySent", function(){
-	window.location.href="index.html";
-    });
+    
     $(document).bind("click", imageSelectHandler);
     $(document).bind("GalleryImagesReady", imageMoreImages);
     this.open();

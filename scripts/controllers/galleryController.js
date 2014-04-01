@@ -39,7 +39,7 @@ function GalleryController() {
     var self = this;
     $(document).bind('dataSuccessfullySent', function() {
         ISNLogger.log("we are done. forward to the user back to the dossier details. new href: " + self.baseURL + 'index.html?id=' + self.dossierid);
-//        window.location.href = self.baseURL() + 'index.html?id=' + self.dossierid;
+        window.location.href = self.baseURL + 'index.html?id=' + self.dossierid;
     });
 }
 
