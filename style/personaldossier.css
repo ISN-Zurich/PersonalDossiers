@@ -873,3 +873,8 @@ body.embedBadge {
 .userRoleUnSelected {
     color:#4C5160;
 }
+
+#labAnnounce {
+    text-align: center;
+    padding:10px;
+}
