@@ -1,42 +1,46 @@
 /**
- * This controller is responsible for the indx.html
- * (dossier banner view and dossier content view)
- *
- * @returns
+ * GalleryController Class
+ * 
+ * The gallery controller is responsible for the UI on the gallery.html.
  */
 
 /*jslint vars: true, sloppy: true */
 
 function GalleryController() {
-    var self = this;
     this.initServiceHost();
-
+    this.findDossierId();
+    
     ISNLogger.log('Gallery Controller starts');
-//    document.domain = 'ethz.ch';
 
-    self.initOAuth();
+    this.initOAuth();
 
-    if (self.oauth) {
-    //initialization of models
-    self.models = {};
-
-    //self.models.authentication = new AuthenticationModel(this);
-    self.models.user = new UserModel(self);
-
-    self.models.dossierList = new DossierListModel(self);
-    self.models.bookmark = new BookmarkModel(self);
-
-    ISNLogger.log("model is initialized");
-
-    ISNLogger.log("loaded from model is "+self.models.bookmark.loaded);
-    self.views = {};
-
-        self.initImageHandler();
+    if (this.oauth) {
+        
+        this.models = {};
+        this.views = {};
+        
+        //initialization of models
+        
+        //self.models.authentication = new AuthenticationModel(this);
+        this.models.user        = new UserModel(this);
+        this.models.dossierList = new DossierListModel(this);
+        this.models.bookmark    = new BookmarkModel(this);
+        this.models.gallery     = new GalleryModel(this);
+            
+        // initialize the views
+        this.views.gallery      = new GalleryView(this);
+        // this.initImageHandler();
     }
     else {
-        // user is not logged in go to user.html
+        // user is not logged in => go to user.html
         window.location.href = 'user.html';
     }
+
+    var self = this;
+    $(document).bind('dataSuccessfullySent', function() {
+        ISNLogger.log("we are done. forward to the user back to the dossier details. new href: " + self.baseURL + 'index.html?id=' + self.dossierid);
+        window.location.href = self.baseURL + 'index.html?id=' + self.dossierid;
+    });
 }
 
 GalleryController.prototype.initOAuth = function() {
@@ -50,46 +54,55 @@ GalleryController.prototype.initOAuth = function() {
 };
 
 GalleryController.prototype.initServiceHost = pdInitServiceHost;
-GalleryController.prototype.getServiceHost = pdGetServiceHost;
+GalleryController.prototype.getServiceHost  = pdGetServiceHost;
 GalleryController.prototype.isAuthenticated = pdIsAuthenticated;
 
-GalleryController.prototype.updateUserData = function() {
-    if ( this.oauth ) {
-        this.models.dossierList.getUserDossiers();
+/**
+ * @method findDossierId()
+ * 
+ * finds the active dossier from the querystring
+ */
+GalleryController.prototype.findDossierId = function() {
+    var url_ref = window.location.search;
+    if (url_ref && url_ref.length) {
+        var param = url_ref.slice(1).split('&');
+        ISNLogger.log("show splitted url array is " + param);
+        if (param && param.length > 0) {
+            var i;
+            for (i=0; i < param.length; i++) {
+                ISNLogger.log("tools is " + param[i]);
+                var split2 = param[i].split("=");
+                // only the id parameter is accepted!
+                if ( split2[0] && split2[0].length && split2[0] === 'id' ) {
+                    var d_id = split2[1];
+                    if (d_id && d_id.length > 0) {
+                        
+                        this.dossierid = d_id;
+                        break; // stop right here ignore and all other ids
+                    }
+                }
+            }
+        }
     }
 };
 
-GalleryController.prototype.initImageHandler=function(){
-    var self=this;
-    ISNLogger.log("runs in controller image handler");
-    self.imageHandler= new ImageHandler(this);
-
+/**
+ * @mehod storeDossierImage(imageurl)
+ */
+GalleryController.prototype.storeDossierImage = function(url) {
+    this.models.bookmark.setDossierImageURL(url);
+    //send to the server the new image url and update the database
+    this.models.bookmark.sendDataToServer();
 };
 
-// ************************* Old function ********************
-//GalleryController.prototype.getActiveDossier = function() {
-//	//return 1;
-//	return this.models.dossierList.getActiveDossier();
-//};
-
-GalleryController.prototype.getActiveDossier = function(){
-    var activedossierId =  this.models.user.getActiveDossier();
-    if (activedossierId){
-    return activedossierId;
-    }else{
-    var dossierId = this.models.dossierList.getDefaultDossierId();
-    return dossierId;
-    }
-    return undefined;
+/**
+ * @method int getActiveDossier()
+ * 
+ * returns the id that has been identified from the querysting
+ */
+GalleryController.prototype.getActiveDossier = function() {
+    return this.dossierid;
 };
-
-GalleryController.prototype.transition = function(){
-
-}
-
-GalleryController.prototype.logout = function() {
-    this.models.user.logout();
-}
 
 var controllerObject = GalleryController;
 //

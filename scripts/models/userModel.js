@@ -236,10 +236,13 @@ UserModel.prototype.getUserProfile = function(){
                 self.controller.initOAuth();
                 self.controller.models.authentication.getRequestToken();
             } else {
-
                 // forward to a page that has the authentication
                 ISNLogger.log( 'userModel: forward to user.html' );
-                window.location.href = '/tools/user.html';
+                
+                // FIXME: only forward to user.html if we are stand alone. 
+                // AKA not part of an embed or bookmark page)
+                
+                window.location.href = '/user.html';
             }
         },
         beforeSend : setHeader

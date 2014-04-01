@@ -713,6 +713,7 @@ body.embedBadge {
     height: 120px;
     background: #4c5160;
     border:0px solid black;
+
 }
 
 .currentSortedItem {
@@ -720,6 +721,9 @@ body.embedBadge {
     top: 0px;
     border: 0px solid red;
     background:#ebedee;
+    transform:rotate(10deg);
+	-ms-transform:rotate(10deg); /* IE 9 */
+	-webkit-transform:rotate(10deg); /* Opera, Chrome, and Safari */
 }
 
 .dragIcon , .deleteButton {

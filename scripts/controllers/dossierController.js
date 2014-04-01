@@ -1,9 +1,7 @@
 /**
- * This controller is responsible for the indx.html
-
+ * This controller is responsible for the managing the 
+ * dossier details view 
  * (dossier banner view and dossier content view)
- *
- * @returns
  */
 
 /*jslint vars: true, sloppy: true */
@@ -46,12 +44,12 @@ function dossierController() {
 		self.views = {};
 
 		//initialization of views
-		self.views.dossierBanner = new DossierBannerView(self);
-		self.views.dossierContent= new DossierContentView(self);
-		self.views.userlist = new DossierUsersView(self);
-		self.views.embed = new AddEmbedButton(self);
-		self.views.invitation = new InvitationView(self);
-		self.views.share = new ShareButtonView(self);
+		self.views.dossierBanner  = new DossierBannerView(self);
+		self.views.dossierContent = new DossierContentView(self);
+		self.views.userlist       = new DossierUsersView(self);
+		self.views.embed          = new AddEmbedButton(self);
+		self.views.invitation     = new InvitationView(self);
+		self.views.share          = new ShareButtonView(self);
 
 
 		//the following views run only when we are authenticated
@@ -123,9 +121,9 @@ dossierController.prototype.hashedUrl = function() {
 };
 
 dossierController.prototype.getHashedURLId = function(){
-	var dossierId=this.pubid;
-	ISNLogger.log("dossier id after hash is "+dossierId);
-	return dossierId;
+	//var dossierId=this.pubid;
+	ISNLogger.log("dossier id after hash is " + this.pubid);
+	return this.pubid;
 };
 
 dossierController.prototype.initOAuth = function() {
