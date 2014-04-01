@@ -713,6 +713,9 @@ body.embedBadge {
     height: 120px;
     background: #4c5160;
     border:0px solid black;
+    transform:rotate(10deg);
+-ms-transform:rotate(10deg); /* IE 9 */
+-webkit-transform:rotate(10deg); /* Opera, Chrome, and Safari */
 }
 
 .currentSortedItem {
