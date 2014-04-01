@@ -447,12 +447,13 @@ ul#sortable li{
     float: left;
     width: 184px;
     height: 18px;
-    padding: 0px;
     margin: 5px 17px 5px 15px;
-    line-height: 16px;
-    border: none;
+    padding: 0px;
     background: #fff;
     color: #4C5160;
+    border: none;
+    font-size: 12px;
+    line-height: 16px;
     text-align: left;
 }
 
