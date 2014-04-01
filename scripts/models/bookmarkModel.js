@@ -89,8 +89,8 @@ BookmarkModel.prototype.addItem=function(id){
     }
 
     function success(){
-	// great! well done!
-	ISNLogger.log("great the insertion of the bookmark was succesfull");
+        // great! well done!
+        ISNLogger.log("great the insertion of the bookmark was succesfull");
         $(document).trigger('BOOKMARKSTORED');
     }
 
@@ -206,14 +206,12 @@ BookmarkModel.prototype.setOrder=function(array_order){
 	ISNLogger.log("stored order is "+this.storedPosition);
 };
 
-
 BookmarkModel.prototype.getOrder=function(){
 	return this.storedPosition;
 };
 
-/*
+/**
  * Load the list of dossier items for the active dossier
- *
  */
 BookmarkModel.prototype.loadDossierList=function(){
     ISNLogger.log("enter loadDossier list");
@@ -267,7 +265,7 @@ BookmarkModel.prototype.loadDossierList=function(){
     	//self.dossierList=JSON.stringify(self.dossierData['dossier_items']);
 
     	self.dossierMetadata=self.dossierData.dossier_metadata;
-    	ISNLogger.log("dossier metadata is "+JSON.stringify(self.dossierMetadata));
+    	ISNLogger.log("dossier metadata is " + JSON.stringify(self.dossierMetadata));
 
     	self.dossierList=self.dossierData.dossier_items;
     	ISNLogger.log("dossier items are"+JSON.stringify(self.dossierList));
