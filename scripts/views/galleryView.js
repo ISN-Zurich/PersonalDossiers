@@ -22,26 +22,34 @@ function GalleryView(controller){
         ISNLogger.log("run into final image select handler");
         var targetE = e.target;
         var targetID = targetE.id;
-        ISNLogger.log("targetID is "+targetID);
-        ISNLogger.log("clicked on image");
-        var myID=targetID.substring(4);
-        if (myID > 0 && self.controller.models.gallery.findImageId(myID)) {
-            var oldId = self.controller.models.gallery.id;
-            
-            self.controller.models.gallery.setImageId(myID);
-            var src = self.controller.models.gallery.getImageSrc();
-            if (src.length){
-                
-                self.controller.storeDossierImage(src);
+        
+        if ( targetID === 'loadmoreimages') {
+            self.controller.models.gallery.more();
+        }
+        else {
+            ISNLogger.log("targetID is "+targetID);
+            ISNLogger.log("clicked on image");
+            var myID=targetID.substring(4);
+            if (myID > 0 && self.controller.models.gallery.findImageId(myID)) {
+                var oldId = self.controller.models.gallery.id;
+
+                self.controller.models.gallery.setImageId(myID);
+                var src = self.controller.models.gallery.getImageSrc();
+                if (src.length){
+
+                    self.controller.storeDossierImage(src);
+                }
+                else {
+
+                    self.controller.models.gallery.setId(oldId);
+                }
             }
-            else {
-                
-                self.controller.models.gallery.setId(oldId);
-            }
-        }    
+        }
     }
     
     function imageMoreImages () {
+        // skip the last item of the previous batch.
+        self.controller.models.gallery.next();
         self.renderMore();
     }
     
@@ -70,6 +78,12 @@ GalleryView.prototype.renderMore = function() {
     do {
         this.renderImage();
     } while (this.controller.models.gallery.next());
+    if (this.controller.models.gallery.lastPage) {
+        $("#gallerynavigation").show();
+    }
+    else {
+        $("#gallerynavigation").hide();
+    }
 };
 
 GalleryView.prototype.renderImage = function() {
@@ -80,7 +94,9 @@ GalleryView.prototype.renderImage = function() {
      $('<h3/>', {'text': ttl, 
                   'id': 'head' + id}).appendTo(divCont);
     $('<img/>', {'src': src, 
-                 'id':  'imgx' + id}).appendTo(divCont);   
+                 'id':  'imgx' + id,
+                 'class': 'galleryimage'
+                }).appendTo(divCont);   
 };
 
 /**

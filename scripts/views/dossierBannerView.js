@@ -260,7 +260,7 @@ DossierBannerView.prototype.changeImage = function(){
 DossierBannerView.prototype.transitionToGallery = function() {
     if ( this.waitForUpload === 0 && this.goToGallery === true ) {
         ISNLogger.log('upload done');
-       window.location.href = "gallery.php";
+       window.location.href = "gallery.html?id="+ this.controller.getActiveDossier();
     }
 };
 

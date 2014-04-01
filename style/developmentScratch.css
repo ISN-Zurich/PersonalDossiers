@@ -321,3 +321,22 @@ div.overviewcontent {
 .embediFrameBig {
     width: 100%;
 }
+
+.gallerynavigation {
+    margin-top: 25px;
+    width: 470px;
+    clear: both;
+}
+#loadmoreimages {
+    cursor: pointer;
+    
+    font-size: 20px;
+    text-align: center;
+    padding: 10px;
+    background-color: #ebedee;
+}
+
+.galleryimage {
+    width: 470px;
+    height: 176px;
+}
