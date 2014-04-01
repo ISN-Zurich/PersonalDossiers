@@ -112,42 +112,23 @@ BookmarkController.prototype.notifyNewHeight = function( height ) {
         }
     };
 
-    var id, mdata = JSON.stringify( data );
+    var mdata = JSON.stringify( data );
 
     //try, catch won't work in this case as multiple tabs / windows may have other domains
     //which will respond to the posted message, so let's strip the domain from the referrer
 
     //instantiate an anchor DOM object with the document referrer as it's href which allows us to do funky JS 'parsing'
-    var temp_docRefObject = $('<a>', { href:document.referrer } )[0];
+    //use [0] to access the DOM of the jQuery object!
+    var temp_parser = $('<a>', { href:document.referrer } )[0];
+    ISNLogger.log( 'document.referrer : ' + document.referrer );
 
-    //domain now stored in 'temp_docRefObject.hostname'
+    //store our protocol://hostname in a temporary variable
+    var message_target = temp_parser.protocol + '//' + temp_parser.hostname ;
+    ISNLogger.log( 'temp_parser target : ' + message_target );
+
+    //cross origin message target now stored in 'message_target'
     //attempt to post our message to the host
-    window.parent.postMessage( mdata , temp_docRefObject.hostname );
-
-    /*
-    if ( this.targetHostId >= 0 ) {
-
-        window.parent.postMessage( mdata , this.allowedHosts[this.targetHostId] );
-    } else {
-
-        for ( id = 0; id < this.allowedHosts.length; id++ ) {
-
-            var isok = true;
-            try {
-
-                window.parent.postMessage( mdata, this.allowedHosts[id] );
-            } catch( e ) {
-
-                isok = false;
-            }
-            if ( isok ) {
-
-                this.targetHostId = id;
-                break;
-            }
-        }
-    }
-    */
+    window.parent.postMessage( mdata , message_target );
 };
 
 
