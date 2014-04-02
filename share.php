@@ -1,3 +1,22 @@
+<?php
+    // code to display the following: Title, image, description here
+
+    //setting baseURL and query
+    $qry_str = substr($qury,$pos);
+    $baseURL = "http://lab.isn.ethz.ch/service/dossier.php/";
+    $getDossier = curl_init();
+
+    // Set CURL loose
+    curl_setopt($getDossier, CURLOPT_URL, $baseURL . $qry_str); 
+    curl_setopt($getDossier, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($getDossier, CURLOPT_TIMEOUT, '3');
+    $dossierContent = trim(curl_exec($getDossier));
+    curl_close($getDossier);
+
+    // handle content, spit it out
+    $dossierContent_json =json_decode($dossierContent,true);
+    $dossierPicture =  $dossierContent_json['dossier_metadata'][image];
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -33,7 +52,7 @@
         <script type="text/javascript" src="scripts/controllers/embedController.js"></script>
         <script type="text/javascript" src="scripts/main.js"></script>
 
-        <title>ISN Personal Dossiers</title>
+        <title><?php echo  $dossierContent_json['dossier_metadata'][title]; ?></title>
 
         <meta http-equiv="X-UA-Compatible" content="IE=edge" >
         <meta http-equiv="Pragma" content="no-cache" />
@@ -82,23 +101,7 @@
                 </div>
                 <div id="contentArea" class="pd_overflow">
                     <?php
-                        // code to display the following: Title, image, description here
 
-                        //setting baseURL and query
-                        $qry_str = substr($qury,$pos);
-                        $baseURL = "http://lab.isn.ethz.ch/service/dossier.php/";
-                        $getDossier = curl_init();
-
-                        // Set CURL loose
-                        curl_setopt($getDossier, CURLOPT_URL, $baseURL . $qry_str); 
-                        curl_setopt($getDossier, CURLOPT_RETURNTRANSFER, 1);
-                        curl_setopt($getDossier, CURLOPT_TIMEOUT, '3');
-                        $dossierContent = trim(curl_exec($getDossier));
-                        curl_close($getDossier);
-
-                        // handle content, spit it out
-                        $dossierContent_json =json_decode($dossierContent,true);
-                        $dossierPicture =  $dossierContent_json['dossier_metadata'][image];
                         echo "<img src=http://lab.isn.ethz.ch/".$dossierPicture." />";
                         echo  "<h1>".$dossierContent_json['dossier_metadata'][title]."</h1>";
                         echo  "<p>".$dossierContent_json['dossier_metadata'][description]."</p>";                      
