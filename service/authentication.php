@@ -243,6 +243,7 @@ class AuthenticationService extends OAUTHRESTService {
                 $this->bad_request();
                 return;
             }
+            
             $this->log('data so far in user profile'.json_encode($this->data));
             $this->data['user_id'] = $this->session->getUserID();
         } else {
@@ -250,7 +251,7 @@ class AuthenticationService extends OAUTHRESTService {
             $this->log('init the user profile');
             $this->data = array('user_id'=> $this->session->getUserID());
         }
-
+        
         $sth = $this->dbh->prepare("SELECT title, name, password, email FROM users WHERE id = ?");
         $res = $sth->execute($this->data['user_id']);
         if (PEAR::isError($res)) {
@@ -268,8 +269,17 @@ class AuthenticationService extends OAUTHRESTService {
             $this->data['name']  = $row[1];
             $this->data['password']  = $row[2];
             $this->data['email'] = $row[3];
+            $sth->free();
+    
+            /** 
+             * inform the UI that the user has special roles.
+             */
+            if ( $this->isAdmin($this->['user_id'])) {
+                $this->data['admin'] = 1;
+            }
         } else {
-
+            $sth->free();
+            
             $this->log("lost the user's account information");
             // gone is probably the best thing to report
             // maybe 404 not found, but this feels inappropriate on this URL.
@@ -277,7 +287,6 @@ class AuthenticationService extends OAUTHRESTService {
             return;
         }
 
-        $sth->free();
         $this->log('user profile is: '. json_encode($this->data));
 
         $this->respond_json_data();
@@ -559,6 +568,31 @@ class AuthenticationService extends OAUTHRESTService {
                 $sqlstring = "INSERT INTO userprofile (profile_data, user_id) VALUES (?,?)";
             }
         }
+    }
+    
+    /**
+     * @method boolean isAdmin(userid)
+     * 
+     * This function checks for the admin privileges of the active user
+     */
+    public function isAdmin($userId) {
+        $this->dbh->setFetchMode(MDB2_FETCHMODE_ASSOC);
+        $mdb2 = $this->dbh;
+        $sth = $mdb2->prepare('SELECT DISTINCT * FROM admin_users WHERE user_id=? AND role=?');
+        $res = $sth->execute(array($userId,'admin'));
+
+        $retval = false;
+        if (PEAR::isError($res)) {
+            $this->log("pear error " . $res->getMessage());
+        }
+        else {
+            if ($res->numRows() == 1) {
+                $retval = true;
+            }
+        }
+        $sth->free();
+        
+        return $retval;
     }
 
     /**
