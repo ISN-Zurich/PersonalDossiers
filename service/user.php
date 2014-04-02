@@ -94,17 +94,6 @@ public function getDossierType($userId) {
 
 }
 
-
-
-public function getUsername(){
-
-
-//return user_name;
-}
-
-
-
-
 public function getUserRole($userId, $dossierId) {
 	
 	$this->log("enter hasViewing Priviledges");
