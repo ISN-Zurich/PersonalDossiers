@@ -42,8 +42,8 @@ function DossierBannerView(myController){
             ISNLogger.log("user type in dossier banner view is "+userType);
             if (userType!== "user"){
                 ISNLogger.log("will activate banner edit mode, we are not users");
-               self.activateBannerEditMode();
-               e.stopPropagation();
+                self.activateBannerEditMode();
+                e.stopPropagation();
             }
         }
     });
