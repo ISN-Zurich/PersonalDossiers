@@ -25,13 +25,19 @@ curl_close( $getDossier ) ;
 // parse content
 $dossierContent_json = json_decode( $dossierContent , true ) ;
 
+$imageURL = $dossierContent_json['dossier_metadata']['image'] ;
+if ( substr( $dossierContent_json['dossier_metadata']['image'] , 0 , 4 ) != 'http' ) {
+
+	$imageURL = 'http://lab.isn.ethz.ch/' . $dossierContent_json['dossier_metadata']['image'] ;
+}
+
 ?><!DOCTYPE html>
 <html prefix="og: http://ogp.me/ns#" lang="en">
 <head>
-<title><? echo $dossierContent_json['dossier_metadata']['title'] ;?></title>
-<meta property="og:title" content="<? echo htmlentities( $dossierContent_json['dossier_metadata']['title'] ) ;?>"/>
-<meta property="og:url" content="http://lab.isn.ethz.ch/index.html?id=<?php echo $dossier_id ;?>" />
-<meta property="og:image" content="http://pictures.isn.ethz.ch/cache/<?php echo $dossierContent_json['dossier_metadata']['id'] . '.' . $dossierContent_json['dossier_metadata']['fileExtension'] ;?>" />
+<title><?php echo $dossierContent_json['dossier_metadata']['title'] ;?></title>
+<meta property="og:title" content="<?php echo htmlentities( $dossierContent_json['dossier_metadata']['title'] ) ;?>"/>
+<meta property="og:url" content="<?php echo $_SERVER['REQUEST_URI'] ;?>" />
+<meta property="og:image" content="<?php echo $imageURL ;?>" />
 <meta property="og:description" content="<?php echo htmlentities( $dossierContent_json['dossier_metadata']['description'] ) ;?>" />
 <meta http-equiv="Pragma" content="no-cache" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -45,9 +51,9 @@ $dossierContent_json = json_decode( $dossierContent , true ) ;
 
 --></script>
 </head>
-<body onload="<? echo $body_load_attr ?>">
+<body onload="<?php echo $body_load_attr ?>">
     <div id="contentArea">
-    <img src="http://pictures.isn.ethz.ch/cache/<?php echo $dossierContent_json['dossier_metadata']['id'] . '.' . $dossierContent_json['dossier_metadata']['fileExtension'] ;?>" />
+    <img src="<?php echo $imageURL ;?>" />
     <h1><?php echo $dossierContent_json['dossier_metadata']['title'] ;?></h1>
     <p><?php echo $dossierContent_json['dossier_metadata']['description'] ;?></p>
     </div>
