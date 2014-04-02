@@ -71,7 +71,6 @@ class DossierService extends OAUTHRESTService {
     public function __construct() {
         parent::__construct();
 
-
         $this->mark();
 
         if ( !empty($this->path_info) ) {
