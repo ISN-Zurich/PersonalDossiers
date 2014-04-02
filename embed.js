@@ -9,7 +9,6 @@ if (typeof ISNResizer === "undefined") {
             d = {}; 
         } 
         if ( d.isnpdid && d.height >= 0 ) { 
-            console.log('ISN RESIZER start');
             var k,ae = document.getElementsByTagName('iframe'); 
             for (k=0; k < ae.length; k++) { 
                 el = ae[k]; 

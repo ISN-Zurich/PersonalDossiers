@@ -561,7 +561,7 @@ BookmarkModel.prototype.getEmbedURL = function() {
     if ( itemType !== 'Audio') {
         itemType = itemType + 's';
     }
-    return 'http:\/\/www.isn.ethz.ch\/layout\/set\/pdembed\/Digital-Library\/'+ itemType +'\/Detail\/?lng=en\u0026id='+this.getItemId();
+    return 'http:\/\/www.isn.ethz.ch\/layout\/set\/pdembed\/Digital-Library\/'+ itemType +'\/Detail\/?lng=en&id='+this.getItemId();
 };
 
 BookmarkModel.prototype.getUsername = function() {
