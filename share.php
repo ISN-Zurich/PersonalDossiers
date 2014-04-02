@@ -36,7 +36,6 @@ if ( substr( $dossierContent_json['dossier_metadata']['image'] , 0 , 4 ) != 'htt
 <head>
 <title><?php echo $dossierContent_json['dossier_metadata']['title'] ;?></title>
 <meta property="og:title" content="<?php echo htmlentities( $dossierContent_json['dossier_metadata']['title'] ) ;?>"/>
-<meta property="og:url" content="<?php echo $_SERVER['REQUEST_URI'] ;?>" />
 <meta property="og:image" content="<?php echo $imageURL ;?>" />
 <meta property="og:description" content="<?php echo htmlentities( $dossierContent_json['dossier_metadata']['description'] ) ;?>" />
 <meta http-equiv="Pragma" content="no-cache" />
