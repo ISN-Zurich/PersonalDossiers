@@ -204,14 +204,18 @@ DossierContentView.prototype.renderList = function(){
 
         //if the specific dossier has no dossier items
         ISNLogger.log( 'the dossier has no dossier items' );
-        var div = $("<div/>", {
-            "id" : "noContent"
-        }).appendTo("#contentArea");
+        $('#contentArea').addClass('hide');
+        
+//        var div = $("<div/>", {
+//            "id" : "noContent"
+//        }).appendTo("#contentArea");
 
         // FIXME: language code should not be hardcoded.
-        var p = $("<p/>", {
-            "text" : "Your Dossier has no items. You can add items  to the personal dossier if you go to http://isn.ethz.ch/. In there, under both the dossiers and the digital library menus there are various content items. If you enter in the ones you are interested in you will see an addBookmark button on the right side. By clicking on it, this item will be added to your active dossier"
-        }).appendTo(div);
+        $('#noContent').removeClass('hide').addClass('span-12');
+        
+//        var p = $("<p/>", {
+//            "text" : "Your Dossier has no items. You can add items  to the personal dossier if you go to http://isn.ethz.ch/. In there, under both the dossiers and the digital library menus there are various content items. If you enter in the ones you are interested in you will see an addBookmark button on the right side. By clicking on it, this item will be added to your active dossier"
+//        }).appendTo(div);
     }
 
     if ( this.embed ) {
