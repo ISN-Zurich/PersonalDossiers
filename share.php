@@ -31,7 +31,7 @@ $dossierContent_json = json_decode( $dossierContent , true ) ;
 <title><? echo $dossierContent_json['dossier_metadata']['title'] ;?></title>
 <meta property="og:title" content="<? echo htmlentities( $dossierContent_json['dossier_metadata']['title'] ) ;?>"/>
 <meta property="og:url" content="http://lab.isn.ethz.ch/index.html?id=<?php echo $dossier_id ;?>" />
-<meta property="og:image" content="http://pictures.isn.ethz.ch/cache/<?php echo $dossierContent_json['dossier_metadata']['id'] . $dossierContent_json['dossier_metadata']['fileExtension'] ;?>" />
+<meta property="og:image" content="http://pictures.isn.ethz.ch/cache/<?php echo $dossierContent_json['dossier_metadata']['id'] . '.' . $dossierContent_json['dossier_metadata']['fileExtension'] ;?>" />
 <meta property="og:description" content="<?php echo htmlentities( $dossierContent_json['dossier_metadata']['description'] ) ;?>" />
 <meta http-equiv="Pragma" content="no-cache" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -47,7 +47,7 @@ $dossierContent_json = json_decode( $dossierContent , true ) ;
 </head>
 <body onload="<? echo $body_load_attr ?>">
     <div id="contentArea">
-    <img src="http://pictures.isn.ethz.ch/cache/<?php echo $dossierContent_json['dossier_metadata']['id'] . $dossierContent_json['dossier_metadata']['fileExtension'] ;?>" />
+    <img src="http://pictures.isn.ethz.ch/cache/<?php echo $dossierContent_json['dossier_metadata']['id'] . '.' . $dossierContent_json['dossier_metadata']['fileExtension'] ;?>" />
     <h1><?php echo $dossierContent_json['dossier_metadata']['title'] ;?></h1>
     <p><?php echo $dossierContent_json['dossier_metadata']['description'] ;?></p>
     </div>
