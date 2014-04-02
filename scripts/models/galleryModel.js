@@ -28,7 +28,7 @@ GalleryModel.prototype.getImageId = function () {
  */
 GalleryModel.prototype.getImageSrc = function () {
     if (this.images.length && this.id < this.images.length) {
-        return this.images[this.id].objectdata.file;
+        return 'http://pictures.isn.ethz.ch/cache/' +  this.images[this.id].imageid + '.' + this.images[this.id].objectdata.fileExtension;
     }
     return "";
 };
