@@ -142,7 +142,7 @@ WelcomeView.prototype.renderDossierItem = function(parentE) {
 	}).appendTo(div3);
 
 	p =$("<p/>", {
-		"class":"small clickable",
+		"class":"clickable",
 		"id":"dossier"+self.controller.models.dossierList.getDossierId(),
 		"text":self.controller.models.dossierList.getDossierDescription()
 	}).appendTo(div3);
