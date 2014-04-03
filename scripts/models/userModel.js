@@ -314,7 +314,7 @@ UserModel.prototype.checkActiveUser = function(){
     } else {
 
         // send the user to the login page
-        window.location.href = '/tools/user.html';
+        window.location.href = ISNLogger.choose('user.html', '/tools/user.html');
     }
 };
 
