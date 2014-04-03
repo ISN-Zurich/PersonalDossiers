@@ -64,7 +64,7 @@ class UserManagement extends PDCommonClass {
 		$dossierId = $this->dossier_id;
 
 		$sth = $dbh->prepare("SELECT u.name, du.user_type, du.user_id FROM users u, dossier_users du WHERE u.user_id = du.user_id AND du.dossier_id = ?");
-		$res = $sth->execute($dossierId);
+		$res = $sth->execute(array($dossierId));
 		if ($res->numRows() === 0) {
 			if (PEAR::isError($res)) {
 				$this->log("pear error " . $res->getMessage());
@@ -72,11 +72,12 @@ class UserManagement extends PDCommonClass {
 				$sth->free();
 				return;
 			}
-		} else { //if the query retrieves back results
+		} 
+        else { //if the query retrieves back results
 
 			while ($row = $res->fetchRow() ){
 				$this->log('row: ' . json_encode($row));
-				array_push($retval,array(
+				array_push($retval, array(
 				'user_id'=> $row['user_id'],
 				'username'=> $row['name'],
 				'user_type'=> $row['user_type']));
@@ -112,7 +113,7 @@ class UserManagement extends PDCommonClass {
             $this->dbh->setFetchMode(MDB2_FETCHMODE_ASSOC);
             $mdb2 = $this->dbh;
             $sth = $mdb2->prepare('SELECT user_type FROM dossier_users WHERE user_id=? AND dossier_id=?');
-            $res = $sth->execute(array($userId,$dossierId));
+            $res = $sth->execute(array($userId, $dossierId));
 
             if (PEAR::isError($res)) {
                 $this->log("pear error " . $res->getMessage());

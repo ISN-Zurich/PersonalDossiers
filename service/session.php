@@ -165,7 +165,7 @@ class SessionManagement extends PDCommonClass {
     public function verifyUser($usermail, $credentialhash) {
         $this->mark('>>>>>>> LOGIN');
         $sth= $this->dbh->prepare("select id, password from users where email = ?");
-        $res = $sth->execute($usermail);
+        $res = $sth->execute(array($usermail));
         if (!PEAR::isError($res)) {
             if ($res->numRows()) {
                 $row = $res->fetchRow();
@@ -520,7 +520,7 @@ class SessionManagement extends PDCommonClass {
         $boolValidToken = OAUTH_CONSUMER_KEY_UNKNOWN;
         
         $sth = $this->dbh->prepare("SELECT id, consumerSecret FROM consumers WHERE consumerKey = ?");
-        $res = $sth->execute($token);
+        $res = $sth->execute(array($token));
         
         if( PEAR::isError($res)) {
             $boolValidToken = OAUTH_CONSUMER_KEY_REFUSED;
@@ -671,7 +671,7 @@ class SessionManagement extends PDCommonClass {
     
     protected function clearRequestTokenAndNonces($id) {
         $sth = $this->dbh->prepare("DELETE FROM requesttokens WHERE id = ?");
-        $res = $sth->execute($id);
+        $res = $sth->execute(array($id));
                     
         if (!PEAR::isError($res)) {
             // remove the nonces
