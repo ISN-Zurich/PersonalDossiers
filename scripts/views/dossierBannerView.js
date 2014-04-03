@@ -20,10 +20,10 @@ function DossierBannerView(myController){
     $('#header_image').bind('click', function(e){
         if (!self.embed && 
             self.editMode && 
-            self.controller.checkActiveUserRole('owner') ){
+            self.controller.checkActiveUserRole('owner')) {
             // always check for edits
             self.checkDescriptionEdit();
-            self.checkTitleEdit();  ;
+            self.checkTitleEdit();
             var targetID = e.target.id;
             if ( ( targetID == "bannerImage" ) || ( targetID == "bannerImageEditOverlay" ) ) {
                 self.changeImage();
@@ -41,18 +41,17 @@ function DossierBannerView(myController){
                 self.checkDescriptionEdit();
             }
 
-            ISNLogger.log("user type in dossier banner view is "+userType);
-            if (self.controller.checkActiveUserRole('owner')){
-                ISNLogger.log("will activate banner edit mode, we are not users");
+            if (self.controller.checkActiveUserRole('owner')) {
                 
+                ISNLogger.log("will activate banner edit mode, we are not users");
                 self.activateBannerEditMode();
                 e.stopPropagation();
             }
         }
     });
 
-    $('#lock-editDossier').bind('click', function(e){.
-    
+    $('#lock-editDossier').bind('click', function(e){
+        
         if ( !self.embed ) {
             if (self.editMode && 
                 self.controller.checkActiveUserRole('owner')) {
@@ -69,16 +68,11 @@ function DossierBannerView(myController){
 
     $('#deleteDossier').bind('click', function(e){
 
-        if ( !self.embed ) {
+        if ( !self.embed && self.controller.checkActiveUserRole('owner') ){
 
-            if (self.controller.checkActiveUserRole('owner')) {
-
-                ISNLogger.log("owners can delete the dossier, reveal confirm buttons");
-                self.activateBannerDeleteMode();
-                e.stopPropagation();
-            }
-            //else if editor
-            //delete their relation to the dossier only!
+            ISNLogger.log("owners can delete the dossier, reveal confirm buttons");
+            self.activateBannerDeleteMode();
+            e.stopPropagation();
         }
     });
 
@@ -87,13 +81,10 @@ function DossierBannerView(myController){
 
         if ( !self.embed ) {
 
-            if ( self.deleteMode ) {
+            if ( self.deleteMode && self.controller.checkActiveUserRole('owner')) {
 
-                if (self.controller.checkActiveUserRole('owner')) {
-
-                    ISNLogger.log("delete the dossier");
-                    self.deleteDossier();
-                }
+                ISNLogger.log("delete the dossier");
+                self.deleteDossier();
             }
             e.stopPropagation();
         }
@@ -253,6 +244,13 @@ DossierBannerView.prototype.open = function(){
     ISNLogger.log("open dossier banner view");
     if(!this.controller.models['bookmark'].dossierForbidden) {
         this.renderBanner();
+        if (!(this.controller.checkActiveUserRole('owner') || this.controller.checkActiveUserRole('editor')) ) {
+            $('#editDossier').addClass('hide');
+            $('#deleteDossier').addClass('hide');
+        }
+        else {
+            $('#editDossier').removeClass('hide');
+        }
         this.openDiv();
     }
 };
@@ -260,11 +258,6 @@ DossierBannerView.prototype.open = function(){
 DossierBannerView.prototype.openDiv = openView;
 DossierBannerView.prototype.close   = closeView;
 
-/**
- * @method renderBanner()
- * 
- * FIXME 
- */
 DossierBannerView.prototype.renderBanner= function(){
     var self=this
     //Design the Banner area
