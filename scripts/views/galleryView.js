@@ -15,6 +15,10 @@ function GalleryView(controller){
     self.controller=controller;
     
     $(document).bind("click", imageSelectHandler);
+    $('#search_bar_submit').bind("click", filterGalleryImages);
+    $('#search_bar_text').bind("click", clearDefaultFilter);
+    $('#search_bar_text').bind("blur", resetDefaultFilter);
+    
     $(document).bind("GalleryImagesReady", imageMoreImages);
     this.open();
     
@@ -23,8 +27,11 @@ function GalleryView(controller){
         var targetE = e.target;
         var targetID = targetE.id;
         
-        if ( targetID === 'loadmoreimages') {
+        if (targetID === 'loadmoreimages') {
             self.controller.models.gallery.more();
+        }
+        else if (targetID === 'cancelgallerybutton') {
+            $(document).trigger('dataSuccessfullySent');
         }
         else {
             ISNLogger.log("targetID is "+targetID);
@@ -53,6 +60,26 @@ function GalleryView(controller){
         self.renderMore();
     }
     
+    function filterGalleryImages(e) {
+        self.controller.models.gallery.filter($('#search_bar_text')[0].value);
+        self.clear();
+
+        e.stopPropagation();
+        e.preventDefault();
+    }
+    
+    function clearDefaultFilter() {
+        if ($('#search_bar_text')[0].value === 'Type your search here...' ) {
+            $('#search_bar_text')[0].value = "";
+        }
+    }
+    
+    function resetDefaultFilter() {
+        if ($('#search_bar_text')[0].value.match(/^\s*$/)) {
+            $('#search_bar_text')[0].value = 'Type your search here...';
+        }
+    }
+    
     ISNLogger.log("image handler ready");
 }
 
@@ -77,12 +104,14 @@ GalleryView.prototype.update    = function() {
 GalleryView.prototype.renderMore = function() {
     do {
         this.renderImage();
-    } while (this.controller.models.gallery.next());
+    } 
+    while (this.controller.models.gallery.next());
+    
     if (this.controller.models.gallery.lastPage) {
-        $("#gallerynavigation").show();
+        $("#gallerynavigation").hide();
     }
     else {
-        $("#gallerynavigation").hide();
+        $("#gallerynavigation").show();
     }
 };
 

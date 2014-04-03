@@ -49,7 +49,7 @@ $sqlparam = array($offset, $limit);
 if (!empty($query)) {
     // FIXME: proper index table for keywords
 
-    $sqlquery = 'SELECT DISTINCT i.* FROM image i, image_keyword ik WHERE i.imageID = ik.imageID AND (ik.keyword like ? OR i.objectData LIKE ?) ORDER BY i.modifiedTS LIMIT ?, ?';
+    $sqlquery = 'SELECT DISTINCT i.* FROM image i, image_keyword ik WHERE i.imageID = ik.imageID AND (LOWER(ik.keyword) like LOWER(?) OR LOWER(i.objectData) LIKE LOWER(?)) ORDER BY i.modifiedTS LIMIT ?, ?';
     $lq = '%'.$query.'%';
     $sqlparam = array($lq,$lq,$offset, $limit);
 }
