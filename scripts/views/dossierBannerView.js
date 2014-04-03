@@ -293,19 +293,19 @@ DossierBannerView.prototype.renderBanner= function(){
         text:bookmarkModel.getDossierTitle()
     }).appendTo(titleContainer);
 
-/*
     var descriptionContainer=$("<p/>", {
     "id":"descriptionContainer",
-    }).appendTo("#header_image");
-*/
-    var p = $("<p/>", {
-        "id":"headerDescription",
-        "text": bookmarkModel.getDossierDescription()
+    "class": "marginForEdit"
     }).appendTo("#header_image");
 
-    // hr=$("<hr/>", {
-    //     "class":"overview white"
-    // }).appendTo("#header_image");
+    var p=$("<p/>", {
+        "id":"headerDescription",
+        "text": bookmarkModel.getDossierDescription()
+    }).appendTo(descriptionContainer);
+
+    hr=$("<hr/>", {
+        "class":"overview white"
+    }).appendTo("#header_image");
 
     if (self.controller.oauth && userType !== "user"){
         $("#editDossier").removeClass("hide");
