@@ -18,7 +18,9 @@ function DossierBannerView(myController){
     self.tagID='header_image';
 
     $('#header_image').bind('click', function(e){
-        if ( !self.embed && self.editMode ) {
+        if (!self.embed && 
+            self.editMode && 
+            self.controller.checkActiveUserRole('owner') ){
             // always check for edits
             self.checkDescriptionEdit();
             self.checkTitleEdit();  ;
@@ -32,25 +34,28 @@ function DossierBannerView(myController){
 
     $('#editDossier').bind('click', function(e){
         if ( !self.embed ) {
-            if ( self.editMode ) {
+            if (self.editMode && 
+                self.controller.checkActiveUserRole('owner')) {
                 // always check for edits
                 self.checkTitleEdit();
                 self.checkDescriptionEdit();
             }
 
-            var userType=self.controller.models.dossierList.getUserType();
             ISNLogger.log("user type in dossier banner view is "+userType);
-            if (userType!== "user"){
+            if (self.controller.checkActiveUserRole('owner')){
                 ISNLogger.log("will activate banner edit mode, we are not users");
+                
                 self.activateBannerEditMode();
                 e.stopPropagation();
             }
         }
     });
 
-    $('#lock-editDossier').bind('click', function(e){
+    $('#lock-editDossier').bind('click', function(e){.
+    
         if ( !self.embed ) {
-            if ( self.editMode ) {
+            if (self.editMode && 
+                self.controller.checkActiveUserRole('owner')) {
                 // always check for edits
                 self.checkTitleEdit();
                 self.checkDescriptionEdit();
@@ -66,9 +71,7 @@ function DossierBannerView(myController){
 
         if ( !self.embed ) {
 
-            var userType = self.controller.models.dossierList.getUserType();
-            ISNLogger.log( "user type in dossier banner view is " + userType );
-            if ( userType === "owner" ) {
+            if (self.controller.checkActiveUserRole('owner')) {
 
                 ISNLogger.log("owners can delete the dossier, reveal confirm buttons");
                 self.activateBannerDeleteMode();
@@ -86,9 +89,7 @@ function DossierBannerView(myController){
 
             if ( self.deleteMode ) {
 
-                var userType = self.controller.models.dossierList.getUserType();
-                ISNLogger.log( "user type in dossier banner view is " + userType );
-                if ( userType === "owner" ) {
+                if (self.controller.checkActiveUserRole('owner')) {
 
                     ISNLogger.log("delete the dossier");
                     self.deleteDossier();
@@ -115,56 +116,6 @@ function DossierBannerView(myController){
             }
         }
     });
-
-
-
-    /**
-    * IN USE? doesn't look like it!
-    */
-/*
-    // click handler
-    function _clickHandler(e) {
-        if (!self.embed) {
-            var targetID = e.target.id;
-            if ( self.editMode ) {
-                // always check for edits
-                self.checkDescriptionEdit();
-                self.checkTitleEdit();
-            }
-
-            switch (targetID) {
-            case 'editDossier':
-                self.activateBannerEditMode();
-                e.stopPropagation();
-                break;
-            case 'lock-editDossier':
-                self.deactivateBannerEditMode();
-                e.stopPropagation();
-                break;
-            case 'deleteDossier':
-                self.activateBannerDeleteMode();
-                e.stopPropagation();
-                break;
-            case 'confirmDeleteDossier':
-                self.removeDossier();
-                e.stopPropagation();
-                self.update();
-                break;
-            case 'cancelDeleteDossier':
-                self.deactivateBannerDeleteMode();
-                e.stopPropagation();
-                break;
-            case 'bannerImage':
-                // go to image gallery
-                self.changeImage();
-                e.stopPropagation();
-                break;
-            default:
-                break;
-            }
-        }
-    }
-*/
 
     $(document).bind('dataSuccessfullySent', function() {
         self.waitForUpload--;
@@ -309,6 +260,11 @@ DossierBannerView.prototype.open = function(){
 DossierBannerView.prototype.openDiv = openView;
 DossierBannerView.prototype.close   = closeView;
 
+/**
+ * @method renderBanner()
+ * 
+ * FIXME 
+ */
 DossierBannerView.prototype.renderBanner= function(){
     var self=this
     //Design the Banner area

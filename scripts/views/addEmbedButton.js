@@ -50,8 +50,13 @@ AddEmbedButton.prototype.openDiv=openView;
 AddEmbedButton.prototype.closeDiv=closeView;
 
 AddEmbedButton.prototype.open = function(){
-	ISNLogger.log("open add embed View");
-	this.openDiv();
+    if ( !this.controller.models.bookmark.dossierForbidden ) {
+	   ISNLogger.log("open add embed View");
+	   this.openDiv();
+    }
+    else {
+        $('#embedView').hide();
+    }
 };
 
 /** 
@@ -63,17 +68,18 @@ AddEmbedButton.prototype.open = function(){
  * 
  */ 
 AddEmbedButton.prototype.update = function(){
-	ISNLogger.log("enter update in addEmbedd button");
-		
-	var self=this;
-	var dossierId=this.controller.getActiveDossier();
-	$("#addEmbedBtn").css("margin-bottom", "1px");
-	
-	$("#inputContainer").attr("value",this.generateEmbedCode('full'));
-	
-	$("#inputContainer").focus();
-	
-	$("#drop_info").show();
+    if ( !this.controller.models.bookmark.dossierForbidden ) {
+        ISNLogger.log("enter update in addEmbedd button");
+        var self=this;
+        var dossierId=this.controller.getActiveDossier();
+        $("#addEmbedBtn").css("margin-bottom", "1px");
+
+        $("#inputContainer").attr("value",this.generateEmbedCode('full'));
+
+        $("#inputContainer").focus();
+
+        $("#drop_info").show();
+    }
 };
 
 /**
