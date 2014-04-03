@@ -109,10 +109,9 @@ DossierListModel.prototype.getUserType = function(){
 
     ISNLogger.log("enter get user type");
     var userType="";
-    for (var i=0; i <=this.dossierList.length -1; i++){
+    for (var i=0; i < this.dossierList.length; i++){
 
-        ISNLogger.log("i iss "+i);
-        if ((this.dossierList[i]["dossier_id"])===this.controller.getActiveDossier()){
+        if ((this.dossierList[i]["dossier_id"]) === this.controller.getActiveDossier()){
 
             userType=this.dossierList[i]["user_type"];
         }
