@@ -1101,6 +1101,9 @@ class DossierService extends OAUTHRESTService {
                                                   $this->dossier_id)){
                             $retval = false;
                         }
+                        else {
+                            $this->log("user '". $this->session->getUserID(). "'is the owner of dossier no. " . $this->dossier_id);
+                        }
                     }
                     else {
                         $retval = false;
