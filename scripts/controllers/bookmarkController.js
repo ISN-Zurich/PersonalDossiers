@@ -1,8 +1,15 @@
+/**
+ * @class BookmarkController()
+ * 
+ * The Bookmark Controller is responsible for the bookmark widget on the digital library.
+ */
+
 /*jslint vars: true, sloppy: true */
 function BookmarkController() {
 
     var self = this;
-
+    
+    this.id = 'BookmarkController';
     this.initServiceHost();
 //    this.hostURL = hostURL;
 //    this.baseURL = baseURL;
