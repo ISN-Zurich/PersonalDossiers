@@ -293,9 +293,8 @@ DossierBannerView.prototype.renderBanner= function(){
         text:bookmarkModel.getDossierTitle()
     }).appendTo(titleContainer);
 
-    var descriptionContainer=$("<p/>", {
+    var descriptionContainer=$("<div/>", {
     "id":"descriptionContainer",
-    "class": "marginForEdit"
     }).appendTo("#header_image");
 
     var p=$("<p/>", {
