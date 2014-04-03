@@ -561,6 +561,7 @@ BookmarkModel.prototype.getEmbedURL = function() {
     if ( itemType !== 'Audio') {
         itemType = itemType + 's';
     }
+    
     return 'http:\/\/www.isn.ethz.ch\/layout\/set\/pdembed\/Digital-Library\/'+ itemType +'\/Detail\/?lng=en&id='+this.getItemId();
 };
 
@@ -570,6 +571,26 @@ BookmarkModel.prototype.getUsername = function() {
 
 BookmarkModel.prototype.getUsertype = function() {
     return (this.user_index < this.userlist.length) ? this.userlist[this.user_index].user_type: false;
+};
+
+/**
+ * @method checkUserRole(user, role)
+ * 
+ * This method checks if a given user id has a role in the current dossier
+ */
+BookmarkModel.prototype.checkUserRole = function(userid, role) {
+    var i;
+    console.log('check user: ' + userid);
+    for (i = 0; i < this.userlist.length; i++) {
+         console.log('user id is ' + this.userlist[i].user_id);
+        if (userid && this.userlist[i].user_id === userid) {
+             console.log( 'role is "' + this.userlist[i].user_type + '" compare with "' +role +'"' );
+            if (role && this.userlist[i].user_type === role) {
+                return true;
+            }
+        }
+    }
+    return false;
 };
 
 BookmarkModel.prototype.getUserid = function() {

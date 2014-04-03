@@ -340,3 +340,9 @@ div.overviewcontent {
     width: 470px;
     height: 176px;
 }
+
+.isnbullet {
+    padding-top: 10px;
+    padding-left: 15px;
+    list-style-image: url('../../images/icons/subnavi_bar_grey.jpg' )
+}

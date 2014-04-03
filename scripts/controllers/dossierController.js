@@ -92,6 +92,16 @@ dossierController.prototype.getUserType = function(){
 	return this.models.dossierList.getUserType();
 };
 
+/**
+ * @method checkActiveUserRole(role)
+ */
+dossierController.prototype.checkActiveUserRole = function(role) {
+    if (this.isAuthenticated()) {
+        return this.models.bookmark.checkUserRole(this.models.user.getUserId(), role);
+    }
+    return false;
+}
+
 dossierController.prototype.hashedUrl = function() {
     ISNLogger.log("enter hasehd url");
     this.hashed = false;

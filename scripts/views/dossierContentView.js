@@ -183,7 +183,8 @@ DossierContentView.prototype.update = function(){
  * TODO: Documentation
  */
 DossierContentView.prototype.renderList = function(){
-
+    
+    
     var iFrameHeight = window.innerHeight || document.documentElement.clientHeight;
     var bookmarkModel = this.controller.models.bookmark;
     ISNLogger.log( 'dossier list length in dossier content view ' + bookmarkModel.dossierList.length );
@@ -210,12 +211,13 @@ DossierContentView.prototype.renderList = function(){
 //            "id" : "noContent"
 //        }).appendTo("#contentArea");
 
-        // FIXME: language code should not be hardcoded.
-        $('#noContent').removeClass('hide').addClass('span-12');
+        if (this.controller.checkActiveUserRole('owner') || this.controller.checkActiveUserRole('editor')) {
+            $('#noContent').removeClass('hide').addClass('span-12');
+        }
+        else {
+            $('#noContentGuest').removeClass('hide').addClass('span-12');
+        }
         
-//        var p = $("<p/>", {
-//            "text" : "Your Dossier has no items. You can add items  to the personal dossier if you go to http://isn.ethz.ch/. In there, under both the dossiers and the digital library menus there are various content items. If you enter in the ones you are interested in you will see an addBookmark button on the right side. By clicking on it, this item will be added to your active dossier"
-//        }).appendTo(div);
     }
 
     if ( this.embed ) {
