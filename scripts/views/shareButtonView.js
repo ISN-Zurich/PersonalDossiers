@@ -22,7 +22,7 @@ function ShareButtonView(controller){
 		
 		//Rewriting the link for facebook, taking care of different forms
 		
-		if(selfURL.indexOf(ch/?id=) != -1)
+		if(selfURL.indexOf("ch/?id=") != -1)
 			{
 				//URL is in the form of "lab.isn.ethz.ch/?id=35"
 				var shared_url_fb = selfURL.replace("lab.isn.ethz.ch/?id=","lab.isn.ethz.ch/share.php/");	
