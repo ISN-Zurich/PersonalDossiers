@@ -217,6 +217,8 @@ BookmarkModel.prototype.loadDossierList=function(){
     ISNLogger.log("enter loadDossier list");
     var self=this;
     var data = {};
+    
+    ISNLogger.debugMode = true;
 
     //var dossierID = this.dossierId;
     var dossierID= self.dossierId;
@@ -269,20 +271,38 @@ BookmarkModel.prototype.loadDossierList=function(){
 
     	self.dossierList=self.dossierData.dossier_items;
     	ISNLogger.log("dossier items are"+JSON.stringify(self.dossierList));
-
-    	if (self.dossierList && self.dossierList.length>0){
-    		var itemId= self.dossierList[0].metadata.id;
-    		ISNLogger.log("dossier item id in success is "+itemId);
-    	}
-    	//init values
-
-    	self.dossierTitle= self.dossierMetadata.title;
+        
+        self.dossierTitle= self.dossierMetadata.title;
     	ISNLogger.log("dossier title is "+self.dossierTitle);
     	self.dossierDescription=self.dossierMetadata.description;
     	self.dossierImageURL=self.dossierMetadata.image;
     	self.dossierId=self.dossierMetadata.id;
 
     	self.userlist=self.dossierData.user_list;
+        
+        
+    	if (self.dossierList && self.dossierList.length>0){
+    		var itemId = self.dossierList[0].metadata.id;
+    		ISNLogger.log("dossier item id in success is "+itemId);
+    	}
+        else {
+            // make a dossier private as long it has no items.
+            // fixes bug #174 (automatically privatize empty dossiers)
+            if (self.controller.checkActiveUserRole('owner') 
+                || self.controller.checkActiveUserRole('editor') 
+                || self.controller.checkActiveUserRole('user')
+                ) {
+                ISNLogger.log('dossier is visible!');
+                self.dossierForbidden = false;
+            }
+            else {
+                ISNLogger.log('dossier is forbidden!');
+                self.dossierForbidden = true;
+            }
+        }
+    	//init values
+
+    	
     	ISNLogger.log("user list is "+JSON.stringify(self.userlist));
     	$(document).trigger("BookmarkModelLoaded");
     }
@@ -580,12 +600,13 @@ BookmarkModel.prototype.getUsertype = function() {
  */
 BookmarkModel.prototype.checkUserRole = function(userid, role) {
     var i;
-    console.log('check user: ' + userid);
+    console.log('check user: ' + userid +  ' userist ' + this.userlist.join('; '));
     for (i = 0; i < this.userlist.length; i++) {
          console.log('user id is ' + this.userlist[i].user_id);
         if (userid && this.userlist[i].user_id === userid) {
              console.log( 'role is "' + this.userlist[i].user_type + '" compare with "' +role +'"' );
             if (role && this.userlist[i].user_type === role) {
+                console.log(' user ' + userid + ' has role '+ role);
                 return true;
             }
         }

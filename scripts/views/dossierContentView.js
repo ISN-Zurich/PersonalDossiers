@@ -82,25 +82,17 @@ function DossierContentView( dController ) {
     });
 
     $('#editDossier').bind('click', function() {
-        if( !self.embed ) {
-            var userType = self.controller.models.dossierList.getUserType();
-            ISNLogger.log( 'user type in dossier content view is ' + userType );
-            if ( userType !== "user" ) {
-
-                // 2. enable sortability
-                self.activateSorting();
-
-                // 3. show delete button
-                if ( self.controller.oauth ) {
-
-                    $('.deletecontainer').show();
-                }
-            }
+        if( !self.embed && (self.controller.checkActiveUserRole('owner') || self.controller.checkActiveUserRole('editor') ) ) {
+            // 2. enable sortability
+            self.activateSorting();
+            
+            // 3. show delete button        
+            $('.deletecontainer').show();
         }
     });
 
     $('#lock-editDossier').bind('click', function(){
-        if ( !self.embed ) {
+        if ( !self.embed && (self.controller.checkActiveUserRole('owner') || self.controller.checkActiveUserRole('editor') ) ) {
             // 1. store the positioning of the items
             self.storeOrder();
 
@@ -139,6 +131,7 @@ DossierContentView.prototype.open = function() {
         $('#privateDossier').show();
     }
     else {
+        $('#privateDossier').hide();
         this.update();
     }
 	this.openDiv();
@@ -165,16 +158,6 @@ DossierContentView.prototype.update = function(){
 
     $("#contentArea").empty();
 
-    //TODO: only if we are loggedIn to display the logout button
-    if ( this.controller.oauth ) {
-        $("#delete").removeClass("hidden");
-        $('#findinformation').removeClass("hidden");
-        $('#shareButton').removeClass("hidden");
-    }
-    if ( this.controller.hashed ) {
-
-        $('#loginButtonLink').removeClass("hidden");
-    }
     ISNLogger.log( 'open dossier list view' );
     this.renderList();
 };
@@ -207,10 +190,6 @@ DossierContentView.prototype.renderList = function(){
         ISNLogger.log( 'the dossier has no dossier items' );
         $('#contentArea').addClass('hide');
         
-//        var div = $("<div/>", {
-//            "id" : "noContent"
-//        }).appendTo("#contentArea");
-
         if (this.controller.checkActiveUserRole('owner') || this.controller.checkActiveUserRole('editor')) {
             $('#noContent').removeClass('hide').addClass('span-12');
         }
@@ -237,26 +216,28 @@ DossierContentView.prototype.renderList = function(){
  */
 DossierContentView.prototype.activateSorting = function(){
     var self = this;
-    ISNLogger.log( 'enter activateSorting' );
-    $('#sortable').sortable("enable");
+    if (!self.embed && (self.controller.checkActiveUserRole('owner') || self.controller.checkActiveUserRole('editor') ) ) {
+        ISNLogger.log( 'enter activateSorting' );
+        $('#sortable').sortable("enable");
 
-    //make the list sortable
-    $('#sortable').sortable({
+        //make the list sortable
+        $('#sortable').sortable({
 
-        axis : 'y',
-        placeholder : "placeholder",
-        forcePlaceholderSize : true,
-        //placeholder : "ui-state-highlight"
-        start : function( event , ui ) {
-            self.rescueFromDelete();
-            $(ui.item).addClass("currentSortedItem");
-        },
-        stop : function( event , ui ) {
+            axis : 'y',
+            placeholder : "placeholder",
+            forcePlaceholderSize : true,
+            //placeholder : "ui-state-highlight"
+            start : function( event , ui ) {
+                self.rescueFromDelete();
+                $(ui.item).addClass("currentSortedItem");
+            },
+            stop : function( event , ui ) {
 
-            $(ui.item).removeClass("currentSortedItem");
-        }
-    });
-    $('#sortable').disableSelection();
+                $(ui.item).removeClass("currentSortedItem");
+            }
+        });
+        $('#sortable').disableSelection();
+    }
 };
 
 /**
@@ -307,7 +288,7 @@ DossierContentView.prototype.renderItem = function(){
     // if we are in the embed page, but if the dossier item type is different than publication display also the isn url
     var firstLineContainer = $("<div/>").appendTo(divFloatText);
 
-    if ( !this.embed ) {
+    if ( !this.embed && (self.controller.checkActiveUserRole('owner') || self.controller.checkActiveUserRole('editor') ) ) {
 
         var div3 = $("<div/>", {
             "class" : "deletecontainer hide"
