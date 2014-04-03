@@ -1,11 +1,8 @@
-ISNLogger.log("enter embed controller file");
-
 /**
- * This controller is responsible for the indx.html
-
- * (dossier banner view and dossier content view)
- *
- * @returns
+ * @class EmbedController 
+ * 
+ * The EmbedController controller is responsible for the embed page that contain the full dossier view. 
+ * 
  */
 
 /*jslint vars: true, sloppy: true */
@@ -122,6 +119,16 @@ EmbedController.prototype.openDossier = function() {
     $("#content").show();
     this.views.dossierBanner.open();
     this.views.dossierContent.open();
+};
+
+/**
+ * @method checkActiveUserRole(role)
+ * 
+ * Convenience function for the bookmark model. As embedded pages do not provide any services for authenticated users, 
+ * this fuction will always return FALSE.
+ */
+EmbedController.prototype.checkActiveUserRole = function(role) {
+    return false;
 };
 
 var controllerObject = EmbedController;

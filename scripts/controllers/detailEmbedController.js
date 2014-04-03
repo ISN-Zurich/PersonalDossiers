@@ -1,5 +1,8 @@
 /**
- * @returns
+ * OUTDATED CLASS
+ * the detailEmbedController served as a controller for the detailed pages.
+ * 
+ * 
  */
 
 /*jslint vars: true, sloppy: true */
@@ -118,6 +121,16 @@ detailEmbedController.prototype.getActiveDossier = function(){
         }
     } //is not hashed
     return undefined; //if something goes wrong for any reason
+};
+
+/**
+ * @method checkActiveUserRole(role)
+ * 
+ * Convenience function for the bookmark model. As embedded pages do not provide any services for authenticated users, 
+ * this fuction will always return FALSE.
+ */
+detailEmbedController.prototype.checkActiveUserRole = function(role) {
+    return false;
 };
 
 var controller;

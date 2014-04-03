@@ -104,6 +104,24 @@ GalleryController.prototype.getActiveDossier = function() {
     return this.dossierid;
 };
 
+/**
+ * @method checkActiveUserRole(role)
+ * 
+ * Checks whether the authenticated user has a specific role for the current dossier. 
+ * Allowed roles are:
+ * - owner
+ * - editor
+ * - user
+ * 
+ * The function returns true if the user has the requested role. 
+ */
+GalleryController.prototype.checkActiveUserRole = function(role) {
+    if (this.isAuthenticated()) {
+        return this.models.bookmark.checkUserRole(this.models.user.getUserId(), role);
+    }
+    return false;
+};
+
 var controllerObject = GalleryController;
 //
 //var controller;

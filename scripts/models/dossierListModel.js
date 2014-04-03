@@ -109,9 +109,10 @@ DossierListModel.prototype.getUserType = function(){
 
     ISNLogger.log("enter get user type");
     var userType="";
-    for (var i=0; i < this.dossierList.length; i++){
+    for (var i=0; i <=this.dossierList.length -1; i++){
 
-        if ((this.dossierList[i]["dossier_id"]) === this.controller.getActiveDossier()){
+        ISNLogger.log("i iss "+i);
+        if ((this.dossierList[i]["dossier_id"])===this.controller.getActiveDossier()){
 
             userType=this.dossierList[i]["user_type"];
         }
@@ -158,7 +159,11 @@ DossierListModel.prototype.getActiveDossier = function(){
 };
 
 
-
+/**
+ * @methd getDefaultDossierId()
+ * 
+ * Returns the first/oldest Dossier a user has created. 
+ */
 DossierListModel.prototype.getDefaultDossierId = function(){
 
     var self=this;

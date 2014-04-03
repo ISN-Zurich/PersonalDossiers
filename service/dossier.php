@@ -637,10 +637,6 @@ class DossierService extends OAUTHRESTService {
             return;
         }
 
-        
-        // FIXME: assure that only owners can delete dossiers
-        
-        
         // if we get here we've found the dossier to delete!
         // first remove all the items in the dossier
         $affectedRows = $this->dbh->extended->autoExecute( "dossier_items" , array( $this->dossier_id) , MDB2_AUTOQUERY_DELETE , 'dossier_id = ?' );
