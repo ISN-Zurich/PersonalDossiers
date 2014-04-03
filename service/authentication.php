@@ -274,7 +274,7 @@ class AuthenticationService extends OAUTHRESTService {
             /** 
              * inform the UI that the user has special roles.
              */
-            if ( $this->isAdmin($this->['user_id'])) {
+            if ( $this->isAdmin($this->data['user_id'])) {
                 $this->data['admin'] = 1;
             }
         } else {
