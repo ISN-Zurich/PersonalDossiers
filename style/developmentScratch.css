@@ -232,6 +232,7 @@ ul#sortable > li {
 }
 
 ul#sortable > li:first-child {
+    border-top: none;
 }
 
 ul#sortable > li:last-child {
