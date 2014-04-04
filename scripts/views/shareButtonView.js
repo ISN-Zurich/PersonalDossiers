@@ -10,11 +10,35 @@ function ShareButtonView(controller){
     var self=this;
     self.controller=controller;
     self.tagID="#shareButton";
+    		
+	var bookmarkModel=self.controller.models['bookmark'];
+	var shared_title=encodeURIComponent(bookmarkModel.getDossierTitle());
+	var shared_url=encodeURIComponent(self.getPublicLink());
 
-       	
+	//Rewriting the page link for social media, taking care of different forms
+	selfURL = self.getPublicLink();
+	if(selfURL.indexOf("ch/?id=") != -1)
+		{
+			//URL is in the form of "lab.isn.ethz.ch/?id=35"
+			var shared_socialURL = selfURL.replace("lab.isn.ethz.ch/?id=","lab.isn.ethz.ch/share.php/");	
+		}
+	else
+		{
+			//URL is in the form of "lab.isn.ethz.ch/index.html?id=35"
+			var shared_socialURL = selfURL.replace("lab.isn.ethz.ch/index.html?id=","lab.isn.ethz.ch/share.php/");	
+		}
+	
+	var shared_description=encodeURIComponent(bookmarkModel.getDossierDescription());
+	var whole_image_string=window.location.href;
+	var trim_url=whole_image_string.substring(0, whole_image_string.indexOf('index.html'));
+	var shared_image= encodeURIComponent(trim_url+'/'+bookmarkModel.getDossierImageURL());
+
+ /*
+	Facebook
+ */       	
 	$("#st_facebook").bind("click", function(e){
 		ISNLogger.log("click facebook button in ");
-		var bookmarkModel=self.controller.models['bookmark'];
+		/*var bookmarkModel=self.controller.models['bookmark'];
 		var shared_title=encodeURIComponent(bookmarkModel.getDossierTitle());
 		var shared_url=encodeURIComponent(self.getPublicLink());
 		//Prepping the FB link
@@ -41,15 +65,18 @@ function ShareButtonView(controller){
 		ISNLogger.log("trimmed url is "+trim_url);
 		
 		var shared_image= encodeURIComponent(trim_url+'/'+bookmarkModel.getDossierImageURL());
-		ISNLogger.log("sharedimage is "+shared_image);
+		ISNLogger.log("sharedimage is "+shared_image);*/
 
-		window.open('http://www.facebook.com/sharer.php?title='+ shared_title + '&summary=' + shared_description + '&u='+ shared_url_fb +'&images='+shared_image, 
+		window.open('http://www.facebook.com/sharer.php?title='+ shared_title + '&summary=' + shared_description + '&u='+ shared_socialURL +'&images='+shared_image, 
 				 'facebook-share-dialog', 
 				 'width=626,height=436'		
 		);
 		
 	});
 	
+	/*
+		Twitter
+	*/
 	$("#st_twitter").bind("click", function(e){
 		ISNLogger.log("clicked the twitter icon");
 		var url1='http://twitter.com/home?status=';
@@ -58,6 +85,9 @@ function ShareButtonView(controller){
 	}
 	);  
 	
+	/*
+		Google plus
+	*/
 	
 	$("#st_googleplus").bind("click", function(e){
 		ISNLogger.log("clicked the google plus icon");
