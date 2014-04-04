@@ -50,7 +50,7 @@ if (!empty($query)) {
     // FIXME: proper index table for keywords
 
     $sqlquery = 'SELECT DISTINCT i.* FROM image i LEFT JOIN image_keyword ik on i.imageID = ik.imageID where (LOWER(ik.keyword) LIKE ? OR LOWER(i.objectData) LIKE ?) ORDER BY i.modifiedTS LIMIT ?, ?';
-    $aq = '%'.strtolower(urldecode($query)).'%';
+    $aq = '%'.strtolower(trim(urldecode($query))).'%';
     
     $sqlparam = array($aq,$aq,$offset, $limit);
 }
