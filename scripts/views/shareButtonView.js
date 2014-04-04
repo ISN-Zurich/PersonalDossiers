@@ -60,11 +60,11 @@ function ShareButtonView(controller){
 	
 	
 	$("#st_googleplus").bind("click", function(e){
-		ISNLogger.log("clicked the twitter icon");
+		ISNLogger.log("clicked the google plus icon");
 		var url='https://plus.google.com/share?url=';
 		$('meta[property="og:description"]').attr('content',"$modified_desc" );
 		
-		ISNLogger.log("final twitter url is "+url+self.getPublicLink());
+		ISNLogger.log("final google plus url is "+url+self.getPublicLink());
 		$("#st_googleplus").attr("href",url+self.getPublicLink());
 	}
 	);   
