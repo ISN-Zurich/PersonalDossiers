@@ -14,6 +14,7 @@ function ShareButtonView(controller){
 	var bookmarkModel=self.controller.models['bookmark'];
 	var shared_title=encodeURIComponent(bookmarkModel.getDossierTitle());
 	var shared_url=encodeURIComponent(self.getPublicLink());
+	var whole_image_string=window.location.href;
 
 	//Rewriting the page link for social media, taking care of different forms
 	selfURL = self.getPublicLink();
@@ -21,7 +22,7 @@ function ShareButtonView(controller){
 		{
 			//URL is in the form of "lab.isn.ethz.ch/?id=35"
 			var shared_socialURL = selfURL.replace("lab.isn.ethz.ch/?id=","lab.isn.ethz.ch/share.php/");
-			var trim_url=whole_image_string.substring(0, whole_image_string.indexOf('?id='));
+			var trim_url = whole_image_string.substring(0, whole_image_string.indexOf('?id='));
 		}
 	else
 		{
@@ -31,7 +32,7 @@ function ShareButtonView(controller){
 		}
 	
 	var shared_description=encodeURIComponent(bookmarkModel.getDossierDescription());
-	var whole_image_string=window.location.href;
+	
 	var shared_image= encodeURIComponent(trim_url+'/'+bookmarkModel.getDossierImageURL());
 
  /*
@@ -64,7 +65,7 @@ function ShareButtonView(controller){
 	
 	$("#st_googleplus").bind("click", function(e){
 		ISNLogger.log("clicked the google plus icon");
-		var url='https://plus.google.com/share?url=' + shared_socialURL +'';
+		var url='https://plus.google.com/share?url=' + shared_socialURL + '';
 		
 		ISNLogger.log("final google plus url is "+url+self.getPublicLink());
 		$("#st_googleplus").attr("href",url+self.getPublicLink());
