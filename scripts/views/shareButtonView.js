@@ -20,17 +20,18 @@ function ShareButtonView(controller){
 	if(selfURL.indexOf("ch/?id=") != -1)
 		{
 			//URL is in the form of "lab.isn.ethz.ch/?id=35"
-			var shared_socialURL = selfURL.replace("lab.isn.ethz.ch/?id=","lab.isn.ethz.ch/share.php/");	
+			var shared_socialURL = selfURL.replace("lab.isn.ethz.ch/?id=","lab.isn.ethz.ch/share.php/");
+			var trim_url=whole_image_string.substring(0, whole_image_string.indexOf('?id='));
 		}
 	else
 		{
 			//URL is in the form of "lab.isn.ethz.ch/index.html?id=35"
 			var shared_socialURL = selfURL.replace("lab.isn.ethz.ch/index.html?id=","lab.isn.ethz.ch/share.php/");	
+			var trim_url=whole_image_string.substring(0, whole_image_string.indexOf('index.html'));
 		}
 	
 	var shared_description=encodeURIComponent(bookmarkModel.getDossierDescription());
 	var whole_image_string=window.location.href;
-	var trim_url=whole_image_string.substring(0, whole_image_string.indexOf('index.html'));
 	var shared_image= encodeURIComponent(trim_url+'/'+bookmarkModel.getDossierImageURL());
 
  /*
@@ -38,34 +39,6 @@ function ShareButtonView(controller){
  */       	
 	$("#st_facebook").bind("click", function(e){
 		ISNLogger.log("click facebook button in ");
-		/*var bookmarkModel=self.controller.models['bookmark'];
-		var shared_title=encodeURIComponent(bookmarkModel.getDossierTitle());
-		var shared_url=encodeURIComponent(self.getPublicLink());
-		//Prepping the FB link
-		selfURL = self.getPublicLink();
-		
-		//Rewriting the link for facebook, taking care of different forms
-		
-		if(selfURL.indexOf("ch/?id=") != -1)
-			{
-				//URL is in the form of "lab.isn.ethz.ch/?id=35"
-				var shared_url_fb = selfURL.replace("lab.isn.ethz.ch/?id=","lab.isn.ethz.ch/share.php/");	
-			}
-		else
-			{
-				//URL is in the form of "lab.isn.ethz.ch/index.html?id=35"
-				var shared_url_fb = selfURL.replace("lab.isn.ethz.ch/index.html?id=","lab.isn.ethz.ch/share.php/");	
-			}
-		
-
-		var shared_description=encodeURIComponent(bookmarkModel.getDossierDescription());
-		
-		var whole_image_string=window.location.href;
-		var trim_url=whole_image_string.substring(0, whole_image_string.indexOf('index.html'));
-		ISNLogger.log("trimmed url is "+trim_url);
-		
-		var shared_image= encodeURIComponent(trim_url+'/'+bookmarkModel.getDossierImageURL());
-		ISNLogger.log("sharedimage is "+shared_image);*/
 
 		window.open('http://www.facebook.com/sharer.php?title='+ shared_title + '&summary=' + shared_description + '&u='+ shared_socialURL +'&images='+shared_image, 
 				 'facebook-share-dialog', 
@@ -91,8 +64,7 @@ function ShareButtonView(controller){
 	
 	$("#st_googleplus").bind("click", function(e){
 		ISNLogger.log("clicked the google plus icon");
-		var url='https://plus.google.com/share?url=';
-		$('meta[property="og:description"]').attr('content',"$modified_desc" );
+		var url='https://plus.google.com/share?url=' + shared_socialURL;
 		
 		ISNLogger.log("final google plus url is "+url+self.getPublicLink());
 		$("#st_googleplus").attr("href",url+self.getPublicLink());
