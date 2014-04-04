@@ -64,7 +64,7 @@ function ShareButtonView(controller){
 	
 	$("#st_googleplus").bind("click", function(e){
 		ISNLogger.log("clicked the google plus icon");
-		var url='https://plus.google.com/share?url=' + shared_socialURL;
+		var url='https://plus.google.com/share?url=' + shared_socialURL '';
 		
 		ISNLogger.log("final google plus url is "+url+self.getPublicLink());
 		$("#st_googleplus").attr("href",url+self.getPublicLink());
