@@ -59,7 +59,7 @@ GalleryModel.prototype.loadImages = function(page) {
     var pp = page + 1;
     var url = self.controller.baseURL +'service/imagelist.php/' + pp;
     if ( q.length ) {
-        url = url + '?' + q;
+        url = url + '?' + encodeURIComponent(q);
     }
     
     // now fetch the items.
@@ -95,6 +95,9 @@ GalleryModel.prototype.loadImages = function(page) {
         
         if (data.images && data.images.length) {
             var i;
+            if (self.id === (self.images.length -1) && data.count > 0) {
+                self.id++;
+            }
             for ( i = 0; data.images[i]; i++) {
                 
                 self.images.push(data.images[i]);    

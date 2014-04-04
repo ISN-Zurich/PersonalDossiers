@@ -56,12 +56,19 @@ function GalleryView(controller){
     
     function imageMoreImages () {
         // skip the last item of the previous batch.
-        self.controller.models.gallery.next();
+        // self.controller.models.gallery.next();
         self.renderMore();
     }
     
     function filterGalleryImages(e) {
-        self.controller.models.gallery.filter($('#search_bar_text')[0].value);
+        var filter = $('#search_bar_text')[0].value;
+        if (filter === 'Type your search here...') {
+            self.controller.models.gallery.filter('');
+        }
+        else {
+            self.controller.models.gallery.filter(filter);
+        }
+    
         self.clear();
 
         e.stopPropagation();

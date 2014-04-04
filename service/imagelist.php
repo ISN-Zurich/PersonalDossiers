@@ -49,31 +49,41 @@ $sqlparam = array($offset, $limit);
 if (!empty($query)) {
     // FIXME: proper index table for keywords
 
-    $sqlquery = 'SELECT DISTINCT i.* FROM image i, image_keyword ik WHERE i.imageID = ik.imageID AND (LOWER(ik.keyword) like LOWER(?) OR LOWER(i.objectData) LIKE LOWER(?)) ORDER BY i.modifiedTS LIMIT ?, ?';
-    $lq = '%'.$query.'%';
-    $sqlparam = array($lq,$lq,$offset, $limit);
+    $sqlquery = 'SELECT DISTINCT i.* FROM image i LEFT JOIN image_keyword ik on i.imageID = ik.imageID where (LOWER(ik.keyword) LIKE ? OR LOWER(i.objectData) LIKE ?) ORDER BY i.modifiedTS LIMIT ?, ?';
+    $aq = '%'.strtolower(urldecode($query)).'%';
+    
+    $sqlparam = array($aq,$aq,$offset, $limit);
 }
 
 $message = '';
-$sth = $dbh->prepare($sqlquery);
-$res = $sth->execute($sqlparam);
-if (PEAR::isError($res)) {
-    $message =  $res->getMessage();
-}
-
-$bItem = $res->numRows();
 $idata= array();
-while ($row=$res->fetchRow()) {
-    //parse the item meta data first
-    $row["objectdata"] = json_decode($row["objectdata"]);
-    array_push($idata,$row);
-}
+$bItem = 0;        
 
-$sth->free();
+$sth = $dbh->prepare($sqlquery);
+if (PEAR::isError($sth)) {
+    $message =  $sth->getMessage();
+   // errorlog('statement error:  ' . $sth->getMessage());
+}
+else {
+    $res = $sth->execute($sqlparam);
+    if (PEAR::isError($res)) {
+        $message =  $res->getMessage();        
+    }
+    else {
+        $bItem = $res->numRows();
+        while ($row=$res->fetchRow()) {
+            //parse the item meta data first
+            $row["objectdata"] = json_decode($row["objectdata"]);
+            array_push($idata,$row);
+        }
+
+        $sth->free();
+    }
+}
 
 $data = array(
     'count' => $bItem,
-    'page' => $page,
+    'page'  => $page,
     'query' => $query,
     'images'=>$idata
 );
