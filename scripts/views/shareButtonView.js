@@ -68,7 +68,7 @@ function ShareButtonView(controller){
 		var url='https://plus.google.com/share?url=' + shared_socialURL + '';
 		
 		ISNLogger.log("final google plus url is "+url+self.getPublicLink());
-		$("#st_googleplus").attr("href",url+self.getPublicLink());
+		$("#st_googleplus").attr("href",url);
 	}
 	);   
 }//end of constructor
