@@ -143,33 +143,23 @@ input#password,
 }
 
 #loginButton {
-    display:inline;
-    width:45px;
-    color:#4c5160;
-    text-align: center;
+    border-right: 1px solid #FFFFFF;
+    color: #4C5160;
     cursor: pointer;
-    border-right:1px solid white;
-    /*border:1px solid green;*/
-    padding-left:40px;
-    padding-right:40px;
-    text-align:center;
-    padding-top:6px;
-    padding-bottom:10px;
-    height:28px;
+    display: inline-block;
+    float: left;
+    height: 28px;
+    text-align: center;
+    width:114px;
 }
 
 #registerButton {
-    display:inline;
-    color:#4c5160;
-    text-align: center;
+    color: #4C5160;
     cursor: pointer;
-    border:0px solid red;
-    width:45px;
-    margin-bottom:0px;
-    padding-left:30px;
-    padding-right:25px;
-    padding-top:6px;
-    height:28px;
+    display: inline-block;
+    height: 28px;
+    text-align: center;
+    width:115px;
 }
 
 #userloginHeader {
@@ -209,9 +199,8 @@ input#password,
 }
 
 .buttonContainer {
-    width:229px;
+    width:230px;
     border-top:1px solid white;
-    height:28px;
 }
 
 .buttonContainer div {
@@ -879,4 +868,14 @@ body.embedBadge {
 #labAnnounce {
     text-align: center;
     padding:10px;
+}
+
+.noJSWarning {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #FF0000;
+    color: #FF0000;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 14px;
+    padding: 10px 18px;
 }
