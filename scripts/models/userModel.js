@@ -241,8 +241,8 @@ UserModel.prototype.getUserProfile = function(){
                 
                 // FIXME: only forward to user.html if we are stand alone. 
                 // AKA not part of an embed or bookmark page)
+                self.transitionToLogin();
                 
-                window.location.href = '/user.html';
             }
         },
         beforeSend : setHeader
@@ -312,9 +312,8 @@ UserModel.prototype.checkActiveUser = function(){
         // we are on the login page so we can play some magic.
         this.controller.models.authentication.getRequestToken();
     } else {
-
-        // send the user to the login page
-        window.location.href = '/tools/user.html';
+        //don't forward nomal users to the login screen when they visit the homepage.
+        this.transitionToLogin();
     }
 };
 
@@ -663,7 +662,20 @@ UserModel.prototype.setValidationField = function( fieldString , value ) {
     this.checkRegistrationValidation();
 };
 
-
+/**
+ * @method transitionToLogin()
+ * 
+ * forward the user to the login page unless the page is embedded.
+ */
+UserModel.prototype.transitionToLogin = function() {
+    if(this.controller.id !== 'BookmarkController' || 
+       this.controller.id !== 'embedController' || 
+       this.controller.id !== 'badgeController'
+      ) {
+        // from all other pages, send the user to the login page
+        window.location.href = ISNLogger.choose('user.html', '/tools/user.html');
+    }
+};
 
 UserModel.prototype.checkEmailValidation = function( email ) {
 

@@ -119,6 +119,16 @@ BadgeController.prototype.postHeight= function(h) {
     }
 };
 
+/**
+ * @method checkActiveUserRole(role)
+ * 
+ * Convenience function for the bookmark model. As embedded pages do not provide any services for authenticated users, 
+ * this fuction will always return FALSE.
+ */
+BadgeController.prototype.checkActiveUserRole = function(role) {
+    return false;
+};
+
 var controllerObject = BadgeController;
 
 //var controler;

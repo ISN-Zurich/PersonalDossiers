@@ -52,12 +52,14 @@ GalleryModel.prototype.getImageTitle = function () {
  * pagination. The service returns the image data in chunks of 50 items
  */
 GalleryModel.prototype.loadImages = function(page) {
+    ISNLogger.debugMode = true;
+    
     var self = this;
     var q = self.query || "";
     var pp = page + 1;
     var url = self.controller.baseURL +'service/imagelist.php/' + pp;
     if ( q.length ) {
-        url = url + '?' + q;
+        url = url + '?' + encodeURIComponent(q);
     }
     
     // now fetch the items.
@@ -92,12 +94,17 @@ GalleryModel.prototype.loadImages = function(page) {
         }
         
         if (data.images && data.images.length) {
-            
-            for ( var i = 0; data.images[i]; i++) {
+            var i;
+            if (self.id === (self.images.length -1) && data.count > 0) {
+                self.id++;
+            }
+            for ( i = 0; data.images[i]; i++) {
                 
                 self.images.push(data.images[i]);    
             }
-            ISNLogger.log("fire GalleryImagesReady");
+            
+            
+            ISNLogger.log("fire GalleryImagesReady " + i + " images");
             $(document).trigger("GalleryImagesReady");
         }
     }
@@ -206,9 +213,20 @@ GalleryModel.prototype.refresh = function() {
     
     this.images = [];
     this.id = 0;
-    this.query = '';
+    //this.query = '';
+    
     // ask the controller if there is already a query
     
     // load the first chunk from the service
     this.loadImages(this.page);   
+};
+
+/**
+ * @method filter(querystring)
+ * 
+ * 
+ */
+GalleryModel.prototype.filter = function(query) {
+    this.query = query;
+    this.refresh();
 };

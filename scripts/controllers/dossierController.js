@@ -100,7 +100,7 @@ dossierController.prototype.checkActiveUserRole = function(role) {
         return this.models.bookmark.checkUserRole(this.models.user.getUserId(), role);
     }
     return false;
-}
+};
 
 dossierController.prototype.hashedUrl = function() {
     ISNLogger.log("enter hasehd url");

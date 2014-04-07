@@ -117,21 +117,27 @@ BookmarkModel.prototype.removeItem=function(id){
     var self=this;
     //send delete request via ajax
     var dossierID = self.dossierId;
-    var url= self.controller.baseURL +'service/dossier.php/' + dossierID + '/' + id;
-    var method="DELETE";
-
-
-    if ( dossierID && id ) {
-        $.ajax({
-            url: url,
-            type : method,
-            dataType : 'text',
-            success: success,
-            error:error,
-            beforeSend:setHeader
-        });
+    if ( !(dossierID && dossierID > 0)) {
+        return;
     }
+    
+    if( id && id.length && id > 0) {
+        var url= self.controller.baseURL +'service/dossier.php/' + dossierID + '/' + id;
+        var method="DELETE";
 
+
+        if ( dossierID && id ) {
+            $.ajax({
+                url: url,
+                type : method,
+                dataType : 'text',
+                success: success,
+                error:error,
+                beforeSend:setHeader
+            });
+        }
+    }
+    
     function success(){
 	   ISNLogger.log("success in deleting the dossier item");
     }

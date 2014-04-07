@@ -296,7 +296,7 @@ class DossierService extends OAUTHRESTService {
 
         //prepare and execute, retrieve dossier id
         $sth = $mdb2->prepare( 'SELECT * FROM dossiers WHERE id = ?' );
-        $res = $sth->execute( $this->dossier_id );
+        $res = $sth->execute( array($this->dossier_id) );
 
         //free
         $sth->free();
@@ -617,13 +617,21 @@ class DossierService extends OAUTHRESTService {
         $this->mark();
         $this->dbh->loadModule( 'Extended' );
         $this->dbh->setFetchMode( MDB2_FETCHMODE_ASSOC );
-
+        
+        if (empty($this->dossier_id)) {
+            //couldn't find the dossier in the db, return a 404 not found
+            $this->not_found();
+            return;
+        }
+        
+        $sqlparam = array($this->dossier_id);
+        
         //handle on database
         $mdb2 = $this->dbh;
 
         //prepare the statement then execute to check for dossier id
         $sth = $mdb2->prepare( 'SELECT * FROM dossiers WHERE id = ?' );
-        $res = $sth->execute( $this->dossier_id );
+        $res = $sth->execute( sqlparam );
 
         //boolean?! dossier flag based on the number of rows returned
         $bDossier = $res->numRows();
@@ -637,13 +645,9 @@ class DossierService extends OAUTHRESTService {
             return;
         }
 
-        
-        // FIXME: assure that only owners can delete dossiers
-        
-        
         // if we get here we've found the dossier to delete!
         // first remove all the items in the dossier
-        $affectedRows = $this->dbh->extended->autoExecute( "dossier_items" , array( $this->dossier_id) , MDB2_AUTOQUERY_DELETE , 'dossier_id = ?' );
+        $affectedRows = $this->dbh->extended->autoExecute( "dossier_items" , sqlparam , MDB2_AUTOQUERY_DELETE , 'dossier_id = ?' );
         if ( PEAR::isError( $affectedRows ) ) {
 
             $this->log( "error " . $affectedRows->getMessage() );
@@ -652,7 +656,7 @@ class DossierService extends OAUTHRESTService {
         }
 
         // now we should remove all dossier users, too
-        $affectedRows = $this->dbh->extended->autoExecute( "dossier_users" , array( $this->dossier_id) , MDB2_AUTOQUERY_DELETE , 'dossier_id = ?' );
+        $affectedRows = $this->dbh->extended->autoExecute( "dossier_users" , sqlparam , MDB2_AUTOQUERY_DELETE , 'dossier_id = ?' );
         if ( PEAR::isError( $affectedRows ) ) {
 
             $this->log( "error " . $affectedRows->getMessage() );
@@ -661,21 +665,20 @@ class DossierService extends OAUTHRESTService {
         }
 
         // if we removed all related items successfully, we also remove the dossier itself.
-        $affectedRows = $this->dbh->extended->autoExecute( "dossiers" , array($this->dossier_id) , MDB2_AUTOQUERY_DELETE , 'id = ?' );
+        $affectedRows = $this->dbh->extended->autoExecute( "dossiers" , sqlparam , MDB2_AUTOQUERY_DELETE , 'id = ?' );
         if ( PEAR::isError( $affectedRows ) ) {
 
             $this->log( "error " . $affectedRows->getMessage() );
             $this->bad_request();
-        } else {
+            return;
+        } 
+        
+        //if we get here we've managed to delete the dossier and associated fragments successfully
+        $this->log( "Service 2: dossier deleted" );
 
-            //if we get here we've managed to delete the dossier and associated fragments successfully
-            $this->log( "Service 2: dossier deleted" );
-
-            // $this->gone();
-            //return 204 no content as per HTTP specification
-            $this->no_content();
-        }
-        return;
+        // $this->gone();
+        //return 204 no content as per HTTP specification
+        $this->no_content();
     }
 
     /**
@@ -912,10 +915,10 @@ class DossierService extends OAUTHRESTService {
             if ($res->numRows() > 0) {
                 while ($row = $res->fetchRow() ){
                     $this->log('row: ' . json_encode($row));
-                    array_push($retval,array(
-                    'user_id'=> $row['user_id'],
-                    'username'=> $row['name'],
-                    'user_type'=> $row['user_type']));
+                    array_push($retval, array(
+                    'user_id'   => $row['user_id'],
+                    'username'  => $row['name'],
+                    'user_type' => $row['user_type']));
                     //array_push($udata,$row);
                 }
 
@@ -969,13 +972,13 @@ class DossierService extends OAUTHRESTService {
         }
         while ($row = $res->fetchRow() ){
             $this->log('row: ' . json_encode($row));
-            array_push($retval,array(
-            'dossier_id'=> $row['id'],
-            'title'=> $row['title'],
-            'description'=> $row['description'],
-            'image'=> $row['image'],
-            'private_flag' => $row['private_flag'],
-            'user_type' => $row['user_type']
+            array_push($retval, array(
+            'dossier_id'    => $row['id'],
+            'title'         => $row['title'],
+            'description'   => $row['description'],
+            'image'         => $row['image'],
+            'private_flag'  => $row['private_flag'],
+            'user_type'     => $row['user_type']
             ));
         }
 
@@ -1013,11 +1016,10 @@ class DossierService extends OAUTHRESTService {
             $sth->free();
             $this->log("dossier is public");
             return true;
-        } else {
-            $this->log("dossier is private");
-            return false;
         }
-
+        
+        $this->log("dossier is private");
+        return false;
     }
 
 
@@ -1082,14 +1084,6 @@ class DossierService extends OAUTHRESTService {
 
                     }
                     break;
-//                  else {
-//                      $this->user = new UserManagement($this->dbh);
-//                      // only access if the user is an owner: dossierId > 0 or any other case
-//                      // update a dossier (title, description, image),
-//                      if (!$this->user->isOwner($this->session->getUserID(),$this->dossier_id)){
-//                          $retval = false;
-//                      }
-                    //}
                 case 'DELETE':
                     $this->user = new UserManagement($this->dbh);
                     $this->log("enter DELETE in prepare statement in dossier.php");
@@ -1104,6 +1098,9 @@ class DossierService extends OAUTHRESTService {
                         if (!$this->user->isOwner($this->session->getUserID(),
                                                   $this->dossier_id)){
                             $retval = false;
+                        }
+                        else {
+                            $this->log("user '". $this->session->getUserID(). "'is the owner of dossier no. " . $this->dossier_id);
                         }
                     }
                     else {

@@ -61,20 +61,37 @@
 
 <body>
 <div id="page_oc">
+    
     <div class="container">
+        <div class="printhidden">
+            <div class="column span-5"><a href="http://www.isn.ethz.ch/"><img src="http://www.isn.ethz.ch/extension/isndesign/design/isn/images/header/20y/logo_isn.gif" alt="Logo ISN" class="logo_isn" width="147" height="59" /></a></div>
+            <div class="column span-13">&nbsp;</div>
+            <div class="column span-6 last"><a href="http://www.ethz.ch/index_EN"><img src="http://www.isn.ethz.ch/extension/isndesign/design/isn/images/header/logo_eth.gif" alt="Logo ETH Z&uuml;rich" class="logo_eth" width="196" height="61" /></a></div>
+        </div>
+        <div class="column span-5">&nbsp;</div>
         <div class="column span-12" id="">
 
+                <div class="column span-12 search_banner_section">
+            <form action="#" id="search_form">
+                <input type="hidden" name="stage" value="search" /> <input type="hidden" value="Dossiers" name="red" /> <input type="hidden" value="en" name="l" /> <input type="hidden" value="standard" name="t" /> <input type="hidden" value="0" name="start" /> <input type="hidden" value="20" name="num" /> <input type="hidden"value="77233387-374f-4688-9a93-ed530a1b91ae" name="c" /> <input type="text" id="search_bar_text" value="Type your search here..." class="" name="q" /> <input type="submit" id="search_bar_submit" class="search_bar_button" value="Search" name="search" />
+            </form>
+        </div>
             <div id="contentArea" class="span-12">
                 <div id="imagegallery" class="hide">
                     <!-- gallery content -->
                 </div>
             </div>
-            <div class="gallerynavigation">
+            <div id="gallerynavigation" class="gallerynavigation">
                 <div id="loadmoreimages"> 
                     Click to load more images.
                 </div>
             </div>
         </div><!-- id="content" -->
+        <div class="column span-6 last">
+            <div id="cancelgallerybutton"class="grey_bar clickable pd_editDossier">
+                Cancel Gallery
+            </div>
+        </div>
     </div><!-- id="container" -->
 </div><!-- id="page_oc" -->
 </body>
