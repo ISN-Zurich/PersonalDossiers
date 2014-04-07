@@ -620,6 +620,7 @@ class DossierService extends OAUTHRESTService {
         
         if (empty($this->dossier_id)) {
             //couldn't find the dossier in the db, return a 404 not found
+            $this->mark("no dossier id");
             $this->not_found();
             return;
         }
@@ -631,7 +632,7 @@ class DossierService extends OAUTHRESTService {
 
         //prepare the statement then execute to check for dossier id
         $sth = $mdb2->prepare( 'SELECT * FROM dossiers WHERE id = ?' );
-        $res = $sth->execute( sqlparam );
+        $res = $sth->execute( $sqlparam );
 
         //boolean?! dossier flag based on the number of rows returned
         $bDossier = $res->numRows();
@@ -639,15 +640,15 @@ class DossierService extends OAUTHRESTService {
         //free the statement
         $sth->free();
         if ( $bDossier < 1 ) {
-
+            $this->mark("dossier id " . $this->dossier_id . " not found in the DB");
             //couldn't find the dossier in the db, return a 404 not found
             $this->not_found();
             return;
         }
-
+        
         // if we get here we've found the dossier to delete!
         // first remove all the items in the dossier
-        $affectedRows = $this->dbh->extended->autoExecute( "dossier_items" , sqlparam , MDB2_AUTOQUERY_DELETE , 'dossier_id = ?' );
+        $affectedRows = $this->dbh->extended->autoExecute( "dossier_items" , $sqlparam , MDB2_AUTOQUERY_DELETE , 'dossier_id = ?' );
         if ( PEAR::isError( $affectedRows ) ) {
 
             $this->log( "error " . $affectedRows->getMessage() );
@@ -656,7 +657,7 @@ class DossierService extends OAUTHRESTService {
         }
 
         // now we should remove all dossier users, too
-        $affectedRows = $this->dbh->extended->autoExecute( "dossier_users" , sqlparam , MDB2_AUTOQUERY_DELETE , 'dossier_id = ?' );
+        $affectedRows = $this->dbh->extended->autoExecute( "dossier_users" , $sqlparam , MDB2_AUTOQUERY_DELETE , 'dossier_id = ?' );
         if ( PEAR::isError( $affectedRows ) ) {
 
             $this->log( "error " . $affectedRows->getMessage() );
@@ -665,7 +666,7 @@ class DossierService extends OAUTHRESTService {
         }
 
         // if we removed all related items successfully, we also remove the dossier itself.
-        $affectedRows = $this->dbh->extended->autoExecute( "dossiers" , sqlparam , MDB2_AUTOQUERY_DELETE , 'id = ?' );
+        $affectedRows = $this->dbh->extended->autoExecute( "dossiers" , $sqlparam , MDB2_AUTOQUERY_DELETE , 'id = ?' );
         if ( PEAR::isError( $affectedRows ) ) {
 
             $this->log( "error " . $affectedRows->getMessage() );
