@@ -114,7 +114,14 @@ function DossierBannerView(myController){
     });
 
     $(document).bind('dossierDeleteSuccess', function(){
-        window.location.href = "user.html#personalDossiers";
+        ISNLogger.log('reload');
+        
+        // window.location.href=window.location.href
+        window.location.reload(true);
+        self.deactivateBannerDeleteMode();
+        
+        // window.location.reload();
+        // window.location.href = "user.html#personalDossiers";
     });
 
 } //end of constructor
@@ -202,7 +209,7 @@ DossierBannerView.prototype.changeImage = function(){
 DossierBannerView.prototype.transitionToGallery = function() {
     if ( this.waitForUpload === 0 && this.goToGallery === true ) {
         ISNLogger.log('upload done');
-       window.location.href = "gallery.html?id="+ this.controller.getActiveDossier();
+        window.location.href = "gallery.html?id="+ this.controller.getActiveDossier();
     }
 };
 

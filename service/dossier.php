@@ -615,7 +615,7 @@ class DossierService extends OAUTHRESTService {
 
         //mark the log file, load Extended module and configure the default fetch mode
         $this->mark();
-        $this->dbh->loadModule( 'Extended' );
+        // $this->dbh->loadModule( 'Extended' );
         $this->dbh->setFetchMode( MDB2_FETCHMODE_ASSOC );
         
         if (empty($this->dossier_id)) {
@@ -624,6 +624,9 @@ class DossierService extends OAUTHRESTService {
             $this->not_found();
             return;
         }
+        
+        $this->log('attempt to delete ' . $this->dossier_id);
+        $this->log('request URL is ' . $_SERVER['REQUEST_URI']);
         
         $sqlparam = array($this->dossier_id);
         
@@ -648,28 +651,36 @@ class DossierService extends OAUTHRESTService {
         
         // if we get here we've found the dossier to delete!
         // first remove all the items in the dossier
-        $affectedRows = $this->dbh->extended->autoExecute( "dossier_items" , $sqlparam , MDB2_AUTOQUERY_DELETE , 'dossier_id = ?' );
-        if ( PEAR::isError( $affectedRows ) ) {
+        $sth = $mdb2->prepare( 'DELETE FROM dossier_items WHERE dossier_id = ?' );
+        $res = $sth->execute( $sqlparam );
+//        $affectedRows = $this->dbh->extended->autoExecute( "dossier_items" , $sqlparam , MDB2_AUTOQUERY_DELETE , 'dossier_id = ?' );
+//        if ( PEAR::isError( $affectedRows ) ) {
+        if ( PEAR::isError( $res ) ) {
 
-            $this->log( "error " . $affectedRows->getMessage() );
+//            $this->log( "error " . $affectedRows->getMessage() );
+            $this->log( "error " . $res->getMessage() );
             $this->bad_request();
             return;
         }
 
         // now we should remove all dossier users, too
-        $affectedRows = $this->dbh->extended->autoExecute( "dossier_users" , $sqlparam , MDB2_AUTOQUERY_DELETE , 'dossier_id = ?' );
-        if ( PEAR::isError( $affectedRows ) ) {
-
-            $this->log( "error " . $affectedRows->getMessage() );
+        $sth = $mdb2->prepare( 'DELETE FROM dossier_users WHERE dossier_id = ?' );
+        $res = $sth->execute( $sqlparam );
+//        $affectedRows = $this->dbh->extended->autoExecute( "dossier_users" , $sqlparam , MDB2_AUTOQUERY_DELETE , 'dossier_id = ?' );
+//        if ( PEAR::isError( $affectedRows ) ) {
+        if ( PEAR::isError( $res ) ) {
+            $this->log( "error " . $res->getMessage() );
             $this->bad_request();
             return;
         }
 
         // if we removed all related items successfully, we also remove the dossier itself.
-        $affectedRows = $this->dbh->extended->autoExecute( "dossiers" , $sqlparam , MDB2_AUTOQUERY_DELETE , 'id = ?' );
-        if ( PEAR::isError( $affectedRows ) ) {
-
-            $this->log( "error " . $affectedRows->getMessage() );
+        $sth = $mdb2->prepare( 'DELETE FROM dossiers WHERE id = ?' );
+        $res = $sth->execute( $sqlparam );
+//        $affectedRows = $this->dbh->extended->autoExecute( "dossier_users" , $sqlparam , MDB2_AUTOQUERY_DELETE , 'dossier_id = ?' );
+//        if ( PEAR::isError( $affectedRows ) ) {
+        if ( PEAR::isError( $res ) ) {
+            $this->log( "error " . $res->getMessage() );
             $this->bad_request();
             return;
         } 
@@ -879,12 +890,12 @@ class DossierService extends OAUTHRESTService {
 
         $sth = $mdb2->prepare('SELECT * FROM dossiers WHERE id=?');
         $this->log('dossierId in read dossier is '.$this->dossier_id);
-        $res = $sth->execute($this->dossier_id);
-
+        $res = $sth->execute(array($this->dossier_id));
 
         if ($res->numRows() == 1) {
             // load the dossier meta data
             // there should be only one dossier with that id
+            $this->log('found the dossier');
             $row=$res->fetchRow();
             $this->data['dossier_metadata'] = $row;
             $sth->free();
@@ -930,6 +941,7 @@ class DossierService extends OAUTHRESTService {
             $this->respond_json_data();
         }
         else {
+            $this->log("dossier with id ". $this->dossier_id . ' not found');
             $this->not_found();
         }
         $sth->free();
@@ -988,7 +1000,22 @@ class DossierService extends OAUTHRESTService {
         $this->respond_json_data();
     }
 
-
+    /**
+     * @method boolean dossierExists(id)
+     * 
+     * This function returns true if the dossier with the given id exists.
+     */
+    protected function dossierExists() {
+        $this->mark();
+        $this->dbh->setFetchMode(MDB2_FETCHMODE_ASSOC);
+        $sth = $this->dbh->prepare('SELECT * FROM dossiers WHERE id=?');
+        $res = $sth->execute(array($this->dossier_id));
+        $retval = false;
+        if ($res->numRows() == 1) {
+            $retval = true;
+        }
+        return $retval;
+    }
 
     /**
      * dossierIsPublic()
@@ -1116,7 +1143,12 @@ class DossierService extends OAUTHRESTService {
 
         if (!$retval) {
             $this->log('session prerequisite failed');
-            $this->authentication_required();
+            if (!$this->dossierExists()) {
+                $this->not_found();
+            }
+            else {
+                $this->authentication_required();
+            }
         }
 
         return $retval;

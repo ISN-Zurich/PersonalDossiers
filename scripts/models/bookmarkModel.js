@@ -206,20 +206,20 @@ BookmarkModel.prototype.arrangeItems=function(){
 	}
 };
 
-BookmarkModel.prototype.setOrder=function(array_order){
+BookmarkModel.prototype.setOrder = function(array_order){
 	ISNLogger.log("enter set Order in bookmark model");
 	this.storedPosition = array_order;
 	ISNLogger.log("stored order is "+this.storedPosition);
 };
 
-BookmarkModel.prototype.getOrder=function(){
+BookmarkModel.prototype.getOrder = function(){
 	return this.storedPosition;
 };
 
 /**
  * Load the list of dossier items for the active dossier
  */
-BookmarkModel.prototype.loadDossierList=function(){
+BookmarkModel.prototype.loadDossierList = function(){
     ISNLogger.log("enter loadDossier list");
     var self=this;
     var data = {};
@@ -249,6 +249,11 @@ BookmarkModel.prototype.loadDossierList=function(){
                     self.dossierForbidden = true;
                     $(document).trigger("BookmarkModelNotLoaded");
                 }
+                else if (request.status === 404){
+                    // the dossier does not exist
+                    ISNLogger.log('dossier does not exist');
+                    window.location.href = self.controller.baseURL + 'user.html#personalDossiers';
+                }
             },
             beforeSend : setHeader
         });
@@ -262,7 +267,8 @@ BookmarkModel.prototype.loadDossierList=function(){
     	}
         catch(err) {
     		dossierObject={};
-    		ISNLogger.log("couldnt load dossier items from the database");
+    		ISNLogger.log("couldnt load dossier items from the database, forward the client to the dossier list");
+            window.location.href = self.controller.baseURL + 'user.html#personalDossiers';
     	}
 
     	dossierItemMetadata={};
@@ -391,7 +397,8 @@ BookmarkModel.prototype.callServiceToDeleteDossier = function(){
     var dossierID = self.dossierId;
     var url=self.controller.baseURL +"service/dossier.php/"+dossierID;
     var method="DELETE";
-
+    var bDeleted = false;
+    
     if ( dossierID ) {
 
         // var data=myData;
@@ -402,8 +409,8 @@ BookmarkModel.prototype.callServiceToDeleteDossier = function(){
             dataType : 'json',
             success : doOnSuccess,
             error : doOnError,
-            beforeSend : setHeader
-        });
+            beforeSend : setHeader,
+        }).always(doOnComplete);
     }
 
     function doOnError( request ) {
@@ -423,8 +430,19 @@ BookmarkModel.prototype.callServiceToDeleteDossier = function(){
     function doOnSuccess(){
 
         //dossier deletion success, means trigger update view, means return to welcome view
+        ISNLogger.debugMode = true;
         ISNLogger.log("dossier successfully deleted");
-        $(document).trigger("dossierDeleteSuccess");
+        
+        // chrome seems to hate being moved while being in an event handler
+        // $(document).trigger("dossierDeleteSuccess");
+        // self.loadDossierList();
+        bDeleted = true;
+    }
+    
+    function doOnComplete() {
+        if (bDeleted) {
+            $(document).trigger("dossierDeleteSuccess");
+        }
     }
 
     function setHeader( xhr ) {

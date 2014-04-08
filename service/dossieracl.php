@@ -124,6 +124,7 @@ protected function update_user_priviliges();
 protected function remove_user_priviliges();
 
 }
+
 $service = new DossierACLService();
 $service->run();
 
