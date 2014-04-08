@@ -5,7 +5,6 @@
  */
 
 /*jslint vars: true, sloppy: true */
-
 function AddEmbedButton(controller){
 	ISNLogger.log("enter add embed button");
 	var self = this;
@@ -34,13 +33,13 @@ function AddEmbedButton(controller){
 	});
 
 	$("#contentEmbed").bind("click", function(e){
-		$("#inputContainer").attr("value", self.generateEmbedCode('full'));
+		$("#inputContainer").val(self.generateEmbedCode('full'));
 		$("#badgeStyle").removeClass("pd_activeBadge");
 		$("#contentEmbed").addClass("pd_activeBadge");
 	});
 
 	$("#badgeStyle").bind("click", function(e){
-		$("#inputContainer").attr("value", self.generateEmbedCode('badge'));
+		$("#inputContainer").val(self.generateEmbedCode('badge'));
 		$("#contentEmbed").removeClass("pd_activeBadge");
 		$("#badgeStyle").addClass("pd_activeBadge");
 	});
@@ -68,14 +67,14 @@ AddEmbedButton.prototype.open = function(){
  *
  */
 AddEmbedButton.prototype.update = function(){
+
     if ( !this.controller.models.bookmark.dossierForbidden ) {
+
         ISNLogger.log("enter update in addEmbedd button");
         var self=this;
         var dossierId=this.controller.getActiveDossier();
-        $("#inputContainer").attr("value",this.generateEmbedCode('full'));
-
+        $("#inputContainer").val(this.generateEmbedCode('full'));
         $("#inputContainer").focus();
-
         $("#drop_info").show();
     }
 };

@@ -142,7 +142,7 @@ input#password,
     text-security:disc;
 }
 
-#loginButton {
+#loginButton , #registerButton {
     border-right: 1px solid #FFFFFF;
     color: #4C5160;
     cursor: pointer;
@@ -154,11 +154,7 @@ input#password,
 }
 
 #registerButton {
-    color: #4C5160;
-    cursor: pointer;
-    display: inline-block;
-    height: 28px;
-    text-align: center;
+    float: none;
     width:115px;
 }
 
@@ -166,32 +162,6 @@ input#password,
     height:28px;
     line-height: 28px;
     padding:0px 0px 0px 18px;
-}
-
-.pd_embed_buttons {
-    display:inline;
-    color:#4c5160;
-    text-align: center;
-    cursor: pointer;
-    border:0px solid red;
-    width:80px;
-    padding-left:25px;
-    padding-right:30px;
-    padding-top:5px;
-    clear:both;
-    font-size:12px;
-}
-
-#contentEmbed {
-    margin-top:5px;
-    border-right:1px solid white;
-    padding-bottom:8px;
-}
-
-#badgeStyle {
-    margin-bottom:0px;
-    margin-top:5px;
-    padding-bottom:8px;
 }
 
 #contentBadgeContainer {
@@ -468,18 +438,44 @@ ul#sortable li{
 
 #dropdown_embed {
     height:auto;
-    background-color:#ebedee;
     border:0px solid green;
     padding:0px;
 }
 
-.pd_activeBadge {
-    background-color:gray;
-    color:white;
+#inputContainer {
+    width: 192px !important;
+    height:auto;
+    margin: 0;
+    padding: 10px 18px;
+    border: 1px solid #CCCCCC;
 }
 
-input#inputContainer {
-    margin-left:5px;
+.pd_embed_buttons {
+    display:inline-block;
+    float:left;
+    width:115px;
+    height:28px;
+    cursor: pointer;
+    border:none;
+    font-size:12px;
+    line-height:28px;
+    background-color: #EBEDEE;
+    color:#4c5160;
+    text-align: center;
+}
+
+#contentEmbed {
+    border-right:1px solid white;
+}
+
+#badgeStyle {
+    width:114px;
+    float:none;
+}
+
+.pd_activeBadge {
+    background-color:#0089CF;
+    color:white;
 }
 
 #drop_info{
@@ -489,13 +485,10 @@ input#inputContainer {
     font-style:italic;
 }
 
-#embed_options,
 #embedButtons {
-    /*font-weight:bold;*/
-    font-size:12px;
-    margin-top:10px;
-    padding: 10px 0px 10px 00px;
-    border:0px solid red;
+    margin-top:1px;
+    width:230px;
+    height:28px;
 }
 
 #badgeHeader {
