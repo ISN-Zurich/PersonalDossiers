@@ -154,6 +154,7 @@ input#password,
 }
 
 #registerButton {
+    border-right: none;
     float: none;
     width:115px;
 }
