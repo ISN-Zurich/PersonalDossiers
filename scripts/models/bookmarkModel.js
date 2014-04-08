@@ -409,7 +409,7 @@ BookmarkModel.prototype.callServiceToDeleteDossier = function(){
             dataType : 'json',
             success : doOnSuccess,
             error : doOnError,
-            beforeSend : setHeader,
+            beforeSend : setHeader
         }).always(doOnComplete);
     }
 
