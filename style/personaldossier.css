@@ -444,7 +444,7 @@ ul#sortable li{
 
 #inputContainer {
     width: 192px !important;
-    height:auto;
+    height: 60px;
     margin: 0;
     padding: 10px 18px;
     border: 1px solid #CCCCCC;
