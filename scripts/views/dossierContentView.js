@@ -385,9 +385,11 @@ DossierContentView.prototype.storeOrder = function() {
         ISNLogger.log("enter store Order");
         var orderList = new Array();
 
-        $("#sortable").find("li.ui-state-default").each(function(index) {
+        $("#sortable").find("li").each(function(index) {
             var id = $(this).attr("id").substring(4);
-            orderList.push(id);
+            if ( id && id > 0) {
+                orderList.push(id);
+            }
         });
         this.controller.models["bookmark"].setOrder(orderList);
     }
