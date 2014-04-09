@@ -393,7 +393,22 @@ ul#sortable li{
 .small {
     font-size:11px !important;
     margin-bottom: 0px !important;
-    line-height: 12px !important;
+    line-height: 13.2px !important;
+}
+
+span.overview_date {
+    padding-right:5.5px;
+    line-height: 13.2px !important;
+}
+
+a.OTName {
+    background: transparent url("../../images/icons/more_darkblue.gif") no-repeat scroll 0 4px;
+    border: 0px;
+    color: #1D517E;
+    font-weight: bold;
+    margin-left: 2px;
+    padding-left: 9px;
+    text-decoration: none;
 }
 
 /************Registration*****/
