@@ -260,6 +260,11 @@ div.overviewcontent {
     margin-left: 90px;
 }
 
+.pd_embed .overviewcontent {
+    width: auto !important;
+}
+
+
 /* we redefine this in order to remove the more icon from the li items, it was set as a background on the original css */
 #content ul li a,
 #content a.more,
