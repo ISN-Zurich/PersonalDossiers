@@ -11,9 +11,19 @@
 }
 
 .pd_embed.pd_details {
-    width:  470px;
+    width: 100%;
 }
 
+img.big_img {
+        width: 470px;
+        height : 176px,
+}
+
+.pd_embed img.big_img {
+        width: 100%;
+        height : auto,
+}
+    
 /**
  * a should have a different font color if not clicked
  */

@@ -280,8 +280,6 @@ DossierBannerView.prototype.renderBanner= function(){
     var img=$("<img/>", {
         "id"     : "bannerImage", //we need to provide the dossierId dynamically
         "class"  : "big_img",
-        "width"  : "470px",
-        "height" : "176px",
         "src"    : bookmarkModel.getDossierImageURL()
     }).appendTo("#header_image");
 
@@ -309,7 +307,7 @@ DossierBannerView.prototype.renderBanner= function(){
         "text": bookmarkModel.getDossierDescription()
     }).appendTo(descriptionContainer);
 
-    hr=$("<hr/>", {
+    $("<hr/>", {
         "class":"overview white"
     }).appendTo("#header_image");
 
