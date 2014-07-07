@@ -591,7 +591,7 @@ BookmarkModel.prototype.getISNURL = function() {
 
 
 BookmarkModel.prototype.getEmbedURL = function() {
-	itemType= this.getType();
+	var itemType= this.getType();
 
     if (itemType === "Publication"){
 		//return  'http://yellowjacket.ethz.ch/tools/embedDetailPage.html?id='+ this.getItemId();
@@ -600,7 +600,7 @@ BookmarkModel.prototype.getEmbedURL = function() {
 		// return  baseURL() + 'embedDetailPage.html?dossier_id='+ this.dossierId +'&item_id='+this.getItemId();
 	}
 
-    if ( itemType !== 'Audio') {
+    if ( !(itemType === 'Audio' || itemType === 'Video')) {
         itemType = itemType + 's';
     }
 
