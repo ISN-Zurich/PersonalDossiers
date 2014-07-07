@@ -23,7 +23,11 @@ img.big_img {
         width: 100%;
         height : auto,
 }
-    
+
+.pd_embed .dossier_item {
+    width: 100%;
+}
+
 /**
  * a should have a different font color if not clicked
  */
