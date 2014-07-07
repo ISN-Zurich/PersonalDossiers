@@ -328,6 +328,7 @@ div.overviewcontent {
     width: 470px;
     clear: both;
 }
+
 #loadmoreimages {
     cursor: pointer;
     
@@ -346,4 +347,62 @@ div.overviewcontent {
     padding-top: 10px;
     padding-left: 15px;
     list-style-image: url('../../images/icons/subnavi_bar_grey.jpg' )
+}
+
+.dossier {
+    padding: 10px;
+    line-height: normal;
+}
+
+.dossier .dossiertitle {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.dossier .dossierusers:before {
+    content: 'By ';
+}
+
+.dossier .dossierusers { 
+    font-style: italic;
+    font-size: 12px;
+}
+
+.dossier .dossierdescription {
+    width: 100%;
+    height 14px;
+    font-size: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.dossier .dossierprivate {
+    float: right;
+}
+
+.dossiertitle a {
+    text-decoration: none;
+}
+
+.button {
+    cursor: pointer;
+}
+
+.button.loadmore {
+    width: 100%;
+    font-size: 16px;
+    text-align: center;
+    padding: 10px;
+    background-color: #ebedee;
+}
+
+.button.active {
+    color: #4C5160;
+    font-size: 14px;
+}
+
+.button.inactive {
+    color: #cdcbcc;
+    font-size: 14px;
 }

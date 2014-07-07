@@ -177,6 +177,26 @@ class UserManagement extends PDCommonClass {
         }
     }
 
+    public function getAdminRole($userId) {
+        $retval = 'none';
+        $this->mark();
+        if (isset($this->dbh)){
+            $this->log("dbh has not been set");
+            $this->dbh->setFetchMode(MDB2_FETCHMODE_ASSOC);
+            $sth = $this->dbh->prepare('select role from admin_users where user_id = ?');
+            $res = $sth->execute(array($userId));
+            if (PEAR::isError($res)) {
+                $this->log("pear error " . $res->getMessage());
+            }
+            else if ($res->numRows() >= 1) {
+                $this->log("user has admin privileges");
+                $retval = $res->fetchRow();
+                $retval = $retval['role'];
+            }
+            $sth->free();
+        }
+        return $retval;
+    }
 
 }//end of class
 
