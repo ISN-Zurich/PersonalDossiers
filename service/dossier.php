@@ -377,11 +377,35 @@ class DossierService extends OAUTHRESTService {
                 if ( $r->getResponseCode() == 200 ) {
 
                     $itemmeta = $r->getResponseBody();
-                    $this->log( 'response message itemmeta '. $itemmeta );
+                    // trim whitespace
+                    $itemmeta = preg_replace('/[\s\n\r\t]+/', ' ', $itemmeta);
+                    
+                    $this->log( 'response message itemmeta ' . $itemmeta );
                     $tmp = json_decode( $itemmeta );
 
                     if ( json_last_error() !== JSON_ERROR_NONE ) {
-                        throw new Exception( "JSON PARSING ERROR " . json_last_error() );
+                        $lasterr = "Unknown error";
+                        switch (json_last_error()) {
+                        case JSON_ERROR_DEPTH:
+                            $lasterr = ' - Maximum stack depth exceeded';
+                            break;
+                        case JSON_ERROR_STATE_MISMATCH:
+                            $lasterr =  ' - Underflow or the modes mismatch';
+                            break;
+                        case JSON_ERROR_CTRL_CHAR:
+                            $lasterr =  ' - Unexpected control character found';
+                            break;
+                        case JSON_ERROR_SYNTAX:
+                            $lasterr =  ' - Syntax error, malformed JSON';
+                            break;
+                        case JSON_ERROR_UTF8:
+                            $lasterr =  ' - Malformed UTF-8 characters, possibly incorrectly encoded';
+                            break;
+                        default: 
+                            break;
+                        }
+                        
+                        throw new Exception( "JSON PARSING ERROR " . json_last_error() . ': ' . $lasterr );
                     }
 
                     if ( empty( $tmp ) ) {
